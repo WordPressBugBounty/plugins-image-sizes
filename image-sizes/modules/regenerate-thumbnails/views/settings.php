@@ -1,5 +1,7 @@
 <?php 
+
 use Codexpert\ThumbPress\Helper;
+
 $status 			= thumbpress_get_last_action_status_by_module_name( 'regenerate-thumbnails' );
 $action_id 			= thumbpress_get_last_action_status_by_module_name( 'regenerate-thumbnails', 'action_id' );
 $_progress 			= get_option( "thumbpress_regenerate_progress" ) ?? 0;
@@ -16,6 +18,7 @@ $completed_time 	= $last_schedule_time ? date_i18n( $time_format, $last_schedule
 if( in_array( $status, [ 'in-progress', 'pending', 'complete' ] ) ) {
 	$show_process = 'flex';
 }
+
 elseif( $status == 'failed' ) {
 	$show_failed = 'flex';
 	$background_color = '#F63D3F0D';
@@ -23,22 +26,28 @@ elseif( $status == 'failed' ) {
 }else{
 	$show_no_process = 'block';
 }
+
 if( $status == "complete" && $processed_count == 0 ) {
 	$show_no_results = "flex";
 	$show_process 	 = 'none';
 }
+
 if( in_array( $status, [ 'in-progress', 'pending' ] ) ) {
 	$message = __( 'Regenerating Thumbnails in Background', 'image-sizes' );
 }
+
 if( $status == 'complete' ) {
+	// Translators: %s is the time when the thumbnail regeneration was completed.
 	$message = sprintf(
 		__( 'Regenerating Thumbnails in background was completed at %s', 'image-sizes' ),
 		esc_html( $completed_time )
 	);
 }
+
 if ( $status == 'failed' ) {
 	$message = __( 'Regenerating Thumbnails in Background Failed.', 'image-sizes' );
 }
+
 ?>
 <div id="cx-message-optimize-images" class="cx-message">
 	<img src="<?php echo esc_url( plugins_url( 'vendor/codexpert/plugin/src/assets/img/checked.png', THUMBPRESS ) ); ?>">
@@ -77,9 +86,9 @@ if ( $status == 'failed' ) {
 			?>
 			
 		</div>
-		<div class="thumbpress-actions-right" style="background-color:<?php esc_attr_e( $background_color ); ?>">
-			<p class="thumbpress-processs-message" style="display: <?php esc_attr_e( $show_process ); ?>;">
-				<?php esc_html_e( $message ); ?>
+		<div class="thumbpress-actions-right" style="background-color:<?php echo esc_attr( $background_color ); ?>">
+			<p class="thumbpress-processs-message" style="display: <?php echo esc_attr( $show_process ); ?>;">
+				<?php echo esc_html( $message ); ?>
 			</p>
 			<div id="thumbpress-action-result" style="display: <?php echo esc_attr( $show_process ); ?>;">
 				<div class="thumbpress-progress-content">

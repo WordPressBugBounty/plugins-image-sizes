@@ -68,6 +68,7 @@ class Settings extends Base {
 		];
 
 		new Settings_API( apply_filters( 'thumbpress-modules_settings_args', $settings ) );
+
 		/**
 		 * Modules menu
 		 */
@@ -102,29 +103,61 @@ class Settings extends Base {
 
 		// new Settings_API( apply_filters( 'thumbpress-modules_settings_args', $modules_settings ) );
 
+		/**********************/
+
+		// if( ! defined( 'THUMBPRESS_PRO' ) ) {
+
+		// 	$upgrade_pro = [
+		// 		'id'            => "upgrade-to-pro",
+		// 		'parent'        => 'thumbpress',
+		// 		'label'         => __( '<b>Get Pro <span style="color: #f77474;">(On Sale)</span></b> ', 'image-sizes' ),
+		// 		'title'         => __( 'Get Pro (On Sale)', 'image-sizes' ),
+		// 		'header'        => __( 'Get Pro (On Sale)', 'image-sizes' ),
+		// 		'priority'      => 100,
+		// 		'sections'      => [
+		// 			'upgrade-to-pro'=> [
+		// 				'id'        => 'upgrade-to-pro',
+		// 				'label'     => __( 'Tools', 'image-sizes' ),
+		// 				'icon'      => 'dashicons-hammer',
+		// 				'no_heading'=> true,
+		// 				'hide_form' => true,
+		// 				'template'  => THUMBPRESS_DIR . '/views/settings/upgrade-pro.php',
+		// 			],           
+		// 		],
+		// 	];
+
+		// 	new Settings_API( apply_filters( 'submenu_thumbpress_pro', $upgrade_pro ) );
+		// }
+
 		if( ! defined( 'THUMBPRESS_PRO' ) ) {
 
-			$upgrade_pro = [
-				'id'            => "upgrade-to-pro",
-				'parent'        => 'thumbpress',
-				'label'         => __( '<b>Get Pro <span style="color: #f77474;">(On Sale)</span></b> ', 'image-sizes' ),
-				'title'         => __( 'Get Pro (On Sale)', 'image-sizes' ),
-				'header'        => __( 'Get Pro (On Sale)', 'image-sizes' ),
-				'priority'      => 100,
-				'sections'      => [
-					'upgrade-to-pro'=> [
-						'id'        => 'upgrade-to-pro',
-						'label'     => __( 'Tools', 'image-sizes' ),
-						'icon'      => 'dashicons-hammer',
-						'no_heading'=> true,
-						'hide_form' => true,
-						'template'  => THUMBPRESS_DIR . '/views/settings/upgrade-pro.php',
-					],           
-				],
-			];
+		    $upgrade_pro = [
+		        'id'            => "upgrade-to-pro",
+		        'parent'        => 'thumbpress',
+		        'label'         => __( 'Get Pro ', 'image-sizes' ), // Remove HTML tags
+		        'title'         => __( 'Get Pro (On Sale)', 'image-sizes' ),
+		        'header'        => __( 'Get Pro (On Sale)', 'image-sizes' ),
+		        'priority'      => 100,
+		        'sections'      => [
+		            'upgrade-to-pro'=> [
+		                'id'        => 'upgrade-to-pro',
+		                'label'     => __( 'Tools', 'image-sizes' ),
+		                'icon'      => 'dashicons-hammer',
+		                'no_heading'=> true,
+		                'hide_form' => true,
+		                'template'  => THUMBPRESS_DIR . '/views/settings/upgrade-pro.php',
+		            ],           
+		        ],
+		    ];
 
-			new Settings_API( apply_filters( 'submenu_thumbpress_pro', $upgrade_pro ) );
+		    // Add HTML tags when rendering, not in the translation function
+		    $upgrade_pro['label'] = '<b>' . esc_html( $upgrade_pro['label'] ) . ' <span style="color: #f77474;">(On Sale)</span></b>';
+
+		    new Settings_API( apply_filters( 'submenu_thumbpress_pro', $upgrade_pro ) );
 		}
+
+
+
 
 	}
 

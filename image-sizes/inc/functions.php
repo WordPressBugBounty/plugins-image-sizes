@@ -217,10 +217,12 @@ if( ! function_exists( 'image_sizes_notices_values' ) ) :
 		return [
 			'compress_images'=> [
 				'text'      => sprintf(
+					// Translators: %d is the number of uncompressed images.
 					__( 'You have <strong>%d</strong> uncompressed images that are possibly slowing down your site - Boost your site speed by compressing them', 'image-sizes' ), 
 					$uncompressed_count 
 				),
 				'woo_text'  => sprintf( 
+					// Translators: %d is the number of uncompressed images.
 					__( '<strong>%d</strong> uncompressed images possibly slowing down your WooCommerce store - Boost your site speed & sales by compressing them', 'image-sizes' ), 
 					$uncompressed_count 
 				),
@@ -231,10 +233,12 @@ if( ! function_exists( 'image_sizes_notices_values' ) ) :
 			],
 			'detect_unused_images'=> [
 				'text'      => sprintf(
+					// Translators: %d is the total number of images on the site.
 					__( 'Your site has total <strong>%d</strong> images - Find and delete unused images to save more server space and money.', 'image-sizes' ), 
 					$uncompressed_count 
 				),
 				'woo_text'  => sprintf( 
+					// Translators: %d is the total number of images in the WooCommerce store.
 					__( 'Your WooCommerce store has total <strong>%d</strong> images - Find and delete unused images to save server space and money.', 'image-sizes' ), 
 					$uncompressed_count 
 				),
@@ -245,10 +249,12 @@ if( ! function_exists( 'image_sizes_notices_values' ) ) :
 			],
 			'detect_large_images'=> [
 				'text'      => sprintf(
+					// Translators: %d is the total number of images on the site.
 					__( 'Your site has total <strong>%d</strong> images - Save server space and speed up your site by deleting large images.', 'image-sizes' ), 
 					$uncompressed_count 
 				),
 				'woo_text'  => sprintf( 
+					// Translators: %d is the total number of images in the WooCommerce store.
 					__( 'Your WooCommerce store has total <strong>%d</strong> images - Save server space, speed up your site and boost sales by deleting large images.', 'image-sizes' ), 
 					$uncompressed_count
 				),
