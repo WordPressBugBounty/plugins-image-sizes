@@ -96,10 +96,10 @@ $enables_count 			= count( $image_sizes ) - $disables_count;
                 <div class="tp-disable-thumbnails-table-wrap">
                     <div class="image_sizes-table-heading">
                         <ul>
-                            <li class="image_sizes-heading-name"><?php _e( 'Name', 'image-sizes' ); ?></li>
-                            <li class="image_sizes-heading-size"><?php _e( 'Size', 'image-sizes' ); ?></li>
-                            <li class="image_sizes-heading-type"><?php _e( 'Type', 'image-sizes' ); ?></li>
-                            <li class="image_sizes-heading-cropped"><?php _e( 'Cropped?', 'image-sizes' ); ?></li>
+                            <li class="image_sizes-heading-name"><?php esc_html_e( 'Name', 'image-sizes' ); ?></li>
+                            <li class="image_sizes-heading-size"><?php esc_html_e( 'Size', 'image-sizes' ); ?></li>
+                            <li class="image_sizes-heading-type"><?php esc_html_e( 'Type', 'image-sizes' ); ?></li>
+                            <li class="image_sizes-heading-cropped"><?php esc_html_e( 'Cropped?', 'image-sizes' ); ?></li>
                             <li></li>
                         </ul>
                     </div>

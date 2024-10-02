@@ -38,10 +38,7 @@ if( in_array( $status, [ 'in-progress', 'pending' ] ) ) {
 
 if( $status == 'complete' ) {
 	// Translators: %s is the time when the thumbnail regeneration was completed.
-	$message = sprintf(
-		__( 'Regenerating Thumbnails in background was completed at %s', 'image-sizes' ),
-		esc_html( $completed_time )
-	);
+	$message = sprintf( __( 'Regenerating Thumbnails in background was completed at %s', 'image-sizes' ), esc_html( $completed_time ) );
 }
 
 if ( $status == 'failed' ) {
@@ -98,19 +95,15 @@ if ( $status == 'failed' ) {
 					<p id="cx-processed">
 						<span class="dashicons dashicons-yes-alt cx-icon cx-success"></span>
 						<?php
-						printf(
-							__( 'Processed %s images', 'image-sizes' ),
-							'<span id="processed-count">' . esc_html( $processed_count ) . '</span>'
-						);
+						// Translators: %s is the number of images processed, wrapped in a span element.
+						printf( __( 'Processed %s images', 'image-sizes' ), '<span id="processed-count">' . esc_html( $processed_count ) . '</span>' );
 						?>
 					</p>
 					<p id="cx-deleted">
 						<span class="dashicons dashicons-yes-alt cx-icon cx-success"></span>
 						<?php
-						printf(
-							__( 'Deleted %s images.', 'image-sizes' ),
-							'<span id="deleted-count">' . esc_html( $deleted_count ) . '</span>'
-						);
+						// Translators: %s is the number of deleted images, wrapped in a span element.
+						printf( __( 'Deleted %s images.', 'image-sizes' ), '<span id="deleted-count">' . esc_html( $deleted_count ) . '</span>' );
 						?>
 					</p>
 					<p id="cx-created">
