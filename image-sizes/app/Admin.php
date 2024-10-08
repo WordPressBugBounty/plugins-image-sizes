@@ -96,13 +96,19 @@ class Admin extends Base {
 	 * Enqueue JavaScripts and stylesheets
 	 */
 	public function enqueue_scripts() {
+		$screen = get_current_screen();
+		$valid_screens = [ 'upload', 'media' ];
+		if ( ! in_array( $screen->id, $valid_screens ) &&
+			!( isset( $_GET[ 'page' ] ) && strpos( $_GET[ 'page' ], 'thumbpress' ) !== false ) ) {
+			return;
+		}
 		$min = defined( 'THUMBPRESS_DEBUG' ) && THUMBPRESS_DEBUG ? '' : '.min';
 		
 		wp_enqueue_style( $this->slug, plugins_url( "/assets/css/admin.css", THUMBPRESS ), '', time(), 'all' );
 		wp_enqueue_style( $this->slug . 'dashboard', plugins_url( "/assets/css/settings/dashboard.css", THUMBPRESS ), '', time(), 'all' );
 		wp_enqueue_style( $this->slug . 'google-font', "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 		wp_enqueue_style( $this->slug . 'font-awesome', "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css");
-		wp_enqueue_script ($this->slug .'fontr-awesome-js', "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.js", ['jquery'], time(), true);
+		wp_enqueue_script ($this->slug .'font-awesome-js', "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.js", ['jquery'], time(), true);
 		
 		wp_enqueue_script($this->slug, plugins_url("/assets/js/admin{$min}.js", THUMBPRESS), ['jquery'], time(), true);
 		
@@ -328,6 +334,20 @@ class Admin extends Base {
 
 	public function show_new_button( $section ) {
 		// Helper::pri( 'Hello' );
-		
+	}
+
+	public function thumbpress_modules_activation() {
+
+		if ( ! get_option( 'thumbpress_modules' ) ) {
+
+			$thumbpress_modules = array(
+				'disable-thumbnails' => 'on',
+				'regenerate-thumbnails' => 'on',
+				'social-share' => 'on',
+				'convert-images' => 'on',
+			);
+
+			add_option( 'thumbpress_modules', $thumbpress_modules );
+	    }
 	}
 }
