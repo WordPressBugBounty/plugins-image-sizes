@@ -41,24 +41,45 @@ $enables_count 			= count( $image_sizes ) - $disables_count;
 
 		<div class="image_sizes-default-thumbnails">
 			<div class="image_sizes-enable-thumbnails">
-				<h4><?php _e( 'Sizes Enabled <small>(will be generated)</small>', 'image-sizes' ); ?></h4>
+				<h4>
+                    <?php echo esc_html__( 'Sizes Enabled ', 'image-sizes' ) . '<small>(' . esc_html__( 'will be generated', 'image-sizes' ) . ')</small>'; ?>
+                </h4>
                     <div class="tp-enable-thumbnails-table-wrap">
                         <div class="image_sizes-table-heading">
                             <ul>
-                                <li class="image_sizes-heading-name"><?php _e( 'Name', 'image-sizes' ); ?></li>
-                                <li class="image_sizes-heading-size"><?php _e( 'Size', 'image-sizes' ); ?></li>
-                                <li class="image_sizes-heading-type"><?php _e( 'Type', 'image-sizes' ); ?></li>
-                                <li class="image_sizes-heading-cropped"><?php _e( 'Cropped?', 'image-sizes' ); ?></li>
+                                <li class="image_sizes-heading-name">
+                                    <?php esc_html_e( 'Name', 'image-sizes' ); ?>
+                                </li>
+                                <li class="image_sizes-heading-size">
+                                    <?php esc_html_e( 'Size', 'image-sizes' ); ?>
+                                </li>
+                                <li class="image_sizes-heading-type">
+                                    <?php esc_html_e( 'Type', 'image-sizes' ); ?>
+                                </li>
+                                <li class="image_sizes-heading-cropped">
+                                    <?php esc_html_e( 'Cropped?', 'image-sizes' ); ?>
+                                </li>
                                 <li></li>
                             </ul>
                         </div>
                         <ul id="sortable1" class="image_sizes-sortable enable">
                             <li class="image_sizes-original-size">
-                                <span class="image_sizes-thumbnails-name"> <img class="image_sizes-thumbnails-arrow-left" src="<?php echo esc_url( plugins_url( 'assets/img/arrow.png', THUMBPRESS ) ); ?>"><?php _e( 'Original Image', 'image-sizes' ); ?></span> 
-                                <span class="image_sizes-thumbnails-size"><?php _e( '100%', 'image-sizes' ); ?></span> 
-                                <span class="image_sizes-thumbnails-type"><?php _e( 'original', 'image-sizes' ); ?></span> 
-                                <span class="image_sizes-thumbnails-cropped"><?php _e( 'No', 'image-sizes' ); ?></span> 
-                                <span><img class="image_sizes-thumbnails-arrow-right" src="<?php echo esc_url( plugins_url( 'assets/img/arrow-black.png', THUMBPRESS ) ); ?>"></span>
+                                <span class="image_sizes-thumbnails-name">
+                                    <img class="image_sizes-thumbnails-arrow-left" src="<?php echo esc_url( plugins_url( 'assets/img/arrow.png', THUMBPRESS ) ); ?>">
+                                    <?php esc_html_e( 'Original Image', 'image-sizes' ); ?>
+                                </span>
+                                <span class="image_sizes-thumbnails-size">
+                                    <?php esc_html_e( '100%', 'image-sizes' ); ?>
+                                </span>
+                                <span class="image_sizes-thumbnails-type">
+                                    <?php esc_html_e( 'Original', 'image-sizes' ); ?>
+                                </span>
+                                <span class="image_sizes-thumbnails-cropped">
+                                    <?php esc_html_e( 'No', 'image-sizes' ); ?>
+                                </span>
+                                <span>
+                                    <img class="image_sizes-thumbnails-arrow-right" src="<?php echo esc_url( plugins_url( 'assets/img/arrow-black.png', THUMBPRESS ) ); ?>">
+                                </span>
                             </li>
                             <?php foreach ( $image_sizes as $id => $size ):
                 
@@ -84,7 +105,7 @@ $enables_count 			= count( $image_sizes ) - $disables_count;
                     if ( $thumbpress_modules == 'on' ) {
                         ?>
                         <a href="<?php echo esc_url( add_query_arg( [ 'page' => 'thumbpress-regenerate-thumbnails' ], admin_url( 'admin.php' ) ) ); ?>" class="imgs-thumb-size-back">
-                            &#10550; <?php _e( 'Go to Regenerate Thumbnails Settings', 'image-sizes' ); ?>
+                            &#10550; <?php esc_html_e( 'Go to Regenerate Thumbnails Settings', 'image-sizes' ); ?>
                         </a>
                         <?php 
                     }
@@ -92,14 +113,22 @@ $enables_count 			= count( $image_sizes ) - $disables_count;
 			</div>
 
 			<div class="image_sizes-disable-thumbnails">
-				<h4><?php _e( 'Sizes Disabled <small>(will not be generated)</small>', 'image-sizes' ); ?></h4>
+                <h4><?php esc_html_e( 'Sizes Disabled', 'image-sizes' ); ?> <small><?php esc_html_e( '(will not be generated)', 'image-sizes' ); ?></small></h4>
                 <div class="tp-disable-thumbnails-table-wrap">
                     <div class="image_sizes-table-heading">
                         <ul>
-                            <li class="image_sizes-heading-name"><?php esc_html_e( 'Name', 'image-sizes' ); ?></li>
-                            <li class="image_sizes-heading-size"><?php esc_html_e( 'Size', 'image-sizes' ); ?></li>
-                            <li class="image_sizes-heading-type"><?php esc_html_e( 'Type', 'image-sizes' ); ?></li>
-                            <li class="image_sizes-heading-cropped"><?php esc_html_e( 'Cropped?', 'image-sizes' ); ?></li>
+                            <li class="image_sizes-heading-name">
+                                <?php esc_html_e( 'Name', 'image-sizes' ); ?>
+                            </li>
+                            <li class="image_sizes-heading-size">
+                                <?php esc_html_e( 'Size', 'image-sizes' ); ?>
+                            </li>
+                            <li class="image_sizes-heading-type">
+                                <?php esc_html_e( 'Type', 'image-sizes' ); ?>
+                            </li>
+                            <li class="image_sizes-heading-cropped">
+                                <?php esc_html_e( 'Cropped?', 'image-sizes' ); ?>
+                            </li>
                             <li></li>
                         </ul>
                     </div>

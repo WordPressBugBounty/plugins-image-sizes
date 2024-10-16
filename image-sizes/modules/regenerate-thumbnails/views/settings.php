@@ -55,19 +55,19 @@ if ( $status == 'failed' ) {
 			<div id="info-icon" class="info-icon">
 				<img class="info-img" src="<?php echo esc_url( plugins_url( 'assets/img/info.png', THUMBPRESS ) ); ?>">
 				<p>
-					<?php _e( "Regenerate Thumbnails is a server-dependent feature and the regeneration process may timeout if you process a large number of images. We suggest doing this process in the background to avoid any issues.", 'image-sizes' ); ?>
+					<?php esc_html_e( "Regenerate Thumbnails is a server-dependent feature and the regeneration process may timeout if you process a large number of images. We suggest doing this process in the background to avoid any issues.", 'image-sizes' ); ?>
 				</p>
 			</div>
 			<label for="image-sizes_regenerate-thumbs-limit">
-				<?php _e( 'Number of images to process per request:', 'image-sizes' ) ?>
+				<?php esc_html_e( 'Number of images to process per request:', 'image-sizes' ); ?>
 			</label>
-			<input type="number" class="cx-field cx-field-number thumbpress-action-input" id="image-sizes_regenerate-thumbs-limit" name="regen-thumbs-limit" value="10" placeholder="<?php _e( 'Images/request. Default is 50', 'image-sizes' ) ?>" required="">
+			<input type="number" class="cx-field cx-field-number thumbpress-action-input" id="image-sizes_regenerate-thumbs-limit" name="regen-thumbs-limit" value="10" placeholder="<?php esc_attr_e( 'Images/request. Default is 50', 'image-sizes' ); ?>" required="">
 			<div class="thumbpress-buttons-wrapper">
 				<button id="image_sizes-regen-thumbs" class="thumbpress-action-now">
-					<?php _e( 'Regenerate Now', 'image-sizes' ); ?>
+					<?php esc_html_e( 'Regenerate Now', 'image-sizes' ); ?>
 				</button>
 				<button id="image_sizes-schedule-regen-thumbs" class="thumbpress-action-background">
-					<?php _e( 'Regenerate In Background', 'image-sizes' ); ?>
+					<?php esc_html_e( 'Regenerate In Background', 'image-sizes' ); ?>
 				</button>
 			</div>
 			<?php 
@@ -76,7 +76,7 @@ if ( $status == 'failed' ) {
 				if ( $thumbpress_modules == 'on' ) {
 					?>
 					<a href="<?php echo esc_url( add_query_arg( [ 'page' => 'thumbpress' ], admin_url( 'admin.php' ) ) . '#prevent_image_sizes' ); ?>" class="prevent_image_sizes-back button-hero">
-						&#10550; <?php _e( 'Go to Disable Thumbnails Settings', 'image-sizes' ); ?>
+						&#10550; <?php esc_html_e( 'Go to Disable Thumbnails Settings', 'image-sizes' ); ?>
 					</a>
 					<?php 
 				}
@@ -120,22 +120,22 @@ if ( $status == 'failed' ) {
 			<div class="thumbpress-action-no-process" style="display: <?php esc_attr_e( $show_no_process ); ?>">
 				<img src="<?php echo esc_url( plugins_url( 'assets/img/no-action.png', THUMBPRESS ) ); ?>" alt="no-action">
 				<p>
-					<?php _e('Please click the button to start detecting images.','image-sizes'); ?>
+					<?php esc_html_e( 'Please click the button to start detecting images.', 'image-sizes' ); ?>
 				</p>
 			</div>
 			<div class="thumbpress-action-no-result" style="display: <?php esc_attr_e( $show_no_results ); ?>">
 				<img src="<?php echo esc_url( plugins_url( 'assets/img/no-images.png', THUMBPRESS ) ); ?>" alt="no-action">
 				<p>
-					<?php _e('You have no images please upload images.','image-sizes'); ?>
+					<?php esc_html_e( 'You have no images. Please upload images.', 'image-sizes' ); ?>
 				</p>
 			</div>
 			<div class="thumbpress-action-failed" style="display: <?php esc_attr_e( $show_failed ); ?>;">
 				<img src="<?php echo esc_url( plugins_url( 'assets/img/failed-action.png', THUMBPRESS ) ); ?>" alt="failed-action">
 				<p class='failed-warning'>
-					<?php _e( 'Something went wrong!.', 'image-sizes' ); ?>
+					<?php esc_html_e( 'Something went wrong!', 'image-sizes' ); ?>
 				</p>
 				<p class='failed-message'>
-					<?php _e( 'Your backgroud action failed please try again..', 'image-sizes' ); ?>
+					<?php esc_html_e( 'Your background action failed. Please try again.', 'image-sizes' ); ?>
 				</p>
 			</div>
 			<?php

@@ -90,22 +90,22 @@ if ( $status == 'failed' ) {
 			<div class="thumbpress-action-no-process" style="display: <?php echo esc_attr( $show_no_process ); ?>">
 				<img src="<?php echo esc_url( plugins_url( 'assets/img/no-action.png', THUMBPRESS ) ); ?>" alt="no-action">
 				<p>
-					<?php _e('Please click the button to start detecting images.','image-sizes'); ?>
+					<?php esc_html_e( 'Please click the button to start detecting images.', 'image-sizes' ); ?>
 				</p>
 			</div>
 			<div class="thumbpress-action-no-result" style="display: <?php echo esc_attr( $show_no_results ); ?>;">
 				<img src="<?php echo esc_url( plugins_url( 'assets/img/no-images.png', THUMBPRESS ) ); ?>" alt="no-action">
 				<p>
-					<?php _e('You have no images to convert please upload new images.','image-sizes'); ?>
+					<?php esc_html_e( 'You have no images to convert, please upload new images.', 'image-sizes' ); ?>
 				</p>
 			</div>
 			<div class="thumbpress-action-failed" style="display: <?php echo esc_attr( $show_failed ); ?>;">
 				<img src="<?php echo esc_url( plugins_url( 'assets/img/failed-action.png', THUMBPRESS ) ); ?>" alt="failed-action">
 				<p class='failed-warning'>
-					<?php _e( 'Something went wrong!.', 'image-sizes' ); ?>
+					<?php esc_html_e( 'Something went wrong!', 'image-sizes' ); ?>
 				</p>
 				<p class='failed-message'>
-					<?php _e( 'Your backgroud action failed. Please try again.', 'image-sizes' ); ?>
+					<?php esc_html_e( 'Your background action failed. Please try again.', 'image-sizes' ); ?>
 				</p>
 			</div>
 			<?php
