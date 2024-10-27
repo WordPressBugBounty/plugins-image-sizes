@@ -209,59 +209,67 @@ function get_reasons() {
 	}
 endif;
 
+// if( ! function_exists( 'image_sizes_notices_values' ) ) :
+// 	function image_sizes_notices_values(){
+// 		$current_time = date_i18n('U');
+// 		$uncompressed_count = image_sizes_uncompressed_count();
+
+// 		return [
+// 			'compress_images'=> [
+// 				'text'      => sprintf(
+// 					__( 'You have <strong>%d</strong> uncompressed images that are possibly slowing down your site - Boost your site speed by compressing them', 'image-sizes' ), 
+// 					$uncompressed_count 
+// 				),
+// 				'woo_text'  => sprintf( 
+// 					__( '<strong>%d</strong> uncompressed images possibly slowing down your WooCommerce store - Boost your site speed & sales by compressing them', 'image-sizes' ), 
+// 					$uncompressed_count 
+// 				),
+// 				'from'		=> $current_time,
+// 				'to'		=> $current_time + 48 * HOUR_IN_SECONDS,
+// 				'button'	=> __( 'Compress Now', 'image-sizes' ),
+// 				'url'		=> "https://thumbpress.co/pricing/?utm_source=In-plugin&utm_medium=offer+notice&utm_campaign=Compress+Images"
+// 			],
+// 			'detect_unused_images'=> [
+// 				'text'      => sprintf(
+// 					__( 'Your site has total <strong>%d</strong> images - Find and delete unused images to save more server space and money.', 'image-sizes' ), 
+// 					$uncompressed_count 
+// 				),
+// 				'woo_text'  => sprintf( 
+// 					__( 'Your WooCommerce store has total <strong>%d</strong> images - Find and delete unused images to save server space and money.', 'image-sizes' ), 
+// 					$uncompressed_count 
+// 				),
+// 				'from'		=> $current_time + 120 * HOUR_IN_SECONDS,
+// 				'to'		=> $current_time + 168 * HOUR_IN_SECONDS,
+// 				'button'	=> __( 'Start Now', 'image-sizes' ),
+// 				'url'		=> "https://thumbpress.co/pricing/?utm_source=In-plugin&utm_medium=offer+notice&utm_campaign=Detect+Unused+Images"
+// 			],
+// 			'detect_large_images'=> [
+// 				'text'      => sprintf(
+// 					__( 'Your site has total <strong>%d</strong> images - Save server space and speed up your site by deleting large images.', 'image-sizes' ), 
+// 					$uncompressed_count 
+// 				),
+// 				'woo_text'  => sprintf( 
+// 					__( 'Your WooCommerce store has total <strong>%d</strong> images - Save server space, speed up your site and boost sales by deleting large images.', 'image-sizes' ), 
+// 					$uncompressed_count
+// 				),
+// 				'from'			=> $current_time + 240 * HOUR_IN_SECONDS,
+// 				'to'			=>  $current_time + 288 * HOUR_IN_SECONDS,
+// 				'button'		=> __( 'Detect & Delete Large Images', 'codesigner' ),
+// 				'url'			=> "https://thumbpress.co/pricing/?utm_source=In-plugin&utm_medium=offer+notice&utm_campaign=Detect+Large+Images"
+// 			],
+// 		];
+// 	}
+// endif;
 if( ! function_exists( 'image_sizes_notices_values' ) ) :
 	function image_sizes_notices_values(){
 		$current_time = date_i18n('U');
-		$uncompressed_count = image_sizes_uncompressed_count();
 
 		return [
-			'compress_images'=> [
-				'text'      => sprintf(
-					// Translators: %d is the number of uncompressed images.
-					__( 'You have <strong>%d</strong> uncompressed images that are possibly slowing down your site - Boost your site speed by compressing them', 'image-sizes' ), 
-					$uncompressed_count 
-				),
-				'woo_text'  => sprintf( 
-					// Translators: %d is the number of uncompressed images.
-					__( '<strong>%d</strong> uncompressed images possibly slowing down your WooCommerce store - Boost your site speed & sales by compressing them', 'image-sizes' ), 
-					$uncompressed_count 
-				),
-				'from'		=> $current_time,
-				'to'		=> $current_time + 48 * HOUR_IN_SECONDS,
-				'button'	=> __( 'Compress Now', 'image-sizes' ),
-				'url'		=> "https://thumbpress.co/pricing/?utm_source=In-plugin&utm_medium=offer+notice&utm_campaign=Compress+Images"
-			],
-			'detect_unused_images'=> [
-				'text'      => sprintf(
-					// Translators: %d is the total number of images on the site.
-					__( 'Your site has total <strong>%d</strong> images - Find and delete unused images to save more server space and money.', 'image-sizes' ), 
-					$uncompressed_count 
-				),
-				'woo_text'  => sprintf( 
-					// Translators: %d is the total number of images in the WooCommerce store.
-					__( 'Your WooCommerce store has total <strong>%d</strong> images - Find and delete unused images to save server space and money.', 'image-sizes' ), 
-					$uncompressed_count 
-				),
-				'from'		=> $current_time + 120 * HOUR_IN_SECONDS,
-				'to'		=> $current_time + 168 * HOUR_IN_SECONDS,
-				'button'	=> __( 'Start Now', 'image-sizes' ),
-				'url'		=> "https://thumbpress.co/pricing/?utm_source=In-plugin&utm_medium=offer+notice&utm_campaign=Detect+Unused+Images"
-			],
-			'detect_large_images'=> [
-				'text'      => sprintf(
-					// Translators: %d is the total number of images on the site.
-					__( 'Your site has total <strong>%d</strong> images - Save server space and speed up your site by deleting large images.', 'image-sizes' ), 
-					$uncompressed_count 
-				),
-				'woo_text'  => sprintf( 
-					// Translators: %d is the total number of images in the WooCommerce store.
-					__( 'Your WooCommerce store has total <strong>%d</strong> images - Save server space, speed up your site and boost sales by deleting large images.', 'image-sizes' ), 
-					$uncompressed_count
-				),
-				'from'			=> $current_time + 240 * HOUR_IN_SECONDS,
-				'to'			=>  $current_time + 288 * HOUR_IN_SECONDS,
-				'button'		=> __( 'Detect & Delete Large Images', 'codesigner' ),
-				'url'			=> "https://thumbpress.co/pricing/?utm_source=In-plugin&utm_medium=offer+notice&utm_campaign=Detect+Large+Images"
+			'promotional_images' => [
+				'from'   => $current_time,
+				'to'     => $current_time + 48 * HOUR_IN_SECONDS,
+				'button' => __('Grab Now', 'image-sizes'),
+				'url'    => "https://thumbpress.co/pricing/?utm_source=IN+PLUGIN&utm_medium=NOTICE&utm_campaign=OCTOBER+THRILLS",
 			],
 		];
 	}

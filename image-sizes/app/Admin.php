@@ -74,7 +74,7 @@ class Admin extends Base {
 
 	public function upgrade() {
 		$current_time = date_i18n('U');
-		if( ! get_option('image_sizes_notice_done') ){
+		if( ! get_option( 'image_sizes_year_last_notice' ) ){
 			foreach ( image_sizes_notices_values() as $id => $notice ) {
 				$data = [
 					'from' => $notice['from'],
@@ -83,7 +83,7 @@ class Admin extends Base {
 			
 				set_transient($id, $data, $notice['to']);
 			}
-			update_option( 'image_sizes_notice_done', 1 );
+			update_option( 'image_sizes_year_last_notice', 1 );
 		}
 		
 		if( $this->version == get_option( "{$this->slug}_db-version" ) ) return;
@@ -97,7 +97,7 @@ class Admin extends Base {
 	 */
 	public function enqueue_scripts() {
 		$screen = get_current_screen();
-		$valid_screens = [ 'upload', 'media' ];
+		$valid_screens = [ 'upload', 'media', 'dashboard' ];
 		if ( ! in_array( $screen->id, $valid_screens ) &&
 			!( isset( $_GET[ 'page' ] ) && strpos( $_GET[ 'page' ], 'thumbpress' ) !== false ) ) {
 			return;
@@ -185,20 +185,6 @@ class Admin extends Base {
 		</div>';
 	}
 
-	// public function popup_for_feedback() {
-	// 	echo '
-	// 	<div id="feedback-modal" style="display:none;" class="feedback-modal">
-	// 		<div class="feedback-content">
-	// 			<span class="close-button">&times;</span>
-	// 			<h2>Share Your Feedback</h2>
-	// 			<form id="feedback-form">
-	// 				<textarea id="feedback-text" placeholder="Type your feedback here..." required style="width:100%; height:100px; margin-bottom: 10px;"></textarea>
-	// 				<button type="submit" class="button button-primary">Submit Feedback</button>
-	// 			</form>
-	// 		</div>
-	// 	</div>';
-	// }
-
 	public function popup_for_feedback() {
 		$get_reasons 	= get_reasons();
 		$user 			= wp_get_current_user();
@@ -247,88 +233,71 @@ class Admin extends Base {
 
 	public function admin_notices() {
 
-		// if ( !defined( 'THUMBPRESS_PRO' ) && current_user_can( 'manage_options' ) ) {
-		// 	$current_screen    				= get_current_screen()->base;
-		// 	$current_time      				= wp_date('U');
-		// 	$install_date      				= get_option( 'image-sizes_install_time' );
-		// 	$user_id           				= get_current_user_id();
-		// 	$display_count     				= (int) get_user_meta( $user_id, 'thumbpress_notice_display_count_' . $current_screen, true );
-		// 	$combined_display_count 		= (int) get_user_meta( $user_id, 'thumbpress_notice_display_count_combined', true );
-		// 	$seven_days_after_install 		= strtotime( '+7 days', $install_date );
-		// 	$notice_dismissed 				= get_option( 'thumbpress_notice_dismissed_' . $current_screen, false );
-		// 	$notice_dismissed_after_week	= get_option( 'thumbpress_notice_dismissed_week', false );
-		// 	$days_since_install 			= ( $current_time - $install_date ) / DAY_IN_SECONDS;
-		// 	$days_since_install 			= floor( $days_since_install );
-		// 	// $release_date 					= strtotime( '2024-07-10' );
-
-		// 	if ( $days_since_install >= 7 && $days_since_install <= 9 && !$notice_dismissed_after_week && ( $current_screen == 'dashboard' || $current_screen == 'toplevel_page_thumbpress' ) ) {
-		// 		if ( $combined_display_count < 2 ) {
-		// 			printf(
-		// 				'<div id="image-sizes-after-aweek" class="notice notice-success is-dismissible image-sizes-admin_notice">
-		// 					<div class="main-div">
-		// 						<img id="img-style" src="%s" alt="ThumbPress Icon">
-		// 						<div>
-		// 							<div class="contents">
-		// 								<p>It’s been <span class="bold">%d days</span> since you started using ThumbPress - that’s awesome 🎉 <br> Could you please do us a BIG favor by giving it a <span class="bold">5-star</span> rating? It means a lot to us 🤗</p>
-		// 							</div>
-		// 							<form class="image-sizes-banner" method="post">
-		// 								<input type="hidden" value="%s" name="thumbpress_nonce">
-		// 								<button type="button" class="notice-dismiss image-sizes-notice" data-target="after_aweek_thumbpress">Dismiss</button>
-		// 								<button type="button" class="image-sizes-response positive" data-response="positive" data-target="after_aweek_thumbpress">Review ThumbPress</button>
-		// 								<button type="button button-primary" class="image-sizes-response negative" data-response="negative" data-target="after_aweek_thumbpress">No, there are areas to improve </button>
-		// 							</form>
-		// 						</div>
-		// 					</div>
-		// 				</div>',
-		// 				esc_url( plugins_url( '../assets/img/icon.png', __FILE__ ) ),
-		// 				absint( $days_since_install ),	// Ensuring the value is sanitized
-		// 				esc_attr( wp_create_nonce() ),	// Properly escaping the nonce
-		// 			);
-		// 			update_user_meta( $user_id, 'thumbpress_notice_display_count_combined', $combined_display_count + 1 );
-		// 		}
-		// 	}
-		// }
-
-
 		if ( !defined( 'THUMBPRESS_PRO' ) && current_user_can( 'manage_options' ) ) {
 			
 			$current_screen = get_current_screen()->base;
 
+			// if ( $current_screen == 'dashboard' || $current_screen == 'toplevel_page_thumbpress' ) {
+			// 	if( isset( $_GET['dismiss'] ) && array_key_exists( $_GET['dismiss'], image_sizes_notices_values() ) ) {
+			// 		delete_transient( sanitize_text_field( $_GET['dismiss'] ) );
+			// 	}
+			// 	$image_count = image_sizes_uncompressed_count(); 
+			// 	if ($image_count > 100) {
+			// 		foreach ( image_sizes_notices_values() as $id => $notice ) {
+			// 			$transient = get_transient( $id );
+			// 			$current_time = date_i18n('U');
+			// 			//$current_time = strtotime( '2024-09-06 12:00:00' );
+			// 			if ($transient && $transient[ 'from' ] < $current_time && $current_time < $transient[ 'to' ]) {
+			// 				// if( $transient[ 'from' ] < $current_time && $current_time < $transient[ 'to' ] ) {
+			// 					$display_text = ( class_exists( 'WooCommerce' ) && isset( $notice['woo_text'] ) ) ? $notice['woo_text']	: $notice['text'];
+
+			// 					printf(
+			// 						'<div class="notice notice-info is-dismissible image-sizes-dismissible-notice">
+			// 							<p>
+			// 								<img src="%5$s" alt="Logo" style="max-height: 25px; margin-right: 10px; vertical-align: middle;" />
+			// 								%1$s
+			// 								<a class="notice-dismiss" href="%2$s"></a>
+			// 							</p>
+			// 							<button class="image-sizes-dismissible-notice-button button-primary" data-id="%3$s">%4$s</button>
+			// 						</div>',
+			// 						wp_kses_post( $display_text ),
+			// 						esc_url( add_query_arg('dismiss', $id ) ),
+			// 						esc_attr( $id ),
+			// 						esc_html( $notice[ 'button' ] ),
+			// 						esc_url( THUMBPRESS_ASSET . '/img/icon.png' )
+			// 					);
+			// 					break;
+			// 				// }	
+			// 			}
+			// 		}
+			// 	}
+			// }
 			if ( $current_screen == 'dashboard' || $current_screen == 'toplevel_page_thumbpress' ) {
 				if( isset( $_GET['dismiss'] ) && array_key_exists( $_GET['dismiss'], image_sizes_notices_values() ) ) {
 					delete_transient( sanitize_text_field( $_GET['dismiss'] ) );
 				}
-				$image_count = image_sizes_uncompressed_count(); 
-				if ($image_count > 100) { 
 				foreach ( image_sizes_notices_values() as $id => $notice ) {
 					$transient = get_transient( $id );
 					$current_time = date_i18n('U');
-					//$current_time = strtotime( '2024-09-06 12:00:00' );
-					if ($transient && $transient[ 'from' ] < $current_time && $current_time < $transient[ 'to' ]) {
-						// if( $transient[ 'from' ] < $current_time && $current_time < $transient[ 'to' ] ) {
-							$display_text = ( class_exists( 'WooCommerce' ) && isset( $notice['woo_text'] ) ) ? $notice['woo_text']	: $notice['text'];
-
-							printf(
-								'<div class="notice notice-info is-dismissible image-sizes-dismissible-notice">
-									<p>
-										<img src="%5$s" alt="Logo" style="max-height: 25px; margin-right: 10px; vertical-align: middle;" />
-										%1$s
-										<a class="notice-dismiss" href="%2$s"></a>
-									</p>
-									<button class="image-sizes-dismissible-notice-button button-primary" data-id="%3$s">%4$s</button>
-								</div>',
-								wp_kses_post( $display_text ),
-								esc_url( add_query_arg('dismiss', $id ) ),
-								esc_attr( $id ),
-								esc_html( $notice[ 'button' ] ),
-								esc_url( THUMBPRESS_ASSET . '/img/icon.png' )
-							);
-							break;
-						// }	
+					if ($transient && $transient['from'] < $current_time && $current_time < $transient['to']) {
+						printf(
+							'<div class="notice notice-info is-dismissible image-sizes-dismissible-notice">
+								<p>
+									<a class="notice-dismiss" href="%1$s"></a>
+								</p>
+								<div class="button-wrapper">
+									<a href="%4$s" class="image-sizes-dismissible-notice-button" data-id="%2$s">%3$s</a>
+								</div>
+							</div>',
+							esc_url( add_query_arg('dismiss', $id ) ),
+							esc_attr( $id ),
+							esc_html( $notice['button'] ),
+							esc_url( $notice['url'] )
+						);
+						break;	
 					}
 				}
-			}
-			}				
+			}			
 		}
 	}
 

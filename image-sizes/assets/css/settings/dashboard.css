@@ -1456,7 +1456,7 @@ ul.image_sizes-sortable.disable li span img.image_sizes-thumbnails-arrow-left {
 }
 
 /* Notice */
-
+/* 
 .image-sizes-dismissible-notice {
 	align-items: center;
 	display: flex;
@@ -1469,11 +1469,37 @@ ul.image_sizes-sortable.disable li span img.image_sizes-thumbnails-arrow-left {
 .image-sizes-dismissible-notice p img {
 	max-height: 28px !important;
 }
-.image-sizes-dismissible-notice a {
-	text-decoration: none;
-}
 .image-sizes-dismissible-notice button {
 	font-size: 14px;
 	font-weight: 700;
+} */
+.image-sizes-dismissible-notice {
+	align-items: center;
+	justify-content: space-around;
+	display: flex;
+	gap: 0px;
+	background: url("../../img/year-end.png") no-repeat;
+	background-size: cover;
+	padding: 22px 0px 22px 0px;
+}
+.image-sizes-dismissible-notice a {
+	text-decoration: none;
+}
+.image-sizes-dismissible-notice .image-sizes-dismissible-notice-button {
+	font-size: 16px;
+	font-weight: 600;
+	color: #000000;
+	background-color: #fcb60d;
+	border: none;
+	cursor: pointer;
+	padding: 10px 22px;
+	border-radius: 20px;
+	border-bottom: 4px solid #ffebbb;
+}
+.image-sizes-dismissible-notice a:focus {
+	box-shadow: 0 0 0 0 !important;
+}
+.image-sizes-dismissible-notice .image-sizes-dismissible-notice-button:hover {
+	border-bottom: none;
 }
 /* Notice css End */
