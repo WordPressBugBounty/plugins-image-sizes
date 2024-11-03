@@ -279,20 +279,25 @@ class Admin extends Base {
 				foreach ( image_sizes_notices_values() as $id => $notice ) {
 					$transient = get_transient( $id );
 					$current_time = date_i18n('U');
-					if ($transient && $transient['from'] < $current_time && $current_time < $transient['to']) {
+					// $current_time = date_i18n( 'Y/m/d H:i:s', strtotime( '2024-11-4 10:00:00' ) );
+					if ( $transient && $transient[ 'from' ] < $current_time && $current_time < strtotime( $transient[ 'to' ] ) ) {
 						printf(
 							'<div class="notice notice-info is-dismissible image-sizes-dismissible-notice">
 								<p>
 									<a class="notice-dismiss" href="%1$s"></a>
 								</p>
-								<div class="button-wrapper">
-									<a href="%4$s" class="image-sizes-dismissible-notice-button" data-id="%2$s">%3$s</a>
+								<div class="image-sizes-dismissible-notice-content">
+									%5$s
+									<div class="button-wrapper">
+										<a href="%4$s" class="image-sizes-dismissible-notice-button" data-id="%2$s">%3$s</a>
+									</div>
 								</div>
 							</div>',
 							esc_url( add_query_arg('dismiss', $id ) ),
 							esc_attr( $id ),
 							esc_html( $notice['button'] ),
-							esc_url( $notice['url'] )
+							esc_url( $notice['url'] ),
+							get_image_sizes_countdown_html( $notice[ 'from' ], $notice[ 'countdown_to' ] )
 						);
 						break;	
 					}

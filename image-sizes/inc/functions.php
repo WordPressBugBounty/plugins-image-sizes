@@ -67,7 +67,7 @@ function thumbpress_modules() {
 		'image-replace'          => [
 			'id'                 => 'image-replace',
 			'title'              => __( 'Replace Images With New Version', 'thumbpress' ),
-			'desc'               => __( 'Upload new versions of images and replace the old ones without any issues.', 'codesigner' ),
+			'desc'               => __( 'Upload new versions of images and replace the old ones without any issues.', 'image-sizes' ),
 			'class'              => 'Image_Replace',
 			'url'                => esc_url( 'https://thumbpress.co/modules/replace-image-with-new-version/?utm_source=in-plugin&utm_medium=Modules+Page+&utm_campaign=Replace+Images+/' ),
 			'pro'                => true,
@@ -254,7 +254,7 @@ endif;
 // 				),
 // 				'from'			=> $current_time + 240 * HOUR_IN_SECONDS,
 // 				'to'			=>  $current_time + 288 * HOUR_IN_SECONDS,
-// 				'button'		=> __( 'Detect & Delete Large Images', 'codesigner' ),
+// 				'button'		=> __( 'Detect & Delete Large Images', 'image-sizes' ),
 // 				'url'			=> "https://thumbpress.co/pricing/?utm_source=In-plugin&utm_medium=offer+notice&utm_campaign=Detect+Large+Images"
 // 			],
 // 		];
@@ -266,13 +266,41 @@ if( ! function_exists( 'image_sizes_notices_values' ) ) :
 
 		return [
 			'promotional_images' => [
-				'from'   => $current_time,
-				'to'     => $current_time + 48 * HOUR_IN_SECONDS,
-				'button' => __('Grab Now', 'image-sizes'),
-				'url'    => "https://thumbpress.co/pricing/?utm_source=IN+PLUGIN&utm_medium=NOTICE&utm_campaign=OCTOBER+THRILLS",
+				'from'   		=> $current_time,
+				// 'to'     => $current_time + 48 * HOUR_IN_SECONDS,
+				'to'    		=> date_i18n( 'Y/m/d H:i:s', strtotime( '2024-11-5 00:00:00' ) ),
+				'button' 		=> __('Grab Now', 'image-sizes'),
+				'url'    		=> "https://thumbpress.co/pricing/?utm_source=IN+PLUGIN&utm_medium=NOTICE&utm_campaign=OCTOBER+THRILLS",
+				'countdown_to' 	=> date_i18n( 'Y/m/d H:i:s', strtotime( '2024-11-5 00:00:00' ) ),
 			],
 		];
 	}
+endif;
+
+
+if( ! function_exists( 'get_image_sizes_countdown_html' ) ) :
+	function get_image_sizes_countdown_html( $from, $to ) {
+		return '
+		<div class="image-sizes-countdown" id="image-sizes-countdown" data-countdown-end="'.$to.'">
+			<div class="image-sizes-count">
+				<span id="days"></span>
+				<label>DAYS</label>
+			</div>
+			<div class="image-sizes-count">
+				<span id="hours"></span>
+				<label>HRS</label>
+			</div>
+			<div class="image-sizes-count">
+				<span id="minutes"></span>
+				<label>MINS</label>
+			</div>
+			<div class="image-sizes-count">
+				<span id="seconds"></span>
+				<label>SEC</label>
+			</div>
+		</div>';
+	}
+	
 endif;
 
 /**

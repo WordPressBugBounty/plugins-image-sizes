@@ -1479,8 +1479,8 @@ ul.image_sizes-sortable.disable li span img.image_sizes-thumbnails-arrow-left {
 	display: flex;
 	gap: 0px;
 	background: url("../../img/year-end.png") no-repeat;
-	background-size: cover;
-	padding: 22px 0px 22px 0px;
+	background-size: contain;
+	padding: 11px 0px 9px 0px;
 }
 .image-sizes-dismissible-notice a {
 	text-decoration: none;
@@ -1502,4 +1502,72 @@ ul.image_sizes-sortable.disable li span img.image_sizes-thumbnails-arrow-left {
 .image-sizes-dismissible-notice .image-sizes-dismissible-notice-button:hover {
 	border-bottom: none;
 }
+
+.image-sizes-dismissible-notice-content {
+	display: flex;
+	align-items: center;
+	gap: 80px;
+	margin-left: 140px;
+}
+.image-sizes-countdown {
+	margin-left: 100px;
+}
+.image-sizes-count {
+	display: inline-block;
+	margin: 0 10px;
+	text-align: center;
+	width: 48px;
+	height: 42px;
+	background-image: radial-gradient(
+			circle at 100% 100%,
+			transparent 1px,
+			#ffffff 1px,
+			#ffffff 2px,
+			transparent 2px
+		),
+		linear-gradient(to right, #ffffff, #ffffff),
+		radial-gradient(
+			circle at 0% 100%,
+			transparent 1px,
+			#ffffff 1px,
+			#ffffff 2px,
+			transparent 2px
+		),
+		linear-gradient(to bottom, #ffffff, transparent),
+		radial-gradient(
+			circle at 0% 0%,
+			transparent 1px,
+			transparent 1px,
+			transparent 2px,
+			transparent 2px
+		),
+		linear-gradient(to left, transparent, transparent),
+		radial-gradient(
+			circle at 100% 0%,
+			transparent 1px,
+			transparent 1px,
+			transparent 2px,
+			transparent 2px
+		),
+		linear-gradient(to top, transparent, #ffffff);
+	background-size: 2px 2px, calc(100% - 2px) 1px, 2px 2px,
+		1px calc(100% - 2px);
+	background-position: top left, top center, top right, center right,
+		bottom right, bottom center, bottom left, center left;
+	background-repeat: no-repeat;
+	text-align: center;
+}
+
+.image-sizes-count span {
+	display: block;
+	font-size: 18px;
+	font-weight: bold;
+	color: #ffffff;
+}
+
+.image-sizes-count label {
+	font-size: 10px;
+	color: #ffffff;
+}
+
 /* Notice css End */
