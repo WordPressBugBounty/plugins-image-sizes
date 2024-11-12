@@ -74,16 +74,17 @@ class Admin extends Base {
 
 	public function upgrade() {
 		$current_time = date_i18n('U');
-		if( ! get_option( 'image_sizes_year_last_notice' ) ){
+		if( ! get_option( 'image_sizes_black_notice' ) ){
 			foreach ( image_sizes_notices_values() as $id => $notice ) {
 				$data = [
 					'from' => $notice['from'],
 					'to' => $notice['to']
 				];
 			
-				set_transient($id, $data, $notice['to']);
+				$expiration_duration = $notice['to'] - $current_time; 
+				set_transient( $id, $data,  $expiration_duration );
 			}
-			update_option( 'image_sizes_year_last_notice', 1 );
+			update_option( 'image_sizes_black_notice', 1 );
 		}
 		
 		if( $this->version == get_option( "{$this->slug}_db-version" ) ) return;
@@ -154,13 +155,20 @@ class Admin extends Base {
 
 	public function action_links( $links ) {
 		$this->admin_url = admin_url( 'admin.php' );
-
+	
 		$new_links = [
-			'settings'	=> sprintf( '<a href="%1$s">' . __( 'Settings', 'image-sizes' ) . '</a>', add_query_arg( 'page', 'thumbpress', $this->admin_url ) )
+			'settings' => sprintf( '<a href="%1$s">' . __( 'Settings', 'image-sizes' ) . '</a>', add_query_arg( 'page', 'thumbpress', $this->admin_url ) )
 		];
-		
-		return array_merge( $new_links, $links );
+		$support = [
+			'support' => sprintf( '<a href="%1$s">' . __( 'Support', 'image-sizes' ) . '</a>', 'https://help.codexpert.io/add-ticket/' )
+		];
+		$documentation = [
+			'documentation' => sprintf( '<a href="%1$s">' . __( 'Documentation', 'image-sizes' ) . '</a>', 'https://thumbpress.co/doc-topic/installation/' )
+		];
+	
+		return array_merge( $new_links, $support, $documentation, $links );
 	}
+	
 
 	public function plugin_row_meta( $plugin_meta, $plugin_file ) {
 		
@@ -277,10 +285,10 @@ class Admin extends Base {
 					delete_transient( sanitize_text_field( $_GET['dismiss'] ) );
 				}
 				foreach ( image_sizes_notices_values() as $id => $notice ) {
-					$transient = get_transient( $id );
-					$current_time = date_i18n('U');
-					// $current_time = date_i18n( 'Y/m/d H:i:s', strtotime( '2024-11-4 10:00:00' ) );
-					if ( $transient && $transient[ 'from' ] < $current_time && $current_time < strtotime( $transient[ 'to' ] ) ) {
+					$transient 		= get_transient( $id );
+					$current_time 	= date_i18n('U');
+					// $current_time = date_i18n( 'Y/m/d H:i:s', strtotime( '2024-11-20 10:00:00' ) );
+					if ( $transient && $transient[ 'from' ] < $current_time && $current_time < $transient[ 'to' ] ) {
 						printf(
 							'<div class="notice notice-info is-dismissible image-sizes-dismissible-notice">
 								<p>
@@ -293,10 +301,10 @@ class Admin extends Base {
 									</div>
 								</div>
 							</div>',
-							esc_url( add_query_arg('dismiss', $id ) ),
+							esc_url( add_query_arg( 'dismiss', $id ) ),
 							esc_attr( $id ),
-							esc_html( $notice['button'] ),
-							esc_url( $notice['url'] ),
+							esc_html( $notice[ 'button' ] ),
+							esc_url( $notice[ 'url' ] ),
 							get_image_sizes_countdown_html( $notice[ 'from' ], $notice[ 'countdown_to' ] )
 						);
 						break;	

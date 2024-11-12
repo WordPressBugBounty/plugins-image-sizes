@@ -265,13 +265,13 @@ if( ! function_exists( 'image_sizes_notices_values' ) ) :
 		$current_time = date_i18n('U');
 
 		return [
-			'promotional_images' => [
+			'image_sizes_promotional_campain' => [
 				'from'   		=> $current_time,
 				// 'to'     => $current_time + 48 * HOUR_IN_SECONDS,
-				'to'    		=> date_i18n( 'Y/m/d H:i:s', strtotime( '2024-11-5 00:00:00' ) ),
+				'to'    		=> strtotime( '2024-12-1 00:00:00' ),
 				'button' 		=> __('Grab Now', 'image-sizes'),
-				'url'    		=> "https://thumbpress.co/pricing/?utm_source=IN+PLUGIN&utm_medium=NOTICE&utm_campaign=OCTOBER+THRILLS",
-				'countdown_to' 	=> date_i18n( 'Y/m/d H:i:s', strtotime( '2024-11-5 00:00:00' ) ),
+				'url'    		=> "https://thumbpress.co/pricing/?utm_source=in+plugin&utm_medium=notice&utm_campaign=black+friday+2024",
+				'countdown_to' 	=>  strtotime( '2024-12-1 00:00:00' ),
 			],
 		];
 	}
@@ -280,6 +280,7 @@ endif;
 
 if( ! function_exists( 'get_image_sizes_countdown_html' ) ) :
 	function get_image_sizes_countdown_html( $from, $to ) {
+		$to = date_i18n( 'Y/m/d H:i:s', $to );
 		return '
 		<div class="image-sizes-countdown" id="image-sizes-countdown" data-countdown-end="'.$to.'">
 			<div class="image-sizes-count">

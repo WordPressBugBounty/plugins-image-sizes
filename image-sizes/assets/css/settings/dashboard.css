@@ -15,11 +15,11 @@
 }
 .cx-wrapper {
 	border-radius: 12px;
-	padding: 24px !important;
+	/* padding: 24px !important; */
 	margin-top: 20px;
 }
 .cx-sections-wrapper {
-	padding: 0 !important;
+	/* padding: 0 !important; */
 	margin: 0 !important;
 }
 .thumbpress_page_upgrade-to-pro .cx-heading {
@@ -1478,7 +1478,7 @@ ul.image_sizes-sortable.disable li span img.image_sizes-thumbnails-arrow-left {
 	justify-content: space-around;
 	display: flex;
 	gap: 0px;
-	background: url("../../img/year-end.png") no-repeat;
+	background: url("../../img/black-friday.png") no-repeat;
 	background-size: contain;
 	padding: 11px 0px 9px 0px;
 }
@@ -1488,19 +1488,18 @@ ul.image_sizes-sortable.disable li span img.image_sizes-thumbnails-arrow-left {
 .image-sizes-dismissible-notice .image-sizes-dismissible-notice-button {
 	font-size: 16px;
 	font-weight: 600;
-	color: #000000;
-	background-color: #fcb60d;
+	color: #ffffff;
+	background: linear-gradient(89.92deg, #ff9410 1.31%, #a42dff 100.35%);
 	border: none;
 	cursor: pointer;
 	padding: 10px 22px;
 	border-radius: 20px;
-	border-bottom: 4px solid #ffebbb;
 }
 .image-sizes-dismissible-notice a:focus {
 	box-shadow: 0 0 0 0 !important;
 }
 .image-sizes-dismissible-notice .image-sizes-dismissible-notice-button:hover {
-	border-bottom: none;
+	background: linear-gradient(89.92deg, #2b97ff 1.31%, #a42dff 100.35%);
 }
 
 .image-sizes-dismissible-notice-content {
@@ -1510,7 +1509,7 @@ ul.image_sizes-sortable.disable li span img.image_sizes-thumbnails-arrow-left {
 	margin-left: 140px;
 }
 .image-sizes-countdown {
-	margin-left: 100px;
+	margin-left: 200px;
 }
 .image-sizes-count {
 	display: inline-block;
@@ -1563,6 +1562,7 @@ ul.image_sizes-sortable.disable li span img.image_sizes-thumbnails-arrow-left {
 	font-size: 18px;
 	font-weight: bold;
 	color: #ffffff;
+	margin-top: 5px;
 }
 
 .image-sizes-count label {
@@ -1571,3 +1571,13 @@ ul.image_sizes-sortable.disable li span img.image_sizes-thumbnails-arrow-left {
 }
 
 /* Notice css End */
+#adminmenu
+	.toplevel_page_thumbpress
+	.wp-submenu-wrap
+	li
+	a[href$="page=upgrade-to-pro"] {
+	background-color: #075bfe;
+	color: #ffffff;
+	padding: 5px 10px;
+	display: block;
+}

@@ -3,8 +3,8 @@ Contributors: pluggable, codexpert, thumbpressco, mukto90
 Donate link: https://thumbpress.co/?utm_source=free-plugins&utm_medium=readme&utm_campaign=image-sizes
 Tags: compress images, disable thumbnails, image editor, optimize images, regenerate thumbnails
 Requires at least: 5.0
-Tested up to: 6.6
-Stable tag: 5.8.3
+Tested up to: 6.7
+Stable tag: 5.8.4
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -163,11 +163,14 @@ Please post on our support forum here https://wordpress.org/support/plugin/image
 
 == Changelog ==
 
+= 2024-11-12 – v5.8.4 =
+* [imp] routine maintenance
+
 = 2024-11-03 – v5.8.3 =
-* [fix] routine maintenance
+* [imp] routine maintenance
 
 = 2024-10-27 – v5.8.2 =
-* [fix] routine maintenance
+* [imp] routine maintenance
 
 = 2024-10-16 – v5.8.1 =
 * [add] added escaping functions for output
