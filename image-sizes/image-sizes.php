@@ -4,7 +4,7 @@
  * Plugin Name:			ThumbPress
  * Plugin URI:			https://thumbpress.co
  * Description:			A complete image and thumbnail management solution for WordPress.
- * Version:				5.8.4
+ * Version:				5.8.5
  * Requires at least:	5.0
  * Requires PHP:		7.0
  * Tested up to:		6.7
@@ -166,7 +166,7 @@ final class Plugin {
 			$admin->action( 'admin_footer', 'modal' );
 			// $admin->action( 'admin_footer', 'popup_for_feedback' );
 			$admin->action( 'admin_footer', 'upgrade' );
-			$admin->action( 'plugins_loaded', 'i18n' );
+			$admin->action( 'init', 'i18n' );
 			$admin->action( 'admin_enqueue_scripts', 'enqueue_scripts' );
 			$admin->filter( "plugin_action_links_{$this->plugin['basename']}", 'action_links' );
 			$admin->filter( 'plugin_row_meta', 'plugin_row_meta', 10, 2 );
