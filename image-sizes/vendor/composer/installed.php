@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '3b02bbb3b3e8651a3f7a9c1aa549d9a9abb63dd9',
+        'reference' => '1e935c62cedc947141691f21973cda47780a5a47',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '3b02bbb3b3e8651a3f7a9c1aa549d9a9abb63dd9',
+            'reference' => '1e935c62cedc947141691f21973cda47780a5a47',
             'dev_requirement' => false,
         ),
         'codexpert/plugin' => array(
