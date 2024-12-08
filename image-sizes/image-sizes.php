@@ -4,7 +4,7 @@
  * Plugin Name:			ThumbPress
  * Plugin URI:			https://thumbpress.co
  * Description:			A complete image and thumbnail management solution for WordPress.
- * Version:				5.8.6
+ * Version:				5.8.7
  * Requires at least:	5.0
  * Requires PHP:		7.0
  * Tested up to:		6.7
@@ -18,7 +18,7 @@
 
 /**
  * ThumbPress is free software: you can redistribute it and/or modify it under 
- * the terms of the GNU General Public License as published by the Free Software 
+ * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or any later version.
  *
  * ThumbPress is distributed in the hope that it will be useful, but WITHOUT ANY 

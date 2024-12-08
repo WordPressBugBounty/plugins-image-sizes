@@ -107,14 +107,14 @@ class Admin extends Base {
 		
 		wp_enqueue_style( $this->slug, plugins_url( "/assets/css/admin.css", THUMBPRESS ), '', time(), 'all' );
 		wp_enqueue_style( $this->slug . 'dashboard', plugins_url( "/assets/css/settings/dashboard.css", THUMBPRESS ), '', time(), 'all' );
-		wp_enqueue_style( $this->slug . 'google-font', "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
-		wp_enqueue_style( $this->slug . 'font-awesome', "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css");
-		wp_enqueue_script ($this->slug .'font-awesome-js', "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.js", ['jquery'], time(), true);
+		wp_enqueue_style( $this->slug . 'google-font', "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" );
+		wp_enqueue_style( $this->slug . 'font-awesome', "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" );
+		wp_enqueue_script( $this->slug . 'font-awesome-js', "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.js", [ 'jquery' ], time(), true );
 		
 		wp_enqueue_script($this->slug, plugins_url("/assets/js/admin{$min}.js", THUMBPRESS), ['jquery'], time(), true);
 		
-		wp_enqueue_script('wp-pointer');
-		wp_enqueue_style('wp-pointer');
+		wp_enqueue_script( 'wp-pointer' );
+		wp_enqueue_style( 'wp-pointer' );
 
 		$max_size_value = get_option( 'thumbpress_max_size_value' );
 		$base_url 	= admin_url( 'admin.php' );
@@ -156,17 +156,11 @@ class Admin extends Base {
 	public function action_links( $links ) {
 		$this->admin_url = admin_url( 'admin.php' );
 	
-		$new_links = [
-			'settings' => sprintf( '<a href="%1$s">' . __( 'Settings', 'image-sizes' ) . '</a>', add_query_arg( 'page', 'thumbpress', $this->admin_url ) )
-		];
-		$support = [
-			'support' => sprintf( '<a href="%1$s">' . __( 'Support', 'image-sizes' ) . '</a>', 'https://help.codexpert.io/add-ticket/' )
-		];
-		$documentation = [
-			'documentation' => sprintf( '<a href="%1$s">' . __( 'Documentation', 'image-sizes' ) . '</a>', 'https://thumbpress.co/doc-topic/installation/' )
-		];
+		$new_links['settings']	= sprintf( '<a href="%2$s" target="_blank">%1$s</a>', __( 'Settings', 'image-sizes' ), add_query_arg( 'page', 'thumbpress', $this->admin_url ) );
+		$new_links['support']	= sprintf( '<a href="%2$s" target="_blank">%1$s</a>', __( 'Support', 'image-sizes' ), 'https://help.codexpert.io/add-ticket/' );
+		$new_links['docs']		= sprintf( '<a href="%2$s" target="_blank">%1$s</a>', __( 'Docs', 'image-sizes' ), 'https://thumbpress.co/doc-topic/installation/' );
 	
-		return array_merge( $new_links, $support, $documentation, $links );
+		return array_merge( $new_links, $links );
 	}
 	
 

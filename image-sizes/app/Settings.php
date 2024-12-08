@@ -134,9 +134,9 @@ class Settings extends Base {
 		    $upgrade_pro = [
 		        'id'            => "upgrade-to-pro",
 		        'parent'        => 'thumbpress',
-		        'label'         => __( 'Black Friday Sale (Up to 80% OFF) ', 'image-sizes' ), // Remove HTML tags
-		        'title'         => __( 'Black Friday Sale (Up to 80% OFF)', 'image-sizes' ),
-		        'header'        => __( 'Black Friday Sale (Up to 80% OFF)', 'image-sizes' ),
+		        'label'         => __( 'Upgrade to Pro', 'image-sizes' ), // Remove HTML tags
+		        'title'         => __( 'Upgrade to Pro', 'image-sizes' ),
+		        'header'        => __( 'Upgrade to Pro', 'image-sizes' ),
 		        'priority'      => 100,
 		        'sections'      => [
 		            'upgrade-to-pro'=> [
@@ -151,7 +151,7 @@ class Settings extends Base {
 		    ];
 
 		    // Add HTML tags when rendering, not in the translation function
-		    $upgrade_pro['label'] = '<span style="font-weight: bold;">Black Friday Sale <br>(Up to 80% OFF)</span></span>';
+		    $upgrade_pro['label'] = '<span style="font-weight: bold;">Upgrade to Pro</span></span>';
 
 		    new Settings_API( apply_filters( 'submenu_thumbpress_pro', $upgrade_pro ) );
 		}
@@ -181,7 +181,7 @@ class Settings extends Base {
 	public function redirect_specific_admin_page() {
 		global $pagenow;
 		if ( $pagenow == 'admin.php' && isset( $_GET[ 'page' ] ) && $_GET[ 'page' ] == 'upgrade-to-pro' ) {
-			wp_redirect( 'https://thumbpress.co/pricing/?utm_source=in+plugin&utm_medium=menu+bar&utm_campaign=black+friday+2024' );
+			wp_redirect( 'https://thumbpress.co/pricing/?utm_source=in+plugin&utm_medium=menu+bar&utm_campaign=8dec24' );
 			exit;
 		}
 	}

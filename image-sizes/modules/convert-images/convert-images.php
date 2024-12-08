@@ -244,6 +244,7 @@ class Convert_Images extends Base {
 		$grand_total_attachments 	= get_option('thumbpress_now_convert_background_total_images');
 		$count 						= $offset + count( $attachments );
 		$progress 					= ( $count / $grand_total_attachments ) * 100;
+		$progress 					= $progress > 100 ? 100 : $progress;
 		$new_offset 				= $offset + count( $attachments );
 
 		update_option( 'thumbpress_convert_progress', $progress );
@@ -431,6 +432,7 @@ class Convert_Images extends Base {
 		$grand_total_attachments 	= get_option('thumbpress_now_convert_total_image');
 		$count 						= $offset + count( $attachments );
 		$progress 					= ( $count / $grand_total_attachments ) * 100;
+		$progress 					= $progress > 100 ? 100 : $progress;
 		$new_offset 				= $offset + count( $attachments );
 		$message 					= __('Converting Images to WebP...', 'image-sizes');
 
