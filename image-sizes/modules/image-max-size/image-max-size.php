@@ -13,9 +13,8 @@ class Image_Max_Size extends Base {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->plugin	= get_plugin_data( THUMBPRESS );
-		$this->slug		= $this->plugin['TextDomain'];
-		$this->version	= $this->plugin['Version'];
+
+		$this->slug		= 'image-sizes';
 
 		$this->filter( 'wp_handle_upload_prefilter', 'restrict_image_upload_by_size' );
 	}

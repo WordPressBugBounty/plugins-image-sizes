@@ -18,9 +18,8 @@ class Convert_Images extends Base {
 
 		require_once( __DIR__ . '/inc/functions.php' );
 
-		$this->plugin	= get_plugin_data( THUMBPRESS );
-		$this->slug		= $this->plugin['TextDomain'];
-		$this->version	= time();
+		$this->slug		= 'image-sizes';
+		$this->version	= '5.8.7';
 
 		$this->action( 'plugins_loaded', 'init_menu', 11 );
 		$this->action( 'admin_enqueue_scripts', 'enqueue_scripts' );

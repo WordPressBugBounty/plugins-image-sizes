@@ -4,7 +4,7 @@
  * Plugin Name:			ThumbPress
  * Plugin URI:			https://thumbpress.co
  * Description:			A complete image and thumbnail management solution for WordPress.
- * Version:				5.8.7
+ * Version:				5.8.8
  * Requires at least:	5.0
  * Requires PHP:		7.0
  * Tested up to:		6.7
@@ -131,10 +131,13 @@ final class Plugin {
 		 * @since 0.9
 		 * @var $plugin
 		 */
-		$this->plugin					= get_plugin_data( THUMBPRESS );
+		$this->plugin					= [];
 		$this->plugin['basename']		= plugin_basename( THUMBPRESS );
 		$this->plugin['file']			= THUMBPRESS;
-		$this->plugin['server']			= apply_filters( 'image-sizes_server', 'https://codexpert.io/dashboard' );
+		$this->plugin['TextDomain']		= 'image-sizes';
+		$this->plugin['Name']			= __( 'ThumbPress', 'image-sizes' );
+		$this->plugin['Version']		= '5.8.8';
+		$this->plugin['server']			= apply_filters( 'image-sizes_server', 'https://my.pluggable.io' );
 		$this->plugin['icon']			= THUMBPRESS_ASSET . '/img/icon.png';
 		$this->plugin['depends']		= [];
 	}
@@ -183,7 +186,6 @@ final class Plugin {
 			$settings->action( 'admin_menu', 'admin_menu' );
 			$settings->action( 'admin_init', 'redirect_specific_admin_page' ); // redirect for upgrading to pro
 
-
 			/**
 			 * Renders different notices
 			 * 
@@ -200,7 +202,7 @@ final class Plugin {
 			 * 
 			 * @author Pluggable <hi@pluggable.io>
 			 */
-			$survey = new Survey( THUMBPRESS );
+			$survey = new Survey( $this->plugin );
 
 			/**
 			 * Shows a popup window asking why a user is deactivating the plugin
@@ -209,7 +211,7 @@ final class Plugin {
 			 * 
 			 * @author Pluggable <hi@pluggable.io>
 			 */
-			$deactivator = new Deactivator( THUMBPRESS );
+			$deactivator = new Deactivator( $this->plugin );
 
 			/**
 			 * Alters featured plugins
@@ -218,7 +220,7 @@ final class Plugin {
 			 * 
 			 * @author Pluggable <hi@pluggable.io>
 			 */
-			$feature = new Feature( THUMBPRESS );
+			$feature = new Feature( $this->plugin );
 
 		else : // !is_admin() ?
 

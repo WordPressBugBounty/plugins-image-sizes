@@ -33,12 +33,6 @@ class Feature {
 
 	public function __construct( $plugin, $args = [] ) {
 
-		if( ! function_exists( 'get_plugin_data' ) ) {
-			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-		}
-		
-		$this->plugin 	= get_plugin_data( $plugin );
-
 		$this->args = wp_parse_args( $args, [
 			'server'	=> 'https://my.pluggable.io',
 			'featured'	=> [
@@ -55,8 +49,8 @@ class Feature {
 		] );
 
 		$this->server 	= $this->args['server'];
-		$this->slug 	= $this->plugin['TextDomain'];
-		$this->name 	= $this->plugin['Name'];
+		$this->slug 	= $plugin['TextDomain'];
+		$this->name 	= $plugin['Name'];
 
 		$this->featured_plugins = $this->args['featured']; // last item in this array will show up first
 

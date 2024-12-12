@@ -4,7 +4,7 @@ Donate link: https://thumbpress.co/?utm_source=free-plugins&utm_medium=readme&ut
 Tags: compress images, disable thumbnails, image editor, optimize images, regenerate thumbnails
 Requires at least: 5.0
 Tested up to: 6.7
-Stable tag: 5.8.7
+Stable tag: 5.8.8
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -163,9 +163,12 @@ Please post on our support forum here https://wordpress.org/support/plugin/image
 
 == Changelog ==
 
+= 2024-12-12 – v5.8.8 =
+* [fix] Error related to `_load_textdomain_just_in_time` fixed
+
 = 2024-11-25 – v5.8.7 =
-* [remove] removed promotional link from plugin list
-* [imp] update promotional link & text from plugin menu 
+* [remove] removed promotional button from dashboard
+* [imp] update promotional link & text from plugin menu
 
 = 2024-11-25 – v5.8.6 =
 * [imp] compatibility tested with WordPress 6.7.1

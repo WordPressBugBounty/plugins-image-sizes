@@ -13,9 +13,9 @@ class Disable_Thumbnails extends Base {
 	 * Constructor
 	 */
     public function __construct() {
-        $this->plugin	= get_plugin_data( THUMBPRESS );
-        $this->slug		= $this->plugin['TextDomain'];
-        $this->version	= $this->plugin['Version'];
+        
+        $this->slug     = 'image-sizes';
+        $this->version  = '5.8.7';
 
         $this->action( 'admin_enqueue_scripts', 'enqueue_scripts' );
 		$this->action( 'admin_head', 'set_init_sizes' );

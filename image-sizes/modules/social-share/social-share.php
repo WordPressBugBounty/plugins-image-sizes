@@ -17,9 +17,7 @@ class Social_Share extends Base {
 
 		// require_once( __DIR__ . '/inc/functions.php' );
 
-		$this->plugin	= get_plugin_data( THUMBPRESS );
-		$this->slug		= $this->plugin['TextDomain'];
-		$this->version	= $this->plugin['Version'];
+		$this->slug		= 'image-sizes';
 
 		$this->action( 'add_meta_boxes', 'social_share_images_metabox' );
 		$this->action( 'save_post', 'save_social_share_images_meta' );

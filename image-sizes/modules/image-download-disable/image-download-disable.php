@@ -13,9 +13,9 @@ class Image_Download_Disable extends Base {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->plugin	= get_plugin_data( THUMBPRESS );
-		$this->slug		= $this->plugin['TextDomain'];
-		$this->version	= $this->plugin['Version'];
+		
+		$this->slug		= 'image-sizes';
+		$this->version	= '5.8.7';
 
 		$this->action( 'wp_enqueue_scripts', 'enqueue_scripts_all' );
 	}

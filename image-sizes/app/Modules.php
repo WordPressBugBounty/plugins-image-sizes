@@ -44,6 +44,7 @@ class Modules extends Base {
 				if( method_exists( $obj, '__settings' ) ) {
 					$obj->filter( 'thumbpress-modules_settings_args', '__settings' );
 				}
+				
 				/**
 				 * if free module has some code in pro version
 				 */

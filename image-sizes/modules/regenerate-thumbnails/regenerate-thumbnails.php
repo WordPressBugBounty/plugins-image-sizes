@@ -14,9 +14,9 @@ class Regenerate_Thumbnails extends Base {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->plugin	= get_plugin_data( THUMBPRESS );
-		$this->slug		= $this->plugin['TextDomain'];
-		$this->version	= $this->plugin['Version'];
+		
+		$this->slug		= 'image-sizes';
+		$this->version	= '5.8.7';
 
 		$this->action( 'admin_enqueue_scripts', 'enqueue_scripts' );
 		$this->action( 'plugins_loaded', 'init_menu', 11 );
@@ -134,6 +134,7 @@ class Regenerate_Thumbnails extends Base {
 			$_thumbs_deleteds 		= $thumbs_deleteds + $thumbs_deleted;
 			$_thumbs_createds 		= $thumbs_createds + $thumbs_created;
 			$progress 				= ( $offsets / $total_images_count ) * 100;
+			$progress 					= $progress > 100 ? 100 : $progress;
 		}
 		$message 					= __('Regenerating Thumbnails...', 'image-sizes');
 
@@ -264,6 +265,7 @@ class Regenerate_Thumbnails extends Base {
 			$_thumbs_createds 	= $thumbs_createds + $thumbs_created;
 			$count 				= $offset + count( $images );
 			$progress 			= ( $count / $total_attachments ) * 100;
+			$progress 					= $progress > 100 ? 100 : $progress;
 
 			update_option( 'thumbpress_regenerate_progress', $progress );
 			update_option( 'thumbpress_regenerate_total_processed', $count );
