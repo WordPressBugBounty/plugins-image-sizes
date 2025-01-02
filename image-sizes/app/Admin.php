@@ -74,7 +74,7 @@ class Admin extends Base {
 
 	public function upgrade() {
 		$current_time = date_i18n('U');
-		if( ! get_option( 'image_sizes_black_notice' ) ){
+		if( ! get_option( 'image_sizes_year_first_notice' ) ){
 			foreach ( image_sizes_notices_values() as $id => $notice ) {
 				$data = [
 					'from' => $notice['from'],
@@ -84,7 +84,7 @@ class Admin extends Base {
 				$expiration_duration = $notice['to'] - $current_time; 
 				set_transient( $id, $data,  $expiration_duration );
 			}
-			update_option( 'image_sizes_black_notice', 1 );
+			update_option( 'image_sizes_year_first_notice', 1 );
 		}
 		
 		if( $this->version == get_option( "{$this->slug}_db-version" ) ) return;
@@ -239,41 +239,6 @@ class Admin extends Base {
 			
 			$current_screen = get_current_screen()->base;
 
-			// if ( $current_screen == 'dashboard' || $current_screen == 'toplevel_page_thumbpress' ) {
-			// 	if( isset( $_GET['dismiss'] ) && array_key_exists( $_GET['dismiss'], image_sizes_notices_values() ) ) {
-			// 		delete_transient( sanitize_text_field( $_GET['dismiss'] ) );
-			// 	}
-			// 	$image_count = image_sizes_uncompressed_count(); 
-			// 	if ($image_count > 100) {
-			// 		foreach ( image_sizes_notices_values() as $id => $notice ) {
-			// 			$transient = get_transient( $id );
-			// 			$current_time = date_i18n('U');
-			// 			//$current_time = strtotime( '2024-09-06 12:00:00' );
-			// 			if ($transient && $transient[ 'from' ] < $current_time && $current_time < $transient[ 'to' ]) {
-			// 				// if( $transient[ 'from' ] < $current_time && $current_time < $transient[ 'to' ] ) {
-			// 					$display_text = ( class_exists( 'WooCommerce' ) && isset( $notice['woo_text'] ) ) ? $notice['woo_text']	: $notice['text'];
-
-			// 					printf(
-			// 						'<div class="notice notice-info is-dismissible image-sizes-dismissible-notice">
-			// 							<p>
-			// 								<img src="%5$s" alt="Logo" style="max-height: 25px; margin-right: 10px; vertical-align: middle;" />
-			// 								%1$s
-			// 								<a class="notice-dismiss" href="%2$s"></a>
-			// 							</p>
-			// 							<button class="image-sizes-dismissible-notice-button button-primary" data-id="%3$s">%4$s</button>
-			// 						</div>',
-			// 						wp_kses_post( $display_text ),
-			// 						esc_url( add_query_arg('dismiss', $id ) ),
-			// 						esc_attr( $id ),
-			// 						esc_html( $notice[ 'button' ] ),
-			// 						esc_url( THUMBPRESS_ASSET . '/img/icon.png' )
-			// 					);
-			// 					break;
-			// 				// }	
-			// 			}
-			// 		}
-			// 	}
-			// }
 			if ( $current_screen == 'dashboard' || $current_screen == 'toplevel_page_thumbpress' ) {
 				if( isset( $_GET['dismiss'] ) && array_key_exists( $_GET['dismiss'], image_sizes_notices_values() ) ) {
 					delete_transient( sanitize_text_field( $_GET['dismiss'] ) );
@@ -289,7 +254,6 @@ class Admin extends Base {
 									<a class="notice-dismiss" href="%1$s"></a>
 								</p>
 								<div class="image-sizes-dismissible-notice-content">
-									%5$s
 									<div class="button-wrapper">
 										<a href="%4$s" class="image-sizes-dismissible-notice-button" data-id="%2$s">%3$s</a>
 									</div>
@@ -299,7 +263,6 @@ class Admin extends Base {
 							esc_attr( $id ),
 							esc_html( $notice[ 'button' ] ),
 							esc_url( $notice[ 'url' ] ),
-							get_image_sizes_countdown_html( $notice[ 'from' ], $notice[ 'countdown_to' ] )
 						);
 						break;	
 					}

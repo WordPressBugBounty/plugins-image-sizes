@@ -1474,13 +1474,14 @@ ul.image_sizes-sortable.disable li span img.image_sizes-thumbnails-arrow-left {
 	font-weight: 700;
 } */
 .image-sizes-dismissible-notice {
+	padding: 20px;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: space-between;
 	display: flex;
 	gap: 0px;
-	background: url("../../img/black-friday.png") no-repeat;
 	background-size: contain;
-	padding: 11px 0px 9px 0px;
+	background: url("../../img/kik-off.png") no-repeat;
+	background-position-y: center;
 }
 .image-sizes-dismissible-notice a {
 	text-decoration: none;
@@ -1489,17 +1490,22 @@ ul.image_sizes-sortable.disable li span img.image_sizes-thumbnails-arrow-left {
 	font-size: 16px;
 	font-weight: 600;
 	color: #ffffff;
-	background: linear-gradient(89.92deg, #ff9410 1.31%, #a42dff 100.35%);
+	background: linear-gradient(89.92deg, #fb15ff 1.31%, #8300cf 100.35%);
 	border: none;
 	cursor: pointer;
 	padding: 10px 22px;
-	border-radius: 20px;
+	transition: transform 0.4s ease, background 0.4s ease;
+	border-radius: 8px;
 }
 .image-sizes-dismissible-notice a:focus {
 	box-shadow: 0 0 0 0 !important;
 }
 .image-sizes-dismissible-notice .image-sizes-dismissible-notice-button:hover {
 	background: linear-gradient(89.92deg, #2b97ff 1.31%, #a42dff 100.35%);
+	transform: scale(1.2);
+}
+.notice.notice-info.is-dismissible.image-sizes-dismissible-notice {
+	padding-right: 50px;
 }
 
 .image-sizes-dismissible-notice-content {

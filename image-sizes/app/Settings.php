@@ -134,9 +134,9 @@ class Settings extends Base {
 		    $upgrade_pro = [
 		        'id'            => "upgrade-to-pro",
 		        'parent'        => 'thumbpress',
-		        'label'         => __( 'Upgrade to Pro', 'image-sizes' ), // Remove HTML tags
-		        'title'         => __( 'Upgrade to Pro', 'image-sizes' ),
-		        'header'        => __( 'Upgrade to Pro', 'image-sizes' ),
+		        'label'         => __( 'New Year Sale (Up to 70% Off)', 'image-sizes' ), // Remove HTML tags
+		        'title'         => __( 'New Year Sale (Up to 70% Off)', 'image-sizes' ),
+		        'header'        => __( 'New Year Sale (Up to 70% Off)', 'image-sizes' ),
 		        'priority'      => 100,
 		        'sections'      => [
 		            'upgrade-to-pro'=> [
@@ -151,7 +151,7 @@ class Settings extends Base {
 		    ];
 
 		    // Add HTML tags when rendering, not in the translation function
-		    $upgrade_pro['label'] = '<span style="font-weight: bold;">Upgrade to Pro</span></span>';
+		    $upgrade_pro['label'] = '<span style="font-weight: bold;">New Year Sale (Up to 70% Off)</span></span>';
 
 		    new Settings_API( apply_filters( 'submenu_thumbpress_pro', $upgrade_pro ) );
 		}

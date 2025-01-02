@@ -265,44 +265,42 @@ if( ! function_exists( 'image_sizes_notices_values' ) ) :
 		$current_time = date_i18n('U');
 
 		return [
-			'image_sizes_promotional_campain' => [
+			'image_sizes_kikoff_notice' => [
 				'from'   		=> $current_time,
-				// 'to'     => $current_time + 48 * HOUR_IN_SECONDS,
-				'to'    		=> strtotime( '2024-12-1 00:00:00' ),
+				'to'    		=> strtotime( '2025-01-10 00:00:00' ),
 				'button' 		=> __('Grab Now', 'image-sizes'),
-				'url'    		=> "https://thumbpress.co/pricing/?utm_source=in+plugin&utm_medium=notice&utm_campaign=black+friday+2024",
-				'countdown_to' 	=>  strtotime( '2024-12-1 00:00:00' ),
+				'url'    		=> "https://thumbpress.co/pricing/?utm_source=in+plugin&utm_medium=notice&utm_campaign=new-year-2025",
 			],
 		];
 	}
 endif;
 
 
-if( ! function_exists( 'get_image_sizes_countdown_html' ) ) :
-	function get_image_sizes_countdown_html( $from, $to ) {
-		$to = date_i18n( 'Y/m/d H:i:s', $to );
-		return '
-		<div class="image-sizes-countdown" id="image-sizes-countdown" data-countdown-end="'.$to.'">
-			<div class="image-sizes-count">
-				<span id="days"></span>
-				<label>DAYS</label>
-			</div>
-			<div class="image-sizes-count">
-				<span id="hours"></span>
-				<label>HRS</label>
-			</div>
-			<div class="image-sizes-count">
-				<span id="minutes"></span>
-				<label>MINS</label>
-			</div>
-			<div class="image-sizes-count">
-				<span id="seconds"></span>
-				<label>SEC</label>
-			</div>
-		</div>';
-	}
+// if( ! function_exists( 'get_image_sizes_countdown_html' ) ) :
+// 	function get_image_sizes_countdown_html( $from, $to ) {
+// 		$to = date_i18n( 'Y/m/d H:i:s', $to );
+// 		return '
+// 		<div class="image-sizes-countdown" id="image-sizes-countdown" data-countdown-end="'.$to.'">
+// 			<div class="image-sizes-count">
+// 				<span id="days"></span>
+// 				<label>DAYS</label>
+// 			</div>
+// 			<div class="image-sizes-count">
+// 				<span id="hours"></span>
+// 				<label>HRS</label>
+// 			</div>
+// 			<div class="image-sizes-count">
+// 				<span id="minutes"></span>
+// 				<label>MINS</label>
+// 			</div>
+// 			<div class="image-sizes-count">
+// 				<span id="seconds"></span>
+// 				<label>SEC</label>
+// 			</div>
+// 		</div>';
+// 	}
 	
-endif;
+// endif;
 
 /**
  * 
