@@ -267,7 +267,7 @@ if( ! function_exists( 'image_sizes_notices_values' ) ) :
 		return [
 			'image_sizes_kikoff_notice' => [
 				'from'   		=> $current_time,
-				'to'    		=> strtotime( '2025-01-10 00:00:00' ),
+				'to'    		=> strtotime( '2025-01-20 00:00:00' ),
 				'button' 		=> __('Grab Now', 'image-sizes'),
 				'url'    		=> "https://thumbpress.co/pricing/?utm_source=in+plugin&utm_medium=notice&utm_campaign=new-year-2025",
 			],

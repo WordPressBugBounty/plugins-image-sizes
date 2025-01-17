@@ -74,7 +74,7 @@ class Admin extends Base {
 
 	public function upgrade() {
 		$current_time = date_i18n('U');
-		if( ! get_option( 'image_sizes_year_first_notice' ) ){
+		if( ! get_option( 'image_sizes_year_notice' ) ){
 			foreach ( image_sizes_notices_values() as $id => $notice ) {
 				$data = [
 					'from' => $notice['from'],
@@ -84,7 +84,7 @@ class Admin extends Base {
 				$expiration_duration = $notice['to'] - $current_time; 
 				set_transient( $id, $data,  $expiration_duration );
 			}
-			update_option( 'image_sizes_year_first_notice', 1 );
+			update_option( 'image_sizes_year_notice', 1 );
 		}
 		
 		if( $this->version == get_option( "{$this->slug}_db-version" ) ) return;

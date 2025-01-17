@@ -1482,6 +1482,7 @@ ul.image_sizes-sortable.disable li span img.image_sizes-thumbnails-arrow-left {
 	background-size: contain;
 	background: url("../../img/kik-off.png") no-repeat;
 	background-position-y: center;
+	background-size: cover;
 }
 .image-sizes-dismissible-notice a {
 	text-decoration: none;
@@ -1505,7 +1506,7 @@ ul.image_sizes-sortable.disable li span img.image_sizes-thumbnails-arrow-left {
 	transform: scale(1.2);
 }
 .notice.notice-info.is-dismissible.image-sizes-dismissible-notice {
-	padding-right: 50px;
+	padding-right: 115px;
 }
 
 .image-sizes-dismissible-notice-content {
