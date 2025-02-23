@@ -3,6 +3,7 @@ namespace Codexpert\ThumbPress\App;
 
 use Codexpert\Plugin\Base;
 use Codexpert\ThumbPress\Helper;
+use Codexpert\ThumbPress\Notice;
 
 /**
  * if accessed directly, exit.
@@ -70,6 +71,35 @@ class Admin extends Base {
 	 */
 	public function i18n() {
 		load_plugin_textdomain( 'image-sizes', false, THUMBPRESS_DIR . '/languages/' );
+		if ( !defined( 'THUMBPRESS_PRO' ) && current_user_can( 'manage_options' ) ) {
+			$data_id = 'thumbpress-easycommerce_campain';
+			$url     = 'https://easycommerce.dev/?utm_source=wp+dashboard&utm_medium=thumbpress+notice&utm_campaign=introducing+easycommerce';
+			$image_path = THUMBPRESS_ASSET . '/img/banner-section/tp-logo.png';
+
+			$notice = new Notice( $data_id );
+
+			$notice->set_intervals( [0] ); // Show at 0s (immediately), after 5s, and after 10s
+			$notice->set_expiry( 3 * DAY_IN_SECONDS ); // Don't show after 3 days
+
+			$message = '
+			    <div class="is-dismissible thumbpress-dismissible-notice">
+			        <p>
+			            <a class="notice-dismiss" href=""></a>
+			        </p>
+			        <div class="thumbpress-dismissible-notice-content">
+						<img src="' . $image_path . '" alt="thumbpress" class="thumbpress-notice-image" >
+						<p class="thumbpress-notice-title"> Introducing <span>EasyCommerce</span> -  A Revolutionary WordPress Ecommerce Plugin </p>
+			            <div class="button-wrapper">
+			                <a href="' . esc_url( $url ) . '" class="thumbpress-dismissible-notice-button" data-id="' . esc_attr( $data_id ) . '">Check it Out</a>
+			            </div>
+			        </div>
+			    </div>
+			';
+
+			$notice->set_message( $message );
+			$notice->set_screens( ['dashboard', 'toplevel_page_thumbpress'] );
+			$notice->render();
+		}
 	}
 
 	public function upgrade() {

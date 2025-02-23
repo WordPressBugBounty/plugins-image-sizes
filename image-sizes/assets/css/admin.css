@@ -343,40 +343,6 @@ ul.image_sizes-sortable.enable li.image_sizes-original-size {
 .cx-sidebar-wrapper > a > img {
 	max-width: 100%;
 }
-.image_sizes-notice p {
-	font-size: 14px;
-}
-.cx-notice-btn {
-	background: #cb3261;
-	padding: 10px;
-	color: #fff;
-	text-decoration: none;
-	border-radius: 20px;
-	border: 1px solid transparent;
-	transition: all 0.4s;
-	display: block;
-	width: 265px;
-	text-align: center;
-	font-size: 14px;
-}
-.cx-notice-btn:hover {
-	background: #fff;
-	color: #cb3261;
-	border: 1px solid #cb3261;
-}
-.image_sizes-notice > div {
-	margin-bottom: 15px;
-}
-.image_sizes-notice {
-	padding-bottom: 10px;
-	border-left-color: #cb3261;
-	background: url(../img/congrats.jpg);
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: right;
-	background-color: #fff;
-	position: relative;
-}
 #image_sizes-form-table tr td {
 	padding-left: 0;
 }
@@ -1300,6 +1266,61 @@ input:checked + .thumb-toggle-slider:before {
 	font-size: 13px;
 	color: #2271b1;
 	font-weight: 500;
+}
+
+/* Thumbpress Notice */
+
+.image_sizes-notice p {
+	font-size: 14px;
+}
+.notice-info.is-dismissible {
+	background: #1255FF1A;
+}
+.thumbpress-dismissible-notice {
+    display: flex;
+    align-items: center;
+    background-size: contain;
+}
+.thumbpress-dismissible-notice a {
+	text-decoration: none;
+}
+.thumbpress-dismissible-notice-content {
+	display: flex;
+	align-items: center;
+	gap: 80px;
+	margin: 0px auto;
+	gap: 170px;
+	padding: 5px;
+}
+.thumbpress-dismissible-notice .thumbpress-notice-title {
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24.2px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #000000;
+}
+.thumbpress-dismissible-notice .thumbpress-notice-title span {
+    font-weight: 800;
+    background: url(../img/banner-section/easycommerce_background_image.png) no-repeat;
+    background-size: contain;
+    background-position-y: bottom;
+    background-size: 155px;
+}
+.thumbpress-dismissible-notice .thumbpress-dismissible-notice-button {
+    font-size: 16px;
+    font-weight: 500;
+    color: #2162FF;
+    backdrop-filter: blur(22.899999618530273px);
+    border: 2px #2162FF solid;
+    padding: 10px 22px;
+    border-radius: 22px;
+}
+.thumbpress-dismissible-notice .thumbpress-dismissible-notice-button:hover {
+    color: #FFFFFF;
+    background: #2162FF;
 }
 
 
