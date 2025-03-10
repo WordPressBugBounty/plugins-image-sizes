@@ -89,18 +89,13 @@ if ( ! class_exists( 'Notice' ) ) {
             </div>
             <script type="text/javascript">
                 (function($) {
-                    $(document).on('click', '.notice[data-notice-id="<?php echo esc_js( $this->id ); ?>"] .notice-dismiss', function() {
-                        hideNotice();
-                    });
-                    $(document).on('click', '.thumbpress-dismissible-notice-button[data-id="<?php echo esc_js( $this->id ); ?>"]', function(e) {
-                        hideNotice();
-                    });
-                    function hideNotice() {
+                    $('.notice[data-notice-id="<?php echo esc_js( $this->id ); ?>"]').on('click', '.notice-dismiss, .thumbpress-dismissible-notice-button', function() {
                         $.post(ajaxurl, {
                             action: 'tp_hide_notice',
                             notice_id: '<?php echo esc_js( $this->id ); ?>',
                         });
-                    }
+                    });
+                    
                 })(jQuery);
             </script>
             <?php

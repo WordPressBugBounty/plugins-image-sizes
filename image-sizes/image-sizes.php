@@ -4,10 +4,10 @@
  * Plugin Name:			ThumbPress
  * Plugin URI:			https://thumbpress.co
  * Description:			A complete image and thumbnail management solution for WordPress.
- * Version:				5.8.11
- * Requires at least:	5.0
+ * Version:				5.8.13
+ * Requires at least:	6.0
  * Requires PHP:		7.0
- * Tested up to:		6.7
+ * Tested up to:		6.7.2
  * Author:				ThumbPress
  * Author URI:			https://thumbpress.co
  * License:				GPL v2 or later
@@ -136,7 +136,7 @@ final class Plugin {
 		$this->plugin['file']			= THUMBPRESS;
 		$this->plugin['TextDomain']		= 'image-sizes';
 		$this->plugin['Name']			= __( 'ThumbPress', 'image-sizes' );
-		$this->plugin['Version']		= '5.8.11';
+		$this->plugin['Version']		= '5.8.13';
 		$this->plugin['server']			= apply_filters( 'image-sizes_server', 'https://my.pluggable.io' );
 		$this->plugin['icon']			= THUMBPRESS_ASSET . '/img/icon.png';
 		$this->plugin['depends']		= [];
@@ -174,7 +174,7 @@ final class Plugin {
 			$admin->filter( "plugin_action_links_{$this->plugin['basename']}", 'action_links' );
 			$admin->filter( 'plugin_row_meta', 'plugin_row_meta', 10, 2 );
 			$admin->action( 'admin_footer_text', 'footer_text' );
-			$admin->action( 'admin_notices', 'admin_notices' );
+			// $admin->action( 'admin_notices', 'admin_notices' );
 			$admin->action( 'cx-settings-after-fields', 'show_new_button' );
 
 			/**
@@ -220,7 +220,7 @@ final class Plugin {
 			 * 
 			 * @author Pluggable <hi@pluggable.io>
 			 */
-			$feature = new Feature( $this->plugin );
+			$feature = new Feature( $this->plugin, [ 'reserved' => [] ] );
 
 		else : // !is_admin() ?
 

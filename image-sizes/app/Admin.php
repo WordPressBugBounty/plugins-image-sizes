@@ -82,10 +82,7 @@ class Admin extends Base {
 			$notice->set_expiry( 3 * DAY_IN_SECONDS ); // Don't show after 3 days
 
 			$message = '
-			    <div class="is-dismissible thumbpress-dismissible-notice">
-			        <p>
-			            <a class="notice-dismiss" href=""></a>
-			        </p>
+			      
 			        <div class="thumbpress-dismissible-notice-content">
 						<img src="' . $image_path . '" alt="thumbpress" class="thumbpress-notice-image" >
 						<p class="thumbpress-notice-title"> Introducing <span>EasyCommerce</span> -  A Revolutionary WordPress Ecommerce Plugin </p>
@@ -93,7 +90,6 @@ class Admin extends Base {
 			                <a href="' . esc_url( $url ) . '" class="thumbpress-dismissible-notice-button" data-id="' . esc_attr( $data_id ) . '">Check it Out</a>
 			            </div>
 			        </div>
-			    </div>
 			';
 
 			$notice->set_message( $message );
@@ -262,44 +258,6 @@ class Admin extends Base {
 	}
 
 
-
-	public function admin_notices() {
-
-		if ( !defined( 'THUMBPRESS_PRO' ) && current_user_can( 'manage_options' ) ) {
-			
-			$current_screen = get_current_screen()->base;
-
-			if ( $current_screen == 'dashboard' || $current_screen == 'toplevel_page_thumbpress' ) {
-				if( isset( $_GET['dismiss'] ) && array_key_exists( $_GET['dismiss'], image_sizes_notices_values() ) ) {
-					delete_transient( sanitize_text_field( $_GET['dismiss'] ) );
-				}
-				foreach ( image_sizes_notices_values() as $id => $notice ) {
-					$transient 		= get_transient( $id );
-					$current_time 	= date_i18n('U');
-					// $current_time = date_i18n( 'Y/m/d H:i:s', strtotime( '2024-11-20 10:00:00' ) );
-					if ( $transient && $transient[ 'from' ] < $current_time && $current_time < $transient[ 'to' ] ) {
-						printf(
-							'<div class="notice notice-info is-dismissible image-sizes-dismissible-notice">
-								<p>
-									<a class="notice-dismiss" href="%1$s"></a>
-								</p>
-								<div class="image-sizes-dismissible-notice-content">
-									<div class="button-wrapper">
-										<a href="%4$s" class="image-sizes-dismissible-notice-button" data-id="%2$s">%3$s</a>
-									</div>
-								</div>
-							</div>',
-							esc_url( add_query_arg( 'dismiss', $id ) ),
-							esc_attr( $id ),
-							esc_html( $notice[ 'button' ] ),
-							esc_url( $notice[ 'url' ] ),
-						);
-						break;	
-					}
-				}
-			}			
-		}
-	}
 
 	public function show_new_button( $section ) {
 		// Helper::pri( 'Hello' );
