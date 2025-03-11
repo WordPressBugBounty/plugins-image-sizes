@@ -4,7 +4,7 @@ Donate link: https://thumbpress.co/?utm_source=free-plugins&utm_medium=readme&ut
 Tags: compress images, disable thumbnails, image editor, optimize images, regenerate thumbnails
 Requires at least: 5.0
 Tested up to: 6.7
-Stable tag: 5.8.14
+Stable tag: 5.8.15
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -163,10 +163,7 @@ Please post on our support forum here https://wordpress.org/support/plugin/image
 
 == Changelog ==
 
-= 2025-03-11 – v5.8.14 =
-* [fix] Warning fixed
-
-= 2025-03-10 – v5.8.13 =
+= 2025-03-10 – v5.8.15 =
 * [misc] Compatibility tested with WP v6.7.2
 * [misc] Version number conflict fixed
 

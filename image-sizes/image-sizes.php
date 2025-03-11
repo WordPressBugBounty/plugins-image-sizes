@@ -4,7 +4,7 @@
  * Plugin Name:			ThumbPress
  * Plugin URI:			https://thumbpress.co
  * Description:			A complete image and thumbnail management solution for WordPress.
- * Version:				5.8.14
+ * Version:				5.8.15
  * Requires at least:	6.0
  * Requires PHP:		7.0
  * Tested up to:		6.7.2
@@ -136,7 +136,7 @@ final class Plugin {
 		$this->plugin['file']			= THUMBPRESS;
 		$this->plugin['TextDomain']		= 'image-sizes';
 		$this->plugin['Name']			= __( 'ThumbPress', 'image-sizes' );
-		$this->plugin['Version']		= '5.8.14';
+		$this->plugin['Version']		= '5.8.15';
 		$this->plugin['server']			= apply_filters( 'image-sizes_server', 'https://my.pluggable.io' );
 		$this->plugin['icon']			= THUMBPRESS_ASSET . '/img/icon.png';
 		$this->plugin['depends']		= [];
