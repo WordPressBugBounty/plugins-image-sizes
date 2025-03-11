@@ -1,152 +1,357 @@
-=== CF7 Submissions – Securely Store Contact Form 7 Data and Attachments, Reply to the Sender and more ===
-Contributors: pluggable, codexpert, mukto90
-Donate link: https://pluggable.io/plugin/cf7-submissions
-Tags: contact form, contact form 7, contact form 7 submissions, contact form 7 entries, contact form 7 messages
-Requires at least: 6.0
-Tested up to: 6.7.2
-Stable tag: 0.19
+=== ThumbPress - Disable Thumbnails, Regenerate Thumbnails, Optimize Images, Convert to WebP, Disable Right Click, Compress Images, Image Editor & More ===
+Contributors: pluggable, codexpert, thumbpressco, mukto90
+Donate link: https://thumbpress.co/?utm_source=free-plugins&utm_medium=readme&utm_campaign=image-sizes
+Tags: compress images, disable thumbnails, image editor, optimize images, regenerate thumbnails
+Requires at least: 5.0
+Tested up to: 6.7
+Stable tag: 5.8.14
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Securely Store and Manage CF7 Submissions Hassle-Free
+Disable Thumbnails, Regenerate Thumbnails, Compress Images, Convert to WebP, Find Unused and Large Images, Edit Images, and more with ThumbPress.
 
 == Description ==
 
-Introducing CF7 Submissions: Securely Store and Manage User Submissions Hassle-Free!
+🚀 [Pro Version](https://thumbpress.co/) | 🔵 [Facebook](https://www.facebook.com/ThumbPressCo/) | 🐦 [Twitter](https://twitter.com/ThumbPressCo/) | 👥 [LinkedIn](https://www.linkedin.com/company/thumbpress/)
 
-Are you tired of losing valuable user submissions due to deleted or misplaced emails? We understand the frustration, and that's why we've developed CF7 Submissions, the ultimate plugin designed to store and manage all your CF7 Submissions and files directly in your WordPress database.
+How many images and thumbnails do you have on your WordPress site? Can’t count, right?
 
-Say goodbye to the worry of losing important user responses. With this amazing plugin, every submission is securely stored and easily accessible from the convenience of your WordPress dashboard.
+Managing those images and thumbnails is harder than counting them. ThumbPress, the one-stop WordPress image management plugin makes this easier than ever.
 
-### Key Features of CF7 Submissions:
+Check out the exciting features below:
 
-**Seamless Integration:** it effortlessly integrates with Contact Form 7, ensuring a smooth transition to secure submission storage. Simply activate the plugin, and it's ready to safeguard your valuable data.
+### 👉 All ThumbPress Features to Supercharge Your WordPress Image Management
 
-**Reliable Database Storage:** No more relying solely on emails for critical submissions. CF7 Submissions securely stores all user responses, including any attached files, directly within your WordPress database. Rest assured that nothing will get lost or accidentally deleted.
+💥 [Disable Thumbnails](https://thumbpress.co/modules/disable-thumbnails/)
+💥 [Regenerate Thumbnails](https://thumbpress.co/modules/regenerate-thumbnails/)
+💥 [Find Unused Images](https://thumbpress.co/modules/detect-unused-images/) [Pro]
+💥 [Set Image Upload Limit](https://thumbpress.co/modules/image-upload-limit/)
+💥 [Detect Large Images](https://thumbpress.co/modules/detect-large-images/) [Pro]
+💥 [Image Compression](https://thumbpress.co/modules/compress-images/) [Pro]
+💥 [Replace Images](https://thumbpress.co/modules/replace-image-with-new-version/) [Pro]
+💥 [Set Social Media Thumbnails](https://thumbpress.co/modules/set-social-media-thumbnails/)
+💥 [Image Editor](https://thumbpress.co/modules/image-editor/) [Pro]
+💥 [Convert to WebP](https://thumbpress.co/modules/convert-images-to-webp/)
+💥 [Disable Right Click on Image](https://thumbpress.co/modules/disable-right-click/)
 
-**Convenient Dashboard Access:** Easily access and manage all your form submissions from your WordPress dashboard. With a few clicks, you can view, search, and organize submissions, saving you time and providing a streamlined workflow.
+Here are some of the key features of the ThumbPress plugin for WordPress Image Management –
 
-**File Attachment Support:** Worried about missing file attachments? CF7 Submissions ensures that all submitted files are securely stored alongside the respective form submissions, allowing you to access and download them whenever needed.
+#### 🚀 Disable Thumbnails
 
-**Advanced Search and Filtering:** Quickly find specific submissions using powerful search and filtering options. Whether you're searching by specific form, container page or user ID, it makes it effortless to locate the information you need.
+When you upload an image using Media Uploader, WordPress generates multiple copies/thumbnails of that image. By default, WordPress generates 5 thumbnails:
+– Thumbnail
+– Medium
+– Medium-large
+– Large
+– Scaled
 
-**Read/Unread Status:** Stay organized by marking submissions as read or unread. This feature allows you to prioritize your responses and easily identify which submissions you have already reviewed and which ones require attention.
+Along with this, your themes and plugins add more thumbnails and most of these thumbnails remain unused.
 
-**Streamlined Deletion:** Say goodbye to cluttered inboxes and unwanted submissions. It enables you to effortlessly delete unwanted or irrelevant responses directly from your WordPress dashboard. Keep your submission list clean and tidy with just a few clicks.
+The result? Unnecessary additional images eat up your server space and slow down your site!
 
-**Bulk Actions:** Save time and effort by performing actions on multiple submissions simultaneously. CF7 Submissions allows you to select multiple submissions and apply actions like marking as read, marking as unread, or deleting in one go. Streamline your workflow and boost your productivity.
+This is where the Disable feature comes into the picture. Just install the plugin and choose which of the image sizes you want to prevent from generating.
 
-**Respond to Users:** With CF7 Submissions, you can respond to users directly from the dashboard. When you view a form submission, the plugin provides an option to reply to the user's message or inquiry. This allows for efficient communication and quick responses without the need to switch to external email clients.
+#### 🚀 Regenerate Thumbnails
 
-**User-Friendly Interface:** Our plugin provides a user-friendly and intuitive interface, making it easy for you to navigate through your submissions, mark them accordingly, and delete unwanted entries. Spend less time managing submissions and more time focusing on what matters most.
+Regenerate thumbnails on your WordPress site at any moment, regardless of their sizes. No more worrying about lost thumbnails — our WordPress plugin guarantees swift restoration, keeping your site’s visual appeal flawless and consistent. Start now and rebuild thumbnails on your WordPress site.
 
-Don't risk losing valuable user submissions any longer. Experience the peace of mind that comes with CF7 Submissions. Install our plugin today and unlock a new level of reliability and convenience for your contact form management.
+#### 🚀 Social Media Thumbnails
 
-Never let important user responses slip through the cracks again. Get CF7 Submissions now and ensure your data is securely stored, easily accessible, and always in your control.
+ThumbPress enables you to assign unique thumbnails for various social media platforms, ensuring that an image intended for Facebook remains uncropped when shared on Twitter or LinkedIn. You can upload distinct thumbnails for each social media site.
 
-### [Explore More Plugins](https://profiles.wordpress.org/codexpert/#content-plugins)
+#### 🚀 Image Upload Limit
 
-Discover our wide range of plugins and extensions that might be just what you're looking for. Check out our other plugins here:
+Set a maximum limit for image upload size and resolution to ensure faster loading times. Our feature allows you to customize these parameters according to your website requirements and prevent oversized images from slowing down your site.
 
-#### [🔥 CoDesigner](https://wordpress.org/plugins/woolementor/)
+#### 🚀 Convert Images to WebP
 
-Crafting stunning WooCommerce sites with Elementor has never been easy!  CoDesigner (formerly WooLementor) makes it easy to design beautiful WooCommerce sites with Elementor, even without coding. Its intuitive drag-and-drop interface allows you to customize shop pages, filters, checkout, and more, quickly achieving a professional look. With 94+ widgets, 14+ modules, and 150+ templates, CoDesigner lets you tailor your site to increase engagement, conversions, and customer retention. Its features include AJAX-based filters, customizable email templates, variation swatches, flash sale timers, and a streamlined checkout. Compatible with top WordPress themes, CoDesigner offers comprehensive support and tools to elevate your WooCommerce store.
+In WordPress convert images to WebP in bulk or one by one without any effort. Convert JPG or PNG to WebP from the comfort of your favorite WordPress dashboard and upgrade your website’s performance without sacrificing image quality. This advanced function ensures your images remain crisp and clear while reducing file size compared to traditional formats. The image conversion to WebP format helps you in SEO and gets you better rankings as Google recommends this format.
 
-#### [🔥 ThumbPress](https://wordpress.org/plugins/image-sizes/)
+#### 🚀 Disable Right Click on Image
 
-Meet ThumbPress, the ultimate WordPress image management solution! Effortlessly manage all your images and thumbnails with ThumbPress, the powerful WordPress plugin for image optimization and control. With features like disabling unwanted thumbnail sizes, regenerating thumbnails, limiting image upload size and resolution, and converting images to WebP, ThumbPress keeps your site running fast and saves server space. The Pro version also offers advanced tools to detect large and unused images, compress images, replace images, and even edit them directly on the dashboard. ThumbPress is your all-in-one solution for streamlined, secure, and efficient WordPress image management.
+Disable the right-click function on your website, a simple yet effective way to deter visitors from downloading or copying your images and thumbnails. It’s a preventive measure that adds an extra layer of protection to your digital assets and keeps your visuals exclusive to your site.
 
-#### [🔥 WC Affiliate](https://wordpress.org/plugins/wc-affiliate/)
+### 👉 ThumbPress Pro Features
 
-Looking to launch an affiliate program for your WooCommerce store? WC Affiliate is the perfect solution to get started without a developer! This plugin is designed to seamlessly integrate with WooCommerce, offering features like referral tracking, real-time reporting, unlimited affiliates, and automated payouts through PayPal and Stripe. Customize commissions, build banners, create short links, and enable cross-domain cookie sharing for maximum reach. Translation-ready and user-friendly, WC Affiliate provides a fully customizable dashboard and exportable data. Experience its full potential with a live demo and join a community of users to boost your sales growth!
+🔥 [Detect Large Images](https://thumbpress.co/modules/detect-large-images/) [Pro]
+🔥 [Detect Unused Images](https://thumbpress.co/modules/detect-unused-images/) [Pro]
+🔥 [Compress Images](https://thumbpress.co/modules/compress-images/) [Pro]
+🔥 [Replace Image with New Version](https://thumbpress.co/modules/replace-image-with-new-version/) [Pro]
+🔥 [Image Editor](https://thumbpress.co/modules/image-editor/) [Pro]
 
-#### [🔥 Restrict Elementor Widgets](https://wordpress.org/plugins/restrict-elementor-widgets/)
+Check out our [Pro Features](https://thumbpress.co/) and [Pricing Plans](https://thumbpress.co/pricing/)
 
-Meet Restrict Elementor Widgets, the Elementor add-on that allows you to control when and where Elementor widgets or sections are displayed based on various conditions. You can choose to show or hide widgets for logged-in or logged-out users, specific user roles, or even certain user IDs. Schedule content for specific dates, times, or based on URL query strings, perfect for targeted displays like affiliate content. For WooCommerce users, you can set visibility based on customer roles, products, or subscription statuses (PRO). Customize restricted content by showing a message, a template, or hiding it entirely.
+#### 🌟 Detect Large Images
 
-#### [🔥 Duplica](https://wordpress.org/plugins/duplica/)
+Find and compress oversized images, or delete them entirely to get back valuable server space. It’s a great way to improve user experience by speeding up your site’s loading time and streamlining media files directly on the WordPress dashboard.
 
-Duplica lets you duplicate posts, pages, or custom posts to the same or different types, including posts, pages, WooCommerce products, and EDD downloads, with more options coming soon. It copies all post meta data and taxonomy terms as well. Starting with version 0.2, you can also duplicate users along with their data, metadata, and roles.
+#### 🌟 Find & Delete Unused Images on WordPress
 
-#### [🔥 CF7 Submissions](https://wordpress.org/plugins/cf7-submissions/)
+Find unused images on WordPress and delete them by simply using ThumbPress. Unused images eat up your server space without adding any value to your website audiences. ThumbPress makes it easy for you to find all unused images and remove them from a very user-friendly interface with ThumbPress image optimizer.
 
-Meet CF7 Submissions, the essential plugin for securely storing and managing Contact Form 7 submissions right in your WordPress dashboard. Say goodbye to lost or misplaced emails! Each user submission and file attachment is safely saved in your database for easy access anytime. With features like seamless Contact Form 7 integration, advanced search, read/unread status, and bulk actions, CF7 Submissions helps you stay organized. Respond directly to users from your dashboard and keep your submissions tidy. Get CF7 Submissions today for reliable, convenient, and secure contact form management!
+#### 🌟 Compress Images (The Easiest Image Compression Plugin on WordPress)
+
+Optimize and have a blazing-fast website by using the WordPress image compression plugin ThumbPress. Our built-in WordPress image compression feature optimizes images to improve your site’s performance without losing visual quality. The plugin’s simple interface helps you compress WordPress effortlessly.
+
+#### 🌟 Replace Image with New Version
+
+Replace images with newer versions without changing their existing links. It ensures that the same image will show up properly if used elsewhere. It’s the perfect solution for maintaining visual relevance.
+
+#### 🌟 Image Editor
+
+We always try to upload the finest image to the site after all the editing stuff is done. But, sometimes, the previously uploaded images may require some brush-ups. In such cases, one option is to upload quite new images. The WordPress image editor feature of ThumbPress enables you to edit them right on your WordPress Dashboard. Try our simple and compact image editor tool today and bring perfection to your WordPress images. 
+
+
+### Notes
+- ThumbPress uses [Intercom](https://www.intercom.com/) and its API to provide live chat support right from the dashboard.
+- Some third-party libraries are used to enable some features of the plugin. Kudos to the corresponding authors.
 
 == Installation ==
 
-1. Upload \`cf7-submissions\` to the \`/wp-content/plugins/\` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Find the `Submissions` submenu under `Contact` menu of Contact Form 7
-
-== Frequently Asked Questions ==
-
-= How does it work? =
-
-CF7 Submissions seamlessly stores all form submissions and associated files from Contact Form 7 in your WordPress database, eliminating the risk of losing important data. It provides a user-friendly dashboard interface where you can easily manage and organize submissions, including marking them as read/unread and deleting unwanted entries.
-
-= Does it work with other contact form plugins? =
-
-Unfortunately, no. It's developed on top of and compatible with Contact Form 7 only.
-
-= How can I contact the user? =
-
-With CF7 Submissions, you have the option to reply to users directly from the submission view screen in the dashboard. it automatically pull the email address(es) submitted in the form fields.
-
-= Can I download the attachments submitted by the user? =
-
-Yes, you can. It allows to securely download attachments.
-
-= What will happen to the files if I delete a submission? =
-
-If you delete a submission, all input data along with the attachment files will be deleted.
+1. Upload the plugin to the `/wp-content/plugins/` directory
+2. Activate the plugin through the **Plugins** menu in WordPress
+3. Go to the **ThumbPress** menu from the left and choose which of the sizes you want to prevent from generating.
 
 == Screenshots ==
 
-1. Links from the Contact Forms page to see filtered submissions
-2. List of submissions
-3. Single submission
-4. Contact form
+1. Module Settings
+2. Disable Thumbnails
+3. Regenerate Thumbnails
+4. Detect Unused Images
+5. Image Editor
+6. Detect Large Images
+7. Compress Images
+8. Replace Image with New Version
+9. Set Social Media Thumbnails
+10. Set Image Upload Limit
+11. Convert Images into WebP
+
+== Frequently Asked Questions ==
+
+= What is ThumbPress? =
+
+ThumbPress is a comprehensive WordPress image management solution. It offers a wide range of features to optimize, manage, and protect images on a WordPress site.
+
+= Does ThumbPress work with WooCommerce? = 
+
+Yes, absolutely! All features of ThumbPress are fully compatible with WooCommerce. 
+
+= Is it compatible with WordPress Multisite? = 
+
+Yes, ThumbPress is fully compatible with any WordPress Multisite installations. 
+
+= How does the disable and delete thumbnails feature work? = 
+
+You will find your images displayed on the dashboard. Simply use our drag-and-drop interface to select the images you want to disable or delete from your media library. 
+
+= Is it possible to bulk convert images to a different format with ThumbPress? = 
+
+Yes, but you can only convert JPG and PNG images into WebP format. 
+
+= Can I get back my old thumbnails? = 
+
+Of course! From version 3.0 and higher, you can regenerate thumbnails of your existing images. Just go to the Regenerate Thumbnails tab, select the images you want to regenerate, and click on the ‘Regenerate Button’.
+
+= Can I replace an image in the WordPress Media Library without changing its URL? =
+
+Yes, you can. ThumbPress lets you replace images and thumbnails with new versions without updating existing links anytime!  
+
+= My question is not answered here. =
+
+Please post on our support forum here https://wordpress.org/support/plugin/image-sizes/
 
 == Changelog ==
 
-= v0.19 — 2024-03-11 =
-- Fixed notice related to `_load_textdomain_just_in_time` message
-- Compatibility tested with WordPress v6.7.2
+= 2025-03-11 – v5.8.14 =
+* [fix] Warning fixed
 
-= v0.18 — 2024-11-28 =
-- Compatibility tested with WordPress v6.7.1
+= 2025-03-10 – v5.8.13 =
+* [misc] Compatibility tested with WP v6.7.2
+* [misc] Version number conflict fixed
 
-= v0.17 — 2024-11-13 =
-- Compatibility tested with WordPress v6.7
+= 2025-03-10 – v5.8.12 =
+* [fix] Fixed the bug related to the convert to WebP feature reached more than 100%
+* [add] Code improved
 
-= v0.16 — 2024-11-05 =
-- Routine maintenance
+= 2025-02-23 – v5.8.11 =
+* [add] Code improved
 
-= v0.15 — 2024-10-21 =
-- Routine maintenance
+= 2025-01-17 – v5.8.10 =
+* [add] Compatibility tested
 
-= v0.14 — 2024-10-07 =
-- Routine maintenance
+= 2025-01-02 – v5.8.9 =
+* [add] New Year Notice added
 
-= v0.13 — 2024-09-19 =
-- Routine maintenance
+= 2024-12-12 – v5.8.8 =
+* [fix] Error related to `_load_textdomain_just_in_time` fixed
 
-= v0.12 — 2024-08-13 =
-- Compatibility tested with WordPress v6.6
+= 2024-11-25 – v5.8.7 =
+* [remove] removed promotional button from dashboard
+* [imp] update promotional link & text from plugin menu
 
-= v0.11 — 2024-02-01 =
-- [fix] Correct hook used to insert log
+= 2024-11-25 – v5.8.6 =
+* [imp] compatibility tested with WordPress 6.7.1
 
-= v0.10 — 2023-08-06 =
-- [imp] Warning added for batch deletion
-- [fix] SQL error fixed in the database installer
-- [imp] Duplicate `install` method removed
-- [fix] Submissions count rendering fixed in the list
-- [imp] Package updated
-- [fix] Showing count for forms with no entries
+= 2024-11-20 – v5.8.5 =
+* [imp] compatibility tested with WordPress 6.7
 
-= v0.9 — 2023-07-01 =
-- Initial release
+= 2024-11-12 – v5.8.4 =
+* [imp] routine maintenance
+
+= 2024-11-03 – v5.8.3 =
+* [imp] routine maintenance
+
+= 2024-10-27 – v5.8.2 =
+* [imp] routine maintenance
+
+= 2024-10-16 – v5.8.1 =
+* [add] added escaping functions for output
+* [imp] corrected escaping attribute format
+
+= 2024-10-08 – v5.8 =
+* [fix] fixed ninja forms conflict issue
+* [imp] enabled necessary modules upon install
+
+= 2024-10-02 – v5.7.5 =
+* [add] added escaping functions for output
+
+= 2024-09-26 – v5.7.4 =
+* [add] added escaping functions for output
+* [imp] corrected escaping attribute format
+* [fix] fixed string and translation issue
+
+= 2024-09-19 – v5.7.3 =
+* [add] added escaping functions for output
+
+= 2024-09-12 – v5.7.2 =
+* [imp] code formatted
+* [imp] compatibility tested with WordPress 6.6.2
+
+= 2024-09-04 – v5.7.1 =
+* [add] added escaping functions for output
+* [imp] corrected escaping attribute format
+* [fix] solved string and translation issue
+
+= 2024-08-21 – v5.7 =
+* [add] added escaping functions for output
+* [imp] corrected escaping attribute format
+* [fix] solved string and translation issue
+* [rem] removed unnecessary DS_Store files
+
+= 2024-08-11 – v5.6.1 =
+* [fix] fixed thumbpress constant issue
+* [fix] fixed font-awesome enqueue issue
+* [imp] updated text-domain
+* [imp] updated css classes
+
+= 2024-08-08 – v5.6 =
+* [fix] fixed background actions for modules
+* [fix] fixed offset count issue
+* [add] new progress messages added
+* [imp] improved progress bar design
+* [imp] updated settings for modules
+* [imp] restricted double click on action buttons
+* [imp] optimized javascript code
+
+= 2024-07-30 – v5.5.1 =
+* [fix] convert images action scheduler issue fixed
+* [fix] regenerate thumbnails real time ajax issue fixed
+
+= 2024-07-30 – v5.5 =
+* [fix] convert images offset fixed
+* [imp] progress completion system improved
+* [imp] javascript code optimized
+* [imp] improved regenerate thumbnails progress
+* [imp] plugin activation time condition updated
+* [imp] code structure updated for compress images
+* [add] new css class added for buttons
+* [add] not found message added in multiple modules
+* [add] real time actions added using ajax in multiple modules
+
+= 2024-07-15 – v5.4 =
+* [imp] integrated Action Scheduler into convert to WebP module
+* [imp] integrated Action Scheduler into some other modules
+* [imp] improved background process of regenerate thumbnails module
+* [imp] improved design issues of some modules
+
+= 2024-06-09 – v5.3 =
+* [fix] fixed disable thumbnails drag-n-drop not working issue
+* [fix] fixed module interconnecting links not working issue
+* [imp] moved overview page contents to advanced features page
+
+= 2024-05-31 – v5.2.4 =
+* [imp] Removed unnecessary `wporg-assets` folder
+
+= 2024-05-29 – v5.2.3 =
+* [imp] optimized code and reduced plugin file size
+* [imp] improved style of disable thumbnails module
+* [imp] added links for interconnecting two modules
+
+= 2024-05-21 – v5.2.2 =
+* [fix] Fixed the issue of stopping generating thumbnails
+
+= 2024-05-21 – v5.2.1 =
+* [imp] removed pointer notice
+
+= 2024-05-21 – v5.2 =
+* [fix] solved regenerate thumbnails issue
+* [imp] optimized javascript code
+
+= 2024-05-20 – v5.1.2 =
+* [imp] removed admin notice from dashboard
+* [mod] changed leave a review button url
+
+= 2024-05-15 – v5.1.1 =
+* [fix] `Add New Plugin` page refersh button onclick issue fixed
+
+= 2024-05-09 – v5.1.0.2 =
+* [imp] code structure improved
+* [fix] sub-menu text changed
+* [fix] replace images issue fixed
+* [fix] convert all images issue fixed
+* [fix] convert images scaled issue fixed
+* [fix] delete original image after conversion issue fixed
+* [add] get image from attached file with scaled name function added
+* [imp] code cleaned and image mime type updated
+* [fix] action scheduler table issue fixed
+* [imp] check action scheduler table function updated
+* [add] create action scheduler tables if missing
+* [imp] check action table before activation and delete option table data
+* [imp] plugin settings slug changed
+* [fix] dashboard pointer issue solved
+* [imp] dashboard banner logic updated
+* [add] social share image single post check added
+* [add] social share image extra check added to avoid warning
+* [fix] scaled image regenerate issue fixed
+* [fix] scaled image thumbnail regenerate in background issue fixed
+
+= 2024-05-01 – v5.0.2 =
+* [fix] fixed pinterest thumbnail in social share images module
+* [fix] fixed typographic issues in sereral modules
+* [fix] fixed Setup Wizard skip button URL
+* [fix] fixed some minor issues in Setup Wizard
+* [add] Pinterest pin support added for woocommerce product in social share images module
+* [add] fallback image meta tag added for Twitter card in social share images module
+* [imp] Pinterest pin meta tag updated in social share images module
+* [imp] improved some styles
+
+= 2024-04-29 – v5.0.1 =
+* [fix] JS and CSS minified
+* [fix] Compat tested with WordPress 6.5.2
+
+= 2024-04-29 – v5.0 =
+* [new] #### 🚀 Introduced modules-
+	- Detect Unused Images
+	- Set Image Upload Limit
+	- Detect Large Images
+	- Compress Images
+	- Replace Image with New Version
+	- Set Social Media Thumbnails
+	- Image Editor
+	- Convert Images into WebP
+	- Disable Right Click on Image
+
+View detailed Changelog from [👉 here](https://thumbpress.co/changelog/).
 
 == Upgrade Notice ==
