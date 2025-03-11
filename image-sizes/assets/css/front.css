@@ -1,10 +1,16 @@
-#image-sizes-credit {
-    font-size: 11px;
-    padding: 5px;
-    text-align: center;
-    margin: 0 auto;
-    color: #aaa;
+#cf7-submissions-modal {
+    position: fixed;
+    background: #c8c8c859;
+    top: 0;
+    border: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-#image-sizes-credit a {
-    color: #3677b9;
+#cf7-submissions-modal-loader {
+    position: absolute;
 }

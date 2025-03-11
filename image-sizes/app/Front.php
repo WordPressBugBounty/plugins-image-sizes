@@ -1,8 +1,8 @@
 <?php
-namespace Codexpert\ThumbPress\App;
+namespace Codexpert\CF7_Submissions\App;
 
 use Codexpert\Plugin\Base;
-use Codexpert\ThumbPress\Helper;
+use Codexpert\CF7_Submissions\Helper;
 
 /**
  * if accessed directly, exit.
@@ -19,6 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Front extends Base {
 
 	public $plugin;
+	public $slug;
+	public $name;
+	public $version;
 
 	/**
 	 * Constructor function
@@ -30,25 +33,35 @@ class Front extends Base {
 		$this->version	= $this->plugin['Version'];
 	}
 
+	public function head() {}
+	
 	/**
 	 * Enqueue JavaScripts and stylesheets
 	 */
 	public function enqueue_scripts() {
-		$min = defined( 'THUMBPRESS_DEBUG' ) && THUMBPRESS_DEBUG ? '' : '.min';
+		$min = defined( 'CF7S_DEBUG' ) && CF7S_DEBUG ? '' : '.min';
 
-		wp_enqueue_style( $this->slug, plugins_url( "/assets/css/front{$min}.css", THUMBPRESS ), '', $this->version, 'all' );
+		wp_enqueue_style( $this->slug, plugins_url( "/assets/css/front{$min}.css", CF7S ), '', $this->version, 'all' );
+
+		wp_enqueue_script( $this->slug, plugins_url( "/assets/js/front{$min}.js", CF7S ), [ 'jquery' ], $this->version, true );
+		
+		$localized = [
+			'ajaxurl'	=> admin_url( 'admin-ajax.php' ),
+			'cf7sub_nonce'	=> wp_create_nonce( 'cf7-submissions' ),
+		];
+		wp_localize_script( $this->slug, 'CF7S', apply_filters( "{$this->slug}-localized", $localized ) );
 	}
 
-	public function credit() {
-
-		if( Helper::get_option( 'image-sizes_tools', 'footer_credit' ) != 'yes' ) return;
-
-		echo '<p id="image-sizes-credit">';
-
-		printf( __( 'Thumbnails managed by <a href="%s" target="_blank">ThumbPress</a>', 'image-sizes' ), 'https://pluggable.io/plugin/thumbpress' );
-
-		echo '</p>';
+	public function modal() {
+		echo '
+		<div id="cf7-submissions-modal" style="display: none">
+			<img id="cf7-submissions-modal-loader" src="' . esc_attr( CF7S_ASSET . '/img/loader.gif' ) . '" />
+		</div>';
 	}
 
-	public function head(){}
+	public function show_user_id( $hidden_fields ) {
+		$hidden_fields = array_merge( $hidden_fields, cf7sub_hidden_fields() );
+
+		return $hidden_fields;
+	}
 }
