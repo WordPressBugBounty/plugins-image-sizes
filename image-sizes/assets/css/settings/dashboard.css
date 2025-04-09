@@ -289,14 +289,14 @@
 	color: #075bfe !important;
 }
 .wp-core-ui .cx-submit {
-	background: #075bfe;
-	border-radius: 6px;
-	font-size: 14px;
-	font-weight: 500;
-	color: var(--light-color);
-	-webkit-box-shadow: 0px 4px 0px 0px rgba(7, 91, 254, 0.2);
-	-moz-box-shadow: 0px 4px 0px 0px rgba(7, 91, 254, 0.2);
-	box-shadow: 0px 4px 0px 0px rgba(7, 91, 254, 0.2);
+    background: #075bfe;
+    /* border-radius: 6px; */
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--light-color);
+    /* -webkit-box-shadow: 0px 4px 0px 0px rgba(7, 91, 254, 0.2); */
+    -moz-box-shadow: 0px 4px 0px 0px rgba(7, 91, 254, 0.2);
+    /* box-shadow: 0px 4px 0px 0px rgba(7, 91, 254, 0.2); */
 }
 .wp-core-ui .cx-submit:hover {
 	background: #075bfe;

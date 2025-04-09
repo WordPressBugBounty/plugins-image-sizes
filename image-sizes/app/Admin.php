@@ -66,34 +66,63 @@ class Admin extends Base {
 		endif;
 	}
 
+	public function add_body_class( $classes ) {
+		
+		$classes .= ' thumbpress';
+		$classes .= defined( 'THUMBPRESS_PRO' ) ? ' thumbpress-pro' : '';
+
+		return $classes;
+	}
+
 	/**
 	 * Internationalization
 	 */
 	public function i18n() {
 		load_plugin_textdomain( 'image-sizes', false, THUMBPRESS_DIR . '/languages/' );
-		if ( !defined( 'THUMBPRESS_PRO' ) && current_user_can( 'manage_options' ) ) {
+	}
+
+	public function show_admin_notices() {
+		if( false !== get_option( 'thumbpress_settings_init' ) ) return;
+
+		if( 'toplevel_page_thumbpress' == get_current_screen()->base ) {
+			update_option( 'thumbpress_settings_init', 1 );
+		}
+		else {
+			printf(
+				'<div class="notice notice-warning is-dismissible thumbpress-notice"><p>%s</p></div>',
+				sprintf(
+					/* Translators: %s is the link to the setup wizard */
+					__( 'Congratulations on installing <strong>ThumbPress</strong>!🎉 You\'re just a few steps away from optimizing your images. <a href="%s"><strong>Click here</strong></a> to enable modules and get started! 🚀', 'thumbpress' ),
+					esc_url( admin_url( 'admin.php?page=thumbpress' ) )
+				)
+			);
+
+			echo "<style>.thumbpress-notice { background-color: #5be8ff52;} .thumbpress-notice p {font-size: 14px;}</style>";
+		}
+	}
+
+	public function show_easycommerce_notice() {
+		if ( false !== get_option( 'thumbpress_settings_init' ) && ! defined( 'THUMBPRESS_PRO' ) && current_user_can( 'manage_options' ) ) {
 			$data_id = 'thumbpress-easycommerce_campain';
 			$url     = 'https://easycommerce.dev/?utm_source=wp+dashboard&utm_medium=thumbpress+notice&utm_campaign=introducing+easycommerce';
 			$image_path = THUMBPRESS_ASSET . '/img/banner-section/tp-logo.png';
 
 			$notice = new Notice( $data_id );
 
-			$notice->set_intervals( [0] ); // Show at 0s (immediately), after 5s, and after 10s
+			$notice->set_intervals( [0] ); // Show at 0s (immediately)
 			$notice->set_expiry( 3 * DAY_IN_SECONDS ); // Don't show after 3 days
 
 			$message = '
-			      
-			        <div class="thumbpress-dismissible-notice-content">
-						<img src="' . $image_path . '" alt="thumbpress" class="thumbpress-notice-image" >
-						<p class="thumbpress-notice-title"> Introducing <span>EasyCommerce</span> -  A Revolutionary WordPress Ecommerce Plugin </p>
-			            <div class="button-wrapper">
-			                <a href="' . esc_url( $url ) . '" class="thumbpress-dismissible-notice-button" data-id="' . esc_attr( $data_id ) . '">Check it Out</a>
-			            </div>
-			        </div>
-			';
+		        <div class="thumbpress-dismissible-notice-content">
+					<img src="' . $image_path . '" alt="thumbpress" class="thumbpress-notice-image" >
+					<p class="thumbpress-notice-title">Introducing <span>EasyCommerce</span> -  A Revolutionary WordPress Ecommerce Plugin</p>
+		            <div class="button-wrapper">
+		                <a href="' . esc_url( $url ) . '" class="thumbpress-dismissible-notice-button" data-id="' . esc_attr( $data_id ) . '">Check it Out</a>
+		            </div>
+		        </div>';
 
 			$notice->set_message( $message );
-			$notice->set_screens( ['dashboard', 'toplevel_page_thumbpress'] );
+			$notice->set_screens( [ 'dashboard' ] );
 			$notice->render();
 		}
 	}
@@ -189,7 +218,6 @@ class Admin extends Base {
 		return array_merge( $new_links, $links );
 	}
 	
-
 	public function plugin_row_meta( $plugin_meta, $plugin_file ) {
 		
 		if ( $this->plugin['basename'] === $plugin_file ) {
@@ -213,56 +241,6 @@ class Admin extends Base {
 		</div>';
 	}
 
-	public function popup_for_feedback() {
-		$get_reasons 	= get_reasons();
-		$user 			= wp_get_current_user();
-	    if ( $user->exists() ) {
-	        $admin_email 	= $user->user_email;
-	        $name 			= $user->display_name; 
-	    }
-		
-		echo '<div id="feedback-modal" class="feedback-modal plugin-unhappy-survey-overlay">
-				<div class="feedback-content plugin-unhappy-survey-modal">
-					<span class="close-button">&times;</span>
-					<form method="post" class="plugin-unhappy-survey-form">
-						<input type="hidden" name="action" value="handle_unhappy_survey">
-						<input type="hidden" name="plugin_name" value="image-sizes">
-						<input type="hidden" name="email" value="'. esc_attr( $admin_email ) .'">
-						<input type="hidden" name="full_name" value="'. esc_attr( $name ) .'">
-						<div class="plugin-header">
-							<h3 class="heading">' . esc_html( sprintf( __( 'We are sorry to hear that our plugin didn\'t fully meet your expectations.', 'thumbpress' ) ) ) . '</h3>
-							<p class="heading">' . __('Could you spare a moment to provide your valuable insights on how we can make it better?<br> It means a lot to us.', 'thumbpress') . '</p>
-						</div>
-						<div class="plugin-dsm-body">
-							<div class="plugin-unhappy-reasons">';
-								foreach ( $get_reasons as $key => $label ) {
-									echo '<div class="plugin-unhappy-reason reason">
-										<label for="' . esc_attr( $key ) . '">' . esc_html( $label ) . '</label>
-										<input type="checkbox" name="ureason[]" value="' . esc_attr( $label ) . '" id="' . esc_attr( $key ) . '">
-									</div>';
-								}
-			echo '</div>
-						<div class="plugin-dsm-reason-details">
-							<textarea class="plugin-dsm-reason-details-input" name="explanation" rows="5" placeholder="' . esc_html__('Please Explain', 'thumbpress') . '"></textarea>
-						</div>
-					</div>
-					<div class="plugin-dsm-footer footer">
-						<div style="display: flex; justify-content: space-between;">
-							<button class="button plugin-dsm-btn plugin-dsm-close">' . esc_html__( 'Skip', 'thumbpress' ) . '</button>
-							<button class="button button-primary plugin-dsm-btn plugin-dsm-submit" type="submit">' . esc_html__( 'Submit', 'thumbpress' ) . '</button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>';
-	}
-
-
-
-	public function show_new_button( $section ) {
-		// Helper::pri( 'Hello' );
-	}
-
 	public function thumbpress_modules_activation() {
 
 		if ( ! get_option( 'thumbpress_modules' ) ) {
@@ -276,5 +254,19 @@ class Admin extends Base {
 
 			add_option( 'thumbpress_modules', $thumbpress_modules );
 	    }
+	}
+
+	public function show_easycommerce_promo( $config ) {
+
+		if( defined( 'THUMBPRESS_PRO' ) ) return;
+
+		$banners = array( 'purple-left-party', 'bullet-points' );
+		$banner = $banners[ array_rand( $banners ) ];
+
+		printf(
+			'<div id="easycommerce-promo"><a href="%1$s" target="_blank"><img src="%2$s" /></a></div>',
+			add_query_arg( [ 'utm_source' => 'in-plugin', 'utm_medium' => 'thumbpress', 'utm_campaign' => "banner_{$banner}" ], 'https://easycommerce.dev' ),
+			"https://cdn.easycommerce.dev/images/promo/{$banner}.png"
+		);
 	}
 }

@@ -4,10 +4,10 @@
  * Plugin Name:			ThumbPress
  * Plugin URI:			https://thumbpress.co
  * Description:			A complete image and thumbnail management solution for WordPress.
- * Version:				5.8.15
+ * Version:				5.8.16
  * Requires at least:	6.0
  * Requires PHP:		7.0
- * Tested up to:		6.7.2
+ * Tested up to:		6.8
  * Author:				ThumbPress
  * Author URI:			https://thumbpress.co
  * License:				GPL v2 or later
@@ -136,7 +136,7 @@ final class Plugin {
 		$this->plugin['file']			= THUMBPRESS;
 		$this->plugin['TextDomain']		= 'image-sizes';
 		$this->plugin['Name']			= __( 'ThumbPress', 'image-sizes' );
-		$this->plugin['Version']		= '5.8.15';
+		$this->plugin['Version']		= '5.8.16';
 		$this->plugin['server']			= apply_filters( 'image-sizes_server', 'https://my.pluggable.io' );
 		$this->plugin['icon']			= THUMBPRESS_ASSET . '/img/icon.png';
 		$this->plugin['depends']		= [];
@@ -166,16 +166,17 @@ final class Plugin {
 			 */
 			$admin = new App\Admin( $this->plugin );
 			$admin->activate( 'check_action_scheduler_tables' );
-			$admin->action( 'admin_footer', 'modal' );
-			// $admin->action( 'admin_footer', 'popup_for_feedback' );
-			$admin->action( 'admin_footer', 'upgrade' );
 			$admin->action( 'init', 'i18n' );
+			$admin->filter( 'admin_body_class', 'add_body_class' );
+			$admin->action( 'admin_footer', 'modal' );
+			$admin->action( 'admin_footer', 'upgrade' );
+			$admin->action( 'admin_notices', 'show_admin_notices' );
+			$admin->action( 'init', 'show_easycommerce_notice' );
 			$admin->action( 'admin_enqueue_scripts', 'enqueue_scripts' );
 			$admin->filter( "plugin_action_links_{$this->plugin['basename']}", 'action_links' );
 			$admin->filter( 'plugin_row_meta', 'plugin_row_meta', 10, 2 );
 			$admin->action( 'admin_footer_text', 'footer_text' );
-			// $admin->action( 'admin_notices', 'admin_notices' );
-			$admin->action( 'cx-settings-after-fields', 'show_new_button' );
+			$admin->action( 'cx-settings-after_wrapper', 'show_easycommerce_promo' );
 
 			/**
 			 * Settings related hooks
@@ -248,7 +249,6 @@ final class Plugin {
 		// $ajax->priv( 'image_sizes-pointer-dismiss', 'dismiss_pointer' );
 		$ajax->priv( 'image_sizes-dismiss', 'image_sizes_dismiss' );
 		$ajax->all( 'image-sizes_dismiss_notice', 'image_sizes_dismiss_notice_callback' );
-
 	}
 
 	/**

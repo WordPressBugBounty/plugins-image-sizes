@@ -1273,22 +1273,17 @@ input:checked + .thumb-toggle-slider:before {
 .image_sizes-notice p {
 	font-size: 14px;
 }
-.notice-info.is-dismissible {
-	background: #1255FF1A;
-}
 .notice-dismiss {
     display: flex;
     align-items: center;
     background-size: contain;
 }
 .thumbpress-dismissible-notice-content {
-	display: flex;
-	align-items: center;
-	gap: 80px;
-	margin: 0px auto;
-	gap: 170px;
-	padding: 5px;
-	width: 86%;
+    display: flex;
+    align-items: center;
+    margin: 0px auto;
+    padding: 5px;
+    justify-content: space-around;
 }
 .thumbpress-notice-title {
     font-family: Inter;
@@ -1653,4 +1648,27 @@ input:checked + .thumb-toggle-slider:before {
     .notice.notice-info.is-dismissible {
         display: none;
     }
+}
+
+/* EasyCommerce Promo */
+.thumbpress:not(.thumbpress-pro) .cx-wrapper-outer {
+    display: grid;
+    grid-template-columns: 16fr 5fr;
+    gap: 20px;
+}
+.thumbpress:not(.thumbpress-pro) .cx-wrapper-outer .cx-wrapper.cx-sections-1 {
+    display: block;
+}
+.thumbpress:not(.thumbpress-pro) #easycommerce-promo {
+    margin-top: 20px;
+}
+.thumbpress:not(.thumbpress-pro) #easycommerce-promo a:focus,
+.thumbpress:not(.thumbpress-pro) #easycommerce-promo a:active {
+  outline: none;
+  border: none;
+}
+.thumbpress:not(.thumbpress-pro) #easycommerce-promo img {
+    max-width: 100%;
+    border-radius: 12px;
+    right: 20px;
 }
