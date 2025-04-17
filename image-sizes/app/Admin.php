@@ -30,11 +30,11 @@ class Admin extends Base {
 	 * Constructor function
 	 */
 	public function __construct( $plugin ) {
-		$this->plugin	= $plugin;
-		$this->slug		= $this->plugin['TextDomain'];
-		$this->name		= $this->plugin['Name'];
-		$this->server	= $this->plugin['server'];
-		$this->version	= $this->plugin['Version'];
+		$this->plugin  = $plugin;
+		$this->slug    = $this->plugin['TextDomain'];
+		$this->name    = $this->plugin['Name'];
+		$this->server  = $this->plugin['server'];
+		$this->version = $this->plugin['Version'];
 	}
 
 	/**
@@ -45,21 +45,21 @@ class Admin extends Base {
 		$table_report = thumbpress_check_action_tables();
 
 		// check for missing tables
-		if( in_array( true, $table_report ) ) :
+		if ( in_array( true, $table_report ) ) :
 
 			// check store table
-			if( $table_report['store_table_missing'] ) :
+			if ( $table_report['store_table_missing'] ) :
 				delete_option( 'schema-ActionScheduler_StoreSchema' );
 
-				$action_store_db 	= new \ActionScheduler_DBStore();
+				$action_store_db = new \ActionScheduler_DBStore();
 				$action_store_db->init();
 			endif;
 
 			// check log table
-			if( $table_report['log_table_missing'] ) :
+			if ( $table_report['log_table_missing'] ) :
 				delete_option( 'schema-ActionScheduler_LoggerSchema' );
 
-				$action_log_db 		= new \ActionScheduler_DBLogger();
+				$action_log_db = new \ActionScheduler_DBLogger();
 				$action_log_db->init();
 			endif;
 
@@ -67,7 +67,7 @@ class Admin extends Base {
 	}
 
 	public function add_body_class( $classes ) {
-		
+
 		$classes .= ' thumbpress';
 		$classes .= defined( 'THUMBPRESS_PRO' ) ? ' thumbpress-pro' : '';
 
@@ -82,12 +82,13 @@ class Admin extends Base {
 	}
 
 	public function show_admin_notices() {
-		if( false !== get_option( 'thumbpress_settings_init' ) ) return;
-
-		if( 'toplevel_page_thumbpress' == get_current_screen()->base ) {
-			update_option( 'thumbpress_settings_init', 1 );
+		if ( false !== get_option( 'thumbpress_settings_init' ) ) {
+			return;
 		}
-		else {
+
+		if ( 'toplevel_page_thumbpress' == get_current_screen()->base ) {
+			update_option( 'thumbpress_settings_init', 1 );
+		} else {
 			printf(
 				'<div class="notice notice-warning is-dismissible thumbpress-notice"><p>%s</p></div>',
 				sprintf(
@@ -97,19 +98,19 @@ class Admin extends Base {
 				)
 			);
 
-			echo "<style>.thumbpress-notice { background-color: #5be8ff52;} .thumbpress-notice p {font-size: 14px;}</style>";
+			echo '<style>.thumbpress-notice { background-color: #5be8ff52;} .thumbpress-notice p {font-size: 14px;}</style>';
 		}
 	}
 
 	public function show_easycommerce_notice() {
 		if ( false !== get_option( 'thumbpress_settings_init' ) && ! defined( 'THUMBPRESS_PRO' ) && current_user_can( 'manage_options' ) ) {
-			$data_id = 'thumbpress-easycommerce_campain';
-			$url     = 'https://easycommerce.dev/?utm_source=wp+dashboard&utm_medium=thumbpress+notice&utm_campaign=introducing+easycommerce';
+			$data_id    = 'thumbpress-easycommerce_campain';
+			$url        = 'https://easycommerce.dev/?utm_source=wp+dashboard&utm_medium=thumbpress+notice&utm_campaign=introducing+easycommerce';
 			$image_path = THUMBPRESS_ASSET . '/img/banner-section/tp-logo.png';
 
 			$notice = new Notice( $data_id );
 
-			$notice->set_intervals( [0] ); // Show at 0s (immediately)
+			$notice->set_intervals( array( 0 ) ); // Show at 0s (immediately)
 			$notice->set_expiry( 3 * DAY_IN_SECONDS ); // Don't show after 3 days
 
 			$message = '
@@ -122,29 +123,31 @@ class Admin extends Base {
 		        </div>';
 
 			$notice->set_message( $message );
-			$notice->set_screens( [ 'dashboard' ] );
+			$notice->set_screens( array( 'dashboard' ) );
 			$notice->render();
 		}
 	}
 
 	public function upgrade() {
-		$current_time = date_i18n('U');
-		if( ! get_option( 'image_sizes_year_notice' ) ){
+		$current_time = date_i18n( 'U' );
+		if ( ! get_option( 'image_sizes_year_notice' ) ) {
 			foreach ( image_sizes_notices_values() as $id => $notice ) {
-				$data = [
+				$data = array(
 					'from' => $notice['from'],
-					'to' => $notice['to']
-				];
-			
-				$expiration_duration = $notice['to'] - $current_time; 
-				set_transient( $id, $data,  $expiration_duration );
+					'to'   => $notice['to'],
+				);
+
+				$expiration_duration = $notice['to'] - $current_time;
+				set_transient( $id, $data, $expiration_duration );
 			}
 			update_option( 'image_sizes_year_notice', 1 );
 		}
-		
-		if( $this->version == get_option( "{$this->slug}_db-version" ) ) return;
+
+		if ( $this->version == get_option( "{$this->slug}_db-version" ) ) {
+			return;
+		}
 		update_option( "{$this->slug}_db-version", $this->version );
-		
+
 		delete_option( 'codexpert-blog-json' );
 	}
 
@@ -152,74 +155,77 @@ class Admin extends Base {
 	 * Enqueue JavaScripts and stylesheets
 	 */
 	public function enqueue_scripts() {
-		$screen = get_current_screen();
-		$valid_screens = [ 'upload', 'media', 'dashboard' ];
+		$screen        = get_current_screen();
+		$valid_screens = array( 'upload', 'media', 'dashboard' );
 		if ( ! in_array( $screen->id, $valid_screens ) &&
-			!( isset( $_GET[ 'page' ] ) && strpos( $_GET[ 'page' ], 'thumbpress' ) !== false ) ) {
+			! ( isset( $_GET['page'] ) && strpos( $_GET['page'], 'thumbpress' ) !== false ) ) {
 			return;
 		}
 		$min = defined( 'THUMBPRESS_DEBUG' ) && THUMBPRESS_DEBUG ? '' : '.min';
-		
-		wp_enqueue_style( $this->slug, plugins_url( "/assets/css/admin.css", THUMBPRESS ), '', time(), 'all' );
-		wp_enqueue_style( $this->slug . 'dashboard', plugins_url( "/assets/css/settings/dashboard.css", THUMBPRESS ), '', time(), 'all' );
-		wp_enqueue_style( $this->slug . 'google-font', "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" );
-		wp_enqueue_style( $this->slug . 'font-awesome', "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" );
-		wp_enqueue_script( $this->slug . 'font-awesome-js', "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.js", [ 'jquery' ], time(), true );
-		
-		wp_enqueue_script($this->slug, plugins_url("/assets/js/admin{$min}.js", THUMBPRESS), ['jquery'], time(), true);
-		
+
+		wp_enqueue_style( $this->slug, plugins_url( '/assets/css/admin.css', THUMBPRESS ), '', time(), 'all' );
+		wp_enqueue_style( $this->slug . 'dashboard', plugins_url( '/assets/css/settings/dashboard.css', THUMBPRESS ), '', time(), 'all' );
+		wp_enqueue_style( $this->slug . 'google-font', 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap' );
+		wp_enqueue_style( $this->slug . 'font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css' );
+		wp_enqueue_script( $this->slug . 'font-awesome-js', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.js', array( 'jquery' ), time(), true );
+
+		wp_enqueue_script( $this->slug, plugins_url( "/assets/js/admin{$min}.js", THUMBPRESS ), array( 'jquery' ), time(), true );
+
 		wp_enqueue_script( 'wp-pointer' );
 		wp_enqueue_style( 'wp-pointer' );
 
 		$max_size_value = get_option( 'thumbpress_max_size_value' );
-		$base_url 	= admin_url( 'admin.php' );
-		$target_url = add_query_arg( array(
-			'page' => 'thumbpress-detect-large-images',
-			'thumb-large-image-size' => $max_size_value,
-		), $base_url );
+		$base_url       = admin_url( 'admin.php' );
+		$target_url     = add_query_arg(
+			array(
+				'page'                   => 'thumbpress-detect-large-images',
+				'thumb-large-image-size' => $max_size_value,
+			),
+			$base_url
+		);
 
 		$localized = array(
-			'ajaxurl'		=> admin_url( 'admin-ajax.php' ),
-			'nonce'			=> wp_create_nonce( $this->slug ),
-			'asseturl'		=> THUMBPRESS_ASSET,
-			'regen'			=> __( 'Regenerate Now', 'image-sizes' ),
-			'regening'		=> __( 'Regenerating..', 'image-sizes' ),
-			'detect'		=> __( 'Detect', 'image-sizes' ),
-			'detecting'		=> __( 'Detecting', 'image-sizes' ),
-			'detectNow'		=> __( 'Detect Now', 'image-sizes' ),
-			'detected'		=> __( 'Detected', 'image-sizes' ),
-			'analyze'		=> __( 'Analyze', 'image-sizes' ),
-			'analyzing'		=> __( 'Analyzing..', 'image-sizes' ),
-			'analyzed'		=> __( 'Analyzed', 'image-sizes' ),
-			'optimize'		=> __( 'Compress', 'image-sizes' ),
-			'compressNow'	=> __( 'Compress Now', 'image-sizes' ),
-			'compressing'	=> __( 'Compressing..', 'image-sizes' ),
-			'confirm'		=> esc_html__( 'Are you sure you want to delete this? The data and its associated files will be completely erased. This action cannot be undone!', 'image-sizes' ),
-			'confirm_all'	=> esc_html__( 'Are you sure you want to delete these? The data and their associated files will be completely erased. This action cannot be undone!', 'image-sizes' ),
-			// 'is_welcome'	=> $this->get_pointers(),
-			'live_chat'		=> get_option( 'thumbpress_live_chat_enabled' ) == 1,
-			'tp_page'		=> isset( $_GET['page'] ) && false !== strpos( $_GET['page'], 'thumbpress' ),
-			'name'			=> get_userdata( get_current_user_id() )->display_name,
-			'email'			=> get_userdata( get_current_user_id() )->user_email,
-			'converting'	=> __( 'Converting', 'image-sizes' ),
-			'convertNow'	=> __( 'Convert Now', 'image-sizes' ),
-			'target_url'    => $target_url,
+			'ajaxurl'     => admin_url( 'admin-ajax.php' ),
+			'nonce'       => wp_create_nonce( $this->slug ),
+			'asseturl'    => THUMBPRESS_ASSET,
+			'regen'       => __( 'Regenerate Now', 'image-sizes' ),
+			'regening'    => __( 'Regenerating..', 'image-sizes' ),
+			'detect'      => __( 'Detect', 'image-sizes' ),
+			'detecting'   => __( 'Detecting', 'image-sizes' ),
+			'detectNow'   => __( 'Detect Now', 'image-sizes' ),
+			'detected'    => __( 'Detected', 'image-sizes' ),
+			'analyze'     => __( 'Analyze', 'image-sizes' ),
+			'analyzing'   => __( 'Analyzing..', 'image-sizes' ),
+			'analyzed'    => __( 'Analyzed', 'image-sizes' ),
+			'optimize'    => __( 'Compress', 'image-sizes' ),
+			'compressNow' => __( 'Compress Now', 'image-sizes' ),
+			'compressing' => __( 'Compressing..', 'image-sizes' ),
+			'confirm'     => esc_html__( 'Are you sure you want to delete this? The data and its associated files will be completely erased. This action cannot be undone!', 'image-sizes' ),
+			'confirm_all' => esc_html__( 'Are you sure you want to delete these? The data and their associated files will be completely erased. This action cannot be undone!', 'image-sizes' ),
+			// 'is_welcome' => $this->get_pointers(),
+			'live_chat'   => get_option( 'thumbpress_live_chat_enabled' ) == 1,
+			'tp_page'     => isset( $_GET['page'] ) && false !== strpos( $_GET['page'], 'thumbpress' ),
+			'name'        => get_userdata( get_current_user_id() )->display_name,
+			'email'       => get_userdata( get_current_user_id() )->user_email,
+			'converting'  => __( 'Converting', 'image-sizes' ),
+			'convertNow'  => __( 'Convert Now', 'image-sizes' ),
+			'target_url'  => $target_url,
 		);
 		wp_localize_script( $this->slug, 'THUMBPRESS', apply_filters( "{$this->slug}-localized", $localized ) );
 	}
 
 	public function action_links( $links ) {
 		$this->admin_url = admin_url( 'admin.php' );
-	
-		$new_links['settings']	= sprintf( '<a href="%2$s" target="_blank">%1$s</a>', __( 'Settings', 'image-sizes' ), add_query_arg( 'page', 'thumbpress', $this->admin_url ) );
-		$new_links['support']	= sprintf( '<a href="%2$s" target="_blank">%1$s</a>', __( 'Support', 'image-sizes' ), 'https://help.codexpert.io/add-ticket/' );
-		$new_links['docs']		= sprintf( '<a href="%2$s" target="_blank">%1$s</a>', __( 'Docs', 'image-sizes' ), 'https://thumbpress.co/doc-topic/installation/' );
-	
+
+		$new_links['settings'] = sprintf( '<a href="%2$s" target="_blank">%1$s</a>', __( 'Settings', 'image-sizes' ), add_query_arg( 'page', 'thumbpress', $this->admin_url ) );
+		$new_links['support']  = sprintf( '<a href="%2$s" target="_blank">%1$s</a>', __( 'Support', 'image-sizes' ), 'https://help.codexpert.io/add-ticket/' );
+		$new_links['docs']     = sprintf( '<a href="%2$s" target="_blank">%1$s</a>', __( 'Docs', 'image-sizes' ), 'https://thumbpress.co/doc-topic/installation/' );
+
 		return array_merge( $new_links, $links );
 	}
-	
+
 	public function plugin_row_meta( $plugin_meta, $plugin_file ) {
-		
+
 		if ( $this->plugin['basename'] === $plugin_file ) {
 			$plugin_meta['help'] = '<a href="https://help.codexpert.io/" target="_blank" class="cx-help">' . __( 'Help', 'image-sizes' ) . '</a>';
 		}
@@ -228,7 +234,9 @@ class Admin extends Base {
 	}
 
 	public function footer_text( $text ) {
-		if( get_current_screen()->parent_base != $this->slug ) return $text;
+		if ( get_current_screen()->parent_base != $this->slug ) {
+			return $text;
+		}
 
 		/* translators: %1$s is the plugin name, %2$s is the link to leave a review, %3$s is the rating stars */
 		return sprintf( __( 'If you like <strong>%1$s</strong>, please <a href="%2$s" target="_blank">leave us a %3$s rating</a> on WordPress.org! It\'d motivate and inspire us to make the plugin even better!', 'image-sizes' ), $this->name, "https://wordpress.org/support/plugin/{$this->slug}/reviews/?filter=5#new-post", '⭐⭐⭐⭐⭐' );
@@ -246,26 +254,35 @@ class Admin extends Base {
 		if ( ! get_option( 'thumbpress_modules' ) ) {
 
 			$thumbpress_modules = array(
-				'disable-thumbnails' => 'on',
+				'disable-thumbnails'    => 'on',
 				'regenerate-thumbnails' => 'on',
-				'social-share' => 'on',
-				'convert-images' => 'on',
+				'social-share'          => 'on',
+				'convert-images'        => 'on',
 			);
 
 			add_option( 'thumbpress_modules', $thumbpress_modules );
-	    }
+		}
 	}
 
 	public function show_easycommerce_promo( $config ) {
 
-		if( defined( 'THUMBPRESS_PRO' ) ) return;
+		if ( defined( 'THUMBPRESS_PRO' ) ) {
+			return;
+		}
 
 		$banners = array( 'purple-left-party', 'bullet-points' );
-		$banner = $banners[ array_rand( $banners ) ];
+		$banner  = $banners[ array_rand( $banners ) ];
 
 		printf(
 			'<div id="easycommerce-promo"><a href="%1$s" target="_blank"><img src="%2$s" /></a></div>',
-			add_query_arg( [ 'utm_source' => 'in-plugin', 'utm_medium' => 'thumbpress', 'utm_campaign' => "banner_{$banner}" ], 'https://easycommerce.dev' ),
+			add_query_arg(
+				array(
+					'utm_source'   => 'in-plugin',
+					'utm_medium'   => 'thumbpress',
+					'utm_campaign' => "banner_{$banner}",
+				),
+				'https://easycommerce.dev'
+			),
 			"https://cdn.easycommerce.dev/images/promo/{$banner}.png"
 		);
 	}

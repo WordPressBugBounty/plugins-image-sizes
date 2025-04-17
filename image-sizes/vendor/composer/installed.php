@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => '__root__',
-        'pretty_version' => 'v5.8.16',
-        'version' => '5.8.16.0',
-        'reference' => '0883e5b7e59c206ede3510db0c2badae2c68c771',
+        'pretty_version' => 'v5.8.17',
+        'version' => '5.8.17.0',
+        'reference' => '44b13443a381cdf248257dbf43745f8db7c9710c',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         '__root__' => array(
-            'pretty_version' => 'v5.8.16',
-            'version' => '5.8.16.0',
-            'reference' => '0883e5b7e59c206ede3510db0c2badae2c68c771',
+            'pretty_version' => 'v5.8.17',
+            'version' => '5.8.17.0',
+            'reference' => '44b13443a381cdf248257dbf43745f8db7c9710c',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -22,7 +22,7 @@
         'codexpert/plugin' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '98a532bf170d35d081435e117265f69647bbf41c',
+            'reference' => '3df2b550ffe81e4a46a18f0d5edf4eeb26d8aff3',
             'type' => 'library',
             'install_path' => __DIR__ . '/../codexpert/plugin',
             'aliases' => array(
@@ -33,7 +33,7 @@
         'pluggable/marketing' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '0b1d66bb4ce840789931b4c59772cfae8a377667',
+            'reference' => 'c18e78804f0c143e66f1df2d075b68a31c846799',
             'type' => 'library',
             'install_path' => __DIR__ . '/../pluggable/marketing',
             'aliases' => array(
