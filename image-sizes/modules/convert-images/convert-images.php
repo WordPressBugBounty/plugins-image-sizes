@@ -21,7 +21,7 @@ class Convert_Images extends Base {
 		$this->slug		= 'image-sizes';
 		$this->version	= '5.8.7';
 
-		$this->action( 'plugins_loaded', 'init_menu', 11 );
+		$this->action( 'init', 'init_menu', 11 );
 		$this->action( 'admin_enqueue_scripts', 'enqueue_scripts' );
 		$this->filter( 'wp_handle_upload', 'convert_image_on_upload' );
 		$this->filter( 'attachment_fields_to_edit', 'display_convert_image_btn', 10, 2 );

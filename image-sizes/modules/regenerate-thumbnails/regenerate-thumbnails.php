@@ -19,7 +19,7 @@ class Regenerate_Thumbnails extends Base {
 		$this->version	= '5.8.7';
 
 		$this->action( 'admin_enqueue_scripts', 'enqueue_scripts' );
-		$this->action( 'plugins_loaded', 'init_menu', 11 );
+		$this->action( 'init', 'init_menu', 11 );
 		$this->priv( 'image_sizes-regen-thumbs', 'regen_thumbs' );
 		$this->priv( 'thumbpress_schedule_regenerate-thumbs', 'schedule_regenerate' );
 		$this->action( 'thumbpress_regenerate_all_image', 'regenerate_all_image' );
