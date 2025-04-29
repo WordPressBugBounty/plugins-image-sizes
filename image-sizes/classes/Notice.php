@@ -30,7 +30,7 @@ if ( ! class_exists( 'Notice' ) ) {
 				update_option( $this->install_time, $this->current_time );
 			}
 
-			add_action( 'wp_ajax_tp_hide_notice', array( $this, 'hide_notice' ) );
+			add_action( 'wp_ajax_cx_hide_notice', array( $this, 'hide_notice' ) );
 		}
 
 		public function set_intervals( $intervals ) {
@@ -58,22 +58,34 @@ if ( ! class_exists( 'Notice' ) ) {
 			}
 		}
 
+		// public function render() {
+		// 	$install_time   = get_option( $this->install_time, $this->current_time );
+		// 	$last_dismissed = get_option( $this->id . '_dismissed', 0 );
+
+		// 	foreach ( $this->intervals as $interval ) {
+		// 		$show_time = $install_time + $interval;
+
+		// 		if ( $this->current_time >= $show_time &&
+		// 			$last_dismissed < $show_time &&
+		// 			$this->current_time <= $install_time + $this->expiry
+		// 		) {
+		// 			add_action( 'admin_notices', array( $this, 'output_notice' ) );
+		// 			return;
+		// 		}
+		// 	}
+		// }
+
 		public function render() {
-			$install_time   = get_option( $this->install_time, $this->current_time );
 			$last_dismissed = get_option( $this->id . '_dismissed', 0 );
-
-			foreach ( $this->intervals as $interval ) {
-				$show_time = $install_time + $interval;
-
-				if ( $this->current_time >= $show_time &&
-					$last_dismissed < $show_time &&
-					$this->current_time <= $install_time + $this->expiry
-				) {
-					add_action( 'admin_notices', array( $this, 'output_notice' ) );
-					return;
-				}
+		
+			if (
+				$this->current_time <= $this->expiry &&
+				$last_dismissed < $this->install_time
+			) {
+				add_action( 'admin_notices', array( $this, 'output_notice' ) );
 			}
 		}
+		
 
 		public function output_notice() {
 			$screen = get_current_screen();
@@ -88,13 +100,14 @@ if ( ! class_exists( 'Notice' ) ) {
 			</div>
 			<script type="text/javascript">
 				(function($) {
-					$('.notice[data-notice-id="<?php echo esc_js( $this->id ); ?>"]').on('click', '.notice-dismiss, .thumbpress-dismissible-notice-button', function() {
+					$('.notice[data-notice-id="<?php echo esc_js( $this->id ); ?>"]').on('click', '.notice-dismiss, .notice-cta-button', function() {
+						console.log('Notice dismissed');
+						console.log(ajaxurl);
 						$.post(ajaxurl, {
-							action: 'tp_hide_notice',
+							action: 'cx_hide_notice',
 							notice_id: '<?php echo esc_js( $this->id ); ?>',
 						});
 					});
-					
 				})(jQuery);
 			</script>
 			<?php

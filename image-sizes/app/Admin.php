@@ -81,6 +81,59 @@ class Admin extends Base {
 		load_plugin_textdomain( 'image-sizes', false, THUMBPRESS_DIR . '/languages/' );
 	}
 
+	public function thumbpress_sale_notice() {
+		if ( ! defined( 'THUMBPRESS_PRO' ) ) {
+			$notice_id	= 'thumbpress-spring-deals-campaign';
+			$url        = 'https://thumbpress.co/pricing/?utm_source=In-plugin&utm_medium=offer+notice&utm_campaign=spring+2025';
+			$logo_url = THUMBPRESS_ASSET . '/img/banner-section/logo.png';
+			$discount_img_url = THUMBPRESS_ASSET . '/img/banner-section/discount.png';
+
+			if( get_option( 'thumbpress-spring-deals-campaign_dismissed' ) !== false ) {
+				return;
+			}
+
+			$sale_notice = new Notice( $notice_id );
+			$expiry_timestamp = strtotime( '2025-05-05 23:59:59' );
+			$sale_notice->set_expiry( $expiry_timestamp );
+
+			$message = '
+					<div class="thumbpress-spring-deals-notice-content">
+						<img src="' . esc_url( $logo_url ) . '" alt="Thumbpress" class="thumbpress-notice-image" >
+						<p class="notice-title">Spring Deals in Full Bloom!</p>
+						<img src="' . esc_url( $discount_img_url ) . '" alt="Spring Deals" class="thumbpress-notice-image" >
+						<div class="tp-timer-wrapper">
+							<div class="tp-timer">
+								<div class="tp-count">
+									<span id="days"></span>
+									<label>DAYS</label>
+								</div>
+			
+								<div class="tp-count">
+									<span id="hours"></span>
+									<label>HRS</label>
+								</div>
+								<div class="tp-count">
+									<span id="minutes"></span>
+									<label>MINS</label>
+								</div>
+								<div class="tp-count">
+									<span id="seconds"></span>
+									<label>SEC</label>
+								</div>
+							</div>
+						</div>
+						<a href="' . esc_url( $url ) . '" class="notice-cta-button" data-id="' . esc_attr( $notice_id ) . '"  target="_blank">
+						' . __( 'Grab Now', 'thumbpress' ) . '
+						</a>
+					</div>
+			';
+
+			$sale_notice->set_message( $message );
+			$sale_notice->set_screens( array( 'dashboard', 'toplevel_page_thumbpress' ) );
+			$sale_notice->render();	
+		}
+	}
+
 	public function show_admin_notices() {
 		if ( false !== get_option( 'thumbpress_settings_init' ) ) {
 			return;
@@ -113,14 +166,14 @@ class Admin extends Base {
 			$notice->set_intervals( array( 0 ) ); // Show at 0s (immediately)
 			$notice->set_expiry( 3 * DAY_IN_SECONDS ); // Don't show after 3 days
 
-			$message = '
-		        <div class="thumbpress-dismissible-notice-content">
+			$message = '   
+				<div class="thumbpress-dismissible-notice-content">
 					<img src="' . $image_path . '" alt="thumbpress" class="thumbpress-notice-image" >
 					<p class="thumbpress-notice-title">Introducing <span>EasyCommerce</span> -  A Revolutionary WordPress Ecommerce Plugin</p>
-		            <div class="button-wrapper">
-		                <a href="' . esc_url( $url ) . '" class="thumbpress-dismissible-notice-button" data-id="' . esc_attr( $data_id ) . '">Check it Out</a>
-		            </div>
-		        </div>';
+					<div class="button-wrapper">
+						<a href="' . esc_url( $url ) . '" class="thumbpress-dismissible-notice-button" data-id="' . esc_attr( $data_id ) . '">Check it Out</a>
+					</div>
+				</div>';
 
 			$notice->set_message( $message );
 			$notice->set_screens( array( 'dashboard' ) );

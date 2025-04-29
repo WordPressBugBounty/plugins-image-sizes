@@ -1672,3 +1672,97 @@ input:checked + .thumb-toggle-slider:before {
     border-radius: 12px;
     right: 20px;
 }
+
+.thumbpress-spring-deals-notice-content {
+	background: linear-gradient(90deg, #FFF4DB 0%, #FFF0E6 49%, #FFF4DB 100%);
+	padding: 3px;
+	border: none;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.thumbpress-spring-deals-notice-content .notice-title {
+	font-family: Inter;
+	font-weight: 700;
+	font-size: 20px;
+	line-height: 30px;
+	letter-spacing: 0%;
+	text-align: center;
+	color: #411900;
+}
+
+.thumbpress-spring-deals-notice-content .notice-cta-button {
+	font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #000000;
+    background-color: #FF873A;
+    padding: 7px 25px;
+    border-radius: 60px;
+    cursor: pointer;
+    border: 2px solid #FF873A;
+    box-shadow: 0px 5px 0px 0px #C7682B;
+	text-decoration: none;
+	margin-bottom: 5px;
+}
+
+.thumbpress-spring-deals-notice-content .tp-timer-wrapper {
+    display: flex;
+    gap: 70px;
+}
+
+.thumbpress-spring-deals-notice-content .tp-timer-wrapper .tp-timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.thumbpress-spring-deals-notice-content .tp-timer-wrapper .tp-count {
+	width: 48px;
+    height: 42px;
+	background-color: #fff;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+
+.thumbpress-spring-deals-notice-content .tp-timer-wrapper .tp-count::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	padding: 1px;
+	border-radius: 5px;
+	background: linear-gradient(180deg, #FFCEAE 0%, rgba(255, 255, 255, 0) 100%);
+	-webkit-mask:
+		linear-gradient(#fff 0 0) content-box, 
+		linear-gradient(#fff 0 0);
+	-webkit-mask-composite: xor;
+	mask-composite: exclude;
+	pointer-events: none;
+}
+
+.thumbpress-spring-deals-notice-content .tp-timer-wrapper .tp-count span {
+	font-size: 18px;
+    font-weight: 700;
+    line-height: 21px;
+    color: #411900;
+}
+
+.thumbpress-spring-deals-notice-content .tp-timer-wrapper .tp-count label {
+	font-size: 10px;
+    font-weight: 400;
+    line-height: 12px;
+    color: #411900;
+}
+
+.notice[data-notice-id="thumbpress-spring-deals-campaign"] {
+    padding: 0;
+    height: 100%;
+    padding-right: 0 !important;
+    border: none;
+}
