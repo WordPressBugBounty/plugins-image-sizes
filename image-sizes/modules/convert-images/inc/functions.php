@@ -2,31 +2,41 @@
 use WebPConvert\WebPConvert;
 
 if( ! function_exists( 'thumbpress_convert_image_to_webp' ) ) :
-function thumbpress_convert_image_to_webp( $source ) {
-	$file_info      = pathinfo( $source );
-	$extension      = strtolower( $file_info['extension'] );
-
-	if( $extension === 'webp' ) return false;
-
-	$webp_file_path = str_replace( '.' . $extension, '.webp', $source );
-	$options        = [];
-
-	WebPConvert::convert( $source, $webp_file_path, $options );
-
-	return $webp_file_path;
-}
+	function thumbpress_convert_image_to_webp( $source ) {
+		$file_info = pathinfo( $source );
+		$extension = strtolower( $file_info['extension'] );
+	
+		if ( $extension === 'webp' ) return false;
+	
+		$base_dir  = $file_info['dirname'];
+		$base_name = $file_info['filename'];
+		$webp_path = $base_dir . '/' . $base_name . '.webp';
+	
+		// Increment if file already exists
+		$counter = 1;
+		while ( file_exists( $webp_path ) ) {
+			$webp_path = $base_dir . '/' . $base_name . '-' . $counter . '.webp';
+			$counter++;
+		}
+	
+		$options = [];
+		WebPConvert::convert( $source, $webp_path, $options );
+	
+		return $webp_path;
+	}
 endif;
+	
 
 if( ! function_exists( 'thumbpress_generate_webp_file_url' ) ) :
-function thumbpress_generate_webp_file_url( $webp_file_path ) {
-	// Assuming WebP file has the same directory structure and name but with a different extension
-	$webp_file_path = pathinfo( $webp_file_path, PATHINFO_DIRNAME ) . '/' . pathinfo( $webp_file_path, PATHINFO_FILENAME ) . '.webp';
+	function thumbpress_generate_webp_file_url( $webp_file_path ) {
+		// Assuming WebP file has the same directory structure and name but with a different extension
+		$webp_file_path = pathinfo( $webp_file_path, PATHINFO_DIRNAME ) . '/' . pathinfo( $webp_file_path, PATHINFO_FILENAME ) . '.webp';
 
-	// Replace the base directory path with the base URL
-	$webp_file_url = str_replace( ABSPATH, home_url( '/' ), $webp_file_path );
+		// Replace the base directory path with the base URL
+		$webp_file_url = str_replace( ABSPATH, home_url( '/' ), $webp_file_path );
 
-	return $webp_file_url;
-}
+		return $webp_file_url;
+	}
 endif;
 
 /**
