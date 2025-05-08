@@ -83,38 +83,37 @@ class Admin extends Base {
 
 	public function thumbpress_sale_notice() {
 		if ( ! defined( 'THUMBPRESS_PRO' ) ) {
-			$notice_id	= 'thumbpress-spring-deals-campaign';
-			$url        = 'https://thumbpress.co/pricing/?utm_source=In-plugin&utm_medium=offer+notice&utm_campaign=spring+2025';
+			$notice_id	= 'thumbpress-mothers_day_campaign';
+			$url        = 'https://thumbpress.co/pricing/?utm_source=In-plugin&utm_medium=offer+notice&utm_campaign=mothersday+2025';
 			$logo_url = THUMBPRESS_ASSET . '/img/banner-section/logo.png';
-			$discount_img_url = THUMBPRESS_ASSET . '/img/banner-section/discount.png';
 
-			if( get_option( 'thumbpress-spring-deals-campaign_dismissed' ) !== false ) {
+			if( get_option( 'thumbpress-mothers_day_campaign_dismissed' ) !== false ) {
 				return;
 			}
 
 			$sale_notice = new Notice( $notice_id );
-			$expiry_timestamp = strtotime( '2025-05-05 23:59:59' );
+			$expiry_timestamp = strtotime( '2025-05-14 23:59:59' );
 			$sale_notice->set_expiry( $expiry_timestamp );
 
 			$message = '
-					<div class="thumbpress-spring-deals-notice-content">
+					<div class="thumbpress-mothersday-deals-notice-content">
 						<img src="' . esc_url( $logo_url ) . '" alt="Thumbpress" class="thumbpress-notice-image" >
-						<p class="notice-title">Spring Deals in Full Bloom!</p>
-						<img src="' . esc_url( $discount_img_url ) . '" alt="Spring Deals" class="thumbpress-notice-image" >
+						<p class="notice-title">' . esc_html__( 'Biggest Ever Mother’s Day  Sale', 'codesigner' ) . '</p>
+						<p class="notice-subtitle"><span> <del>' . esc_html__( 'Yearly', 'codesigner' ) . '</del> ' . esc_html__( 'Lifetime Access to All Plans!', 'codesigner' ) . '</span></p>
 						<div class="tp-timer-wrapper">
 							<div class="tp-timer">
 								<div class="tp-count">
 									<span id="days"></span>
-									<label>DAYS</label>
+									<label>DAY</label>
 								</div>
-			
+
+								<div class="tp-count">
+									<span id="minutes"></span>
+									<label>MIN</label>
+								</div>
 								<div class="tp-count">
 									<span id="hours"></span>
 									<label>HRS</label>
-								</div>
-								<div class="tp-count">
-									<span id="minutes"></span>
-									<label>MINS</label>
 								</div>
 								<div class="tp-count">
 									<span id="seconds"></span>
@@ -129,7 +128,7 @@ class Admin extends Base {
 			';
 
 			$sale_notice->set_message( $message );
-			$sale_notice->set_screens( array( 'dashboard', 'toplevel_page_thumbpress' ) );
+			$sale_notice->set_screens( array( 'dashboard', 'toplevel_page_thumbpress', 'thumbpress_page_thumbpress-regenerate-thumbnails', 'thumbpress_page_thumbpress-convert-images' ) );
 			$sale_notice->render();	
 		}
 	}
@@ -315,28 +314,5 @@ class Admin extends Base {
 
 			add_option( 'thumbpress_modules', $thumbpress_modules );
 		}
-	}
-
-	public function show_easycommerce_promo( $config ) {
-
-		if ( defined( 'THUMBPRESS_PRO' ) ) {
-			return;
-		}
-
-		$banners = array( 'purple-left-party', 'bullet-points' );
-		$banner  = $banners[ array_rand( $banners ) ];
-
-		printf(
-			'<div id="easycommerce-promo"><a href="%1$s" target="_blank"><img src="%2$s" /></a></div>',
-			add_query_arg(
-				array(
-					'utm_source'   => 'in-plugin',
-					'utm_medium'   => 'thumbpress',
-					'utm_campaign' => "banner_{$banner}",
-				),
-				'https://easycommerce.dev'
-			),
-			"https://cdn.easycommerce.dev/images/promo/{$banner}.png"
-		);
 	}
 }

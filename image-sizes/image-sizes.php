@@ -3,7 +3,7 @@
  * Plugin Name:         ThumbPress
  * Plugin URI:          https://thumbpress.co
  * Description:         A complete image and thumbnail management solution for WordPress.
- * Version:             5.8.22
+ * Version:             5.8.23
  * Requires at least:   6.0
  * Requires PHP:        7.0
  * Tested up to:        6.8
@@ -136,7 +136,7 @@ final class Plugin {
 		$this->plugin['file']       = THUMBPRESS;
 		$this->plugin['TextDomain'] = 'image-sizes';
 		$this->plugin['Name']       = 'ThumbPress';
-		$this->plugin['Version']    = '5.8.22';
+		$this->plugin['Version']    = '5.8.23';
 		$this->plugin['server']     = apply_filters( 'image-sizes_server', 'https://my.pluggable.io' );
 		$this->plugin['icon']       = THUMBPRESS_ASSET . '/img/icon.png';
 		$this->plugin['depends']    = array();
@@ -180,7 +180,7 @@ final class Plugin {
 			$admin->filter( "plugin_action_links_{$this->plugin['basename']}", 'action_links' );
 			$admin->filter( 'plugin_row_meta', 'plugin_row_meta', 10, 2 );
 			$admin->action( 'admin_footer_text', 'footer_text' );
-			$admin->action( 'cx-settings-after_wrapper', 'show_easycommerce_promo' );
+			// $admin->action( 'cx-settings-after_wrapper', 'show_easycommerce_promo' );
 			$admin->action( 'init', 'thumbpress_sale_notice', 9 );
 
 			/**

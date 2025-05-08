@@ -154,7 +154,7 @@ class Settings extends Base {
 			);
 
 			// Add HTML tags when rendering, not in the translation function
-			$upgrade_pro['label'] = '<span style="font-weight: bold;">Upgrade to Pro (Up to 60% Off)</span></span>';
+			$upgrade_pro['label'] = '<span style="font-weight: bold;"><del>Yearly</del> Lifetime Access at Up to 70% OFF!</span></span>';
 
 			new Settings_API( apply_filters( 'submenu_thumbpress_pro', $upgrade_pro ) );
 		}
@@ -180,7 +180,7 @@ class Settings extends Base {
 	public function redirect_specific_admin_page() {
 		global $pagenow;
 		if ( $pagenow == 'admin.php' && isset( $_GET['page'] ) && $_GET['page'] == 'upgrade-to-pro' ) {
-			wp_redirect( 'https://thumbpress.co/pricing/?utm_source=in+plugin&utm_medium=menu+bar&utm_campaign=8dec24' );
+			wp_redirect( 'https://thumbpress.co/pricing/?utm_source=In-plugin&utm_medium=offer+notice&utm_campaign=mothersday+2025' );
 			exit;
 		}
 	}
