@@ -1702,14 +1702,14 @@ input:checked + .thumb-toggle-slider:before {
     color: #420042;
 }
 
-.thumbpress-mothersday-deals-notice-content .notice-subtitle del {
+.thumbpress-mothersday-deals-notice-content .notice-subtitle span {
     color: #FF1D43;
 }
 
 .thumbpress-mothersday-deals-notice-content .notice-cta-button {
     font-family: 'Roboto';
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 22px;
     color: #fff;
 	text-align: center;
