@@ -84,7 +84,7 @@ class Admin extends Base {
 	public function thumbpress_sale_notice() {
 		if ( ! defined( 'THUMBPRESS_PRO' ) ) {
 			$notice_id	= 'thumbpress-mothers_day_campaign';
-			$url        = 'https://thumbpress.co/pricing/?utm_source=In-plugin&utm_medium=offer+notice&utm_campaign=mothersday+2025';
+			$url        = 'https://thumbpress.co/pricing/?utm_source=in+plugin&utm_medium=notice&utm_campaign=spring+2025';
 			$logo_url = THUMBPRESS_ASSET . '/img/banner-section/logo.png';
 
 			if( get_option( 'thumbpress-mothers_day_campaign_dismissed' ) !== false ) {
@@ -92,7 +92,7 @@ class Admin extends Base {
 			}
 
 			$sale_notice = new Notice( $notice_id );
-			$expiry_timestamp = strtotime( '2025-05-14 23:59:59' );
+			$expiry_timestamp = strtotime( '2025-05-30 23:59:59' );
 			$sale_notice->set_expiry( $expiry_timestamp );
 
 			$allowed_html = [
@@ -101,8 +101,9 @@ class Admin extends Base {
 				)
 			];
 
+			$percantage = '60%';
 			$message = '
-					<div class="thumbpress-mothersday-deals-notice-content">
+					<div class="thumbpress-spring-deals-notice-content">
 						<img src="' . esc_url( $logo_url ) . '" alt="Thumbpress" class="thumbpress-notice-image" >
 						
 						<div class="tp-timer-wrapper">
@@ -129,10 +130,12 @@ class Admin extends Base {
 							</div>
 						</div>
 
-						<p class="notice-subtitle">' . wp_kses( sprintf( "Last Chance: Mother's Day <span>Lifetime Deal</span> Ending Soon...", 'thumbpress' ), $allowed_html ) . '</p>
+						<p class="notice-subtitle">' . wp_kses( sprintf( "Spring into Mega Savings with ThumbPress Pro", 'thumbpress' ), $allowed_html ) . '</p>
+
+						<p class="notice-discount">' . wp_kses( sprintf( __("Up to <span>%s</span> OFF", 'codesigner'), $percantage ), $allowed_html ) . '</p>
 						
 						<a href="' . esc_url( $url ) . '" class="notice-cta-button" data-id="' . esc_attr( $notice_id ) . '"  target="_blank">
-						' . __( 'Grab Now', 'thumbpress' ) . '
+						' . __( 'Save Now!', 'thumbpress' ) . '
 						</a>
 					</div>
 			';
