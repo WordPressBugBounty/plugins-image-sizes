@@ -1678,7 +1678,12 @@ input:checked + .thumb-toggle-slider:before {
 }
 
 
-/* Mothers Day Sale Notice */
+/* Spring Day Sale Notice */
+.wp-core-ui .notice.is-dismissible {
+	padding: unset !important;
+	border: unset !important;
+}
+
 .thumbpress-spring-deals-notice-content {
 	background: linear-gradient(90deg, #FFF4DB 0%, #FFF0E6 49%, #FFF4DB 100%);
 	border: none;

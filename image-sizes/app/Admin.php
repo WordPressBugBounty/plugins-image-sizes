@@ -83,11 +83,11 @@ class Admin extends Base {
 
 	public function thumbpress_sale_notice() {
 		if ( ! defined( 'THUMBPRESS_PRO' ) ) {
-			$notice_id	= 'thumbpress-mothers_day_campaign';
+			$notice_id	= 'thumbpress-spring-5-30_campaign';
 			$url        = 'https://thumbpress.co/pricing/?utm_source=in+plugin&utm_medium=notice&utm_campaign=spring+2025';
 			$logo_url = THUMBPRESS_ASSET . '/img/banner-section/logo.png';
 
-			if( get_option( 'thumbpress-mothers_day_campaign_dismissed' ) !== false ) {
+			if( get_option( 'thumbpress-spring-5-30_campaign_dismissed' ) !== false ) {
 				return;
 			}
 
