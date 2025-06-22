@@ -154,7 +154,7 @@ class Settings extends Base {
 			);
 
 			// Add HTML tags when rendering, not in the translation function
-			$upgrade_pro['label'] = '<span style="font-weight: bold;">Upgrade Today & Save Up to 60%!</span></span>';
+			$upgrade_pro['label'] = '<span style="font-weight: bold;">Upgrade Today & Save Big! (Flat 50% OFF)</span></span>';
 
 			new Settings_API( apply_filters( 'submenu_thumbpress_pro', $upgrade_pro ) );
 		}
