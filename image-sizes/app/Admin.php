@@ -82,67 +82,53 @@ class Admin extends Base {
 	}
 
 	public function thumbpress_sale_notice() {
-		if ( ! defined( 'THUMBPRESS_PRO' ) ) {
-			$notice_id	= 'thumbpress-spring-5-30_campaign';
-			$url        = 'https://thumbpress.co/pricing/?utm_source=in+plugin&utm_medium=notice&utm_campaign=spring+2025';
-			$logo_url = THUMBPRESS_ASSET . '/img/banner-section/logo.png';
+		$is_year_end_campaign_active = apply_filters( 'is_year_end_campaign_active', false );
+		$is_wp_dashboard 			 = is_admin() && basename( $_SERVER['PHP_SELF'] ) === 'index.php';
 
-			if( get_option( 'thumbpress-spring-5-30_campaign_dismissed' ) !== false ) {
+		if ( $is_year_end_campaign_active ) {
+			return;
+		}
+
+		if ( ! defined( 'THUMBPRESS_PRO' ) ) {
+			$notice_id			= 'thumbpress-year-end-dec-21_campaign';
+			$url				= $is_wp_dashboard ? 'https://thumbpress.co/pricing/?utm_source=wpdashboard&utm_medium=banner&utm_campaign=year-end' : 'https://thumbpress.co/pricing/?utm_source=inplugin&utm_medium=dashboard&utm_campaign=year-end';
+			$discount_img 		= THUMBPRESS_ASSET . '/img/banner-section/discount.gif';
+
+			$dismissed_time 	= get_option( 'thumbpress-year-end-dec-21_campaign_dismissed' );
+			$current_time 		= date_i18n( 'U' );
+			$five_days    		= 5 * DAY_IN_SECONDS;
+
+			if( $dismissed_time !== false && $current_time <= ( $dismissed_time + $five_days ) ) {
 				return;
 			}
 
 			$sale_notice = new Notice( $notice_id );
-			$expiry_timestamp = strtotime( '2025-05-30 23:59:59' );
+			$start_timestamp  = strtotime( '2025-12-20 23:59:59' );
+			$expiry_timestamp = strtotime( '2026-1-10 23:59:59' );
+			$sale_notice->set_start_time( $start_timestamp );
 			$sale_notice->set_expiry( $expiry_timestamp );
 
-			$allowed_html = [
-				'span' => array(
-					'class' => true
-				)
-			];
-
-			$percantage = '60%';
 			$message = '
-					<div class="thumbpress-spring-deals-notice-content">
-						<img src="' . esc_url( $logo_url ) . '" alt="Thumbpress" class="thumbpress-notice-image" >
-						
-						<div class="tp-timer-wrapper">
-							<div class="tp-timer">
-								<div class="tp-count">
-									<span id="days"></span>
-									<label>DAY</label>
-								</div>
+				<div class="thumbpress-year-end-deals-notice">
+					<div class="discount-image">
+						<img src="' . esc_url( $discount_img ) . '" alt="Thumbpress" class="wc-affiliate-notice-image" >
+					</div>
 
-								<div class="tp-count">
-									<span id="hours"></span>
-									<label>HRS</label>
-								</div>
-
-								<div class="tp-count">
-									<span id="minutes"></span>
-									<label>MIN</label>
-								</div>
-								
-								<div class="tp-count">
-									<span id="seconds"></span>
-									<label>SEC</label>
-								</div>
-							</div>
-						</div>
-
-						<p class="notice-subtitle">' . wp_kses( sprintf( "Spring into Mega Savings with ThumbPress Pro", 'thumbpress' ), $allowed_html ) . '</p>
-
-						<p class="notice-discount">' . wp_kses( sprintf( __("Up to <span>%s</span> OFF", 'codesigner'), $percantage ), $allowed_html ) . '</p>
-						
-						<a href="' . esc_url( $url ) . '" class="notice-cta-button" data-id="' . esc_attr( $notice_id ) . '"  target="_blank">
-						' . __( 'Save Now!', 'thumbpress' ) . '
+					<div class="year-end-content">
+						<p class="title">' . __( 'Celebrate Year-End with ThumbPress!', 'thumbpress' ) . '</p>
+						<p class="description">' . __( 'Grab 50% OFF and keep your WordPress media library clean, optimized, and lightning-fast!', 'thumbpress' ) . '</p>
+						<a href="' . esc_url( $url ) . '" class="notice-cta-button" data-id="' . esc_attr( $notice_id ) . '" target="_blank">
+						' . __( 'Save 50% Now', 'thumbpress' ) . '
 						</a>
 					</div>
+				</div>
 			';
 
 			$sale_notice->set_message( $message );
 			$sale_notice->set_screens( array( 'dashboard', 'toplevel_page_thumbpress', 'thumbpress_page_thumbpress-regenerate-thumbnails', 'thumbpress_page_thumbpress-convert-images' ) );
-			$sale_notice->render();	
+			$sale_notice->render();
+
+			add_filter( 'is_year_end_campaign_active', '__return_true' );
 		}
 	}
 
@@ -155,7 +141,7 @@ class Admin extends Base {
 			update_option( 'thumbpress_settings_init', 1 );
 		} else {
 			printf(
-				'<div class="notice notice-warning is-dismissible thumbpress-notice"><p>%s</p></div>',
+				'<div class="notice notice-warning is-dismissible thumbpress-notice" id="thumbpress_settings_init"><p>%s</p></div>',
 				sprintf(
 					/* Translators: %s is the link to the setup wizard */
 					__( 'Congratulations on installing <strong>ThumbPress</strong>!🎉 You\'re just a few steps away from optimizing your images. <a href="%s"><strong>Click here</strong></a> to enable modules and get started! 🚀', 'thumbpress' ),
@@ -220,21 +206,29 @@ class Admin extends Base {
 	 * Enqueue JavaScripts and stylesheets
 	 */
 	public function enqueue_scripts() {
+		$min = defined( 'THUMBPRESS_DEBUG' ) && THUMBPRESS_DEBUG ? '' : '.min';
+
+		wp_enqueue_script( $this->slug . '-thumb-notice', plugins_url( "/assets/js/thumb-notice{$min}.js", THUMBPRESS ), [ 'jquery' ], $this->version, true );
+		$localized2 = array(
+			'ajaxurl'     => admin_url( 'admin-ajax.php' ),
+			'nonce'       => wp_create_nonce( $this->slug ),
+		);
+		wp_localize_script( $this->slug, 'THUMBPRESS', $localized2  );
+
 		$screen        = get_current_screen();
 		$valid_screens = array( 'upload', 'media', 'dashboard' );
 		if ( ! in_array( $screen->id, $valid_screens ) &&
 			! ( isset( $_GET['page'] ) && strpos( $_GET['page'], 'thumbpress' ) !== false ) ) {
 			return;
 		}
-		$min = defined( 'THUMBPRESS_DEBUG' ) && THUMBPRESS_DEBUG ? '' : '.min';
 
-		wp_enqueue_style( $this->slug, plugins_url( '/assets/css/admin.css', THUMBPRESS ), '', time(), 'all' );
-		wp_enqueue_style( $this->slug . 'dashboard', plugins_url( '/assets/css/settings/dashboard.css', THUMBPRESS ), '', time(), 'all' );
-		wp_enqueue_style( $this->slug . 'google-font', 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap' );
-		wp_enqueue_style( $this->slug . 'font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css' );
-		wp_enqueue_script( $this->slug . 'font-awesome-js', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.js', array( 'jquery' ), time(), true );
+		wp_enqueue_style( $this->slug . '-admin', plugins_url( '/assets/css/admin.css', THUMBPRESS ), '', time(), 'all' );
+		wp_enqueue_style( $this->slug . '-dashboard', plugins_url( '/assets/css/settings/dashboard.css', THUMBPRESS ), '', time(), 'all' );
+		wp_enqueue_style( $this->slug . '-google-font', 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap' );
+		wp_enqueue_style( $this->slug . '-font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css' );
+		wp_enqueue_script( $this->slug . '-font-awesome-js', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.js', array( 'jquery' ), time(), true );
 
-		wp_enqueue_script( $this->slug, plugins_url( "/assets/js/admin{$min}.js", THUMBPRESS ), array( 'jquery' ), time(), true );
+		wp_enqueue_script( $this->slug . '-admin', plugins_url( "/assets/js/admin{$min}.js", THUMBPRESS ), array( 'jquery' ), time(), true );
 
 		wp_enqueue_script( 'wp-pointer' );
 		wp_enqueue_style( 'wp-pointer' );
@@ -276,7 +270,7 @@ class Admin extends Base {
 			'convertNow'  => __( 'Convert Now', 'image-sizes' ),
 			'target_url'  => $target_url,
 		);
-		wp_localize_script( $this->slug, 'THUMBPRESS', apply_filters( "{$this->slug}-localized", $localized ) );
+		wp_localize_script( $this->slug . '-admin', 'THUMBPRESS', apply_filters( "{$this->slug}-localized", $localized ) );
 	}
 
 	public function action_links( $links ) {

@@ -7,19 +7,19 @@ namespace Composer\Autoload;
 class ComposerStaticInit00f1c0f4983a5e2ac5cad2776a99c9b8
 {
     public static $prefixLengthsPsr4 = array (
-        'W' => 
+        'W' =>
         array (
             'WebPConvert\\' => 12,
         ),
-        'I' => 
+        'I' =>
         array (
             'ImageMimeTypeGuesser\\' => 21,
         ),
-        'E' => 
+        'E' =>
         array (
             'ExecWithFallback\\' => 17,
         ),
-        'C' => 
+        'C' =>
         array (
             'Codexpert\\ThumbPress\\App\\' => 25,
             'Codexpert\\ThumbPress\\API\\' => 25,
@@ -28,27 +28,27 @@ class ComposerStaticInit00f1c0f4983a5e2ac5cad2776a99c9b8
     );
 
     public static $prefixDirsPsr4 = array (
-        'WebPConvert\\' => 
+        'WebPConvert\\' =>
         array (
             0 => __DIR__ . '/..' . '/rosell-dk/webp-convert/src',
         ),
-        'ImageMimeTypeGuesser\\' => 
+        'ImageMimeTypeGuesser\\' =>
         array (
             0 => __DIR__ . '/..' . '/rosell-dk/image-mime-type-guesser/src',
         ),
-        'ExecWithFallback\\' => 
+        'ExecWithFallback\\' =>
         array (
             0 => __DIR__ . '/..' . '/rosell-dk/exec-with-fallback/src',
         ),
-        'Codexpert\\ThumbPress\\App\\' => 
+        'Codexpert\\ThumbPress\\App\\' =>
         array (
             0 => __DIR__ . '/../..' . '/app',
         ),
-        'Codexpert\\ThumbPress\\API\\' => 
+        'Codexpert\\ThumbPress\\API\\' =>
         array (
             0 => __DIR__ . '/../..' . '/api',
         ),
-        'Codexpert\\ThumbPress\\' => 
+        'Codexpert\\ThumbPress\\' =>
         array (
             0 => __DIR__ . '/../..' . '/classes',
         ),

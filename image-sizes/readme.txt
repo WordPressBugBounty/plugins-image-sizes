@@ -1,10 +1,10 @@
-=== ThumbPress - Disable Thumbnails, Regenerate Thumbnails, Optimize Images, Convert to WebP, Disable Right Click, Compress Images, Image Editor & More ===
+=== ThumbPress - Image Management Suite for Performance and Optimization ===
 Contributors: pluggable, codexpert, thumbpressco, mukto90
 Donate link: https://thumbpress.co/?utm_source=free-plugins&utm_medium=readme&utm_campaign=image-sizes
 Tags: compress images, disable thumbnails, image editor, optimize images, regenerate thumbnails
 Requires at least: 5.0
-Tested up to: 6.8.1
-Stable tag: 5.8.31
+Tested up to: 6.9
+Stable tag: 5.8.37
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -100,7 +100,7 @@ Replace images with newer versions without changing their existing links. It ens
 
 #### 🌟 Image Editor
 
-We always try to upload the finest image to the site after all the editing stuff is done. But, sometimes, the previously uploaded images may require some brush-ups. In such cases, one option is to upload quite new images. The WordPress image editor feature of ThumbPress enables you to edit them right on your WordPress Dashboard. Try our simple and compact image editor tool today and bring perfection to your WordPress images. 
+We always try to upload the finest image to the site after all the editing stuff is done. But, sometimes, the previously uploaded images may require some brush-ups. In such cases, one option is to upload quite new images. The WordPress image editor feature of ThumbPress enables you to edit them right on your WordPress Dashboard. Try our simple and compact image editor tool today and bring perfection to your WordPress images.
 
 
 ### Notes
@@ -133,35 +133,53 @@ We always try to upload the finest image to the site after all the editing stuff
 
 ThumbPress is a comprehensive WordPress image management solution. It offers a wide range of features to optimize, manage, and protect images on a WordPress site.
 
-= Does ThumbPress work with WooCommerce? = 
+= Does ThumbPress work with WooCommerce? =
 
-Yes, absolutely! All features of ThumbPress are fully compatible with WooCommerce. 
+Yes, absolutely! All features of ThumbPress are fully compatible with WooCommerce.
 
-= Is it compatible with WordPress Multisite? = 
+= Is it compatible with WordPress Multisite? =
 
-Yes, ThumbPress is fully compatible with any WordPress Multisite installations. 
+Yes, ThumbPress is fully compatible with any WordPress Multisite installations.
 
-= How does the disable and delete thumbnails feature work? = 
+= How does the disable and delete thumbnails feature work? =
 
-You will find your images displayed on the dashboard. Simply use our drag-and-drop interface to select the images you want to disable or delete from your media library. 
+You will find your images displayed on the dashboard. Simply use our drag-and-drop interface to select the images you want to disable or delete from your media library.
 
-= Is it possible to bulk convert images to a different format with ThumbPress? = 
+= Is it possible to bulk convert images to a different format with ThumbPress? =
 
-Yes, but you can only convert JPG and PNG images into WebP format. 
+Yes, but you can only convert JPG and PNG images into WebP format.
 
-= Can I get back my old thumbnails? = 
+= Can I get back my old thumbnails? =
 
 Of course! From version 3.0 and higher, you can regenerate thumbnails of your existing images. Just go to the Regenerate Thumbnails tab, select the images you want to regenerate, and click on the ‘Regenerate Button’.
 
 = Can I replace an image in the WordPress Media Library without changing its URL? =
 
-Yes, you can. ThumbPress lets you replace images and thumbnails with new versions without updating existing links anytime!  
+Yes, you can. ThumbPress lets you replace images and thumbnails with new versions without updating existing links anytime!
 
 = My question is not answered here. =
 
 Please post on our support forum here https://wordpress.org/support/plugin/image-sizes/
 
 == Changelog ==
+
+= v5.8.37 - 2026-01-13 =
+- [remove] Removed the notice for the Year End sale campaign.
+
+= v5.8.36 - 2025-12-23 =
+- [added] Added a new notice for the Year End sale campaign.
+
+= v5.8.35 - 2025-12-08 =
+- [fix] Fixed regenerate thumbnails, detect unused & large Images not working issue.
+
+= v5.8.34 - 2025-11-25 =
+- [fix] Fixed Free/Pro tab switching (clicks were being ignored)
+
+= v5.8.33 - 2025-11-09 =
+- [added] Added a new notice for the upcoming BFCM campaign.
+
+= v5.8.32 - 2025-10-08 =
+* [imp] Version compatibility tested with 6.8.3
 
 = v5.8.31 - 2025-06-22 =
 * [imp] Version compatibility tested

@@ -2,11 +2,11 @@
 /**
  * Plugin Name:         ThumbPress
  * Plugin URI:          https://thumbpress.co
- * Description:         A complete image and thumbnail management solution for WordPress.
- * Version:             5.8.31
+ * Description:         Image Management Suite for Performance and Optimization
+ * Version:             5.8.37
  * Requires at least:   6.0
  * Requires PHP:        7.0
- * Tested up to:        6.8
+ * Tested up to:        6.9
  * Author:              ThumbPress
  * Author URI:          https://thumbpress.co
  * License:             GPL v2 or later
@@ -136,7 +136,7 @@ final class Plugin {
 		$this->plugin['file']       = THUMBPRESS;
 		$this->plugin['TextDomain'] = 'image-sizes';
 		$this->plugin['Name']       = 'ThumbPress';
-		$this->plugin['Version']    = '5.8.31';
+		$this->plugin['Version']    = '5.8.37';
 		$this->plugin['server']     = apply_filters( 'image-sizes_server', 'https://my.pluggable.io' );
 		$this->plugin['icon']       = THUMBPRESS_ASSET . '/img/icon.png';
 		$this->plugin['depends']    = array();
@@ -181,7 +181,7 @@ final class Plugin {
 			$admin->filter( 'plugin_row_meta', 'plugin_row_meta', 10, 2 );
 			$admin->action( 'admin_footer_text', 'footer_text' );
 			// $admin->action( 'cx-settings-after_wrapper', 'show_easycommerce_promo' );
-			$admin->action( 'init', 'thumbpress_sale_notice', 9 );
+			// $admin->action( 'init', 'thumbpress_sale_notice', 9 );
 
 			/**
 			 * Settings related hooks
@@ -254,6 +254,7 @@ final class Plugin {
 		// $ajax->priv( 'image_sizes-pointer-dismiss', 'dismiss_pointer' );
 		$ajax->priv( 'image_sizes-dismiss', 'image_sizes_dismiss' );
 		$ajax->all( 'image-sizes_dismiss_notice', 'image_sizes_dismiss_notice_callback' );
+		$ajax->priv( 'thumbpress_init_notice_dismiss', 'thumbpress_init_notice_handler' );
 	}
 
 	/**

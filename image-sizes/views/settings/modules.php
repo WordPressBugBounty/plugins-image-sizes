@@ -90,7 +90,7 @@ $active_modules = get_option( 'thumbpress_modules', [] );
             <?php _e( 'Make a smart choice today; a <strong>small investment</strong> can lead to a <strong>big boost</strong> in your website performance. Unlock All Premium Features.', 'image-sizes' ); ?>
         </p>
         <p>
-            <a id="thumb-pro-popup-btn" href="<?php echo esc_url( 'https://thumbpress.co/' ); ?>" target="_blank">
+            <a id="thumb-pro-popup-btn" href="<?php echo esc_url( 'https://thumbpress.co/pricing/?utm_source=inplugin&utm_medium=button&utm_campaign=year-end' ); ?>" target="_blank">
                 <span class="dashicons dashicons-unlock"></span>
                 <?php _e( 'Unlock Premium Features', 'image-sizes' ); ?>
             </a>

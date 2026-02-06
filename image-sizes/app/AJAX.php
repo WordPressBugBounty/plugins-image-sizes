@@ -144,4 +144,11 @@ class Ajax extends Base {
 		$response['url']     = $url;
 		wp_send_json( $response );
 	}
+
+	public function thumbpress_init_notice_handler() {
+		// Update the option in the database
+		update_option( 'thumbpress_settings_init', 1 );
+
+		wp_send_json_success( 'Option updated successfully' );
+	}
 }

@@ -1649,9 +1649,6 @@ input:checked + .thumb-toggle-slider:before {
         gap: 0px;
         width: 97%;
     }
-    .notice.notice-info.is-dismissible {
-        display: none;
-    }
 }
 
 /* EasyCommerce Promo */
@@ -1677,136 +1674,41 @@ input:checked + .thumb-toggle-slider:before {
     right: 20px;
 }
 
-
-/* Spring Day Sale Notice */
-.wp-core-ui .notice.is-dismissible {
-	padding: unset !important;
-	border: unset !important;
+/* Year End deals notice */
+[data-notice-id="thumbpress-year-end-dec-7_campaign"] {
+  border-left-color: #075bfe !important;
 }
 
-.thumbpress-spring-deals-notice-content {
-	background: linear-gradient(90deg, #FFF4DB 0%, #FFF0E6 49%, #FFF4DB 100%);
-	border: none;
+.thumbpress-year-end-deals-notice {
 	display: flex;
-	align-items: center;
-	justify-content: space-around;
-    height: 60px;
+	gap: 30px;
+	padding: 10px;
 }
 
-.thumbpress-spring-deals-notice-content .notice-title {
-	font-family: 'Inria';
-	font-weight: 400;
-	font-size: 24px;
-	line-height: 100%;
-	text-align: center;
-	color: #420042;
+.thumbpress-year-end-deals-notice .year-end-content .title {
+	color: #3c434a;
+	font-size: 20px;
+	font-weight: 600;
+	margin: 0;
 }
 
-.thumbpress-spring-deals-notice-content .notice-subtitle {
-	font-family: 'Inter';
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 30px;
-    color: #411900;
+.thumbpress-year-end-deals-notice .year-end-content .description {
+	color: #3c434a;
+	font-size: 14px;
+	margin: 0;
 }
 
-.thumbpress-spring-deals-notice-content .notice-subtitle span {
-    color: #FF1D43;
+.thumbpress-year-end-deals-notice .year-end-content a {
+	display: inline-block;
+	color: #2271b1;
+	font-size: 14px;
+	padding: 8px 16px;
+	text-decoration: none;
+	border: 1px solid #2271b1;
+	border-radius: 4px;	
+	margin-top: 12px;
 }
 
-.thumbpress-spring-deals-notice-content .notice-discount {
-	color: #705442;
-	font-size: 16px;
-	line-height: 100%;
-	font-weight: 500;
-	font-family: 'Roboto';
-}
-
-.thumbpress-spring-deals-notice-content .notice-discount span {
-	color: #FF5A44;
-    font-size: 40px;
-    line-height: 100%;
-    font-weight: 400;
-    font-family: 'Sonsie One';
-    vertical-align: middle;
-}
-
-.thumbpress-spring-deals-notice-content .notice-cta-button {
-	background: #FF873A;
-    padding: 10px 22px;
-    border-radius: 100px;
-    box-shadow: 0px 5px 0px 0px #C7682B;
-    color: #000000;
-    text-decoration: none;
-    font-family: 'Inter';
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 100%;
-	margin-right: 240px;
-}
-
-
-.thumbpress-spring-deals-notice-content .tp-timer-wrapper {
-    display: none;
-    gap: 70px;
-}
-
-.thumbpress-spring-deals-notice-content .tp-timer-wrapper .tp-timer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-.thumbpress-spring-deals-notice-content .tp-timer-wrapper .tp-count {
-	width: 50px;
-    height: 50px;
-	background-color: #fff;
-	border-radius: 5px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	position: relative;
-}
-
-.thumbpress-spring-deals-notice-content .tp-timer-wrapper .tp-count::before {
-	content: '';
-	position: absolute;
-	inset: 0;
-	padding: 1px;
-	border-radius: 5px;
-	/* background: linear-gradient(180deg, #FFCEAE 0%, rgba(255, 255, 255, 0) 100%); */
-	-webkit-mask:
-		linear-gradient(#fff 0 0) content-box, 
-		linear-gradient(#fff 0 0);
-	-webkit-mask-composite: xor;
-	mask-composite: exclude;
-	pointer-events: none;
-}
-
-.thumbpress-spring-deals-notice-content .tp-timer-wrapper .tp-count span {
-    color: #FF2F63;
-    font-family: 'Roboto';
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 100%;
-    text-align: center;
-}
-
-.thumbpress-spring-deals-notice-content .tp-timer-wrapper .tp-count label {
-    font-family: 'Roboto';
-    font-weight: 400;
-    font-size: 10px;
-    line-height: 100%;
-    text-align: center;
-    color: #2F2D2D;
-    margin-top: 3px;
-}
-
-.notice[data-notice-id="thumbpress-mothers_day_campaign"] {
-    padding: 0;
-    height: 100%;
-    padding-right: 0 !important;
-    border: none;
+.thumbpress-year-end-deals-notice .year-end-content a:hover {
+	text-decoration: underline;
 }
