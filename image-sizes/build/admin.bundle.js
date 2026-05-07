@@ -7708,7 +7708,13 @@ var Hero = function Hero() {
     "stroke-linecap": "round",
     "stroke-linejoin": "round"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "text-white text-base"
+    onClick: function onClick() {
+      var _document$getElementB2;
+      return (_document$getElementB2 = document.getElementById('thumbpress-pro-pricing')) === null || _document$getElementB2 === void 0 ? void 0 : _document$getElementB2.scrollIntoView({
+        behavior: 'smooth'
+      });
+    },
+    className: "text-white text-base cursor-pointer"
   }, "Price starts from $5/month."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "flex-shrink-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
@@ -7888,23 +7894,23 @@ function _extends() { return _extends = Object.assign ? Object.assign.bind() : f
 
 var Testimonials = function Testimonials() {
   var reviewsData = [{
+    name: '@pressnine',
+    rating: 5,
+    comment: "This saved me money when I realised I was about to exceed my host’s image allowance, enabling me to wipe out excess duplicate images.",
+    avatar: 'https://secure.gravatar.com/avatar/fd1d58ce44ef22dd5be33ba7dff3235101a6ab0102776b77dda7ccbd30c23405?s=100&d=retro&r=g',
+    link: 'https://wordpress.org/support/topic/works-great-9314/'
+  }, {
     name: '@tobthijm',
     rating: 5,
     comment: 'At the moment I’m using it to resize my pictures, I see a lot of things to use in the future to keep the site smaller then it was. So far it’s working fine and the one question I had was answered right away!! Keep up the good work!!!',
-    avatar: 'https://secure.gravatar.com/avatar/7fbc730989a7f760da00ef7de457bd4e6c4345b13bfbc286e1897a8038fdc26c?s=100&d=retro&r=g',
+    avatar: 'https://secure.gravatar.com/avatar/066a486c032beb08340a5c24501e74476d026e4d0de735fd5765a8c0f7fbf1e5?s=100&d=retro&r=g',
     link: 'https://wordpress.org/support/topic/very-nice-plugin-1063/'
   }, {
     name: '@raygulick',
     rating: 5,
     comment: "This plugin is extremely useful, and a must for sites with a lot of images. I had a problem with activation of the Pro version, and the support team resolved the issue quickly and without fuss.",
-    avatar: 'https://secure.gravatar.com/avatar/6955650dfc2336dd1f5601c9089ff5bc39b5d5c20f848724cce25ffdf64aee8b?s=100&d=retro&r=g',
+    avatar: 'https://secure.gravatar.com/avatar/327da942e9592e59753230ebbfaba1becc14e08c65b5b383e5c3de4d78168be4?s=100&d=retro&r=g',
     link: 'https://wordpress.org/support/topic/great-features-helpful-support/'
-  }, {
-    name: '@pressnine',
-    rating: 5,
-    comment: "This saved me money when I realised I was about to exceed my host’s image allowance, enabling me to wipe out excess duplicate images.",
-    avatar: 'https://secure.gravatar.com/avatar/8950bef34dbf36f49f0304d428f70536f0ef00f78ec71e60112288f543c4d44c?s=100&d=retro&r=g',
-    link: 'https://wordpress.org/support/topic/works-great-9314/'
   }];
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "px-[80px] py-16"
@@ -8067,13 +8073,21 @@ var ReviewCard = function ReviewCard(review) {
     className: "text-base text-thumbpress-body mt-2.5"
   }, review.comment)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "flex items-center gap-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+    href: review.link,
+    target: "_blank",
+    rel: "noreferrer"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
     src: review.avatar,
     alt: "reviewer",
     className: "rounded-full w-[60px] h-[60px] object-cover"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+    href: review.link,
+    target: "_blank",
+    rel: "noreferrer"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "mb-1 block text-base text-thumbpress-body font-medium"
-  }, review.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+  }, review.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
     href: review.link,
     target: "_blank",
     rel: "noreferrer",
@@ -9627,9 +9641,7 @@ var ProAlert = function ProAlert(_ref) {
   }, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
     className: "text-[#F2EFEF] text-base mb-6"
   }, description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-    href: "https://thumbpress.co/pricing/",
-    target: "_blank",
-    rel: "noopener noreferrer",
+    href: "#/pro",
     className: "inline-flex items-center gap-2 bg-thumbpress-pro-yellow hover:bg-yellow-500 !text-thumbpress-title text-base font-medium px-6 py-3 rounded-lg transition-colors no-underline duration-300"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
     width: "18",

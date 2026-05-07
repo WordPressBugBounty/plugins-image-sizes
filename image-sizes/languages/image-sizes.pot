@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-05-06T04:06:23+00:00\n"
+"POT-Creation-Date: 2026-05-07T05:05:58+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.13.0-alpha-3eb2dd7\n"
 "X-Domain: image-sizes\n"
@@ -18,11 +18,8 @@ msgstr ""
 #. Author of the plugin
 #: image-sizes.php:5
 #: image-sizes.php:11
-#: app/Controllers/Admin/Menu.php:55
-#: app/Controllers/Admin/Menu.php:56
-#: legacy/app/Settings.php:43
-#: legacy/app/Settings.php:44
-#: legacy/app/Settings.php:45
+#: app/Controllers/Admin/Menu.php:59
+#: app/Controllers/Admin/Menu.php:60
 #: views/settings/layout.php:20
 msgid "ThumbPress"
 msgstr ""
@@ -39,106 +36,98 @@ msgstr ""
 msgid "Image Management Suite for Performance and Optimization"
 msgstr ""
 
-#: app/API/Convert_Avif.php:16
+#: app/API/Convert_Avif.php:18
 msgid "AVIF conversion requires PHP 8.0 or higher."
 msgstr ""
 
-#: app/API/Convert_Avif.php:22
-#: app/API/Convert_Webp.php:273
+#: app/API/Convert_Avif.php:24
+#: app/API/Convert_Webp.php:303
 msgid "Invalid image ID."
 msgstr ""
 
-#: app/API/Convert_Avif.php:28
-#: app/API/Convert_Avif.php:36
-#: app/API/Convert_Webp.php:279
-#: app/API/Convert_Webp.php:287
+#: app/API/Convert_Avif.php:30
+#: app/API/Convert_Avif.php:38
+#: app/API/Convert_Webp.php:309
+#: app/API/Convert_Webp.php:317
 msgid "Source image file not found."
 msgstr ""
 
-#: app/API/Convert_Avif.php:58
+#: app/API/Convert_Avif.php:60
 msgid "Failed to convert image to AVIF."
 msgstr ""
 
-#: app/API/Convert_Avif.php:111
+#: app/API/Convert_Avif.php:121
 msgid "Image converted to AVIF successfully."
 msgstr ""
 
-#: app/API/Convert_Webp.php:45
-#: app/API/Convert_Webp.php:204
+#: app/API/Convert_Webp.php:48
+#: app/API/Convert_Webp.php:223
 msgid "No file formats selected."
 msgstr ""
 
-#: app/API/Convert_Webp.php:51
-#: app/API/Convert_Webp.php:209
+#: app/API/Convert_Webp.php:54
+#: app/API/Convert_Webp.php:228
 msgid "No valid file formats selected."
 msgstr ""
 
-#: app/API/Convert_Webp.php:82
-#: app/API/Convert_Webp.php:229
-#: app/API/Regenerate.php:32
-#: app/API/Regenerate.php:95
-#: legacy/modules/convert-images/convert-images.php:165
-#: legacy/modules/convert-images/convert-images.php:387
-#: legacy/modules/regenerate-thumbnails/regenerate-thumbnails.php:83
-#: legacy/modules/regenerate-thumbnails/regenerate-thumbnails.php:187
+#: app/API/Convert_Webp.php:89
+#: app/API/Convert_Webp.php:248
+#: app/API/Regenerate.php:41
+#: app/API/Regenerate.php:113
 msgid "No images found."
 msgstr ""
 
-#: app/API/Convert_Webp.php:181
-#: legacy/modules/convert-images/convert-images.php:436
+#: app/API/Convert_Webp.php:195
 msgid "Converting Images to WebP..."
 msgstr ""
 
-#: app/API/Convert_Webp.php:183
-#: legacy/modules/convert-images/convert-images.php:439
+#: app/API/Convert_Webp.php:197
 msgid "Congratulations, Converting Images to WebP is Completed!"
 msgstr ""
 
-#: app/API/Convert_Webp.php:238
-#: app/API/Regenerate.php:104
+#: app/API/Convert_Webp.php:264
+#: app/API/Regenerate.php:122
 msgid "Failed to schedule action."
 msgstr ""
 
-#: app/API/Convert_Webp.php:242
+#: app/API/Convert_Webp.php:269
 msgid "Your images are being converted in the background."
 msgstr ""
 
-#: app/API/Convert_Webp.php:325
+#: app/API/Convert_Webp.php:355
 msgid "Failed to convert image."
 msgstr ""
 
-#: app/API/Convert_Webp.php:360
+#: app/API/Convert_Webp.php:398
 msgid "Image converted successfully."
 msgstr ""
 
-#: app/API/Regenerate.php:59
-#: legacy/modules/regenerate-thumbnails/regenerate-thumbnails.php:139
+#: app/API/Regenerate.php:74
 msgid "Regenerating Thumbnails..."
 msgstr ""
 
-#: app/API/Regenerate.php:61
-#: legacy/modules/regenerate-thumbnails/regenerate-thumbnails.php:142
+#: app/API/Regenerate.php:76
 msgid "Congratulations, Thumbnail Regeneration is Completed!"
 msgstr ""
 
-#: app/API/Regenerate.php:108
+#: app/API/Regenerate.php:127
 msgid "Your images are being regenerated in the background."
 msgstr ""
 
-#: app/API/Regenerate.php:120
+#: app/API/Regenerate.php:140
 msgid "Invalid attachment."
 msgstr ""
 
-#: app/API/Regenerate.php:129
+#: app/API/Regenerate.php:149
 msgid "Image file not found."
 msgstr ""
 
-#: app/API/Regenerate.php:133
+#: app/API/Regenerate.php:157
 msgid "Thumbnails regenerated successfully."
 msgstr ""
 
-#: app/API/Settings.php:184
-#: app/API/Social_Share.php:47
+#: app/API/Settings.php:187
+#: app/API/Social_Share.php:50
 msgid "Settings saved successfully."
 msgstr ""
 
@@ -168,13 +157,13 @@ msgstr ""
 
 #. translators: 1: installed pro version, 2: required pro version
 #: app/Bootstrap/AdminNotice.php:72
-#: app/Controllers/Admin/Init.php:104
+#: app/Controllers/Admin/Init.php:105
 #, php-format
 msgid "ThumbPress requires ThumbPress Pro version %2$s or higher. You have version %1$s. Please update to use all new features."
 msgstr ""
 
 #: app/Bootstrap/AdminNotice.php:79
-#: app/Controllers/Admin/Init.php:111
+#: app/Controllers/Admin/Init.php:113
 msgid "Update ThumbPress Pro Now"
 msgstr ""
 
@@ -218,81 +207,67 @@ msgstr ""
 msgid "Go to Dashboard"
 msgstr ""
 
-#: app/Controllers/Admin/Menu.php:67
-#: app/Controllers/Admin/Menu.php:126
+#: app/Controllers/Admin/Menu.php:72
+#: app/Controllers/Admin/Menu.php:165
 msgid "Dashboard"
 msgstr ""
 
-#: app/Controllers/Admin/Menu.php:68
-#: app/Controllers/Admin/Menu.php:127
+#: app/Controllers/Admin/Menu.php:76
+#: app/Controllers/Admin/Menu.php:170
 msgid "Thumbnails"
 msgstr ""
 
-#: app/Controllers/Admin/Menu.php:69
-#: app/Controllers/Admin/Menu.php:128
+#: app/Controllers/Admin/Menu.php:80
+#: app/Controllers/Admin/Menu.php:175
 msgid "Unused Images"
 msgstr ""
 
-#: app/Controllers/Admin/Menu.php:70
-#: app/Controllers/Admin/Menu.php:129
+#: app/Controllers/Admin/Menu.php:84
+#: app/Controllers/Admin/Menu.php:181
 msgid "Duplicate Images"
 msgstr ""
 
-#: app/Controllers/Admin/Menu.php:71
-#: app/Controllers/Admin/Menu.php:130
+#: app/Controllers/Admin/Menu.php:88
+#: app/Controllers/Admin/Menu.php:187
 msgid "Large Images"
 msgstr ""
 
-#: app/Controllers/Admin/Menu.php:72
-#: app/Controllers/Admin/Menu.php:131
-#: legacy/inc/functions.php:53
-#: legacy/views/settings/dashboad.php:41
-#: legacy/views/settings/upgrade-pro.php:67
-#: legacy/views/settings/upgrade-pro.php:166
+#: app/Controllers/Admin/Menu.php:92
+#: app/Controllers/Admin/Menu.php:193
 msgid "Compress Images"
 msgstr ""
 
-#: app/Controllers/Admin/Menu.php:73
-#: app/Controllers/Admin/Menu.php:132
-#: app/Controllers/Common/Convert_Webp.php:122
-#: app/Controllers/Common/Convert_Webp.php:126
-#: legacy/modules/convert-images/convert-images.php:44
-#: legacy/modules/convert-images/convert-images.php:72
-#: legacy/modules/convert-images/convert-images.php:73
-#: legacy/modules/convert-images/convert-images.php:74
-#: legacy/modules/convert-images/convert-images.php:78
-#: legacy/modules/convert-images/convert-images.php:125
+#: app/Controllers/Admin/Menu.php:96
+#: app/Controllers/Admin/Menu.php:199
+#: app/Controllers/Common/Convert_Webp.php:131
+#: app/Controllers/Common/Convert_Webp.php:135
 msgid "Convert to WebP"
 msgstr ""
 
-#: app/Controllers/Admin/Menu.php:74
-#: app/Controllers/Admin/Menu.php:133
-#: app/Controllers/Common/Convert_Avif.php:119
-#: app/Controllers/Common/Convert_Avif.php:132
-#: app/Controllers/Common/Convert_Avif.php:136
+#: app/Controllers/Admin/Menu.php:100
+#: app/Controllers/Admin/Menu.php:204
+#: app/Controllers/Common/Convert_Avif.php:122
+#: app/Controllers/Common/Convert_Avif.php:135
+#: app/Controllers/Common/Convert_Avif.php:139
 msgid "Convert to AVIF"
 msgstr ""
 
-#: app/Controllers/Admin/Menu.php:75
-#: app/Controllers/Admin/Menu.php:134
+#: app/Controllers/Admin/Menu.php:104
+#: app/Controllers/Admin/Menu.php:210
 msgid "Trashed Files"
 msgstr ""
 
-#: app/Controllers/Admin/Menu.php:76
-#: app/Controllers/Admin/Menu.php:135
-#: legacy/app/Admin.php:279
+#: app/Controllers/Admin/Menu.php:108
+#: app/Controllers/Admin/Menu.php:216
 msgid "Settings"
 msgstr ""
 
-#: app/Controllers/Admin/Menu.php:77
-#: app/Controllers/Admin/Menu.php:136
-#: legacy/views/settings/dashboad.php:99
-#: legacy/views/settings/modules.php:16
-#: legacy/views/settings/upgrade-pro.php:135
+#: app/Controllers/Admin/Menu.php:112
+#: app/Controllers/Admin/Menu.php:221
 msgid "Pro"
 msgstr ""
 
-#: app/Controllers/Admin/Menu.php:110
+#: app/Controllers/Admin/Menu.php:147
 msgid "Loading.."
 msgstr ""
 
@@ -340,19 +315,15 @@ msgstr ""
 
 #. translators: %1$s: maximum allowed image width in pixels, %2$s: maximum allowed image height in pixels
 #: app/Controllers/Common/Image_Max_Size.php:52
-#: legacy/modules/image-max-size/image-max-size.php:79
 #, php-format
 msgid "[ ThumbPress Alert ] Image exceeds the maximum allowed resolution of %1$sx%2$s pixels."
 msgstr ""
 
 #: app/Controllers/Common/Social_Share.php:41
-#: legacy/modules/social-share/social-share.php:30
-#: legacy/modules/social-share/social-share.php:73
 msgid "Social Share Image"
 msgstr ""
 
 #: app/Controllers/Common/Social_Share.php:69
-#: legacy/modules/social-share/social-share.php:100
 msgid "Facebook Image:"
 msgstr ""
 
@@ -360,10 +331,6 @@ msgstr ""
 #: app/Controllers/Common/Social_Share.php:82
 #: app/Controllers/Common/Social_Share.php:93
 #: app/Controllers/Common/Social_Share.php:104
-#: legacy/modules/social-share/social-share.php:102
-#: legacy/modules/social-share/social-share.php:112
-#: legacy/modules/social-share/social-share.php:122
-#: legacy/modules/social-share/social-share.php:132
 msgid "Upload Image"
 msgstr ""
 
@@ -375,29 +342,19 @@ msgid "Remove Image"
 msgstr ""
 
 #: app/Controllers/Common/Social_Share.php:80
-#: legacy/modules/social-share/social-share.php:110
 msgid "LinkedIn Image:"
 msgstr ""
 
 #: app/Controllers/Common/Social_Share.php:91
-#: legacy/modules/social-share/social-share.php:120
 msgid "Twitter Image:"
 msgstr ""
 
 #: app/Controllers/Common/Social_Share.php:102
-#: legacy/modules/social-share/social-share.php:130
 msgid "Pinterest Image:"
 msgstr ""
 
-#: app/Controllers/Common/Thumbnails.php:45
-#: app/Controllers/Common/Thumbnails.php:49
-#: legacy/inc/functions.php:21
-#: legacy/modules/regenerate-thumbnails/regenerate-thumbnails.php:37
-#: legacy/modules/regenerate-thumbnails/regenerate-thumbnails.php:38
-#: legacy/modules/regenerate-thumbnails/regenerate-thumbnails.php:39
-#: legacy/modules/regenerate-thumbnails/regenerate-thumbnails.php:43
-#: legacy/views/settings/dashboad.php:15
-#: legacy/views/settings/upgrade-pro.php:146
+#: app/Controllers/Common/Thumbnails.php:52
+#: app/Controllers/Common/Thumbnails.php:56
 msgid "Regenerate Thumbnails"
 msgstr ""
 
@@ -499,823 +456,6 @@ msgstr ""
 #: app/Helpers/Utility.php:145
 #, php-format
 msgid "- Choose a %s -"
-msgstr ""
-
-#: legacy/app/Admin.php:250
-#: legacy/modules/regenerate-thumbnails/views/settings.php:67
-msgid "Regenerate Now"
-msgstr ""
-
-#: legacy/app/Admin.php:251
-msgid "Regenerating.."
-msgstr ""
-
-#: legacy/app/Admin.php:252
-msgid "Detect"
-msgstr ""
-
-#: legacy/app/Admin.php:253
-msgid "Detecting"
-msgstr ""
-
-#: legacy/app/Admin.php:254
-msgid "Detect Now"
-msgstr ""
-
-#: legacy/app/Admin.php:255
-msgid "Detected"
-msgstr ""
-
-#: legacy/app/Admin.php:256
-msgid "Analyze"
-msgstr ""
-
-#: legacy/app/Admin.php:257
-msgid "Analyzing.."
-msgstr ""
-
-#: legacy/app/Admin.php:258
-msgid "Analyzed"
-msgstr ""
-
-#: legacy/app/Admin.php:259
-msgid "Compress"
-msgstr ""
-
-#: legacy/app/Admin.php:260
-msgid "Compress Now"
-msgstr ""
-
-#: legacy/app/Admin.php:261
-msgid "Compressing.."
-msgstr ""
-
-#: legacy/app/Admin.php:262
-msgid "Are you sure you want to delete this? The data and its associated files will be completely erased. This action cannot be undone!"
-msgstr ""
-
-#: legacy/app/Admin.php:263
-msgid "Are you sure you want to delete these? The data and their associated files will be completely erased. This action cannot be undone!"
-msgstr ""
-
-#: legacy/app/Admin.php:269
-msgid "Converting"
-msgstr ""
-
-#: legacy/app/Admin.php:270
-#: legacy/modules/convert-images/views/settings.php:58
-msgid "Convert Now"
-msgstr ""
-
-#: legacy/app/Admin.php:280
-msgid "Support"
-msgstr ""
-
-#: legacy/app/Admin.php:281
-msgid "Docs"
-msgstr ""
-
-#: legacy/app/Admin.php:289
-msgid "Help"
-msgstr ""
-
-#. translators: %1$s is the plugin name, %2$s is the link to leave a review, %3$s is the rating stars
-#: legacy/app/Admin.php:301
-#, php-format
-msgid "If you like <strong>%1$s</strong>, please <a href=\"%2$s\" target=\"_blank\">leave us a %3$s rating</a> on WordPress.org! It'd motivate and inspire us to make the plugin even better!"
-msgstr ""
-
-#: legacy/app/AJAX.php:46
-#: legacy/app/AJAX.php:134
-msgid "Unauthorized!"
-msgstr ""
-
-#: legacy/app/AJAX.php:61
-msgid "Notice Removed"
-msgstr ""
-
-#: legacy/app/AJAX.php:143
-msgid "Notice Removed!"
-msgstr ""
-
-#: legacy/app/Settings.php:51
-#: legacy/app/Settings.php:166
-#: legacy/app/Settings.php:167
-msgid "Modules"
-msgstr ""
-
-#: legacy/app/Settings.php:140
-#: legacy/app/Settings.php:141
-#: legacy/app/Settings.php:142
-msgid "Upgrade to Pro (Up to 60% Off)"
-msgstr ""
-
-#: legacy/app/Settings.php:147
-msgid "Tools"
-msgstr ""
-
-#: legacy/classes/Helper.php:105
-msgid "Template not found!"
-msgstr ""
-
-#: legacy/inc/functions.php:13
-#: legacy/modules/disable-thumbnails/disable-thumbnails.php:30
-#: legacy/views/settings/dashboad.php:9
-#: legacy/views/settings/upgrade-pro.php:141
-msgid "Disable Thumbnails"
-msgstr ""
-
-#: legacy/inc/functions.php:14
-msgid "Delete and disable unnecessary thumbnails for all uploaded images in a flash."
-msgstr ""
-
-#: legacy/inc/functions.php:22
-msgid "Regenerate previously deleted thumbnails anytime, no matter the size."
-msgstr ""
-
-#: legacy/inc/functions.php:29
-#: legacy/views/settings/dashboad.php:21
-#: legacy/views/settings/upgrade-pro.php:79
-#: legacy/views/settings/upgrade-pro.php:151
-msgid "Detect Unused Images"
-msgstr ""
-
-#: legacy/inc/functions.php:30
-#: legacy/views/settings/dashboad.php:22
-msgid "Find unused images & delete them from your website anytime with just one click."
-msgstr ""
-
-#: legacy/inc/functions.php:37
-#: legacy/modules/image-max-size/image-max-size.php:25
-#: legacy/views/settings/dashboad.php:28
-#: legacy/views/settings/upgrade-pro.php:156
-msgid "Image Upload Limit"
-msgstr ""
-
-#: legacy/inc/functions.php:38
-msgid "Set a limit for maximum image upload size and resolution to speed up your website."
-msgstr ""
-
-#: legacy/inc/functions.php:45
-#: legacy/views/settings/dashboad.php:34
-#: legacy/views/settings/upgrade-pro.php:85
-#: legacy/views/settings/upgrade-pro.php:161
-msgid "Detect Large Images"
-msgstr ""
-
-#: legacy/inc/functions.php:46
-msgid "Identify and compress or delete large images to free up your website server space."
-msgstr ""
-
-#: legacy/inc/functions.php:54
-msgid "Compress your images to reduce image size, save server space, and boost page speed."
-msgstr ""
-
-#: legacy/inc/functions.php:61
-#: legacy/views/settings/dashboad.php:48
-#: legacy/views/settings/upgrade-pro.php:171
-msgid "Disable Right Click on Image"
-msgstr ""
-
-#: legacy/inc/functions.php:62
-msgid "Prevent visitors from downloading your images by turning off the right-click option on your website."
-msgstr ""
-
-#: legacy/inc/functions.php:70
-#: legacy/views/settings/dashboad.php:55
-msgid "Upload new versions of images and replace the old ones without any issues."
-msgstr ""
-
-#: legacy/inc/functions.php:77
-#: legacy/views/settings/dashboad.php:68
-#: legacy/views/settings/upgrade-pro.php:181
-msgid "Social Media Thumbnails"
-msgstr ""
-
-#: legacy/inc/functions.php:78
-msgid "Enjoy the freedom of setting separate thumbnails for different social media channels."
-msgstr ""
-
-#: legacy/inc/functions.php:85
-#: legacy/views/settings/dashboad.php:61
-#: legacy/views/settings/upgrade-pro.php:186
-msgid "Image Editor"
-msgstr ""
-
-#: legacy/inc/functions.php:86
-msgid "Enhance images with filters and adjustments to showcase their best versions."
-msgstr ""
-
-#: legacy/inc/functions.php:93
-msgid "Convert Images to WebP"
-msgstr ""
-
-#: legacy/inc/functions.php:94
-msgid "Convert images to WebP format to retain image quality without needing to compress."
-msgstr ""
-
-#: legacy/inc/functions.php:273
-msgid "Grab Now"
-msgstr ""
-
-#: legacy/modules/convert-images/convert-images.php:50
-msgid "Convert Image on Upload"
-msgstr ""
-
-#: legacy/modules/convert-images/convert-images.php:51
-msgid "Enable this if you want to convert your image to webp on upload."
-msgstr ""
-
-#: legacy/modules/convert-images/convert-images.php:57
-msgid "Single Image Conversion"
-msgstr ""
-
-#: legacy/modules/convert-images/convert-images.php:58
-msgid "Enable this if you want to convert your image to webp one by one."
-msgstr ""
-
-#: legacy/modules/convert-images/convert-images.php:122
-msgid "Convert Image"
-msgstr ""
-
-#: legacy/modules/convert-images/convert-images.php:136
-#: legacy/modules/convert-images/convert-images.php:264
-#: legacy/modules/convert-images/convert-images.php:349
-#: legacy/modules/regenerate-thumbnails/regenerate-thumbnails.php:60
-#: legacy/modules/regenerate-thumbnails/regenerate-thumbnails.php:159
-msgid "Failed"
-msgstr ""
-
-#: legacy/modules/convert-images/convert-images.php:140
-#: legacy/modules/convert-images/convert-images.php:268
-#: legacy/modules/convert-images/convert-images.php:353
-#: legacy/modules/regenerate-thumbnails/regenerate-thumbnails.php:64
-#: legacy/modules/regenerate-thumbnails/regenerate-thumbnails.php:163
-msgid "Unauthorized"
-msgstr ""
-
-#: legacy/modules/convert-images/convert-images.php:176
-msgid "Failed to schedule image conversion"
-msgstr ""
-
-#: legacy/modules/convert-images/convert-images.php:181
-msgid "Your images are being converted. Please wait..."
-msgstr ""
-
-#: legacy/modules/convert-images/convert-images.php:308
-msgid "Failed to convert image"
-msgstr ""
-
-#: legacy/modules/convert-images/convert-images.php:318
-msgid "Failed to update attachment metadata"
-msgstr ""
-
-#: legacy/modules/convert-images/convert-images.php:340
-msgid "Success"
-msgstr ""
-
-#: legacy/modules/convert-images/views/settings.php:30
-msgid "Converting Images to WebP in Background"
-msgstr ""
-
-#. Translators: %s is the time when the image conversion to WebP was completed.
-#: legacy/modules/convert-images/views/settings.php:34
-#, php-format
-msgid "Converting Images to WebP in background was completed %s"
-msgstr ""
-
-#: legacy/modules/convert-images/views/settings.php:37
-msgid "Converting Images to WebP in Background Failed."
-msgstr ""
-
-#: legacy/modules/convert-images/views/settings.php:49
-msgid "Convert to WebP is a highly server-dependent feature and the converting process may timeout if you process a large number of images. You may need to work on your server side to solve the issues if you face any when using this feature. Also keep in mind that once you convert your images to WebP, you can never undo it."
-msgstr ""
-
-#: legacy/modules/convert-images/views/settings.php:53
-#: legacy/modules/regenerate-thumbnails/views/settings.php:62
-msgid "Number of images to process per request:"
-msgstr ""
-
-#: legacy/modules/convert-images/views/settings.php:55
-#: legacy/modules/regenerate-thumbnails/views/settings.php:64
-msgid "Images/request. Default is 50"
-msgstr ""
-
-#: legacy/modules/convert-images/views/settings.php:61
-msgid "Convert in Background"
-msgstr ""
-
-#. Translators: %s is the number of images that have been processed.
-#. Translators: %s is the number of images processed, wrapped in a span element.
-#: legacy/modules/convert-images/views/settings.php:78
-#: legacy/modules/regenerate-thumbnails/views/settings.php:99
-#, php-format
-msgid "Processed %s images"
-msgstr ""
-
-#. Translators: %s is the number of images that have been converted.
-#: legacy/modules/convert-images/views/settings.php:85
-#, php-format
-msgid "Converted %s images."
-msgstr ""
-
-#: legacy/modules/convert-images/views/settings.php:93
-#: legacy/modules/regenerate-thumbnails/views/settings.php:123
-msgid "Please click the button to start detecting images."
-msgstr ""
-
-#: legacy/modules/convert-images/views/settings.php:99
-msgid "You have no images to convert, please upload new images."
-msgstr ""
-
-#: legacy/modules/convert-images/views/settings.php:105
-#: legacy/modules/regenerate-thumbnails/views/settings.php:135
-msgid "Something went wrong!"
-msgstr ""
-
-#: legacy/modules/convert-images/views/settings.php:108
-#: legacy/modules/regenerate-thumbnails/views/settings.php:138
-msgid "Your background action failed. Please try again."
-msgstr ""
-
-#. Translators: %1$d refers to the number of thumbnails currently registered.
-#: legacy/modules/disable-thumbnails/views/settings.php:22
-#, php-format
-msgid "You currently have <strong>%1$d thumbnails</strong> registered. It means, if you upload an image, it'll generate %1$d duplicates along with the original image."
-msgstr ""
-
-#: legacy/modules/disable-thumbnails/views/settings.php:23
-msgid "Drag the image sizes you don't want to generate to the right side. The image sizes on the left will be generated."
-msgstr ""
-
-#: legacy/modules/disable-thumbnails/views/settings.php:31
-msgid " Thumbnails disabled"
-msgstr ""
-
-#: legacy/modules/disable-thumbnails/views/settings.php:37
-msgid " Thumbnails will be generated"
-msgstr ""
-
-#: legacy/modules/disable-thumbnails/views/settings.php:45
-msgid "Sizes Enabled "
-msgstr ""
-
-#: legacy/modules/disable-thumbnails/views/settings.php:45
-msgid "will be generated"
-msgstr ""
-
-#: legacy/modules/disable-thumbnails/views/settings.php:51
-#: legacy/modules/disable-thumbnails/views/settings.php:121
-msgid "Name"
-msgstr ""
-
-#: legacy/modules/disable-thumbnails/views/settings.php:54
-#: legacy/modules/disable-thumbnails/views/settings.php:124
-msgid "Size"
-msgstr ""
-
-#: legacy/modules/disable-thumbnails/views/settings.php:57
-#: legacy/modules/disable-thumbnails/views/settings.php:127
-msgid "Type"
-msgstr ""
-
-#: legacy/modules/disable-thumbnails/views/settings.php:60
-#: legacy/modules/disable-thumbnails/views/settings.php:130
-msgid "Cropped?"
-msgstr ""
-
-#: legacy/modules/disable-thumbnails/views/settings.php:69
-msgid "Original Image"
-msgstr ""
-
-#: legacy/modules/disable-thumbnails/views/settings.php:72
-msgid "100%"
-msgstr ""
-
-#: legacy/modules/disable-thumbnails/views/settings.php:75
-msgid "Original"
-msgstr ""
-
-#: legacy/modules/disable-thumbnails/views/settings.php:78
-#: legacy/modules/disable-thumbnails/views/settings.php:87
-#: legacy/modules/disable-thumbnails/views/settings.php:143
-msgid "No"
-msgstr ""
-
-#: legacy/modules/disable-thumbnails/views/settings.php:87
-#: legacy/modules/disable-thumbnails/views/settings.php:143
-msgid "Yes"
-msgstr ""
-
-#: legacy/modules/disable-thumbnails/views/settings.php:108
-msgid "Go to Regenerate Thumbnails Settings"
-msgstr ""
-
-#: legacy/modules/disable-thumbnails/views/settings.php:116
-msgid "Sizes Disabled"
-msgstr ""
-
-#: legacy/modules/disable-thumbnails/views/settings.php:116
-msgid "(will not be generated)"
-msgstr ""
-
-#: legacy/modules/image-max-size/image-max-size.php:31
-msgid "Max Size"
-msgstr ""
-
-#: legacy/modules/image-max-size/image-max-size.php:33
-msgid "Enter the maximum size in KB"
-msgstr ""
-
-#: legacy/modules/image-max-size/image-max-size.php:39
-msgid "Max Width"
-msgstr ""
-
-#: legacy/modules/image-max-size/image-max-size.php:41
-msgid "Enter the maximum width in px"
-msgstr ""
-
-#: legacy/modules/image-max-size/image-max-size.php:47
-msgid "Max Height"
-msgstr ""
-
-#: legacy/modules/image-max-size/image-max-size.php:49
-msgid "Enter the maximum height in px"
-msgstr ""
-
-#. translators: %s: maximum allowed image size in KB
-#: legacy/modules/image-max-size/image-max-size.php:72
-#, php-format
-msgid "[ ThumbPress Alert ] Image exceeds the maximum allowed size of %s KB."
-msgstr ""
-
-#: legacy/modules/regenerate-thumbnails/regenerate-thumbnails.php:197
-msgid "Your images are being regenerating. Please wait..."
-msgstr ""
-
-#: legacy/modules/regenerate-thumbnails/views/settings.php:36
-msgid "Regenerating Thumbnails in Background"
-msgstr ""
-
-#. Translators: %s is the time when the thumbnail regeneration was completed.
-#: legacy/modules/regenerate-thumbnails/views/settings.php:41
-#, php-format
-msgid "Regenerating Thumbnails in background was completed at %s"
-msgstr ""
-
-#: legacy/modules/regenerate-thumbnails/views/settings.php:45
-msgid "Regenerating Thumbnails in Background Failed."
-msgstr ""
-
-#: legacy/modules/regenerate-thumbnails/views/settings.php:58
-msgid "Regenerate Thumbnails is a server-dependent feature and the regeneration process may timeout if you process a large number of images. We suggest doing this process in the background to avoid any issues."
-msgstr ""
-
-#: legacy/modules/regenerate-thumbnails/views/settings.php:70
-msgid "Regenerate In Background"
-msgstr ""
-
-#: legacy/modules/regenerate-thumbnails/views/settings.php:79
-msgid "Go to Disable Thumbnails Settings"
-msgstr ""
-
-#. Translators: %s is the number of deleted images, wrapped in a span element.
-#: legacy/modules/regenerate-thumbnails/views/settings.php:106
-#, php-format
-msgid "Deleted %s images."
-msgstr ""
-
-#: legacy/modules/regenerate-thumbnails/views/settings.php:113
-#, php-format
-msgid "Created %s images."
-msgstr ""
-
-#: legacy/modules/regenerate-thumbnails/views/settings.php:129
-msgid "You have no images. Please upload images."
-msgstr ""
-
-#: legacy/modules/social-share/social-share.php:36
-msgid "Enable Facebook Share Image"
-msgstr ""
-
-#: legacy/modules/social-share/social-share.php:38
-msgid "By enabling this you'll be able to set image for Facebook share."
-msgstr ""
-
-#: legacy/modules/social-share/social-share.php:43
-msgid "Enable LinkedIn Share Image"
-msgstr ""
-
-#: legacy/modules/social-share/social-share.php:45
-msgid "By enabling this you'll be able to set image for LinkedIn share."
-msgstr ""
-
-#: legacy/modules/social-share/social-share.php:50
-msgid "Enable Twitter Share Image"
-msgstr ""
-
-#: legacy/modules/social-share/social-share.php:52
-msgid "By enabling this you'll be able to set image for Twitter share."
-msgstr ""
-
-#: legacy/modules/social-share/social-share.php:57
-msgid "Enable Pinterest Share Image"
-msgstr ""
-
-#: legacy/modules/social-share/social-share.php:59
-msgid "By enabling this you'll be able to set image for Pinterest share."
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:2
-msgid "ThumbPress - All in One WordPress Image & Thumbnail Management Solution"
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:10
-msgid "Delete and disable unnecessary thumbnails for all uploaded images"
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:16
-msgid "Regenerate previously deleted thumbnails anytime, no matter the size"
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:29
-msgid "Set a limit for maximum image upload size and resolution to speed up"
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:35
-msgid "Identify and compress or delete large images to free up your website"
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:42
-msgid "Compress your images to reduce image size, save server space, and boost site speed."
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:49
-msgid "Prevent visitors from downloading your images by turning off the right-click"
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:54
-msgid "Replace Image With New Version"
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:62
-msgid "Enhance images with filters and adjustments to showcase their best"
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:69
-msgid "Enjoy the freedom of setting separate thumbnails for different social media"
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:74
-#: legacy/views/settings/upgrade-pro.php:191
-msgid "Convert Images into WebP"
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:75
-msgid "Convert images to WebP format to retain image quality without needing"
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:94
-#: legacy/views/settings/modules.php:71
-#: legacy/views/settings/upgrade-pro.php:111
-msgid "View Details"
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:112
-#: legacy/views/settings/upgrade-pro.php:320
-msgid "Get Best Out of ThumbPress"
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:119
-#: legacy/views/settings/upgrade-pro.php:327
-msgid "Show Your Love"
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:120
-#: legacy/views/settings/upgrade-pro.php:328
-msgid "Take 2 minutes to review ThumbPress and help us keep motivated."
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:121
-#: legacy/views/settings/upgrade-pro.php:329
-msgid "Leave a review"
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:127
-#: legacy/views/settings/upgrade-pro.php:335
-msgid "Share Your Feedback"
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:128
-#: legacy/views/settings/upgrade-pro.php:336
-msgid "Share your ideas or suggestions to help make ThumbPress better. We would love to hear about them!"
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:129
-#: legacy/views/settings/upgrade-pro.php:337
-msgid "Share Feedback"
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:135
-#: legacy/views/settings/upgrade-pro.php:343
-msgid "Read Our Blogs"
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:136
-#: legacy/views/settings/upgrade-pro.php:344
-msgid "Explore our blogs for fresh insights on WordPress images and Thumbnails. Join the conversation today!"
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:137
-#: legacy/views/settings/upgrade-pro.php:345
-msgid "Read Blogs"
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:163
-#: legacy/views/settings/upgrade-pro.php:371
-msgid "Get Support"
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:164
-#: legacy/views/settings/upgrade-pro.php:372
-msgid "Stuck with something? Our support team is always ready to help you out."
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:175
-#: legacy/views/settings/upgrade-pro.php:382
-msgid "Start Live Chat"
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:175
-#: legacy/views/settings/upgrade-pro.php:382
-msgid "Enable Live Chat"
-msgstr ""
-
-#: legacy/views/settings/dashboad.php:194
-#: legacy/views/settings/upgrade-pro.php:48
-#: legacy/views/settings/upgrade-pro.php:119
-#: legacy/views/settings/upgrade-pro.php:209
-#: legacy/views/settings/upgrade-pro.php:406
-msgid "Get ThumbPress Pro"
-msgstr ""
-
-#: legacy/views/settings/modules.php:14
-msgid "All"
-msgstr ""
-
-#: legacy/views/settings/modules.php:15
-#: legacy/views/settings/upgrade-pro.php:134
-msgid "Free"
-msgstr ""
-
-#: legacy/views/settings/modules.php:21
-msgid "Disable All"
-msgstr ""
-
-#: legacy/views/settings/modules.php:26
-msgid "Enable All"
-msgstr ""
-
-#: legacy/views/settings/modules.php:86
-msgid "Get this Premium Feature"
-msgstr ""
-
-#: legacy/views/settings/modules.php:88
-msgid "This is a Premium Feature. This feature is only available in <strong>ThumbPress Pro</strong>!"
-msgstr ""
-
-#: legacy/views/settings/modules.php:90
-msgid "Make a smart choice today; a <strong>small investment</strong> can lead to a <strong>big boost</strong> in your website performance. Unlock All Premium Features."
-msgstr ""
-
-#: legacy/views/settings/modules.php:95
-msgid "Unlock Premium Features"
-msgstr ""
-
-#: legacy/views/settings/modules.php:102
-msgid "To use this Premium Feature. Activate your license now!"
-msgstr ""
-
-#: legacy/views/settings/modules.php:107
-msgid "Activate License"
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:7
-msgid "Upgrade to Manage Your WordPress Images & Thumbnails Like a Pro"
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:10
-msgid "Rich in Features, Light in Cost!"
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:15
-msgid "60,000+"
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:18
-msgid "Active Users"
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:23
-msgid "500,000+"
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:26
-msgid "Downloads"
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:31
-#: legacy/views/settings/upgrade-pro.php:39
-msgid "7+"
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:34
-msgid "Active Years"
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:42
-msgid "Languages"
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:57
-msgid "ThumbPress Pro Modules"
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:60
-msgid "Refine your WordPress images, save server space, and maximize your thumbnail potential with ThumbPress Pro."
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:68
-msgid "Reduce image size and speed up your website with our built-in image compressor."
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:73
-msgid "Edit Images"
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:74
-msgid "Edit images directly within WordPress to fit your site's aesthetics perfectly."
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:80
-msgid "Free up space by detecting and removing images not used anywhere on your website."
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:86
-msgid "Detect and delete large images that slow down your server and improve loading times."
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:91
-msgid "Replace Images"
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:92
-msgid "Update images with newer versions without changing their links on your site."
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:127
-msgid "Compare Free Vs. Pro"
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:129
-msgid "Compare ThumbPress Free and Pro features to see which extra features you'll enjoy"
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:133
-msgid "Feature"
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:176
-msgid "Replace Image with New Version"
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:221
-msgid "100% Hassle-Free Money Back Guarantee!"
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:224
-msgid ""
-"We're confident that you'll love using ThumbPress. However, if within the next 30 days, you feel \n"
-"                        that ThumbPress isn't the best fit for your needs, simply reach out and we'll refund your money in full, \n"
-"                        no questions asked!"
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:236
-msgid "See Why 60,000+ Users Love ThumbPress"
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:304
-#: legacy/views/settings/upgrade-pro.php:408
-msgid "icon"
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:400
-msgid "Effortlessly Manage WordPress Images & Thumbnails"
-msgstr ""
-
-#: legacy/views/settings/upgrade-pro.php:402
-msgid "Focus on crafting your blazing-fast WordPress site and leave the image & thumbnail management to ThumbPress!"
 msgstr ""
 
 #: views/settings/layout.php:60
