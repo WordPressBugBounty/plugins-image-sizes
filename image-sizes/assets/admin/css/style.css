@@ -1,0 +1,62 @@
+.thumbpress_img_btn.button,
+.thumbpress_img_btn.button:focus,
+.thumbpress_img_btn.button:active {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 16px;
+	height: 36px;
+	border: 1.5px solid #40189D;
+	border-radius: 6px;
+	background: #ffffff;
+	color: #40189D;
+	font-size: 13px;
+	font-weight: 500;
+	font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+	line-height: 1;
+	cursor: pointer;
+	text-decoration: none;
+	box-shadow: none;
+	outline: none;
+	transition: background 0.15s, color 0.15s;
+}
+
+.thumbpress_img_btn.button:hover {
+	background: #40189D;
+	color: #ffffff;
+	border-color: #40189D;
+	box-shadow: none;
+}
+
+.compat-attachment-fields th {
+	padding-top: 0;
+}
+
+.compat-item .field span {
+    padding-top: 7px;
+    display: block;
+}
+
+.toplevel_page_thumbpress #wpcontent {
+	padding-left: 0;
+}
+
+.toplevel_page_thumbpress .wrap {
+    margin: 0;
+}
+
+.toplevel_page_thumbpress .wrap>h2:first-child {
+	padding: 0;
+}
+
+.toplevel_page_thumbpress .wrap .notice {
+	margin: 15px;
+}
+
+input.tp-max-size-input {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+.cx-notice a{
+	color: #2271b1!important;
+}

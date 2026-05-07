@@ -1,0 +1,66 @@
+#image-sizes-settings-body {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: 1fr 3fr;
+    max-width: 900px;
+}
+#image-sizes-settings-header {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+#image-sizes-settings-menus-list > li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    margin: 0;
+}
+#image-sizes-settings-menus-list > li.active {
+    font-weight: bold;
+}
+#image-sizes-settings-submenus-list {
+    display: flex;
+}
+.image-sizes-settings-section {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+#image-sizes-settings-header > h2 {
+    font-size: 24px;
+}
+#image-sizes-settings-content-label > h3 {
+    font-size: 20px;
+}
+#image-sizes-settings-submenus-list > li {
+    border-right: 1px solid #ddd;
+    padding: 0 10px;
+}
+#image-sizes-settings-submenus-list > li:first-child {
+    padding-left: 0px;
+}
+#image-sizes-settings-submenus-list > li:last-child {
+    border-right: 0px;
+}
+#image-sizes-settings-submenus-list > li > a {
+    text-decoration: none;
+}
+#image-sizes-settings-submenus-list > li.active > a {
+    font-weight: bold;
+}
+#image-sizes-settings-content-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.image-sizes-settings-section-heading {
+    font-size: 16px;
+}
+.image-sizes-field-wrapper {
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+}
+.image-sizes-field-wrapper label {
+    display: inline-block;
+    width: 100px;
+}

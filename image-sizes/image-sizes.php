@@ -1,284 +1,188 @@
 <?php
 /**
- * Plugin Name:         ThumbPress
- * Plugin URI:          https://thumbpress.co
- * Description:         Image Management Suite for Performance and Optimization
- * Version:             5.8.37
- * Requires at least:   6.0
- * Requires PHP:        7.0
- * Tested up to:        6.9
- * Author:              ThumbPress
- * Author URI:          https://thumbpress.co
- * License:             GPL v2 or later
- * License URI:         https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:         image-sizes
- * Domain Path:         /languages
+ * @package Thumbpress
+ *
+ * Plugin Name:       ThumbPress
+ * Plugin URI:        https://wordpress.org/plugins/image-sizes/
+ * Description:       WordPress Image Optimization & Media Management Toolkit
+ * Version:           6.0.0
+ * Requires at least: 6.0
+ * Requires PHP:      7.4
+ * Author:            ThumbPress
+ * Author URI:        https://thumbpress.co
+ * Text Domain:       image-sizes
+ * Domain Path:       /languages
+ * License:           GPL v2 or later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  */
 
-/**
- * ThumbPress is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or any later version.
- *
- * ThumbPress is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
-
-namespace Codexpert\ThumbPress;
+namespace Thumbpress;
 
 use Codexpert\Plugin\Notice;
 use Pluggable\Marketing\Survey;
 use Pluggable\Marketing\Feature;
 use Pluggable\Marketing\Deactivator;
 
-/**
- * if accessed directly, exit.
- */
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+defined( 'ABSPATH' ) || exit;
+
+define( 'THUMBPRESS_VERSION', '6.0.0' );
+define( 'THUMBPRESS_FILE', __FILE__ );
+define( 'THUMBPRESS_PATH', plugin_dir_path( __FILE__ ) );
+define( 'THUMBPRESS_URL', plugin_dir_url( __FILE__ ) );
+define( 'THUMBPRESS_ASSETS_PATH', THUMBPRESS_PATH . 'assets/' );
+define( 'THUMBPRESS_ASSETS_URL', THUMBPRESS_URL . 'assets/' );
+define( 'THUMBPRESS_CACHE_ENABLED', true );
+
+require_once THUMBPRESS_PATH . 'app/Bootstrap/VersionManager.php';
+require_once THUMBPRESS_PATH . 'vendor/autoload.php';
+
+( new Bootstrap\AdminNotice() )->init();
+
+add_action( 'rest_api_init', __NAMESPACE__ . '\\thumbpress_version_routes' );
+function thumbpress_version_routes() {
+	( new Bootstrap\VersionManager() )->register_rest_routes();
 }
 
+// Gate: if the user chose the legacy version, load it and stop.
+$thumbpress_vm = new Bootstrap\VersionManager();
+if ( 'legacy' === $thumbpress_vm->get_version_to_load() ) {
+	$thumbpress_vm->load_legacy();
+	return;
+}
+
+define( 'THUMBPRESS_PLUGIN_DIR', THUMBPRESS_PATH );
+define( 'THUMBPRESS_PLUGIN_URL', THUMBPRESS_URL );
+
+require_once THUMBPRESS_PATH . 'legacy/libraries/action-scheduler/action-scheduler.php';
+
 /**
- * Main class for the plugin
+ * Main ThumbPress plugin class.
  *
- * @package Plugin
- * @author Codexpert <hi@codexpert.io>
+ * @since 6.0
+ * @package Thumbpress
  */
-final class Plugin {
+final class ThumbPress {
 
 	/**
-	 * The Plugin
+	 * Singleton instance.
 	 *
-	 * @access private
+	 * @var ThumbPress|null
 	 */
-	private $plugin;
+	public static $_instance;
 
 	/**
-	 * Plugin instance
+	 * Plugin configuration and metadata.
 	 *
-	 * @access private
-	 *
-	 * @var Plugin
+	 * @var array
 	 */
-	private static $_instance;
+	public array $plugin;
 
 	/**
-	 * The constructor method
+	 * Constructor.
 	 *
-	 * @access private
-	 *
-	 * @since 0.9
+	 * @return void
 	 */
-	private function __construct() {
-
-		/**
-		 * Includes required files
-		 */
-		$this->include();
-
-		/**
-		 * Defines contants
-		 */
+	public function __construct() {
 		$this->define();
-
-		/**
-		 * Runs actual hooks
-		 */
+		$this->includes();
 		$this->hook();
 	}
 
 	/**
-	 * Includes files
-	 *
-	 * @access private
-	 *
-	 * @uses composer
-	 * @uses psr-4
-	 */
-	private function include() {
-		require_once __DIR__ . '/inc/functions.php';
-		require_once __DIR__ . '/vendor/autoload.php';
-		require_once __DIR__ . '/libraries/action-scheduler/action-scheduler.php';
-	}
-
-	/**
-	 * Define variables and constants
-	 *
-	 * @access private
-	 *
-	 * @uses get_plugin_data
-	 * @uses plugin_basename
-	 */
-	private function define() {
-
-		/**
-		 * Define some constants
-		 *
-		 * @since 0.9
-		 */
-		define( 'THUMBPRESS', __FILE__ );
-		define( 'THUMBPRESS_DIR', dirname( THUMBPRESS ) );
-		define( 'THUMBPRESS_ASSET', plugins_url( 'assets', THUMBPRESS ) );
-		define( 'THUMBPRESS_DEBUG', apply_filters( 'image-sizes_debug', Helper::get_option( 'image-sizes_tools', 'enable_debug', true ) ) );
-
-		/**
-		 * The plugin data
-		 *
-		 * @since 0.9
-		 * @var $plugin
-		 */
-		$this->plugin               = array();
-		$this->plugin['basename']   = plugin_basename( THUMBPRESS );
-		$this->plugin['file']       = THUMBPRESS;
-		$this->plugin['TextDomain'] = 'image-sizes';
-		$this->plugin['Name']       = 'ThumbPress';
-		$this->plugin['Version']    = '5.8.37';
-		$this->plugin['server']     = apply_filters( 'image-sizes_server', 'https://my.pluggable.io' );
-		$this->plugin['icon']       = THUMBPRESS_ASSET . '/img/icon.png';
-		$this->plugin['depends']    = array();
-
-		$this->plugin['hash_deactivator'] = 'f490a1f1-c3a1-4d3a-bc2a-70d4b405aa11';
-		$this->plugin['hash_survey']      = '55b6c7ca-9102-495f-a6bd-581285447c0a';
-		$this->plugin['hash_wizard']      = '568b640b-6bce-4c2e-aa1a-d325d8e4f4fa';
-	}
-
-	/**
-	 * Hooks
-	 *
-	 * @access private
-	 *
-	 * Executes main plugin features
-	 *
-	 * To add an action, use $instance->action()
-	 * To apply a filter, use $instance->filter()
-	 * To register a shortcode, use $instance->register()
-	 * To add a hook for logged in users, use $instance->priv()
-	 * To add a hook for non-logged in users, use $instance->nopriv()
+	 * Define plugin variables.
 	 *
 	 * @return void
 	 */
-	private function hook() {
-
-		if ( is_admin() ) :
-
-			/**
-			 * Admin facing hooks
-			 */
-			$admin = new App\Admin( $this->plugin );
-			$admin->activate( 'check_action_scheduler_tables' );
-			$admin->action( 'init', 'i18n' );
-			$admin->filter( 'admin_body_class', 'add_body_class' );
-			$admin->action( 'admin_footer', 'modal' );
-			$admin->action( 'admin_footer', 'upgrade' );
-			$admin->action( 'admin_notices', 'show_admin_notices' );
-			$admin->action( 'init', 'show_easycommerce_notice' );
-			$admin->action( 'admin_enqueue_scripts', 'enqueue_scripts' );
-			$admin->filter( "plugin_action_links_{$this->plugin['basename']}", 'action_links' );
-			$admin->filter( 'plugin_row_meta', 'plugin_row_meta', 10, 2 );
-			$admin->action( 'admin_footer_text', 'footer_text' );
-			// $admin->action( 'cx-settings-after_wrapper', 'show_easycommerce_promo' );
-			// $admin->action( 'init', 'thumbpress_sale_notice', 9 );
-
-			/**
-			 * Settings related hooks
-			 */
-			$settings = new App\Settings( $this->plugin );
-			$settings->action( 'init', 'init_menu', 9 );
-			$settings->filter( 'cx-settings-reset', 'reset' );
-			$settings->action( 'admin_menu', 'admin_menu' );
-			$settings->action( 'admin_init', 'redirect_specific_admin_page' ); // redirect for upgrading to pro
-
-			/**
-			 * Renders different notices
-			 *
-			 * @package Codexpert\Plugin
-			 *
-			 * @author Codexpert <hi@codexpert.io>
-			 */
-			$notice = new Notice( $this->plugin );
-
-			/**
-			 * Asks to participate in a survey
-			 *
-			 * @package Pluggable\Marketing
-			 *
-			 * @author Pluggable <hi@pluggable.io>
-			 */
-			$survey = new Survey( $this->plugin );
-
-			/**
-			 * Shows a popup window asking why a user is deactivating the plugin
-			 *
-			 * @package Pluggable\Marketing
-			 *
-			 * @author Pluggable <hi@pluggable.io>
-			 */
-			$deactivator = new Deactivator( $this->plugin );
-
-			/**
-			 * Alters featured plugins
-			 *
-			 * @package Pluggable\Marketing
-			 *
-			 * @author Pluggable <hi@pluggable.io>
-			 */
-			// $feature = new Feature( $this->plugin, array( 'reserved' => array() ) );
-
-		else : // !is_admin() ?
-
-		endif;
-
-		/**
-		 * Modules related hooks
-		 */
-		$modules = new App\Modules( $this->plugin );
-		$modules->action( 'init', 'init', -999 );
-
-		/**
-		 * Cron facing hooks
-		 */
-		$cron = new App\Cron( $this->plugin );
-		$cron->activate( 'install' );
-		$cron->deactivate( 'uninstall' );
-
-		/**
-		 * AJAX related hooks
-		 */
-		$ajax = new App\AJAX( $this->plugin );
-		$ajax->priv( 'image_sizes-notice-dismiss', 'dismiss_notice' );
-		$ajax->priv( 'handle_unhappy_survey', 'unhappy_servay' );
-		// $ajax->priv( 'image_sizes-pointer-dismiss', 'dismiss_pointer' );
-		$ajax->priv( 'image_sizes-dismiss', 'image_sizes_dismiss' );
-		$ajax->all( 'image-sizes_dismiss_notice', 'image_sizes_dismiss_notice_callback' );
-		$ajax->priv( 'thumbpress_init_notice_dismiss', 'thumbpress_init_notice_handler' );
+	public function define(): void {
+		$this->plugin                     = get_plugin_data( THUMBPRESS_FILE, true, false );
+		$this->plugin['basename']         = plugin_basename( THUMBPRESS_FILE );
+		$this->plugin['file']             = THUMBPRESS_FILE;
+		$this->plugin['server']           = apply_filters( 'thumbpress_server', 'https://my.pluggable.io' );
+		$this->plugin['min_php']          = '7.4';
+		$this->plugin['min_wp']           = '5.0';
+		$this->plugin['hash_deactivator'] = 'f490a1f1-c3a1-4d3a-bc2a-70d4b405aa11';
+		$this->plugin['hash_survey']      = '55b6c7ca-9102-495f-a6bd-581285447c0a';
 	}
 
 	/**
-	 * Cloning is forbidden.
+	 * Include additional dependencies.
 	 *
-	 * @access public
+	 * @return void
 	 */
-	public function __clone() { }
+	public function includes(): void {
+		if ( is_admin() ) {
+			new Notice( $this->plugin );
+			new Survey( $this->plugin );
+			new Deactivator( $this->plugin );
+		}
+	}
 
 	/**
-	 * Unserializing instances of this class is forbidden.
+	 * Register plugin hooks.
 	 *
-	 * @access public
+	 * @return void
 	 */
-	public function __wakeup() { }
+	public function hook(): void {
+		register_activation_hook( THUMBPRESS_FILE, array( $this, 'install' ) );
+		register_deactivation_hook( THUMBPRESS_FILE, array( $this, 'uninstall' ) );
+
+		add_action( 'admin_init', array( $this, 'redirect' ) );
+		add_action( 'plugins_loaded', array( $this, 'activate' ) );
+		add_action( 'plugins_loaded', array( $this, 'initialize' ) );
+	}
 
 	/**
-	 * Instantiate the plugin
+	 * Run on plugin activation.
 	 *
-	 * @access public
-	 *
-	 * @return $_instance
+	 * @return void
 	 */
-	public static function instance() {
+	public function install(): void {
+		Bootstrap\Installer::install();
+		update_option( Bootstrap\Activator::REDIRECT_OPTION, true );
+	}
+
+	/**
+	 * Redirect after activation.
+	 *
+	 * @return void
+	 */
+	public function redirect(): void {
+		Bootstrap\Activator::maybe_redirect();
+	}
+
+	/**
+	 * Run activator on plugins_loaded.
+	 *
+	 * @return void
+	 */
+	public function activate(): void {
+		Bootstrap\Activator::activate();
+	}
+
+	/**
+	 * Initialize the plugin.
+	 *
+	 * @return void
+	 */
+	public function initialize(): void {
+		Bootstrap\Initializer::initialize();
+	}
+
+	/**
+	 * Run on plugin deactivation.
+	 *
+	 * @return void
+	 */
+	public function uninstall(): void {
+		Bootstrap\Uninstaller::uninstall();
+	}
+
+	/**
+	 * Get singleton instance.
+	 *
+	 * @return ThumbPress
+	 */
+	public static function instance(): self {
 		if ( is_null( self::$_instance ) ) {
 			self::$_instance = new self();
 		}
@@ -286,4 +190,4 @@ final class Plugin {
 	}
 }
 
-Plugin::instance();
+ThumbPress::instance();

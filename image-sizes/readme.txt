@@ -1,167 +1,297 @@
-=== ThumbPress - Image Management Suite for Performance and Optimization ===
-Contributors: pluggable, codexpert, thumbpressco, mukto90
-Donate link: https://thumbpress.co/?utm_source=free-plugins&utm_medium=readme&utm_campaign=image-sizes
-Tags: compress images, disable thumbnails, image editor, optimize images, regenerate thumbnails
-Requires at least: 5.0
+=== ThumbPress – Compress Images, Manage Thumbnails, Detect Image Issues, WebP/AVIF, Lazy Loading, Hotlinking & More ===
+Contributors: thumbpressco, codexpert, mukto90
+Tags: image optimization, compress images, thumbnail manager, WebP converter, media library cleaner, AVIF converter, regenerate thumbnails, unused images, lazy load, hotlink protection
+Requires at least: 6.0.0
 Tested up to: 6.9
-Stable tag: 5.8.37
-Requires PHP: 7.0
+Requires PHP: 7.4
+Stable tag: 6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Disable Thumbnails, Regenerate Thumbnails, Compress Images, Convert to WebP, Find Unused and Large Images, Edit Images, and more with ThumbPress.
+The all-in-one WordPress image optimization plugin. Disable thumbnails, compress images, convert to WebP & AVIF, clean your media library, and more.
 
 == Description ==
 
-🚀 [Pro Version](https://thumbpress.co/) | 🔵 [Facebook](https://www.facebook.com/ThumbPressCo/) | 🐦 [Twitter](https://twitter.com/ThumbPressCo/) | 👥 [LinkedIn](https://www.linkedin.com/company/thumbpress/)
+🚀 [Pro Version](https://thumbpress.co) | 🔵 [Facebook](https://www.facebook.com/codexpert.io/) | 🐦 [X](https://x.com/codexpertio) | 👥 [LinkedIn](https://www.linkedin.com/company/codexpertio/)
 
-How many images and thumbnails do you have on your WordPress site? Can’t count, right?
+WordPress image management is a mess. And most site owners don't even know it.
 
-Managing those images and thumbnails is harder than counting them. ThumbPress, the one-stop WordPress image management plugin makes this easier than ever.
+Here's what's quietly happening on your site right now:
 
-Check out the exciting features below:
+* Each upload creates 7+ thumbnails. Themes and plugins add more. Most stay unused and waste storage.
+* Many images are still JPG or PNG. They’re heavier, slow down pages, and hurt Core Web Vitals and rankings.
+* Unused, duplicate, and oversized images keep piling up. Updating them across pages takes extra time.
 
-### 👉 All ThumbPress Features to Supercharge Your WordPress Image Management
+None of this is dramatic. It's just the slow, invisible damage that builds up on every WordPress site without a proper image management system.
 
-💥 [Disable Thumbnails](https://thumbpress.co/modules/disable-thumbnails/)
-💥 [Regenerate Thumbnails](https://thumbpress.co/modules/regenerate-thumbnails/)
-💥 [Find Unused Images](https://thumbpress.co/modules/detect-unused-images/) [Pro]
-💥 [Set Image Upload Limit](https://thumbpress.co/modules/image-upload-limit/)
-💥 [Detect Large Images](https://thumbpress.co/modules/detect-large-images/) [Pro]
-💥 [Image Compression](https://thumbpress.co/modules/compress-images/) [Pro]
-💥 [Replace Images](https://thumbpress.co/modules/replace-image-with-new-version/) [Pro]
-💥 [Set Social Media Thumbnails](https://thumbpress.co/modules/set-social-media-thumbnails/)
-💥 [Image Editor](https://thumbpress.co/modules/image-editor/) [Pro]
-💥 [Convert to WebP](https://thumbpress.co/modules/convert-images-to-webp/)
-💥 [Disable Right Click on Image](https://thumbpress.co/modules/disable-right-click/)
+**ThumbPress fixes it all with a single plugin.**
 
-Here are some of the key features of the ThumbPress plugin for WordPress Image Management –
+ThumbPress is a complete WordPress image optimization and media management plugin built for site owners, developers, and agencies who want full control over their media library. Compress images, convert to WebP or AVIF, regenerate thumbnails, find duplicate images, detect unused files, and much more — all from your WordPress dashboard.
 
-#### 🚀 Disable Thumbnails
+**Version 6.0 is here** - with a redesigned interface, AVIF image conversion, and duplicate image detection.
 
-When you upload an image using Media Uploader, WordPress generates multiple copies/thumbnails of that image. By default, WordPress generates 5 thumbnails:
-– Thumbnail
-– Medium
-– Medium-large
-– Large
-– Scaled
+---
 
-Along with this, your themes and plugins add more thumbnails and most of these thumbnails remain unused.
+👉 **All ThumbPress Features**
 
-The result? Unnecessary additional images eat up your server space and slow down your site!
+**Free Modules**
 
-This is where the Disable feature comes into the picture. Just install the plugin and choose which of the image sizes you want to prevent from generating.
+* 💥 [Disable Thumbnails](https://thumbpress.co/modules/disable-thumbnails)
+* 💥 [Regenerate Thumbnails](https://thumbpress.co/modules/regenerate-thumbnails)
+* 💥 [Set Image Upload Limit](https://thumbpress.co/modules/image-upload-limit)
+* 💥 [Convert Images to WebP](https://thumbpress.co/modules/convert-images-to-webp)
+* 💥 [Convert Images to AVIF](https://thumbpress.co/modules/convert-images-to-avif) *(Bulk conversion is Pro)*
+* 💥 [Set Social Media Thumbnails](https://thumbpress.co/modules/set-social-media-thumbnails)
+* 💥 Lazy Load Images
+* 💥 Hotlink Protection
+* 💥 [Disable Right Click on Images](https://thumbpress.co/modules/disable-right-click)
 
-#### 🚀 Regenerate Thumbnails
+**Pro Modules**
 
-Regenerate thumbnails on your WordPress site at any moment, regardless of their sizes. No more worrying about lost thumbnails — our WordPress plugin guarantees swift restoration, keeping your site’s visual appeal flawless and consistent. Start now and rebuild thumbnails on your WordPress site.
+* 🔥 [Find Unused Images](https://thumbpress.co/modules/detect-unused-images)
+* 🔥 [Detect Large Images](https://thumbpress.co/modules/detect-large-images)
+* 🔥 [Compress Images](https://thumbpress.co/modules/compress-images)
+* 🔥 [Replace Image with New Version](https://thumbpress.co/modules/replace-image-with-new-version)
+* 🔥 [Image Editor](https://thumbpress.co/modules/image-editor)
+* 🔥 [Detect Duplicate Images](https://thumbpress.co/modules/detect-duplicate-images) *(New in 6.0)*
+* 🔥 [Bulk AVIF Conversion](https://thumbpress.co/modules/convert-images-to-avif) *(New in 6.0)*
+* 🔥 Trash Images *(Not a module, but lets you recover deleted images)*
 
-#### 🚀 Social Media Thumbnails
+---
 
-ThumbPress enables you to assign unique thumbnails for various social media platforms, ensuring that an image intended for Facebook remains uncropped when shared on Twitter or LinkedIn. You can upload distinct thumbnails for each social media site.
+🚀 **Free Features - In Detail**
 
-#### 🚀 Image Upload Limit
+**Disable Thumbnails - Stop Wasting Server Storage**
 
-Set a maximum limit for image upload size and resolution to ensure faster loading times. Our feature allows you to customize these parameters according to your website requirements and prevent oversized images from slowing down your site.
+Every image upload triggers WordPress to create multiple resized copies - Thumbnail, Medium, Medium-Large, Large, Scaled — plus whatever your theme and plugins add on top. Most of these copies are never used anywhere on your site.
 
-#### 🚀 Convert Images to WebP
+The Disable Thumbnails module lets you choose exactly which image sizes to block. Stop the copies before they're created, save server storage from day one, and keep your WordPress media library clean and manageable.
 
-In WordPress convert images to WebP in bulk or one by one without any effort. Convert JPG or PNG to WebP from the comfort of your favorite WordPress dashboard and upgrade your website’s performance without sacrificing image quality. This advanced function ensures your images remain crisp and clear while reducing file size compared to traditional formats. The image conversion to WebP format helps you in SEO and gets you better rankings as Google recommends this format.
+**Regenerate Thumbnails - Fix Broken Image Sizes Instantly**
 
-#### 🚀 Disable Right Click on Image
+Switched themes? Changed your image size settings? Installed a new page builder? Your existing images now have the wrong dimensions - and broken layouts are the result.
 
-Disable the right-click function on your website, a simple yet effective way to deter visitors from downloading or copying your images and thumbnails. It’s a preventive measure that adds an extra layer of protection to your digital assets and keeps your visuals exclusive to your site.
+The Regenerate Thumbnails module rebuilds all your image sizes on demand. Select specific sizes or regenerate everything at once. No manual work, no missing thumbnails. Your site stays consistent without touching a single image file.
 
-### 👉 ThumbPress Pro Features
+**Convert Images to WebP - Boost Site Speed and SEO Rankings**
 
-🔥 [Detect Large Images](https://thumbpress.co/modules/detect-large-images/) [Pro]
-🔥 [Detect Unused Images](https://thumbpress.co/modules/detect-unused-images/) [Pro]
-🔥 [Compress Images](https://thumbpress.co/modules/compress-images/) [Pro]
-🔥 [Replace Image with New Version](https://thumbpress.co/modules/replace-image-with-new-version/) [Pro]
-🔥 [Image Editor](https://thumbpress.co/modules/image-editor/) [Pro]
+WebP images are 25–35% smaller than JPG and PNG without any visible quality loss. Google recommends WebP. Core Web Vitals reward it. Page speed tools flag JPG and PNG as a performance issue.
 
-Check out our [Pro Features](https://thumbpress.co/) and [Pricing Plans](https://thumbpress.co/pricing/)
+ThumbPress converts your existing WordPress images to WebP in bulk or one by one, right from your dashboard. No FTP, no separate tools. Just faster images and better SEO rankings.
 
-#### 🌟 Detect Large Images
+**Convert Images to AVIF - Next-Generation Image Format**
 
-Find and compress oversized images, or delete them entirely to get back valuable server space. It’s a great way to improve user experience by speeding up your site’s loading time and streamlining media files directly on the WordPress dashboard.
+AVIF is the successor to WebP. It compresses images even further while preserving quality, and browser support is now mainstream across Chrome, Firefox, and Safari.
 
-#### 🌟 Find & Delete Unused Images on WordPress
+ThumbPress lets you convert individual images to AVIF for free. Need to convert your entire media library at once? That's a Pro feature available in the new 6.0 release.
 
-Find unused images on WordPress and delete them by simply using ThumbPress. Unused images eat up your server space without adding any value to your website audiences. ThumbPress makes it easy for you to find all unused images and remove them from a very user-friendly interface with ThumbPress image optimizer.
+**Image Upload Limit - Protect Site Performance at the Source**
 
-#### 🌟 Compress Images (The Easiest Image Compression Plugin on WordPress)
+One oversized image upload can slow down a page significantly. Without limits, editors and contributors regularly upload images straight from their phones or cameras - files that are 5MB, 10MB, sometimes larger.
 
-Optimize and have a blazing-fast website by using the WordPress image compression plugin ThumbPress. Our built-in WordPress image compression feature optimizes images to improve your site’s performance without losing visual quality. The plugin’s simple interface helps you compress WordPress effortlessly.
+Set a maximum file size and resolution for every image upload. Any file that exceeds your rules gets blocked before it ever hits the server. Clean media library, faster site - automatically enforced.
 
-#### 🌟 Replace Image with New Version
+**Social Media Thumbnails - Look Intentional Everywhere You're Shared**
 
-Replace images with newer versions without changing their existing links. It ensures that the same image will show up properly if used elsewhere. It’s the perfect solution for maintaining visual relevance.
+When you share a page on Facebook, Twitter, or LinkedIn, each platform crops the image differently. Without customization, your carefully chosen image ends up poorly framed or cut off entirely.
 
-#### 🌟 Image Editor
+ThumbPress lets you set distinct thumbnails for each social media platform. Upload one version for Facebook, another for Twitter, another for LinkedIn. Your content always looks deliberate when shared.
 
-We always try to upload the finest image to the site after all the editing stuff is done. But, sometimes, the previously uploaded images may require some brush-ups. In such cases, one option is to upload quite new images. The WordPress image editor feature of ThumbPress enables you to edit them right on your WordPress Dashboard. Try our simple and compact image editor tool today and bring perfection to your WordPress images.
+**Lazy Load Images - Faster Pages Without Changing a Single Image**
 
+By default, WordPress loads every image on a page at once - including images that are way below the fold and won't be seen until the user scrolls down. That's wasted bandwidth, slower initial load times, and a worse experience for users on mobile or slower connections.
 
-### Notes
-- ThumbPress uses [Intercom](https://www.intercom.com/) and its API to provide live chat support right from the dashboard.
-- Some third-party libraries are used to enable some features of the plugin. Kudos to the corresponding authors.
+Lazy loading changes this. Images only load as users scroll toward them. The result is a noticeably faster page on first load, lower bandwidth usage, and a real improvement in Core Web Vitals scores - all without touching your images or content.
+
+**Hotlink Protection - Stop Other Sites From Stealing Your Bandwidth**
+
+Hotlinking happens when another website embeds your images directly using your image URLs. Your server serves the image, your bandwidth takes the hit - and you get nothing in return.
+
+ThumbPress blocks external sites from loading images directly from your server. Your images stay on your site, your bandwidth stays yours, and your hosting costs don't quietly inflate because someone else decided to use your media library as their CDN.
+
+**Disable Right Click - Protect Your Images from Theft**
+
+Right-click protection disables the ability to save, copy, or drag images directly from your site. It's a practical barrier that stops casual image theft - especially useful for photographers, portfolio sites, and ecommerce stores.
+
+Enable it globally or for specific pages. No code needed.
+
+---
+
+🔥 **Pro Features — In Detail**
+
+**Find and Delete Unused Images — Reclaim Your Server Space**
+
+As websites evolve, images get left behind. Old blog post headers, replaced product photos, outdated banners — they all stay in your media library indefinitely, taking up space and adding noise.
+
+The Find Unused Images module scans your entire site and surfaces every image that isn't linked to any post, page, or content. Review the list, then delete in bulk. Reclaim storage and clean up years of media clutter in minutes.
+
+**Detect Large Images — Find What's Slowing Your Site Down**
+
+Large images are one of the top causes of slow WordPress page load times. And slow pages hurt conversions and search rankings alike.
+
+ThumbPress scans your media library for oversized images and flags them for action. Then compress them directly from the dashboard — no image editing software, no re-uploading. A faster WordPress site without sacrificing visual quality.
+
+**Image Compression — Smaller Files, Same Visual Quality**
+
+ThumbPress includes a built-in WordPress image compression tool that reduces file size while keeping your images sharp. Compress in bulk across your entire media library or optimize new uploads automatically.
+
+Smaller images mean faster pages, better Core Web Vitals scores, and stronger SEO — across your entire site.
+
+**Replace Image with New Version — Update Without Breaking Links**
+
+Need to update a product image, fix a low-quality photo, or refresh a visual after a rebrand? Normally, replacing an image in WordPress means deleting the old file and updating every page where it appears manually.
+
+ThumbPress lets you replace an image with a newer version while keeping the same URL. Every page, post, or widget that uses that image updates automatically. No broken links. No manual edits.
+
+**Detect Duplicate Images — New in 6.0 🆕**
+
+Duplicate images waste storage and create confusion in your media library. The same file uploaded twice, variations of the same photo, slightly different crops of one original — they all add up over time.
+
+The new Duplicate Image Detection module identifies redundant files in your media library and helps you remove them safely. One of the most-requested features we've ever received — now available in ThumbPress 6.0.
+
+**Image Editor — Edit Images Without Leaving WordPress**
+
+Sometimes an uploaded image just needs a small adjustment — a crop, a rotation, a brightness tweak. The ThumbPress Image Editor lets you make those changes without ever leaving your WordPress dashboard.
+
+No Photoshop. No re-uploading. Edit, save, and publish right from your media library.
+
+---
+
+🆕 **What's New in ThumbPress 6.0**
+
+* Redesigned interface — cleaner, faster, and easier to navigate
+* AVIF Image Converter — next-gen format support, with bulk conversion via Pro
+* Duplicate Image Detection — find and remove redundant files from your media library
+* Improved performance across all existing modules
+
+---
+
+👉 **Why ThumbPress Instead of Multiple Separate Plugins?**
+
+Most WordPress sites end up using 4–6 different plugins just to manage images:
+
+* One for thumbnail control
+* One for compression
+* One for WebP conversion
+* One for social media previews
+* One for image cleanup
+
+Each plugin adds overhead. Each one adds potential conflicts. And none of them talks to each other.
+
+**ThumbPress is one plugin that does everything.** Thumbnail management, image compression, WebP and AVIF conversion, media library cleanup, duplicate detection, image protection — all in a single, unified interface. Install once, manage everything.
+
+---
 
 == Installation ==
 
-1. Upload the plugin to the `/wp-content/plugins/` directory
-2. Activate the plugin through the **Plugins** menu in WordPress
-3. Go to the **ThumbPress** menu from the left and choose which of the sizes you want to prevent from generating.
-
-== Screenshots ==
-
-1. Module Settings
-2. Disable Thumbnails
-3. Regenerate Thumbnails
-4. Detect Unused Images
-5. Image Editor
-6. Detect Large Images
-7. Compress Images
-8. Replace Image with New Version
-9. Set Social Media Thumbnails
-10. Set Image Upload Limit
-11. Convert Images into WebP
+1. Upload the `thumbpress` folder to the `/wp-content/plugins/` directory, or install directly through the WordPress plugin screen.
+2. Activate the plugin through the **Plugins** screen in WordPress.
+3. Go to **ThumbPress** in your WordPress admin menu to get started.
 
 == Frequently Asked Questions ==
 
-= What is ThumbPress? =
+= Will ThumbPress delete my existing thumbnails when I disable image sizes? =
+No. The Disable Thumbnails module only prevents new thumbnails from being generated on future uploads. Your existing files stay untouched unless you manually delete them. You can regenerate thumbnails based on the sizes you have picked.
 
-ThumbPress is a comprehensive WordPress image management solution. It offers a wide range of features to optimize, manage, and protect images on a WordPress site.
+= Is WebP conversion reversible? =
+It’s a one-way process. You reduce image size without losing quality, and there’s rarely a need to switch back to heavier formats from WebP.
 
-= Does ThumbPress work with WooCommerce? =
+= Can I use ThumbPress on multiple sites? =
+Yes, both Professional and Agency plans let you use it on multiple sites. Visit the [Pricing page](https://thumbpress.co/pricing) to view multi-site license options.
 
-Yes, absolutely! All features of ThumbPress are fully compatible with WooCommerce.
+= Is ThumbPress compatible with WooCommerce? =
+Yes. ThumbPress works with WooCommerce, Elementor, Divi, and most major WordPress themes and plugins.
 
-= Is it compatible with WordPress Multisite? =
+= Will image compression affect my image quality? =
+No, ThumbPress uses lossless compression, so there’s no visible quality loss in your WordPress site images.
 
-Yes, ThumbPress is fully compatible with any WordPress Multisite installations.
+= What's the difference between WebP and AVIF? =
+WebP is a widely supported modern image format that reduces file sizes compared to JPG and PNG. AVIF is the next generation — it compresses even further with equal or better quality. Both are supported by major browsers and recommended for WordPress performance.
 
-= How does the disable and delete thumbnails feature work? =
+= Can I bulk-convert images to AVIF for free? =
+No, you can convert individual images to AVIF in the free version. Bulk conversion across your entire media library requires ThumbPress Pro.
 
-You will find your images displayed on the dashboard. Simply use our drag-and-drop interface to select the images you want to disable or delete from your media library.
+= How does Duplicate Image Detection work? =
+ThumbPress scans your media library and compares image files using unique hashes to find exact duplicates. This method is highly accurate since identical files share the same hash. You review the matches and decide if a fix is required - nothing is deleted automatically.
 
-= Is it possible to bulk convert images to a different format with ThumbPress? =
-
-Yes, but you can only convert JPG and PNG images into WebP format.
-
-= Can I get back my old thumbnails? =
-
-Of course! From version 3.0 and higher, you can regenerate thumbnails of your existing images. Just go to the Regenerate Thumbnails tab, select the images you want to regenerate, and click on the ‘Regenerate Button’.
-
-= Can I replace an image in the WordPress Media Library without changing its URL? =
-
-Yes, you can. ThumbPress lets you replace images and thumbnails with new versions without updating existing links anytime!
-
-= My question is not answered here. =
-
-Please post on our support forum here https://wordpress.org/support/plugin/image-sizes/
+== Screenshots ==
+1. Dashboard - Quick overview of key media factors
+2. General Settings - Control essential image parameters globally
+3. Detect Large Images - Identify oversized images slowing performance
+4. Optimize Images - Optimize images while keeping visual quality intact
+5. Disable & Regenerate Thumbnails - Block unwanted thumbnails and regenerate the ones you need.
+6. Unused Image Detection - Find and remove unused media files
+7. Convert to WebP - Bulk convert images to WebP format
+8. Convert to AVIF - Convert images to modern AVIF format
+9. Detect Duplicate Images - Find images uploaded more than once
+10. Merge Duplicate Images - Replace duplicate images with the original and remove the copies
+11. Compress Images - Reduce size without visible quality loss
+12. Trashed Images - Restore deleted images or remove them permanently
+13. Image Editor - Edit images directly inside WordPress
+14. Social Media Share - Set custom thumbnails for each platform
 
 == Changelog ==
+
+= 6.0.0 - 2026-05-07 =
+
+**New Features**
+* Launched a completely redesigned React SPA admin interface with a persistent sidebar, page-level headers, and smooth client-side navigation — replacing the legacy PHP admin
+* Added a new Dashboard with a weighted health score gauge, stat cards (Total Images, Total Thumbnails, Unoptimized Images, Space Saved), and a Quick Facts panel sorted by health impact
+* Added Convert to AVIF as a free feature — includes auto-convert on upload and single-image conversion from the media library; bulk conversion requires Pro
+* Added duplicate image detection in the free plugin using file-hash fingerprinting of original images
+* Added Hotlink Protection via .htaccess RewriteRules to block external referrers from embedding site images
+* Added JavaScript-based Lazy Load via IntersectionObserver as a configurable option
+* Added a unified, tabbed Settings page covering all features: General, Thumbnails, Convert to WebP, Convert to AVIF, Social Share, Compress Images (Pro), and Duplicate Images (Pro)
+* Added Cancel button for background WebP conversion and thumbnail regeneration jobs — immediately unschedules queued tasks
+* Added single-image Convert to WebP and Convert to AVIF buttons directly on the media attachment edit page
+* Added a Regenerate Thumbnails button on the media attachment edit page for per-image regeneration
+* Added a Space Saved stat card to the regeneration progress view — tracks cumulative storage recovered across all operations
+* Added a welcome notice for new installations that auto-dismisses when visiting the ThumbPress dashboard
+* Added an admin notice when an outdated ThumbPress Pro (below 6.0) is detected, prompting an upgrade
+* Added a version router so new users receive the new interface automatically while existing users retain their experience until they opt in; a "Turn on legacy mode" link is available in Settings for those who prefer the classic UI
+
+**Improvements**
+* Moved Convert to WebP from Pro-only to the free plugin, with dynamic file format selection (JPEG, PNG, GIF, etc.) and configurable batch size
+* Redesigned the Regenerate Thumbnails page with six progress stat cards: Total Images, Total Thumbnails, Images Processed, Images Deleted, Images Created, and Space Saved
+* Added a toggle-all switch to the Thumbnails page card header for quickly enabling or disabling all thumbnail sizes at once
+* Redesigned the Convert to WebP page with initial/progress states, immediate progress display on button click, and a settings shortcut link
+* Replaced the third-party rosell-dk/webp-convert library with WordPress's native wp_get_image_editor() for WebP and AVIF conversion
+* Added skeleton loading animations to the Dashboard, Convert to WebP, and Regenerate Thumbnails pages to prevent layout flash during data fetch
+* Added toast notifications on all Settings tabs for save confirmation and error feedback
+* Added URL-based tab navigation in Settings so individual tabs are deep-linkable and survive page reload
+* Added Pro badge indicators to pro-gated sidebar navigation items and settings rows
+* Added an "Upgrade to Pro" button to the page header when the pro plugin is not active
+* Added a dedicated Pro page with hero section, feature comparison, pricing plans, accordion FAQ, and testimonials
+* Automatically redirected to the ThumbPress dashboard after plugin activation or upgrade
+* Automatically migrated legacy option data to the new format when switching from the legacy UI to the new version
+* Automatically cleared relevant stat caches when thumbnail sizes are saved, plugins are activated/deactivated, or media is added/deleted
+* Pre-warmed stat caches on first activation via Action Scheduler so the Dashboard loads with real data immediately
+* Rebuilt stat caches automatically after each media upload or deletion to keep dashboard numbers current without a manual refresh
+* Tracked space saved cumulatively across all operations (WebP conversion, AVIF conversion, compression, regeneration) in a single unified option
+* Added file-hash and file-size meta backfill for all existing images on activation to enable duplicate detection without a full rescan
+
+**Bug Fixes**
+* Fixed division by zero error in the health score calculation when no images are present
+* Fixed WebP and AVIF conversion leaving the original file on disk after a successful swap
+* Fixed filename collisions when two source files (e.g. foo.jpg and foo.png) both targeted the same output — the second file now receives a unique name (e.g. foo-1.webp)
+* Fixed memory exhaustion on very large image uploads during WebP conversion by pre-flighting available memory before calling the image editor
+* Fixed large image detection incorrectly measuring the -scaled derivative instead of the original uploaded file
+* Fixed hotlink protection .htaccess rules not working correctly on Apache and Nginx
+* Fixed stale progress data disabling action buttons after a completed job
+* Fixed foreground WebP conversion not accumulating space-saved totals correctly across multiple chunks
+* Fixed a TypeError in Convert to WebP caused by the loop variable being overwritten during iteration
+* Fixed migration ordering bug that caused legacy settings to be overwritten by plugin defaults during the version switch
+* Fixed WordPress admin submenu active state not syncing with the SPA sidebar when navigating from other admin pages
+* Fixed Tailwind CSS leaking styles into the WordPress sidebar and other admin pages by scoping all rules to the plugin container
+* Fixed the legacy PHP admin showing a blank screen when switching back from the SPA version
+* Fixed AVIF conversion being silently skipped due to an overly strict server support check
+* Fixed the Convert to WebP card header not appearing until data finished loading, causing a visible flash
+* Fixed Quick Facts showing incorrect WebP/AVIF counts — each format now uses its own independent count
+* Fixed the health score incorrectly penalising sites for having thumbnail sizes disabled (disabled sizes save storage and should improve the score)
+* Fixed General and Thumbnails settings tabs not saving changes
+* Fixed missing file-existence checks before WebP/AVIF conversion that could cause fatal errors on missing source files
+* Fixed trashed and missing-file attachments being included in image queries, skewing counts
+* Fixed the progress screen flashing briefly when retrying after no images were found
 
 = v5.8.37 - 2026-01-13 =
 - [remove] Removed the notice for the Year End sale campaign.
@@ -420,3 +550,6 @@ Please post on our support forum here https://wordpress.org/support/plugin/image
 View detailed Changelog from [👉 here](https://thumbpress.co/changelog/).
 
 == Upgrade Notice ==
+
+= 6.0 =
+ThumbPress 6.0 includes a redesigned interface and two new modules — AVIF conversion and Duplicate Image Detection. Update recommended for all users.

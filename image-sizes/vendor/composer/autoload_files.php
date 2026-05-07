@@ -6,5 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    '3643df700757a247351b378bc7c3ac76' => $baseDir . '/inc/functions.php',
+    '0900f131f6c64f7eaafbb356073e2f2b' => $baseDir . '/app/Helpers/functions.php',
+    'a0df865efd35a33af6785a95b7f6b938' => $baseDir . '/app/Config/autoload.php',
 );
