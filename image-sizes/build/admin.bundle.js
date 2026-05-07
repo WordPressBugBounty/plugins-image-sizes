@@ -5487,6 +5487,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   getAllThumbnails: () => (/* binding */ getAllThumbnails),
 /* harmony export */   getConvertProgress: () => (/* binding */ getConvertProgress),
 /* harmony export */   getDashboardStats: () => (/* binding */ getDashboardStats),
+/* harmony export */   getDebugInfo: () => (/* binding */ getDebugInfo),
 /* harmony export */   getDisabledThumbnails: () => (/* binding */ getDisabledThumbnails),
 /* harmony export */   getPluginSettings: () => (/* binding */ getPluginSettings),
 /* harmony export */   getRegenerateProgress: () => (/* binding */ getRegenerateProgress),
@@ -5633,6 +5634,11 @@ function savePluginSettings(settings) {
     path: "".concat(BASE_URL, "/settings"),
     method: 'POST',
     data: settings
+  });
+}
+function getDebugInfo() {
+  return (0,_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    path: "".concat(BASE_URL, "/debug/info")
   });
 }
 
@@ -8525,6 +8531,240 @@ function ConvertToWebP(_ref) {
     disabled: saving,
     className: "px-8 py-2.5 rounded-lg bg-thumbpress-primary text-white text-sm font-medium hover:bg-purple-800 transition-colors disabled:opacity-50 cursor-pointer"
   }, "Save Changes")));
+}
+
+/***/ },
+
+/***/ "./spa/admin/src/components/settings/Debug.tsx"
+/*!*****************************************************!*\
+  !*** ./spa/admin/src/components/settings/Debug.tsx ***!
+  \*****************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Debug)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../api */ "./spa/admin/src/api/index.ts");
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+function Badge(_ref) {
+  var ok = _ref.ok;
+  return /*#__PURE__*/React.createElement("span", {
+    className: "inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ".concat(ok ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700')
+  }, ok ? 'Enabled' : 'Disabled');
+}
+function StatusBadge(_ref2) {
+  var status = _ref2.status;
+  if (!status) return /*#__PURE__*/React.createElement("span", {
+    className: "text-[#94A3B8] text-sm"
+  }, "\u2014");
+  var ok = status.toLowerCase() === 'active' || status.toLowerCase() === 'valid';
+  return /*#__PURE__*/React.createElement("span", {
+    className: "inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ".concat(ok ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700')
+  }, status);
+}
+function Row(_ref3) {
+  var label = _ref3.label,
+    value = _ref3.value;
+  return /*#__PURE__*/React.createElement("tr", {
+    className: "border-b border-[#F1F5F9] last:border-0"
+  }, /*#__PURE__*/React.createElement("td", {
+    className: "py-2.5 pr-6 text-sm text-[#64748B] w-48 align-top whitespace-nowrap"
+  }, label), /*#__PURE__*/React.createElement("td", {
+    className: "py-2.5 text-sm text-thumbpress-title font-medium"
+  }, value));
+}
+function Section(_ref4) {
+  var title = _ref4.title,
+    children = _ref4.children;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "mb-6 last:mb-0"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "text-xs font-semibold uppercase tracking-wide text-[#94A3B8] mb-2"
+  }, title), /*#__PURE__*/React.createElement("table", {
+    className: "w-full"
+  }, /*#__PURE__*/React.createElement("tbody", null, children)));
+}
+function Debug(_ref5) {
+  var onDataLoaded = _ref5.onDataLoaded;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState2 = _slicedToArray(_useState, 2),
+    info = _useState2[0],
+    setInfo = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState4 = _slicedToArray(_useState3, 2),
+    loading = _useState4[0],
+    setLoading = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState6 = _slicedToArray(_useState5, 2),
+    error = _useState6[0],
+    setError = _useState6[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    (0,_api__WEBPACK_IMPORTED_MODULE_1__.getDebugInfo)().then(function (res) {
+      if (res.success && res.data) {
+        setInfo(res.data);
+        onDataLoaded === null || onDataLoaded === void 0 || onDataLoaded(res.data);
+      } else {
+        setError('Failed to load debug info.');
+      }
+    })["catch"](function () {
+      return setError('Failed to load debug info.');
+    })["finally"](function () {
+      return setLoading(false);
+    });
+  }, []);
+  if (loading) {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "text-sm text-[#94A3B8] py-4"
+    }, "Loading\u2026");
+  }
+  if (error || !info) {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "text-sm text-red-500 py-4"
+    }, error || 'No data.');
+  }
+  var tp = info.thumbpress;
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Section, {
+    title: "System"
+  }, /*#__PURE__*/React.createElement(Row, {
+    label: "WordPress",
+    value: info.wordpress_version
+  }), /*#__PURE__*/React.createElement(Row, {
+    label: "PHP",
+    value: info.php_version
+  }), /*#__PURE__*/React.createElement(Row, {
+    label: "MySQL",
+    value: info.mysql_version
+  }), /*#__PURE__*/React.createElement(Row, {
+    label: "Server",
+    value: info.server_software
+  }), /*#__PURE__*/React.createElement(Row, {
+    label: "PHP Memory Limit",
+    value: info.php_memory_limit
+  }), /*#__PURE__*/React.createElement(Row, {
+    label: "WP Memory Limit",
+    value: info.wp_memory_limit
+  }), /*#__PURE__*/React.createElement(Row, {
+    label: "Max Execution Time",
+    value: "".concat(info.php_max_execution, "s")
+  }), /*#__PURE__*/React.createElement(Row, {
+    label: "Upload Max Filesize",
+    value: info.php_upload_max
+  })), /*#__PURE__*/React.createElement(Section, {
+    title: "WordPress Config"
+  }, /*#__PURE__*/React.createElement(Row, {
+    label: "WP_DEBUG",
+    value: /*#__PURE__*/React.createElement(Badge, {
+      ok: info.wp_debug
+    })
+  }), /*#__PURE__*/React.createElement(Row, {
+    label: "WP_DEBUG_DISPLAY",
+    value: /*#__PURE__*/React.createElement(Badge, {
+      ok: info.wp_debug_display
+    })
+  }), /*#__PURE__*/React.createElement(Row, {
+    label: "WP_DEBUG_LOG",
+    value: /*#__PURE__*/React.createElement(Badge, {
+      ok: info.wp_debug_log
+    })
+  })), /*#__PURE__*/React.createElement(Section, {
+    title: "ThumbPress"
+  }, /*#__PURE__*/React.createElement(Row, {
+    label: "Version",
+    value: tp.thumbpress_version
+  }), /*#__PURE__*/React.createElement(Row, {
+    label: "Pro Plugin",
+    value: tp.pro_active ? /*#__PURE__*/React.createElement("span", {
+      className: "inline-flex items-center gap-1.5"
+    }, /*#__PURE__*/React.createElement(Badge, {
+      ok: true
+    }), tp.pro_version && /*#__PURE__*/React.createElement("span", {
+      className: "text-[#94A3B8] text-xs font-normal"
+    }, "v", tp.pro_version)) : /*#__PURE__*/React.createElement(Badge, {
+      ok: false
+    })
+  }), /*#__PURE__*/React.createElement(Row, {
+    label: "License Status",
+    value: /*#__PURE__*/React.createElement(StatusBadge, {
+      status: tp.license_status
+    })
+  }), /*#__PURE__*/React.createElement(Row, {
+    label: "License Key",
+    value: tp.license_key_set ? /*#__PURE__*/React.createElement("span", {
+      className: "inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-700"
+    }, "Set") : /*#__PURE__*/React.createElement("span", {
+      className: "inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-700"
+    }, "Not Set")
+  }), /*#__PURE__*/React.createElement(Row, {
+    label: "Lazy Load",
+    value: /*#__PURE__*/React.createElement(Badge, {
+      ok: tp.lazy_load
+    })
+  }), /*#__PURE__*/React.createElement(Row, {
+    label: "Right-Click Disable",
+    value: /*#__PURE__*/React.createElement(Badge, {
+      ok: tp.right_click_disable
+    })
+  }), /*#__PURE__*/React.createElement(Row, {
+    label: "Hotlink Protection",
+    value: /*#__PURE__*/React.createElement(Badge, {
+      ok: tp.hotlink_protection
+    })
+  }), /*#__PURE__*/React.createElement(Row, {
+    label: "WebP on Upload",
+    value: /*#__PURE__*/React.createElement(Badge, {
+      ok: tp.webp_on_upload
+    })
+  }), /*#__PURE__*/React.createElement(Row, {
+    label: "AVIF on Upload",
+    value: /*#__PURE__*/React.createElement(Badge, {
+      ok: tp.avif_on_upload
+    })
+  }), /*#__PURE__*/React.createElement(Row, {
+    label: "Max File Size",
+    value: tp.max_file_size
+  }), /*#__PURE__*/React.createElement(Row, {
+    label: "Max Dimensions",
+    value: tp.max_dimensions
+  }), /*#__PURE__*/React.createElement(Row, {
+    label: "Disabled Sizes",
+    value: tp.disabled_sizes.length > 0 ? /*#__PURE__*/React.createElement("span", {
+      className: "font-mono text-xs"
+    }, tp.disabled_sizes.join(', ')) : /*#__PURE__*/React.createElement("span", {
+      className: "text-[#94A3B8]"
+    }, "None")
+  })), /*#__PURE__*/React.createElement(Section, {
+    title: "Active Theme"
+  }, /*#__PURE__*/React.createElement(Row, {
+    label: "Name",
+    value: info.active_theme.name
+  }), /*#__PURE__*/React.createElement(Row, {
+    label: "Version",
+    value: info.active_theme.version
+  }), info.active_theme.parent && /*#__PURE__*/React.createElement(Row, {
+    label: "Parent Theme",
+    value: "".concat(info.active_theme.parent.name, " v").concat(info.active_theme.parent.version)
+  })), /*#__PURE__*/React.createElement(Section, {
+    title: "Active Plugins (".concat(info.active_plugins.length, ")")
+  }, info.active_plugins.map(function (plugin) {
+    return /*#__PURE__*/React.createElement(Row, {
+      key: plugin.slug,
+      label: plugin.name,
+      value: /*#__PURE__*/React.createElement("span", {
+        className: "text-[#94A3B8] font-normal"
+      }, "v", plugin.version)
+    });
+  })));
 }
 
 /***/ },
@@ -12181,25 +12421,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
 /* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../api */ "./spa/admin/src/api/index.ts");
-/* harmony import */ var _components_ui_switch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/ui/switch */ "./spa/admin/src/components/ui/switch.tsx");
-/* harmony import */ var _components_layout_Header__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/layout/Header */ "./spa/admin/src/components/layout/Header.tsx");
-/* harmony import */ var _components_layout_PluginPage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/layout/PluginPage */ "./spa/admin/src/components/layout/PluginPage.tsx");
-/* harmony import */ var _components_ui_tabs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/ui/tabs */ "./spa/admin/src/components/ui/tabs.tsx");
-/* harmony import */ var _components_ui_card__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/ui/card */ "./spa/admin/src/components/ui/card.tsx");
-/* harmony import */ var _components_settings_General__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/settings/General */ "./spa/admin/src/components/settings/General.tsx");
-/* harmony import */ var _components_settings_RegenerateThumbnails__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/settings/RegenerateThumbnails */ "./spa/admin/src/components/settings/RegenerateThumbnails.tsx");
-/* harmony import */ var _components_settings_CompressImages__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/settings/CompressImages */ "./spa/admin/src/components/settings/CompressImages.tsx");
-/* harmony import */ var _components_settings_DuplicateImages__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/settings/DuplicateImages */ "./spa/admin/src/components/settings/DuplicateImages.tsx");
-/* harmony import */ var _components_settings_ConvertToWebP__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../components/settings/ConvertToWebP */ "./spa/admin/src/components/settings/ConvertToWebP.tsx");
-/* harmony import */ var _components_settings_ConvertToAvif__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../components/settings/ConvertToAvif */ "./spa/admin/src/components/settings/ConvertToAvif.tsx");
-/* harmony import */ var _components_settings_SocialShareImage__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/settings/SocialShareImage */ "./spa/admin/src/components/settings/SocialShareImage.tsx");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/check.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/copy.js");
+/* harmony import */ var sonner__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! sonner */ "./node_modules/sonner/dist/index.mjs");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../api */ "./spa/admin/src/api/index.ts");
+/* harmony import */ var _components_ui_switch__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/ui/switch */ "./spa/admin/src/components/ui/switch.tsx");
+/* harmony import */ var _components_layout_Header__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/layout/Header */ "./spa/admin/src/components/layout/Header.tsx");
+/* harmony import */ var _components_layout_PluginPage__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/layout/PluginPage */ "./spa/admin/src/components/layout/PluginPage.tsx");
+/* harmony import */ var _components_ui_tabs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/ui/tabs */ "./spa/admin/src/components/ui/tabs.tsx");
+/* harmony import */ var _components_ui_card__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/ui/card */ "./spa/admin/src/components/ui/card.tsx");
+/* harmony import */ var _components_settings_General__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/settings/General */ "./spa/admin/src/components/settings/General.tsx");
+/* harmony import */ var _components_settings_RegenerateThumbnails__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../components/settings/RegenerateThumbnails */ "./spa/admin/src/components/settings/RegenerateThumbnails.tsx");
+/* harmony import */ var _components_settings_CompressImages__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../components/settings/CompressImages */ "./spa/admin/src/components/settings/CompressImages.tsx");
+/* harmony import */ var _components_settings_DuplicateImages__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/settings/DuplicateImages */ "./spa/admin/src/components/settings/DuplicateImages.tsx");
+/* harmony import */ var _components_settings_ConvertToWebP__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../components/settings/ConvertToWebP */ "./spa/admin/src/components/settings/ConvertToWebP.tsx");
+/* harmony import */ var _components_settings_ConvertToAvif__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../components/settings/ConvertToAvif */ "./spa/admin/src/components/settings/ConvertToAvif.tsx");
+/* harmony import */ var _components_settings_SocialShareImage__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../components/settings/SocialShareImage */ "./spa/admin/src/components/settings/SocialShareImage.tsx");
+/* harmony import */ var _components_settings_Debug__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../components/settings/Debug */ "./spa/admin/src/components/settings/Debug.tsx");
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
 
 
 
@@ -12238,8 +12485,16 @@ function Settings() {
     _useState8 = _slicedToArray(_useState7, 2),
     disabledSizes = _useState8[0],
     setDisabledSizes = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState0 = _slicedToArray(_useState9, 2),
+    debugInfo = _useState0[0],
+    setDebugInfo = _useState0[1];
+  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState10 = _slicedToArray(_useState1, 2),
+    debugCopied = _useState10[0],
+    setDebugCopied = _useState10[1];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    Promise.all([(0,_api__WEBPACK_IMPORTED_MODULE_3__.getPluginSettings)(), (0,_api__WEBPACK_IMPORTED_MODULE_3__.getAllThumbnails)(), (0,_api__WEBPACK_IMPORTED_MODULE_3__.getDisabledThumbnails)()]).then(function (_ref) {
+    Promise.all([(0,_api__WEBPACK_IMPORTED_MODULE_6__.getPluginSettings)(), (0,_api__WEBPACK_IMPORTED_MODULE_6__.getAllThumbnails)(), (0,_api__WEBPACK_IMPORTED_MODULE_6__.getDisabledThumbnails)()]).then(function (_ref) {
       var _ref2 = _slicedToArray(_ref, 3),
         settingsRes = _ref2[0],
         sizesRes = _ref2[1],
@@ -12262,6 +12517,31 @@ function Settings() {
       tab: slug
     });
   };
+  var handleDebugCopy = function handleDebugCopy() {
+    var _navigator$clipboard;
+    if (!debugInfo) return;
+    var text = JSON.stringify(debugInfo, null, 2);
+    var finish = function finish() {
+      setDebugCopied(true);
+      sonner__WEBPACK_IMPORTED_MODULE_5__.toast.success('Debug info copied to clipboard.');
+      setTimeout(function () {
+        return setDebugCopied(false);
+      }, 2000);
+    };
+    if ((_navigator$clipboard = navigator.clipboard) !== null && _navigator$clipboard !== void 0 && _navigator$clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(finish);
+    } else {
+      var el = document.createElement('textarea');
+      el.value = text;
+      el.style.position = 'fixed';
+      el.style.opacity = '0';
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+      finish();
+    }
+  };
   var allToggleable = Object.keys(thumbnailSizes).filter(function (n) {
     return n !== 'full';
   });
@@ -12271,7 +12551,7 @@ function Settings() {
   var defaultTabs = [{
     label: 'General',
     slug: 'general',
-    content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_settings_General__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_settings_General__WEBPACK_IMPORTED_MODULE_12__["default"], {
       settings: pluginSettings
     }),
     title: 'General Settings',
@@ -12279,14 +12559,14 @@ function Settings() {
   }, {
     label: 'Thumbnails',
     slug: 'thumbnails',
-    content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_settings_RegenerateThumbnails__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_settings_RegenerateThumbnails__WEBPACK_IMPORTED_MODULE_13__["default"], {
       sizes: thumbnailSizes,
       disabled: disabledSizes,
       onDisabledChange: setDisabledSizes
     }),
     title: 'Thumbnail Generation',
     tooltip: 'Disable thumbnail generation for specific image sizes',
-    headerAction: allToggleable.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ui_switch__WEBPACK_IMPORTED_MODULE_4__.Switch, {
+    headerAction: allToggleable.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ui_switch__WEBPACK_IMPORTED_MODULE_7__.Switch, {
       checked: allEnabled,
       onCheckedChange: function onCheckedChange(checked) {
         return setDisabledSizes(checked ? [] : allToggleable);
@@ -12295,19 +12575,19 @@ function Settings() {
   }, {
     label: 'Duplicate Images',
     slug: 'duplicate-images',
-    content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_settings_DuplicateImages__WEBPACK_IMPORTED_MODULE_12__["default"], null),
+    content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_settings_DuplicateImages__WEBPACK_IMPORTED_MODULE_15__["default"], null),
     title: 'Duplicate Upload Prevention',
     tooltip: 'Prevent uploading duplicate images to your media library'
   }, {
     label: 'Compress Images',
     slug: 'compress-images',
-    content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_settings_CompressImages__WEBPACK_IMPORTED_MODULE_11__["default"], null),
+    content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_settings_CompressImages__WEBPACK_IMPORTED_MODULE_14__["default"], null),
     title: 'File Compression Settings',
     tooltip: 'Image compression additional settings'
   }, {
     label: 'Convert to WebP',
     slug: 'convert-to-webp',
-    content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_settings_ConvertToWebP__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_settings_ConvertToWebP__WEBPACK_IMPORTED_MODULE_16__["default"], {
       settings: pluginSettings
     }),
     title: 'Convert to WebP',
@@ -12315,7 +12595,7 @@ function Settings() {
   }, {
     label: 'Convert to AVIF',
     slug: 'convert-to-avif',
-    content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_settings_ConvertToAvif__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_settings_ConvertToAvif__WEBPACK_IMPORTED_MODULE_17__["default"], {
       settings: pluginSettings
     }),
     title: 'Convert to AVIF',
@@ -12323,38 +12603,56 @@ function Settings() {
   }, {
     label: 'Social Share Image',
     slug: 'social-share-image',
-    content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_settings_SocialShareImage__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_settings_SocialShareImage__WEBPACK_IMPORTED_MODULE_18__["default"], {
       settings: pluginSettings
     }),
     title: 'Platform Configuration',
     tooltip: 'Manage the image used for social media sharing'
+  }, {
+    label: 'Debug',
+    slug: 'debug',
+    content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_settings_Debug__WEBPACK_IMPORTED_MODULE_19__["default"], {
+      onDataLoaded: setDebugInfo
+    }),
+    title: 'Debug Information',
+    tooltip: 'System and plugin info for support',
+    headerAction: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      onClick: handleDebugCopy,
+      disabled: !debugInfo,
+      className: "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#E2E8F0] text-sm text-[#64748B] hover:border-thumbpress-primary hover:text-thumbpress-primary transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+    }, debugCopied ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      size: 14,
+      className: "text-green-600"
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      size: 14
+    }), debugCopied ? 'Copied!' : 'Copy as JSON')
   }];
   var settingsTabs = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_2__.applyFilters)('thumbpress_settings_tabs', defaultTabs);
-  if (loading) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_layout_Header__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  if (loading) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_layout_Header__WEBPACK_IMPORTED_MODULE_8__["default"], {
     title: "Settings"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_layout_PluginPage__WEBPACK_IMPORTED_MODULE_6__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_layout_PluginPage__WEBPACK_IMPORTED_MODULE_9__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "flex items-center justify-center h-40 text-sm text-gray-400"
   }, "Loading\u2026")));
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_layout_Header__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_layout_Header__WEBPACK_IMPORTED_MODULE_8__["default"], {
     title: "Settings"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_layout_PluginPage__WEBPACK_IMPORTED_MODULE_6__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_7__.Tabs, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_layout_PluginPage__WEBPACK_IMPORTED_MODULE_9__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_10__.Tabs, {
     defaultValue: activeTab,
     onValueChange: handleTabChange,
     className: "rounded-xl border border-[#E2E8F0] bg-white p-6 h-full"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_7__.TabsList, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_10__.TabsList, {
     variant: "line",
     className: "w-full overflow-y-auto mb-5"
   }, settingsTabs.map(function (tab, index) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_7__.TabsTrigger, {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_10__.TabsTrigger, {
       key: index,
       value: tab.slug
     }, tab.label);
   })), settingsTabs.map(function (tab) {
     var _window$THUMBPRESS;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_7__.TabsContent, {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_10__.TabsContent, {
       key: tab.slug,
       value: tab.slug
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ui_card__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ui_card__WEBPACK_IMPORTED_MODULE_11__["default"], {
       title: tab.title,
       tooltip: tab.tooltip,
       headerAction: tab.headerAction,
@@ -12671,6 +12969,38 @@ const ChevronUp = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"
 
 
 //# sourceMappingURL=chevron-up.js.map
+
+
+/***/ },
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/copy.js"
+/*!**********************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/copy.js ***!
+  \**********************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Copy)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.378.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const Copy = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("Copy", [
+  ["rect", { width: "14", height: "14", x: "8", y: "8", rx: "2", ry: "2", key: "17jyea" }],
+  ["path", { d: "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2", key: "zix9uf" }]
+]);
+
+
+//# sourceMappingURL=copy.js.map
 
 
 /***/ },

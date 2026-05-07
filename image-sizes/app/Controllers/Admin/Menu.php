@@ -62,7 +62,7 @@ class Menu {
 			$slug,
 			array( $this, 'render_spa' ),
 			'dashicons-format-image',
-			2
+			10.1
 		);
 
 		// All submenus point to the same page slug.

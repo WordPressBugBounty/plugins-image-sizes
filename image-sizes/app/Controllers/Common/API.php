@@ -374,5 +374,93 @@ class API {
 				'permission_callback' => array( $this, 'is_admin' ),
 			)
 		);
+
+		/**
+		 * Debug Info API
+		 */
+		register_rest_route(
+			$this->namespace,
+			'/debug/info',
+			array(
+				'methods'             => WP_REST_Server::READABLE,
+				'callback'            => array( $this, 'get_debug_info' ),
+				'permission_callback' => array( $this, 'is_admin' ),
+			)
+		);
+	}
+
+	public function get_debug_info() {
+		global $wpdb;
+
+		// MySQL version
+		$mysql_version = $wpdb->get_var( 'SELECT VERSION()' );
+
+		// Active plugins with name + version
+		$all_plugins    = get_plugins();
+		$active_slugs   = get_option( 'active_plugins', array() );
+		$active_plugins = array();
+		foreach ( $active_slugs as $slug ) {
+			if ( isset( $all_plugins[ $slug ] ) ) {
+				$p                = $all_plugins[ $slug ];
+				$active_plugins[] = array(
+					'name'    => $p['Name'],
+					'version' => $p['Version'],
+					'slug'    => $slug,
+				);
+			}
+		}
+
+		// Active theme
+		$theme       = wp_get_theme();
+		$parent      = $theme->parent();
+		$active_theme = array(
+			'name'    => $theme->get( 'Name' ),
+			'version' => $theme->get( 'Version' ),
+		);
+		if ( $parent ) {
+			$active_theme['parent'] = array(
+				'name'    => $parent->get( 'Name' ),
+				'version' => $parent->get( 'Version' ),
+			);
+		}
+
+		// ThumbPress settings
+		$prevent      = get_option( 'prevent_image_sizes', array() );
+		$disabled     = isset( $prevent['disables'] ) ? $prevent['disables'] : array();
+		$max_size_raw = get_option( 'image-max-size', array() );
+		$tp_settings  = array(
+			'lazy_load'          => (bool) get_option( 'thumbpress_lazy_load', false ),
+			'right_click_disable'=> (bool) get_option( 'image_download_disable', false ),
+			'hotlink_protection' => (bool) get_option( 'thumbpress_hotlink_protection', false ),
+			'webp_on_upload'     => (bool) get_option( 'convert-img-on-upload', false ),
+			'avif_on_upload'     => (bool) get_option( 'thumbpress_avif_convert_on_upload', false ),
+			'disabled_sizes'     => $disabled,
+			'max_file_size'      => isset( $max_size_raw['max-size'] ) ? $max_size_raw['max-size'] . ' ' . ( $max_size_raw['max-size-unit'] ?? 'KB' ) : 'Not set',
+			'max_dimensions'     => ( isset( $max_size_raw['max-width'] ) && $max_size_raw['max-width'] ) ? $max_size_raw['max-width'] . 'x' . ( $max_size_raw['max-height'] ?? '0' ) . 'px' : 'Not set',
+			'thumbpress_version' => defined( 'THUMBPRESS_VERSION' ) ? THUMBPRESS_VERSION : get_plugin_data( WP_PLUGIN_DIR . '/image-sizes/image-sizes.php' )['Version'] ?? 'Unknown',
+			'pro_active'         => defined( 'THUMBPRESS_PRO_VERSION' ),
+			'pro_version'        => defined( 'THUMBPRESS_PRO_VERSION' ) ? THUMBPRESS_PRO_VERSION : null,
+			'license_status'     => apply_filters( 'thumbpress_debug_license_status', null ),
+			'license_key_set'    => apply_filters( 'thumbpress_debug_license_key_set', false ),
+		);
+
+		$data = array(
+			'wordpress_version' => get_bloginfo( 'version' ),
+			'php_version'       => PHP_VERSION,
+			'mysql_version'     => $mysql_version,
+			'server_software'   => isset( $_SERVER['SERVER_SOFTWARE'] ) ? sanitize_text_field( $_SERVER['SERVER_SOFTWARE'] ) : 'Unknown',
+			'wp_debug'          => defined( 'WP_DEBUG' ) && WP_DEBUG,
+			'wp_debug_display'  => defined( 'WP_DEBUG_DISPLAY' ) && WP_DEBUG_DISPLAY,
+			'wp_debug_log'      => defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG,
+			'wp_memory_limit'   => defined( 'WP_MEMORY_LIMIT' ) ? WP_MEMORY_LIMIT : ini_get( 'memory_limit' ),
+			'php_memory_limit'  => ini_get( 'memory_limit' ),
+			'php_max_execution' => ini_get( 'max_execution_time' ),
+			'php_upload_max'    => ini_get( 'upload_max_filesize' ),
+			'active_plugins'    => $active_plugins,
+			'active_theme'      => $active_theme,
+			'thumbpress'        => $tp_settings,
+		);
+
+		return rest_ensure_response( array( 'success' => true, 'data' => $data ) );
 	}
 }
