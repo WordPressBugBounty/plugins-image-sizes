@@ -444,6 +444,13 @@ class API {
 			'license_key_set'    => apply_filters( 'thumbpress_debug_license_key_set', false ),
 		);
 
+		$total_images = (int) $wpdb->get_var(
+			"SELECT COUNT(*) FROM {$wpdb->posts}
+			 WHERE post_type = 'attachment'
+			 AND post_mime_type LIKE 'image/%'
+			 AND post_status = 'inherit'"
+		);
+
 		$data = array(
 			'wordpress_version' => get_bloginfo( 'version' ),
 			'php_version'       => PHP_VERSION,
@@ -456,6 +463,7 @@ class API {
 			'php_memory_limit'  => ini_get( 'memory_limit' ),
 			'php_max_execution' => ini_get( 'max_execution_time' ),
 			'php_upload_max'    => ini_get( 'upload_max_filesize' ),
+			'total_images'      => $total_images,
 			'active_plugins'    => $active_plugins,
 			'active_theme'      => $active_theme,
 			'thumbpress'        => $tp_settings,

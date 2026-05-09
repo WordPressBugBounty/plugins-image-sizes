@@ -7038,6 +7038,21 @@ __webpack_require__.r(__webpack_exports__);
 
 function Layout(_ref) {
   var navItems = _ref.navItems;
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (document.querySelector('script[data-site-key="8291588342a02fbf368fccfe1083737a"]')) {
+      return;
+    }
+    var script = document.createElement('script');
+    script.src = 'https://helpwp.dev/cdn/chat.min.js';
+    script.setAttribute('data-site-key', '8291588342a02fbf368fccfe1083737a');
+    script.setAttribute('data-agent-name', 'Luna');
+    script.setAttribute('data-agent-avatar', 'https://helpwp.dev/cdn/luna.webp');
+    script.setAttribute('data-welcome-message', 'Hi, I\'m Luna, your ThumbPress assistant. How can I help you today?');
+    script.setAttribute('data-formatted', 'false');
+    script.setAttribute('data-primary-color', '#40189d');
+    script.defer = true;
+    document.body.appendChild(script);
+  }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "flex font-inter"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Sidebar__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -8660,6 +8675,9 @@ function Debug(_ref5) {
   }), /*#__PURE__*/React.createElement(Row, {
     label: "Upload Max Filesize",
     value: info.php_upload_max
+  }), /*#__PURE__*/React.createElement(Row, {
+    label: "Total Images",
+    value: info.total_images.toLocaleString()
   })), /*#__PURE__*/React.createElement(Section, {
     title: "WordPress Config"
   }, /*#__PURE__*/React.createElement(Row, {

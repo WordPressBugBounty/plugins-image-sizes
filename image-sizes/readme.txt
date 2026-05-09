@@ -1,10 +1,10 @@
 === ThumbPress – Compress Images, Manage Thumbnails, Detect Image Issues, WebP/AVIF, Lazy Loading, Hotlinking & More ===
 Contributors: thumbpressco, codexpert, mukto90
 Tags: image optimization, compress images, thumbnail manager, WebP converter, media library cleaner, AVIF converter, regenerate thumbnails, unused images, lazy load, hotlink protection
-Requires at least: 6.0.2
+Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 6.0
+Stable tag: 6.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -231,6 +231,13 @@ ThumbPress scans your media library and compares image files using unique hashes
 14. Social Media Share - Set custom thumbnails for each platform
 
 == Changelog ==
+
+= 6.1.1 - 2026-05-09 =
+* [imp] Set stats cache expiry to 1 hour
+
+= 6.1 - 2026-05-09 =
+* [fix] Fixed heavy `_thumbpress_file_hash` queries after opening dashboard
+* [add] Added number of images in the debug dataset
 
 = 6.0.2 - 2026-05-07 =
 * [add] Added a Debug tab under Settings with system info (WordPress, PHP, MySQL, server software, memory limits), active plugins list, active theme, WP_DEBUG flags, and ThumbPress-specific settings

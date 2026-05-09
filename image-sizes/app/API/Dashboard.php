@@ -81,7 +81,7 @@ class Dashboard {
 			 AND post_status = 'inherit'"
 		);
 
-		$this->set_cache( 'stat_total_images', $value, 300, true );
+		$this->set_cache( 'stat_total_images', $value, HOUR_IN_SECONDS, true );
 		return $value;
 	}
 
@@ -116,7 +116,7 @@ class Dashboard {
 			'disabled_sizes' => $disabled_count,
 		);
 
-		$this->set_cache( 'stat_sizes_data', $value, 300 );
+		$this->set_cache( 'stat_sizes_data', $value, HOUR_IN_SECONDS );
 		return $value;
 	}
 
@@ -140,7 +140,7 @@ class Dashboard {
 			 )"
 		);
 
-		$this->set_cache( 'stat_unoptimized', $value, 300, true );
+		$this->set_cache( 'stat_unoptimized', $value, HOUR_IN_SECONDS, true );
 		return $value;
 	}
 
@@ -167,7 +167,7 @@ class Dashboard {
 			 )"
 		);
 
-		$this->set_cache( 'stat_not_compressed', $value, 300, true );
+		$this->set_cache( 'stat_not_compressed', $value, HOUR_IN_SECONDS, true );
 		return $value;
 	}
 
@@ -186,7 +186,7 @@ class Dashboard {
 			 AND post_status = 'inherit'"
 		);
 
-		$this->set_cache( 'stat_not_webp', $value, 300, true );
+		$this->set_cache( 'stat_not_webp', $value, HOUR_IN_SECONDS, true );
 		return $value;
 	}
 
@@ -205,7 +205,7 @@ class Dashboard {
 			 AND post_status = 'inherit'"
 		);
 
-		$this->set_cache( 'stat_not_avif', $value, 300, true );
+		$this->set_cache( 'stat_not_avif', $value, HOUR_IN_SECONDS, true );
 		return $value;
 	}
 
@@ -219,28 +219,28 @@ class Dashboard {
 		$value = (int) $wpdb->get_var(
 			$wpdb->prepare(
 				"SELECT COUNT(*)
-			 FROM {$wpdb->posts} p
-			 INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id AND pm.meta_key = %s
-			 WHERE p.post_type = 'attachment'
-			 AND p.post_mime_type LIKE 'image/%'
-			 AND p.post_status != 'trash'
-			 AND pm.meta_value IN (
-				SELECT pm2.meta_value
-				FROM {$wpdb->postmeta} pm2
-				INNER JOIN {$wpdb->posts} p2 ON pm2.post_id = p2.ID
-				WHERE pm2.meta_key = %s
-				AND p2.post_type = 'attachment'
-				AND p2.post_mime_type LIKE 'image/%'
-				AND p2.post_status != 'trash'
-				GROUP BY pm2.meta_value
-				HAVING COUNT(*) > 1
-			 )",
+             FROM {$wpdb->posts} p
+             INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id AND pm.meta_key = %s
+             INNER JOIN (
+                 SELECT pm2.meta_value
+                 FROM {$wpdb->postmeta} pm2
+                 INNER JOIN {$wpdb->posts} p2 ON pm2.post_id = p2.ID
+                 WHERE pm2.meta_key = %s
+                 AND p2.post_type = 'attachment'
+                 AND p2.post_mime_type LIKE 'image/%'
+                 AND p2.post_status != 'trash'
+                 GROUP BY pm2.meta_value
+                 HAVING COUNT(*) > 1
+             ) AS dup_hashes ON pm.meta_value = dup_hashes.meta_value
+             WHERE p.post_type = 'attachment'
+             AND p.post_mime_type LIKE 'image/%'
+             AND p.post_status != 'trash'",
 				Utility::HASH_META_KEY,
 				Utility::HASH_META_KEY
 			)
 		);
 
-		$this->set_cache( 'stat_duplicates', $value, 600, true );
+		$this->set_cache( 'stat_duplicates', $value, HOUR_IN_SECONDS, true );
 		return $value;
 	}
 
@@ -325,14 +325,17 @@ class Dashboard {
 
 		$attachment_ids = $wpdb->get_col(
 			"SELECT ID FROM {$wpdb->posts}
-			 WHERE post_type = 'attachment'
-			 AND post_mime_type LIKE 'image/%'
-			 AND post_status = 'inherit'"
+         WHERE post_type = 'attachment'
+         AND post_mime_type LIKE 'image/%'
+         AND post_status = 'inherit'"
 		);
 
 		if ( empty( $attachment_ids ) ) {
+			$this->set_cache( 'stat_large_images', 0, HOUR_IN_SECONDS, true );
 			return 0;
 		}
+
+		update_meta_cache( 'post', $attachment_ids );
 
 		$threshold = 1024 * 1024;
 		$count     = 0;
@@ -347,7 +350,7 @@ class Dashboard {
 			}
 		}
 
-		$this->set_cache( 'stat_large_images', $count, 3600, true );
+		$this->set_cache( 'stat_large_images', $count, HOUR_IN_SECONDS, true );
 		return $count;
 	}
 
@@ -364,14 +367,17 @@ class Dashboard {
 
 		$attachment_ids = $wpdb->get_col(
 			"SELECT ID FROM {$wpdb->posts}
-			 WHERE post_type = 'attachment'
-			 AND post_mime_type LIKE 'image/%'
-			 AND post_status = 'inherit'"
+         WHERE post_type = 'attachment'
+         AND post_mime_type LIKE 'image/%'
+         AND post_status = 'inherit'"
 		);
 
 		if ( empty( $attachment_ids ) ) {
+			$this->set_cache( 'stat_total_thumbnails', 0, HOUR_IN_SECONDS, true );
 			return 0;
 		}
+
+		update_meta_cache( 'post', $attachment_ids );
 
 		$count = 0;
 
@@ -382,7 +388,7 @@ class Dashboard {
 			}
 		}
 
-		$this->set_cache( 'stat_total_thumbnails', $count, 3600, true );
+		$this->set_cache( 'stat_total_thumbnails', $count, HOUR_IN_SECONDS, true );
 		return $count;
 	}
 
