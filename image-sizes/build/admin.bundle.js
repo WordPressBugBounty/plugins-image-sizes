@@ -10842,6 +10842,7 @@ function ConvertToWebP() {
     spaceSaved = _useState20[0],
     setSpaceSaved = _useState20[1];
   var pollRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  var generationRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(0);
   var circumference = 2 * Math.PI * 80;
   var strokeDashoffset = circumference - progress / 100 * circumference;
   var detectImageUrl = (((_window$THUMBPRESS = window.THUMBPRESS) === null || _window$THUMBPRESS === void 0 ? void 0 : _window$THUMBPRESS.assets_url) || '') + 'admin/img/no-search-result.png';
@@ -10858,6 +10859,7 @@ function ConvertToWebP() {
     };
   }, []);
   var handleScanAgain = function handleScanAgain() {
+    generationRef.current++;
     setHasStarted(false);
     setConverting(false);
     setNoImages(false);
@@ -10880,6 +10882,7 @@ function ConvertToWebP() {
     });
   };
   var handleConvertNow = function handleConvertNow() {
+    var myGen = ++generationRef.current;
     var limit = parseInt(chunkSize, 10) || 10;
     var fileFormats = formats.filter(function (f) {
       return f.checked;
@@ -10903,13 +10906,25 @@ function ConvertToWebP() {
         return _regenerator().w(function (_context) {
           while (1) switch (_context.p = _context.n) {
             case 0:
-              _context.p = 0;
-              _context.n = 1;
-              return (0,_api__WEBPACK_IMPORTED_MODULE_5__.convertNow)(offset, limit, fileFormats, currentSpaceSaved);
+              if (!(generationRef.current !== myGen)) {
+                _context.n = 1;
+                break;
+              }
+              return _context.a(2);
             case 1:
+              _context.p = 1;
+              _context.n = 2;
+              return (0,_api__WEBPACK_IMPORTED_MODULE_5__.convertNow)(offset, limit, fileFormats, currentSpaceSaved);
+            case 2:
               res = _context.v;
+              if (!(generationRef.current !== myGen)) {
+                _context.n = 3;
+                break;
+              }
+              return _context.a(2);
+            case 3:
               if (res !== null && res !== void 0 && res.success) {
-                _context.n = 2;
+                _context.n = 4;
                 break;
               }
               setConverting(false);
@@ -10918,28 +10933,28 @@ function ConvertToWebP() {
                 setHasStarted(true);
               }
               return _context.a(2);
-            case 2:
+            case 4:
               if (!(res !== null && res !== void 0 && res.data && _typeof(res.data) === 'object')) {
-                _context.n = 5;
+                _context.n = 7;
                 break;
               }
               data = res.data;
               if (!firstChunk) {
-                _context.n = 4;
+                _context.n = 6;
                 break;
               }
               firstChunk = false;
               if (!((data.total || 0) === 0)) {
-                _context.n = 3;
+                _context.n = 5;
                 break;
               }
               setConverting(false);
               setNoImages(true);
               setHasStarted(true);
               return _context.a(2);
-            case 3:
+            case 5:
               setHasStarted(true);
-            case 4:
+            case 6:
               setProgress(Math.round(data.progress || 0));
               setConverted(data.converted || 0);
               setRemaining(data.remaining || 0);
@@ -10947,28 +10962,26 @@ function ConvertToWebP() {
               setSpaceSaved(data.space_saved || 0);
               offset = data.offset || 0;
               currentSpaceSaved = data.space_saved || 0;
-              if (data.progress !== undefined && data.progress >= 100) {
+              if (data.progress === undefined || data.progress >= 100) {
                 setConverting(false);
-              } else if (data.progress !== undefined && data.progress > 0) {
-                setTimeout(_processChunk, 500);
               } else {
-                setConverting(false);
+                setTimeout(_processChunk, 500);
               }
-              _context.n = 6;
-              break;
-            case 5:
-              setConverting(false);
-            case 6:
               _context.n = 8;
               break;
             case 7:
-              _context.p = 7;
-              _t = _context.v;
               setConverting(false);
             case 8:
+              _context.n = 10;
+              break;
+            case 9:
+              _context.p = 9;
+              _t = _context.v;
+              setConverting(false);
+            case 10:
               return _context.a(2);
           }
-        }, _callee, null, [[0, 7]]);
+        }, _callee, null, [[1, 9]]);
       }));
       return function processChunk() {
         return _ref2.apply(this, arguments);
@@ -11992,6 +12005,7 @@ function RegenerateThumbnails() {
     regenStats = _useState16[0],
     setRegenStats = _useState16[1];
   var pollRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  var generationRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(0);
   var stopPolling = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
     if (pollRef.current) {
       clearInterval(pollRef.current);
@@ -12071,6 +12085,7 @@ function RegenerateThumbnails() {
     };
   }, []);
   var handleScanAgain = function handleScanAgain() {
+    generationRef.current++;
     setHasStarted(false);
     setRegenerating(false);
     setNoImages(false);
@@ -12088,10 +12103,11 @@ function RegenerateThumbnails() {
   };
   var handleRegenerateNow = /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
-      var offset, limit, thumbsDeleted, thumbsCreated, spaceSaved, firstChunk, _processChunk;
+      var myGen, offset, limit, thumbsDeleted, thumbsCreated, spaceSaved, firstChunk, _processChunk;
       return _regenerator().w(function (_context3) {
         while (1) switch (_context3.n) {
           case 0:
+            myGen = ++generationRef.current;
             setRegenerating(true);
             setHasStarted(true);
             setNoImages(false);
@@ -12115,12 +12131,24 @@ function RegenerateThumbnails() {
                 return _regenerator().w(function (_context2) {
                   while (1) switch (_context2.n) {
                     case 0:
-                      _context2.n = 1;
-                      return (0,_api__WEBPACK_IMPORTED_MODULE_6__.regenerateNow)(offset, limit, thumbsDeleted, thumbsCreated, spaceSaved);
+                      if (!(generationRef.current !== myGen)) {
+                        _context2.n = 1;
+                        break;
+                      }
+                      return _context2.a(2);
                     case 1:
+                      _context2.n = 2;
+                      return (0,_api__WEBPACK_IMPORTED_MODULE_6__.regenerateNow)(offset, limit, thumbsDeleted, thumbsCreated, spaceSaved);
+                    case 2:
                       res = _context2.v;
+                      if (!(generationRef.current !== myGen)) {
+                        _context2.n = 3;
+                        break;
+                      }
+                      return _context2.a(2);
+                    case 3:
                       if (res.success) {
-                        _context2.n = 2;
+                        _context2.n = 4;
                         break;
                       }
                       setRegenerating(false);
@@ -12129,7 +12157,7 @@ function RegenerateThumbnails() {
                         setHasStarted(true);
                       }
                       return _context2.a(2);
-                    case 2:
+                    case 4:
                       data = _typeof(res.data) === 'object' ? res.data : {
                         message: String(res.data),
                         progress: 0,
@@ -12139,21 +12167,21 @@ function RegenerateThumbnails() {
                         total_images_count: 0
                       };
                       if (!firstChunk) {
-                        _context2.n = 4;
+                        _context2.n = 6;
                         break;
                       }
                       firstChunk = false;
                       if (!(Number(data.total_images_count) === 0)) {
-                        _context2.n = 3;
+                        _context2.n = 5;
                         break;
                       }
                       setRegenerating(false);
                       setNoImages(true);
                       setHasStarted(true);
                       return _context2.a(2);
-                    case 3:
+                    case 5:
                       setHasStarted(true);
-                    case 4:
+                    case 6:
                       currentProgress = Number(data.progress) || 0;
                       currentOffset = Number(data.offset) || 0;
                       setProgress(currentProgress);
@@ -12173,7 +12201,7 @@ function RegenerateThumbnails() {
                       } else {
                         setRegenerating(false);
                       }
-                    case 5:
+                    case 7:
                       return _context2.a(2);
                   }
                 }, _callee2);
@@ -12503,33 +12531,40 @@ function Settings() {
     _useState8 = _slicedToArray(_useState7, 2),
     disabledSizes = _useState8[0],
     setDisabledSizes = _useState8[1];
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState0 = _slicedToArray(_useState9, 2),
-    debugInfo = _useState0[0],
-    setDebugInfo = _useState0[1];
-  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    thumbnailsLoaded = _useState0[0],
+    setThumbnailsLoaded = _useState0[1];
+  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState10 = _slicedToArray(_useState1, 2),
-    debugCopied = _useState10[0],
-    setDebugCopied = _useState10[1];
+    debugInfo = _useState10[0],
+    setDebugInfo = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState12 = _slicedToArray(_useState11, 2),
+    debugCopied = _useState12[0],
+    setDebugCopied = _useState12[1];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    Promise.all([(0,_api__WEBPACK_IMPORTED_MODULE_6__.getPluginSettings)(), (0,_api__WEBPACK_IMPORTED_MODULE_6__.getAllThumbnails)(), (0,_api__WEBPACK_IMPORTED_MODULE_6__.getDisabledThumbnails)()]).then(function (_ref) {
-      var _ref2 = _slicedToArray(_ref, 3),
-        settingsRes = _ref2[0],
-        sizesRes = _ref2[1],
-        disabledRes = _ref2[2];
-      if (settingsRes.success && settingsRes.data) {
-        setPluginSettings(settingsRes.data);
-      }
+    (0,_api__WEBPACK_IMPORTED_MODULE_6__.getPluginSettings)().then(function (res) {
+      if (res.success && res.data) setPluginSettings(res.data);
+    })["finally"](function () {
+      return setLoading(false);
+    });
+  }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (activeTab !== 'thumbnails' || thumbnailsLoaded) return;
+    Promise.all([(0,_api__WEBPACK_IMPORTED_MODULE_6__.getAllThumbnails)(), (0,_api__WEBPACK_IMPORTED_MODULE_6__.getDisabledThumbnails)()]).then(function (_ref) {
+      var _ref2 = _slicedToArray(_ref, 2),
+        sizesRes = _ref2[0],
+        disabledRes = _ref2[1];
       if (sizesRes.success && sizesRes.data && typeof sizesRes.data !== 'string' && !Array.isArray(sizesRes.data)) {
         setThumbnailSizes(sizesRes.data);
       }
       if (disabledRes.success && disabledRes.data && typeof disabledRes.data !== 'string') {
         setDisabledSizes(disabledRes.data);
       }
-    })["finally"](function () {
-      return setLoading(false);
+      setThumbnailsLoaded(true);
     });
-  }, []);
+  }, [activeTab, thumbnailsLoaded]);
   var handleTabChange = function handleTabChange(slug) {
     setSearchParams({
       tab: slug
@@ -12669,7 +12704,8 @@ function Settings() {
     var _window$THUMBPRESS;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_10__.TabsContent, {
       key: tab.slug,
-      value: tab.slug
+      value: tab.slug,
+      keepMounted: false
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ui_card__WEBPACK_IMPORTED_MODULE_11__["default"], {
       title: tab.title,
       tooltip: tab.tooltip,

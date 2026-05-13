@@ -17,9 +17,9 @@ class Thumbnails {
 		$this->filter( 'intermediate_image_sizes_advanced', array( $this, 'filter_image_sizes' ) );
 		$this->filter( 'big_image_size_threshold', array( $this, 'filter_big_image_size' ) );
 		$this->action( 'thumbpress_regenerate_all_image', array( $this, 'regenerate_all_image' ) );
-		$this->action( 'thumbpress_thumbnail_sizes_saved', array( $this, 'clear_size_caches' ) );
 		$this->action( 'activated_plugin', array( $this, 'clear_size_caches' ) );
 		$this->action( 'deactivated_plugin', array( $this, 'clear_size_caches' ) );
+		$this->action( 'upgrader_process_complete', array( $this, 'clear_size_on_plugin_update' ), 10, 2 );
 		$this->action( 'add_attachment', array( $this, 'clear_thumbnail_count_cache' ) );
 		$this->action( 'delete_attachment', array( $this, 'clear_thumbnail_count_cache' ) );
 		$this->filter( 'attachment_fields_to_edit', array( $this, 'display_regenerate_btn' ), 10, 2 );
@@ -59,6 +59,12 @@ class Thumbnails {
 		);
 
 		return $form_fields;
+	}
+
+	public function clear_size_on_plugin_update( $upgrader, $options ) {
+		if ( isset( $options['type'] ) && 'plugin' === $options['type'] ) {
+			$this->clear_size_caches();
+		}
 	}
 
 	public function clear_size_caches() {

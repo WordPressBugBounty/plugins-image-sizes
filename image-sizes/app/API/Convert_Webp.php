@@ -251,6 +251,9 @@ class Convert_Webp {
 		update_option( 'thumbpress_now_convert_background_total_images', $total_attachments );
 		update_option( 'thumbpress_convert_img_val', $limit );
 
+		as_unschedule_all_actions( 'thumbpress_convert_all_image' );
+		delete_option( 'thumbpress_webp_cancelled' );
+
 		$action_id = as_schedule_single_action(
 			wp_date( 'U' ) - 10,
 			'thumbpress_convert_all_image',

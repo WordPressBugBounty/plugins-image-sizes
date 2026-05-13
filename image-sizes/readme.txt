@@ -4,7 +4,7 @@ Tags: image optimization, compress images, thumbnail manager, WebP converter, me
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 6.1.1
+Stable tag: 6.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -231,6 +231,15 @@ ThumbPress scans your media library and compares image files using unique hashes
 14. Social Media Share - Set custom thumbnails for each platform
 
 == Changelog ==
+
+= 6.1.2 - 2026-05-13 =
+* [fix] Fixed foreground chunk loop not stopping on cancel for Regenerate and Convert WebP
+* [fix] Fixed background WebP and AVIF stale queue, cancel race condition, and stuck loop
+* [fix] Fixed AVIF background conversion stuck at 0% due to empty batch and division by zero
+* [fix] Fixed loader modal conflicting with page head by moving it to wp_footer
+* [fix] Fixed thumbnail size caches not clearing immediately on save disabled sizes
+* [perf] Cache thumbnail sizes list for 24h; invalidate only on plugin activate, deactivate, or update
+* [perf] Lazy-load Settings tab data to reduce API calls on mount
 
 = 6.1.1 - 2026-05-09 =
 * [imp] Set stats cache expiry to 1 hour

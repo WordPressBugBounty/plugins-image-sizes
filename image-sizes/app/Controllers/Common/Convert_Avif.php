@@ -39,7 +39,7 @@ class Convert_Avif {
 	public function __construct() {
 		$this->filter( 'wp_handle_upload', array( $this, 'convert_image_on_upload' ) );
 		$this->filter( 'attachment_fields_to_edit', array( $this, 'display_convert_image_btn' ), 10, 2 );
-		$this->action( 'thumbpress_convert_all_image_avif', array( $this, 'convert_all_image' ) );
+		$this->action( 'thumbpress_convert_all_image_avif', array( $this, 'convert_all_image' ), 10, 2 );
 		$this->filter( 'intermediate_image_sizes_advanced', array( $this, 'image_sizes' ) );
 		$this->filter( 'big_image_size_threshold', array( $this, 'big_image_size' ), 10, 1 );
 		$this->action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
@@ -254,6 +254,15 @@ class Convert_Avif {
 
 		$attachments = $wpdb->get_results( $query );
 
+		if ( ! $total_attachments ) {
+			update_option( 'thumbpress_avif_convert_progress', 100 );
+			update_option( 'thumbpress_avif_convert_last_completed_time', wp_date( 'U' ) );
+			$this->delete_cache( 'stat_not_avif' );
+			$this->delete_cache( 'stat_not_webp' );
+			$this->delete_cache( 'stat_unoptimized' );
+			return;
+		}
+
 		if ( count( $attachments ) > 0 ) {
 			$batch_saved = 0;
 			foreach ( $attachments as $attachment ) {
@@ -357,20 +366,28 @@ class Convert_Avif {
 			update_option( 'thumbpress_avif_convert_space_saved', $space_saved );
 
 			if ( $progress < 100 ) {
-				as_schedule_single_action(
-					wp_date( 'U' ) - 10,
-					'thumbpress_convert_all_image_avif',
-					array(
-						'offset'       => $new_offset,
-						'file_formats' => $file_formats,
-					)
-				);
+				if ( ! get_option( 'thumbpress_avif_cancelled', false ) ) {
+					as_schedule_single_action(
+						wp_date( 'U' ) - 10,
+						'thumbpress_convert_all_image_avif',
+						array(
+							'offset'       => $new_offset,
+							'file_formats' => $file_formats,
+						)
+					);
+				}
 			} else {
 				update_option( 'thumbpress_avif_convert_last_completed_time', wp_date( 'U' ) );
 				$this->delete_cache( 'stat_not_avif' );
 				$this->delete_cache( 'stat_not_webp' );
 				$this->delete_cache( 'stat_unoptimized' );
 			}
+		} else {
+			update_option( 'thumbpress_avif_convert_progress', 100 );
+			update_option( 'thumbpress_avif_convert_last_completed_time', wp_date( 'U' ) );
+			$this->delete_cache( 'stat_not_avif' );
+			$this->delete_cache( 'stat_not_webp' );
+			$this->delete_cache( 'stat_unoptimized' );
 		}
 	}
 }

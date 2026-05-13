@@ -19,8 +19,8 @@ class Init {
 	 * Constructor to add all hooks.
 	 */
 	public function __construct() {
-		$this->action( 'wp_head', array( $this, 'modal' ) );
-		$this->action( 'admin_head', array( $this, 'modal' ) );
+		$this->action( 'wp_footer', array( $this, 'modal' ) );
+		$this->action( 'admin_footer', array( $this, 'modal' ) );
 		$this->action( 'wp_enqueue_scripts', array( $this, 'add_assets' ) );
 		$this->action( 'admin_enqueue_scripts', array( $this, 'add_assets' ) );
 		$this->action( 'admin_init', array( $this, 'schedule_hash_generation' ) );

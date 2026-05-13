@@ -172,6 +172,7 @@ class API {
 			array(
 				'methods'             => WP_REST_Server::CREATABLE,
 				'callback'            => function () {
+					update_option( 'thumbpress_webp_cancelled', true );
 					as_unschedule_all_actions( 'thumbpress_convert_all_image' );
 					delete_option( 'thumbpress_convert_progress' );
 					delete_option( 'thumbpress_convert_total_processd' );

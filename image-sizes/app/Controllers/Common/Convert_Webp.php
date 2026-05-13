@@ -365,14 +365,16 @@ class Convert_Webp {
 			update_option( 'thumbpress_convert_space_saved', $space_saved );
 
 			if ( $progress < 100 ) {
-				as_schedule_single_action(
-					wp_date( 'U' ) - 10,
-					'thumbpress_convert_all_image',
-					array(
-						'offset'       => $new_offset,
-						'file_formats' => $file_formats,
-					)
-				);
+				if ( ! get_option( 'thumbpress_webp_cancelled', false ) ) {
+					as_schedule_single_action(
+						wp_date( 'U' ) - 10,
+						'thumbpress_convert_all_image',
+						array(
+							'offset'       => $new_offset,
+							'file_formats' => $file_formats,
+						)
+					);
+				}
 			} else {
 				update_option( 'convert_last_completed_time', wp_date( 'U' ) );
 				$this->clear_webp_caches();

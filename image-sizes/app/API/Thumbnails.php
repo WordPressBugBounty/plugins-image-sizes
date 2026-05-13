@@ -110,7 +110,7 @@ class Thumbnails {
 			$disabled = array();
 		}
 		$disables = isset( $disabled['disables'] ) ? $disabled['disables'] : array();
-		$this->set_cache( $cache_key, $disables, 3600 );
+		$this->set_cache( $cache_key, $disables, 86400 );
 
 		return $this->response_success( $disables );
 	}
@@ -131,6 +131,9 @@ class Thumbnails {
 		$updated = update_option( 'prevent_image_sizes', array( 'disables' => $sizes ) );
 
 		if ( $updated ) {
+			$this->delete_cache( 'all_sizes' );
+			$this->delete_cache( 'disabled_sizes' );
+			$this->delete_cache( 'stat_sizes_data' );
 			do_action( 'thumbpress_thumbnail_sizes_saved' );
 			return $this->response_success( __( 'Disabled sizes saved successfully.', 'image-sizes' ) );
 		}

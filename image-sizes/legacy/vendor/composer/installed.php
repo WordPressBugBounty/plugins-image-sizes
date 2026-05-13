@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'image-sizes-legacy/image-sizes-legacy',
-        'pretty_version' => 'v6.1.1',
-        'version' => '6.1.1.0',
-        'reference' => 'ea1b798940db8a52e8db83b29358610c2c147448',
+        'pretty_version' => 'v6.1.2',
+        'version' => '6.1.2.0',
+        'reference' => '428e42cd68abe145f7cdeb6f11e50afad75b091f',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,9 +22,9 @@
             'dev_requirement' => false,
         ),
         'image-sizes-legacy/image-sizes-legacy' => array(
-            'pretty_version' => 'v6.1.1',
-            'version' => '6.1.1.0',
-            'reference' => 'ea1b798940db8a52e8db83b29358610c2c147448',
+            'pretty_version' => 'v6.1.2',
+            'version' => '6.1.2.0',
+            'reference' => '428e42cd68abe145f7cdeb6f11e50afad75b091f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
