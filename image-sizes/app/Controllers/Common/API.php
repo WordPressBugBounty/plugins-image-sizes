@@ -428,7 +428,7 @@ class API {
 		// ThumbPress settings
 		$prevent      = get_option( 'prevent_image_sizes', array() );
 		$disabled     = isset( $prevent['disables'] ) ? $prevent['disables'] : array();
-		$max_size_raw = get_option( 'image-max-size', array() );
+		$max_size_raw = get_option( 'thumbpress_image_max_size', array() );
 		$tp_settings  = array(
 			'lazy_load'          => (bool) get_option( 'thumbpress_lazy_load', false ),
 			'right_click_disable'=> (bool) get_option( 'image_download_disable', false ),
@@ -436,7 +436,7 @@ class API {
 			'webp_on_upload'     => (bool) get_option( 'convert-img-on-upload', false ),
 			'avif_on_upload'     => (bool) get_option( 'thumbpress_avif_convert_on_upload', false ),
 			'disabled_sizes'     => $disabled,
-			'max_file_size'      => isset( $max_size_raw['max-size'] ) ? $max_size_raw['max-size'] . ' ' . ( $max_size_raw['max-size-unit'] ?? 'KB' ) : 'Not set',
+			'max_file_size'      => isset( $max_size_raw['max-size'] ) && $max_size_raw['max-size'] !== '' ? $max_size_raw['max-size'] . ' ' . ( $max_size_raw['max-size-unit'] ?? 'KB' ) : 'Not set',
 			'max_dimensions'     => ( isset( $max_size_raw['max-width'] ) && $max_size_raw['max-width'] ) ? $max_size_raw['max-width'] . 'x' . ( $max_size_raw['max-height'] ?? '0' ) . 'px' : 'Not set',
 			'thumbpress_version' => defined( 'THUMBPRESS_VERSION' ) ? THUMBPRESS_VERSION : get_plugin_data( WP_PLUGIN_DIR . '/image-sizes/image-sizes.php' )['Version'] ?? 'Unknown',
 			'pro_active'         => defined( 'THUMBPRESS_PRO_VERSION' ),

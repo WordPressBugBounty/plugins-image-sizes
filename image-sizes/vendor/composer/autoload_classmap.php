@@ -37,6 +37,7 @@ return array(
     'Thumbpress\\Controllers\\Admin\\Init' => $baseDir . '/app/Controllers/Admin/Init.php',
     'Thumbpress\\Controllers\\Admin\\Menu' => $baseDir . '/app/Controllers/Admin/Menu.php',
     'Thumbpress\\Controllers\\Common\\API' => $baseDir . '/app/Controllers/Common/API.php',
+    'Thumbpress\\Controllers\\Common\\Auto_Featured_Image' => $baseDir . '/app/Controllers/Common/Auto_Featured_Image.php',
     'Thumbpress\\Controllers\\Common\\Convert_Avif' => $baseDir . '/app/Controllers/Common/Convert_Avif.php',
     'Thumbpress\\Controllers\\Common\\Convert_Webp' => $baseDir . '/app/Controllers/Common/Convert_Webp.php',
     'Thumbpress\\Controllers\\Common\\Hotlink_Protection' => $baseDir . '/app/Controllers/Common/Hotlink_Protection.php',

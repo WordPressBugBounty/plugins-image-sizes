@@ -26,10 +26,13 @@ class Menu {
 
 		if ( strpos( $current_screen->base, 'thumbpress' ) !== false ) {
 
+			$admin_asset = require THUMBPRESS_PLUGIN_DIR . 'build/admin.asset.php';
+
 			$this->enqueue_script(
 				'image-sizes_main-menu',
-				THUMBPRESS_PLUGIN_URL . 'build/admin.bundle.js',
-				array( 'wp-element', 'wp-hooks', 'image-sizes_common' )
+				THUMBPRESS_PLUGIN_URL . 'build/admin.js',
+				array_merge( $admin_asset['dependencies'], array( 'image-sizes_common' ) ),
+				$admin_asset['version']
 			);
 
 			// Localize dynamic nav items for the React sidebar.
@@ -101,7 +104,7 @@ class Menu {
 				'hash'  => '#/convert-to-avif',
 			),
 			array(
-				'label' => __( 'Trashed Files', 'image-sizes' ),
+				'label' => __( 'Trashed Images', 'image-sizes' ),
 				'hash'  => '#/trashed-files',
 			),
 			array(
@@ -207,7 +210,7 @@ class Menu {
 			),
 			array(
 				'to'    => '/trashed-files',
-				'label' => __( 'Trashed Files', 'image-sizes' ),
+				'label' => __( 'Trashed Images', 'image-sizes' ),
 				'icon'  => 'TrashIcon',
 				'pro'   => ! $pro_unlocked,
 			),

@@ -13,12 +13,13 @@ class Settings {
 	 * Get all plugin settings.
 	 */
 	public function get() {
-		$image_max_size      = get_option( 'thumbpress_image_max_size', array() );
-		$right_click_disable = get_option( 'thumbpress_image_download_disable', 0 );
-		$lazy_load           = get_option( 'thumbpress_lazy_load', 0 );
-		$hotlink_protection  = get_option( 'thumbpress_hotlink_protection', 0 );
-		$image_editor        = get_option( 'thumbpress_image_editor', 0 );
-		$replace_images      = get_option( 'thumbpress_replace_images', 0 );
+		$image_max_size          = get_option( 'thumbpress_image_max_size', array() );
+		$right_click_disable     = get_option( 'thumbpress_image_download_disable', 0 );
+		$lazy_load               = get_option( 'thumbpress_lazy_load', 0 );
+		$hotlink_protection      = get_option( 'thumbpress_hotlink_protection', 0 );
+		$image_editor            = get_option( 'thumbpress_image_editor', 0 );
+		$replace_images          = get_option( 'thumbpress_replace_images', 0 );
+		$auto_set_featured_image = get_option( 'thumbpress_auto_set_featured_image', 0 );
 
 		// WebP settings.
 		$webp_on_upload      = get_option( 'thumbpress_webp_on_upload', 0 );
@@ -34,24 +35,26 @@ class Settings {
 
 		return $this->response_success(
 			array(
-				'right_click_disable' => (bool) $right_click_disable,
-				'lazy_load'           => (bool) $lazy_load,
-				'hotlink_protection'  => (bool) $hotlink_protection,
-				'image_editor'        => (bool) $image_editor,
-				'replace_images'      => (bool) $replace_images,
-				'max_size'            => isset( $image_max_size['max-size'] ) ? $image_max_size['max-size'] : '',
-				'max_size_unit'       => isset( $image_max_size['max-size-unit'] ) ? $image_max_size['max-size-unit'] : 'KB',
-				'max_width'           => isset( $image_max_size['max-width'] ) ? $image_max_size['max-width'] : '',
-				'max_height'          => isset( $image_max_size['max-height'] ) ? $image_max_size['max-height'] : '',
-				'webp_on_upload'      => (bool) $webp_on_upload,
-				'webp_single_convert' => (bool) $webp_single_convert,
-				'webp_file_formats'   => (array) $webp_file_formats,
-				'avif_on_upload'      => (bool) $avif_on_upload,
-				'avif_single_convert' => (bool) $avif_single_convert,
-				'social_facebook'     => ! empty( $social_share['enable_fb_share_img'] ) && $social_share['enable_fb_share_img'] === 'on',
-				'social_linkedin'     => ! empty( $social_share['enable_ln_share_img'] ) && $social_share['enable_ln_share_img'] === 'on',
-				'social_twitter'      => ! empty( $social_share['enable_tw_share_img'] ) && $social_share['enable_tw_share_img'] === 'on',
-				'social_pinterest'    => ! empty( $social_share['enable_pin_share_img'] ) && $social_share['enable_pin_share_img'] === 'on',
+				'php_upload_max'          => ini_get( 'upload_max_filesize' ),
+				'right_click_disable'     => (bool) $right_click_disable,
+				'lazy_load'               => (bool) $lazy_load,
+				'hotlink_protection'      => (bool) $hotlink_protection,
+				'image_editor'            => (bool) $image_editor,
+				'replace_images'          => (bool) $replace_images,
+				'max_size'                => isset( $image_max_size['max-size'] ) ? $image_max_size['max-size'] : '',
+				'max_size_unit'           => isset( $image_max_size['max-size-unit'] ) ? $image_max_size['max-size-unit'] : 'KB',
+				'max_width'               => isset( $image_max_size['max-width'] ) ? $image_max_size['max-width'] : '',
+				'max_height'              => isset( $image_max_size['max-height'] ) ? $image_max_size['max-height'] : '',
+				'webp_on_upload'          => (bool) $webp_on_upload,
+				'webp_single_convert'     => (bool) $webp_single_convert,
+				'webp_file_formats'       => (array) $webp_file_formats,
+				'avif_on_upload'          => (bool) $avif_on_upload,
+				'avif_single_convert'     => (bool) $avif_single_convert,
+				'social_facebook'         => ! empty( $social_share['enable_fb_share_img'] ) && $social_share['enable_fb_share_img'] === 'on',
+				'social_linkedin'         => ! empty( $social_share['enable_ln_share_img'] ) && $social_share['enable_ln_share_img'] === 'on',
+				'social_twitter'          => ! empty( $social_share['enable_tw_share_img'] ) && $social_share['enable_tw_share_img'] === 'on',
+				'social_pinterest'        => ! empty( $social_share['enable_pin_share_img'] ) && $social_share['enable_pin_share_img'] === 'on',
+				'auto_set_featured_image' => (bool) $auto_set_featured_image,
 			)
 		);
 	}
@@ -158,6 +161,12 @@ class Settings {
 		}
 		if ( $social_changed ) {
 			update_option( 'thumbpress_social_share', $social_share );
+		}
+
+		// Auto set featured image.
+		$auto_set_featured_image = $request->get_param( 'auto_set_featured_image' );
+		if ( $auto_set_featured_image !== null ) {
+			update_option( 'thumbpress_auto_set_featured_image', $auto_set_featured_image ? 1 : 0 );
 		}
 
 		// Image size and dimension limits.

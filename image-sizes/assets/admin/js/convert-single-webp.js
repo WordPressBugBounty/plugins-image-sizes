@@ -20,22 +20,21 @@
 			},
 			body: JSON.stringify({ image_id: parseInt(imageId, 10) }),
 		})
-			.then(function (res) {
-				return res.json();
-			})
+			.then(function (res) { return res.json(); })
 			.then(function (res) {
 				if (res.success) {
-					location.reload();
+					thumbpressToast(true, 'Image converted to WebP successfully!', 'success');
+					setTimeout(function () { location.reload(); }, 1500);
 				} else {
 					btn.innerHTML = originalText;
 					btn.disabled = false;
-					alert(res.message || 'Failed to convert image.');
+					thumbpressToast(true, res.message || 'Failed to convert image.', 'error');
 				}
 			})
 			.catch(function () {
 				btn.innerHTML = originalText;
 				btn.disabled = false;
-				alert('An error occurred while converting the image.');
+				thumbpressToast(true, 'An error occurred while converting the image.', 'error');
 			});
 	});
 })();

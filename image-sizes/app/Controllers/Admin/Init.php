@@ -21,6 +21,11 @@ class Init {
 		$this->action( 'admin_enqueue_scripts', array( $this, 'add_assets' ) );
 		$this->action( 'admin_notices', array( $this, 'show_fresh_install_notice' ) );
 		$this->action( 'admin_notices', array( $this, 'show_pro_outdated_notice' ) );
+		$this->action( 'admin_footer', array( $this, 'render_toast' ) );
+	}
+
+	public function render_toast() {
+		echo '<div id="thumbpress-toast" class="thumbpress-toast" aria-live="polite"></div>';
 	}
 
 	public function show_fresh_install_notice() {

@@ -19,9 +19,7 @@ class Init {
 	 * Constructor to add all hooks.
 	 */
 	public function __construct() {
-		$this->action( 'wp_footer', array( $this, 'modal' ) );
 		$this->action( 'admin_footer', array( $this, 'modal' ) );
-		$this->action( 'wp_enqueue_scripts', array( $this, 'add_assets' ) );
 		$this->action( 'admin_enqueue_scripts', array( $this, 'add_assets' ) );
 		$this->action( 'admin_init', array( $this, 'schedule_hash_generation' ) );
 		$this->action( 'admin_init', array( $this, 'schedule_initial_stat_cache_build' ) );
@@ -46,11 +44,15 @@ class Init {
 	public function add_assets() {
 		global $current_screen;
 
-		if ( isset( $current_screen->base ) && ( strpos( $current_screen->base, 'thumbpress' ) !== false || strpos( $current_screen->base, 'image-sizes' ) !== false ) || ! is_admin() ) {
+		if ( isset( $current_screen->base ) && ( strpos( $current_screen->base, 'thumbpress' ) !== false || strpos( $current_screen->base, 'image-sizes' ) !== false ) ) {
 
-			$this->enqueue_script(
+			$tailwind_css_path = THUMBPRESS_PLUGIN_DIR . 'build/tailwind.css';
+
+			$this->enqueue_style(
 				'tailwind-css',
-				THUMBPRESS_PLUGIN_URL . 'build/tailwind.bundle.js'
+				THUMBPRESS_PLUGIN_URL . 'build/tailwind.css',
+				array(),
+				file_exists( $tailwind_css_path ) ? filemtime( $tailwind_css_path ) : THUMBPRESS_VERSION
 			);
 
 			$this->enqueue_script(

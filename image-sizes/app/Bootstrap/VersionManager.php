@@ -201,7 +201,7 @@ class VersionManager {
 				$preference = sanitize_text_field( $request->get_param( 'preference' ) );
 
 				if ( ! $self->save_preference( $preference ) ) {
-					return new \WP_Error( 'invalid_preference', 'Must be "new" or "legacy".', array( 'status' => 400 ) );
+					return new \WP_Error( 'invalid_preference', __( 'Must be "new" or "legacy".', 'image-sizes' ), array( 'status' => 400 ) );
 				}
 
 				return rest_ensure_response( array(

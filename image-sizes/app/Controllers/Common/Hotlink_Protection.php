@@ -89,7 +89,7 @@ class Hotlink_Protection {
 				if ( strcasecmp( $referer_host, $site_host ) !== 0 ) {
 					status_header( 403 );
 					header( 'Content-Type: text/plain' );
-					echo 'Hotlinking not allowed.';
+					echo esc_html__( 'Hotlinking not allowed.', 'image-sizes' );
 					exit;
 				}
 			}

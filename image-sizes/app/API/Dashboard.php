@@ -81,7 +81,7 @@ class Dashboard {
 			 AND post_status = 'inherit'"
 		);
 
-		$this->set_cache( 'stat_total_images', $value, HOUR_IN_SECONDS, true );
+		$this->set_cache( 'stat_total_images', $value, 6 * HOUR_IN_SECONDS, true );
 		return $value;
 	}
 
@@ -116,7 +116,7 @@ class Dashboard {
 			'disabled_sizes' => $disabled_count,
 		);
 
-		$this->set_cache( 'stat_sizes_data', $value, HOUR_IN_SECONDS );
+		$this->set_cache( 'stat_sizes_data', $value, 6 * HOUR_IN_SECONDS );
 		return $value;
 	}
 
@@ -140,7 +140,7 @@ class Dashboard {
 			 )"
 		);
 
-		$this->set_cache( 'stat_unoptimized', $value, HOUR_IN_SECONDS, true );
+		$this->set_cache( 'stat_unoptimized', $value, 6 * HOUR_IN_SECONDS, true );
 		return $value;
 	}
 
@@ -167,7 +167,7 @@ class Dashboard {
 			 )"
 		);
 
-		$this->set_cache( 'stat_not_compressed', $value, HOUR_IN_SECONDS, true );
+		$this->set_cache( 'stat_not_compressed', $value, 6 * HOUR_IN_SECONDS, true );
 		return $value;
 	}
 
@@ -186,7 +186,7 @@ class Dashboard {
 			 AND post_status = 'inherit'"
 		);
 
-		$this->set_cache( 'stat_not_webp', $value, HOUR_IN_SECONDS, true );
+		$this->set_cache( 'stat_not_webp', $value, 6 * HOUR_IN_SECONDS, true );
 		return $value;
 	}
 
@@ -205,7 +205,7 @@ class Dashboard {
 			 AND post_status = 'inherit'"
 		);
 
-		$this->set_cache( 'stat_not_avif', $value, HOUR_IN_SECONDS, true );
+		$this->set_cache( 'stat_not_avif', $value, 6 * HOUR_IN_SECONDS, true );
 		return $value;
 	}
 
@@ -240,7 +240,7 @@ class Dashboard {
 			)
 		);
 
-		$this->set_cache( 'stat_duplicates', $value, HOUR_IN_SECONDS, true );
+		$this->set_cache( 'stat_duplicates', $value, 6 * HOUR_IN_SECONDS, true );
 		return $value;
 	}
 
@@ -331,11 +331,9 @@ class Dashboard {
 		);
 
 		if ( empty( $attachment_ids ) ) {
-			$this->set_cache( 'stat_large_images', 0, HOUR_IN_SECONDS, true );
+			$this->set_cache( 'stat_large_images', 0, 6 * HOUR_IN_SECONDS, true );
 			return 0;
 		}
-
-		update_meta_cache( 'post', $attachment_ids );
 
 		$threshold = 1024 * 1024;
 		$count     = 0;
@@ -350,7 +348,7 @@ class Dashboard {
 			}
 		}
 
-		$this->set_cache( 'stat_large_images', $count, HOUR_IN_SECONDS, true );
+		$this->set_cache( 'stat_large_images', $count, 6 * HOUR_IN_SECONDS, true );
 		return $count;
 	}
 
@@ -373,22 +371,30 @@ class Dashboard {
 		);
 
 		if ( empty( $attachment_ids ) ) {
-			$this->set_cache( 'stat_total_thumbnails', 0, HOUR_IN_SECONDS, true );
+			$this->set_cache( 'stat_total_thumbnails', 0, 6 * HOUR_IN_SECONDS, true );
 			return 0;
 		}
 
-		update_meta_cache( 'post', $attachment_ids );
-
+		global $wpdb;
 		$count = 0;
 
-		foreach ( $attachment_ids as $id ) {
-			$metadata = wp_get_attachment_metadata( $id );
+		$metadata_list = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT post_id, meta_value FROM {$wpdb->postmeta}
+				 WHERE post_id IN (" . implode( ',', array_map( 'absint', $attachment_ids ) ) . ")
+				 AND meta_key = %s",
+				'_wp_attachment_metadata'
+			)
+		);
+
+		foreach ( $metadata_list as $row ) {
+			$metadata = maybe_unserialize( $row->meta_value );
 			if ( $metadata && ! empty( $metadata['sizes'] ) ) {
 				$count += count( $metadata['sizes'] );
 			}
 		}
 
-		$this->set_cache( 'stat_total_thumbnails', $count, HOUR_IN_SECONDS, true );
+		$this->set_cache( 'stat_total_thumbnails', $count, 6 * HOUR_IN_SECONDS, true );
 		return $count;
 	}
 

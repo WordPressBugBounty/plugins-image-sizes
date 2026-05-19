@@ -34,16 +34,38 @@ class Thumbnails {
 		$sizes     = get_intermediate_image_sizes();
 		$all_sizes = array();
 
+		global $wpdb;
+		$option_keys = array();
 		foreach ( $sizes as $size ) {
-			$width  = get_option( "{$size}_size_w" );
-			$height = get_option( "{$size}_size_h" );
-			$crop   = get_option( "{$size}_crop" );
+			$option_keys[] = "{$size}_size_w";
+			$option_keys[] = "{$size}_size_h";
+			$option_keys[] = "{$size}_crop";
+		}
+
+		$placeholders = implode( ',', array_fill( 0, count( $option_keys ), '%s' ) );
+		$options = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT option_name, option_value FROM {$wpdb->options}
+				 WHERE option_name IN ({$placeholders})",
+				...$option_keys
+			)
+		);
+
+		$option_map = array();
+		foreach ( $options as $opt ) {
+			$option_map[ $opt->option_name ] = $opt->option_value;
+		}
+
+		foreach ( $sizes as $size ) {
+			$width  = isset( $option_map[ "{$size}_size_w" ] ) ? $option_map[ "{$size}_size_w" ] : 0;
+			$height = isset( $option_map[ "{$size}_size_h" ] ) ? $option_map[ "{$size}_size_h" ] : 0;
+			$crop   = isset( $option_map[ "{$size}_crop" ] ) ? $option_map[ "{$size}_crop" ] : '';
 
 			$all_sizes[ $size ] = array(
 				'name'   => $size,
 				'width'  => $width ? absint( $width ) : 0,
 				'height' => $height ? absint( $height ) : 0,
-				'crop'   => is_array( $crop ) && ! empty( $crop ) ? true : false,
+				'crop'   => is_array( @unserialize( $crop ) ) && ! empty( @unserialize( $crop ) ) ? true : false,
 			);
 		}
 

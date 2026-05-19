@@ -1,3 +1,16 @@
+const thumbpressToast = ( show = true, message = '', type = 'success' ) => {
+	const toast = document.getElementById( 'thumbpress-toast' );
+	if ( ! toast ) return;
+	if ( show ) {
+		toast.textContent = message;
+		toast.className = 'thumbpress-toast thumbpress-toast--visible thumbpress-toast--' + type;
+		clearTimeout( toast._thumbpressTimer );
+		toast._thumbpressTimer = setTimeout( () => thumbpressToast( false ), 3000 );
+	} else {
+		toast.classList.remove( 'thumbpress-toast--visible' );
+	}
+};
+
 (function() {
 	var links = document.querySelectorAll( '#adminmenu a[href*="page=thumbpress"]' );
 

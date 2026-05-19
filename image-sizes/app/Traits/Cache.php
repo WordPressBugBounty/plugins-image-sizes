@@ -9,13 +9,18 @@ trait Cache {
 
 	private $cache_group = 'thumbpress';
 
+	private static $use_object_cache = null;
+
 	/**
 	 * Checks if external object cache is in use and returns true or false.
 	 *
 	 * @return bool Returns true if external object cache is used, otherwise false.
 	 */
 	private function is_using_object_cache() {
-		return wp_using_ext_object_cache();
+		if ( null === self::$use_object_cache ) {
+			self::$use_object_cache = wp_using_ext_object_cache();
+		}
+		return self::$use_object_cache;
 	}
 
 	/**

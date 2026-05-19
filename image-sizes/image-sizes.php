@@ -5,7 +5,7 @@
  * Plugin Name:       ThumbPress
  * Plugin URI:        https://wordpress.org/plugins/image-sizes/
  * Description:       WordPress Image Optimization & Media Management Toolkit
- * Version:           6.1.2
+ * Version:           6.1.3
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            ThumbPress
@@ -25,7 +25,7 @@ use Pluggable\Marketing\Deactivator;
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'THUMBPRESS_VERSION', '6.1.2' );
+define( 'THUMBPRESS_VERSION', '6.1.3' );
 define( 'THUMBPRESS_FILE', __FILE__ );
 define( 'THUMBPRESS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'THUMBPRESS_URL', plugin_dir_url( __FILE__ ) );

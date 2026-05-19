@@ -20,22 +20,21 @@
 			},
 			body: JSON.stringify({ image_id: parseInt(imageId, 10) }),
 		})
-			.then(function (res) {
-				return res.json();
-			})
+			.then(function (res) { return res.json(); })
 			.then(function (res) {
 				if (res.success) {
-					location.reload();
+					thumbpressToast(true, 'Image converted to AVIF successfully!', 'success');
+					setTimeout(function () { location.reload(); }, 1500);
 				} else {
 					btn.innerHTML = originalText;
 					btn.disabled = false;
-					alert(res.message || 'Failed to convert image to AVIF.');
+					thumbpressToast(true, res.message || 'Failed to convert image to AVIF.', 'error');
 				}
 			})
 			.catch(function () {
 				btn.innerHTML = originalText;
 				btn.disabled = false;
-				alert('An error occurred while converting the image to AVIF.');
+				thumbpressToast(true, 'An error occurred while converting the image to AVIF.', 'error');
 			});
 	});
 })();

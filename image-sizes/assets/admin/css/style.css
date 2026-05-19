@@ -60,3 +60,22 @@ input.tp-max-size-input {
 .cx-notice a{
 	color: #2271b1!important;
 }
+/* ThumbPress Toast */
+#thumbpress-toast {
+	position: fixed;
+	top: 56px;
+	right: 24px;
+	padding: 12px 20px;
+	border-radius: 8px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #fff;
+	z-index: 160001;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s;
+}
+#thumbpress-toast.thumbpress-toast--visible { opacity: 1; pointer-events: auto; }
+#thumbpress-toast.thumbpress-toast--success { background: #22c55e; }
+#thumbpress-toast.thumbpress-toast--error   { background: #ef4444; }

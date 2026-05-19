@@ -57,6 +57,7 @@ class ComposerStaticInitbc3a3c287ca29c47b02dd94846518371
         'Thumbpress\\Controllers\\Admin\\Init' => __DIR__ . '/../..' . '/app/Controllers/Admin/Init.php',
         'Thumbpress\\Controllers\\Admin\\Menu' => __DIR__ . '/../..' . '/app/Controllers/Admin/Menu.php',
         'Thumbpress\\Controllers\\Common\\API' => __DIR__ . '/../..' . '/app/Controllers/Common/API.php',
+        'Thumbpress\\Controllers\\Common\\Auto_Featured_Image' => __DIR__ . '/../..' . '/app/Controllers/Common/Auto_Featured_Image.php',
         'Thumbpress\\Controllers\\Common\\Convert_Avif' => __DIR__ . '/../..' . '/app/Controllers/Common/Convert_Avif.php',
         'Thumbpress\\Controllers\\Common\\Convert_Webp' => __DIR__ . '/../..' . '/app/Controllers/Common/Convert_Webp.php',
         'Thumbpress\\Controllers\\Common\\Hotlink_Protection' => __DIR__ . '/../..' . '/app/Controllers/Common/Hotlink_Protection.php',

@@ -4,7 +4,7 @@ Tags: image optimization, compress images, thumbnail manager, WebP converter, me
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 6.1.2
+Stable tag: 6.1.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -231,6 +231,13 @@ ThumbPress scans your media library and compares image files using unique hashes
 14. Social Media Share - Set custom thumbnails for each platform
 
 == Changelog ==
+
+= 6.1.3 - 2026-05-19 =
+* [imp] Improved empty state messages across feature pages
+* [imp] Enhanced cache management for dashboard data
+* [add] Made all strings translatable across entire codebase
+* [fix] Fixed unicode curly quotes to ASCII straight quotes for proper encoding
+* [remove] Removed unnecessary code from public-facing views
 
 = 6.1.2 - 2026-05-13 =
 * [fix] Fixed foreground chunk loop not stopping on cancel for Regenerate and Convert WebP

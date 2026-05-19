@@ -73,7 +73,7 @@ class Email {
 		ob_start();
 		?>
 			<div class="footer" style="background: #f8f8f8; padding: 20px; text-align: center;">
-				<p>&copy; <?php echo date( 'Y' ); ?> Thumbpress. All rights reserved.</p>
+				<p>&copy; <?php echo date( 'Y' ); ?> <?php echo esc_html__( 'Thumbpress. All rights reserved.', 'image-sizes' ); ?></p>
 				<?php if ( $content ) : ?>
 					<p><?php echo wp_kses_post( $content ); ?></p>
 				<?php endif; ?>

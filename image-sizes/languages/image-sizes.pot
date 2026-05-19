@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: ThumbPress 6.0.2\n"
+"Project-Id-Version: ThumbPress 6.1.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/image-sizes\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-05-09T03:03:03+00:00\n"
+"POT-Creation-Date: 2026-05-18T17:17:48+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: image-sizes\n"
@@ -17,8 +17,8 @@ msgstr ""
 #. Plugin Name of the plugin
 #. Author of the plugin
 #: image-sizes.php
-#: app/Controllers/Admin/Menu.php:59
-#: app/Controllers/Admin/Menu.php:60
+#: app/Controllers/Admin/Menu.php:62
+#: app/Controllers/Admin/Menu.php:63
 #: views/settings/layout.php:20
 msgid "ThumbPress"
 msgstr ""
@@ -43,14 +43,14 @@ msgid "AVIF conversion requires PHP 8.0 or higher."
 msgstr ""
 
 #: app/API/Convert_Avif.php:24
-#: app/API/Convert_Webp.php:303
+#: app/API/Convert_Webp.php:306
 msgid "Invalid image ID."
 msgstr ""
 
 #: app/API/Convert_Avif.php:30
 #: app/API/Convert_Avif.php:38
-#: app/API/Convert_Webp.php:309
-#: app/API/Convert_Webp.php:317
+#: app/API/Convert_Webp.php:312
+#: app/API/Convert_Webp.php:320
 msgid "Source image file not found."
 msgstr ""
 
@@ -87,20 +87,20 @@ msgstr ""
 msgid "Congratulations, Converting Images to WebP is Completed!"
 msgstr ""
 
-#: app/API/Convert_Webp.php:264
+#: app/API/Convert_Webp.php:267
 #: app/API/Regenerate.php:122
 msgid "Failed to schedule action."
 msgstr ""
 
-#: app/API/Convert_Webp.php:269
+#: app/API/Convert_Webp.php:272
 msgid "Your images are being converted in the background."
 msgstr ""
 
-#: app/API/Convert_Webp.php:355
+#: app/API/Convert_Webp.php:358
 msgid "Failed to convert image."
 msgstr ""
 
-#: app/API/Convert_Webp.php:398
+#: app/API/Convert_Webp.php:401
 msgid "Image converted successfully."
 msgstr ""
 
@@ -128,44 +128,45 @@ msgstr ""
 msgid "Thumbnails regenerated successfully."
 msgstr ""
 
-#: app/API/Settings.php:187
+#: app/API/Settings.php:196
 #: app/API/Social_Share.php:50
+#: build/admin.js:1
 msgid "Settings saved successfully."
 msgstr ""
 
-#: app/API/Thumbnails.php:128
+#: app/API/Thumbnails.php:150
 msgid "Invalid data format. Array expected."
 msgstr ""
 
-#: app/API/Thumbnails.php:135
+#: app/API/Thumbnails.php:160
 msgid "Disabled sizes saved successfully."
 msgstr ""
 
-#: app/API/Thumbnails.php:138
+#: app/API/Thumbnails.php:163
 msgid "No changes detected."
 msgstr ""
 
 #: app/Bootstrap/AdminNotice.php:66
 #: app/Bootstrap/AdminNotice.php:147
-#: app/Controllers/Admin/Init.php:49
-#: app/Controllers/Admin/Init.php:98
+#: app/Controllers/Admin/Init.php:54
+#: app/Controllers/Admin/Init.php:103
 msgid "Dismiss this notice."
 msgstr ""
 
 #: app/Bootstrap/AdminNotice.php:69
-#: app/Controllers/Admin/Init.php:101
+#: app/Controllers/Admin/Init.php:106
 msgid "ThumbPress Pro update required!"
 msgstr ""
 
 #. translators: 1: installed pro version, 2: required pro version
 #: app/Bootstrap/AdminNotice.php:72
-#: app/Controllers/Admin/Init.php:105
+#: app/Controllers/Admin/Init.php:110
 #, php-format
 msgid "ThumbPress requires ThumbPress Pro version %2$s or higher. You have version %1$s. Please update to use all new features."
 msgstr ""
 
 #: app/Bootstrap/AdminNotice.php:79
-#: app/Controllers/Admin/Init.php:113
+#: app/Controllers/Admin/Init.php:118
 msgid "Update ThumbPress Pro Now"
 msgstr ""
 
@@ -197,79 +198,93 @@ msgstr ""
 msgid "Using Classic"
 msgstr ""
 
-#: app/Controllers/Admin/Init.php:52
-msgid "ThumbPress is installed!"
-msgstr ""
-
-#: app/Controllers/Admin/Init.php:53
-msgid "Your images are ready to be optimized. Visit the dashboard to get started."
+#: app/Bootstrap/VersionManager.php:204
+msgid "Must be \"new\" or \"legacy\"."
 msgstr ""
 
 #: app/Controllers/Admin/Init.php:57
+msgid "ThumbPress is installed!"
+msgstr ""
+
+#: app/Controllers/Admin/Init.php:58
+msgid "Your images are ready to be optimized. Visit the dashboard to get started."
+msgstr ""
+
+#: app/Controllers/Admin/Init.php:62
 msgid "Go to Dashboard"
 msgstr ""
 
-#: app/Controllers/Admin/Menu.php:72
-#: app/Controllers/Admin/Menu.php:165
+#: app/Controllers/Admin/Menu.php:75
+#: app/Controllers/Admin/Menu.php:168
+#: build/admin.js:1
 msgid "Dashboard"
 msgstr ""
 
-#: app/Controllers/Admin/Menu.php:76
-#: app/Controllers/Admin/Menu.php:170
+#: app/Controllers/Admin/Menu.php:79
+#: app/Controllers/Admin/Menu.php:173
 msgid "Thumbnails"
 msgstr ""
 
-#: app/Controllers/Admin/Menu.php:80
-#: app/Controllers/Admin/Menu.php:175
+#: app/Controllers/Admin/Menu.php:83
+#: app/Controllers/Admin/Menu.php:178
+#: build/admin.js:1
 msgid "Unused Images"
 msgstr ""
 
-#: app/Controllers/Admin/Menu.php:84
-#: app/Controllers/Admin/Menu.php:181
+#: app/Controllers/Admin/Menu.php:87
+#: app/Controllers/Admin/Menu.php:184
+#: build/admin.js:1
 msgid "Duplicate Images"
 msgstr ""
 
-#: app/Controllers/Admin/Menu.php:88
-#: app/Controllers/Admin/Menu.php:187
+#: app/Controllers/Admin/Menu.php:91
+#: app/Controllers/Admin/Menu.php:190
+#: build/admin.js:1
 msgid "Large Images"
 msgstr ""
 
-#: app/Controllers/Admin/Menu.php:92
-#: app/Controllers/Admin/Menu.php:193
+#: app/Controllers/Admin/Menu.php:95
+#: app/Controllers/Admin/Menu.php:196
+#: build/admin.js:1
 msgid "Compress Images"
 msgstr ""
 
-#: app/Controllers/Admin/Menu.php:96
-#: app/Controllers/Admin/Menu.php:199
+#: app/Controllers/Admin/Menu.php:99
+#: app/Controllers/Admin/Menu.php:202
 #: app/Controllers/Common/Convert_Webp.php:131
 #: app/Controllers/Common/Convert_Webp.php:135
+#: build/admin.js:1
 msgid "Convert to WebP"
 msgstr ""
 
-#: app/Controllers/Admin/Menu.php:100
-#: app/Controllers/Admin/Menu.php:204
+#: app/Controllers/Admin/Menu.php:103
+#: app/Controllers/Admin/Menu.php:207
 #: app/Controllers/Common/Convert_Avif.php:122
 #: app/Controllers/Common/Convert_Avif.php:135
 #: app/Controllers/Common/Convert_Avif.php:139
+#: build/admin.js:1
 msgid "Convert to AVIF"
 msgstr ""
 
-#: app/Controllers/Admin/Menu.php:104
-#: app/Controllers/Admin/Menu.php:210
-msgid "Trashed Files"
+#: app/Controllers/Admin/Menu.php:107
+#: app/Controllers/Admin/Menu.php:213
+#: build/admin.js:1
+msgid "Trashed Images"
 msgstr ""
 
-#: app/Controllers/Admin/Menu.php:108
-#: app/Controllers/Admin/Menu.php:216
+#: app/Controllers/Admin/Menu.php:111
+#: app/Controllers/Admin/Menu.php:219
+#: build/admin.js:1
 msgid "Settings"
 msgstr ""
 
-#: app/Controllers/Admin/Menu.php:112
-#: app/Controllers/Admin/Menu.php:221
+#: app/Controllers/Admin/Menu.php:115
+#: app/Controllers/Admin/Menu.php:224
+#: build/admin.js:1
 msgid "Pro"
 msgstr ""
 
-#: app/Controllers/Admin/Menu.php:147
+#: app/Controllers/Admin/Menu.php:150
 msgid "Loading.."
 msgstr ""
 
@@ -278,12 +293,12 @@ msgid "Array of disabled size names"
 msgstr ""
 
 #: app/Controllers/Common/API.php:83
-#: app/Controllers/Common/API.php:198
+#: app/Controllers/Common/API.php:199
 msgid "Offset for pagination"
 msgstr ""
 
 #: app/Controllers/Common/API.php:88
-#: app/Controllers/Common/API.php:203
+#: app/Controllers/Common/API.php:204
 msgid "Number of images to process"
 msgstr ""
 
@@ -296,7 +311,7 @@ msgid "Previously created thumbnails count"
 msgstr ""
 
 #: app/Controllers/Common/API.php:115
-#: app/Controllers/Common/API.php:220
+#: app/Controllers/Common/API.php:221
 msgid "Batch size for background processing"
 msgstr ""
 
@@ -304,9 +319,13 @@ msgstr ""
 msgid "Attachment ID to regenerate"
 msgstr ""
 
-#: app/Controllers/Common/API.php:247
-#: app/Controllers/Common/API.php:267
+#: app/Controllers/Common/API.php:248
+#: app/Controllers/Common/API.php:268
 msgid "Attachment ID to convert"
+msgstr ""
+
+#: app/Controllers/Common/Hotlink_Protection.php:92
+msgid "Hotlinking not allowed."
 msgstr ""
 
 #. translators: %1$s: maximum allowed image size, %2$s: size unit (KB or MB)
@@ -357,7 +376,12 @@ msgstr ""
 
 #: app/Controllers/Common/Thumbnails.php:52
 #: app/Controllers/Common/Thumbnails.php:56
+#: build/admin.js:1
 msgid "Regenerate Thumbnails"
+msgstr ""
+
+#: app/Helpers/Email.php:76
+msgid "Thumbpress. All rights reserved."
 msgstr ""
 
 #: app/Helpers/functions.php:24
@@ -467,4 +491,632 @@ msgstr ""
 #: views/settings/layout.php:61
 #: views/settings/layout.php:120
 msgid "Save Settings"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Close"
+msgstr ""
+
+#: build/admin.js:1
+msgid "A Special Offer Just for You!"
+msgstr ""
+
+#: build/admin.js:1
+msgid "As an existing user, we're giving you an exclusive 25% discount on ThumbPress Pro. Copy the code and use it at checkout!"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Offer expired"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Offer expires in"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Copied!"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Copy"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Coupon code TPTHANKS25 copied!"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Paste it at checkout for 25% off."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Get 25% Off — View Pricing →"
+msgstr ""
+
+#: build/admin.js:1
+msgid "No thanks, I don't want a discount"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Help"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Docs"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Community"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Upgrade to Pro"
+msgstr ""
+
+#: build/admin.js:1
+msgid "120"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Server limit:"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Height"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Width"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Lazy load"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Prevent visitors from downloading your images by turning off the right-click option on your website."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Hotlink Protection"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Block other websites from embedding your images directly, preventing bandwidth theft from external hotlinking."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Auto Set Featured Image"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Automatically use the first image in post content as the featured image if none is set."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Settings reset successfully."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Reset Options"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Failed to save settings."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Save Changes"
+msgstr ""
+
+#: build/admin.js:1
+msgid "No thumbnail sizes found."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Enabled - This size will be generated for new uploads."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Disabled - This size will not be generated for new uploads."
+msgstr ""
+
+#: build/admin.js:1
+msgid "This is the original image size and cannot be disabled."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Compress during upload"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Enable compression during upload to reduce file size and improve speed."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Compression Percentage"
+msgstr ""
+
+#: build/admin.js:1
+msgid "A measure of how much a file's size is reduced after compression."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Single Image Compress"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Show the Optimize button on individual media attachments."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Bulk Image Compression is a Pro feature"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Heavy images are silently costing you visitors. Compress your entire library in one click with absolutely no visible quality loss."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Upgrade for a faster website"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Prevent Duplicate Upload"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Block uploading images that already exist in your media library"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Duplicate Image Detection is a Pro feature"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Duplicate images quietly pile up and bloat your media library. Find and remove every copy you didn't even know existed."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Upgrade to detect duplicate images"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Convert during upload"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Single image conversion"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Convert individual images to WebP directly from the media library."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Automatically convert images to AVIF when they are uploaded."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Convert individual images to AVIF directly from the media library."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Facebook"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Generate optimized share images for Facebook posts"
+msgstr ""
+
+#: build/admin.js:1
+msgid "LinkedIn"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Create professional share images for LinkedIn"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Twitter"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Optimize share images for Twitter cards"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Pinterest"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Generate Pinterest-optimized pin images"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Enabled"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Disabled"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Failed to load debug info."
+msgstr ""
+
+#: build/admin.js:1
+msgid "No data."
+msgstr ""
+
+#: build/admin.js:1
+msgid "License Status"
+msgstr ""
+
+#: build/admin.js:1
+msgid "None"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Your Media Library is Silently Slowing Down Your Site."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Unused images, oversized files, and missing optimization pile up with every upload. Pro finds them all and fixes them — without touching a single file manually."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Price starts from $5/month."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Detect Large Images"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Scan your media library and find oversized images instantly. See exactly which files are bloating your pages and fix them before they cost you rankings."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Detect Now"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Delete Unused Images"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Scan your media library and find unused images instantly. See exactly which files are taking up space and delete them to reclaim server space."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Delete Now"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Compress Large Images"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Large images are costing you speed. Optimize them without visible loss and deliver a faster, smoother browsing experience."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Compress Now"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Bulk Convert to AVIF"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Your images shouldn't be stuck in the past. Convert them all to AVIF - the format the modern web is built on - in a single click."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Convert Now"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Image Editor"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Crop, resize, or tweak any image right inside your WordPress dashboard. No need to re-upload or touch a third-party tool."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Edit Now"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Merge Duplicate Images"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Find images that have been uploaded more than once. Clean up the clutter and stop wasting space on files you already have."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Merge Now"
+msgstr ""
+
+#: build/admin.js:1
+msgid "IMAGE CONTROL"
+msgstr ""
+
+#: build/admin.js:1
+msgid "STORAGE & CLEANUP"
+msgstr ""
+
+#: build/admin.js:1
+msgid "MEDIA MANAGEMENT"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Personal"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Professional"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Agency"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Trusted by 30,000+ WordPress Users Just Like You"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Ready to take control of your Images?"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Join 30,000+ users who manage their media smarter with ThumbPress Pro"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Total Images"
+msgstr ""
+
+#: build/admin.js:1
+msgid "In media library"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Total Thumbnails"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Thumbnails found"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Unoptimized Images"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Images yet to be fixed"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Space Saved"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Worth of space saved"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Images (over 1 MB)"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Upgrade to Compress"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Unattached images"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Images needs compression"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Duplicate images found"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Upgrade to Merge"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Non-AVIF images found"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Upgrade to Convert"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Non-WebP images found"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Thumbnail Disabled"
+msgstr ""
+
+#: build/admin.js:1
+msgid "These sizes won't be generated"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Lazy Loading"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Active"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Inactive"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Regenerate All Thumbnails"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Broken thumbnails hurt layouts and lose visitors. Regenerate once - every image across your site snaps back to the perfect size and crop."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Generate Again"
+msgstr ""
+
+#: build/admin.js:1
+msgid "No Images Found"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Ready to Regenerate Thumbnails?"
+msgstr ""
+
+#: build/admin.js:1
+msgid "There are no images to regenerate."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Click \"Regenerate Now\" to create fresh thumbnails for all images. Configure your thumbnail sizes in "
+msgstr ""
+
+#: build/admin.js:1
+msgid "settings"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Chunk Size"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Number of images processed in a single batch per server request."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Regenerate Now"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Regenerate In Background"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Image Regeneration Complete"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Image Regenerate in Progress"
+msgstr ""
+
+#: build/admin.js:1
+msgid "All thumbnails have been regenerated successfully."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Regenerating media library thumbnails using selected sizes."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Cancel"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Image Processed"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Image Deleted"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Image Created"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Convert Images to WebP"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Slow images cost you sales. Switch to WebP and cut file sizes by 35% - faster pages, lower bounce rates, and better rankings, zero quality loss."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Convert Again"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Ready to Convert to WebP?"
+msgstr ""
+
+#: build/admin.js:1
+msgid "There are no images to convert to WebP."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Select file formats above and click \"Convert Now\" to start converting images to WebP for faster loading."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Select File Format"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Convert In Background"
+msgstr ""
+
+#: build/admin.js:1
+msgid "WebP Conversion Complete"
+msgstr ""
+
+#: build/admin.js:1
+msgid "WebP Conversion in Progress"
+msgstr ""
+
+#: build/admin.js:1
+msgid "All images have been converted to WebP."
+msgstr ""
+
+#: build/admin.js:1
+msgid "We're scanning your media library and converting eligible images to WebP."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Total"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Converted"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Remaining"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Convert Images to AVIF"
+msgstr ""
+
+#: build/admin.js:1
+msgid "The format Google rewards. Cut image sizes by 50% over WebP, slash bandwidth costs, and pass Core Web Vitals with ease."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Ready to Convert to AVIF?"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Select file formats above and click \"Convert Now\" to convert images to AVIF for even smaller file sizes."
 msgstr ""
