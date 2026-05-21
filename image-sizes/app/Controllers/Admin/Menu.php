@@ -1,11 +1,11 @@
 <?php
-namespace Thumbpress\Controllers\Admin;
+namespace Codexpert\ThumbPress\Controllers\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
-use Thumbpress\Traits\Hook;
-use Thumbpress\Traits\Asset;
-use Thumbpress\Traits\Menu as Menu_Trait;
+use Codexpert\ThumbPress\Traits\Hook;
+use Codexpert\ThumbPress\Traits\Asset;
+use Codexpert\ThumbPress\Traits\Menu as Menu_Trait;
 
 class Menu {
 

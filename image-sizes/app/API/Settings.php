@@ -1,9 +1,9 @@
 <?php
-namespace Thumbpress\API;
+namespace Codexpert\ThumbPress\API;
 
 defined( 'ABSPATH' ) || exit;
 
-use Thumbpress\Traits\Rest;
+use Codexpert\ThumbPress\Traits\Rest;
 
 class Settings {
 

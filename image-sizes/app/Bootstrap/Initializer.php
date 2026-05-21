@@ -1,5 +1,5 @@
 <?php
-namespace Thumbpress\Bootstrap;
+namespace Codexpert\ThumbPress\Bootstrap;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -25,7 +25,7 @@ class Initializer {
 
 			foreach ( glob( $controller_dir . '*.php' ) as $file ) {
 				$class_name = basename( $file, '.php' );
-				$controller = "\\Thumbpress\\Controllers\\Admin\\{$class_name}";
+				$controller = "\\Codexpert\ThumbPress\\Controllers\\Admin\\{$class_name}";
 
 				if ( class_exists( $controller ) ) {
 					new $controller();
@@ -43,7 +43,7 @@ class Initializer {
 
 			foreach ( glob( $controller_dir . '*.php' ) as $file ) {
 				$class_name = basename( $file, '.php' );
-				$controller = "\\Thumbpress\\Controllers\\Front\\{$class_name}";
+				$controller = "\\Codexpert\ThumbPress\\Controllers\\Front\\{$class_name}";
 
 				if ( class_exists( $controller ) ) {
 					new $controller();
@@ -60,7 +60,7 @@ class Initializer {
 
 		foreach ( glob( $controller_dir . '*.php' ) as $file ) {
 			$class_name = basename( $file, '.php' );
-			$controller = "\\Thumbpress\\Controllers\\Common\\{$class_name}";
+			$controller = "\\Codexpert\ThumbPress\\Controllers\\Common\\{$class_name}";
 
 			if ( class_exists( $controller ) ) {
 				new $controller();

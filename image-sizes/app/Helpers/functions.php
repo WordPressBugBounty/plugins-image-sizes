@@ -1,5 +1,5 @@
 <?php
-use Thumbpress\Helpers\Utility;
+use Codexpert\ThumbPress\Helpers\Utility;
 
 /**
  * Returns the home URL of the WordPress site.
@@ -179,5 +179,5 @@ function thumbpress_get_field_factory( $type ) {
 		$type = 'WYSIWYG';
 	}
 
-	return '\\Thumbpress\\Helpers\\Field\\' . ucfirst( $type );
+	return '\\Codexpert\ThumbPress\\Helpers\\Field\\' . ucfirst( $type );
 }

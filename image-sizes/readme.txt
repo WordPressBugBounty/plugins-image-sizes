@@ -4,7 +4,7 @@ Tags: image optimization, compress images, thumbnail manager, WebP converter, me
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 6.1.3
+Stable tag: 6.1.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -231,6 +231,15 @@ ThumbPress scans your media library and compares image files using unique hashes
 14. Social Media Share - Set custom thumbnails for each platform
 
 == Changelog ==
+
+= 6.1.4 - 2026-05-21 =
+* [feat] Add RTL support for switch component
+* [fix] Dashboard stats now load sequentially to prevent race conditions
+* [fix] Dashboard skeleton loading states display correctly while data loads
+* [fix] Pro card filters apply during initial dashboard load
+* [refactor] Prefix namespaces with Codexpert to match legacy
+* [refactor] Replace single pro_cards filter with 5 per-card filters for granular control
+* [chore] Ignore .worktrees directory
 
 = 6.1.3 - 2026-05-19 =
 * [imp] Improved empty state messages across feature pages

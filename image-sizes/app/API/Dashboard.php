@@ -1,11 +1,11 @@
 <?php
-namespace Thumbpress\API;
+namespace Codexpert\ThumbPress\API;
 
 defined( 'ABSPATH' ) || exit;
 
-use Thumbpress\Helpers\Utility;
-use Thumbpress\Traits\Rest;
-use Thumbpress\Traits\Cache;
+use Codexpert\ThumbPress\Helpers\Utility;
+use Codexpert\ThumbPress\Traits\Rest;
+use Codexpert\ThumbPress\Traits\Cache;
 
 class Dashboard {
 
@@ -18,6 +18,82 @@ class Dashboard {
 	public function get_stats() {
 		$stats = $this->compute_stats();
 		return $this->response_success( $stats );
+	}
+
+	public function get_fast_stats() {
+		$total_images = $this->get_total_images();
+		$sizes_data   = $this->get_sizes_data();
+
+		return $this->response_success( array(
+			'total_images'     => $total_images,
+			'total_sizes'      => $sizes_data['total_sizes'],
+			'disabled_sizes'   => $sizes_data['disabled_sizes'],
+			'total_space_saved'=> $this->get_space_saved(),
+			'not_webp'         => $this->get_not_webp(),
+			'not_avif'         => $this->get_not_avif(),
+			'lazy_load'        => (bool) get_option( 'thumbpress_lazy_load', 0 ),
+			'pro_active'       => apply_filters( 'thumbpress_is_pro_active', defined( 'THUMBPRESS_PRO_VERSION' ) ),
+		) );
+	}
+
+	public function get_medium_stats() {
+		$unoptimized    = $this->get_unoptimized_count();
+		$not_compressed = $this->get_not_compressed();
+		$thumbnails     = $this->count_total_thumbnails();
+		$total_images   = $this->get_total_images();
+
+		return $this->response_success( array(
+			'total_thumbnails'   => $thumbnails,
+			'unoptimized_images' => $unoptimized,
+			'compressed'         => $total_images - $not_compressed,
+			'not_compressed'     => $not_compressed,
+		) );
+	}
+
+	public function get_slow_stats() {
+		$total_images   = $this->get_total_images();
+		$sizes_data     = $this->get_sizes_data();
+		$not_webp       = $this->get_not_webp();
+		$not_avif       = $this->get_not_avif();
+		$unoptimized    = $this->get_unoptimized_count();
+		$not_compressed = $this->get_not_compressed();
+		$thumbnails     = $this->count_total_thumbnails();
+		$duplicates     = $this->get_duplicate_count();
+		$large_images   = $this->count_large_images();
+
+		$stats = array(
+			'total_images'       => $total_images,
+			'total_sizes'        => $sizes_data['total_sizes'],
+			'disabled_sizes'     => $sizes_data['disabled_sizes'],
+			'total_space_saved'  => $this->get_space_saved(),
+			'not_webp'           => $not_webp,
+			'not_avif'           => $not_avif,
+			'lazy_load'          => (bool) get_option( 'thumbpress_lazy_load', 0 ),
+			'pro_active'         => apply_filters( 'thumbpress_is_pro_active', defined( 'THUMBPRESS_PRO_VERSION' ) ),
+			'total_thumbnails'   => $thumbnails,
+			'unoptimized_images' => $unoptimized,
+			'compressed'         => $total_images - $not_compressed,
+			'not_compressed'     => $not_compressed,
+			'large_images'       => $large_images,
+			'duplicate_images'   => $duplicates,
+			'unused_images'      => 0,
+		);
+
+		$stats = apply_filters( 'thumbpress_dashboard_stats', $stats, $total_images );
+
+		$health_data           = $this->calculate_health_score( $stats );
+		$stats['health_score'] = $health_data['score'];
+		$stats['health_issue'] = $health_data['issue'];
+		$stats['quick_facts']  = $this->build_quick_facts( $stats );
+
+		return $this->response_success( array(
+			'large_images'     => $stats['large_images'],
+			'duplicate_images' => $stats['duplicate_images'],
+			'unused_images'    => $stats['unused_images'],
+			'health_score'     => $stats['health_score'],
+			'health_issue'     => $stats['health_issue'],
+			'quick_facts'      => $stats['quick_facts'],
+		) );
 	}
 
 	/**

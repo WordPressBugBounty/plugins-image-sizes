@@ -1,9 +1,9 @@
 <?php
-namespace Thumbpress\Abstracts;
+namespace Codexpert\ThumbPress\Abstracts;
 
 defined( 'ABSPATH' ) || exit;
 
-use Thumbpress\Models\Database;
+use Codexpert\ThumbPress\Models\Database;
 
 /**
  * Class Meta

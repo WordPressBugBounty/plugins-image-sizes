@@ -1,18 +1,18 @@
 <?php
-namespace Thumbpress\Controllers\Common;
+namespace Codexpert\ThumbPress\Controllers\Common;
 
 defined( 'ABSPATH' ) || exit;
 
 use WP_REST_Server;
-use Thumbpress\API\Regenerate;
-use Thumbpress\API\Thumbnails;
-use Thumbpress\API\Convert_Webp;
-use Thumbpress\API\Convert_Avif;
-use Thumbpress\API\Settings;
-use Thumbpress\API\Dashboard;
-use Thumbpress\Traits\Hook;
-use Thumbpress\Traits\Auth;
-use Thumbpress\Traits\Rest;
+use Codexpert\ThumbPress\API\Regenerate;
+use Codexpert\ThumbPress\API\Thumbnails;
+use Codexpert\ThumbPress\API\Convert_Webp;
+use Codexpert\ThumbPress\API\Convert_Avif;
+use Codexpert\ThumbPress\API\Settings;
+use Codexpert\ThumbPress\API\Dashboard;
+use Codexpert\ThumbPress\Traits\Hook;
+use Codexpert\ThumbPress\Traits\Auth;
+use Codexpert\ThumbPress\Traits\Rest;
 
 class API {
 
@@ -366,6 +366,36 @@ class API {
 		/**
 		 * Dashboard Stats API
 		 */
+		register_rest_route(
+			$this->namespace,
+			'/dashboard/stats/fast',
+			array(
+				'methods'             => WP_REST_Server::READABLE,
+				'callback'            => array( new Dashboard(), 'get_fast_stats' ),
+				'permission_callback' => array( $this, 'is_admin' ),
+			)
+		);
+
+		register_rest_route(
+			$this->namespace,
+			'/dashboard/stats/medium',
+			array(
+				'methods'             => WP_REST_Server::READABLE,
+				'callback'            => array( new Dashboard(), 'get_medium_stats' ),
+				'permission_callback' => array( $this, 'is_admin' ),
+			)
+		);
+
+		register_rest_route(
+			$this->namespace,
+			'/dashboard/stats/slow',
+			array(
+				'methods'             => WP_REST_Server::READABLE,
+				'callback'            => array( new Dashboard(), 'get_slow_stats' ),
+				'permission_callback' => array( $this, 'is_admin' ),
+			)
+		);
+
 		register_rest_route(
 			$this->namespace,
 			'/dashboard/stats',

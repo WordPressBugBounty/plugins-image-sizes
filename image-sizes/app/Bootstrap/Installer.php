@@ -1,9 +1,9 @@
 <?php
-namespace Thumbpress\Bootstrap;
+namespace Codexpert\ThumbPress\Bootstrap;
 
 defined( 'ABSPATH' ) || exit;
 
-use Thumbpress\Models\Database;
+use Codexpert\ThumbPress\Models\Database;
 
 class Installer {
 

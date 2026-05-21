@@ -1,5 +1,5 @@
 <?php
-namespace Thumbpress\Bootstrap;
+namespace Codexpert\ThumbPress\Bootstrap;
 
 defined( 'ABSPATH' ) || exit;
 

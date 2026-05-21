@@ -1,11 +1,11 @@
 <?php
-namespace Thumbpress\Controllers\Admin;
+namespace Codexpert\ThumbPress\Controllers\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
-use Thumbpress\Bootstrap\VersionManager;
-use Thumbpress\Traits\Hook;
-use Thumbpress\Traits\Asset;
+use Codexpert\ThumbPress\Bootstrap\VersionManager;
+use Codexpert\ThumbPress\Traits\Hook;
+use Codexpert\ThumbPress\Traits\Asset;
 
 class Init {
 

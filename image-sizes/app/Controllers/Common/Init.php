@@ -1,13 +1,13 @@
 <?php
-namespace Thumbpress\Controllers\Common;
+namespace Codexpert\ThumbPress\Controllers\Common;
 
 defined( 'ABSPATH' ) || exit;
 
-use Thumbpress\API\Dashboard;
-use Thumbpress\Helpers\Utility;
-use Thumbpress\Traits\Hook;
-use Thumbpress\Traits\Asset;
-use Thumbpress\Traits\Cache;
+use Codexpert\ThumbPress\API\Dashboard;
+use Codexpert\ThumbPress\Helpers\Utility;
+use Codexpert\ThumbPress\Traits\Hook;
+use Codexpert\ThumbPress\Traits\Asset;
+use Codexpert\ThumbPress\Traits\Cache;
 
 class Init {
 

@@ -1,9 +1,9 @@
 <?php
-namespace Thumbpress\Controllers\Common;
+namespace Codexpert\ThumbPress\Controllers\Common;
 
 defined( 'ABSPATH' ) || exit;
 
-use Thumbpress\Traits\Hook;
+use Codexpert\ThumbPress\Traits\Hook;
 
 class Image_Max_Size {
 

@@ -1,10 +1,10 @@
 <?php
-namespace Thumbpress\Controllers\Front;
+namespace Codexpert\ThumbPress\Controllers\Front;
 
 defined( 'ABSPATH' ) || exit;
 
-use Thumbpress\Traits\Hook;
-use Thumbpress\Traits\Asset;
+use Codexpert\ThumbPress\Traits\Hook;
+use Codexpert\ThumbPress\Traits\Asset;
 
 class Lazy_Load {
 

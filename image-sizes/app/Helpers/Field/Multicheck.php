@@ -1,7 +1,7 @@
 <?php
-namespace Thumbpress\Helpers\Field;
+namespace Codexpert\ThumbPress\Helpers\Field;
 
-use Thumbpress\Abstracts\Field;
+use Codexpert\ThumbPress\Abstracts\Field;
 
 defined( 'ABSPATH' ) || exit;
 

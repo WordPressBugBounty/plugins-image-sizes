@@ -1,5 +1,5 @@
 <?php
-namespace Thumbpress\Controllers\Common;
+namespace Codexpert\ThumbPress\Controllers\Common;
 
 defined( 'ABSPATH' ) || exit;
 

@@ -1,12 +1,12 @@
 <?php
-namespace Thumbpress\API;
+namespace Codexpert\ThumbPress\API;
 
 defined( 'ABSPATH' ) || exit;
 
-use Thumbpress\Helpers\Utility;
-use Thumbpress\Traits\Rest;
-use Thumbpress\Traits\Cache;
-use Thumbpress\Controllers\Common\Convert_Avif as Convert_Avif_Controller;
+use Codexpert\ThumbPress\Helpers\Utility;
+use Codexpert\ThumbPress\Traits\Rest;
+use Codexpert\ThumbPress\Traits\Cache;
+use Codexpert\ThumbPress\Controllers\Common\Convert_Avif as Convert_Avif_Controller;
 
 class Convert_Avif {
 
