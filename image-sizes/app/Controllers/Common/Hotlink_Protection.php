@@ -21,7 +21,16 @@ class Hotlink_Protection {
 			return;
 		}
 
-		$this->action( 'template_redirect', array( $this, 'start_buffer' ), 0 );
+		// URL rewriting via output buffer only works correctly on Apache.
+		// Nginx handles image delivery differently — rewriting URLs breaks CDN and media converters.
+		if ( $this->is_apache() ) {
+			$this->action( 'template_redirect', array( $this, 'start_buffer' ), 0 );
+		}
+	}
+
+	private function is_apache() {
+		$software = isset( $_SERVER['SERVER_SOFTWARE'] ) ? strtolower( $_SERVER['SERVER_SOFTWARE'] ) : '';
+		return strpos( $software, 'apache' ) !== false;
 	}
 
 	/**
@@ -119,7 +128,7 @@ class Hotlink_Protection {
 
 	/**
 	 * Rewrite upload image URLs to go through the proxy endpoint.
-	 * Uses /thumbpress-image/ pretty URL — works on both Apache and Nginx.
+	 * Apache only — never runs on Nginx.
 	 */
 	public function rewrite_image_urls( $html ) {
 		if ( empty( $html ) ) {

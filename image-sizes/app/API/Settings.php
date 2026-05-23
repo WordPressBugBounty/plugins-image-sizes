@@ -87,12 +87,14 @@ class Settings {
 			update_option( 'thumbpress_hotlink_protection', $hotlink_protection ? 1 : 0 );
 
 			if ( (bool) $previous !== (bool) $hotlink_protection ) {
-				if ( $hotlink_protection ) {
-					$this->add_hotlink_rules();
-					$this->add_uploads_htaccess();
-				} else {
-					$this->remove_hotlink_rules();
-					$this->remove_uploads_htaccess();
+				if ( $this->is_apache() ) {
+					if ( $hotlink_protection ) {
+						$this->add_hotlink_rules();
+						$this->add_uploads_htaccess();
+					} else {
+						$this->remove_hotlink_rules();
+						$this->remove_uploads_htaccess();
+					}
 				}
 				// Flush WordPress rewrite rules so /thumbpress-image/ pretty URL is written
 				// to .htaccess (Apache) and registered for WordPress routing (Nginx).
@@ -196,6 +198,11 @@ class Settings {
 				'message' => __( 'Settings saved successfully.', 'image-sizes' ),
 			)
 		);
+	}
+
+	private function is_apache() {
+		$software = isset( $_SERVER['SERVER_SOFTWARE'] ) ? strtolower( $_SERVER['SERVER_SOFTWARE'] ) : '';
+		return strpos( $software, 'apache' ) !== false;
 	}
 
 	/**

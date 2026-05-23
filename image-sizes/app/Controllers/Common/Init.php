@@ -32,6 +32,8 @@ class Init {
 		$this->action( 'thumbpress_generate_image_hashes', array( $this, 'generate_hashes_batch' ) );
 		$this->action( 'thumbpress_build_stat_cache', array( $this, 'build_stat_cache' ) );
 		$this->action( 'thumbpress_file_meta_refreshed', array( $this, 'clear_duplicate_cache' ) );
+		$this->action( 'thumbpress_media_changed', array( $this, 'clear_media_cache' ) );
+		$this->action( 'thumbpress_media_changed', array( $this, 'schedule_stat_cache_refresh' ) );
 	}
 
 	public function modal() {

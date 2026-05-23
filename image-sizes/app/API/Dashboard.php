@@ -20,7 +20,7 @@ class Dashboard {
 		return $this->response_success( $stats );
 	}
 
-	public function get_fast_stats() {
+	public function get_counts_stats() {
 		$total_images = $this->get_total_images();
 		$sizes_data   = $this->get_sizes_data();
 
@@ -36,7 +36,7 @@ class Dashboard {
 		) );
 	}
 
-	public function get_medium_stats() {
+	public function get_optimization_stats() {
 		$unoptimized    = $this->get_unoptimized_count();
 		$not_compressed = $this->get_not_compressed();
 		$thumbnails     = $this->count_total_thumbnails();
@@ -50,7 +50,7 @@ class Dashboard {
 		) );
 	}
 
-	public function get_slow_stats() {
+	public function get_analysis_stats() {
 		$total_images   = $this->get_total_images();
 		$sizes_data     = $this->get_sizes_data();
 		$not_webp       = $this->get_not_webp();

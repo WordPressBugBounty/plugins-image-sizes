@@ -368,30 +368,30 @@ class API {
 		 */
 		register_rest_route(
 			$this->namespace,
-			'/dashboard/stats/fast',
+			'/dashboard/stats/counts',
 			array(
 				'methods'             => WP_REST_Server::READABLE,
-				'callback'            => array( new Dashboard(), 'get_fast_stats' ),
+				'callback'            => array( new Dashboard(), 'get_counts_stats' ),
 				'permission_callback' => array( $this, 'is_admin' ),
 			)
 		);
 
 		register_rest_route(
 			$this->namespace,
-			'/dashboard/stats/medium',
+			'/dashboard/stats/optimization',
 			array(
 				'methods'             => WP_REST_Server::READABLE,
-				'callback'            => array( new Dashboard(), 'get_medium_stats' ),
+				'callback'            => array( new Dashboard(), 'get_optimization_stats' ),
 				'permission_callback' => array( $this, 'is_admin' ),
 			)
 		);
 
 		register_rest_route(
 			$this->namespace,
-			'/dashboard/stats/slow',
+			'/dashboard/stats/analysis',
 			array(
 				'methods'             => WP_REST_Server::READABLE,
-				'callback'            => array( new Dashboard(), 'get_slow_stats' ),
+				'callback'            => array( new Dashboard(), 'get_analysis_stats' ),
 				'permission_callback' => array( $this, 'is_admin' ),
 			)
 		);

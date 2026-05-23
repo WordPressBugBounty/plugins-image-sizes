@@ -42,6 +42,17 @@ class Activator {
 			return;
 		}
 
+		// Skip AJAX and REST requests — sending a redirect header breaks them.
+		if ( wp_doing_ajax() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+			return;
+		}
+
+		// Break potential redirect loop: already on the target page.
+		if ( isset( $_GET['page'] ) && 'thumbpress' === $_GET['page'] ) { // phpcs:ignore WordPress.Security.NonceVerification
+			delete_option( self::REDIRECT_OPTION );
+			return;
+		}
+
 		delete_option( self::REDIRECT_OPTION );
 
 		// Skip during bulk plugin activation.

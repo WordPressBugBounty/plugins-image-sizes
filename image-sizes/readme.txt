@@ -2,9 +2,9 @@
 Contributors: thumbpressco, codexpert, mukto90
 Tags: image optimization, compress images, thumbnail manager, WebP converter, media library cleaner, AVIF converter, regenerate thumbnails, unused images, lazy load, hotlink protection
 Requires at least: 6.0
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 6.1.4
+Stable tag: 6.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -231,6 +231,13 @@ ThumbPress scans your media library and compares image files using unique hashes
 14. Social Media Share - Set custom thumbnails for each platform
 
 == Changelog ==
+
+= 6.2 - 2026-05-22 =
+* [fix] Fixed admin redirect loop — AJAX and REST requests now skipped in `maybe_redirect`
+* [feat] Added `thumbpress_media_changed` action hook fired after media changes to allow cache rebuilds
+* [fix] Hotlink protection `.htaccess` writes now gated to Apache only
+* [fix] Hotlink protection URL rewriting now gated to Apache only
+* [refactor] Renamed dashboard API identifiers from `fast/medium/slow` to `counts/optimization/analysis` across PHP methods, REST routes, TypeScript interfaces, API functions, and React state
 
 = 6.1.4 - 2026-05-21 =
 * [feat] Add RTL support for switch component
