@@ -4,7 +4,7 @@ Tags: image optimization, compress images, thumbnail manager, WebP converter, me
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 6.2.1
+Stable tag: 6.2.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -231,6 +231,13 @@ ThumbPress scans your media library and compares image files using unique hashes
 14. Social Media Share - Set custom thumbnails for each platform
 
 == Changelog ==
+
+= 6.2.2 - 2026-06-04 =
+* [fix] Fixed stale settings values when switching tabs after save
+* [fix] Fixed WebP convert-on-upload settings screen
+* [fix] Fixed lazy load settings screen
+* [fix] Hide dismiss button in admin notice when in legacy mode
+* [refactor] Removed unused Social_Share API class
 
 = 6.2 - 2026-05-22 =
 * [fix] Fixed admin redirect loop — AJAX and REST requests now skipped in `maybe_redirect`

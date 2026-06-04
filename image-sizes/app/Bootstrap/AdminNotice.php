@@ -143,9 +143,11 @@ class AdminNotice {
 		$current = $manager->get_user_preference() ?? 'legacy';
 		?>
 		<div class="notice notice-info" id="thumbpress-version-choice" style="padding: 12px 16px; position: relative;">
+			<?php if ( 'new' === $current ) : ?>
 			<button type="button" class="notice-dismiss" id="thumbpress-dismiss-notice">
 				<span class="screen-reader-text"><?php esc_html_e( 'Dismiss this notice.', 'image-sizes' ); ?></span>
 			</button>
+			<?php endif; ?>
 			<p style="font-size: 14px; margin: 0 0 10px;">
 				<strong><?php esc_html_e( 'A new version of ThumbPress is ready!', 'image-sizes' ); ?></strong><br>
 				<?php
@@ -205,7 +207,8 @@ class AdminNotice {
 				legacyBtn.addEventListener( 'click', function() { choose( 'legacy' ); });
 			}
 
-			document.getElementById( 'thumbpress-dismiss-notice' ).addEventListener( 'click', function() {
+			var dismissBtn = document.getElementById( 'thumbpress-dismiss-notice' );
+			if ( dismissBtn ) dismissBtn.addEventListener( 'click', function() {
 				fetch( config.dismiss_url, {
 					method: 'POST',
 					headers: {

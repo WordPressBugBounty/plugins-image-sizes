@@ -39,7 +39,6 @@ class ComposerStaticInitbc3a3c287ca29c47b02dd94846518371
         'Codexpert\\ThumbPress\\API\\Dashboard' => __DIR__ . '/../..' . '/app/API/Dashboard.php',
         'Codexpert\\ThumbPress\\API\\Regenerate' => __DIR__ . '/../..' . '/app/API/Regenerate.php',
         'Codexpert\\ThumbPress\\API\\Settings' => __DIR__ . '/../..' . '/app/API/Settings.php',
-        'Codexpert\\ThumbPress\\API\\Social_Share' => __DIR__ . '/../..' . '/app/API/Social_Share.php',
         'Codexpert\\ThumbPress\\API\\Thumbnails' => __DIR__ . '/../..' . '/app/API/Thumbnails.php',
         'Codexpert\\ThumbPress\\Abstracts\\Field' => __DIR__ . '/../..' . '/app/Abstracts/Field.php',
         'Codexpert\\ThumbPress\\Abstracts\\Meta' => __DIR__ . '/../..' . '/app/Abstracts/Meta.php',

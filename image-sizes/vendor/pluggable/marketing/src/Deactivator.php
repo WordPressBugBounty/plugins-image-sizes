@@ -132,6 +132,7 @@ class Deactivator {
 					<form method="post" class="pl-plugin-deactivation-survey-form">
 						<input type="hidden" name="plugin" value="" id="cxd-plugin-name">
 						<input type="hidden" name="action" value="pl-plugin-deactivation">
+						<?php wp_nonce_field( 'pl-plugin-deactivation-nonce', 'pl_deactivation_nonce' ); ?>
 						<div class="pl-plugin-dsm-header">
 							<h3 class="pl-heading">
 								<?php printf( __( 'We\'re so sorry to see you go, %s!', 'pluggable' ), $user->display_name ); ?>
@@ -171,6 +172,12 @@ class Deactivator {
 	}
 
 	public function send_deactivation_survey()	{
+		if ( ! current_user_can( 'activate_plugins' ) ) {
+			wp_send_json_error( 'Unauthorized', 403 );
+		}
+
+		check_ajax_referer( 'pl-plugin-deactivation-nonce', 'pl_deactivation_nonce' );
+
 		// deactivate the plugin first
 		deactivate_plugins( $this->basename );
 

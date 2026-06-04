@@ -19,7 +19,6 @@ return array(
     'Codexpert\\ThumbPress\\API\\Dashboard' => $baseDir . '/app/API/Dashboard.php',
     'Codexpert\\ThumbPress\\API\\Regenerate' => $baseDir . '/app/API/Regenerate.php',
     'Codexpert\\ThumbPress\\API\\Settings' => $baseDir . '/app/API/Settings.php',
-    'Codexpert\\ThumbPress\\API\\Social_Share' => $baseDir . '/app/API/Social_Share.php',
     'Codexpert\\ThumbPress\\API\\Thumbnails' => $baseDir . '/app/API/Thumbnails.php',
     'Codexpert\\ThumbPress\\Abstracts\\Field' => $baseDir . '/app/Abstracts/Field.php',
     'Codexpert\\ThumbPress\\Abstracts\\Meta' => $baseDir . '/app/Abstracts/Meta.php',
