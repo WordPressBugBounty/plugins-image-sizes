@@ -609,6 +609,9 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .col-span-2{
   grid-column: span 2 / span 2;
 }
+#image-sizes_render .col-start-2{
+  grid-column-start: 2;
+}
 #image-sizes_render .-mx-1{
   margin-right: -0.25rem;
   margin-left: -0.25rem;
@@ -616,14 +619,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .mx-4{
   margin-right: 1rem;
   margin-left: 1rem;
-}
-#image-sizes_render .mx-6{
-  margin-right: 1.5rem;
-  margin-left: 1.5rem;
-}
-#image-sizes_render .mx-\[80px\]{
-  margin-right: 80px;
-  margin-left: 80px;
 }
 #image-sizes_render .mx-auto{
   margin-right: auto;
@@ -724,6 +719,9 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .hidden{
   display: none;
 }
+#image-sizes_render .aspect-square{
+  aspect-ratio: 1 / 1;
+}
 #image-sizes_render .size-4{
   width: 1rem;
   height: 1rem;
@@ -772,20 +770,17 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .h-9{
   height: 2.25rem;
 }
+#image-sizes_render .h-\[110px\]{
+  height: 110px;
+}
 #image-sizes_render .h-\[120px\]{
   height: 120px;
 }
 #image-sizes_render .h-\[18px\]{
   height: 18px;
 }
-#image-sizes_render .h-\[190px\]{
-  height: 190px;
-}
 #image-sizes_render .h-\[24px\]{
   height: 24px;
-}
-#image-sizes_render .h-\[340px\]{
-  height: 340px;
 }
 #image-sizes_render .h-\[40px\]{
   height: 40px;
@@ -801,9 +796,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 }
 #image-sizes_render .h-\[56px\]{
   height: 56px;
-}
-#image-sizes_render .h-\[60px\]{
-  height: 60px;
 }
 #image-sizes_render .h-\[68px\]{
   height: 68px;
@@ -904,6 +896,9 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .w-\[10\%\]{
   width: 10%;
 }
+#image-sizes_render .w-\[110px\]{
+  width: 110px;
+}
 #image-sizes_render .w-\[120px\]{
   width: 120px;
 }
@@ -916,26 +911,17 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .w-\[18px\]{
   width: 18px;
 }
-#image-sizes_render .w-\[190px\]{
-  width: 190px;
-}
 #image-sizes_render .w-\[1px\]{
   width: 1px;
 }
 #image-sizes_render .w-\[225px\]{
   width: 225px;
 }
-#image-sizes_render .w-\[235px\]{
-  width: 235px;
-}
 #image-sizes_render .w-\[45\%\]{
   width: 45%;
 }
 #image-sizes_render .w-\[48px\]{
   width: 48px;
-}
-#image-sizes_render .w-\[60px\]{
-  width: 60px;
 }
 #image-sizes_render .w-\[80\%\]{
   width: 80%;
@@ -956,12 +942,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 }
 #image-sizes_render .min-w-0{
   min-width: 0px;
-}
-#image-sizes_render .min-w-\[410px\]{
-  min-width: 410px;
-}
-#image-sizes_render .min-w-\[826px\]{
-  min-width: 826px;
 }
 #image-sizes_render .min-w-\[88px\]{
   min-width: 88px;
@@ -1170,9 +1150,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 }
 #image-sizes_render .rounded-2xl{
   border-radius: 1rem;
-}
-#image-sizes_render .rounded-3xl{
-  border-radius: 1.5rem;
 }
 #image-sizes_render .rounded-\[4px\]{
   border-radius: 4px;
@@ -1502,9 +1479,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .p-8{
   padding: 2rem;
 }
-#image-sizes_render .p-\[30px\]{
-  padding: 30px;
-}
 #image-sizes_render .p-\[3px\]{
   padding: 3px;
 }
@@ -1569,10 +1543,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .px-8{
   padding-right: 2rem;
   padding-left: 2rem;
-}
-#image-sizes_render .px-\[300px\]{
-  padding-right: 300px;
-  padding-left: 300px;
 }
 #image-sizes_render .px-\[3px\]{
   padding-right: 3px;
@@ -1676,29 +1646,15 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   font-size: 1.5rem;
   line-height: 2rem;
 }
-#image-sizes_render .text-3xl{
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-}
 #image-sizes_render .text-4xl{
   font-size: 2.25rem;
   line-height: 2.5rem;
-}
-#image-sizes_render .text-5xl{
-  font-size: 3rem;
-  line-height: 1;
 }
 #image-sizes_render .text-\[10px\]{
   font-size: 10px;
 }
 #image-sizes_render .text-\[14px\]{
   font-size: 14px;
-}
-#image-sizes_render .text-\[32px\]{
-  font-size: 32px;
-}
-#image-sizes_render .text-\[38px\]{
-  font-size: 38px;
 }
 #image-sizes_render .text-\[8px\]{
   font-size: 8px;
@@ -2304,12 +2260,314 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 }
 @media (min-width: 768px){
 
-  #image-sizes_render .md\:grid-cols-4{
+  #image-sizes_render .md\:grid-cols-\[1fr_auto\]{
+    grid-template-columns: 1fr auto;
+  }
+}
+@media (min-width: 1024px){
+
+  #image-sizes_render .lg\:mx-\[40px\]{
+    margin-right: 40px;
+    margin-left: 40px;
+  }
+
+  #image-sizes_render .lg\:mb-4{
+    margin-bottom: 1rem;
+  }
+
+  #image-sizes_render .lg\:mt-8{
+    margin-top: 2rem;
+  }
+
+  #image-sizes_render .lg\:h-8{
+    height: 2rem;
+  }
+
+  #image-sizes_render .lg\:h-\[40px\]{
+    height: 40px;
+  }
+
+  #image-sizes_render .lg\:h-auto{
+    height: auto;
+  }
+
+  #image-sizes_render .lg\:w-8{
+    width: 2rem;
+  }
+
+  #image-sizes_render .lg\:w-\[110px\]{
+    width: 110px;
+  }
+
+  #image-sizes_render .lg\:w-\[208px\]{
+    width: 208px;
+  }
+
+  #image-sizes_render .lg\:w-\[237px\]{
+    width: 237px;
+  }
+
+  #image-sizes_render .lg\:w-\[40px\]{
+    width: 40px;
+  }
+
+  #image-sizes_render .lg\:w-\[430px\]{
+    width: 430px;
+  }
+
+  #image-sizes_render .lg\:min-w-\[32\%\]{
+    min-width: 32%;
+  }
+
+  #image-sizes_render .lg\:min-w-\[427px\]{
+    min-width: 427px;
+  }
+
+  #image-sizes_render .lg\:grid-cols-3{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #image-sizes_render .lg\:gap-4{
+    gap: 1rem;
+  }
+
+  #image-sizes_render .lg\:p-4{
+    padding: 1rem;
+  }
+
+  #image-sizes_render .lg\:p-5{
+    padding: 1.25rem;
+  }
+
+  #image-sizes_render .lg\:px-2{
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+
+  #image-sizes_render .lg\:px-6{
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  #image-sizes_render .lg\:px-\[80px\]{
+    padding-right: 80px;
+    padding-left: 80px;
+  }
+
+  #image-sizes_render .lg\:pt-\[36px\]{
+    padding-top: 36px;
+  }
+
+  #image-sizes_render .lg\:text-2xl{
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  #image-sizes_render .lg\:text-\[12px\]{
+    font-size: 12px;
+  }
+
+  #image-sizes_render .lg\:text-\[14px\]{
+    font-size: 14px;
+  }
+
+  #image-sizes_render .lg\:text-\[18px\]{
+    font-size: 18px;
+  }
+
+  #image-sizes_render .lg\:text-\[24px\]{
+    font-size: 24px;
+  }
+
+  #image-sizes_render .lg\:text-\[28px\]{
+    font-size: 28px;
+  }
+
+  #image-sizes_render .lg\:text-\[38px\]{
+    font-size: 38px;
+  }
+
+  #image-sizes_render .lg\:text-base{
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  #image-sizes_render .lg\:text-sm{
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  #image-sizes_render .lg\:text-xs{
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+
+  #image-sizes_render .lg\:leading-\[42px\]{
+    line-height: 42px;
+  }
+}
+@media (min-width: 1280px){
+
+  #image-sizes_render .xl\:rounded-2xl{
+    border-radius: 1rem;
+  }
+}
+@media (min-width: 1536px){
+
+  #image-sizes_render .\32xl\:mx-\[80px\]{
+    margin-right: 80px;
+    margin-left: 80px;
+  }
+
+  #image-sizes_render .\32xl\:mb-5{
+    margin-bottom: 1.25rem;
+  }
+
+  #image-sizes_render .\32xl\:mt-0{
+    margin-top: 0px;
+  }
+
+  #image-sizes_render .\32xl\:h-10{
+    height: 2.5rem;
+  }
+
+  #image-sizes_render .\32xl\:h-\[190px\]{
+    height: 190px;
+  }
+
+  #image-sizes_render .\32xl\:h-\[340px\]{
+    height: 340px;
+  }
+
+  #image-sizes_render .\32xl\:h-\[60px\]{
+    height: 60px;
+  }
+
+  #image-sizes_render .\32xl\:w-10{
+    width: 2.5rem;
+  }
+
+  #image-sizes_render .\32xl\:w-\[190px\]{
+    width: 190px;
+  }
+
+  #image-sizes_render .\32xl\:w-\[235px\]{
+    width: 235px;
+  }
+
+  #image-sizes_render .\32xl\:w-\[408px\]{
+    width: 408px;
+  }
+
+  #image-sizes_render .\32xl\:w-\[60px\]{
+    width: 60px;
+  }
+
+  #image-sizes_render .\32xl\:w-full{
+    width: 100%;
+  }
+
+  #image-sizes_render .\32xl\:min-w-\[410px\]{
+    min-width: 410px;
+  }
+
+  #image-sizes_render .\32xl\:min-w-\[826px\]{
+    min-width: 826px;
+  }
+
+  #image-sizes_render .\32xl\:flex-shrink-0{
+    flex-shrink: 0;
+  }
+
+  #image-sizes_render .\32xl\:grid-cols-4{
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  #image-sizes_render .md\:grid-cols-\[1fr_auto\]{
-    grid-template-columns: 1fr auto;
+  #image-sizes_render .\32xl\:gap-12{
+    gap: 3rem;
+  }
+
+  #image-sizes_render .\32xl\:gap-5{
+    gap: 1.25rem;
+  }
+
+  #image-sizes_render .\32xl\:gap-6{
+    gap: 1.5rem;
+  }
+
+  #image-sizes_render .\32xl\:rounded-3xl{
+    border-radius: 1.5rem;
+  }
+
+  #image-sizes_render .\32xl\:p-6{
+    padding: 1.5rem;
+  }
+
+  #image-sizes_render .\32xl\:p-\[30px\]{
+    padding: 30px;
+  }
+
+  #image-sizes_render .\32xl\:px-10{
+    padding-right: 2.5rem;
+    padding-left: 2.5rem;
+  }
+
+  #image-sizes_render .\32xl\:px-3{
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+  }
+
+  #image-sizes_render .\32xl\:px-\[300px\]{
+    padding-right: 300px;
+    padding-left: 300px;
+  }
+
+  #image-sizes_render .\32xl\:px-\[80px\]{
+    padding-right: 80px;
+    padding-left: 80px;
+  }
+
+  #image-sizes_render .\32xl\:text-2xl{
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  #image-sizes_render .\32xl\:text-3xl{
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
+  #image-sizes_render .\32xl\:text-5xl{
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  #image-sizes_render .\32xl\:text-\[32px\]{
+    font-size: 32px;
+  }
+
+  #image-sizes_render .\32xl\:text-\[38px\]{
+    font-size: 38px;
+  }
+
+  #image-sizes_render .\32xl\:text-base{
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  #image-sizes_render .\32xl\:text-lg{
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
+  #image-sizes_render .\32xl\:text-sm{
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  #image-sizes_render .\32xl\:text-xl{
+    font-size: 1.25rem;
+    line-height: 1.75rem;
   }
 }
 #image-sizes_render .rtl\:left-1:where([dir="rtl"], [dir="rtl"] *){

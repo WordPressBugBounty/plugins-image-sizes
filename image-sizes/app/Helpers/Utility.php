@@ -44,7 +44,9 @@ class Utility {
 			$message = json_encode( $message );
 		}
 
-		if ( ! file_exists( $log_path = WP_CONTENT_DIR . '/image-sizes-logs/' . $log_file ) ) {
+		$upload_dir = wp_upload_dir();
+		$log_dir    = trailingslashit( $upload_dir['basedir'] ) . 'image-sizes-logs/';
+		if ( ! file_exists( $log_path = $log_dir . $log_file ) ) {
 			$wp_filesystem->mkdir( dirname( $log_path ) );
 			$wp_filesystem->put_contents( $log_path, '', FS_CHMOD_FILE );
 		}

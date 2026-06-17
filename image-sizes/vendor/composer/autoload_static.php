@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitbc3a3c287ca29c47b02dd94846518371
+class ComposerStaticInit5102d9dbdde4a56de2475e62eba0b668
 {
     public static $files = array (
         '0900f131f6c64f7eaafbb356073e2f2b' => __DIR__ . '/../..' . '/app/Helpers/functions.php',
@@ -58,6 +58,7 @@ class ComposerStaticInitbc3a3c287ca29c47b02dd94846518371
         'Codexpert\\ThumbPress\\Controllers\\Common\\Hotlink_Protection' => __DIR__ . '/../..' . '/app/Controllers/Common/Hotlink_Protection.php',
         'Codexpert\\ThumbPress\\Controllers\\Common\\Image_Max_Size' => __DIR__ . '/../..' . '/app/Controllers/Common/Image_Max_Size.php',
         'Codexpert\\ThumbPress\\Controllers\\Common\\Init' => __DIR__ . '/../..' . '/app/Controllers/Common/Init.php',
+        'Codexpert\\ThumbPress\\Controllers\\Common\\Media_Buttons' => __DIR__ . '/../..' . '/app/Controllers/Common/Media_Buttons.php',
         'Codexpert\\ThumbPress\\Controllers\\Common\\Social_Share' => __DIR__ . '/../..' . '/app/Controllers/Common/Social_Share.php',
         'Codexpert\\ThumbPress\\Controllers\\Common\\Thumbnails' => __DIR__ . '/../..' . '/app/Controllers/Common/Thumbnails.php',
         'Codexpert\\ThumbPress\\Controllers\\Front\\Image_Download_Disable' => __DIR__ . '/../..' . '/app/Controllers/Front/Image_Download_Disable.php',
@@ -97,9 +98,9 @@ class ComposerStaticInitbc3a3c287ca29c47b02dd94846518371
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitbc3a3c287ca29c47b02dd94846518371::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitbc3a3c287ca29c47b02dd94846518371::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitbc3a3c287ca29c47b02dd94846518371::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit5102d9dbdde4a56de2475e62eba0b668::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit5102d9dbdde4a56de2475e62eba0b668::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit5102d9dbdde4a56de2475e62eba0b668::$classMap;
 
         }, null, ClassLoader::class);
     }

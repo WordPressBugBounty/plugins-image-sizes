@@ -25,7 +25,6 @@ class Activator {
 			if ( $stored_version ) {
 				update_option( 'thumbpress_previous_version', $stored_version );
 			}
-			update_option( self::REDIRECT_OPTION, true );
 			update_option( self::VERSION_OPTION, THUMBPRESS_VERSION );
 		}
 

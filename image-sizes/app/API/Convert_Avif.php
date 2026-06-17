@@ -60,7 +60,39 @@ class Convert_Avif {
 			return $this->response_error( __( 'Failed to convert image to AVIF.', 'image-sizes' ) );
 		}
 
-		// Delete old files only after successful conversion.
+		$avif_metadata = wp_generate_attachment_metadata( $img_id, $avif_file_path );
+
+		// Metadata generation failed — roll back. Delete the AVIF we just created (no orphan, no
+		// retry collision) and leave the original attachment + its files untouched. Deleting the
+		// old files now would strand the DB on metadata that still references them.
+		if ( ! $avif_metadata || is_wp_error( $avif_metadata ) ) {
+			if ( file_exists( $avif_file_path ) ) {
+				wp_delete_file( $avif_file_path );
+			}
+			return $this->response_error( __( 'Failed to convert image to AVIF.', 'image-sizes' ) );
+		}
+
+		wp_update_attachment_metadata( $img_id, $avif_metadata );
+
+		// Keep _wp_attached_file aligned with metadata['file']. For big images WP scales the
+		// converted file and points the attachment at the -scaled copy; forcing the non-scaled
+		// path here would orphan the -scaled file on delete and serve the full-size image.
+		if ( ! empty( $avif_metadata['file'] ) ) {
+			update_post_meta( $img_id, '_wp_attached_file', $avif_metadata['file'] );
+		} else {
+			update_attached_file( $img_id, $avif_file_path );
+		}
+		wp_update_post(
+			array(
+				'ID'             => $img_id,
+				'post_mime_type' => 'image/avif',
+				'guid'           => wp_get_attachment_url( $img_id ),
+			)
+		);
+
+		// Delete old files only AFTER the DB points at the new AVIF. If the request is
+		// interrupted during metadata generation above, the original survives and the DB
+		// still resolves it — instead of an avif on disk with the attachment stuck on jpeg.
 		if ( ! empty( $old_metadata['sizes'] ) ) {
 			foreach ( $old_metadata['sizes'] as $old_size_data ) {
 				if ( 'image/svg+xml' === $old_size_data['mime-type'] ) {
@@ -78,24 +110,10 @@ class Convert_Avif {
 			wp_delete_file( $scaled_path );
 		}
 
-		$avif_metadata = wp_generate_attachment_metadata( $img_id, $avif_file_path );
-
-		update_attached_file( $img_id, $avif_file_path );
-		wp_update_attachment_metadata( $img_id, $avif_metadata );
-
-		$updated_metadata = wp_get_attachment_metadata( $img_id );
-		update_post_meta( $img_id, '_wp_attached_file', $updated_metadata['file'] );
-		wp_update_post(
-			array(
-				'ID'             => $img_id,
-				'post_mime_type' => 'image/avif',
-				'guid'           => wp_get_attachment_url( $img_id ),
-			)
-		);
-
 		Utility::refresh_file_meta( $img_id, $avif_file_path );
 
-		$new_size = file_exists( $avif_file_path ) ? filesize( $avif_file_path ) : 0;
+		$new_size         = file_exists( $avif_file_path ) ? filesize( $avif_file_path ) : 0;
+		$updated_metadata = wp_get_attachment_metadata( $img_id );
 		if ( ! empty( $updated_metadata['sizes'] ) ) {
 			foreach ( $updated_metadata['sizes'] as $thumb ) {
 				$thumb_path = dirname( $avif_file_path ) . '/' . $thumb['file'];

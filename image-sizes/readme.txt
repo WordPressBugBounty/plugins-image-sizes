@@ -4,11 +4,25 @@ Tags: image optimization, compress images, thumbnail manager, WebP converter, me
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 6.2.2
+Stable tag: 6.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 The all-in-one WordPress image optimization plugin. Disable thumbnails, compress images, convert to WebP & AVIF, clean your media library, and more.
+
+== Source Code ==
+
+This plugin includes compiled JavaScript built with webpack, React, and TypeScript. The full uncompiled source code is publicly available at:
+
+https://github.com/codexpertio/thumbpress
+
+To build from source:
+
+1. Clone the repository: `git clone https://github.com/codexpertio/thumbpress`
+2. Install dependencies: `yarn install` (or `npm install`)
+3. Build: `npm run build`
+
+Source files are in `spa/admin/src/` (React/TypeScript components) and `assets/` (plain JS/CSS).
 
 == Description ==
 
@@ -230,9 +244,44 @@ ThumbPress scans your media library and compares image files using unique hashes
 13. Image Editor - Edit images directly inside WordPress
 14. Social Media Share - Set custom thumbnails for each platform
 
+== External Services ==
+
+This plugin does not send user data to any external servers.
+
+**WordPress.org Plugin API**
+ThumbPress may connect to the WordPress.org API (api.wordpress.org) to check for plugin updates. This is standard WordPress behavior used by all plugins. No personal data is transmitted beyond what WordPress core sends.
+
+**ThumbPress Website (thumbpress.co)**
+The plugin links to thumbpress.co for Pro upgrade information. No data is sent automatically; links only open when the user clicks them.
+
 == Changelog ==
 
-= 6.2.2 - 2026-06-04 =
+= 6.3.0 - 2026-06-17 =
+* [fix] WP.org compliance: removed bulk AVIF code from free plugin (trialware violation)
+* [fix] WP.org compliance: restricted REST /option endpoint to allowlisted keys
+* [fix] WP.org compliance: removed external data transmission from deactivation survey
+* [fix] WP.org compliance: replaced remote Font Awesome CDN with WordPress dashicons
+* [fix] WP.org compliance: removed Intercom live chat widget (external service)
+* [fix] WP.org compliance: wrapped core admin includes in is_admin() guards
+* [fix] WP.org compliance: replaced WP_CONTENT_DIR and ABSPATH URL patterns with wp_upload_dir()
+* [fix] WP.org compliance: added ABSPATH guards to view/template files
+* [fix] WP.org compliance: fixed text domain from 'thumbpress' to 'image-sizes' in 5 strings
+* [fix] WP.org compliance: replaced esc_attr_e($var) with echo esc_attr($var) in legacy views
+* [fix] WP.org compliance: include composer.json in plugin release
+* [fix] WP.org compliance: updated Action Scheduler from 3.7.1 to 3.9.3
+* [add] readme.txt: source code link and build instructions
+* [add] readme.txt: external services documentation
+* [feat] Media library: added Convert to WebP/AVIF Pro feature buttons with an upsell popup in the free version
+* [fix] Convert to WebP/AVIF: conversion no longer corrupts attachment metadata or loses data — the new file is written before old files are deleted, metadata writes are guarded, and -scaled originals are no longer orphaned or served at full size
+* [fix] Regenerate Thumbnails: cancelling a background regeneration no longer leaves a zombie batch chain that corrupts progress
+* [fix] Background jobs: completed Regenerate and Convert to WebP jobs now restore their progress view on page reload instead of showing the initial screen
+* [fix] Regenerate & Convert: orphan attachments are no longer processed silently — a not-found count is now surfaced
+* [fix] Fixed null dereferences, stale debug keys, and unhandled promise rejections in the new SPA
+* [fix] Pro: show an Activate License / Pro activation notice when Pro is installed but its license is inactive
+* [fix] No longer force-redirect to the ThumbPress dashboard on every plugin update
+* [fix] Fixed settings page and general responsiveness issues (including MacBook screens)
+
+= 6.2.2 – 2026-06-04 =
 * [fix] Fixed stale settings values when switching tabs after save
 * [fix] Fixed WebP convert-on-upload settings screen
 * [fix] Fixed lazy load settings screen

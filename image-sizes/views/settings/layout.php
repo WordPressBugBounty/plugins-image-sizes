@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 use EasyCommerce\Helpers\Utility;
 
 $menus = thumbpress_settings_menus();

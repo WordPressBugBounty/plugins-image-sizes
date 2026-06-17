@@ -45,7 +45,7 @@ class Convert_Webp {
 	public function __construct() {
 		$this->filter( 'wp_handle_upload', array( $this, 'convert_image_on_upload' ) );
 		$this->filter( 'attachment_fields_to_edit', array( $this, 'display_convert_image_btn' ), 10, 2 );
-		$this->action( 'thumbpress_convert_all_image', array( $this, 'convert_all_image' ) );
+		$this->action( 'thumbpress_convert_all_image', array( $this, 'convert_all_image' ), 10, 2 );
 		$this->filter( 'intermediate_image_sizes_advanced', array( $this, 'image_sizes' ) );
 		$this->filter( 'big_image_size_threshold', array( $this, 'big_image_size' ), 10, 1 );
 		$this->action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
@@ -231,16 +231,22 @@ class Convert_Webp {
 	 */
 	public function generate_webp_file_url( $webp_file_path ) {
 		$webp_file_path = pathinfo( $webp_file_path, PATHINFO_DIRNAME ) . '/' . pathinfo( $webp_file_path, PATHINFO_FILENAME ) . '.webp';
-		$webp_file_url  = str_replace( ABSPATH, home_url( '/' ), $webp_file_path );
+		$upload_dir    = wp_upload_dir();
+		$webp_file_url = str_replace(
+			wp_normalize_path( $upload_dir['basedir'] ),
+			$upload_dir['baseurl'],
+			wp_normalize_path( $webp_file_path )
+		);
 
 		return $webp_file_url;
 	}
 
 
-	public function convert_all_image( $offset, $file_formats = array( 'jpeg', 'png', 'jpg' ) ) {
+	public function convert_all_image( $last_id = 0, $file_formats = array( 'jpeg', 'png', 'jpg' ) ) {
 		require_once ABSPATH . 'wp-admin/includes/image.php';
 		global $wpdb;
 
+		$last_id           = absint( $last_id );
 		$image_types       = $this->get_image_mime_types_for_webp( $file_formats );
 		$limit             = (int) get_option( 'thumbpress_convert_img_val', 100 );
 		$total_attachments = (int) get_option( 'thumbpress_now_convert_background_total_images' );
@@ -248,137 +254,182 @@ class Convert_Webp {
 		$converted_count   = (int) get_option( 'thumbpress_convert_total_converted', 0 );
 		$space_saved       = (int) get_option( 'thumbpress_convert_space_saved', 0 );
 
+		if ( ! $total_attachments ) {
+			return;
+		}
+
+		$mime_in = "'" . implode( "','", array_map( 'esc_sql', $image_types ) ) . "'";
+
+		// Cursor pagination by ID: converted images change mime and drop out of the
+		// filter, but we never look back, so each attachment is visited exactly once.
 		$query = $wpdb->prepare(
 			"
 			SELECT ID
 			FROM {$wpdb->posts}
 			WHERE post_type = 'attachment'
-			AND post_mime_type IN ('" . implode( "','", array_map( 'esc_sql', $image_types ) ) . "')
+			AND post_mime_type IN ($mime_in)
 			AND post_status != 'trash'
+			AND ID > %d
+			ORDER BY ID ASC
 			LIMIT %d
 		",
+			$last_id,
 			$limit
 		);
 
 		$attachments = $wpdb->get_results( $query );
 
-		if ( count( $attachments ) > 0 ) {
-			$batch_saved = 0;
-			foreach ( $attachments as $attachment ) {
-				$img_id   = $attachment->ID;
-				$main_img = get_attached_file( $img_id );
+		// No more rows — we've reached the end of the set. Mark complete.
+		if ( empty( $attachments ) ) {
+			update_option( 'thumbpress_convert_progress', 100 );
+			update_option( 'convert_last_completed_time', wp_date( 'U' ) );
+			$this->clear_webp_caches();
+			return;
+		}
 
-				if ( ! $main_img || ! file_exists( $main_img ) ) {
-					++$processed_count;
-					continue;
-				}
+		$batch_saved     = 0;
+		$batch_not_found = 0;
+		$batch_converted = 0;
+		$new_last_id     = $last_id;
 
-				$file_info = pathinfo( $main_img );
-				$extension = strtolower( $file_info['extension'] ?? '' );
-				$main_img  = str_replace( "-scaled.{$extension}", ".{$extension}", $main_img );
+		foreach ( $attachments as $attachment ) {
+			$img_id      = (int) $attachment->ID;
+			$new_last_id = $img_id;
+			$main_img    = get_attached_file( $img_id );
 
-				if ( ! file_exists( $main_img ) ) {
-					++$processed_count;
-					continue;
-				}
+			if ( ! $main_img || ! file_exists( $main_img ) ) {
+				$batch_not_found++;
+				continue;
+			}
 
-				$old_metadata = wp_get_attachment_metadata( $img_id );
-				$thumb_dir    = dirname( $main_img ) . DIRECTORY_SEPARATOR;
+			$file_info = pathinfo( $main_img );
+			$extension = strtolower( $file_info['extension'] ?? '' );
+			$main_img  = str_replace( "-scaled.{$extension}", ".{$extension}", $main_img );
 
-				// Calculate old total size before conversion.
-				$old_size = file_exists( $main_img ) ? filesize( $main_img ) : 0;
-				if ( ! empty( $old_metadata['sizes'] ) ) {
-					foreach ( $old_metadata['sizes'] as $thumb ) {
-						$thumb_path = $thumb_dir . $thumb['file'];
-						if ( file_exists( $thumb_path ) ) {
-							$old_size += filesize( $thumb_path );
-						}
+			if ( ! file_exists( $main_img ) ) {
+				$batch_not_found++;
+				continue;
+			}
+
+			$old_metadata = wp_get_attachment_metadata( $img_id );
+			$thumb_dir    = dirname( $main_img ) . DIRECTORY_SEPARATOR;
+
+			// Calculate old total size before conversion.
+			$old_size = file_exists( $main_img ) ? filesize( $main_img ) : 0;
+			if ( ! empty( $old_metadata['sizes'] ) ) {
+				foreach ( $old_metadata['sizes'] as $thumb ) {
+					$thumb_path = $thumb_dir . $thumb['file'];
+					if ( file_exists( $thumb_path ) ) {
+						$old_size += filesize( $thumb_path );
 					}
 				}
+			}
 
-				// Delete old thumbnails before conversion to avoid name collisions.
-				foreach ( ( $old_metadata['sizes'] ?? array() ) as $size_name => $size_data ) {
-					if ( 'image/svg+xml' == $size_data['mime-type'] ) {
-						continue;
-					}
-					wp_delete_file( $thumb_dir . $size_data['file'] );
+			$webp_file_path = $this->convert_image_to_webp( $main_img );
+
+			if ( ! $webp_file_path ) {
+				// Conversion failed (unsupported/decode/memory). Count it so it surfaces in stats.
+				$batch_not_found++;
+				continue;
+			}
+
+			$webp_metadata = wp_generate_attachment_metadata( $img_id, $webp_file_path );
+
+			// Metadata generation failed — roll back. Delete the WebP we just created so a retry
+			// doesn't collide into a -1 copy and orphan this one, and leave the original attachment
+			// + its files untouched. Deleting the old files now would strand the DB on metadata that
+			// still references them (blank thumbnails, "media still says jpeg").
+			if ( ! $webp_metadata || is_wp_error( $webp_metadata ) ) {
+				if ( file_exists( $webp_file_path ) ) {
+					wp_delete_file( $webp_file_path );
 				}
+				$batch_not_found++;
+				continue;
+			}
 
-				$webp_file_path = $this->convert_image_to_webp( $main_img );
+			wp_update_attachment_metadata( $img_id, $webp_metadata );
 
-				// Delete original source file after conversion.
-				if ( file_exists( $main_img ) ) {
-					wp_delete_file( $main_img );
-				}
-				$scaled_path = str_replace( ".{$extension}", "-scaled.{$extension}", $main_img );
-				if ( $scaled_path !== $main_img && file_exists( $scaled_path ) ) {
-					wp_delete_file( $scaled_path );
-				}
-
-				if ( ! $webp_file_path ) {
-					continue;
-				}
-
-				$webp_metadata = wp_generate_attachment_metadata( $img_id, $webp_file_path );
-
+			// Keep _wp_attached_file aligned with metadata['file']. For big images WP scales the
+			// converted file and points the attachment at the -scaled copy; forcing the non-scaled
+			// path here would orphan the -scaled file on delete and serve the full-size image.
+			if ( ! empty( $webp_metadata['file'] ) ) {
+				update_post_meta( $img_id, '_wp_attached_file', $webp_metadata['file'] );
+			} else {
 				update_attached_file( $img_id, $webp_file_path );
-				wp_update_attachment_metadata( $img_id, $webp_metadata );
+			}
+			wp_update_post(
+				array(
+					'ID'             => $img_id,
+					'post_mime_type' => 'image/webp',
+					'guid'           => wp_get_attachment_url( $img_id ),
+				)
+			);
 
-				$updated_metadata = wp_get_attachment_metadata( $img_id );
-				$file_path        = $updated_metadata['file'];
-				update_post_meta( $img_id, '_wp_attached_file', $file_path );
-				wp_update_post(
+			// Delete old files only AFTER the DB points at the new WebP. If the request is
+			// interrupted during metadata generation above, the original survives and the DB
+			// still resolves it — instead of a webp on disk with the attachment stuck on jpeg.
+			foreach ( ( $old_metadata['sizes'] ?? array() ) as $size_name => $size_data ) {
+				if ( 'image/svg+xml' == $size_data['mime-type'] ) {
+					continue;
+				}
+				wp_delete_file( $thumb_dir . $size_data['file'] );
+			}
+			if ( file_exists( $main_img ) ) {
+				wp_delete_file( $main_img );
+			}
+			$scaled_path = str_replace( ".{$extension}", "-scaled.{$extension}", $main_img );
+			if ( $scaled_path !== $main_img && file_exists( $scaled_path ) ) {
+				wp_delete_file( $scaled_path );
+			}
+
+			Utility::refresh_file_meta( $img_id, $webp_file_path );
+
+			// Calculate new total size after conversion.
+			$new_size     = file_exists( $webp_file_path ) ? filesize( $webp_file_path ) : 0;
+			$new_metadata = wp_get_attachment_metadata( $img_id );
+			if ( ! empty( $new_metadata['sizes'] ) ) {
+				foreach ( $new_metadata['sizes'] as $thumb ) {
+					$thumb_path = dirname( $webp_file_path ) . '/' . $thumb['file'];
+					if ( file_exists( $thumb_path ) ) {
+						$new_size += filesize( $thumb_path );
+					}
+				}
+			}
+			$space_saved += max( 0, $old_size - $new_size );
+			$batch_saved += max( 0, $old_size - $new_size );
+			$batch_converted++;
+		}
+
+		thumbpress_add_space_saved( $batch_saved );
+
+		$prev_not_found = (int) get_option( 'thumbpress_webp_total_not_found', 0 );
+		update_option( 'thumbpress_webp_total_not_found', $prev_not_found + $batch_not_found );
+
+		$processed_count += count( $attachments );
+		$is_complete      = ( $processed_count >= $total_attachments );
+		$progress         = $total_attachments > 0 ? ( $processed_count / $total_attachments ) * 100 : 100;
+		$progress         = $is_complete ? 100 : min( 99, floor( $progress ) );
+
+		update_option( 'thumbpress_convert_progress', $progress );
+		update_option( 'thumbpress_convert_total_processd', $processed_count );
+		update_option( 'thumbpress_convert_total_converted', $converted_count + $batch_converted );
+		update_option( 'thumbpress_convert_space_saved', $space_saved );
+
+		if ( ! $is_complete ) {
+			if ( ! get_option( 'thumbpress_webp_cancelled', false ) ) {
+				as_schedule_single_action(
+					wp_date( 'U' ) - 10,
+					'thumbpress_convert_all_image',
 					array(
-						'ID'             => $img_id,
-						'post_mime_type' => 'image/webp',
-						'guid'           => wp_get_attachment_url( $img_id ),
+						'last_id'      => $new_last_id,
+						'file_formats' => $file_formats,
 					)
 				);
-
-				Utility::refresh_file_meta( $img_id, $webp_file_path );
-
-				// Calculate new total size after conversion.
-				$new_size     = file_exists( $webp_file_path ) ? filesize( $webp_file_path ) : 0;
-				$new_metadata = wp_get_attachment_metadata( $img_id );
-				if ( ! empty( $new_metadata['sizes'] ) ) {
-					foreach ( $new_metadata['sizes'] as $thumb ) {
-						$thumb_path = dirname( $webp_file_path ) . '/' . $thumb['file'];
-						if ( file_exists( $thumb_path ) ) {
-							$new_size += filesize( $thumb_path );
-						}
-					}
-				}
-				$space_saved += max( 0, $old_size - $new_size );
-				$batch_saved += max( 0, $old_size - $new_size );
 			}
-
-			thumbpress_add_space_saved( $batch_saved );
-
-			$count      = $offset + count( $attachments );
-			$progress   = ( $count / $total_attachments ) * 100;
-			$progress   = min( $progress, 100 );
-			$new_offset = $offset + count( $attachments );
-
-			update_option( 'thumbpress_convert_progress', $progress );
-			update_option( 'thumbpress_convert_total_processd', $count );
-			update_option( 'thumbpress_convert_total_converted', $count );
-			update_option( 'thumbpress_convert_space_saved', $space_saved );
-
-			if ( $progress < 100 ) {
-				if ( ! get_option( 'thumbpress_webp_cancelled', false ) ) {
-					as_schedule_single_action(
-						wp_date( 'U' ) - 10,
-						'thumbpress_convert_all_image',
-						array(
-							'offset'       => $new_offset,
-							'file_formats' => $file_formats,
-						)
-					);
-				}
-			} else {
-				update_option( 'convert_last_completed_time', wp_date( 'U' ) );
-				$this->clear_webp_caches();
-			}
+		} else {
+			update_option( 'thumbpress_convert_progress', 100 );
+			update_option( 'convert_last_completed_time', wp_date( 'U' ) );
+			$this->clear_webp_caches();
 		}
 	}
 }

@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 use Codexpert\ThumbPress\Helper;
 
 global $thumbpress_pro;

@@ -93,7 +93,6 @@ final class Plugin {
 	private function include() {
 		require_once __DIR__ . '/inc/functions.php';
 		require_once __DIR__ . '/vendor/autoload.php';
-		require_once __DIR__ . '/libraries/action-scheduler/action-scheduler.php';
 	}
 
 	/**
@@ -241,7 +240,6 @@ final class Plugin {
 		 */
 		$ajax = new App\AJAX( $this->plugin );
 		$ajax->priv( 'image_sizes-notice-dismiss', 'dismiss_notice' );
-		$ajax->priv( 'handle_unhappy_survey', 'unhappy_servay' );
 		// $ajax->priv( 'image_sizes-pointer-dismiss', 'dismiss_pointer' );
 		$ajax->priv( 'image_sizes-dismiss', 'image_sizes_dismiss' );
 		$ajax->all( 'image-sizes_dismiss_notice', 'image_sizes_dismiss_notice_callback' );

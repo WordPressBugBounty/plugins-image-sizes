@@ -38,6 +38,7 @@ return array(
     'Codexpert\\ThumbPress\\Controllers\\Common\\Hotlink_Protection' => $baseDir . '/app/Controllers/Common/Hotlink_Protection.php',
     'Codexpert\\ThumbPress\\Controllers\\Common\\Image_Max_Size' => $baseDir . '/app/Controllers/Common/Image_Max_Size.php',
     'Codexpert\\ThumbPress\\Controllers\\Common\\Init' => $baseDir . '/app/Controllers/Common/Init.php',
+    'Codexpert\\ThumbPress\\Controllers\\Common\\Media_Buttons' => $baseDir . '/app/Controllers/Common/Media_Buttons.php',
     'Codexpert\\ThumbPress\\Controllers\\Common\\Social_Share' => $baseDir . '/app/Controllers/Common/Social_Share.php',
     'Codexpert\\ThumbPress\\Controllers\\Common\\Thumbnails' => $baseDir . '/app/Controllers/Common/Thumbnails.php',
     'Codexpert\\ThumbPress\\Controllers\\Front\\Image_Download_Disable' => $baseDir . '/app/Controllers/Front/Image_Download_Disable.php',

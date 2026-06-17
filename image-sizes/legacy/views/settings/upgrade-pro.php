@@ -1,3 +1,4 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
 <div class="tp-pro-page-wrapper">
     
     <!-- START TITLE AND COUNTUP SECTION  -->
@@ -139,58 +140,58 @@
             $features = [
                 [
                     'name' => esc_html__( 'Disable Thumbnails', 'image-sizes' ),
-                    'free' => '<i class="fa-solid fa-check tp-success"></i>',
-                    'pro'  => '<i class="fa-solid fa-check tp-success"></i>',
+                    'free' => '<span class="dashicons dashicons-yes-alt tp-success"></span>',
+                    'pro'  => '<span class="dashicons dashicons-yes-alt tp-success"></span>',
                 ],
                 [
                     'name' => esc_html__( 'Regenerate Thumbnails', 'image-sizes' ),
-                    'free' => '<i class="fa-solid fa-check tp-success"></i>',
-                    'pro'  => '<i class="fa-solid fa-check tp-success"></i>',
+                    'free' => '<span class="dashicons dashicons-yes-alt tp-success"></span>',
+                    'pro'  => '<span class="dashicons dashicons-yes-alt tp-success"></span>',
                 ],
                 [
                     'name' => esc_html__( 'Detect Unused Images', 'image-sizes' ),
-                    'free' => '<i class="fa-solid fa-xmark tp-cross"></i>',
-                    'pro'  => '<i class="fa-solid fa-check tp-success"></i>',
+                    'free' => '<span class="dashicons dashicons-no-alt tp-cross"></span>',
+                    'pro'  => '<span class="dashicons dashicons-yes-alt tp-success"></span>',
                 ],
                 [
                     'name' => esc_html__( 'Image Upload Limit', 'image-sizes' ),
-                    'free' => '<i class="fa-solid fa-check tp-success"></i>',
-                    'pro'  => '<i class="fa-solid fa-check tp-success"></i>',
+                    'free' => '<span class="dashicons dashicons-yes-alt tp-success"></span>',
+                    'pro'  => '<span class="dashicons dashicons-yes-alt tp-success"></span>',
                 ],
                 [
                     'name' => esc_html__( 'Detect Large Images', 'image-sizes' ),
-                    'free' => '<i class="fa-solid fa-xmark tp-cross"></i>',
-                    'pro'  => '<i class="fa-solid fa-check tp-success"></i>',
+                    'free' => '<span class="dashicons dashicons-no-alt tp-cross"></span>',
+                    'pro'  => '<span class="dashicons dashicons-yes-alt tp-success"></span>',
                 ],
                 [
                     'name' => esc_html__( 'Compress Images', 'image-sizes' ),
-                    'free' => '<i class="fa-solid fa-xmark tp-cross"></i>',
-                    'pro'  => '<i class="fa-solid fa-check tp-success"></i>',
+                    'free' => '<span class="dashicons dashicons-no-alt tp-cross"></span>',
+                    'pro'  => '<span class="dashicons dashicons-yes-alt tp-success"></span>',
                 ],
                 [
                     'name' => esc_html__( 'Disable Right Click on Image', 'image-sizes' ),
-                    'free' => '<i class="fa-solid fa-check tp-success"></i>',
-                    'pro'  => '<i class="fa-solid fa-check tp-success"></i>',
+                    'free' => '<span class="dashicons dashicons-yes-alt tp-success"></span>',
+                    'pro'  => '<span class="dashicons dashicons-yes-alt tp-success"></span>',
                 ],
                 [
                     'name' => esc_html__( 'Replace Image with New Version', 'image-sizes' ),
-                    'free' => '<i class="fa-solid fa-xmark tp-cross"></i>',
-                    'pro'  => '<i class="fa-solid fa-check tp-success"></i>',
+                    'free' => '<span class="dashicons dashicons-no-alt tp-cross"></span>',
+                    'pro'  => '<span class="dashicons dashicons-yes-alt tp-success"></span>',
                 ],
                 [
                     'name' => esc_html__( 'Social Media Thumbnails', 'image-sizes' ),
-                    'free' => '<i class="fa-solid fa-check tp-success"></i>',
-                    'pro'  => '<i class="fa-solid fa-check tp-success"></i>',
+                    'free' => '<span class="dashicons dashicons-yes-alt tp-success"></span>',
+                    'pro'  => '<span class="dashicons dashicons-yes-alt tp-success"></span>',
                 ],
                 [
                     'name' => esc_html__( 'Image Editor', 'image-sizes' ),
-                    'free' => '<i class="fa-solid fa-xmark tp-cross"></i>',
-                    'pro'  => '<i class="fa-solid fa-check tp-success"></i>',
+                    'free' => '<span class="dashicons dashicons-no-alt tp-cross"></span>',
+                    'pro'  => '<span class="dashicons dashicons-yes-alt tp-success"></span>',
                 ],
                 [
                     'name' => esc_html__( 'Convert Images into WebP', 'image-sizes' ),
-                    'free' => '<i class="fa-solid fa-check tp-success"></i>',
-                    'pro'  => '<i class="fa-solid fa-check tp-success"></i>',
+                    'free' => '<span class="dashicons dashicons-yes-alt tp-success"></span>',
+                    'pro'  => '<span class="dashicons dashicons-yes-alt tp-success"></span>',
                 ],
             ];
 

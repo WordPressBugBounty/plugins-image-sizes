@@ -1,9 +1,23 @@
 <?php
-require_once ABSPATH . 'wp-admin/includes/plugin.php';
-require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
-require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-require_once ABSPATH . 'wp-admin/includes/class-wp-ajax-upgrader-skin.php';
-require_once ABSPATH . 'wp-admin/includes/class-plugin-upgrader.php';
+defined( 'ABSPATH' ) || exit;
+
+if ( is_admin() ) {
+	if ( ! function_exists( 'plugins_api' ) ) {
+		require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+	}
+	if ( ! class_exists( 'WP_Upgrader' ) ) {
+		require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+	}
+	if ( ! class_exists( 'WP_Ajax_Upgrader_Skin' ) ) {
+		require_once ABSPATH . 'wp-admin/includes/class-wp-ajax-upgrader-skin.php';
+	}
+	if ( ! class_exists( 'Plugin_Upgrader' ) ) {
+		require_once ABSPATH . 'wp-admin/includes/class-plugin-upgrader.php';
+	}
+	if ( ! function_exists( 'get_plugins' ) ) {
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
+	}
+}
 
 if ( ! function_exists( 'thumbpress_modules' ) ) :
 	function thumbpress_modules() {
@@ -66,7 +80,7 @@ if ( ! function_exists( 'thumbpress_modules' ) ) :
 			),
 			'image-replace'          => array(
 				'id'    => 'image-replace',
-				'title' => __( 'Replace Images With New Version', 'thumbpress' ),
+				'title' => __( 'Replace Images With New Version', 'image-sizes' ),
 				'desc'  => __( 'Upload new versions of images and replace the old ones without any issues.', 'image-sizes' ),
 				'class' => 'Image_Replace',
 				'url'   => esc_url( 'https://thumbpress.co/modules/replace-image-with-new-version/?utm_source=in-plugin&utm_medium=Modules+Page+&utm_campaign=Replace+Images+/' ),
@@ -193,23 +207,6 @@ if ( ! function_exists( 'thumbpress_check_action_tables' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'get_reasons' ) ) :
-	function get_reasons() {
-		$reasons = array(
-			'ui'                   => 'Poor UI/UX',
-			'doesnt_works'         => 'Doesn\'t work properly',
-			'performance'          => 'Performance issues',
-			'feature_missing'      => 'Features missing',
-			'compatibility'        => 'Compatibility issues',
-			'difficult_learning'   => 'Difficult learning curve',
-			'unnecessary_features' => 'Unnecessary features',
-			'website_crashes'      => 'Website crashes',
-			'other'                => 'Others',
-		);
-
-		return apply_filters( 'plugin-unhappy-reasons', $reasons, 'thumbpress' );
-	}
-endif;
 
 // if( ! function_exists( 'image_sizes_notices_values' ) ) :
 // function image_sizes_notices_values(){

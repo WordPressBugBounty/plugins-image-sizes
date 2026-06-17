@@ -27,17 +27,11 @@ class Ajax extends Base {
 	/**
 	 * Constructor function
 	 */
-	public function __construct( $plugin, $args = array() ) {
+	public function __construct( $plugin ) {
 		$this->plugin  = $plugin;
 		$this->slug    = $this->plugin['TextDomain'];
 		$this->name    = $this->plugin['Name'];
 		$this->version = $this->plugin['Version'];
-		$this->args    = wp_parse_args(
-			$args,
-			array(
-				'server' => 'https://my.pluggable.io',
-			)
-		);
 	}
 
 	public function dismiss_notice() {
@@ -62,41 +56,6 @@ class Ajax extends Base {
 		wp_send_json( $response );
 	}
 
-	public function unhappy_servay() {
-		// if (!isset($_POST['unhappy_survey_nonce']) || !wp_verify_nonce($_POST['unhappy_survey_nonce'], 'unhappy_survey_action')) {
-		// wp_send_json_error(['message' => 'Nonce verification failed']);
-		// return;
-		// }
-
-		$full_name      = sanitize_text_field( $_POST['full_name'] );
-		$email          = sanitize_email( $_POST['email'] );
-		$plugin_name    = sanitize_text_field( $_POST['plugin_name'] );
-		$explanation    = sanitize_textarea_field( $_POST['explanation'] );
-		$reasons        = isset( $_POST['ureason'] ) ? array_map( 'sanitize_text_field', $_POST['ureason'] ) : array();
-		$reasons_string = implode( ', ', $reasons );
-		$endpoint       = 'https://my.pluggable.io/?fluentcrm=1&route=contact&hash=d67602e6-db28-49ee-8855-0e126863912a';
-		$body           = array(
-			'full_name' => $full_name,
-			'email'     => $email,
-			'plugin'    => $plugin_name,
-			'feedback'  => '<strong>Reasons:</strong> ' . $reasons_string . ' | <strong>Explanation:</strong> ' . $explanation,
-		);
-
-		$response = wp_remote_post(
-			$endpoint,
-			array(
-				'body'    => $body,
-				'timeout' => 15,
-				'headers' => array( 'Content-Type' => 'application/x-www-form-urlencoded' ),
-			)
-		);
-
-		if ( is_wp_error( $response ) ) {
-			wp_send_json_error( array( 'message' => $response->get_error_message() ) );
-		} else {
-			wp_send_json_success( array( 'message' => 'Feedback submitted successfully' ) );
-		}
-	}
 
 
 	// public function dismiss_pointer() {
@@ -134,10 +93,16 @@ class Ajax extends Base {
 			$response['message'] = __( 'Unauthorized!', 'image-sizes' );
 			wp_send_json( $response );
 		}
-		$notice_type = sanitize_text_field( $_POST['notice_type'] );
-		$url         = image_sizes_notices_values()[ $notice_type ]['url'];
+		$notice_type     = sanitize_text_field( $_POST['notice_type'] );
+		$allowed_notices = array_keys( image_sizes_notices_values() );
+		if ( ! in_array( $notice_type, $allowed_notices, true ) ) {
+			$response['status']  = 0;
+			$response['message'] = __( 'Invalid notice type.', 'image-sizes' );
+			wp_send_json( $response );
+		}
+		$url = image_sizes_notices_values()[ $notice_type ]['url'];
 
-		delete_transient( sanitize_text_field( $notice_type ) );
+		delete_transient( $notice_type );
 
 		$response['status']  = 1;
 		$response['message'] = __( 'Notice Removed!', 'image-sizes' );

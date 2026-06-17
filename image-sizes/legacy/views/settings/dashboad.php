@@ -1,3 +1,4 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
 <div class="tp-all-in-one-section">
     <h2><?php esc_html_e( 'ThumbPress - All in One WordPress Image & Thumbnail Management Solution', 'image-sizes' ); ?></h2>
     <div class="tp-all-in-one-section-wrapper">

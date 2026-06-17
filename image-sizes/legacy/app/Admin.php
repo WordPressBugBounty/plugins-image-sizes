@@ -115,10 +115,10 @@ class Admin extends Base {
 					</div>
 
 					<div class="year-end-content">
-						<p class="title">' . __( 'Celebrate Year-End with ThumbPress!', 'thumbpress' ) . '</p>
-						<p class="description">' . __( 'Grab 50% OFF and keep your WordPress media library clean, optimized, and lightning-fast!', 'thumbpress' ) . '</p>
+						<p class="title">' . __( 'Celebrate Year-End with ThumbPress!', 'image-sizes' ) . '</p>
+						<p class="description">' . __( 'Grab 50% OFF and keep your WordPress media library clean, optimized, and lightning-fast!', 'image-sizes' ) . '</p>
 						<a href="' . esc_url( $url ) . '" class="notice-cta-button" data-id="' . esc_attr( $notice_id ) . '" target="_blank">
-						' . __( 'Save 50% Now', 'thumbpress' ) . '
+						' . __( 'Save 50% Now', 'image-sizes' ) . '
 						</a>
 					</div>
 				</div>
@@ -144,7 +144,7 @@ class Admin extends Base {
 				'<div class="notice notice-warning is-dismissible thumbpress-notice" id="thumbpress_settings_init"><p>%s</p></div>',
 				sprintf(
 					/* Translators: %s is the link to the setup wizard */
-					__( 'Congratulations on installing <strong>ThumbPress</strong>!🎉 You\'re just a few steps away from optimizing your images. <a href="%s"><strong>Click here</strong></a> to enable modules and get started! 🚀', 'thumbpress' ),
+					__( 'Congratulations on installing <strong>ThumbPress</strong>!🎉 You\'re just a few steps away from optimizing your images. <a href="%s"><strong>Click here</strong></a> to enable modules and get started! 🚀', 'image-sizes' ),
 					esc_url( admin_url( 'admin.php?page=thumbpress' ) )
 				)
 			);
@@ -222,12 +222,9 @@ class Admin extends Base {
 			return;
 		}
 
-		wp_enqueue_style( $this->slug . '-admin', plugins_url( '/assets/css/admin.css', THUMBPRESS ), '', time(), 'all' );
+		wp_enqueue_style( $this->slug . '-admin', plugins_url( '/assets/css/admin.css', THUMBPRESS ), array( 'dashicons' ), time(), 'all' );
 		wp_enqueue_style( $this->slug . '-dashboard', plugins_url( '/assets/css/settings/dashboard.css', THUMBPRESS ), '', time(), 'all' );
 		wp_enqueue_style( $this->slug . '-google-font', 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap' );
-		wp_enqueue_style( $this->slug . '-font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css' );
-		wp_enqueue_script( $this->slug . '-font-awesome-js', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.js', array( 'jquery' ), time(), true );
-
 		wp_enqueue_script( $this->slug . '-admin', plugins_url( "/assets/js/admin{$min}.js", THUMBPRESS ), array( 'jquery' ), time(), true );
 
 		wp_enqueue_script( 'wp-pointer' );
@@ -262,7 +259,6 @@ class Admin extends Base {
 			'confirm'     => esc_html__( 'Are you sure you want to delete this? The data and its associated files will be completely erased. This action cannot be undone!', 'image-sizes' ),
 			'confirm_all' => esc_html__( 'Are you sure you want to delete these? The data and their associated files will be completely erased. This action cannot be undone!', 'image-sizes' ),
 			// 'is_welcome' => $this->get_pointers(),
-			'live_chat'   => get_option( 'thumbpress_live_chat_enabled' ) == 1,
 			'tp_page'     => isset( $_GET['page'] ) && false !== strpos( $_GET['page'], 'thumbpress' ),
 			'name'        => get_userdata( get_current_user_id() )->display_name,
 			'email'       => get_userdata( get_current_user_id() )->user_email,

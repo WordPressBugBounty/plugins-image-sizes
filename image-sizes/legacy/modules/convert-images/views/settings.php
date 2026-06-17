@@ -1,4 +1,5 @@
-<?php 
+<?php
+defined( 'ABSPATH' ) || exit;
 use Codexpert\ThumbPress\Helper;
 $status 			= thumbpress_get_last_action_status_by_module_name( 'convert-images' );
 $action_id 			= thumbpress_get_last_action_status_by_module_name( 'convert-images', 'action_id' );

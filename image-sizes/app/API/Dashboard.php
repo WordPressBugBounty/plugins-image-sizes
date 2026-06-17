@@ -36,7 +36,13 @@ class Dashboard {
 		) );
 	}
 
-	public function get_optimization_stats() {
+	public function get_optimization_stats( $request = null ) {
+		// Allow the Thumbnails page to force a fresh thumbnail count on load so it
+		// never shows a stale cached value before the user runs a regeneration.
+		if ( $request && $request->get_param( 'refresh' ) ) {
+			$this->delete_cache( 'stat_total_thumbnails' );
+		}
+
 		$unoptimized    = $this->get_unoptimized_count();
 		$not_compressed = $this->get_not_compressed();
 		$thumbnails     = $this->count_total_thumbnails();
@@ -336,7 +342,7 @@ class Dashboard {
 				'ok'     => $not_compressed === 0,
 				'weight' => 25,
 				'text'   => $not_compressed > 0
-					? number_format_i18n( $not_compressed ) . ' Images Needs Compression'
+					? number_format_i18n( $not_compressed ) . ' Images Need Compression'
 					: 'All Images Compressed',
 			),
 			array(
@@ -465,8 +471,18 @@ class Dashboard {
 
 		foreach ( $metadata_list as $row ) {
 			$metadata = maybe_unserialize( $row->meta_value );
-			if ( $metadata && ! empty( $metadata['sizes'] ) ) {
+			if ( ! $metadata ) {
+				continue;
+			}
+			if ( ! empty( $metadata['sizes'] ) ) {
 				$count += count( $metadata['sizes'] );
+			}
+			// Count the -scaled full-size file as a generated size too. The settings
+			// UI lists "scaled" alongside the thumbnail sizes (get_sizes_data() adds
+			// it), and regenerate's created/deleted tallies count it, so this metric
+			// must match. WP sets original_image only when it produced a -scaled copy.
+			if ( ! empty( $metadata['original_image'] ) ) {
+				++$count;
 			}
 		}
 
@@ -502,7 +518,7 @@ class Dashboard {
 		$disabled_sizes        = (int) $stats['disabled_sizes'];
 		$neither_webp_nor_avif = min( (int) $stats['not_webp'], (int) $stats['not_avif'] );
 		$webp_avif_score       = min( 1.0, ( $total - $neither_webp_nor_avif ) / $total ) * 15;
-		$thumbnail_score       = $total_sizes > 0 ? min( 1.0, $disabled_sizes / $total_sizes ) * 15 : 15;
+		$thumbnail_score       = $total_sizes > 0 ? min( 1.0, ( $total_sizes - $disabled_sizes ) / $total_sizes ) * 15 : 15;
 		$compress_score        = max( 0.0, min( 1.0, ( $total - $not_compressed ) / $total ) ) * 25;
 		$large_score           = max( 0.0, min( 1.0, ( $total - $large ) / $total ) ) * 25;
 		$duplicates            = (int) $stats['duplicate_images'];

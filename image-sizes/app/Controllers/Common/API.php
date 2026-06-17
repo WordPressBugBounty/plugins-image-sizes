@@ -154,6 +154,7 @@ class API {
 			array(
 				'methods'             => WP_REST_Server::CREATABLE,
 				'callback'            => function () {
+					update_option( 'thumbpress_regenerate_cancelled', true );
 					as_unschedule_all_actions( 'thumbpress_regenerate_all_image' );
 					delete_option( 'thumbpress_regenerate_progress' );
 					delete_option( 'thumbpress_regenerate_total_processed' );
@@ -179,6 +180,7 @@ class API {
 					delete_option( 'thumbpress_convert_total_converted' );
 					delete_option( 'thumbpress_convert_space_saved' );
 					delete_option( 'thumbpress_convert_total_image' );
+					delete_option( 'thumbpress_now_convert_background_total_images' );
 					return rest_ensure_response( array( 'success' => true ) );
 				},
 				'permission_callback' => array( $this, 'is_admin' ),
@@ -195,15 +197,25 @@ class API {
 				'methods'             => WP_REST_Server::CREATABLE,
 				'callback'            => array( new Convert_Webp(), 'convert_now' ),
 				'args'                => array(
-					'offset' => array(
-						'description' => __( 'Offset for pagination', 'image-sizes' ),
+					'last_id'   => array(
+						'description' => __( 'Last processed attachment ID (pagination cursor)', 'image-sizes' ),
 						'type'        => 'integer',
 						'default'     => 0,
 					),
-					'limit'  => array(
+					'limit'     => array(
 						'description' => __( 'Number of images to process', 'image-sizes' ),
 						'type'        => 'integer',
 						'default'     => 10,
+					),
+					'processed' => array(
+						'description' => __( 'Cumulative processed count', 'image-sizes' ),
+						'type'        => 'integer',
+						'default'     => 0,
+					),
+					'converted' => array(
+						'description' => __( 'Cumulative converted count', 'image-sizes' ),
+						'type'        => 'integer',
+						'default'     => 0,
 					),
 				),
 				'permission_callback' => array( $this, 'is_admin' ),
@@ -356,6 +368,17 @@ class API {
 					if ( ! $key ) {
 						return rest_ensure_response( array( 'success' => false ) );
 					}
+					$allowed_keys = apply_filters( 'thumbpress_allowed_option_keys', [
+						'thumbpress_fresh_install_notice_dismissed',
+						'thumbpress_pro_outdated_notice_dismissed',
+						'thumbpress_regen_view_state',
+						'thumbpress_webp_view_state',
+						'thumbpress_avif_view_state',
+						'thumbpress_compress_view_state',
+					] );
+					if ( ! in_array( $key, $allowed_keys, true ) ) {
+						return rest_ensure_response( array( 'success' => false ) );
+					}
 					update_option( $key, $value );
 					return rest_ensure_response( array( 'success' => true ) );
 				},
@@ -461,9 +484,9 @@ class API {
 		$max_size_raw = get_option( 'thumbpress_image_max_size', array() );
 		$tp_settings  = array(
 			'lazy_load'          => (bool) get_option( 'thumbpress_lazy_load', false ),
-			'right_click_disable'=> (bool) get_option( 'image_download_disable', false ),
+			'right_click_disable'=> (bool) get_option( 'thumbpress_image_download_disable', false ),
 			'hotlink_protection' => (bool) get_option( 'thumbpress_hotlink_protection', false ),
-			'webp_on_upload'     => (bool) get_option( 'convert-img-on-upload', false ),
+			'webp_on_upload'     => (bool) get_option( 'thumbpress_webp_on_upload', false ),
 			'avif_on_upload'     => (bool) get_option( 'thumbpress_avif_convert_on_upload', false ),
 			'disabled_sizes'     => $disabled,
 			'max_file_size'      => isset( $max_size_raw['max-size'] ) && $max_size_raw['max-size'] !== '' ? $max_size_raw['max-size'] . ' ' . ( $max_size_raw['max-size-unit'] ?? 'KB' ) : 'Not set',

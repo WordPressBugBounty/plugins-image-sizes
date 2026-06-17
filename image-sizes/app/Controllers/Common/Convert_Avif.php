@@ -46,6 +46,208 @@ class Convert_Avif {
 	}
 
 	/**
+	 * Background batch AVIF conversion (called by Action Scheduler via the pro plugin).
+	 * Cursor pagination by ID so each attachment is visited exactly once.
+	 */
+	public function convert_all_image( $last_id = 0, $file_formats = array( 'jpeg', 'png', 'jpg', 'webp' ) ) {
+		require_once ABSPATH . 'wp-admin/includes/image.php';
+		global $wpdb;
+
+		$last_id           = absint( $last_id );
+		$image_types       = $this->get_image_mime_types_for_avif( $file_formats );
+		$limit             = (int) get_option( 'thumbpress_avif_convert_img_val', 100 );
+		$total_attachments = (int) get_option( 'thumbpress_avif_convert_background_total_images' );
+		$processed_count   = (int) get_option( 'thumbpress_avif_convert_total_processed', 0 );
+		$converted_count   = (int) get_option( 'thumbpress_avif_convert_total_converted', 0 );
+		$space_saved       = (int) get_option( 'thumbpress_avif_convert_space_saved', 0 );
+
+		if ( ! $total_attachments ) {
+			return;
+		}
+
+		$mime_in = "'" . implode( "','", array_map( 'esc_sql', $image_types ) ) . "'";
+
+		$query = $wpdb->prepare(
+			"
+			SELECT ID
+			FROM {$wpdb->posts}
+			WHERE post_type = 'attachment'
+			AND post_mime_type IN ($mime_in)
+			AND post_status != 'trash'
+			AND ID > %d
+			ORDER BY ID ASC
+			LIMIT %d
+		",
+			$last_id,
+			$limit
+		);
+
+		$attachments = $wpdb->get_results( $query );
+
+		// No more rows — we've reached the end of the set. Mark complete.
+		if ( empty( $attachments ) ) {
+			update_option( 'thumbpress_avif_convert_progress', 100 );
+			update_option( 'thumbpress_avif_convert_last_completed_time', wp_date( 'U' ) );
+			$this->clear_avif_caches();
+			return;
+		}
+
+		$batch_saved     = 0;
+		$batch_not_found = 0;
+		$batch_converted = 0;
+		$new_last_id     = $last_id;
+
+		foreach ( $attachments as $attachment ) {
+			$img_id      = (int) $attachment->ID;
+			$new_last_id = $img_id;
+			$main_img    = get_attached_file( $img_id );
+
+			if ( ! $main_img || ! file_exists( $main_img ) ) {
+				$batch_not_found++;
+				continue;
+			}
+
+			$file_info = pathinfo( $main_img );
+			$extension = strtolower( $file_info['extension'] ?? '' );
+			$main_img  = str_replace( "-scaled.{$extension}", ".{$extension}", $main_img );
+
+			if ( ! file_exists( $main_img ) ) {
+				$batch_not_found++;
+				continue;
+			}
+
+			$old_metadata = wp_get_attachment_metadata( $img_id );
+			$thumb_dir    = dirname( $main_img ) . DIRECTORY_SEPARATOR;
+
+			// Calculate old total size before conversion.
+			$old_size = file_exists( $main_img ) ? filesize( $main_img ) : 0;
+			if ( ! empty( $old_metadata['sizes'] ) ) {
+				foreach ( $old_metadata['sizes'] as $thumb ) {
+					$thumb_path = $thumb_dir . $thumb['file'];
+					if ( file_exists( $thumb_path ) ) {
+						$old_size += filesize( $thumb_path );
+					}
+				}
+			}
+
+			$avif_file_path = $this->convert_image_to_avif( $main_img );
+
+			if ( ! $avif_file_path ) {
+				// Conversion failed (unsupported/decode/memory). Count it so it surfaces in stats.
+				$batch_not_found++;
+				continue;
+			}
+
+			$avif_metadata = wp_generate_attachment_metadata( $img_id, $avif_file_path );
+
+			// Metadata generation failed — roll back. Delete the AVIF we just created so a retry
+			// doesn't collide into a -1 copy and orphan this one, and leave the original attachment
+			// + its files untouched. Deleting the old files now would strand the DB on metadata that
+			// still references them (blank thumbnails, "media still says jpeg").
+			if ( ! $avif_metadata || is_wp_error( $avif_metadata ) ) {
+				if ( file_exists( $avif_file_path ) ) {
+					wp_delete_file( $avif_file_path );
+				}
+				$batch_not_found++;
+				continue;
+			}
+
+			wp_update_attachment_metadata( $img_id, $avif_metadata );
+
+			// Keep _wp_attached_file aligned with metadata['file']. For big images WP scales the
+			// converted file and points the attachment at the -scaled copy; forcing the non-scaled
+			// path here would orphan the -scaled file on delete and serve the full-size image.
+			if ( ! empty( $avif_metadata['file'] ) ) {
+				update_post_meta( $img_id, '_wp_attached_file', $avif_metadata['file'] );
+			} else {
+				update_attached_file( $img_id, $avif_file_path );
+			}
+			wp_update_post(
+				array(
+					'ID'             => $img_id,
+					'post_mime_type' => 'image/avif',
+					'guid'           => wp_get_attachment_url( $img_id ),
+				)
+			);
+
+			// Delete old files only AFTER the DB points at the new AVIF. If the request is
+			// interrupted during metadata generation above, the original survives and the DB
+			// still resolves it — instead of an avif on disk with the attachment stuck on jpeg.
+			foreach ( ( $old_metadata['sizes'] ?? array() ) as $size_name => $size_data ) {
+				if ( 'image/svg+xml' == $size_data['mime-type'] ) {
+					continue;
+				}
+				wp_delete_file( $thumb_dir . $size_data['file'] );
+			}
+			if ( file_exists( $main_img ) ) {
+				wp_delete_file( $main_img );
+			}
+			$scaled_path = str_replace( ".{$extension}", "-scaled.{$extension}", $main_img );
+			if ( $scaled_path !== $main_img && file_exists( $scaled_path ) ) {
+				wp_delete_file( $scaled_path );
+			}
+
+			Utility::refresh_file_meta( $img_id, $avif_file_path );
+
+			// Calculate new total size after conversion.
+			$new_size     = file_exists( $avif_file_path ) ? filesize( $avif_file_path ) : 0;
+			$new_metadata = wp_get_attachment_metadata( $img_id );
+			if ( ! empty( $new_metadata['sizes'] ) ) {
+				foreach ( $new_metadata['sizes'] as $thumb ) {
+					$thumb_path = dirname( $avif_file_path ) . '/' . $thumb['file'];
+					if ( file_exists( $thumb_path ) ) {
+						$new_size += filesize( $thumb_path );
+					}
+				}
+			}
+			$space_saved += max( 0, $old_size - $new_size );
+			$batch_saved += max( 0, $old_size - $new_size );
+			$batch_converted++;
+		}
+
+		thumbpress_add_space_saved( $batch_saved );
+
+		$prev_not_found = (int) get_option( 'thumbpress_avif_total_not_found', 0 );
+		update_option( 'thumbpress_avif_total_not_found', $prev_not_found + $batch_not_found );
+
+		$processed_count += count( $attachments );
+		$is_complete      = ( $processed_count >= $total_attachments );
+		$progress         = $total_attachments > 0 ? ( $processed_count / $total_attachments ) * 100 : 100;
+		$progress         = $is_complete ? 100 : min( 99, floor( $progress ) );
+
+		update_option( 'thumbpress_avif_convert_progress', $progress );
+		update_option( 'thumbpress_avif_convert_total_processed', $processed_count );
+		update_option( 'thumbpress_avif_convert_total_converted', $converted_count + $batch_converted );
+		update_option( 'thumbpress_avif_convert_space_saved', $space_saved );
+
+		if ( ! $is_complete ) {
+			if ( ! get_option( 'thumbpress_avif_cancelled', false ) ) {
+				as_schedule_single_action(
+					wp_date( 'U' ) - 10,
+					'thumbpress_convert_all_image_avif',
+					array(
+						'last_id'      => $new_last_id,
+						'file_formats' => $file_formats,
+					)
+				);
+			}
+		} else {
+			update_option( 'thumbpress_avif_convert_progress', 100 );
+			update_option( 'thumbpress_avif_convert_last_completed_time', wp_date( 'U' ) );
+			$this->clear_avif_caches();
+		}
+	}
+
+	/**
+	 * Clear AVIF-related stat caches.
+	 */
+	public function clear_avif_caches() {
+		$this->delete_cache( 'stat_not_avif' );
+		$this->delete_cache( 'stat_not_webp' );
+		$this->delete_cache( 'stat_unoptimized' );
+	}
+
+	/**
 	 * Enqueue the convert single image to AVIF script on media pages.
 	 */
 	public function enqueue_scripts( $hook ) {
@@ -192,6 +394,23 @@ class Convert_Avif {
 			$avif_path   = $base_dir . '/' . $unique_name;
 		}
 
+		// Raise memory limit for image ops (WP helper, respects WP_MAX_MEMORY_LIMIT).
+		wp_raise_memory_limit( 'image' );
+
+		// Skip if image too big to safely decode — width*height*4 bytes + overhead. AVIF encoding
+		// is heavier than WebP, so bailing before we touch disk avoids a mid-encode fatal that
+		// would leave a half-written file behind.
+		$dims = @getimagesize( $source );
+		if ( is_array( $dims ) ) {
+			$pixels       = (int) $dims[0] * (int) $dims[1];
+			$needed_bytes = $pixels * 4 * 2; // Decoded buffer + working copy.
+			$memory_limit = wp_convert_hr_to_bytes( ini_get( 'memory_limit' ) );
+			$memory_usage = memory_get_usage( true );
+			if ( $memory_limit > 0 && ( $memory_usage + $needed_bytes ) > $memory_limit ) {
+				return false;
+			}
+		}
+
 		$editor = wp_get_image_editor( $source );
 		if ( is_wp_error( $editor ) ) {
 			return false;
@@ -223,171 +442,13 @@ class Convert_Avif {
 	 */
 	public function generate_avif_file_url( $avif_file_path ) {
 		$avif_file_path = pathinfo( $avif_file_path, PATHINFO_DIRNAME ) . '/' . pathinfo( $avif_file_path, PATHINFO_FILENAME ) . '.avif';
-		$avif_file_url  = str_replace( ABSPATH, home_url( '/' ), $avif_file_path );
-
-		return $avif_file_url;
-	}
-
-	/**
-	 * Background batch conversion (called by Action Scheduler).
-	 */
-	public function convert_all_image( $offset, $file_formats = array( 'jpeg', 'png', 'jpg', 'webp' ) ) {
-		require_once ABSPATH . 'wp-admin/includes/image.php';
-		global $wpdb;
-
-		$image_types       = $this->get_image_mime_types_for_avif( $file_formats );
-		$limit             = (int) get_option( 'thumbpress_avif_convert_img_val', 100 );
-		$total_attachments = (int) get_option( 'thumbpress_avif_convert_background_total_images' );
-		$space_saved       = (int) get_option( 'thumbpress_avif_convert_space_saved', 0 );
-
-		$query = $wpdb->prepare(
-			"
-			SELECT ID
-			FROM {$wpdb->posts}
-			WHERE post_type = 'attachment'
-			AND post_status != 'trash'
-			AND post_mime_type IN ('" . implode( "','", array_map( 'esc_sql', $image_types ) ) . "')
-			LIMIT %d
-		",
-			$limit
+		$upload_dir     = wp_upload_dir();
+		$avif_file_url  = str_replace(
+			wp_normalize_path( $upload_dir['basedir'] ),
+			$upload_dir['baseurl'],
+			wp_normalize_path( $avif_file_path )
 		);
 
-		$attachments = $wpdb->get_results( $query );
-
-		if ( ! $total_attachments ) {
-			update_option( 'thumbpress_avif_convert_progress', 100 );
-			update_option( 'thumbpress_avif_convert_last_completed_time', wp_date( 'U' ) );
-			$this->delete_cache( 'stat_not_avif' );
-			$this->delete_cache( 'stat_not_webp' );
-			$this->delete_cache( 'stat_unoptimized' );
-			return;
-		}
-
-		if ( count( $attachments ) > 0 ) {
-			$batch_saved = 0;
-			foreach ( $attachments as $attachment ) {
-				$img_id   = $attachment->ID;
-				$main_img = get_attached_file( $img_id );
-
-				if ( ! $main_img || ! file_exists( $main_img ) ) {
-					continue;
-				}
-
-				$file_info = pathinfo( $main_img );
-				$extension = strtolower( $file_info['extension'] ?? '' );
-				$main_img  = str_replace( "-scaled.{$extension}", ".{$extension}", $main_img );
-
-				if ( ! file_exists( $main_img ) ) {
-					continue;
-				}
-
-				$old_metadata = wp_get_attachment_metadata( $img_id );
-				$thumb_dir    = dirname( $main_img ) . DIRECTORY_SEPARATOR;
-
-				// Calculate old total size before conversion.
-				$old_size = file_exists( $main_img ) ? filesize( $main_img ) : 0;
-				if ( ! empty( $old_metadata['sizes'] ) ) {
-					foreach ( $old_metadata['sizes'] as $thumb ) {
-						$thumb_path = $thumb_dir . $thumb['file'];
-						if ( file_exists( $thumb_path ) ) {
-							$old_size += filesize( $thumb_path );
-						}
-					}
-				}
-
-				$avif_file_path = $this->convert_image_to_avif( $main_img );
-
-				if ( ! $avif_file_path ) {
-					continue;
-				}
-
-				// Delete old files only after successful conversion.
-				if ( ! empty( $old_metadata['sizes'] ) ) {
-					foreach ( $old_metadata['sizes'] as $old_size_data ) {
-						if ( 'image/svg+xml' === $old_size_data['mime-type'] ) {
-							continue;
-						}
-						wp_delete_file( $thumb_dir . $old_size_data['file'] );
-					}
-				}
-
-				// Delete original source file.
-				if ( file_exists( $main_img ) ) {
-					wp_delete_file( $main_img );
-				}
-				$scaled_path = str_replace( ".{$extension}", "-scaled.{$extension}", $main_img );
-				if ( $scaled_path !== $main_img && file_exists( $scaled_path ) ) {
-					wp_delete_file( $scaled_path );
-				}
-
-				$avif_metadata = wp_generate_attachment_metadata( $img_id, $avif_file_path );
-
-				update_attached_file( $img_id, $avif_file_path );
-				wp_update_attachment_metadata( $img_id, $avif_metadata );
-
-				$updated_metadata = wp_get_attachment_metadata( $img_id );
-				$file_path        = $updated_metadata['file'];
-				update_post_meta( $img_id, '_wp_attached_file', $file_path );
-				wp_update_post(
-					array(
-						'ID'             => $img_id,
-						'post_mime_type' => 'image/avif',
-						'guid'           => wp_get_attachment_url( $img_id ),
-					)
-				);
-
-				Utility::refresh_file_meta( $img_id, $avif_file_path );
-
-				// Calculate new total size after conversion.
-				$new_size     = file_exists( $avif_file_path ) ? filesize( $avif_file_path ) : 0;
-				$new_metadata = wp_get_attachment_metadata( $img_id );
-				if ( ! empty( $new_metadata['sizes'] ) ) {
-					foreach ( $new_metadata['sizes'] as $thumb ) {
-						$thumb_path = dirname( $avif_file_path ) . '/' . $thumb['file'];
-						if ( file_exists( $thumb_path ) ) {
-							$new_size += filesize( $thumb_path );
-						}
-					}
-				}
-				$space_saved += max( 0, $old_size - $new_size );
-				$batch_saved += max( 0, $old_size - $new_size );
-			}
-
-			thumbpress_add_space_saved( $batch_saved );
-
-			$count      = $offset + count( $attachments );
-			$progress   = ( $count / $total_attachments ) * 100;
-			$progress   = min( $progress, 100 );
-			$new_offset = $offset + count( $attachments );
-
-			update_option( 'thumbpress_avif_convert_progress', $progress );
-			update_option( 'thumbpress_avif_convert_total_processed', $count );
-			update_option( 'thumbpress_avif_convert_total_converted', $count );
-			update_option( 'thumbpress_avif_convert_space_saved', $space_saved );
-
-			if ( $progress < 100 ) {
-				if ( ! get_option( 'thumbpress_avif_cancelled', false ) ) {
-					as_schedule_single_action(
-						wp_date( 'U' ) - 10,
-						'thumbpress_convert_all_image_avif',
-						array(
-							'offset'       => $new_offset,
-							'file_formats' => $file_formats,
-						)
-					);
-				}
-			} else {
-				update_option( 'thumbpress_avif_convert_last_completed_time', wp_date( 'U' ) );
-				$this->delete_cache( 'stat_not_avif' );
-				$this->delete_cache( 'stat_not_webp' );
-				$this->delete_cache( 'stat_unoptimized' );
-			}
-		} else {
-			update_option( 'thumbpress_avif_convert_progress', 100 );
-			update_option( 'thumbpress_avif_convert_last_completed_time', wp_date( 'U' ) );
-			$this->delete_cache( 'stat_not_avif' );
-			$this->delete_cache( 'stat_not_webp' );
-			$this->delete_cache( 'stat_unoptimized' );
-		}
+		return $avif_file_url;
 	}
 }

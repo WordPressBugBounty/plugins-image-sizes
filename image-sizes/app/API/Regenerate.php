@@ -15,26 +15,19 @@ class Regenerate {
 	public function regen_now( $request ) {
 		global $wpdb;
 
-		$offset         = $request->get_param( 'offset' );
-		$limit          = $request->get_param( 'limit' );
-		$deleted        = $request->get_param( 'thumbs_deleteds' );
-		$created        = $request->get_param( 'thumbs_createds' );
-		$offset         = $offset ? absint( $offset ) : 0;
-		$limit          = $limit ? absint( $limit ) : 40;
-		$images_count   = $wpdb->get_results( "SELECT `ID` FROM `$wpdb->posts` WHERE `post_type` = 'attachment' AND `post_mime_type` LIKE 'image/%' AND `post_status` != 'trash'" );
-		$images_count   = array_filter(
-			$images_count,
-			function ( $img ) {
-				$f = get_attached_file( $img->ID );
-				return $f && file_exists( $f );
-			}
-		);
-		$images_count   = array_values( $images_count );
-		$total_images   = count( $images_count );
-		$images         = $wpdb->get_results( $wpdb->prepare( "SELECT `ID` FROM `$wpdb->posts` WHERE `post_type` = 'attachment' AND `post_mime_type` LIKE 'image/%' AND `post_status` != 'trash' LIMIT %d OFFSET %d", $limit, $offset ) );
-		$next_offset    = $offset + count( $images );
-		$thumbs_created = $thumbs_deleted = 0;
-		$space_saved    = absint( $request->get_param( 'space_saved' ) );
+		$offset               = $request->get_param( 'offset' );
+		$limit                = $request->get_param( 'limit' );
+		$deleted              = $request->get_param( 'thumbs_deleteds' );
+		$created              = $request->get_param( 'thumbs_createds' );
+		$offset               = $offset ? absint( $offset ) : 0;
+		$limit                = $limit ? absint( $limit ) : 40;
+		$not_found_prev       = absint( $request->get_param( 'not_found' ) );
+		$processed_count_prev = absint( $request->get_param( 'processed_count' ) );
+		$total_images         = (int) $wpdb->get_var( "SELECT COUNT(*) FROM `$wpdb->posts` WHERE `post_type` = 'attachment' AND `post_mime_type` LIKE 'image/%' AND `post_status` != 'trash'" );
+		$images               = $wpdb->get_results( $wpdb->prepare( "SELECT `ID` FROM `$wpdb->posts` WHERE `post_type` = 'attachment' AND `post_mime_type` LIKE 'image/%' AND `post_status` != 'trash' LIMIT %d OFFSET %d", $limit, $offset ) );
+		$next_offset          = $offset + count( $images );
+		$thumbs_created       = $thumbs_deleted = 0;
+		$space_saved          = absint( $request->get_param( 'space_saved' ) );
 
 		if ( ! $images ) {
 			return $this->response_error(
@@ -47,10 +40,18 @@ class Regenerate {
 
 		require_once ABSPATH . 'wp-admin/includes/image.php';
 
-		$thumbnails  = new Thumbnails();
-		$chunk_saved = 0;
+		$thumbnails      = new Thumbnails();
+		$chunk_saved     = 0;
+		$not_found       = 0;
+		$processed_count = 0;
 
 		foreach ( $images as $image ) {
+			$file = get_attached_file( $image->ID );
+			if ( ! $file || ! file_exists( $file ) ) {
+				++$not_found;
+				continue;
+			}
+			++$processed_count;
 			$res = $thumbnails->regenerate_one( $image->ID );
 			if ( $res['skipped'] ) {
 				continue;
@@ -63,11 +64,13 @@ class Regenerate {
 
 		thumbpress_add_space_saved( $chunk_saved );
 
-		$total_deleted = $deleted + $thumbs_deleted;
-		$total_created = $created + $thumbs_created;
-		$total_images  = $total_images > 0 ? $total_images : 1;
-		$progress      = floor( ( $next_offset / $total_images ) * 100 );
-		$progress      = min( $progress, 100 );
+		$total_deleted         = $deleted + $thumbs_deleted;
+		$total_created         = $created + $thumbs_created;
+		$total_not_found       = $not_found_prev + $not_found;
+		$total_processed_count = $processed_count_prev + $processed_count;
+		$total_images          = $total_images > 0 ? $total_images : 1;
+		$progress              = floor( ( $next_offset / $total_images ) * 100 );
+		$progress              = min( $progress, 100 );
 
 		update_option( 'thumbpress_regenerate_space_saved', $space_saved );
 
@@ -89,6 +92,8 @@ class Regenerate {
 				'total_images_count' => $total_images,
 				'space_saved'        => $space_saved,
 				'space_saved_label'  => $space_saved_label,
+				'not_found'          => $total_not_found,
+				'processed_count'    => $total_processed_count,
 			)
 		);
 	}
@@ -99,11 +104,14 @@ class Regenerate {
 
 		global $wpdb;
 
+		as_unschedule_all_actions( 'thumbpress_regenerate_all_image' );
+		delete_option( 'thumbpress_regenerate_cancelled' );
 		delete_option( 'thumbpress_regenerate_progress' );
 		delete_option( 'thumbpress_regenerate_total_processed' );
 		delete_option( 'thumbpress_regenerate_total_deleted' );
 		delete_option( 'thumbpress_regenerate_total_created' );
 		delete_option( 'thumbpress_regenerate_space_saved' );
+		delete_option( 'thumbpress_regenerate_total_not_found' );
 
 		update_option( 'thumbpress_regenerate_limit', $limit );
 
@@ -173,6 +181,7 @@ class Regenerate {
 
 		$space_saved       = (int) get_option( 'thumbpress_regenerate_space_saved', 0 );
 		$space_saved_label = size_format( $space_saved );
+		$not_found         = (int) get_option( 'thumbpress_regenerate_total_not_found', 0 );
 
 		return $this->response_success(
 			array(
@@ -182,6 +191,7 @@ class Regenerate {
 				'created'           => $created,
 				'total'             => $total,
 				'space_saved_label' => $space_saved_label,
+				'not_found'         => $not_found,
 				'is_complete'       => $progress >= 100,
 			)
 		);

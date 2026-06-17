@@ -153,24 +153,45 @@ class Thumbnails {
 			}
 		}
 
-		$new_thumbs = wp_generate_attachment_metadata( $image_id, $main_img );
-		wp_update_attachment_metadata( $image_id, $new_thumbs );
+		// Default so the size-calculation block below is safe even if regeneration fails
+		// (the if-guard may leave $updated_metadata unset otherwise).
+		$updated_metadata = array();
 
-		$updated_metadata = wp_get_attachment_metadata( $image_id );
-		if ( ! empty( $updated_metadata['file'] ) ) {
-			update_post_meta( $image_id, '_wp_attached_file', $updated_metadata['file'] );
+		$new_thumbs = wp_generate_attachment_metadata( $image_id, $main_img );
+
+		// Guard against false / WP_Error / empty so a failed regeneration can't wipe the
+		// attachment metadata. Regeneration doesn't change the filename, so on failure we
+		// simply leave the existing metadata and _wp_attached_file untouched.
+		if ( $new_thumbs && ! is_wp_error( $new_thumbs ) ) {
+			wp_update_attachment_metadata( $image_id, $new_thumbs );
+
+			$updated_metadata = wp_get_attachment_metadata( $image_id );
+			if ( ! empty( $updated_metadata['file'] ) ) {
+				update_post_meta( $image_id, '_wp_attached_file', $updated_metadata['file'] );
+			}
 		}
 
+		// Count created thumbnails as unique physical files so the tally mirrors
+		// thumbs_deleted: dedupe size keys that point at the same file, skip SVG,
+		// and include the regenerated -scaled full-size file below.
 		$new_thumb_size = 0;
+		$created_files  = array();
 		if ( ! empty( $updated_metadata['sizes'] ) ) {
 			foreach ( $updated_metadata['sizes'] as $new_thumb ) {
+				if ( empty( $new_thumb['file'] ) || 'image/svg+xml' === ( $new_thumb['mime-type'] ?? '' ) ) {
+					continue;
+				}
+				if ( isset( $created_files[ $new_thumb['file'] ] ) ) {
+					continue;
+				}
+
+				$new_thumb_path = $thumb_dir . $new_thumb['file'];
 				if ( ! empty( $new_thumb['filesize'] ) ) {
 					$new_thumb_size += $new_thumb['filesize'];
-				} else {
-					$new_thumb_path = $thumb_dir . $new_thumb['file'];
-					if ( file_exists( $new_thumb_path ) ) {
-						$new_thumb_size += filesize( $new_thumb_path );
-					}
+					$created_files[ $new_thumb['file'] ] = true;
+				} elseif ( file_exists( $new_thumb_path ) ) {
+					$new_thumb_size += filesize( $new_thumb_path );
+					$created_files[ $new_thumb['file'] ] = true;
 				}
 			}
 		}
@@ -178,10 +199,12 @@ class Thumbnails {
 		$scaled_file = get_attached_file( $image_id );
 		if ( $scaled_file && $scaled_file !== $main_img && file_exists( $scaled_file ) ) {
 			$new_thumb_size += filesize( $scaled_file );
+			// Mirror the deleted side, which counts the old -scaled file.
+			$created_files[ basename( $scaled_file ) ] = true;
 		}
 
 		$result['space_saved']    = max( 0, $old_thumb_size - $new_thumb_size );
-		$result['thumbs_created'] = is_array( $new_thumbs['sizes'] ?? null ) ? count( $new_thumbs['sizes'] ) : 0;
+		$result['thumbs_created'] = count( $created_files );
 
 		return $result;
 	}
@@ -221,9 +244,14 @@ class Thumbnails {
 		$thumbs_created    = 0;
 		$thumbs_deleted    = 0;
 		$batch_space_saved = 0;
+		$batch_not_found   = 0;
 
 		foreach ( $images as $image ) {
 			$res                = $this->regenerate_one( $image->ID );
+			if ( ! empty( $res['skipped'] ) ) {
+				$batch_not_found++;
+				continue;
+			}
 			$thumbs_deleted    += $res['thumbs_deleted'];
 			$thumbs_created    += $res['thumbs_created'];
 			$batch_space_saved += $res['space_saved'];
@@ -231,20 +259,24 @@ class Thumbnails {
 
 		thumbpress_add_space_saved( $batch_space_saved );
 
-		$total_deleted = $thumbs_deleteds + $thumbs_deleted;
-		$total_created = $thumbs_createds + $thumbs_created;
-		$count         = $offset + count( $images );
-		$progress      = ( $count / $total_attachments ) * 100;
-		$progress      = min( $progress, 100 );
+		$prev_not_found = (int) get_option( 'thumbpress_regenerate_total_not_found', 0 );
+		$total_deleted  = $thumbs_deleteds + $thumbs_deleted;
+		$total_created  = $thumbs_createds + $thumbs_created;
+		$count          = $offset + count( $images );
+		$progress       = ( $count / $total_attachments ) * 100;
+		$progress       = min( $progress, 100 );
 
-		$cumulative_space = (int) get_option( 'thumbpress_regenerate_space_saved', 0 );
+		$cumulative_space   = (int) get_option( 'thumbpress_regenerate_space_saved', 0 );
+		$prev_valid         = (int) get_option( 'thumbpress_regenerate_total_processed', 0 );
+		$batch_valid        = count( $images ) - $batch_not_found;
 		update_option( 'thumbpress_regenerate_space_saved', $cumulative_space + $batch_space_saved );
 		update_option( 'thumbpress_regenerate_progress', $progress );
-		update_option( 'thumbpress_regenerate_total_processed', $count );
+		update_option( 'thumbpress_regenerate_total_processed', $prev_valid + $batch_valid );
 		update_option( 'thumbpress_regenerate_total_deleted', $total_deleted );
 		update_option( 'thumbpress_regenerate_total_created', $total_created );
+		update_option( 'thumbpress_regenerate_total_not_found', $prev_not_found + $batch_not_found );
 
-		if ( $count < $total_attachments ) {
+		if ( $count < $total_attachments && ! get_option( 'thumbpress_regenerate_cancelled', false ) ) {
 			$new_offset = $offset + $limit;
 			as_schedule_single_action( wp_date( 'U' ) - 10, 'thumbpress_regenerate_all_image', array( 'offset' => $new_offset ) );
 		} else {

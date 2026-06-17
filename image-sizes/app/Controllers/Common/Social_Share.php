@@ -228,7 +228,7 @@ class Social_Share {
 				esc_html( $post_desc ),
 				esc_url( $tw_img ),
 				esc_url( $tw_img ),
-				esc_html( $post_author->display_name )
+				esc_html( $post_author ? $post_author->display_name : '' )
 			);
 		}
 
@@ -254,7 +254,7 @@ class Social_Share {
 					esc_url( $post_url ),
 					esc_attr( $site_name ),
 					esc_attr( get_post_field( 'post_date', $post_id ) ),
-					esc_html( $post_author->display_name )
+					esc_html( $post_author ? $post_author->display_name : '' )
 				);
 			}
 

@@ -5,7 +5,7 @@
  * Plugin Name:       ThumbPress
  * Plugin URI:        https://wordpress.org/plugins/image-sizes/
  * Description:       WordPress Image Optimization & Media Management Toolkit
- * Version:           6.2.2
+ * Version:           6.3.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            ThumbPress
@@ -25,7 +25,7 @@ use Pluggable\Marketing\Deactivator;
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'THUMBPRESS_VERSION', '6.2.2' );
+define( 'THUMBPRESS_VERSION', '6.3.0' );
 define( 'THUMBPRESS_FILE', __FILE__ );
 define( 'THUMBPRESS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'THUMBPRESS_URL', plugin_dir_url( __FILE__ ) );
@@ -35,6 +35,7 @@ define( 'THUMBPRESS_CACHE_ENABLED', true );
 
 require_once THUMBPRESS_PATH . 'app/Bootstrap/VersionManager.php';
 require_once THUMBPRESS_PATH . 'vendor/autoload.php';
+require_once THUMBPRESS_PATH . 'vendor/woocommerce/action-scheduler/action-scheduler.php';
 
 ( new Bootstrap\AdminNotice() )->init();
 
@@ -52,8 +53,6 @@ if ( 'legacy' === $thumbpress_vm->get_version_to_load() ) {
 
 define( 'THUMBPRESS_PLUGIN_DIR', THUMBPRESS_PATH );
 define( 'THUMBPRESS_PLUGIN_URL', THUMBPRESS_URL );
-
-require_once THUMBPRESS_PATH . 'legacy/libraries/action-scheduler/action-scheduler.php';
 
 /**
  * Main ThumbPress plugin class.
