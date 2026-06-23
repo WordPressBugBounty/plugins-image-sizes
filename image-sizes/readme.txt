@@ -4,7 +4,7 @@ Tags: image optimization, compress images, thumbnail manager, WebP converter, me
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 6.3.0
+Stable tag: 6.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -255,6 +255,12 @@ ThumbPress may connect to the WordPress.org API (api.wordpress.org) to check for
 The plugin links to thumbpress.co for Pro upgrade information. No data is sent automatically; links only open when the user clicks them.
 
 == Changelog ==
+
+= 6.3.1 - 2026-06-23 =
+* [fix] WebP/AVIF conversion now updates the image URL everywhere it is stored — post content, custom fields, and options — so images no longer break in page builders (Elementor, Divi, Beaver Builder), the Customizer, or WooCommerce email and placeholder images after converting (#341, #357)
+* [fix] URL replacement handles plain, PHP-serialized, and escaped-JSON stored values, and matches by URL path so CDN, protocol-relative, and root-relative links are rewritten too
+* [perf] Faster, safer database URL rewriting with a basename pre-filter and per-option cache clearing
+* [fix] Aligned the Compress size selector and button on the media attachment screen
 
 = 6.3.0 - 2026-06-17 =
 * [fix] WP.org compliance: removed bulk AVIF code from free plugin (trialware violation)

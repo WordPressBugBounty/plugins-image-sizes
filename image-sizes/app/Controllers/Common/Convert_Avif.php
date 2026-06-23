@@ -189,6 +189,9 @@ class Convert_Avif {
 
 			Utility::refresh_file_meta( $img_id, $avif_file_path );
 
+			// Repoint stored URLs (post content, meta, options) at the new file.
+			Utility::replace_attachment_urls( $img_id, $main_img, $old_metadata );
+
 			// Calculate new total size after conversion.
 			$new_size     = file_exists( $avif_file_path ) ? filesize( $avif_file_path ) : 0;
 			$new_metadata = wp_get_attachment_metadata( $img_id );

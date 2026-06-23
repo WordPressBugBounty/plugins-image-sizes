@@ -16,6 +16,9 @@ class Media_Buttons {
 	use Asset;
 
 	public function __construct() {
+
+		$this->action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+
 		if ( defined( 'THUMBPRESS_PRO_VERSION' ) ) {
 			return;
 		}
@@ -23,12 +26,11 @@ class Media_Buttons {
 		$this->filter( 'attachment_fields_to_edit', array( $this, 'add_compress_field' ), 16, 2 );
 		$this->filter( 'attachment_fields_to_edit', array( $this, 'add_replace_button' ), 17, 2 );
 		$this->filter( 'attachment_fields_to_edit', array( $this, 'add_editor_button' ), 18, 2 );
-		$this->action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		$this->action( 'admin_footer', array( $this, 'render_modal' ) );
 	}
 
 	/**
-	 * Enqueue CSS and JS only on media pages.
+	 * Enqueue CSS on media pages. JS + localize only when Pro is not active.
 	 */
 	public function enqueue_scripts( $hook ) {
 		if ( ! in_array( $hook, array( 'post.php', 'upload.php' ), true ) ) {
@@ -41,6 +43,10 @@ class Media_Buttons {
 			array(),
 			THUMBPRESS_VERSION
 		);
+
+		if ( defined( 'THUMBPRESS_PRO_VERSION' ) ) {
+			return;
+		}
 
 		$this->enqueue_script(
 			'thumbpress-media-buttons',
@@ -117,7 +123,7 @@ class Media_Buttons {
 		$form_fields['thumbpress_compress_field'] = array(
 			'label' => __( 'Compress Image', 'image-sizes' ),
 			'input' => 'html',
-			'html'  => $select . $button,
+			'html'  => '<span class="thumbpress-media-compress-wrap">' . $select . $button . '</span>',
 		);
 
 		return $form_fields;

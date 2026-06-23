@@ -28,10 +28,12 @@
 	outline: none !important;
 }
 
-.thumbpress-media-select.select-thumb + .thumbpress_img_btn.button {
-	margin-left: 8px;
+/* Flex wrapper locks gap to exactly 8px and vertically centers select + button */
+.thumbpress-media-compress-wrap {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
 }
-
 /* Modal */
 #thumbpress-media-modal {
 	position: fixed;
