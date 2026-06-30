@@ -5,7 +5,7 @@
  * Plugin Name:       ThumbPress
  * Plugin URI:        https://wordpress.org/plugins/image-sizes/
  * Description:       WordPress Image Optimization & Media Management Toolkit
- * Version:           6.3.1
+ * Version:           6.3.3.1
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            ThumbPress
@@ -25,7 +25,7 @@ use Pluggable\Marketing\Deactivator;
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'THUMBPRESS_VERSION', '6.3.1' );
+define( 'THUMBPRESS_VERSION', '6.3.3.1' );
 define( 'THUMBPRESS_FILE', __FILE__ );
 define( 'THUMBPRESS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'THUMBPRESS_URL', plugin_dir_url( __FILE__ ) );
@@ -38,18 +38,6 @@ require_once THUMBPRESS_PATH . 'vendor/autoload.php';
 require_once THUMBPRESS_PATH . 'vendor/woocommerce/action-scheduler/action-scheduler.php';
 
 ( new Bootstrap\AdminNotice() )->init();
-
-add_action( 'rest_api_init', __NAMESPACE__ . '\\thumbpress_version_routes' );
-function thumbpress_version_routes() {
-	( new Bootstrap\VersionManager() )->register_rest_routes();
-}
-
-// Gate: if the user chose the legacy version, load it and stop.
-$thumbpress_vm = new Bootstrap\VersionManager();
-if ( 'legacy' === $thumbpress_vm->get_version_to_load() ) {
-	$thumbpress_vm->load_legacy();
-	return;
-}
 
 define( 'THUMBPRESS_PLUGIN_DIR', THUMBPRESS_PATH );
 define( 'THUMBPRESS_PLUGIN_URL', THUMBPRESS_URL );
@@ -99,6 +87,10 @@ final class ThumbPress {
 		$this->plugin['server']           = apply_filters( 'thumbpress_server', 'https://my.pluggable.io' );
 		$this->plugin['min_php']          = '7.4';
 		$this->plugin['min_wp']           = '5.0';
+		// Opt-in lead collection via pluggable.io / FluentCRM. Data is sent ONLY on explicit user
+		// action — clicking "Agree" on the activation survey notice, or "Submit & Deactivate" on the
+		// deactivation feedback modal. Nothing is transmitted automatically. Disclosed in readme.txt
+		// under "External Services" (what is sent, when, ToS + Privacy Policy links).
 		$this->plugin['hash_deactivator'] = 'f490a1f1-c3a1-4d3a-bc2a-70d4b405aa11';
 		$this->plugin['hash_survey']      = '55b6c7ca-9102-495f-a6bd-581285447c0a';
 	}

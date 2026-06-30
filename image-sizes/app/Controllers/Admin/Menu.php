@@ -147,7 +147,7 @@ class Menu {
 		echo '<div class="wrap"><h2></h2></div>';
 		printf(
 			'<div id="image-sizes_render">%s</div>',
-			__( 'Loading..', 'image-sizes' )
+			esc_html( __( 'Loading..', 'image-sizes' ) )
 		);
 	}
 

@@ -73,6 +73,6 @@ trait Auth {
 	 * @return bool True if sandbox mode is enabled or the user has administrator capabilities, false otherwise.
 	 */
 	public function is_admin( $request ) {
-		return $this->is_sandbox_mode() || current_user_can( 'administrator' );
+		return $this->is_sandbox_mode() || current_user_can( 'manage_options' );
 	}
 }

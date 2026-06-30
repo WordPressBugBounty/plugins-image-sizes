@@ -45,6 +45,12 @@ class AdminNotice {
 	}
 
 	public function dismiss_pro_outdated_notice() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => 'Unauthorized' ) );
+		}
+		if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), 'thumbpress_dismiss_pro_outdated' ) ) {
+			wp_send_json_error( array( 'message' => 'Invalid nonce' ) );
+		}
 		update_option( 'thumbpress_pro_outdated_notice_dismissed', 1 );
 		wp_send_json_success();
 	}

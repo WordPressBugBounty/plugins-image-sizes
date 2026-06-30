@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ES2019",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "declaration": false,
+    "noEmit": true,
+    "paths": {
+      "@/*": ["./spa/admin/src/*"]
+    }
+  },
+  "include": ["spa/admin/src/**/*"],
+  "exclude": ["node_modules", "dist", "build", "legacy"]
+}

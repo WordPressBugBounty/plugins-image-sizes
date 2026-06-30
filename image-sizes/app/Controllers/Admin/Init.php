@@ -102,7 +102,7 @@ class Init {
 				'assets_url'         => THUMBPRESS_ASSETS_URL,
 				'pro_active'         => apply_filters( 'thumbpress_is_pro_active', defined( 'THUMBPRESS_PRO_VERSION' ) ),
 				'pro_installed'      => defined( 'THUMBPRESS_PRO_VERSION' ),
-				'is_new_user'        => $version_manager->is_new_user(),
+				'is_new_user'        => ( false === get_option( 'thumbpress_modules', false ) ),
 			)
 		);
 	}

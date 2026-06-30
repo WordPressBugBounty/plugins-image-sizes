@@ -351,6 +351,17 @@ class API {
 					if ( ! $key ) {
 						return rest_ensure_response( array( 'value' => null ) );
 					}
+					$allowed_keys = apply_filters( 'thumbpress_allowed_option_keys', [
+						'thumbpress_fresh_install_notice_dismissed',
+						'thumbpress_pro_outdated_notice_dismissed',
+						'thumbpress_regen_view_state',
+						'thumbpress_webp_view_state',
+						'thumbpress_avif_view_state',
+						'thumbpress_compress_view_state',
+					] );
+					if ( ! in_array( $key, $allowed_keys, true ) ) {
+						return rest_ensure_response( array( 'value' => null ) );
+					}
 					return rest_ensure_response( array( 'value' => get_option( $key, null ) ) );
 				},
 				'permission_callback' => array( $this, 'is_admin' ),

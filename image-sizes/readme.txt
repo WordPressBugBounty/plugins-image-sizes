@@ -4,7 +4,7 @@ Tags: image optimization, compress images, thumbnail manager, WebP converter, me
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 6.3.1
+Stable tag: 6.3.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,17 +12,18 @@ The all-in-one WordPress image optimization plugin. Disable thumbnails, compress
 
 == Source Code ==
 
-This plugin includes compiled JavaScript built with webpack, React, and TypeScript. The full uncompiled source code is publicly available at:
+This plugin includes a compiled JavaScript bundle (`build/admin.js`) built with webpack, React, and TypeScript. The full uncompiled, human-readable source is included **inside this plugin**, so it can be reviewed, studied, modified, and rebuilt with no external dependency:
 
-https://github.com/codexpertio/thumbpress
+* React/TypeScript source: `spa/admin/src/`
+* Plain JS/CSS: `assets/`
+* Build configuration: `package.json`, `webpack.config.js`, `tailwind.config.js`, `postcss.config.js`, `tsconfig.json`
 
-To build from source:
+To rebuild the compiled bundle from the included source, run these from the plugin directory:
 
-1. Clone the repository: `git clone https://github.com/codexpertio/thumbpress`
-2. Install dependencies: `yarn install` (or `npm install`)
-3. Build: `npm run build`
+1. Install dependencies: `npm install`
+2. Build: `npm run build`
 
-Source files are in `spa/admin/src/` (React/TypeScript components) and `assets/` (plain JS/CSS).
+This regenerates `build/admin.js` and `build/tailwind.css` from `spa/admin/src/`.
 
 == Description ==
 
@@ -246,7 +247,19 @@ ThumbPress scans your media library and compares image files using unique hashes
 
 == External Services ==
 
-This plugin does not send user data to any external servers.
+This plugin connects to the following external services. No personal data is ever transmitted automatically — the only transmissions described below happen solely after an explicit, opt-in action by a logged-in administrator.
+
+**ThumbPress Feedback Service (pluggable.io / FluentCRM)**
+ThumbPress can send your information to our marketing/CRM endpoint (`https://my.pluggable.io/?fluentcrm=1`) so we can follow up, improve the plugin, and understand how it is used.
+
+This service is used in two places, and **only** when you choose to participate:
+
+* *Activation survey notice* — if (and only if) you click the "Ok, I agree" button on the optional survey notice, the plugin sends your WordPress user first name, last name, email address, the plugin slug, and your site URL. Clicking "Remind me later", dismissing, or ignoring the notice sends nothing.
+* *Deactivation feedback form* — if (and only if) you click "Submit & Deactivate" on the optional feedback form shown when deactivating the plugin, it sends your WordPress user first name, last name, email address, the plugin slug, your site URL, the time since install, the deactivation reason(s) you selected, and any free-text feedback you typed. Clicking "Skip & Deactivate" sends nothing.
+
+No data is sent on activation, on normal usage, in the background, or on a schedule. Nothing is sent unless you actively submit one of the forms above.
+
+Service provided by ThumbPress / Codexpert. Terms of Service: https://thumbpress.co/terms-of-service/ — Privacy Policy: https://thumbpress.co/privacy-policy/
 
 **WordPress.org Plugin API**
 ThumbPress may connect to the WordPress.org API (api.wordpress.org) to check for plugin updates. This is standard WordPress behavior used by all plugins. No personal data is transmitted beyond what WordPress core sends.
@@ -255,6 +268,31 @@ ThumbPress may connect to the WordPress.org API (api.wordpress.org) to check for
 The plugin links to thumbpress.co for Pro upgrade information. No data is sent automatically; links only open when the user clicks them.
 
 == Changelog ==
+
+= 6.3.3.1 - 2026-06-28 =
+* [fix] WP.org compliance: removed legacy/ folder entirely — eliminates all legacy-specific violations (Google Fonts unconditional enqueue, cwebp binary files, 5-star review filter links, unguarded nonce checks, unescaped output in legacy views)
+* [fix] WP.org compliance: removed helpwp.dev in-plugin chat widget — the script was loaded automatically on every admin page without user opt-in (phoning home, Guideline 7); bundle rebuilt
+* [security] REST /option GET endpoint now enforces the same allowlist as the POST endpoint (thumbpress_allowed_option_keys filter) — previously any wp_option key could be read including sensitive WordPress core options
+* [fix] VersionManager simplified: get_version_to_load() always returns 'new'; legacy routing, load_legacy(), register_rest_routes(), save_preference(), and dismiss_notice() removed
+* [fix] Admin/Init.php: inlined is_new_user() check directly (false === get_option('thumbpress_modules')) to avoid call to removed VersionManager method
+
+= 6.3.3 - 2026-06-27 =
+* [fix] WP.org compliance: removed Google Fonts enqueue (fonts.googleapis.com) from legacy admin — was loading unconditionally without opt-in consent (phoning home, Guidelines 7 & 9)
+* [fix] WP.org compliance: bumped rosell-dk/webp-convert from 2.9 to 2.9.5 in legacy/composer.json (out-of-date library)
+* [fix] WP.org compliance: documented the helpwp.dev in-plugin chat widget under == External Services == in readme.txt
+* [security] REST API permission callbacks now use current_user_can('manage_options') (capability-based) instead of current_user_can('administrator') (role-string) across all thumbpress/v1 endpoints
+* [security] All wp_verify_nonce() calls in legacy AJAX handlers now sanitize input with sanitize_text_field(wp_unslash()) before verification (8 locations across regenerate-thumbnails, convert-images, social-share, and AJAX classes)
+* [security] Fixed AJAX nonce bypass in legacy bulk WebP conversion (convert_images()): previously set an error message but continued executing file operations on nonce failure; now exits immediately with wp_send_json_error() + return, and added manage_options capability guard
+* [security] Fixed three AJAX handlers that accepted state-changing requests with no authentication: legacy image_sizes_dismiss() (now checks manage_options cap + nonce), AdminNotice::dismiss_pro_outdated_notice() (now checks manage_options + nonce), and legacy Notice::hide_notice() (now checks manage_options cap + sanitizes notice_id input)
+* [fix] WP.org compliance: replaced all bare _e() calls with esc_html_e(), esc_attr_e(), or echo wp_kses_post(__()) depending on context — 27+ locations in legacy views (modules.php, upgrade-pro.php) and controllers (Admin.php, Menu.php, disable-thumbnails, regenerate-thumbnails)
+* [fix] WP.org compliance: added defined('ABSPATH') || exit direct-access guard to 12 PHP files that lacked it (legacy/app/Admin.php, legacy/app/Settings.php, six legacy module entry files, legacy/modules/disable-thumbnails/views/settings.php, legacy/modules/convert-images/inc/functions.php, app/Config/autoload.php, app/Helpers/functions.php)
+
+= 6.3.2 - 2026-06-23 =
+* [fix] WP.org compliance: removed the bulk AVIF conversion worker from the free plugin — the handler shipped in free code but was only triggerable by the Pro add-on (trialware / locked feature, Guideline 5)
+* [fix] WP.org compliance & privacy: the activation survey and deactivation feedback forms (pluggable.io / FluentCRM) are now fully documented as an opt-in External Service in the readme — they transmit data (name, email, site URL, deactivation reason, feedback) only when you explicitly click "Agree" / "Submit & Deactivate", never automatically, with Terms of Service and Privacy Policy links provided (Guidelines 6, 7 & 9)
+* [fix] WP.org compliance: replaced the remote secure.gravatar.com reviewer avatars on the Pro page with locally bundled images — the free plugin no longer loads any image from a remote server (Guideline: no calling files remotely)
+* [fix] WP.org compliance: the legacy WebP URL builder now derives the public URL from wp_upload_dir() instead of str_replace(ABSPATH, home_url()), so it works on custom upload paths, subdirectory installs, multisite, and symlinked setups
+* [fix] WP.org compliance: the uncompiled React/TypeScript source (spa/) and its build configuration are now shipped inside the plugin zip so the source of build/admin.js can be reviewed and rebuilt directly, with no external dependency
 
 = 6.3.1 - 2026-06-23 =
 * [fix] WebP/AVIF conversion now updates the image URL everywhere it is stored — post content, custom fields, and options — so images no longer break in page builders (Elementor, Divi, Beaver Builder), the Customizer, or WooCommerce email and placeholder images after converting (#341, #357)

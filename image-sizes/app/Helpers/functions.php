@@ -1,4 +1,6 @@
 <?php
+defined( 'ABSPATH' ) || exit;
+
 use Codexpert\ThumbPress\Helpers\Utility;
 
 /**

@@ -1,9 +1,9 @@
 <?php
 namespace Codexpert\ThumbPress\Helpers\Field;
 
-use Codexpert\ThumbPress\Abstracts\Field;
-
 defined( 'ABSPATH' ) || exit;
+
+use Codexpert\ThumbPress\Abstracts\Field;
 
 /**
  * WYSIWYG Field Class

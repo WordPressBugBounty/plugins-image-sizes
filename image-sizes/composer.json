@@ -58,12 +58,10 @@
             "mkdir -p release",
             "composer install --no-dev --optimize-autoloader",
             "rsync -av --exclude-from=.distignore . release/image-sizes/",
-            "cp legacy/composer.json release/image-sizes/legacy/composer.json",
-            "cd release/image-sizes/legacy && rm -rf vendor && composer install --no-dev --optimize-autoloader && rm -rf composer.*",
+            "find release/image-sizes -type f \\( -name '*.bak' -o -name '*.tmp' -o -name '*.log' -o -name '*.orig' -o -name '*.dist' \\) -delete",
             "cd release && zip -r image-sizes.zip image-sizes/",
             "rm -rf release/image-sizes/",
-            "composer install",
-            "cd legacy && composer install"
+            "composer install"
         ]
     }
 }

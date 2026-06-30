@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: ThumbPress 6.2.1\n"
+"Project-Id-Version: ThumbPress 6.3.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/image-sizes\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-01T09:02:19+00:00\n"
+"POT-Creation-Date: 2026-06-23T13:08:10+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: image-sizes\n"
@@ -19,7 +19,7 @@ msgstr ""
 #: image-sizes.php
 #: app/Controllers/Admin/Menu.php:62
 #: app/Controllers/Admin/Menu.php:63
-#: views/settings/layout.php:20
+#: views/settings/layout.php:21
 msgid "ThumbPress"
 msgstr ""
 
@@ -43,93 +43,95 @@ msgid "AVIF conversion requires PHP 8.0 or higher."
 msgstr ""
 
 #: app/API/Convert_Avif.php:24
-#: app/API/Convert_Webp.php:306
+#: app/API/Convert_Webp.php:377
 msgid "Invalid image ID."
 msgstr ""
 
 #: app/API/Convert_Avif.php:30
 #: app/API/Convert_Avif.php:38
-#: app/API/Convert_Webp.php:312
-#: app/API/Convert_Webp.php:320
+#: app/API/Convert_Webp.php:383
+#: app/API/Convert_Webp.php:391
 msgid "Source image file not found."
 msgstr ""
 
 #: app/API/Convert_Avif.php:60
+#: app/API/Convert_Avif.php:72
 msgid "Failed to convert image to AVIF."
 msgstr ""
 
-#: app/API/Convert_Avif.php:121
+#: app/API/Convert_Avif.php:142
 msgid "Image converted to AVIF successfully."
 msgstr ""
 
-#: app/API/Convert_Webp.php:48
-#: app/API/Convert_Webp.php:223
+#: app/API/Convert_Webp.php:51
+#: app/API/Convert_Webp.php:291
 msgid "No file formats selected."
 msgstr ""
 
-#: app/API/Convert_Webp.php:54
-#: app/API/Convert_Webp.php:228
+#: app/API/Convert_Webp.php:57
+#: app/API/Convert_Webp.php:296
 msgid "No valid file formats selected."
 msgstr ""
 
-#: app/API/Convert_Webp.php:89
-#: app/API/Convert_Webp.php:248
-#: app/API/Regenerate.php:41
-#: app/API/Regenerate.php:113
+#: app/API/Convert_Webp.php:100
+#: app/API/Convert_Webp.php:317
+#: app/API/Regenerate.php:34
+#: app/API/Regenerate.php:121
 msgid "No images found."
 msgstr ""
 
-#: app/API/Convert_Webp.php:195
-msgid "Converting Images to WebP..."
-msgstr ""
-
-#: app/API/Convert_Webp.php:197
+#: app/API/Convert_Webp.php:115
+#: app/API/Convert_Webp.php:262
 msgid "Congratulations, Converting Images to WebP is Completed!"
 msgstr ""
 
-#: app/API/Convert_Webp.php:267
-#: app/API/Regenerate.php:122
+#: app/API/Convert_Webp.php:260
+msgid "Converting Images to WebP..."
+msgstr ""
+
+#: app/API/Convert_Webp.php:336
+#: app/API/Regenerate.php:130
 msgid "Failed to schedule action."
 msgstr ""
 
-#: app/API/Convert_Webp.php:272
+#: app/API/Convert_Webp.php:341
 msgid "Your images are being converted in the background."
 msgstr ""
 
-#: app/API/Convert_Webp.php:358
+#: app/API/Convert_Webp.php:412
+#: app/API/Convert_Webp.php:424
 msgid "Failed to convert image."
 msgstr ""
 
-#: app/API/Convert_Webp.php:401
+#: app/API/Convert_Webp.php:491
 msgid "Image converted successfully."
 msgstr ""
 
-#: app/API/Regenerate.php:74
+#: app/API/Regenerate.php:77
 msgid "Regenerating Thumbnails..."
 msgstr ""
 
-#: app/API/Regenerate.php:76
+#: app/API/Regenerate.php:79
 msgid "Congratulations, Thumbnail Regeneration is Completed!"
 msgstr ""
 
-#: app/API/Regenerate.php:127
+#: app/API/Regenerate.php:135
 msgid "Your images are being regenerated in the background."
 msgstr ""
 
-#: app/API/Regenerate.php:140
+#: app/API/Regenerate.php:148
 msgid "Invalid attachment."
 msgstr ""
 
-#: app/API/Regenerate.php:149
+#: app/API/Regenerate.php:157
 msgid "Image file not found."
 msgstr ""
 
-#: app/API/Regenerate.php:157
+#: app/API/Regenerate.php:165
 msgid "Thumbnails regenerated successfully."
 msgstr ""
 
 #: app/API/Settings.php:198
-#: app/API/Social_Share.php:50
 #: build/admin.js:1
 msgid "Settings saved successfully."
 msgstr ""
@@ -146,55 +148,64 @@ msgstr ""
 msgid "No changes detected."
 msgstr ""
 
-#: app/Bootstrap/AdminNotice.php:66
-#: app/Bootstrap/AdminNotice.php:148
-#: app/Controllers/Admin/Init.php:54
-#: app/Controllers/Admin/Init.php:103
+#: app/Bootstrap/AdminNotice.php:81
+#: app/Bootstrap/AdminNotice.php:161
+#: app/Bootstrap/AdminNotice.php:289
+#: app/Controllers/Admin/Init.php:48
 msgid "Dismiss this notice."
 msgstr ""
 
-#: app/Bootstrap/AdminNotice.php:69
-#: app/Controllers/Admin/Init.php:106
+#: app/Bootstrap/AdminNotice.php:84
 msgid "ThumbPress Pro update required!"
 msgstr ""
 
 #. translators: 1: installed pro version, 2: required pro version
-#: app/Bootstrap/AdminNotice.php:72
-#: app/Controllers/Admin/Init.php:110
+#: app/Bootstrap/AdminNotice.php:87
 #, php-format
 msgid "ThumbPress requires ThumbPress Pro version %2$s or higher. You have version %1$s. Please update to use all new features."
 msgstr ""
 
-#: app/Bootstrap/AdminNotice.php:79
-#: app/Controllers/Admin/Init.php:118
+#: app/Bootstrap/AdminNotice.php:94
 msgid "Update ThumbPress Pro Now"
 msgstr ""
 
-#: app/Bootstrap/AdminNotice.php:152
+#: app/Bootstrap/AdminNotice.php:164
+msgid "ThumbPress Pro is installed but not activated!"
+msgstr ""
+
+#: app/Bootstrap/AdminNotice.php:165
+msgid "Activate ThumbPress Pro to unlock all premium features including image compression, unused image detection, large image detection, and more."
+msgstr ""
+
+#: app/Bootstrap/AdminNotice.php:169
+msgid "Activate ThumbPress Pro"
+msgstr ""
+
+#: app/Bootstrap/AdminNotice.php:293
 msgid "A new version of ThumbPress is ready!"
 msgstr ""
 
-#: app/Bootstrap/AdminNotice.php:155
+#: app/Bootstrap/AdminNotice.php:296
 msgid "You are using the new dashboard. Switch back to classic anytime."
 msgstr ""
 
-#: app/Bootstrap/AdminNotice.php:157
+#: app/Bootstrap/AdminNotice.php:298
 msgid "Would you like to try the new modern dashboard, or keep using the classic version?"
 msgstr ""
 
-#: app/Bootstrap/AdminNotice.php:164
+#: app/Bootstrap/AdminNotice.php:305
 msgid "Using New Version"
 msgstr ""
 
-#: app/Bootstrap/AdminNotice.php:167
+#: app/Bootstrap/AdminNotice.php:308
 msgid "Switch to Classic"
 msgstr ""
 
-#: app/Bootstrap/AdminNotice.php:171
+#: app/Bootstrap/AdminNotice.php:312
 msgid "Try New Version"
 msgstr ""
 
-#: app/Bootstrap/AdminNotice.php:174
+#: app/Bootstrap/AdminNotice.php:315
 msgid "Using Classic"
 msgstr ""
 
@@ -202,15 +213,15 @@ msgstr ""
 msgid "Must be \"new\" or \"legacy\"."
 msgstr ""
 
-#: app/Controllers/Admin/Init.php:57
+#: app/Controllers/Admin/Init.php:51
 msgid "ThumbPress is installed!"
 msgstr ""
 
-#: app/Controllers/Admin/Init.php:58
+#: app/Controllers/Admin/Init.php:52
 msgid "Your images are ready to be optimized. Visit the dashboard to get started."
 msgstr ""
 
-#: app/Controllers/Admin/Init.php:62
+#: app/Controllers/Admin/Init.php:56
 msgid "Go to Dashboard"
 msgstr ""
 
@@ -259,9 +270,9 @@ msgstr ""
 
 #: app/Controllers/Admin/Menu.php:103
 #: app/Controllers/Admin/Menu.php:207
-#: app/Controllers/Common/Convert_Avif.php:122
-#: app/Controllers/Common/Convert_Avif.php:135
-#: app/Controllers/Common/Convert_Avif.php:139
+#: app/Controllers/Common/Convert_Avif.php:130
+#: app/Controllers/Common/Convert_Avif.php:143
+#: app/Controllers/Common/Convert_Avif.php:147
 #: build/admin.js:1
 msgid "Convert to AVIF"
 msgstr ""
@@ -293,12 +304,11 @@ msgid "Array of disabled size names"
 msgstr ""
 
 #: app/Controllers/Common/API.php:83
-#: app/Controllers/Common/API.php:199
 msgid "Offset for pagination"
 msgstr ""
 
 #: app/Controllers/Common/API.php:88
-#: app/Controllers/Common/API.php:204
+#: app/Controllers/Common/API.php:206
 msgid "Number of images to process"
 msgstr ""
 
@@ -311,7 +321,7 @@ msgid "Previously created thumbnails count"
 msgstr ""
 
 #: app/Controllers/Common/API.php:115
-#: app/Controllers/Common/API.php:221
+#: app/Controllers/Common/API.php:233
 msgid "Batch size for background processing"
 msgstr ""
 
@@ -319,8 +329,20 @@ msgstr ""
 msgid "Attachment ID to regenerate"
 msgstr ""
 
-#: app/Controllers/Common/API.php:248
-#: app/Controllers/Common/API.php:268
+#: app/Controllers/Common/API.php:201
+msgid "Last processed attachment ID (pagination cursor)"
+msgstr ""
+
+#: app/Controllers/Common/API.php:211
+msgid "Cumulative processed count"
+msgstr ""
+
+#: app/Controllers/Common/API.php:216
+msgid "Cumulative converted count"
+msgstr ""
+
+#: app/Controllers/Common/API.php:260
+#: app/Controllers/Common/API.php:280
 msgid "Attachment ID to convert"
 msgstr ""
 
@@ -338,6 +360,72 @@ msgstr ""
 #: app/Controllers/Common/Image_Max_Size.php:52
 #, php-format
 msgid "[ ThumbPress Alert ] Image exceeds the maximum allowed resolution of %1$sx%2$s pixels."
+msgstr ""
+
+#: app/Controllers/Common/Media_Buttons.php:68
+msgid "Image Compression is a Pro feature"
+msgstr ""
+
+#: app/Controllers/Common/Media_Buttons.php:69
+msgid "Reduce file sizes without losing visual quality. Compress images in bulk or one at a time to speed up your site."
+msgstr ""
+
+#: app/Controllers/Common/Media_Buttons.php:70
+msgid "Upgrade to compress images"
+msgstr ""
+
+#: app/Controllers/Common/Media_Buttons.php:73
+msgid "Image Replacement is a Pro feature"
+msgstr ""
+
+#: app/Controllers/Common/Media_Buttons.php:74
+msgid "Swap out images without losing their metadata or breaking existing links. Drop in a new file and ThumbPress handles the rest."
+msgstr ""
+
+#: app/Controllers/Common/Media_Buttons.php:75
+msgid "Upgrade to replace images"
+msgstr ""
+
+#: app/Controllers/Common/Media_Buttons.php:78
+msgid "Image Editor is a Pro feature"
+msgstr ""
+
+#: app/Controllers/Common/Media_Buttons.php:79
+msgid "Crop, rotate, flip and adjust images directly inside WordPress — no external tools needed."
+msgstr ""
+
+#: app/Controllers/Common/Media_Buttons.php:80
+msgid "Upgrade to edit images"
+msgstr ""
+
+#: app/Controllers/Common/Media_Buttons.php:109
+msgid "Select Option"
+msgstr ""
+
+#: app/Controllers/Common/Media_Buttons.php:120
+msgid "Compress"
+msgstr ""
+
+#: app/Controllers/Common/Media_Buttons.php:124
+msgid "Compress Image"
+msgstr ""
+
+#: app/Controllers/Common/Media_Buttons.php:143
+#: app/Controllers/Common/Media_Buttons.php:148
+msgid "Replace New File"
+msgstr ""
+
+#: app/Controllers/Common/Media_Buttons.php:169
+msgid "Edit with ThumbPress"
+msgstr ""
+
+#: app/Controllers/Common/Media_Buttons.php:174
+msgid "Edit Image"
+msgstr ""
+
+#: app/Controllers/Common/Media_Buttons.php:193
+#: build/admin.js:1
+msgid "Close"
 msgstr ""
 
 #: app/Controllers/Common/Social_Share.php:41
@@ -479,22 +567,18 @@ msgstr ""
 msgid "Agent Reply Email"
 msgstr ""
 
-#: app/Helpers/Utility.php:145
+#: app/Helpers/Utility.php:147
 #, php-format
 msgid "- Choose a %s -"
 msgstr ""
 
-#: views/settings/layout.php:60
+#: views/settings/layout.php:61
 msgid "Reset Settings"
 msgstr ""
 
-#: views/settings/layout.php:61
-#: views/settings/layout.php:120
+#: views/settings/layout.php:62
+#: views/settings/layout.php:121
 msgid "Save Settings"
-msgstr ""
-
-#: build/admin.js:1
-msgid "Close"
 msgstr ""
 
 #: build/admin.js:1
@@ -554,6 +638,30 @@ msgid "Upgrade to Pro"
 msgstr ""
 
 #: build/admin.js:1
+msgid "EasyCommerce promotional notice"
+msgstr ""
+
+#: build/admin.js:1
+msgid "New from the ThumbPress team - Try"
+msgstr ""
+
+#: build/admin.js:1
+msgid "EasyCommerce"
+msgstr ""
+
+#: build/admin.js:1
+msgid ". A fast, AI-powered way to sell on WordPress."
+msgstr ""
+
+#: build/admin.js:1
+msgid "Learn more"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Dismiss EasyCommerce notice"
+msgstr ""
+
+#: build/admin.js:1
 msgid "120"
 msgstr ""
 
@@ -574,7 +682,7 @@ msgid "Lazy load"
 msgstr ""
 
 #: build/admin.js:1
-msgid "Prevent visitors from downloading your images by turning off the right-click option on your website."
+msgid "Load images only when they enter the user's viewport, improving page speed and reducing bandwidth usage."
 msgstr ""
 
 #: build/admin.js:1
@@ -683,6 +791,10 @@ msgstr ""
 
 #: build/admin.js:1
 msgid "Convert during upload"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Automatically convert images to WebP when they are uploaded."
 msgstr ""
 
 #: build/admin.js:1
@@ -922,7 +1034,11 @@ msgid "Unattached images"
 msgstr ""
 
 #: build/admin.js:1
-msgid "Images needs compression"
+msgid "Uncompressed Images"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Images need compression"
 msgstr ""
 
 #: build/admin.js:1
@@ -1018,7 +1134,7 @@ msgid "Image Regeneration Complete"
 msgstr ""
 
 #: build/admin.js:1
-msgid "Image Regenerate in Progress"
+msgid "Image Regeneration in Progress"
 msgstr ""
 
 #: build/admin.js:1
@@ -1034,15 +1150,19 @@ msgid "Cancel"
 msgstr ""
 
 #: build/admin.js:1
-msgid "Image Processed"
+msgid "Images Processed"
 msgstr ""
 
 #: build/admin.js:1
-msgid "Image Deleted"
+msgid "Images Not Found"
 msgstr ""
 
 #: build/admin.js:1
-msgid "Image Created"
+msgid "Images Deleted"
+msgstr ""
+
+#: build/admin.js:1
+msgid "Images Created"
 msgstr ""
 
 #: build/admin.js:1
@@ -1094,15 +1214,11 @@ msgid "We're scanning your media library and converting eligible images to WebP.
 msgstr ""
 
 #: build/admin.js:1
-msgid "Total"
+msgid "Images Converted"
 msgstr ""
 
 #: build/admin.js:1
-msgid "Converted"
-msgstr ""
-
-#: build/admin.js:1
-msgid "Remaining"
+msgid "Images Remaining"
 msgstr ""
 
 #: build/admin.js:1
