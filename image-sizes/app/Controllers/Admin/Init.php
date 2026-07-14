@@ -16,6 +16,149 @@ class Init {
 		$this->action( 'admin_enqueue_scripts', array( $this, 'add_assets' ) );
 		$this->action( 'admin_notices', array( $this, 'show_fresh_install_notice' ) );
 		$this->action( 'admin_footer', array( $this, 'render_toast' ) );
+
+		// World Cup upgrade offer admin bar.
+		$this->action( 'admin_bar_menu', array( $this, 'add_offer_admin_bar_node' ), 100 );
+		$this->action( 'admin_head', array( $this, 'render_offer_admin_bar_assets' ) );
+		$this->action( 'wp_ajax_thumbpress_dismiss_offer', array( $this, 'dismiss_offer_admin_bar' ) );
+	}
+
+	/**
+	 * Whether the World Cup upgrade offer should be shown to the current user.
+	 *
+	 * Hidden when Pro is active, when the user lacks the manage_options
+	 * capability, or once dismissed (persisted so it never reappears).
+	 *
+	 * @return bool
+	 */
+	protected function should_show_offer() {
+		if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
+			return false;
+		}
+
+		if ( apply_filters( 'thumbpress_is_pro_active', defined( 'THUMBPRESS_PRO_VERSION' ) ) ) {
+			return false;
+		}
+
+		if ( get_option( 'thumbpress_worldcup_offer_dismissed' ) ) {
+			return false;
+		}
+
+		return (bool) apply_filters( 'thumbpress_show_offer_admin_bar', true );
+	}
+
+	/**
+	 * Add the World Cup upgrade offer node to the admin bar.
+	 *
+	 * @param \WP_Admin_Bar $wp_admin_bar The admin bar instance.
+	 * @return void
+	 */
+	public function add_offer_admin_bar_node( $wp_admin_bar ) {
+		if ( ! $this->should_show_offer() ) {
+			return;
+		}
+
+		$upgrade_url = admin_url( 'admin.php?page=thumbpress#/pro' );
+
+		$title = sprintf(
+			'<span class="thumbpress-offer-text">%1$s</span><span class="thumbpress-offer-dismiss" role="button" tabindex="0" aria-label="%2$s" title="%2$s">&times;</span>',
+			esc_html__( 'ThumbPress: World Cup offer - up to 48% Off', 'image-sizes' ),
+			esc_attr__( 'Dismiss', 'image-sizes' )
+		);
+
+		$wp_admin_bar->add_node(
+			array(
+				'id'    => 'thumbpress-offer',
+				'title' => $title,
+				'href'  => $upgrade_url,
+				'meta'  => array( 'class' => 'thumbpress-offer-node' ),
+			)
+		);
+	}
+
+	/**
+	 * Inline CSS/JS for the offer admin-bar node: orange styling and dismiss
+	 * handling (persists dismissal via admin-ajax so it never returns).
+	 *
+	 * @return void
+	 */
+	public function render_offer_admin_bar_assets() {
+		if ( ! $this->should_show_offer() ) {
+			return;
+		}
+
+		$nonce = wp_create_nonce( 'thumbpress_dismiss_offer' );
+		?>
+		<style>
+			#wpadminbar #wp-admin-bar-thumbpress-offer > .ab-item {
+				background: #ea580c;
+				color: #fff !important;
+				font-weight: 600;
+			}
+			#wpadminbar #wp-admin-bar-thumbpress-offer:hover > .ab-item {
+				background: #c2410c;
+				color: #fff !important;
+			}
+			#wpadminbar #wp-admin-bar-thumbpress-offer .thumbpress-offer-text {
+				font-weight: 700;
+			}
+			#wpadminbar #wp-admin-bar-thumbpress-offer .thumbpress-offer-dismiss {
+				margin-left: 8px;
+				font-size: 16px;
+				line-height: 1;
+				opacity: 0.85;
+				cursor: pointer;
+			}
+			#wpadminbar #wp-admin-bar-thumbpress-offer .thumbpress-offer-dismiss:hover {
+				opacity: 1;
+			}
+		</style>
+		<script>
+			( function() {
+				document.addEventListener( 'click', function( e ) {
+					var btn = e.target.closest( '#wp-admin-bar-thumbpress-offer .thumbpress-offer-dismiss' );
+					if ( ! btn ) {
+						return;
+					}
+					e.preventDefault();
+					e.stopPropagation();
+
+					var node = document.getElementById( 'wp-admin-bar-thumbpress-offer' );
+					if ( node ) {
+						node.parentNode.removeChild( node );
+					}
+
+					var body = new URLSearchParams();
+					body.append( 'action', 'thumbpress_dismiss_offer' );
+					body.append( 'nonce', '<?php echo esc_js( $nonce ); ?>' );
+
+					window.fetch( '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>', {
+						method: 'POST',
+						credentials: 'same-origin',
+						headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+						body: body.toString(),
+					} );
+				}, true );
+			} )();
+		</script>
+		<?php
+	}
+
+	/**
+	 * AJAX handler: persist dismissal of the World Cup offer.
+	 *
+	 * @return void
+	 */
+	public function dismiss_offer_admin_bar() {
+		check_ajax_referer( 'thumbpress_dismiss_offer', 'nonce' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'image-sizes' ) ), 403 );
+		}
+
+		update_option( 'thumbpress_worldcup_offer_dismissed', 1 );
+
+		wp_send_json_success();
 	}
 
 	public function render_toast() {

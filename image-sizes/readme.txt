@@ -4,7 +4,7 @@ Tags: image optimization, compress images, thumbnail manager, WebP converter, me
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 6.3.3.1
+Stable tag: 6.3.3.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -268,6 +268,10 @@ ThumbPress may connect to the WordPress.org API (api.wordpress.org) to check for
 The plugin links to thumbpress.co for Pro upgrade information. No data is sent automatically; links only open when the user clicks them.
 
 == Changelog ==
+
+= 6.3.3.2 - 2026-07-14 =
+* [compat] Version compatibility tested with 7.0.1
+* [chore] Restructured the PHPUnit test suite
 
 = 6.3.3.1 - 2026-06-28 =
 * [fix] WP.org compliance: removed legacy/ folder entirely — eliminates all legacy-specific violations (Google Fonts unconditional enqueue, cwebp binary files, 5-star review filter links, unguarded nonce checks, unescaped output in legacy views)

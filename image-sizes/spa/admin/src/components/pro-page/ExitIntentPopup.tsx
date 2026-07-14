@@ -1,27 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
-import { X, Copy, Check, Tag, Clock } from 'lucide-react';
+import { X, Trophy, Clock } from 'lucide-react';
 import { toast } from 'sonner';
 
-const COUPON_CODE = 'TPTHANKS25';
-const TIMER_SECONDS = 10 * 60; // 10 minutes
-const TIMER_KEY = 'thumbpress_exit_popup_expiry';
+// Offer deadline: July 19, 2026 at midnight local time.
+const OFFER_DEADLINE_TS = new Date( 2026, 6, 19, 0, 0, 0, 0 ).getTime();
 
+/**
+ * Seconds remaining until the offer deadline.
+ */
 function getRemainingSeconds(): number {
-	const expiry = sessionStorage.getItem( TIMER_KEY );
-	if ( expiry ) {
-		const remaining = Math.floor( ( parseInt( expiry ) - Date.now() ) / 1000 );
-		return Math.max( 0, remaining );
-	}
-	const expiryTs = Date.now() + TIMER_SECONDS * 1000;
-	sessionStorage.setItem( TIMER_KEY, String( expiryTs ) );
-	return TIMER_SECONDS;
+	return Math.max( 0, Math.floor( ( OFFER_DEADLINE_TS - Date.now() ) / 1000 ) );
 }
 
-function formatTime( seconds: number ): string {
-	const m = Math.floor( seconds / 60 ).toString().padStart( 2, '0' );
-	const s = ( seconds % 60 ).toString().padStart( 2, '0' );
-	return `${ m }:${ s }`;
+/**
+ * Split seconds into zero-padded days, hours, minutes and seconds.
+ */
+function getTimeParts( seconds: number ): { d: string; h: string; m: string; s: string } {
+	const d = Math.floor( seconds / 86400 );
+	const h = Math.floor( ( seconds % 86400 ) / 3600 );
+	const m = Math.floor( ( seconds % 3600 ) / 60 );
+	const s = seconds % 60;
+	return {
+		d: d.toString().padStart( 2, '0' ),
+		h: h.toString().padStart( 2, '0' ),
+		m: m.toString().padStart( 2, '0' ),
+		s: s.toString().padStart( 2, '0' ),
+	};
 }
 
 interface Props {
@@ -30,7 +35,6 @@ interface Props {
 }
 
 export default function ExitIntentPopup( { onClose, onScrollToPricing }: Props ) {
-	const [ copied, setCopied ] = useState( false );
 	const [ timeLeft, setTimeLeft ] = useState( getRemainingSeconds );
 
 	useEffect( () => {
@@ -39,50 +43,24 @@ export default function ExitIntentPopup( { onClose, onScrollToPricing }: Props )
 			setTimeLeft( getRemainingSeconds() );
 		}, 1000 );
 		return () => clearInterval( id );
-	}, [] );
-
-	const copyCode = ( onDone?: () => void ) => {
-		const done = () => {
-			onDone?.();
-		};
-		if ( navigator.clipboard ) {
-			navigator.clipboard.writeText( COUPON_CODE ).then( done ).catch( () => fallbackCopy( done ) );
-		} else {
-			fallbackCopy( done );
-		}
-	};
-
-	const handleCopy = () => {
-		copyCode( () => {
-			setCopied( true );
-			setTimeout( () => setCopied( false ), 2000 );
-		} );
-	};
-
-	const fallbackCopy = ( done: () => void ) => {
-		const el = document.createElement( 'textarea' );
-		el.value = COUPON_CODE;
-		el.style.position = 'fixed';
-		el.style.opacity = '0';
-		document.body.appendChild( el );
-		el.focus();
-		el.select();
-		try {
-			document.execCommand( 'copy' );
-			done();
-		} catch {}
-		document.body.removeChild( el );
-	};
+	}, [] ); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const handleGetDiscount = () => {
-		copyCode( () => toast.success(
-			__( 'Coupon code TPTHANKS25 copied!', 'image-sizes' ),
-			{ description: __( 'Paste it at checkout for 25% off.', 'image-sizes' ) }
-		) );
+		toast.success(
+			__( 'World Cup discount applied!', 'image-sizes' ),
+			{ description: __( 'Your up-to-48% discount is auto-applied at checkout.', 'image-sizes' ) }
+		);
 		onScrollToPricing();
 	};
 
 	const expired = timeLeft <= 0;
+	const { d, h, m, s } = getTimeParts( timeLeft );
+	const units = [
+		{ value: d, label: __( 'Days', 'image-sizes' ) },
+		{ value: h, label: __( 'Hrs', 'image-sizes' ) },
+		{ value: m, label: __( 'Min', 'image-sizes' ) },
+		{ value: s, label: __( 'Sec', 'image-sizes' ) },
+	];
 
 	return (
 		<div
@@ -103,47 +81,48 @@ export default function ExitIntentPopup( { onClose, onScrollToPricing }: Props )
 
 				<div className="p-8 text-center">
 					<div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-thumbpress-primary/10">
-						<Tag className="text-thumbpress-primary" size={ 26 } />
+						<Trophy className="text-thumbpress-primary" size={ 26 } />
 					</div>
 
 					<h2 className="mb-2 text-2xl font-bold text-thumbpress-title">
-						{ __( 'A Special Offer Just for You!', 'image-sizes' ) }
+						{ __( 'FIFA World Cup Sale is Live!', 'image-sizes' ) }
 					</h2>
 
-					<p className="mb-4 text-thumbpress-body">
-						{ __( 'As an existing user, we\'re giving you an exclusive 25% discount on ThumbPress Pro. Copy the code and use it at checkout!', 'image-sizes' ) }
+					<p className="mb-6 text-thumbpress-body">
+						{ __( 'Score up to 48% off ThumbPress Pro during our FIFA World Cup sale. The discount is auto-applied at checkout — grab it before the whistle blows!', 'image-sizes' ) }
 					</p>
 
-					{ /* Countdown timer */ }
-					<div className={ `mb-5 inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-semibold ${ expired ? 'bg-red-50 text-red-500' : 'bg-amber-50 text-amber-600' }` }>
-						<Clock size={ 14 } />
-						{ expired
-							? __( 'Offer expired', 'image-sizes' )
-							: `${ __( 'Offer expires in', 'image-sizes' ) } ${ formatTime( timeLeft ) }`
-						}
-					</div>
-
-					<div className="mb-6 flex items-center justify-between gap-3 rounded-xl border-2 border-dashed border-thumbpress-primary bg-thumbpress-primary/5 px-5 py-4">
-						<span className="text-xl font-extrabold tracking-widest text-thumbpress-primary">
-							{ COUPON_CODE }
-						</span>
-						<button
-							onClick={ handleCopy }
-							className="flex items-center gap-1.5 rounded-lg bg-thumbpress-primary px-3 py-1.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
-						>
-							{ copied
-								? <><Check size={ 14 } />{ __( 'Copied!', 'image-sizes' ) }</>
-								: <><Copy size={ 14 } />{ __( 'Copy', 'image-sizes' ) }</>
-							}
-						</button>
+					{ /* Countdown timer — the focal element */ }
+					<div className="mb-6 rounded-xl border-2 border-dashed border-thumbpress-primary bg-thumbpress-primary/5 px-5 py-4">
+						<div className="mb-3 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-thumbpress-primary">
+							<Clock size={ 14 } />
+							{ expired ? __( 'Offer expired', 'image-sizes' ) : __( 'Offer ends July 19', 'image-sizes' ) }
+						</div>
+						{ ! expired && (
+							<div className="flex items-center justify-center gap-2 text-thumbpress-primary">
+								{ units.map( ( unit, i ) => (
+									<React.Fragment key={ unit.label }>
+										{ i > 0 && <span className="pb-4 text-2xl font-bold">:</span> }
+										<div className="flex flex-col items-center">
+											<span className="min-w-14 rounded-lg bg-white px-3 py-2 text-3xl font-extrabold tabular-nums shadow-sm">
+												{ unit.value }
+											</span>
+											<span className="mt-1 text-[10px] font-semibold uppercase tracking-wide text-thumbpress-primary/70">
+												{ unit.label }
+											</span>
+										</div>
+									</React.Fragment>
+								) ) }
+							</div>
+						) }
 					</div>
 
 					<button
 						onClick={ handleGetDiscount }
 						disabled={ expired }
-						className="w-full rounded-md bg-thumbpress-primary py-3 text-base font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed"
+						className="w-full rounded-md bg-thumbpress-primary py-3 text-base font-medium text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
 					>
-						{ __( 'Get 25% Off — View Pricing →', 'image-sizes' ) }
+						{ __( 'Get 48% Off — View Pricing →', 'image-sizes' ) }
 					</button>
 
 					<button

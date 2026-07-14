@@ -4,6 +4,8 @@ interface PricingCardProps {
 	plan: {
 		name: string;
 		price: string;
+		originalPrice?: string;
+		discount?: string;
 		totalPrice?: string;
 		featured?: boolean;
 		features: string[];
@@ -28,16 +30,26 @@ const PricingCard = ({ plan, duration }: PricingCardProps) => {
 				<h3 className="text-2xl font-medium text-thumbpress-title mb-8">
 					{plan.name}
 				</h3>
-				<div className="flex items-center gap-1.5 mb-2">
+				<div className="flex items-baseline gap-1.5 mb-2">
+					{plan.originalPrice && (
+						<span className="text-xl font-medium text-thumbpress-body line-through">
+							{plan.originalPrice}
+						</span>
+					)}
 					<span className="text-4xl font-semibold text-thumbpress-primary">
 						{plan.price}
 					</span>
 					{duration === 'Yearly' && (
 						<span className="text-base text-thumbpress-body">/ Month</span>
 					)}
-					
+
 					{duration === 'Lifetime' && (
 						<span className="text-base text-thumbpress-body">/ Lifetime</span>
+					)}
+					{plan.discount && (
+						<span className="ml-auto self-center bg-[#F97316] text-white text-xs font-semibold px-2.5 py-1 rounded">
+							{plan.discount}
+						</span>
 					)}
 				</div>
 

@@ -11,51 +11,63 @@ const Pricing = () => {
 	const pricingPlansYearly = [
 		{
 			name: __( 'Personal', 'image-sizes' ),
-			price: '$5',
-			totalPrice: '$59',
+			price: '$3.50',
+			originalPrice: '$5',
+			discount: '30% OFF',
+			totalPrice: '$41',
 			featured: false,
 			features: ['1 Site', '1 Year Support', 'All Features Included'],
-			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=1'
+			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=1&discount=FIFA30'
 		},
 		{
 			name: __( 'Professional', 'image-sizes' ),
-			price: '$10',
-			totalPrice: '$119',
+			price: '$7',
+			originalPrice: '$10',
+			discount: '30% OFF',
+			totalPrice: '$83',
 			featured: true,
 			features: ['5 Sites', '1 Year Support', 'All Features Included'],
-			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=2'
+			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=2&discount=FIFA30'
 		},
 		{
 			name: __( 'Agency', 'image-sizes' ),
-			price: '$25',
-			totalPrice: '$299',
+			price: '$17.50',
+			originalPrice: '$25',
+			discount: '30% OFF',
+			totalPrice: '$209',
 			featured: false,
 			features: ['Unlimited Sites', '1 Year Support', 'All Features Included'],
-			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=4'
+			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=4&discount=FIFA30'
 		},
 	];
 
 	const pricingPlansLifetime = [
 		{
 			name: __( 'Personal', 'image-sizes' ),
-			price: '$119',
+			price: '$62',
+			originalPrice: '$119',
+			discount: '48% OFF',
 			featured: false,
 			features: ['1 Site', 'Lifetime Support', 'All Features Included'],
-			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=5'
+			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=5&discount=FIFA48'
 		},
 		{
 			name: __( 'Professional', 'image-sizes' ),
-			price: '$239',
+			price: '$124',
+			originalPrice: '$239',
+			discount: '48% OFF',
 			featured: false,
 			features: ['5 Sites', 'Lifetime Support', 'All Features Included'],
-			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=6'
+			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=6&discount=FIFA48'
 		},
 		{
 			name: __( 'Agency', 'image-sizes' ),
-			price: '$599',
+			price: '$311',
+			originalPrice: '$599',
+			discount: '48% OFF',
 			featured: true,
 			features: ['Unlimited Sites', 'Lifetime Support', 'All Features Included'],
-			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=8'
+			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=8&discount=FIFA48'
 		},
 	];
 
@@ -103,7 +115,7 @@ const Pricing = () => {
 			</div>
 
 			{/* Pricing Cards */}
-			<div className="grid grid-cols-3 2xl:gap-6 lg:gap-4 max-w-[1000px] mx-auto">
+			<div className="grid grid-cols-3 2xl:gap-6 lg:gap-4 max-w-[1200px] mx-auto">
 				{billingCycle === 'yearly' &&
 					pricingPlansYearly.map((plan, index) => (
 						<PricingCard key={index} duration="Yearly" plan={plan} />
