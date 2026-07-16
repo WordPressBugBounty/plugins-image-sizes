@@ -4,7 +4,7 @@ Tags: image optimization, compress images, thumbnail manager, WebP converter, me
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 6.3.3.2
+Stable tag: 6.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -268,6 +268,14 @@ ThumbPress may connect to the WordPress.org API (api.wordpress.org) to check for
 The plugin links to thumbpress.co for Pro upgrade information. No data is sent automatically; links only open when the user clicks them.
 
 == Changelog ==
+
+= 6.4 - 2026-07-16 =
+* [imp] Convert to WebP/AVIF: the single-image convert buttons now show the real reason a conversion failed instead of a generic "Failed to convert image" — including a memory-limit message stating how much memory was needed vs the server limit and how to raise it
+* [perf] Auto Featured Image: fixed an N+1 query on archive/blog/shop pages — the resolved image is now cached per request and persisted in post meta, so thumbnail-less posts no longer trigger a content regex scan and extra database query on every view
+* [perf] Dashboard: added stampede (dog-pile) protection to the large-image and thumbnail stat recompute so a cold cache under concurrent load recomputes once instead of many times
+* [perf] Dashboard: large-image count now uses a single indexed SQL query over stored file-size meta instead of a per-image filesystem scan, and the thumbnail count reads attachment metadata in chunks — the dashboard no longer risks timeouts or memory exhaustion on large media libraries
+* [imp] Header: pointed the community link to the ThumbPress community space and moved it first (before Support and Docs), with icons added to each link
+* [security] WP.org compliance: removed the remote Google Fonts request from the admin build and self-hosted Inter locally — no fonts are loaded from an external server
 
 = 6.3.3.2 - 2026-07-14 =
 * [compat] Version compatibility tested with 7.0.1

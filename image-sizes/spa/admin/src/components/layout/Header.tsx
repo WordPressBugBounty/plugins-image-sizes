@@ -13,20 +13,29 @@ const Header = ({ title }: HeaderProps) => {
 			<h1 className="text-2xl font-medium text-thumbpress-title">{title}</h1>
 
             <div className="flex items-center gap-4 text-sm font-medium text-thumbpress-body">
-                <a href="https://help.pluggable.io/new-ticket/" target="_blank" rel="noreferrer" className="hover:text-thumbpress-primary duration-300">
+                <a href="https://community.codexpert.io/c/space/thumbpress" target="_blank" rel="noreferrer" className="flex items-center gap-1.5 hover:text-thumbpress-primary duration-300">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
+                    </svg>
+                    {__('Community', 'image-sizes')}
+                </a>
+
+                <span className='text-[#D9D9D9]'>|</span>
+
+                <a href="https://help.pluggable.io/new-ticket/" target="_blank" rel="noreferrer" className="flex items-center gap-1.5 hover:text-thumbpress-primary duration-300">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 15h-2v-2h2v2zm1.07-7.75-.9.92c-.5.51-.8.93-.94 1.83h-2v-.5c0-.66.27-1.28.71-1.72l1.24-1.26c.37-.36.59-.86.59-1.42 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z" />
+                    </svg>
                     {__('Support', 'image-sizes')}
                 </a>
 
                 <span className='text-[#D9D9D9]'>|</span>
 
-                <a href="https://thumbpress.co/docs" target="_blank" rel="noreferrer" className="hover:text-thumbpress-primary duration-300">
+                <a href="https://thumbpress.co/docs" target="_blank" rel="noreferrer" className="flex items-center gap-1.5 hover:text-thumbpress-primary duration-300">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
+                    </svg>
                     {__('Docs', 'image-sizes')}
-                </a>
-
-                <span className='text-[#D9D9D9]'>|</span>
-
-                <a href="https://www.facebook.com/groups/codexpert.io" target="_blank" rel="noreferrer" className="hover:text-thumbpress-primary duration-300">
-                    {__('Community', 'image-sizes')}
                 </a>
 
                 { !isProActive && (

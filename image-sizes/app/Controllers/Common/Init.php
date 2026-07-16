@@ -31,7 +31,7 @@ class Init {
 		$this->action( 'thumbpress_thumbnail_sizes_saved', array( $this, 'clear_media_cache' ) );
 		$this->action( 'thumbpress_generate_image_hashes', array( $this, 'generate_hashes_batch' ) );
 		$this->action( 'thumbpress_build_stat_cache', array( $this, 'build_stat_cache' ) );
-		$this->action( 'thumbpress_file_meta_refreshed', array( $this, 'clear_duplicate_cache' ) );
+		$this->action( 'thumbpress_file_meta_refreshed', array( $this, 'clear_file_meta_caches' ) );
 		$this->action( 'thumbpress_media_changed', array( $this, 'clear_media_cache' ) );
 		$this->action( 'thumbpress_media_changed', array( $this, 'schedule_stat_cache_refresh' ) );
 	}
@@ -128,8 +128,9 @@ class Init {
 		as_schedule_single_action( wp_date( 'U' ) - 10, 'thumbpress_build_stat_cache' );
 	}
 
-	public function clear_duplicate_cache( $attachment_id = null ) {
+	public function clear_file_meta_caches( $attachment_id = null ) {
 		$this->delete_cache( 'stat_duplicates' );
+		$this->delete_cache( 'stat_large_images' );
 	}
 
 	/**

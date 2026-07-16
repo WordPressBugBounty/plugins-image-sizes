@@ -56,8 +56,8 @@ class Convert_Avif {
 		$avif_controller = new Convert_Avif_Controller();
 		$avif_file_path  = $avif_controller->convert_image_to_avif( $main_img );
 
-		if ( ! $avif_file_path ) {
-			return $this->response_error( __( 'Failed to convert image to AVIF.', 'image-sizes' ) );
+		if ( is_wp_error( $avif_file_path ) ) {
+			return $this->response_error( $avif_file_path->get_error_message() );
 		}
 
 		$avif_metadata = wp_generate_attachment_metadata( $img_id, $avif_file_path );
@@ -69,7 +69,14 @@ class Convert_Avif {
 			if ( file_exists( $avif_file_path ) ) {
 				wp_delete_file( $avif_file_path );
 			}
-			return $this->response_error( __( 'Failed to convert image to AVIF.', 'image-sizes' ) );
+			$reason = is_wp_error( $avif_metadata ) ? $avif_metadata->get_error_message() : __( 'metadata generation returned nothing', 'image-sizes' );
+			return $this->response_error(
+				sprintf(
+					/* translators: %s: underlying reason metadata generation failed */
+					__( 'Converted the image to AVIF but could not generate its metadata (%s); rolled back.', 'image-sizes' ),
+					$reason
+				)
+			);
 		}
 
 		wp_update_attachment_metadata( $img_id, $avif_metadata );

@@ -398,51 +398,32 @@ class Dashboard {
 	 * Count images with file size over 1 MB.
 	 */
 	private function count_large_images() {
-		$cached = $this->get_cache( 'stat_large_images' );
-		if ( false !== $cached ) {
-			return $cached;
-		}
+		return $this->remember( 'stat_large_images', 6 * HOUR_IN_SECONDS, function () {
+			global $wpdb;
 
-		global $wpdb;
-
-		$attachment_ids = $wpdb->get_col(
-			"SELECT ID FROM {$wpdb->posts}
-         WHERE post_type = 'attachment'
-         AND post_mime_type LIKE 'image/%'
-         AND post_status = 'inherit'"
-		);
-
-		if ( empty( $attachment_ids ) ) {
-			$this->set_cache( 'stat_large_images', 0, 6 * HOUR_IN_SECONDS, true );
-			return 0;
-		}
-
-		$threshold = 1024 * 1024;
-		$count     = 0;
-
-		foreach ( $attachment_ids as $id ) {
-			$file = function_exists( 'wp_get_original_image_path' ) ? wp_get_original_image_path( $id ) : false;
-			if ( ! $file ) {
-				$file = get_attached_file( $id, true );
-			}
-			if ( $file && file_exists( $file ) && filesize( $file ) > $threshold ) {
-				++$count;
-			}
-		}
-
-		$this->set_cache( 'stat_large_images', $count, 6 * HOUR_IN_SECONDS, true );
-		return $count;
+			return (int) $wpdb->get_var(
+				$wpdb->prepare(
+					"SELECT COUNT(*) FROM {$wpdb->postmeta} pm
+					INNER JOIN {$wpdb->posts} p ON p.ID = pm.post_id
+					WHERE pm.meta_key = %s
+					AND CAST( pm.meta_value AS UNSIGNED ) > 1024
+					AND p.post_type = 'attachment'
+					AND p.post_mime_type LIKE 'image/%%'
+					AND p.post_status = 'inherit'",
+					Utility::SIZE_META_KEY
+				)
+			);
+		} );
 	}
 
 	/**
 	 * Count total generated thumbnails across all images.
 	 */
 	private function count_total_thumbnails() {
-		$cached = $this->get_cache( 'stat_total_thumbnails' );
-		if ( false !== $cached ) {
-			return $cached;
-		}
+		return $this->remember( 'stat_total_thumbnails', 6 * HOUR_IN_SECONDS, array( $this, 'compute_total_thumbnails' ) );
+	}
 
+	public function compute_total_thumbnails() {
 		global $wpdb;
 
 		$attachment_ids = $wpdb->get_col(
@@ -453,40 +434,39 @@ class Dashboard {
 		);
 
 		if ( empty( $attachment_ids ) ) {
-			$this->set_cache( 'stat_total_thumbnails', 0, 6 * HOUR_IN_SECONDS, true );
 			return 0;
 		}
 
-		global $wpdb;
 		$count = 0;
 
-		$metadata_list = $wpdb->get_results(
-			$wpdb->prepare(
-				"SELECT post_id, meta_value FROM {$wpdb->postmeta}
-				 WHERE post_id IN (" . implode( ',', array_map( 'absint', $attachment_ids ) ) . ")
-				 AND meta_key = %s",
-				'_wp_attachment_metadata'
-			)
-		);
+		foreach ( array_chunk( $attachment_ids, 1000 ) as $chunk ) {
+			$ids  = implode( ',', array_map( 'absint', $chunk ) );
+			$rows = $wpdb->get_results(
+				$wpdb->prepare(
+					"SELECT meta_value FROM {$wpdb->postmeta}
+					 WHERE post_id IN ( $ids ) AND meta_key = %s",
+					'_wp_attachment_metadata'
+				)
+			);
 
-		foreach ( $metadata_list as $row ) {
-			$metadata = maybe_unserialize( $row->meta_value );
-			if ( ! $metadata ) {
-				continue;
-			}
-			if ( ! empty( $metadata['sizes'] ) ) {
-				$count += count( $metadata['sizes'] );
-			}
-			// Count the -scaled full-size file as a generated size too. The settings
-			// UI lists "scaled" alongside the thumbnail sizes (get_sizes_data() adds
-			// it), and regenerate's created/deleted tallies count it, so this metric
-			// must match. WP sets original_image only when it produced a -scaled copy.
-			if ( ! empty( $metadata['original_image'] ) ) {
-				++$count;
+			foreach ( $rows as $row ) {
+				$metadata = maybe_unserialize( $row->meta_value );
+				if ( ! $metadata ) {
+					continue;
+				}
+				if ( ! empty( $metadata['sizes'] ) ) {
+					$count += count( $metadata['sizes'] );
+				}
+				// Count the -scaled full-size file as a generated size too. The settings
+				// UI lists "scaled" alongside the thumbnail sizes (get_sizes_data() adds
+				// it), and regenerate's created/deleted tallies count it, so this metric
+				// must match. WP sets original_image only when it produced a -scaled copy.
+				if ( ! empty( $metadata['original_image'] ) ) {
+					++$count;
+				}
 			}
 		}
 
-		$this->set_cache( 'stat_total_thumbnails', $count, 6 * HOUR_IN_SECONDS, true );
 		return $count;
 	}
 

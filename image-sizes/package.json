@@ -2,6 +2,7 @@
   "scripts": {
     "build": "wp-scripts build",
     "start": "wp-scripts start",
+    "watch": "wp-scripts start",
     "merge-backend": "git checkout feature/dashboard-restructure && git pull && git checkout feature/dashboard-restructure-frontend && git merge feature/dashboard-restructure",
     "merge-frontend": "git checkout feature/dashboard-restructure-frontend && git pull && git checkout feature/dashboard-restructure && git merge feature/dashboard-restructure-frontend"
   },

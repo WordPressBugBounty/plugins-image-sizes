@@ -18,7 +18,17 @@ module.exports = {
 				},
 			},
 			fontFamily: {
-				inter: ['Inter', 'sans-serif'],
+				inter: [
+					'Inter',
+					'system-ui',
+					'-apple-system',
+					'BlinkMacSystemFont',
+					'"Segoe UI"',
+					'Roboto',
+					'"Helvetica Neue"',
+					'Arial',
+					'sans-serif',
+				],
 			},
 			keyframes: {
 				'accordion-down': {

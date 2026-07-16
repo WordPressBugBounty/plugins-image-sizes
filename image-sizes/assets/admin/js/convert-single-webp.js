@@ -28,7 +28,7 @@
 				} else {
 					btn.innerHTML = originalText;
 					btn.disabled = false;
-					thumbpressToast(true, res.message || 'Failed to convert image.', 'error');
+					thumbpressToast(true, res.data || 'Failed to convert image.', 'error');
 				}
 			})
 			.catch(function () {

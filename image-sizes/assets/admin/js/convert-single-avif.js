@@ -28,7 +28,7 @@
 				} else {
 					btn.innerHTML = originalText;
 					btn.disabled = false;
-					thumbpressToast(true, res.message || 'Failed to convert image to AVIF.', 'error');
+					thumbpressToast(true, res.data || 'Failed to convert image to AVIF.', 'error');
 				}
 			})
 			.catch(function () {

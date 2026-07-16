@@ -114,7 +114,7 @@ class Menu {
 			array(
 				'label' => apply_filters( 'thumbpress_is_pro_active', defined( 'THUMBPRESS_PRO_VERSION' ) )
 					? __( 'Pro', 'image-sizes' )
-					: '<span style="background: #40189D; width: 100%; display: inline-block; color: #fff; text-align: center; padding: 5px 0; border-radius: 4px;">' . __( 'World Cup 48% Off', 'image-sizes' ) . '</span>',
+					: '<span style="background: #ea580c; width: 100%; display: inline-block; color: #fff; text-align: center; padding: 5px 0; border-radius: 4px; font-weight: bold;">' . __( 'World Cup 48% Off', 'image-sizes' ) . '</span>',
 				'hash'  => '#/pro',
 			),
 		);

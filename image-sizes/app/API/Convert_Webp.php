@@ -166,7 +166,7 @@ class Convert_Webp {
 
 			$webp_file_path = $this->convert_image_to_webp( $main_img );
 
-			if ( ! $webp_file_path ) {
+			if ( is_wp_error( $webp_file_path ) ) {
 				// Conversion failed (unsupported/decode/memory). Count it so it surfaces in stats.
 				$batch_not_found++;
 				continue;
@@ -408,8 +408,8 @@ class Convert_Webp {
 
 		$webp_file_path = $this->convert_image_to_webp( $main_img );
 
-		if ( ! $webp_file_path ) {
-			return $this->response_error( __( 'Failed to convert image.', 'image-sizes' ) );
+		if ( is_wp_error( $webp_file_path ) ) {
+			return $this->response_error( $webp_file_path->get_error_message() );
 		}
 
 		$webp_metadata = wp_generate_attachment_metadata( $img_id, $webp_file_path );
@@ -421,7 +421,14 @@ class Convert_Webp {
 			if ( file_exists( $webp_file_path ) ) {
 				wp_delete_file( $webp_file_path );
 			}
-			return $this->response_error( __( 'Failed to convert image.', 'image-sizes' ) );
+			$reason = is_wp_error( $webp_metadata ) ? $webp_metadata->get_error_message() : __( 'metadata generation returned nothing', 'image-sizes' );
+			return $this->response_error(
+				sprintf(
+					/* translators: %s: underlying reason metadata generation failed */
+					__( 'Converted the image but could not generate its metadata (%s); rolled back.', 'image-sizes' ),
+					$reason
+				)
+			);
 		}
 
 		wp_update_attachment_metadata( $img_id, $webp_metadata );

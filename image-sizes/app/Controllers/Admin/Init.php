@@ -44,7 +44,37 @@ class Init {
 			return false;
 		}
 
+		// Hide once the offer deadline has passed.
+		if ( '' === $this->get_offer_deadline_label() ) {
+			return false;
+		}
+
 		return (bool) apply_filters( 'thumbpress_show_offer_admin_bar', true );
+	}
+
+	/**
+	 * Deadline label shown in the offer text.
+	 *
+	 * Shows the primary deadline until it passes, then automatically rolls to
+	 * the extended deadline. Returns '' once the extended deadline has also
+	 * passed (caller drops the "- Ends ..." suffix). Uses the site timezone.
+	 *
+	 * @return string Localised date label (e.g. "July 19"), or '' when expired.
+	 */
+	protected function get_offer_deadline_label() {
+		$now      = current_time( 'timestamp' );
+		$primary  = strtotime( '2026-07-19 23:59:59' );
+		$extended = strtotime( '2026-07-22 23:59:59' );
+
+		if ( $now <= $primary ) {
+			return __( 'July 19', 'image-sizes' );
+		}
+
+		if ( $now <= $extended ) {
+			return __( 'July 22', 'image-sizes' );
+		}
+
+		return '';
 	}
 
 	/**
@@ -60,9 +90,17 @@ class Init {
 
 		$upgrade_url = admin_url( 'admin.php?page=thumbpress#/pro' );
 
+		$deadline = $this->get_offer_deadline_label();
+		if ( '' !== $deadline ) {
+			/* translators: %s: offer deadline date, e.g. "July 19". */
+			$offer_text = sprintf( esc_html__( 'ThumbPress: World Cup - 48%% Off - Ends %s', 'image-sizes' ), $deadline );
+		} else {
+			$offer_text = esc_html__( 'ThumbPress: World Cup - 48% Off', 'image-sizes' );
+		}
+
 		$title = sprintf(
 			'<span class="thumbpress-offer-text">%1$s</span><span class="thumbpress-offer-dismiss" role="button" tabindex="0" aria-label="%2$s" title="%2$s">&times;</span>',
-			esc_html__( 'ThumbPress: World Cup offer - up to 48% Off', 'image-sizes' ),
+			$offer_text,
 			esc_attr__( 'Dismiss', 'image-sizes' )
 		);
 

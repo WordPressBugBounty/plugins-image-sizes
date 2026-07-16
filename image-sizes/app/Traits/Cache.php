@@ -79,4 +79,40 @@ trait Cache {
 			delete_transient( $key );
 		}
 	}
+
+	/**
+	 * Return a cached value, computing it via $callback on a cold cache with
+	 * stampede protection. With a persistent object cache, only the request that
+	 * wins the atomic wp_cache_add() lock runs $callback; concurrent callers return
+	 * $default until it repopulates the cache. Without an external object cache a
+	 * lock cannot span requests, so it just computes.
+	 *
+	 * @param string   $key
+	 * @param int      $expiration
+	 * @param callable $callback
+	 * @param mixed    $default
+	 * @return mixed
+	 */
+	public function remember( $key, $expiration, callable $callback, $default = 0 ) {
+		$cached = $this->get_cache( $key );
+		if ( false !== $cached ) {
+			return $cached;
+		}
+
+		if ( $this->is_using_object_cache() ) {
+			$lock = $this->key_prefix . $key . '_lock';
+			if ( false === wp_cache_add( $lock, 1, $this->cache_group, 30 ) ) {
+				return $default;
+			}
+
+			$value = call_user_func( $callback );
+			$this->set_cache( $key, $value, $expiration, true );
+			wp_cache_delete( $lock, $this->cache_group );
+			return $value;
+		}
+
+		$value = call_user_func( $callback );
+		$this->set_cache( $key, $value, $expiration, true );
+		return $value;
+	}
 }

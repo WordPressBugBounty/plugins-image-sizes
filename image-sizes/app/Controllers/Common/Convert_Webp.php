@@ -86,7 +86,7 @@ class Convert_Webp {
 		$size_before       = file_exists( $original_img_path ) ? filesize( $original_img_path ) : 0;
 		$webp_file_path    = $this->convert_image_to_webp( $original_img_path );
 
-		if ( ! $webp_file_path ) {
+		if ( is_wp_error( $webp_file_path ) ) {
 			return $file_info;
 		}
 
@@ -174,7 +174,7 @@ class Convert_Webp {
 		$extension = strtolower( $file_info['extension'] );
 
 		if ( $extension === 'webp' ) {
-			return false;
+			return new \WP_Error( 'thumbpress_already_webp', __( 'This image is already a WebP file.', 'image-sizes' ) );
 		}
 
 		$base_dir  = $file_info['dirname'];
@@ -199,18 +199,40 @@ class Convert_Webp {
 			$memory_limit = wp_convert_hr_to_bytes( ini_get( 'memory_limit' ) );
 			$memory_usage = memory_get_usage( true );
 			if ( $memory_limit > 0 && ( $memory_usage + $needed_bytes ) > $memory_limit ) {
-				return false;
+				return new \WP_Error(
+					'thumbpress_memory_limit',
+					sprintf(
+						/* translators: 1: estimated memory needed in MB, 2: current PHP memory limit in MB */
+						__( 'Image is too large to convert within the server memory limit (needs ~%1$d MB, limit %2$d MB). Increase PHP memory_limit or WP_MAX_MEMORY_LIMIT and try again.', 'image-sizes' ),
+						(int) ceil( $needed_bytes / MB_IN_BYTES ),
+						(int) ceil( $memory_limit / MB_IN_BYTES )
+					)
+				);
 			}
 		}
 
 		$editor = wp_get_image_editor( $source );
 		if ( is_wp_error( $editor ) ) {
-			return false;
+			return new \WP_Error(
+				'thumbpress_editor_unavailable',
+				sprintf(
+					/* translators: %s: underlying image-editor error message */
+					__( 'No image editor is available to process this file (%s).', 'image-sizes' ),
+					$editor->get_error_message()
+				)
+			);
 		}
 
 		$result = $editor->save( $webp_path, 'image/webp' );
 		if ( is_wp_error( $result ) ) {
-			return false;
+			return new \WP_Error(
+				'thumbpress_save_failed',
+				sprintf(
+					/* translators: %s: underlying image-editor error message */
+					__( 'Could not write the WebP file (%s).', 'image-sizes' ),
+					$result->get_error_message()
+				)
+			);
 		}
 
 		$saved_path = $result['path'] ?? $webp_path;
@@ -220,7 +242,10 @@ class Convert_Webp {
 			if ( file_exists( $saved_path ) ) {
 				wp_delete_file( $saved_path );
 			}
-			return false;
+			return new \WP_Error(
+				'thumbpress_webp_unsupported',
+				__( 'The server image library could not produce a WebP file (WebP output is not supported here).', 'image-sizes' )
+			);
 		}
 
 		return $saved_path;
@@ -327,7 +352,7 @@ class Convert_Webp {
 
 			$webp_file_path = $this->convert_image_to_webp( $main_img );
 
-			if ( ! $webp_file_path ) {
+			if ( is_wp_error( $webp_file_path ) ) {
 				// Conversion failed (unsupported/decode/memory). Count it so it surfaces in stats.
 				$batch_not_found++;
 				continue;
