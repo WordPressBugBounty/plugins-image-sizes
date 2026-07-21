@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { __ } from '@wordpress/i18n';
+import { numberFormat, percentFormat, formatBytes } from '../lib/i18n';
 import { useNavigate } from 'react-router-dom';
 import Card from '../components/ui/card';
 import { Image, HardDrive } from 'lucide-react';
@@ -383,7 +384,7 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 											className="text-thumbpress-primary cursor-pointer"
 										>
 											{__('settings', 'image-sizes')}
-										</span>.
+										</span>{__('.', 'image-sizes')}
 									</>}
 							</p>
 
@@ -401,7 +402,7 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 
 								<input
 									type="number"
-									placeholder="e.g. 50"
+									placeholder={__('e.g. 50', 'image-sizes')}
 									value={chunkSize}
 									onChange={(e) => setChunkSize(e.target.value)}
 									className="flex w-full !rounded-lg !border !border-thumbpress-border bg-white !px-4 !h-[56px] text-sm placeholder:text-gray-400 focus:!outline-none focus:!shadow-none"
@@ -472,7 +473,7 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 								</svg>
 								<div className="absolute inset-0 flex items-center justify-center">
 									<span className="text-4xl font-bold text-gray-900">
-										{progress}%
+										{ percentFormat( progress ) }
 									</span>
 								</div>
 							</div>
@@ -480,12 +481,12 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 							<div className="grid grid-cols-3 gap-4 w-full max-w-[700px]">
 								<StatCard
 									icon={<TotalImagesIcon2 />}
-									value={totalImages}
+									value={ numberFormat( totalImages ) }
 									label={__('Total Images', 'image-sizes')}
 								/>
 								<StatCard
 									icon={<ImageProcessedIcon />}
-									value={regenStats.processed}
+									value={ numberFormat( regenStats.processed ) }
 									label={__('Images Processed', 'image-sizes')}
 								/>
 								<StatCard
@@ -497,28 +498,28 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 											<path d="M3 16L7.50036 11.5004M21 16L18.5303 13.5303C18.1908 13.1908 17.7302 13 17.25 13C16.7698 13 16.3092 13.1908 15.9697 13.5303L14.75 14.75" />
 										</svg>
 									}
-									value={regenStats.not_found || 0}
+									value={ numberFormat( regenStats.not_found || 0 ) }
 									label={__('Images Not Found', 'image-sizes')}
 								/>
 								<StatCard
 									icon={<TotalThumbnailsIcon2 />}
-									value={totalThumbnails}
+									value={ numberFormat( totalThumbnails ) }
 									label={__('Total Thumbnails', 'image-sizes')}
 								/>
 								<StatCard
 									icon={<ImageDeletedIcon />}
-									value={regenStats.deleted}
+									value={ numberFormat( regenStats.deleted ) }
 									label={__('Images Deleted', 'image-sizes')}
 								/>
 								<StatCard
 									icon={<ImageCreatedIcon />}
-									value={regenStats.created}
+									value={ numberFormat( regenStats.created ) }
 									label={__('Images Created', 'image-sizes')}
 								/>
 								<div className="col-start-2">
 									<StatCard
 										icon={<SpaceSavedIcon2 />}
-										value={regenStats.space_saved_label || '0 B'}
+										value={regenStats.space_saved_label || formatBytes(0)}
 										label={__('Space Saved', 'image-sizes')}
 									/>
 								</div>

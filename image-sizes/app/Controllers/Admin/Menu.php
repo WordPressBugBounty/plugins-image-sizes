@@ -35,6 +35,11 @@ class Menu {
 				$admin_asset['version']
 			);
 
+			// Feed the React bundle's __() strings the translations for the current locale.
+			// Reads languages/image-sizes-{locale}-image-sizes_main-menu.json (built via
+			// `yarn make-json`). Without this the SPA renders English only.
+			wp_set_script_translations( 'image-sizes_main-menu', 'image-sizes', THUMBPRESS_PATH . 'languages' );
+
 			// Localize dynamic nav items for the React sidebar.
 			$nav_items = $this->get_nav_items();
 			$routes    = $this->get_routes();
@@ -114,7 +119,7 @@ class Menu {
 			array(
 				'label' => apply_filters( 'thumbpress_is_pro_active', defined( 'THUMBPRESS_PRO_VERSION' ) )
 					? __( 'Pro', 'image-sizes' )
-					: '<span style="background: #ea580c; width: 100%; display: inline-block; color: #fff; text-align: center; padding: 5px 0; border-radius: 4px; font-weight: bold;">' . __( 'World Cup 48% Off', 'image-sizes' ) . '</span>',
+					: '<span style="background: #ea580c; width: 100%; display: inline-block; color: #fff; text-align: center; padding: 5px 0; border-radius: 4px; font-weight: bold;">' . __( 'Get Up to 48% OFF', 'image-sizes' ) . '</span>',
 				'hash'  => '#/pro',
 			),
 		);

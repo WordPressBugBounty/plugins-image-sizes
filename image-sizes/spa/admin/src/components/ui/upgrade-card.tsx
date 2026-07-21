@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { __ } from '@wordpress/i18n';
 
 interface UpgradeCardProps {
 	title: string;
@@ -11,7 +12,7 @@ interface UpgradeCardProps {
 export default function UpgradeCard({
 	title,
 	description,
-	buttonText = 'Upgrade for a Faster Website',
+	buttonText = __( 'Upgrade for a Faster Website', 'image-sizes' ),
 	buttonUrl = 'https://thumbpress.co/pricing/',
 	backgroundImage = 'table-shadow.png',
 }: UpgradeCardProps) {

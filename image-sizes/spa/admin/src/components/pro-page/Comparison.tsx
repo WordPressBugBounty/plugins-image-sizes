@@ -2,22 +2,25 @@ import React from 'react';
 import { __ } from '@wordpress/i18n';
 
 const Comparison = () => {
-	const comparisonFeatures = [
+	const comparisonFeatures: Array<{
+		category: string;
+		features: Array<{ name: string; free: boolean; pro: boolean; key?: string }>;
+	}> = [
 		{
 			category: __( 'IMAGE CONTROL', 'image-sizes' ),
 			features: [
 				{
-					name: 'Disable Thumbnails',
+					name: __( 'Disable Thumbnails', 'image-sizes' ),
 					free: true,
 					pro: true,
 				},
 				{
-					name: 'Regenerate Thumbnails',
+					name: __( 'Regenerate Thumbnails', 'image-sizes' ),
 					free: true,
 					pro: true,
 				},
 				{
-					name: 'Set Image Upload Limit',
+					name: __( 'Set Image Upload Limit', 'image-sizes' ),
 					free: true,
 					pro: true,
 				},
@@ -27,22 +30,22 @@ const Comparison = () => {
 			category: __( 'STORAGE & CLEANUP', 'image-sizes' ),
 			features: [
 				{
-					name: 'Detect Large Images',
+					name: __( 'Detect Large Images', 'image-sizes' ),
 					free: false,
 					pro: true,
 				},
 				{
-					name: 'Find Unused Images',
+					name: __( 'Find Unused Images', 'image-sizes' ),
 					free: false,
 					pro: true,
 				},
 				{
-					name: 'Find Duplicate Images',
+					name: __( 'Find Duplicate Images', 'image-sizes' ),
 					free: false,
 					pro: true,
 				},
 				{
-					name: 'Compress Images',
+					name: __( 'Compress Images', 'image-sizes' ),
 					free: false,
 					pro: true,
 				},
@@ -52,27 +55,28 @@ const Comparison = () => {
 			category: __( 'MEDIA MANAGEMENT', 'image-sizes' ),
 			features: [
 				{
-					name: 'Replace Images',
+					name: __( 'Replace Images', 'image-sizes' ),
 					free: false,
 					pro: true,
 				},
 				{
-					name: 'Image Editor',
+					name: __( 'Image Editor', 'image-sizes' ),
 					free: false,
 					pro: true,
 				},
 				{
-					name: 'Social Media Thumbnails',
+					name: __( 'Social Media Thumbnails', 'image-sizes' ),
 					free: true,
 					pro: true,
 				},
 				{
-					name: 'Convert to AVIF',
+					name: __( 'Convert to AVIF', 'image-sizes' ),
+					key: 'avif',
 					free: true,
 					pro: true,
 				},
 				{
-					name: 'Convert to WebP',
+					name: __( 'Convert to WebP', 'image-sizes' ),
 					free: true,
 					pro: true,
 				},
@@ -84,23 +88,22 @@ const Comparison = () => {
 		<div id="comparison" className="2xl:px-[300px] lg:px-[80px] py-16">
 			<div className="text-center mb-10">
 				<h2 className="2xl:text-[32px] lg:text-[28px] font-semibold text-thumbpress-title mb-2 max-w-[600px] mx-auto leading-[1.4]">
-					Free vs. Pro Side by Side
+					{__( 'Free vs. Pro Side by Side', 'image-sizes' )}
 				</h2>
 				<p className="text-base text-thumbpress-body max-w-[484px] mx-auto">
-					See a clear comparison between your current version and the Pro
-					version you're about to get.
+					{__( 'See a clear comparison between your current version and the Pro version you\'re about to get.', 'image-sizes' )}
 				</p>
 			</div>
 			<div>
 				<div className="rounded-xl border border-gray-200 overflow-hidden">
 					{/* Table Header */}
 					<div className="grid grid-cols-4 bg-thumbpress-primary text-white border-t border-thumbpress-border">
-						<div className="px-6 py-4 text-xl font-semibold col-span-2">Features</div>
+						<div className="px-6 py-4 text-xl font-semibold col-span-2">{__( 'Features', 'image-sizes' )}</div>
 						<div className="px-4 py-4 text-xl font-semibold text-center col-span-1">
-							Free
+							{__( 'Free', 'image-sizes' )}
 						</div>
 						<div className="px-4 py-4 text-xl font-semibold text-center col-span-1">
-							Pro
+							{__( 'Pro', 'image-sizes' )}
 						</div>
 					</div>
 					{/* Table Body */}
@@ -123,9 +126,9 @@ const Comparison = () => {
 									</div>
 									
 									<div className="flex items-center justify-center border-x border-thumbpress-border col-span-1">
-										{feature.name === 'Convert to AVIF' ? (
+										{feature.key === 'avif' ? (
 											<span className="text-sm text-[#777980]">
-												Future uploads only
+												{__( 'Future uploads only', 'image-sizes' )}
 											</span>
 										) : feature.free ? (
 											<svg
@@ -159,9 +162,9 @@ const Comparison = () => {
 									</div>
 
 									<div className="flex items-center justify-center bg-[#6646B108] col-span-1">
-										{feature.name === 'Convert to AVIF' ? (
+										{feature.key === 'avif' ? (
 											<span className="text-sm text-[#1D1F2C]">
-												Fully unlocked
+												{__( 'Fully unlocked', 'image-sizes' )}
 											</span>
 										) : (
 											<svg

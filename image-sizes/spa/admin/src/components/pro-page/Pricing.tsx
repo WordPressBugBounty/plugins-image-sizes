@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import { cn } from '../../lib/utils';
 import PricingCard from './components/PricingCard';
 
@@ -13,30 +13,30 @@ const Pricing = () => {
 			name: __( 'Personal', 'image-sizes' ),
 			price: '$3.50',
 			originalPrice: '$5',
-			discount: '30% OFF',
+			discount: sprintf( /* translators: %d is the discount percentage. */ __( '%d%% OFF', 'image-sizes' ), 30 ),
 			totalPrice: '$41',
 			featured: false,
-			features: ['1 Site', '1 Year Support', 'All Features Included'],
+			features: [__( '1 Site', 'image-sizes' ), __( '1 Year Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=1&discount=FIFA30'
 		},
 		{
 			name: __( 'Professional', 'image-sizes' ),
 			price: '$7',
 			originalPrice: '$10',
-			discount: '30% OFF',
+			discount: sprintf( /* translators: %d is the discount percentage. */ __( '%d%% OFF', 'image-sizes' ), 30 ),
 			totalPrice: '$83',
 			featured: true,
-			features: ['5 Sites', '1 Year Support', 'All Features Included'],
+			features: [__( '5 Sites', 'image-sizes' ), __( '1 Year Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=2&discount=FIFA30'
 		},
 		{
 			name: __( 'Agency', 'image-sizes' ),
 			price: '$17.50',
 			originalPrice: '$25',
-			discount: '30% OFF',
+			discount: sprintf( /* translators: %d is the discount percentage. */ __( '%d%% OFF', 'image-sizes' ), 30 ),
 			totalPrice: '$209',
 			featured: false,
-			features: ['Unlimited Sites', '1 Year Support', 'All Features Included'],
+			features: [__( 'Unlimited Sites', 'image-sizes' ), __( '1 Year Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=4&discount=FIFA30'
 		},
 	];
@@ -46,27 +46,27 @@ const Pricing = () => {
 			name: __( 'Personal', 'image-sizes' ),
 			price: '$62',
 			originalPrice: '$119',
-			discount: '48% OFF',
+			discount: sprintf( /* translators: %d is the discount percentage. */ __( '%d%% OFF', 'image-sizes' ), 48 ),
 			featured: false,
-			features: ['1 Site', 'Lifetime Support', 'All Features Included'],
+			features: [__( '1 Site', 'image-sizes' ), __( 'Lifetime Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=5&discount=FIFA48'
 		},
 		{
 			name: __( 'Professional', 'image-sizes' ),
 			price: '$124',
 			originalPrice: '$239',
-			discount: '48% OFF',
+			discount: sprintf( /* translators: %d is the discount percentage. */ __( '%d%% OFF', 'image-sizes' ), 48 ),
 			featured: false,
-			features: ['5 Sites', 'Lifetime Support', 'All Features Included'],
+			features: [__( '5 Sites', 'image-sizes' ), __( 'Lifetime Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=6&discount=FIFA48'
 		},
 		{
 			name: __( 'Agency', 'image-sizes' ),
 			price: '$311',
 			originalPrice: '$599',
-			discount: '48% OFF',
+			discount: sprintf( /* translators: %d is the discount percentage. */ __( '%d%% OFF', 'image-sizes' ), 48 ),
 			featured: true,
-			features: ['Unlimited Sites', 'Lifetime Support', 'All Features Included'],
+			features: [__( 'Unlimited Sites', 'image-sizes' ), __( 'Lifetime Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=8&discount=FIFA48'
 		},
 	];
@@ -75,11 +75,10 @@ const Pricing = () => {
 		<div className="px-[80px] py-16" id='thumbpress-pro-pricing'>
 			<div className="text-center mb-10">
 				<h2 className="2xl:text-[32px] lg:text-[28px] font-semibold text-thumbpress-title mb-2 max-w-[600px] mx-auto leading-[1.4]">
-					ThumbPress Pro Pricing
+					{__( 'ThumbPress Pro Pricing', 'image-sizes' )}
 				</h2>
 				<p className="text-base text-thumbpress-body max-w-[484px] mx-auto">
-					Every plan includes the full set of Pro features. Just pick how many
-					sites you need to cover.
+					{__( 'Every plan includes the full set of Pro features. Just pick how many sites you need to cover.', 'image-sizes' )}
 				</p>
 			</div>
 
@@ -89,7 +88,7 @@ const Pricing = () => {
 					onClick={() => setBillingCycle('yearly')}
 					className={`text-base text-thumbpress-title font-medium cursor-pointer`}
 				>
-					Yearly
+					{__( 'Yearly', 'image-sizes' )}
 				</button>
 
 				<button
@@ -110,7 +109,7 @@ const Pricing = () => {
 					onClick={() => setBillingCycle('lifetime')}
 					className={`text-base text-thumbpress-title font-medium cursor-pointer`}
 				>
-					Lifetime
+					{__( 'Lifetime', 'image-sizes' )}
 				</button>
 			</div>
 
@@ -143,7 +142,7 @@ const Pricing = () => {
 					</svg>
 
 					<span className="text-thumbpress-title text-base font-medium max-w-[165px]">
-						30-day money back guarantee
+						{__( '30-day money back guarantee', 'image-sizes' )}
 					</span>
 				</div>
 
@@ -164,7 +163,7 @@ const Pricing = () => {
 					</svg>
 
 					<span className="text-thumbpress-title text-base font-medium max-w-[249px]">
-						Access future features for the subscription period
+						{__( 'Access future features for the subscription period', 'image-sizes' )}
 					</span>
 				</div>
 			</div>

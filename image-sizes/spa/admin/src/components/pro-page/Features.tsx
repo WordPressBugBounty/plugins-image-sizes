@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { __ } from '@wordpress/i18n';
+import { __, sprintf, _n } from '@wordpress/i18n';
 import { getDashboardStats, type DashboardStats } from '../../api';
 import FeatureCard from './components/FeatureCard';
 
@@ -21,11 +21,10 @@ const Features = () => {
 		<div id="thumbpress-pro-features" className="2xl:px-[80px] lg:px-6 py-16">
 			<div className="text-center mb-10">
 				<h2 className="2xl:text-[32px] lg:text-[28px] font-semibold text-thumbpress-title mb-2 max-w-[600px] mx-auto leading-[1.4]">
-					What Pro Fixes Today
+					{__( 'What Pro Fixes Today', 'image-sizes' )}
 				</h2>
 				<p className="text-base text-thumbpress-body max-w-[500px] mx-auto">
-					Every Pro feature is designed to solve a specific real problem. Here's
-					what exactly an upgrade unlocks.
+					{__( 'Every Pro feature is designed to solve a specific real problem. Here\'s what exactly an upgrade unlocks.', 'image-sizes' )}
 				</p>
 			</div>
 			<div className="grid grid-cols-3 2xl:gap-5 lg:gap-4">
@@ -43,7 +42,7 @@ const Features = () => {
                             </defs>
                         </svg>
                     )}
-                    subtitle={!loading && stats?.large_images && stats.large_images > 0 ? `${stats.large_images} images found!` : ''}
+                    subtitle={!loading && stats?.large_images && stats.large_images > 0 ? sprintf( /* translators: %d is the number of images found. */ _n( '%d image found!', '%d images found!', stats.large_images, 'image-sizes' ), stats.large_images ) : ''}
                     title={__( 'Detect Large Images', 'image-sizes' )}
                     description={__( 'Scan your media library and find oversized images instantly. See exactly which files are bloating your pages and fix them before they cost you rankings.', 'image-sizes' )}
                     link={(
@@ -65,7 +64,7 @@ const Features = () => {
                             <path d="M14.417 17V24.5C14.417 26.1569 15.7601 27.5 17.417 27.5H21.917C23.5738 27.5 24.917 26.1569 24.917 24.5V17M21.167 19.25V23.75M18.167 19.25L18.167 23.75M22.667 14.75L21.6123 13.1679C21.3341 12.7507 20.8657 12.5 20.3642 12.5H18.9698C18.4682 12.5 17.9999 12.7507 17.7217 13.1679L16.667 14.75M22.667 14.75H16.667M22.667 14.75H26.417M16.667 14.75H12.917" stroke="#E08E06" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     )}
-                    subtitle={!loading && stats?.unused_images && stats.unused_images > 0 ? `${stats.unused_images} images found!` : ''}
+                    subtitle={!loading && stats?.unused_images && stats.unused_images > 0 ? sprintf( /* translators: %d is the number of images found. */ _n( '%d image found!', '%d images found!', stats.unused_images, 'image-sizes' ), stats.unused_images ) : ''}
                     title={__( 'Delete Unused Images', 'image-sizes' )}
                     description={__( 'Scan your media library and find unused images instantly. See exactly which files are taking up space and delete them to reclaim server space.', 'image-sizes' )}
                     link={(
@@ -94,7 +93,7 @@ const Features = () => {
                             <path d="M21.2476 21.5605L26.1589 26.4325" stroke="#059669" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     )}
-                    subtitle={!loading && stats?.unoptimized_images && stats.unoptimized_images > 0 ? `${stats.unoptimized_images} images found!` : ''}
+                    subtitle={!loading && stats?.unoptimized_images && stats.unoptimized_images > 0 ? sprintf( /* translators: %d is the number of images found. */ _n( '%d image found!', '%d images found!', stats.unoptimized_images, 'image-sizes' ), stats.unoptimized_images ) : ''}
                     title={__( 'Compress Large Images', 'image-sizes' )}
                     description={__( 'Large images are costing you speed. Optimize them without visible loss and deliver a faster, smoother browsing experience.', 'image-sizes' )}
                     link={(
@@ -116,7 +115,7 @@ const Features = () => {
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M22.1583 11.0822C22.4808 10.9592 22.8419 11.121 22.9649 11.4436L23.9466 14.0192C24.0411 14.267 23.9689 14.5474 23.7665 14.7188C23.5642 14.8901 23.2758 14.9152 23.0469 14.7812C22.1529 14.258 21.1124 13.9579 19.9999 13.9579C16.6632 13.9579 13.9583 16.6628 13.9583 19.9995C13.9583 21.101 14.2524 22.1319 14.7661 23.0199C14.939 23.3187 14.8369 23.701 14.5381 23.8739C14.2393 24.0467 13.857 23.9446 13.6841 23.6458C13.0633 22.5727 12.7083 21.3266 12.7083 19.9995C12.7083 15.9724 15.9728 12.7079 19.9999 12.7079C20.7821 12.7079 21.5361 12.8312 22.2431 13.0596L21.7969 11.8888C21.6739 11.5662 21.8357 11.2051 22.1583 11.0822ZM25.4618 16.1252C25.7605 15.9523 26.1429 16.0544 26.3157 16.3532C26.9365 17.4264 27.2916 18.6724 27.2916 19.9995C27.2916 24.0266 24.027 27.2912 19.9999 27.2912C19.2177 27.2912 18.4637 27.1678 17.7567 26.9394L18.203 28.1102C18.3259 28.4328 18.1641 28.7939 17.8416 28.9169C17.519 29.0398 17.1579 28.878 17.035 28.5555L16.0532 25.9798C15.9587 25.732 16.0309 25.4516 16.2333 25.2803C16.4356 25.1089 16.7241 25.0839 16.9529 25.2178C17.8469 25.7411 18.8874 26.0412 19.9999 26.0412C23.3366 26.0412 26.0416 23.3362 26.0416 19.9995C26.0416 18.898 25.7474 17.8671 25.2337 16.9791C25.0609 16.6803 25.163 16.298 25.4618 16.1252Z" fill="#0EB9F2"/>
                         </svg>
                     )}
-                    subtitle={!loading && stats?.not_avif && stats.not_avif > 0 ? `${stats.not_avif} images found!` : ''}
+                    subtitle={!loading && stats?.not_avif && stats.not_avif > 0 ? sprintf( /* translators: %d is the number of images found. */ _n( '%d image found!', '%d images found!', stats.not_avif, 'image-sizes' ), stats.not_avif ) : ''}
                     title={__( 'Bulk Convert to AVIF', 'image-sizes' )}
                     description={__( "Your images shouldn't be stuck in the past. Convert them all to AVIF - the format the modern web is built on - in a single click.", 'image-sizes' )}
                     link={(
@@ -169,7 +168,7 @@ const Features = () => {
                             </defs>
                         </svg>
                     )}
-                    subtitle={!loading && stats?.duplicate_images && stats.duplicate_images > 0 ? `${stats.duplicate_images} images found!` : ''}
+                    subtitle={!loading && stats?.duplicate_images && stats.duplicate_images > 0 ? sprintf( /* translators: %d is the number of images found. */ _n( '%d image found!', '%d images found!', stats.duplicate_images, 'image-sizes' ), stats.duplicate_images ) : ''}
                     title={__( 'Merge Duplicate Images', 'image-sizes' )}
                     description={__( 'Find images that have been uploaded more than once. Clean up the clutter and stop wasting space on files you already have.', 'image-sizes' )}
                     link={(

@@ -272,6 +272,103 @@ class Utility {
 			return $summary;
 		}
 
+		$summary = self::apply_url_pairs( $pairs );
+
+		do_action( 'thumbpress_image_urls_replaced', $old_url, $new_url, $summary );
+
+		return $summary;
+	}
+
+	/**
+	 * Rewrite stored references for MANY just-converted attachments in a single pass over
+	 * post_content, postmeta and options — 3 table scans for the whole batch instead of 3
+	 * per image. Fold every image's old->new file map together, then scan once. Reading the
+	 * new URL/metadata here (after the whole convert loop) is safe: each attachment already
+	 * points at its converted file by the time the batch is flushed.
+	 *
+	 * @param array $items List of [ 'attachment_id'=>int, 'old_main_path'=>string, 'old_metadata'=>array ].
+	 * @return array { posts:int, postmeta:int, options:int } aggregate change counts for the batch.
+	 */
+	public static function replace_attachment_urls_batch( array $items ) {
+		$summary = array(
+			'posts'    => 0,
+			'postmeta' => 0,
+			'options'  => 0,
+		);
+
+		if ( empty( $items ) ) {
+			return $summary;
+		}
+
+		$uploads = wp_upload_dir();
+		if ( ! empty( $uploads['error'] ) ) {
+			return $summary;
+		}
+		$basedir = wp_normalize_path( $uploads['basedir'] );
+
+		$all_pairs = array();
+		$fired     = array();
+		foreach ( $items as $item ) {
+			$attachment_id = isset( $item['attachment_id'] ) ? (int) $item['attachment_id'] : 0;
+			$old_main_path = isset( $item['old_main_path'] ) ? (string) $item['old_main_path'] : '';
+			if ( ! $attachment_id || '' === $old_main_path ) {
+				continue;
+			}
+			$old_metadata = ( isset( $item['old_metadata'] ) && is_array( $item['old_metadata'] ) ) ? $item['old_metadata'] : array();
+
+			$old_url = trim( str_replace( $basedir, $uploads['baseurl'], wp_normalize_path( $old_main_path ) ) );
+			$new_url = trim( (string) strtok( (string) wp_get_attachment_url( $attachment_id ), '?' ) );
+			if ( '' === $old_url || '' === $new_url ) {
+				continue;
+			}
+
+			$new_metadata = wp_get_attachment_metadata( $attachment_id );
+			$old_sizes    = ! empty( $old_metadata['sizes'] ) ? $old_metadata['sizes'] : array();
+			$new_sizes    = ( is_array( $new_metadata ) && ! empty( $new_metadata['sizes'] ) ) ? $new_metadata['sizes'] : array();
+			$old_original = ! empty( $old_metadata['original_image'] ) ? $old_metadata['original_image'] : '';
+
+			$pairs = self::build_url_pairs( $old_url, $new_url, (array) $old_sizes, (array) $new_sizes, (string) $old_original );
+			if ( empty( $pairs ) ) {
+				continue;
+			}
+			foreach ( $pairs as $from => $to ) {
+				$all_pairs[ $from ] = $to;
+			}
+			$fired[] = array( $old_url, $new_url );
+		}
+
+		$summary = self::apply_url_pairs( $all_pairs );
+
+		// Notify per image (external listeners bust caches/CDN per old->new URL). The count
+		// argument is the batch aggregate — per-image counts are not separable in one pass.
+		foreach ( $fired as $pair ) {
+			do_action( 'thumbpress_image_urls_replaced', $pair[0], $pair[1], $summary );
+		}
+
+		return $summary;
+	}
+
+	/**
+	 * Run the shared search/replace pass over post_content, postmeta and options for a
+	 * combined old-path => new-path map. One scan per table for the WHOLE map — callers
+	 * fold many images together so a batch conversion is 3 scans, not 3 per image.
+	 *
+	 * @param array $pairs Combined old-file-path => new-file-path map.
+	 * @return array { posts:int, postmeta:int, options:int }
+	 */
+	private static function apply_url_pairs( array $pairs ) {
+		global $wpdb;
+
+		$summary = array(
+			'posts'    => 0,
+			'postmeta' => 0,
+			'options'  => 0,
+		);
+
+		if ( empty( $pairs ) ) {
+			return $summary;
+		}
+
 		list( $search, $replace ) = self::expand_replacement_pairs( $pairs );
 		if ( empty( $search ) ) {
 			return $summary;
@@ -339,8 +436,6 @@ class Utility {
 		if ( $flush_alloptions ) {
 			wp_cache_delete( 'alloptions', 'options' );
 		}
-
-		do_action( 'thumbpress_image_urls_replaced', $old_url, $new_url, $summary );
 
 		return $summary;
 	}

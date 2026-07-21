@@ -25,6 +25,8 @@ declare global {
 			pro_active?: boolean;
 			is_new_user?: boolean;
 			menus?: Record<string, unknown>;
+			/** BCP-47 locale tag from PHP (get_locale() with "_" → "-"), e.g. "bn-BD". */
+			locale?: string;
 		};
 	}
 }

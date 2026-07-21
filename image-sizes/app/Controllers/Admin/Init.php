@@ -17,17 +17,28 @@ class Init {
 		$this->action( 'admin_notices', array( $this, 'show_fresh_install_notice' ) );
 		$this->action( 'admin_footer', array( $this, 'render_toast' ) );
 
-		// World Cup upgrade offer admin bar.
+		// Summer Special upgrade offer admin bar.
 		$this->action( 'admin_bar_menu', array( $this, 'add_offer_admin_bar_node' ), 100 );
 		$this->action( 'admin_head', array( $this, 'render_offer_admin_bar_assets' ) );
 		$this->action( 'wp_ajax_thumbpress_dismiss_offer', array( $this, 'dismiss_offer_admin_bar' ) );
 	}
 
 	/**
-	 * Whether the World Cup upgrade offer should be shown to the current user.
+	 * Option recording that the current campaign's offer bar was dismissed.
+	 *
+	 * Each campaign gets its own option, so dismissing one offer does not
+	 * silently hide every future one. Bump this when the campaign changes.
+	 */
+	const OFFER_DISMISSED_OPTION = 'thumbpress_summer_offer_dismissed';
+
+	/**
+	 * Whether the Summer Special upgrade offer should be shown to the current user.
 	 *
 	 * Hidden when Pro is active, when the user lacks the manage_options
 	 * capability, or once dismissed (persisted so it never reappears).
+	 *
+	 * The campaign runs on a rolling cycle with no fixed end date, so there is
+	 * no deadline gate here — it ends when the code says so.
 	 *
 	 * @return bool
 	 */
@@ -40,12 +51,7 @@ class Init {
 			return false;
 		}
 
-		if ( get_option( 'thumbpress_worldcup_offer_dismissed' ) ) {
-			return false;
-		}
-
-		// Hide once the offer deadline has passed.
-		if ( '' === $this->get_offer_deadline_label() ) {
+		if ( get_option( self::OFFER_DISMISSED_OPTION ) ) {
 			return false;
 		}
 
@@ -53,32 +59,7 @@ class Init {
 	}
 
 	/**
-	 * Deadline label shown in the offer text.
-	 *
-	 * Shows the primary deadline until it passes, then automatically rolls to
-	 * the extended deadline. Returns '' once the extended deadline has also
-	 * passed (caller drops the "- Ends ..." suffix). Uses the site timezone.
-	 *
-	 * @return string Localised date label (e.g. "July 19"), or '' when expired.
-	 */
-	protected function get_offer_deadline_label() {
-		$now      = current_time( 'timestamp' );
-		$primary  = strtotime( '2026-07-19 23:59:59' );
-		$extended = strtotime( '2026-07-22 23:59:59' );
-
-		if ( $now <= $primary ) {
-			return __( 'July 19', 'image-sizes' );
-		}
-
-		if ( $now <= $extended ) {
-			return __( 'July 22', 'image-sizes' );
-		}
-
-		return '';
-	}
-
-	/**
-	 * Add the World Cup upgrade offer node to the admin bar.
+	 * Add the Summer Special upgrade offer node to the admin bar.
 	 *
 	 * @param \WP_Admin_Bar $wp_admin_bar The admin bar instance.
 	 * @return void
@@ -90,13 +71,7 @@ class Init {
 
 		$upgrade_url = admin_url( 'admin.php?page=thumbpress#/pro' );
 
-		$deadline = $this->get_offer_deadline_label();
-		if ( '' !== $deadline ) {
-			/* translators: %s: offer deadline date, e.g. "July 19". */
-			$offer_text = sprintf( esc_html__( 'ThumbPress: World Cup - 48%% Off - Ends %s', 'image-sizes' ), $deadline );
-		} else {
-			$offer_text = esc_html__( 'ThumbPress: World Cup - 48% Off', 'image-sizes' );
-		}
+		$offer_text = esc_html__( 'ThumbPress: Summer Special - Up to 48% OFF', 'image-sizes' );
 
 		$title = sprintf(
 			'<span class="thumbpress-offer-text">%1$s</span><span class="thumbpress-offer-dismiss" role="button" tabindex="0" aria-label="%2$s" title="%2$s">&times;</span>',
@@ -183,7 +158,7 @@ class Init {
 	}
 
 	/**
-	 * AJAX handler: persist dismissal of the World Cup offer.
+	 * AJAX handler: persist dismissal of the Summer Special offer.
 	 *
 	 * @return void
 	 */
@@ -194,7 +169,7 @@ class Init {
 			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'image-sizes' ) ), 403 );
 		}
 
-		update_option( 'thumbpress_worldcup_offer_dismissed', 1 );
+		update_option( self::OFFER_DISMISSED_OPTION, 1 );
 
 		wp_send_json_success();
 	}
@@ -284,6 +259,8 @@ class Init {
 				'pro_active'         => apply_filters( 'thumbpress_is_pro_active', defined( 'THUMBPRESS_PRO_VERSION' ) ),
 				'pro_installed'      => defined( 'THUMBPRESS_PRO_VERSION' ),
 				'is_new_user'        => ( false === get_option( 'thumbpress_modules', false ) ),
+				// BCP-47 locale tag for locale-aware number/size formatting in the SPA.
+				'locale'             => str_replace( '_', '-', get_locale() ),
 			)
 		);
 	}

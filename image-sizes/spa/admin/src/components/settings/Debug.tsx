@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { __ } from '@wordpress/i18n';
+import { __, sprintf, _n } from '@wordpress/i18n';
 import { getDebugInfo, DebugInfo } from '../../api';
+import { numberFormat } from '../../lib/i18n';
 
 interface DebugProps {
 	onDataLoaded?: (info: DebugInfo) => void;
@@ -142,34 +143,34 @@ export default function Debug({ onDataLoaded }: DebugProps) {
 
 	return (
 		<div>
-			<Section title="System">
-				<Row label="WordPress" value={info.wordpress_version} />
-				<Row label="PHP" value={info.php_version} />
-				<Row label="MySQL" value={info.mysql_version} />
-				<Row label="Server" value={info.server_software} />
-				<Row label="PHP Memory Limit" value={info.php_memory_limit} />
-				<Row label="WP Memory Limit" value={info.wp_memory_limit} />
-				<Row label="Max Execution Time" value={`${info.php_max_execution}s`} />
-				<Row label="Upload Max Filesize" value={info.php_upload_max} />
-				<Row label="Total Images" value={info.total_images.toLocaleString()} />
+			<Section title={__( 'System', 'image-sizes' )}>
+				<Row label={__( 'WordPress', 'image-sizes' )} value={info.wordpress_version} />
+				<Row label={__( 'PHP', 'image-sizes' )} value={info.php_version} />
+				<Row label={__( 'MySQL', 'image-sizes' )} value={info.mysql_version} />
+				<Row label={__( 'Server', 'image-sizes' )} value={info.server_software} />
+				<Row label={__( 'PHP Memory Limit', 'image-sizes' )} value={info.php_memory_limit} />
+				<Row label={__( 'WP Memory Limit', 'image-sizes' )} value={info.wp_memory_limit} />
+				<Row label={__( 'Max Execution Time', 'image-sizes' )} value={sprintf( /* translators: %s is the maximum execution time in seconds. */ __( '%ss', 'image-sizes' ), numberFormat( Number( info.php_max_execution ) ) )} />
+				<Row label={__( 'Upload Max Filesize', 'image-sizes' )} value={info.php_upload_max} />
+				<Row label={__( 'Total Images', 'image-sizes' )} value={numberFormat( info.total_images )} />
 			</Section>
 
-			<Section title="WordPress Config">
-				<Row label="WP_DEBUG" value={<Badge ok={info.wp_debug} />} />
-				<Row label="WP_DEBUG_DISPLAY" value={<Badge ok={info.wp_debug_display} />} />
-				<Row label="WP_DEBUG_LOG" value={<Badge ok={info.wp_debug_log} />} />
+			<Section title={__( 'WordPress Config', 'image-sizes' )}>
+				<Row label={__( 'WP_DEBUG', 'image-sizes' )} value={<Badge ok={info.wp_debug} />} />
+				<Row label={__( 'WP_DEBUG_DISPLAY', 'image-sizes' )} value={<Badge ok={info.wp_debug_display} />} />
+				<Row label={__( 'WP_DEBUG_LOG', 'image-sizes' )} value={<Badge ok={info.wp_debug_log} />} />
 			</Section>
 
 			<Section title="ThumbPress">
-				<Row label="Version" value={tp.thumbpress_version} />
+				<Row label={__( 'Version', 'image-sizes' )} value={tp.thumbpress_version} />
 				<Row
-					label="Pro Plugin"
+					label={__( 'Pro Plugin', 'image-sizes' )}
 					value={
 						tp.pro_active ? (
 							<span className="inline-flex items-center gap-1.5">
 								<Badge ok={true} />
 								{tp.pro_version && (
-									<span className="text-[#94A3B8] text-xs font-normal">v{tp.pro_version}</span>
+									<span className="text-[#94A3B8] text-xs font-normal">{sprintf( /* translators: %s is a version number. */ __( 'v%s', 'image-sizes' ), tp.pro_version )}</span>
 								)}
 							</span>
 						) : (
@@ -181,15 +182,15 @@ export default function Debug({ onDataLoaded }: DebugProps) {
 					label={__( 'License Status', 'image-sizes' )}
 					value={<StatusBadge status={tp.license_status} />}
 				/>
-				<Row label="Lazy Load" value={<Badge ok={tp.lazy_load} />} />
-				<Row label="Right-Click Disable" value={<Badge ok={tp.right_click_disable} />} />
-				<Row label="Hotlink Protection" value={<Badge ok={tp.hotlink_protection} />} />
-				<Row label="WebP on Upload" value={<Badge ok={tp.webp_on_upload} />} />
-				<Row label="AVIF on Upload" value={<Badge ok={tp.avif_on_upload} />} />
-				<Row label="Max Image Size" value={tp.max_file_size} />
-				<Row label="Max Image Dimensions" value={tp.max_dimensions} />
+				<Row label={__( 'Lazy Load', 'image-sizes' )} value={<Badge ok={tp.lazy_load} />} />
+				<Row label={__( 'Right-Click Disable', 'image-sizes' )} value={<Badge ok={tp.right_click_disable} />} />
+				<Row label={__( 'Hotlink Protection', 'image-sizes' )} value={<Badge ok={tp.hotlink_protection} />} />
+				<Row label={__( 'WebP on Upload', 'image-sizes' )} value={<Badge ok={tp.webp_on_upload} />} />
+				<Row label={__( 'AVIF on Upload', 'image-sizes' )} value={<Badge ok={tp.avif_on_upload} />} />
+				<Row label={__( 'Max Image Size', 'image-sizes' )} value={tp.max_file_size} />
+				<Row label={__( 'Max Image Dimensions', 'image-sizes' )} value={tp.max_dimensions} />
 				<Row
-					label="Disabled Sizes"
+					label={__( 'Disabled Sizes', 'image-sizes' )}
 					value={
 						tp.disabled_sizes.length > 0 ? (
 							<span className="font-mono text-xs">{tp.disabled_sizes.join(', ')}</span>
@@ -200,23 +201,23 @@ export default function Debug({ onDataLoaded }: DebugProps) {
 				/>
 			</Section>
 
-			<Section title="Active Theme">
-				<Row label="Name" value={info.active_theme.name} />
-				<Row label="Version" value={info.active_theme.version} />
+			<Section title={__( 'Active Theme', 'image-sizes' )}>
+				<Row label={__( 'Name', 'image-sizes' )} value={info.active_theme.name} />
+				<Row label={__( 'Version', 'image-sizes' )} value={info.active_theme.version} />
 				{info.active_theme.parent && (
 					<Row
-						label="Parent Theme"
-						value={`${info.active_theme.parent.name} v${info.active_theme.parent.version}`}
+						label={__( 'Parent Theme', 'image-sizes' )}
+						value={sprintf( /* translators: %1$s is the parent theme name, %2$s is its version. */ __( '%1$s v%2$s', 'image-sizes' ), info.active_theme.parent.name, info.active_theme.parent.version )}
 					/>
 				)}
 			</Section>
 
-			<Section title={__( `Active Plugins (${info.active_plugins.length})`, 'image-sizes' )}>
+			<Section title={sprintf( /* translators: %d is the number of active plugins. */ _n( 'Active Plugin (%d)', 'Active Plugins (%d)', info.active_plugins.length, 'image-sizes' ), info.active_plugins.length )}>
 				{info.active_plugins.map((plugin) => (
 					<Row
 						key={plugin.slug}
 						label={plugin.name}
-						value={<span className="text-[#94A3B8] font-normal">v{plugin.version}</span>}
+						value={<span className="text-[#94A3B8] font-normal">{sprintf( /* translators: %s is a version number. */ __( 'v%s', 'image-sizes' ), plugin.version )}</span>}
 					/>
 				))}
 			</Section>

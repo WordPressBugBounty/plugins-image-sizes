@@ -1,6 +1,8 @@
 import React from 'react';
+import { __ } from '@wordpress/i18n';
 import { type DashboardStats } from '../../api';
 import { CheckCircle2, AlertCircle } from 'lucide-react';
+import { percentFormat } from '../../lib/i18n';
 
 type Props = {};
 
@@ -12,7 +14,7 @@ const HealthScoreCard = ( { score, stats }: { score: number; stats: DashboardSta
 	const color = score >= 80 ? '#0FDA7A' : score >= 50 ? '#FFCE28' : '#FD3738';
 	const bgTrack = 'rgba(255,255,255,0.4)';
 
-	const statusLabel = score >= 80 ? 'Good' : score >= 50 ? 'Normal' : 'Danger';
+	const statusLabel = score >= 80 ? __( 'Good', 'image-sizes' ) : score >= 50 ? __( 'Normal', 'image-sizes' ) : __( 'Danger', 'image-sizes' );
 	const statusColor =
 		score >= 80 ? '#0FDA7A' : score >= 50 ? '#FFCE28' : '#FD3738';
 	const statusBg =
@@ -24,9 +26,9 @@ const HealthScoreCard = ( { score, stats }: { score: number; stats: DashboardSta
 		<div className="bg-[#1E0F53] rounded-xl 2xl:px-10 lg:px-6 py-6 flex items-center 2xl:gap-12 lg:gap-4 text-white shadow-[0px_8px_72px_0px_rgba(242,237,255,0.4)]">
 			<div className="flex flex-col shrink-0">
 				<p className="2xl:text-base lg:text-sm font-medium text-[#E9E9EA] mb-1 text-left">
-					Overall
+					{ __( 'Overall', 'image-sizes' ) }
 				</p>
-				<p className="2xl:text-2xl lg:text-[18px] font-semibold text-white mb-4">Health Score</p>
+				<p className="2xl:text-2xl lg:text-[18px] font-semibold text-white mb-4">{ __( 'Health Score', 'image-sizes' ) }</p>
 				<div className="relative 2xl:w-[190px] lg:w-[110px] aspect-square">
 					<svg viewBox="0 0 160 160" className="w-full h-full">
 						<circle
@@ -52,11 +54,11 @@ const HealthScoreCard = ( { score, stats }: { score: number; stats: DashboardSta
 						/>
 					</svg>
 					<div className="absolute inset-0 flex items-center justify-center">
-						<span className="2xl:text-[38px] lg:text-[24px] font-bold text-white">{score}%</span>
+						<span className="2xl:text-[38px] lg:text-[24px] font-bold text-white">{ percentFormat( score ) }</span>
 					</div>
 				</div>
 				<div className="flex items-center justify-center gap-2 my-4">
-					<span className="2xl:text-base lg:text-sm font-normal text-white">Status:</span>
+					<span className="2xl:text-base lg:text-sm font-normal text-white">{ __( 'Status:', 'image-sizes' ) }</span>
 
 					<div
 						style={{ backgroundColor: statusBg, borderRadius: '20px' }}
@@ -77,7 +79,7 @@ const HealthScoreCard = ( { score, stats }: { score: number; stats: DashboardSta
 			</div>
 
 			<div className="flex flex-col gap-2">
-				<p className="text-base font-medium text-[#D2D2D5] mb-6">Quick Facts</p>
+				<p className="text-base font-medium text-[#D2D2D5] mb-6">{ __( 'Quick Facts', 'image-sizes' ) }</p>
 				<div className=" border-l border-[#FFFFFF80] pl-4 flex flex-col gap-5">
 					{quickFacts.map((fact, i) => (
 						<div key={i} className="flex items-center gap-[10px]">

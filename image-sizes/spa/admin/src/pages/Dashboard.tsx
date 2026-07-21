@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import { useNavigate } from 'react-router-dom';
 import { applyFilters } from '@wordpress/hooks';
 import {
@@ -43,14 +43,7 @@ import LockedFeatureCard from '../components/dashboard/LockedFeatureCard';
 import InfoCard from '../components/dashboard/InfoCard';
 import HealthScoreCard from '../components/dashboard/HealthScoreCard';
 import PromotionalNotice from '../components/dashboard/PromotionalNotice';
-
-function formatBytes(bytes: number): string {
-	if (bytes === 0) return '0 B';
-	const units = ['B', 'KB', 'MB', 'GB', 'TB'];
-	const i = Math.floor(Math.log(bytes) / Math.log(1024));
-	const value = bytes / Math.pow(1024, i);
-	return `${value < 10 ? value.toFixed(1) : Math.round(value)} ${units[i]}`;
-}
+import { numberFormat, formatBytes } from '../lib/i18n';
 
 function InfoCardSkeleton({ hasArrow = false }: { hasArrow?: boolean }) {
 	return (
@@ -196,7 +189,7 @@ export default function Dashboard() {
 						<InfoCard
 							customIcon={<TotalImagesIcon />}
 							title={__('Total Images', 'image-sizes')}
-							value={countsStats.total_images.toLocaleString()}
+							value={numberFormat(countsStats.total_images)}
 							sub={__('In media library', 'image-sizes')}
 						/>
 						{/* OPTIMIZATION */}
@@ -204,7 +197,7 @@ export default function Dashboard() {
 							<InfoCard
 								customIcon={<TotalThumbnailsIcon />}
 								title={__('Total Thumbnails', 'image-sizes')}
-								value={optimizationStats!.total_thumbnails.toLocaleString()}
+								value={numberFormat(optimizationStats!.total_thumbnails)}
 								sub={__('Thumbnails found', 'image-sizes')}
 							/>
 						)}
@@ -213,7 +206,7 @@ export default function Dashboard() {
 							<InfoCard
 								customIcon={<UnoptimizedIcon />}
 								title={__('Unoptimized Images', 'image-sizes')}
-								value={optimizationStats!.unoptimized_images.toLocaleString()}
+								value={numberFormat(optimizationStats!.unoptimized_images)}
 								sub={__('Images yet to be fixed', 'image-sizes')}
 							/>
 						)}
@@ -232,7 +225,7 @@ export default function Dashboard() {
 					{/* ANALYSIS */}
 					{analysisLoading ? <InfoCardSkeleton hasArrow /> : applyFilters(
 						'thumbpress_dashboard_card_large',
-						<LockedFeatureCard icon={<LargeImagesIcon />} title={__('Large Images', 'image-sizes')} description={__('Images (over 1 MB)', 'image-sizes')} value={mergedStats.large_images.toLocaleString()} actionLabel={__('Upgrade to Compress', 'image-sizes')} />,
+						<LockedFeatureCard icon={<LargeImagesIcon />} title={__('Large Images', 'image-sizes')} description={__('Images (over 1 MB)', 'image-sizes')} value={numberFormat(mergedStats.large_images)} actionLabel={__('Upgrade to Compress', 'image-sizes')} />,
 						mergedStats, navigate,
 					) as React.ReactNode}
 
@@ -246,21 +239,21 @@ export default function Dashboard() {
 					{/* OPTIMIZATION */}
 					{optimizationLoading ? <InfoCardSkeleton hasArrow /> : applyFilters(
 						'thumbpress_dashboard_card_compress',
-						<LockedFeatureCard icon={<CompressedImagesIcon />} title={__('Uncompressed Images', 'image-sizes')} description={__('Images need compression', 'image-sizes')} value={mergedStats.not_compressed.toLocaleString()} actionLabel={__('Upgrade to Compress', 'image-sizes')} />,
+						<LockedFeatureCard icon={<CompressedImagesIcon />} title={__('Uncompressed Images', 'image-sizes')} description={__('Images need compression', 'image-sizes')} value={numberFormat(mergedStats.not_compressed)} actionLabel={__('Upgrade to Compress', 'image-sizes')} />,
 						mergedStats, navigate,
 					) as React.ReactNode}
 
 					{/* ANALYSIS */}
 					{analysisLoading ? <InfoCardSkeleton hasArrow /> : applyFilters(
 						'thumbpress_dashboard_card_duplicate',
-						<LockedFeatureCard icon={<DuplicateImagesIcon />} title={__('Duplicate Images', 'image-sizes')} description={__('Duplicate images found', 'image-sizes')} value={mergedStats.duplicate_images.toLocaleString()} actionLabel={__('Upgrade to Merge', 'image-sizes')} />,
+						<LockedFeatureCard icon={<DuplicateImagesIcon />} title={__('Duplicate Images', 'image-sizes')} description={__('Duplicate images found', 'image-sizes')} value={numberFormat(mergedStats.duplicate_images)} actionLabel={__('Upgrade to Merge', 'image-sizes')} />,
 						mergedStats, navigate,
 					) as React.ReactNode}
 
 					{/* COUNTS — always ready */}
 					{applyFilters(
 						'thumbpress_dashboard_card_avif',
-						<LockedFeatureCard icon={<AvifFileIcon />} title={__('Convert to AVIF', 'image-sizes')} description={__('Non-AVIF images found', 'image-sizes')} value={mergedStats.not_avif.toLocaleString()} actionLabel={__('Upgrade to Convert', 'image-sizes')} />,
+						<LockedFeatureCard icon={<AvifFileIcon />} title={__('Convert to AVIF', 'image-sizes')} description={__('Non-AVIF images found', 'image-sizes')} value={numberFormat(mergedStats.not_avif)} actionLabel={__('Upgrade to Convert', 'image-sizes')} />,
 						mergedStats, navigate,
 					) as React.ReactNode}
 
@@ -268,7 +261,7 @@ export default function Dashboard() {
 					<InfoCard
 						customIcon={<WebpFileIcon />}
 						title={__('Convert to WebP', 'image-sizes')}
-						value={(countsStats.not_webp ?? 0).toLocaleString()}
+						value={numberFormat(countsStats.not_webp ?? 0)}
 						sub={__('Non-WebP images found', 'image-sizes')}
 						onClick={() => navigate('/convert-to-webp')}
 					/>
@@ -277,7 +270,7 @@ export default function Dashboard() {
 					<InfoCard
 						customIcon={<ThumbnailDisabledIcon />}
 						title={__('Thumbnail Disabled', 'image-sizes')}
-						value={`${countsStats.disabled_sizes}/${countsStats.total_sizes}`}
+						value={sprintf( /* translators: %1$s is the number of disabled sizes, %2$s is the total number of sizes. */ __( '%1$s/%2$s', 'image-sizes' ), numberFormat(countsStats.disabled_sizes), numberFormat(countsStats.total_sizes) )}
 						sub={__("These sizes won't be generated", 'image-sizes')}
 						onClick={() => navigate('/settings?tab=thumbnails')}
 					/>
@@ -287,7 +280,7 @@ export default function Dashboard() {
 						customIcon={<LazyLoadingIcon />}
 						title={__('Lazy Loading', 'image-sizes')}
 						value={countsStats.lazy_load ? __('Active', 'image-sizes') : __('Inactive', 'image-sizes')}
-						sub={__(`Status: ${countsStats.lazy_load ? 'On' : 'Off'}`, 'image-sizes')}
+						sub={sprintf( /* translators: %s is the lazy-load status (On or Off). */ __( 'Status: %s', 'image-sizes' ), countsStats.lazy_load ? __( 'On', 'image-sizes' ) : __( 'Off', 'image-sizes' ) )}
 						onClick={() => navigate('/settings?tab=general')}
 					/>
 				</div>

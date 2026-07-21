@@ -1,6 +1,7 @@
 import React from 'react';
+import { __ } from '@wordpress/i18n';
 
-const LockedFeatureCard = ( { icon, title, description, value, actionLabel = 'Upgrade to View' }: {
+const LockedFeatureCard = ( { icon, title, description, value, actionLabel = __( 'Upgrade to View', 'image-sizes' ) }: {
     icon: React.ReactNode;
     title: string;
     description: string;

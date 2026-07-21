@@ -5,7 +5,7 @@
  * Plugin Name:       ThumbPress
  * Plugin URI:        https://wordpress.org/plugins/image-sizes/
  * Description:       WordPress Image Optimization & Media Management Toolkit
- * Version:           6.4
+ * Version:           6.4.1
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            ThumbPress
@@ -25,7 +25,7 @@ use Pluggable\Marketing\Deactivator;
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'THUMBPRESS_VERSION', '6.4' );
+define( 'THUMBPRESS_VERSION', '6.4.1' );
 define( 'THUMBPRESS_FILE', __FILE__ );
 define( 'THUMBPRESS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'THUMBPRESS_URL', plugin_dir_url( __FILE__ ) );
@@ -120,6 +120,21 @@ final class ThumbPress {
 		add_action( 'admin_init', array( $this, 'redirect' ) );
 		add_action( 'plugins_loaded', array( $this, 'activate' ) );
 		add_action( 'plugins_loaded', array( $this, 'initialize' ) );
+		add_action( 'init', array( $this, 'load_textdomain' ) );
+	}
+
+	/**
+	 * Load the plugin's translations for PHP strings (menu labels, admin notices,
+	 * REST messages). The React bundle's JS strings are wired separately via
+	 * wp_set_script_translations() at enqueue time (see Controllers\Admin\Menu).
+	 *
+	 * Hooked on `init` so it is valid on WordPress 6.7+, which warns when a
+	 * textdomain is loaded earlier.
+	 *
+	 * @return void
+	 */
+	public function load_textdomain(): void {
+		load_plugin_textdomain( 'image-sizes', false, dirname( $this->plugin['basename'] ) . '/languages' );
 	}
 
 	/**

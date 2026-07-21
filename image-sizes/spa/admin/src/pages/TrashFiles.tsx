@@ -17,30 +17,30 @@ export default function TrashFiles() {
 
 			<PluginPage>
 				<Card
-					title="Manage Trashed Images"
-					description="Leftover files from old conversions and failed uploads quietly pile up. Delete the junk and reclaim real disk space in seconds."
+					title={__( 'Manage Trashed Images', 'image-sizes' )}
+					description={__( 'Leftover files from old conversions and failed uploads quietly pile up. Delete the junk and reclaim real disk space in seconds.', 'image-sizes' )}
 				>
 					<div className="border border-thumbpress-border rounded-xl overflow-hidden">
 						<div className="flex items-center gap-3 p-4 h-[48px] bg-thumbpress-primary/5 border-b border-thumbpress-border text-thumbpress-title text-base">
 							<div className="w-max">
 								<Checkbox checked={false} onCheckedChange={() => {}} />
 							</div>
-							<div className="w-[45%]">File Name</div>
-							<div className="w-[15%] text-center">Image</div>
-							<div className="w-[15%] text-center">Upload Date</div>
-							<div className="w-[10%] text-center">File Size</div>
-							<div className="w-[10%] text-center">Action</div>
+							<div className="w-[45%]">{__( 'File Name', 'image-sizes' )}</div>
+							<div className="w-[15%] text-center">{__( 'Image', 'image-sizes' )}</div>
+							<div className="w-[15%] text-center">{__( 'Upload Date', 'image-sizes' )}</div>
+							<div className="w-[10%] text-center">{__( 'File Size', 'image-sizes' )}</div>
+							<div className="w-[10%] text-center">{__( 'Action', 'image-sizes' )}</div>
 						</div>
 
 						<div className="p-12 text-center text-thumbpress-body">
-							No trashed images found.
+							{__( 'No trashed images found.', 'image-sizes' )}
 						</div>
 					</div>
 
 					<ProAlert
-						title="Manage Trashed Images is a Pro feature"
-						description="Restore or permanently delete images you've moved to trash. Keep your library clean and reclaim disk space."
-						buttonText="Activate License to manage trashed images"
+						title={__( 'Manage Trashed Images is a Pro feature', 'image-sizes' )}
+						description={__( 'Restore or permanently delete images you\'ve moved to trash. Keep your library clean and reclaim disk space.', 'image-sizes' )}
+						buttonText={__( 'Activate License to manage trashed images', 'image-sizes' )}
 						open={alertOpen}
 						onClose={() => setAlertOpen(false)}
 					/>

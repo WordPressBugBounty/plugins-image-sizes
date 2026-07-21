@@ -1,0 +1,1139 @@
+{
+    "translation-revision-date": "YEAR-MO-DA HO:MI+ZONE",
+    "generator": "WP-CLI\/2.13.0-alpha-3eb2dd7",
+    "source": "build\/admin.js",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "es_ES",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
+            },
+            "Settings saved successfully.": [
+                "Ajustes guardados correctamente."
+            ],
+            "Dashboard": [
+                "Panel"
+            ],
+            "Thumbnails": [
+                "Miniaturas"
+            ],
+            "Unused Images": [
+                "Im\u00e1genes sin usar"
+            ],
+            "Duplicate Images": [
+                "Im\u00e1genes duplicadas"
+            ],
+            "Large Images": [
+                "Im\u00e1genes grandes"
+            ],
+            "Compress Images": [
+                "Comprimir im\u00e1genes"
+            ],
+            "Convert to WebP": [
+                "Convertir a WebP"
+            ],
+            "Convert to AVIF": [
+                "Convertir a AVIF"
+            ],
+            "Trashed Images": [
+                "Im\u00e1genes en la papelera"
+            ],
+            "Settings": [
+                "Ajustes"
+            ],
+            "Pro": [
+                "Pro"
+            ],
+            "Close": [
+                "Cerrar"
+            ],
+            "Social Share Image": [
+                "Imagen para compartir en redes sociales"
+            ],
+            "Regenerate Thumbnails": [
+                "Regenerar miniaturas"
+            ],
+            "General": [
+                "General"
+            ],
+            "Days": [
+                "D\u00edas"
+            ],
+            "Hrs": [
+                "H"
+            ],
+            "Min": [
+                "Min"
+            ],
+            "Sec": [
+                "Seg"
+            ],
+            "FIFA World Cup Sale is Live!": [
+                "\u00a1La rebaja del Mundial de la FIFA ya est\u00e1 aqu\u00ed!"
+            ],
+            "Score up to 48% off ThumbPress Pro during our FIFA World Cup sale. The discount is auto-applied at checkout \u2014 grab it before the whistle blows!": [
+                "Consigue hasta un 48% de descuento en ThumbPress Pro durante nuestra rebaja del Mundial de la FIFA. El descuento se aplica autom\u00e1ticamente al pagar: \u00a1hazte con \u00e9l antes del pitido final!"
+            ],
+            "Offer expired": [
+                "Oferta caducada"
+            ],
+            "Offer ends July 19": [
+                "La oferta termina el 19 de julio"
+            ],
+            "World Cup discount applied!": [
+                "\u00a1Descuento del Mundial aplicado!"
+            ],
+            "Your up-to-48% discount is auto-applied at checkout.": [
+                "Tu descuento de hasta el 48% se aplica autom\u00e1ticamente al pagar."
+            ],
+            "Get 48% Off \u2014 View Pricing \u2192": [
+                "Consigue un 48% de descuento \u2014 Ver precios \u2192"
+            ],
+            "No thanks, I don't want a discount": [
+                "No, gracias, no quiero un descuento"
+            ],
+            "Community": [
+                "Comunidad"
+            ],
+            "Support": [
+                "Soporte"
+            ],
+            "Docs": [
+                "Documentaci\u00f3n"
+            ],
+            "Upgrade to Pro": [
+                "Mejorar a Pro"
+            ],
+            "Upgrade to View": [
+                "Mejora tu plan para verlo"
+            ],
+            "%s%%": [
+                "%s%%"
+            ],
+            "%s B": [
+                "%s B"
+            ],
+            "%s KB": [
+                "%s KB"
+            ],
+            "%s MB": [
+                "%s MB"
+            ],
+            "%s GB": [
+                "%s GB"
+            ],
+            "%s TB": [
+                "%s TB"
+            ],
+            "Good": [
+                "Bueno"
+            ],
+            "Normal": [
+                "Normal"
+            ],
+            "Danger": [
+                "Peligro"
+            ],
+            "Overall": [
+                "Global"
+            ],
+            "Health Score": [
+                "Puntuaci\u00f3n de salud"
+            ],
+            "Status:": [
+                "Estado:"
+            ],
+            "Quick Facts": [
+                "Datos r\u00e1pidos"
+            ],
+            "EasyCommerce promotional notice": [
+                "Aviso promocional de EasyCommerce"
+            ],
+            "New from the ThumbPress team - Try": [
+                "Novedad del equipo de ThumbPress: prueba"
+            ],
+            "EasyCommerce": [
+                "EasyCommerce"
+            ],
+            ". A fast, AI-powered way to sell on WordPress.": [
+                ". Una forma r\u00e1pida e impulsada por IA de vender en WordPress."
+            ],
+            "Learn more": [
+                "Saber m\u00e1s"
+            ],
+            "Dismiss EasyCommerce notice": [
+                "Descartar el aviso de EasyCommerce"
+            ],
+            "Activate License": [
+                "Activar licencia"
+            ],
+            "Image Editor": [
+                "Editor de im\u00e1genes"
+            ],
+            "Enhance images with filters and adjustments to showcase their best versions.": [
+                "Mejora las im\u00e1genes con filtros y ajustes para mostrar su mejor versi\u00f3n."
+            ],
+            "The built-in Image Editor is a Pro feature": [
+                "El editor de im\u00e1genes integrado es una funci\u00f3n Pro"
+            ],
+            "Leaving WordPress just to crop an image breaks your whole workflow. Edit, resize, and re-optimize everything without switching tools.": [
+                "Salir de WordPress solo para recortar una imagen rompe todo tu flujo de trabajo. Edita, redimensiona y vuelve a optimizar todo sin cambiar de herramienta."
+            ],
+            "Upgrade to edit images in WordPress": [
+                "Mejora tu plan para editar im\u00e1genes en WordPress"
+            ],
+            "Replace Images With New Version": [
+                "Reemplazar im\u00e1genes con una nueva versi\u00f3n"
+            ],
+            "Upload new versions of images and replace the old ones without any issues.": [
+                "Sube nuevas versiones de las im\u00e1genes y reemplaza las antiguas sin ning\u00fan problema."
+            ],
+            "Replacing Image is a Pro feature": [
+                "Reemplazar im\u00e1genes es una funci\u00f3n Pro"
+            ],
+            "Outdated images live on more pages than you think. Swap in a new version once, and every page updates instantly.": [
+                "Las im\u00e1genes desactualizadas est\u00e1n en m\u00e1s p\u00e1ginas de las que crees. Sustit\u00fayelas por una versi\u00f3n nueva una sola vez y todas las p\u00e1ginas se actualizar\u00e1n al instante."
+            ],
+            "Upgrade to replace images seamlessly": [
+                "Mejora tu plan para reemplazar im\u00e1genes sin complicaciones"
+            ],
+            "Disable Right Click on Image": [
+                "Desactivar el clic derecho sobre las im\u00e1genes"
+            ],
+            "Prevent visitors from downloading your images by turning off the right-click option on your website.": [
+                "Evita que los visitantes descarguen tus im\u00e1genes desactivando la opci\u00f3n de clic derecho en tu web."
+            ],
+            "Image Size Limit": [
+                "L\u00edmite de tama\u00f1o de imagen"
+            ],
+            "Set a limit for maximum image upload size.": [
+                "Establece un l\u00edmite para el tama\u00f1o m\u00e1ximo de subida de im\u00e1genes."
+            ],
+            "120": [
+                "120"
+            ],
+            "KB": [
+                "KB"
+            ],
+            "MB": [
+                "MB"
+            ],
+            "Server limit: %s": [
+                "L\u00edmite del servidor: %s"
+            ],
+            "Image Dimension Limit": [
+                "L\u00edmite de dimensiones de imagen"
+            ],
+            "Set a limit for maximum image upload dimensions (in pixels).": [
+                "Establece un l\u00edmite para las dimensiones m\u00e1ximas de subida de im\u00e1genes (en p\u00edxeles)."
+            ],
+            "Height": [
+                "Alto"
+            ],
+            "Width": [
+                "Ancho"
+            ],
+            "Lazy load": [
+                "Carga diferida"
+            ],
+            "Load images only when they enter the user's viewport, improving page speed and reducing bandwidth usage.": [
+                "Carga las im\u00e1genes solo cuando entran en la ventana visible del usuario, lo que mejora la velocidad de la p\u00e1gina y reduce el consumo de ancho de banda."
+            ],
+            "Hotlink Protection": [
+                "Protecci\u00f3n contra hotlinking"
+            ],
+            "Block other websites from embedding your images directly, preventing bandwidth theft from external hotlinking.": [
+                "Impide que otras webs incrusten tus im\u00e1genes directamente y evita el robo de ancho de banda por hotlinking externo."
+            ],
+            "Auto Set Featured Image": [
+                "Establecer la imagen destacada autom\u00e1ticamente"
+            ],
+            "Automatically use the first image in post content as the featured image if none is set.": [
+                "Usa autom\u00e1ticamente la primera imagen del contenido de la entrada como imagen destacada si no se ha establecido ninguna."
+            ],
+            "Settings reset successfully.": [
+                "Ajustes restablecidos correctamente."
+            ],
+            "Reset Options": [
+                "Restablecer opciones"
+            ],
+            "Failed to save settings.": [
+                "No se han podido guardar los ajustes."
+            ],
+            "Save Changes": [
+                "Guardar cambios"
+            ],
+            "No thumbnail sizes found.": [
+                "No se han encontrado tama\u00f1os de miniatura."
+            ],
+            "%1$s (%2$s\u00d7%3$s)": [
+                "%1$s (%2$s\u00d7%3$s)"
+            ],
+            "Enabled - This size will be generated for new uploads.": [
+                "Activado: este tama\u00f1o se generar\u00e1 para las nuevas subidas."
+            ],
+            "Disabled - This size will not be generated for new uploads.": [
+                "Desactivado: este tama\u00f1o no se generar\u00e1 para las nuevas subidas."
+            ],
+            "This is the original image size and cannot be disabled.": [
+                "Este es el tama\u00f1o original de la imagen y no se puede desactivar."
+            ],
+            "Compress during upload": [
+                "Comprimir durante la subida"
+            ],
+            "Enable compression during upload to reduce file size and improve speed.": [
+                "Activa la compresi\u00f3n durante la subida para reducir el tama\u00f1o de los archivos y mejorar la velocidad."
+            ],
+            "Compression Percentage": [
+                "Porcentaje de compresi\u00f3n"
+            ],
+            "A measure of how much a file's size is reduced after compression.": [
+                "Una medida de cu\u00e1nto se reduce el tama\u00f1o de un archivo tras la compresi\u00f3n."
+            ],
+            "Single Image Compress": [
+                "Compresi\u00f3n de una sola imagen"
+            ],
+            "Show the Optimize button on individual media attachments.": [
+                "Muestra el bot\u00f3n Optimizar en los adjuntos de medios individuales."
+            ],
+            "Bulk Image Compression is a Pro feature": [
+                "La compresi\u00f3n masiva de im\u00e1genes es una funci\u00f3n Pro"
+            ],
+            "Heavy images are silently costing you visitors. Compress your entire library in one click with absolutely no visible quality loss.": [
+                "Las im\u00e1genes pesadas te est\u00e1n costando visitantes en silencio. Comprime toda tu biblioteca con un clic sin ninguna p\u00e9rdida de calidad visible."
+            ],
+            "Upgrade for a faster website": [
+                "Mejora tu plan para tener una web m\u00e1s r\u00e1pida"
+            ],
+            "Prevent Duplicate Upload": [
+                "Impedir subidas duplicadas"
+            ],
+            "Block uploading images that already exist in your media library": [
+                "Bloquea la subida de im\u00e1genes que ya existen en tu biblioteca de medios"
+            ],
+            "Duplicate Image Detection is a Pro feature": [
+                "La detecci\u00f3n de im\u00e1genes duplicadas es una funci\u00f3n Pro"
+            ],
+            "Duplicate images quietly pile up and bloat your media library. Find and remove every copy you didn't even know existed.": [
+                "Las im\u00e1genes duplicadas se acumulan sin que te des cuenta y sobrecargan tu biblioteca de medios. Encuentra y elimina todas las copias que ni siquiera sab\u00edas que exist\u00edan."
+            ],
+            "Upgrade to detect duplicate images": [
+                "Mejora tu plan para detectar im\u00e1genes duplicadas"
+            ],
+            "Convert during upload": [
+                "Convertir durante la subida"
+            ],
+            "Automatically convert images to WebP when they are uploaded.": [
+                "Convierte autom\u00e1ticamente las im\u00e1genes a WebP cuando se suben."
+            ],
+            "Single image conversion": [
+                "Conversi\u00f3n de una sola imagen"
+            ],
+            "Convert individual images to WebP directly from the media library.": [
+                "Convierte im\u00e1genes concretas a WebP directamente desde la biblioteca de medios."
+            ],
+            "Automatically convert images to AVIF when they are uploaded.": [
+                "Convierte autom\u00e1ticamente las im\u00e1genes a AVIF cuando se suben."
+            ],
+            "Convert individual images to AVIF directly from the media library.": [
+                "Convierte im\u00e1genes concretas a AVIF directamente desde la biblioteca de medios."
+            ],
+            "Facebook": [
+                "Facebook"
+            ],
+            "Generate optimized share images for Facebook posts": [
+                "Genera im\u00e1genes optimizadas para compartir en publicaciones de Facebook"
+            ],
+            "LinkedIn": [
+                "LinkedIn"
+            ],
+            "Create professional share images for LinkedIn": [
+                "Crea im\u00e1genes profesionales para compartir en LinkedIn"
+            ],
+            "Twitter": [
+                "Twitter"
+            ],
+            "Optimize share images for Twitter cards": [
+                "Optimiza las im\u00e1genes para compartir en tarjetas de Twitter"
+            ],
+            "Pinterest": [
+                "Pinterest"
+            ],
+            "Generate Pinterest-optimized pin images": [
+                "Genera im\u00e1genes de pin optimizadas para Pinterest"
+            ],
+            "Enabled": [
+                "Activado"
+            ],
+            "Disabled": [
+                "Desactivado"
+            ],
+            "Failed to load debug info.": [
+                "No se ha podido cargar la informaci\u00f3n de depuraci\u00f3n."
+            ],
+            "No data.": [
+                "Sin datos."
+            ],
+            "System": [
+                "Sistema"
+            ],
+            "WordPress": [
+                "WordPress"
+            ],
+            "PHP": [
+                "PHP"
+            ],
+            "MySQL": [
+                "MySQL"
+            ],
+            "Server": [
+                "Servidor"
+            ],
+            "PHP Memory Limit": [
+                "L\u00edmite de memoria de PHP"
+            ],
+            "WP Memory Limit": [
+                "L\u00edmite de memoria de WP"
+            ],
+            "Max Execution Time": [
+                "Tiempo m\u00e1ximo de ejecuci\u00f3n"
+            ],
+            "%ss": [
+                "%ss"
+            ],
+            "Upload Max Filesize": [
+                "Tama\u00f1o m\u00e1ximo de archivo de subida"
+            ],
+            "Total Images": [
+                "Total de im\u00e1genes"
+            ],
+            "WordPress Config": [
+                "Configuraci\u00f3n de WordPress"
+            ],
+            "WP_DEBUG": [
+                "WP_DEBUG"
+            ],
+            "WP_DEBUG_DISPLAY": [
+                "WP_DEBUG_DISPLAY"
+            ],
+            "WP_DEBUG_LOG": [
+                "WP_DEBUG_LOG"
+            ],
+            "Version": [
+                "Versi\u00f3n"
+            ],
+            "Pro Plugin": [
+                "Plugin Pro"
+            ],
+            "v%s": [
+                "v%s"
+            ],
+            "License Status": [
+                "Estado de la licencia"
+            ],
+            "Lazy Load": [
+                "Carga diferida"
+            ],
+            "Right-Click Disable": [
+                "Clic derecho desactivado"
+            ],
+            "WebP on Upload": [
+                "WebP al subir"
+            ],
+            "AVIF on Upload": [
+                "AVIF al subir"
+            ],
+            "Max Image Size": [
+                "Tama\u00f1o m\u00e1ximo de imagen"
+            ],
+            "Max Image Dimensions": [
+                "Dimensiones m\u00e1ximas de imagen"
+            ],
+            "Disabled Sizes": [
+                "Tama\u00f1os desactivados"
+            ],
+            "None": [
+                "Ninguno"
+            ],
+            "Active Theme": [
+                "Tema activo"
+            ],
+            "Name": [
+                "Nombre"
+            ],
+            "Parent Theme": [
+                "Tema padre"
+            ],
+            "%1$s v%2$s": [
+                "%1$s v%2$s"
+            ],
+            "Active Plugin (%d)": [
+                "Plugin activo (%d)",
+                "Plugins activos (%d)"
+            ],
+            "Your Media Library is Silently Slowing Down Your Site.": [
+                "Tu biblioteca de medios est\u00e1 ralentizando tu sitio en silencio."
+            ],
+            "Unused images, oversized files, and missing optimization pile up with every upload. Pro finds them all and fixes them \u2014 without touching a single file manually.": [
+                "Las im\u00e1genes sin usar, los archivos demasiado grandes y la falta de optimizaci\u00f3n se acumulan con cada subida. Pro los encuentra todos y los soluciona, sin tocar un solo archivo a mano."
+            ],
+            "Price starts from $5\/month.": [
+                "El precio empieza desde $5 al mes."
+            ],
+            "ThumbPress modules": [
+                "M\u00f3dulos de ThumbPress"
+            ],
+            "What Pro Fixes Today": [
+                "Lo que Pro soluciona hoy mismo"
+            ],
+            "Every Pro feature is designed to solve a specific real problem. Here's what exactly an upgrade unlocks.": [
+                "Cada funci\u00f3n Pro est\u00e1 pensada para resolver un problema real concreto. Esto es exactamente lo que desbloquea una mejora de plan."
+            ],
+            "%d image found!": [
+                "\u00a1%d imagen encontrada!",
+                "\u00a1%d im\u00e1genes encontradas!"
+            ],
+            "Detect Large Images": [
+                "Detectar im\u00e1genes grandes"
+            ],
+            "Scan your media library and find oversized images instantly. See exactly which files are bloating your pages and fix them before they cost you rankings.": [
+                "Analiza tu biblioteca de medios y encuentra al instante las im\u00e1genes demasiado grandes. Descubre exactamente qu\u00e9 archivos sobrecargan tus p\u00e1ginas y arr\u00e9glalos antes de que te cuesten posiciones."
+            ],
+            "Detect Now": [
+                "Detectar ahora"
+            ],
+            "Delete Unused Images": [
+                "Eliminar im\u00e1genes sin usar"
+            ],
+            "Scan your media library and find unused images instantly. See exactly which files are taking up space and delete them to reclaim server space.": [
+                "Analiza tu biblioteca de medios y encuentra al instante las im\u00e1genes sin usar. Descubre exactamente qu\u00e9 archivos ocupan espacio y elim\u00ednalos para recuperar espacio en el servidor."
+            ],
+            "Delete Now": [
+                "Eliminar ahora"
+            ],
+            "Compress Large Images": [
+                "Comprimir im\u00e1genes grandes"
+            ],
+            "Large images are costing you speed. Optimize them without visible loss and deliver a faster, smoother browsing experience.": [
+                "Las im\u00e1genes grandes te est\u00e1n costando velocidad. Optim\u00edzalas sin p\u00e9rdida visible y ofrece una navegaci\u00f3n m\u00e1s r\u00e1pida y fluida."
+            ],
+            "Compress Now": [
+                "Comprimir ahora"
+            ],
+            "Bulk Convert to AVIF": [
+                "Conversi\u00f3n masiva a AVIF"
+            ],
+            "Your images shouldn't be stuck in the past. Convert them all to AVIF - the format the modern web is built on - in a single click.": [
+                "Tus im\u00e1genes no deber\u00edan quedarse ancladas en el pasado. Convi\u00e9rtelas todas a AVIF, el formato sobre el que se construye la web moderna, con un solo clic."
+            ],
+            "Convert Now": [
+                "Convertir ahora"
+            ],
+            "Crop, resize, or tweak any image right inside your WordPress dashboard. No need to re-upload or touch a third-party tool.": [
+                "Recorta, redimensiona o retoca cualquier imagen dentro de tu propio escritorio de WordPress. Sin necesidad de volver a subirla ni de usar herramientas de terceros."
+            ],
+            "Edit Now": [
+                "Editar ahora"
+            ],
+            "Merge Duplicate Images": [
+                "Combinar im\u00e1genes duplicadas"
+            ],
+            "Find images that have been uploaded more than once. Clean up the clutter and stop wasting space on files you already have.": [
+                "Encuentra las im\u00e1genes que se han subido m\u00e1s de una vez. Limpia el desorden y deja de desperdiciar espacio en archivos que ya tienes."
+            ],
+            "Merge Now": [
+                "Combinar ahora"
+            ],
+            "IMAGE CONTROL": [
+                "CONTROL DE IM\u00c1GENES"
+            ],
+            "Disable Thumbnails": [
+                "Desactivar miniaturas"
+            ],
+            "Set Image Upload Limit": [
+                "Establecer un l\u00edmite de subida de im\u00e1genes"
+            ],
+            "STORAGE & CLEANUP": [
+                "ALMACENAMIENTO Y LIMPIEZA"
+            ],
+            "Find Unused Images": [
+                "Encontrar im\u00e1genes sin usar"
+            ],
+            "Find Duplicate Images": [
+                "Encontrar im\u00e1genes duplicadas"
+            ],
+            "MEDIA MANAGEMENT": [
+                "GESTI\u00d3N DE MEDIOS"
+            ],
+            "Replace Images": [
+                "Reemplazar im\u00e1genes"
+            ],
+            "Social Media Thumbnails": [
+                "Miniaturas para redes sociales"
+            ],
+            "Free vs. Pro Side by Side": [
+                "Free y Pro comparados"
+            ],
+            "See a clear comparison between your current version and the Pro version you're about to get.": [
+                "Consulta una comparativa clara entre tu versi\u00f3n actual y la versi\u00f3n Pro que est\u00e1s a punto de conseguir."
+            ],
+            "Features": [
+                "Funciones"
+            ],
+            "Free": [
+                "Free"
+            ],
+            "Future uploads only": [
+                "Solo subidas futuras"
+            ],
+            "Fully unlocked": [
+                "Totalmente desbloqueado"
+            ],
+            "Best Value": [
+                "Mejor valor"
+            ],
+            "\/ Month": [
+                "\/ Mes"
+            ],
+            "\/ Lifetime": [
+                "\/ De por vida"
+            ],
+            "Billed annually. You pay %s today": [
+                "Facturaci\u00f3n anual. Hoy pagas %s"
+            ],
+            "Purchase": [
+                "Comprar"
+            ],
+            "Personal": [
+                "Personal"
+            ],
+            "%d%% OFF": [
+                "%d%% DE DESCUENTO"
+            ],
+            "1 Site": [
+                "1 sitio"
+            ],
+            "1 Year Support": [
+                "1 a\u00f1o de soporte"
+            ],
+            "All Features Included": [
+                "Todas las funciones incluidas"
+            ],
+            "Professional": [
+                "Profesional"
+            ],
+            "5 Sites": [
+                "5 sitios"
+            ],
+            "Agency": [
+                "Agencia"
+            ],
+            "Unlimited Sites": [
+                "Sitios ilimitados"
+            ],
+            "Lifetime Support": [
+                "Soporte de por vida"
+            ],
+            "ThumbPress Pro Pricing": [
+                "Precios de ThumbPress Pro"
+            ],
+            "Every plan includes the full set of Pro features. Just pick how many sites you need to cover.": [
+                "Todos los planes incluyen el conjunto completo de funciones Pro. Solo tienes que elegir cu\u00e1ntos sitios necesitas cubrir."
+            ],
+            "Yearly": [
+                "Anual"
+            ],
+            "Lifetime": [
+                "De por vida"
+            ],
+            "30-day money back guarantee": [
+                "Garant\u00eda de devoluci\u00f3n del dinero de 30 d\u00edas"
+            ],
+            "Access future features for the subscription period": [
+                "Acceso a las funciones futuras durante el periodo de suscripci\u00f3n"
+            ],
+            "reviewer": [
+                "rese\u00f1ador"
+            ],
+            "This saved me money when I realised I was about to exceed my host\u2019s image allowance, enabling me to wipe out excess duplicate images.": [
+                "Esto me ahorr\u00f3 dinero cuando me di cuenta de que estaba a punto de superar el l\u00edmite de im\u00e1genes de mi alojamiento, ya que me permiti\u00f3 borrar el exceso de im\u00e1genes duplicadas."
+            ],
+            "At the moment I\u2019m using it to resize my pictures, I see a lot of things to use in the future to keep the site smaller then it was. So far it\u2019s working fine and the one question I had was answered right away!! Keep up the good work!!!": [
+                "De momento lo estoy usando para redimensionar mis fotos, y veo un mont\u00f3n de cosas que podr\u00e9 usar en el futuro para mantener el sitio m\u00e1s ligero de lo que era. Hasta ahora funciona perfectamente y la \u00fanica duda que tuve me la resolvieron enseguida. \u00a1\u00a1Seguid as\u00ed!!"
+            ],
+            "This plugin is extremely useful, and a must for sites with a lot of images. I had a problem with activation of the Pro version, and the support team resolved the issue quickly and without fuss.": [
+                "Este plugin es tremendamente \u00fatil y imprescindible para webs con muchas im\u00e1genes. Tuve un problema al activar la versi\u00f3n Pro y el equipo de soporte lo resolvi\u00f3 r\u00e1pido y sin complicaciones."
+            ],
+            "Trusted by 30,000+ WordPress Users Just Like You": [
+                "Con la confianza de m\u00e1s de 30.000 usuarios de WordPress como t\u00fa"
+            ],
+            "What image formats does ThumbPress convert?": [
+                "\u00bfQu\u00e9 formatos de imagen convierte ThumbPress?"
+            ],
+            "Free version converts images to WebP (25-35% smaller files). Pro adds AVIF conversion (50% smaller than WebP) plus intelligent compression for all formats. Both reduce file size without visible quality loss, dramatically improving site speed and lowering bandwidth costs.": [
+                "La versi\u00f3n gratuita convierte las im\u00e1genes a WebP (archivos entre un 25 % y un 35 % m\u00e1s peque\u00f1os). Pro a\u00f1ade la conversi\u00f3n a AVIF (un 50 % m\u00e1s peque\u00f1o que WebP) adem\u00e1s de una compresi\u00f3n inteligente para todos los formatos. Ambas reducen el tama\u00f1o de los archivos sin p\u00e9rdida de calidad visible, lo que mejora enormemente la velocidad del sitio y reduce los costes de ancho de banda."
+            ],
+            "How much can I save on storage and bandwidth?": [
+                "\u00bfCu\u00e1nto puedo ahorrar en almacenamiento y ancho de banda?"
+            ],
+            "Most sites save 30-60% of image storage. WebP reduces files by 25-35%, AVIF by 50% more than WebP. A typical site with 5,000 images saves 50-100GB. Smaller images also cut bandwidth costs and improve Core Web Vitals scores for better SEO rankings.": [
+                "La mayor\u00eda de los sitios ahorra entre un 30 % y un 60 % del almacenamiento de im\u00e1genes. WebP reduce los archivos entre un 25 % y un 35 %, y AVIF un 50 % m\u00e1s que WebP. Un sitio t\u00edpico con 5.000 im\u00e1genes ahorra entre 50 y 100 GB. Las im\u00e1genes m\u00e1s peque\u00f1as tambi\u00e9n reducen los costes de ancho de banda y mejoran las puntuaciones de Core Web Vitals para un mejor posicionamiento SEO."
+            ],
+            "What's the difference between Free and Pro?": [
+                "\u00bfCu\u00e1l es la diferencia entre Free y Pro?"
+            ],
+            "Free: Basic optimization (WebP, regenerate thumbnails). Pro: Advanced detection (find unused images, duplicates, oversized files), bulk compression, AVIF conversion, one-click automation. Best for sites with hundreds or thousands of images where optimization pays for itself.": [
+                "Free: optimizaci\u00f3n b\u00e1sica (WebP, regenerar miniaturas). Pro: detecci\u00f3n avanzada (encontrar im\u00e1genes sin usar, duplicadas y demasiado grandes), compresi\u00f3n masiva, conversi\u00f3n a AVIF y automatizaci\u00f3n con un clic. Ideal para sitios con cientos o miles de im\u00e1genes, donde la optimizaci\u00f3n se amortiza sola."
+            ],
+            "How does pricing work? Is there a trial?": [
+                "\u00bfC\u00f3mo funcionan los precios? \u00bfHay prueba gratuita?"
+            ],
+            "No hidden fees or surprise renewals - renewal costs the same as initial purchase. Free version is your trial. Test WebP conversion and regeneration risk-free. Upgrade anytime if you need Pro features. 30-day money-back guarantee on all paid plans.": [
+                "Sin comisiones ocultas ni renovaciones sorpresa: la renovaci\u00f3n cuesta lo mismo que la compra inicial. La versi\u00f3n gratuita es tu prueba. Prueba la conversi\u00f3n a WebP y la regeneraci\u00f3n sin ning\u00fan riesgo. Mejora tu plan cuando quieras si necesitas las funciones Pro. Garant\u00eda de devoluci\u00f3n del dinero de 30 d\u00edas en todos los planes de pago."
+            ],
+            "Can I use Pro on multiple sites? How many?": [
+                "\u00bfPuedo usar Pro en varios sitios? \u00bfEn cu\u00e1ntos?"
+            ],
+            "Yes. Professional plan covers up to 5 sites. Agency plan covers unlimited. Perfect for freelancers and agencies managing multiple client sites. Licensing is per-plan, not per-site.": [
+                "S\u00ed. El plan Profesional cubre hasta 5 sitios. El plan Agencia cubre sitios ilimitados. Perfecto para freelancers y agencias que gestionan varios sitios de clientes. La licencia es por plan, no por sitio."
+            ],
+            "Is my media library safe? Will images be deleted automatically?": [
+                "\u00bfEst\u00e1 segura mi biblioteca de medios? \u00bfSe eliminar\u00e1n im\u00e1genes autom\u00e1ticamente?"
+            ],
+            "Completely safe. ThumbPress shows you exactly what it found and requires your approval before any action. Nothing is ever deleted automatically. Unused images, duplicates, and large files are flagged for review - you decide what to remove.": [
+                "Totalmente segura. ThumbPress te muestra exactamente lo que ha encontrado y requiere tu aprobaci\u00f3n antes de realizar cualquier acci\u00f3n. Nunca se elimina nada autom\u00e1ticamente. Las im\u00e1genes sin usar, las duplicadas y los archivos grandes se marcan para que los revises: t\u00fa decides qu\u00e9 eliminar."
+            ],
+            "What if it doesn't deliver results or doesn't work on my site?": [
+                "\u00bfY si no da resultados o no funciona en mi sitio?"
+            ],
+            "100% money-back within 30 days, no questions asked. Our team provides setup assistance to ensure it works perfectly. We also stand behind the results - if optimization doesn't improve your metrics, we refund immediately.": [
+                "Devoluci\u00f3n del 100 % del dinero en un plazo de 30 d\u00edas, sin preguntas. Nuestro equipo te ayuda con la configuraci\u00f3n para asegurarse de que funciona a la perfecci\u00f3n. Adem\u00e1s, respaldamos los resultados: si la optimizaci\u00f3n no mejora tus m\u00e9tricas, te devolvemos el dinero de inmediato."
+            ],
+            "Is it compatible with WooCommerce, Elementor, and my theme?": [
+                "\u00bfEs compatible con WooCommerce, Elementor y mi tema?"
+            ],
+            "Yes. ThumbPress works with WooCommerce, Gutenberg, Elementor, Divi, and all major themes. It operates at the WordPress media layer, not inside specific plugins, so compatibility is universal.": [
+                "S\u00ed. ThumbPress funciona con WooCommerce, Gutenberg, Elementor, Divi y todos los temas principales. Act\u00faa en la capa de medios de WordPress, no dentro de plugins concretos, por lo que la compatibilidad es universal."
+            ],
+            "How long does bulk processing take? Will it slow my site?": [
+                "\u00bfCu\u00e1nto tarda el procesamiento masivo? \u00bfRalentizar\u00e1 mi sitio?"
+            ],
+            "All heavy operations run in the background - zero impact on your site. Most sites process 500-1000 (or more) images per hour depending on hosting. Background processing handles thousands overnight. Your dashboard and frontend stay fast.": [
+                "Todas las operaciones pesadas se ejecutan en segundo plano: cero impacto en tu sitio. La mayor\u00eda de los sitios procesa entre 500 y 1000 im\u00e1genes (o m\u00e1s) por hora seg\u00fan el alojamiento. El procesamiento en segundo plano gestiona miles de im\u00e1genes durante la noche. Tu escritorio y tu web siguen siendo r\u00e1pidos."
+            ],
+            "Do I get support? What if I need help implementing?": [
+                "\u00bfTengo soporte? \u00bfY si necesito ayuda con la implementaci\u00f3n?"
+            ],
+            "All customers get support with 24-hour response time. Professional and Agency plans include priority support. Our team helps with setup, troubleshooting, and optimization recommendations to maximize your results.": [
+                "Todos los clientes reciben soporte con un tiempo de respuesta de 24 horas. Los planes Profesional y Agencia incluyen soporte prioritario. Nuestro equipo te ayuda con la configuraci\u00f3n, la resoluci\u00f3n de problemas y las recomendaciones de optimizaci\u00f3n para maximizar tus resultados."
+            ],
+            "Frequently Asked Questions": [
+                "Preguntas frecuentes"
+            ],
+            "Ready to take control of your Images?": [
+                "\u00bfListo para tomar el control de tus im\u00e1genes?"
+            ],
+            "Join 30,000+ users who manage their media smarter with ThumbPress Pro": [
+                "\u00danete a m\u00e1s de 30.000 usuarios que gestionan sus medios de forma m\u00e1s inteligente con ThumbPress Pro"
+            ],
+            "In media library": [
+                "En la biblioteca de medios"
+            ],
+            "Total Thumbnails": [
+                "Total de miniaturas"
+            ],
+            "Thumbnails found": [
+                "Miniaturas encontradas"
+            ],
+            "Unoptimized Images": [
+                "Im\u00e1genes sin optimizar"
+            ],
+            "Images yet to be fixed": [
+                "Im\u00e1genes pendientes de arreglar"
+            ],
+            "Space Saved": [
+                "Espacio ahorrado"
+            ],
+            "Worth of space saved": [
+                "Espacio ahorrado en total"
+            ],
+            "Images (over 1 MB)": [
+                "Im\u00e1genes (m\u00e1s de 1 MB)"
+            ],
+            "Upgrade to Compress": [
+                "Mejora tu plan para comprimir"
+            ],
+            "Unattached images": [
+                "Im\u00e1genes sin adjuntar"
+            ],
+            "Uncompressed Images": [
+                "Im\u00e1genes sin comprimir"
+            ],
+            "Images need compression": [
+                "Im\u00e1genes que necesitan compresi\u00f3n"
+            ],
+            "Duplicate images found": [
+                "Im\u00e1genes duplicadas encontradas"
+            ],
+            "Upgrade to Merge": [
+                "Mejora tu plan para combinar"
+            ],
+            "Non-AVIF images found": [
+                "Im\u00e1genes que no son AVIF encontradas"
+            ],
+            "Upgrade to Convert": [
+                "Mejora tu plan para convertir"
+            ],
+            "Non-WebP images found": [
+                "Im\u00e1genes que no son WebP encontradas"
+            ],
+            "Thumbnail Disabled": [
+                "Miniaturas desactivadas"
+            ],
+            "%1$s\/%2$s": [
+                "%1$s\/%2$s"
+            ],
+            "These sizes won't be generated": [
+                "Estos tama\u00f1os no se generar\u00e1n"
+            ],
+            "Lazy Loading": [
+                "Carga diferida"
+            ],
+            "Active": [
+                "Activa"
+            ],
+            "Inactive": [
+                "Inactiva"
+            ],
+            "Status: %s": [
+                "Estado: %s"
+            ],
+            "On": [
+                "Activada"
+            ],
+            "Off": [
+                "Desactivada"
+            ],
+            "Regenerate All Thumbnails": [
+                "Regenerar todas las miniaturas"
+            ],
+            "Broken thumbnails hurt layouts and lose visitors. Regenerate once - every image across your site snaps back to the perfect size and crop.": [
+                "Las miniaturas rotas estropean los dise\u00f1os y ahuyentan a los visitantes. Regen\u00e9ralas una vez y todas las im\u00e1genes de tu sitio recuperar\u00e1n el tama\u00f1o y el recorte perfectos."
+            ],
+            "Generate Again": [
+                "Generar de nuevo"
+            ],
+            "No Images Found": [
+                "No se han encontrado im\u00e1genes"
+            ],
+            "Ready to Regenerate Thumbnails?": [
+                "\u00bfListo para regenerar las miniaturas?"
+            ],
+            "There are no images to regenerate.": [
+                "No hay im\u00e1genes que regenerar."
+            ],
+            "Click \"Regenerate Now\" to create fresh thumbnails for all images. Configure your thumbnail sizes in ": [
+                "Haz clic en \u00abRegenerar ahora\u00bb para crear miniaturas nuevas de todas las im\u00e1genes. Configura los tama\u00f1os de tus miniaturas en "
+            ],
+            "settings": [
+                "ajustes"
+            ],
+            ".": [
+                "."
+            ],
+            "Chunk Size": [
+                "Tama\u00f1o del bloque"
+            ],
+            "Number of images processed in a single batch per server request.": [
+                "N\u00famero de im\u00e1genes procesadas en un solo lote por petici\u00f3n al servidor."
+            ],
+            "e.g. 50": [
+                "p. ej. 50"
+            ],
+            "Regenerate Now": [
+                "Regenerar ahora"
+            ],
+            "Regenerate In Background": [
+                "Regenerar en segundo plano"
+            ],
+            "Image Regeneration Complete": [
+                "Regeneraci\u00f3n de im\u00e1genes completada"
+            ],
+            "Image Regeneration in Progress": [
+                "Regeneraci\u00f3n de im\u00e1genes en curso"
+            ],
+            "All thumbnails have been regenerated successfully.": [
+                "Todas las miniaturas se han regenerado correctamente."
+            ],
+            "Regenerating media library thumbnails using selected sizes.": [
+                "Regenerando las miniaturas de la biblioteca de medios con los tama\u00f1os seleccionados."
+            ],
+            "Cancel": [
+                "Cancelar"
+            ],
+            "Images Processed": [
+                "Im\u00e1genes procesadas"
+            ],
+            "Images Not Found": [
+                "Im\u00e1genes no encontradas"
+            ],
+            "Images Deleted": [
+                "Im\u00e1genes eliminadas"
+            ],
+            "Images Created": [
+                "Im\u00e1genes creadas"
+            ],
+            "Find & Remove Unused Images": [
+                "Encontrar y eliminar im\u00e1genes sin usar"
+            ],
+            "You're paying to host images nobody sees. Remove orphaned files and cut hosting costs, backup size, and storage waste instantly.": [
+                "Est\u00e1s pagando por alojar im\u00e1genes que nadie ve. Elimina los archivos hu\u00e9rfanos y reduce al instante los costes de alojamiento, el tama\u00f1o de las copias de seguridad y el espacio desperdiciado."
+            ],
+            "Ready to Scan for Unused Images?": [
+                "\u00bfListo para buscar im\u00e1genes sin usar?"
+            ],
+            "Click \"Detect Now\" to scan your library across Gutenberg, Elementor, WooCommerce, ACF, and LayerSlider for unused images.": [
+                "Haz clic en \u00abDetectar ahora\u00bb para analizar tu biblioteca en busca de im\u00e1genes sin usar en Gutenberg, Elementor, WooCommerce, ACF y LayerSlider."
+            ],
+            "Detect in background": [
+                "Detectar en segundo plano"
+            ],
+            "Unused Image Cleanup is a Pro feature": [
+                "La limpieza de im\u00e1genes sin usar es una funci\u00f3n Pro"
+            ],
+            "A bloated library slows uploads, backups, and searches. Remove dead weight and keep your site lean and fast.": [
+                "Una biblioteca sobrecargada ralentiza las subidas, las copias de seguridad y las b\u00fasquedas. Elimina el peso muerto y mant\u00e9n tu sitio ligero y r\u00e1pido."
+            ],
+            "Upgrade to clean up unused images": [
+                "Mejora tu plan para limpiar las im\u00e1genes sin usar"
+            ],
+            "Find & Remove Duplicate Images": [
+                "Encontrar y eliminar im\u00e1genes duplicadas"
+            ],
+            "Duplicates inflate storage and bloat backups. Find every redundant file and clean house without risking your originals.": [
+                "Los duplicados inflan el almacenamiento y sobrecargan las copias de seguridad. Encuentra todos los archivos redundantes y haz limpieza sin poner en riesgo tus originales."
+            ],
+            "Ready to Scan for Duplicates?": [
+                "\u00bfListo para buscar duplicados?"
+            ],
+            "Click \"Detect Now\" to scan your library and identify redundant files taking up unnecessary storage space.": [
+                "Haz clic en \u00abDetectar ahora\u00bb para analizar tu biblioteca e identificar los archivos redundantes que ocupan espacio de almacenamiento innecesario."
+            ],
+            "The same file uploaded twice wastes space every day. Surface every duplicate and reclaim storage you didn't know you were losing.": [
+                "El mismo archivo subido dos veces desperdicia espacio cada d\u00eda. Saca a la luz todos los duplicados y recupera el almacenamiento que ni sab\u00edas que estabas perdiendo."
+            ],
+            "One oversized image tanks your page score. Find every offender and fix it before it costs you rankings and revenue.": [
+                "Una sola imagen demasiado grande hunde la puntuaci\u00f3n de tu p\u00e1gina. Encuentra a todos los culpables y arr\u00e9glalos antes de que te cuesten posiciones e ingresos."
+            ],
+            "Ready to Scan for Large Images?": [
+                "\u00bfListo para buscar im\u00e1genes grandes?"
+            ],
+            "Set your file size threshold above and click \"Detect Now\" to find images exceeding your size limit.": [
+                "Establece arriba tu umbral de tama\u00f1o de archivo y haz clic en \u00abDetectar ahora\u00bb para encontrar las im\u00e1genes que superan tu l\u00edmite de tama\u00f1o."
+            ],
+            "File Size Threshold": [
+                "Umbral de tama\u00f1o de archivo"
+            ],
+            "Images larger than this size will be marked as large. Set the limit to detect oversized images.": [
+                "Las im\u00e1genes mayores que este tama\u00f1o se marcar\u00e1n como grandes. Establece el l\u00edmite para detectar im\u00e1genes demasiado grandes."
+            ],
+            "e.g. 1 for 1MB": [
+                "p. ej. 1 para 1MB"
+            ],
+            "Large Image Detection is a Pro feature": [
+                "La detecci\u00f3n de im\u00e1genes grandes es una funci\u00f3n Pro"
+            ],
+            "Slow pages bleed traffic. Find the heavy images hurting your Core Web Vitals before they cost you visitors.": [
+                "Las p\u00e1ginas lentas pierden tr\u00e1fico. Encuentra las im\u00e1genes pesadas que perjudican tus Core Web Vitals antes de que te cuesten visitantes."
+            ],
+            "Upgrade to find and fix large images": [
+                "Mejora tu plan para encontrar y arreglar im\u00e1genes grandes"
+            ],
+            "Compress Your Images": [
+                "Comprime tus im\u00e1genes"
+            ],
+            "Uncompressed images are the #1 reason sites fail Core Web Vitals. Compress your library in minutes - smaller files, higher rankings, zero quality loss.": [
+                "Las im\u00e1genes sin comprimir son el motivo n.\u00ba 1 por el que los sitios no superan los Core Web Vitals. Comprime tu biblioteca en minutos: archivos m\u00e1s peque\u00f1os, mejores posiciones y cero p\u00e9rdida de calidad."
+            ],
+            "Ready to Compress Your Images?": [
+                "\u00bfListo para comprimir tus im\u00e1genes?"
+            ],
+            "Configure your compression settings above and click \"Compress Now\" to optimize your image library.": [
+                "Configura arriba tus ajustes de compresi\u00f3n y haz clic en \u00abComprimir ahora\u00bb para optimizar tu biblioteca de im\u00e1genes."
+            ],
+            "Quality Level": [
+                "Nivel de calidad"
+            ],
+            "Compression quality from 0-100. Higher values preserve more detail but result in larger files. 80+ recommended for best results.": [
+                "Calidad de compresi\u00f3n de 0 a 100. Los valores m\u00e1s altos conservan m\u00e1s detalle, pero generan archivos m\u00e1s grandes. Se recomienda 80 o m\u00e1s para obtener los mejores resultados."
+            ],
+            "e.g. 80 (0-100)": [
+                "p. ej. 80 (0-100)"
+            ],
+            "Compress In Background": [
+                "Comprimir en segundo plano"
+            ],
+            "Every heavy image loses you a visitor. Compress your entire library in one click and watch page speed - and conversions - climb.": [
+                "Cada imagen pesada te hace perder un visitante. Comprime toda tu biblioteca con un clic y observa c\u00f3mo suben la velocidad de la p\u00e1gina y las conversiones."
+            ],
+            "Convert Images to WebP": [
+                "Convertir im\u00e1genes a WebP"
+            ],
+            "Slow images cost you sales. Switch to WebP and cut file sizes by 35% - faster pages, lower bounce rates, and better rankings, zero quality loss.": [
+                "Las im\u00e1genes lentas te cuestan ventas. P\u00e1sate a WebP y reduce el tama\u00f1o de los archivos un 35 %: p\u00e1ginas m\u00e1s r\u00e1pidas, menor tasa de rebote y mejores posiciones, con cero p\u00e9rdida de calidad."
+            ],
+            "Convert Again": [
+                "Convertir de nuevo"
+            ],
+            "Ready to Convert to WebP?": [
+                "\u00bfListo para convertir a WebP?"
+            ],
+            "There are no images to convert to WebP.": [
+                "No hay im\u00e1genes que convertir a WebP."
+            ],
+            "Select file formats above and click \"Convert Now\" to start converting images to WebP for faster loading.": [
+                "Selecciona arriba los formatos de archivo y haz clic en \u00abConvertir ahora\u00bb para empezar a convertir las im\u00e1genes a WebP y acelerar la carga."
+            ],
+            "Select File Format": [
+                "Selecciona el formato de archivo"
+            ],
+            "Convert In Background": [
+                "Convertir en segundo plano"
+            ],
+            "WebP Conversion Complete": [
+                "Conversi\u00f3n a WebP completada"
+            ],
+            "WebP Conversion in Progress": [
+                "Conversi\u00f3n a WebP en curso"
+            ],
+            "All images have been converted to WebP.": [
+                "Todas las im\u00e1genes se han convertido a WebP."
+            ],
+            "We're scanning your media library and converting eligible images to WebP.": [
+                "Estamos analizando tu biblioteca de medios y convirtiendo a WebP las im\u00e1genes aptas."
+            ],
+            "Images Converted": [
+                "Im\u00e1genes convertidas"
+            ],
+            "Images Remaining": [
+                "Im\u00e1genes restantes"
+            ],
+            "Convert Images to AVIF": [
+                "Convertir im\u00e1genes a AVIF"
+            ],
+            "The format Google rewards. Cut image sizes by 50% over WebP, slash bandwidth costs, and pass Core Web Vitals with ease.": [
+                "El formato que Google premia. Reduce el tama\u00f1o de las im\u00e1genes un 50 % respecto a WebP, recorta los costes de ancho de banda y supera los Core Web Vitals con facilidad."
+            ],
+            "Ready to Convert to AVIF?": [
+                "\u00bfListo para convertir a AVIF?"
+            ],
+            "Select file formats above and click \"Convert Now\" to convert images to AVIF for even smaller file sizes.": [
+                "Selecciona arriba los formatos de archivo y haz clic en \u00abConvertir ahora\u00bb para convertir las im\u00e1genes a AVIF y conseguir archivos a\u00fan m\u00e1s peque\u00f1os."
+            ],
+            "AVIF Conversion is a Pro feature": [
+                "La conversi\u00f3n a AVIF es una funci\u00f3n Pro"
+            ],
+            "Slow loads kill conversions. AVIF halves your file sizes with no visible quality loss - faster pages, higher rankings.": [
+                "Las cargas lentas acaban con las conversiones. AVIF reduce a la mitad el tama\u00f1o de tus archivos sin p\u00e9rdida de calidad visible: p\u00e1ginas m\u00e1s r\u00e1pidas y mejores posiciones."
+            ],
+            "Upgrade to convert images to AVIF": [
+                "Mejora tu plan para convertir im\u00e1genes a AVIF"
+            ],
+            "Manage Trashed Images": [
+                "Gestionar las im\u00e1genes en la papelera"
+            ],
+            "Leftover files from old conversions and failed uploads quietly pile up. Delete the junk and reclaim real disk space in seconds.": [
+                "Los archivos sobrantes de conversiones antiguas y subidas fallidas se acumulan en silencio. Elimina la basura y recupera espacio real en disco en segundos."
+            ],
+            "File Name": [
+                "Nombre del archivo"
+            ],
+            "Image": [
+                "Imagen"
+            ],
+            "Upload Date": [
+                "Fecha de subida"
+            ],
+            "File Size": [
+                "Tama\u00f1o del archivo"
+            ],
+            "Action": [
+                "Acci\u00f3n"
+            ],
+            "No trashed images found.": [
+                "No se han encontrado im\u00e1genes en la papelera."
+            ],
+            "Manage Trashed Images is a Pro feature": [
+                "Gestionar las im\u00e1genes en la papelera es una funci\u00f3n Pro"
+            ],
+            "Restore or permanently delete images you've moved to trash. Keep your library clean and reclaim disk space.": [
+                "Restaura o elimina definitivamente las im\u00e1genes que has movido a la papelera. Mant\u00e9n tu biblioteca limpia y recupera espacio en disco."
+            ],
+            "Activate License to manage trashed images": [
+                "Activa la licencia para gestionar las im\u00e1genes en la papelera"
+            ],
+            "General Settings": [
+                "Ajustes generales"
+            ],
+            "General settings for the plugin": [
+                "Ajustes generales del plugin"
+            ],
+            "Thumbnail Generation": [
+                "Generaci\u00f3n de miniaturas"
+            ],
+            "Disable thumbnail generation for specific image sizes": [
+                "Desactiva la generaci\u00f3n de miniaturas para tama\u00f1os de imagen concretos"
+            ],
+            "Duplicate Upload Prevention": [
+                "Prevenci\u00f3n de subidas duplicadas"
+            ],
+            "Prevent uploading duplicate images to your media library": [
+                "Evita subir im\u00e1genes duplicadas a tu biblioteca de medios"
+            ],
+            "File Compression Settings": [
+                "Ajustes de compresi\u00f3n de archivos"
+            ],
+            "Image compression additional settings": [
+                "Ajustes adicionales de compresi\u00f3n de im\u00e1genes"
+            ],
+            "WebP Image Converter additional settings": [
+                "Ajustes adicionales del conversor de im\u00e1genes a WebP"
+            ],
+            "AVIF Image Converter additional settings": [
+                "Ajustes adicionales del conversor de im\u00e1genes a AVIF"
+            ],
+            "Platform Configuration": [
+                "Configuraci\u00f3n de la plataforma"
+            ],
+            "Manage the image used for social media sharing": [
+                "Gestiona la imagen utilizada para compartir en redes sociales"
+            ],
+            "Debug": [
+                "Depuraci\u00f3n"
+            ],
+            "Debug Information": [
+                "Informaci\u00f3n de depuraci\u00f3n"
+            ],
+            "System and plugin info for support": [
+                "Informaci\u00f3n del sistema y del plugin para el soporte"
+            ],
+            "Debug info copied to clipboard.": [
+                "Informaci\u00f3n de depuraci\u00f3n copiada al portapapeles."
+            ],
+            "Copied!": [
+                "\u00a1Copiado!"
+            ],
+            "Copy as JSON": [
+                "Copiar como JSON"
+            ],
+            "Miss the old interface?": [
+                "\u00bfEchas de menos la interfaz anterior?"
+            ],
+            "Turn on legacy mode.": [
+                "Activa el modo cl\u00e1sico."
+            ]
+        }
+    }
+}

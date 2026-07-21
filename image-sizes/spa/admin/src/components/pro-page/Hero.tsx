@@ -62,7 +62,7 @@ const Hero = () => {
 				<div className="2xl:flex-shrink-0 2xl:w-[408px] lg:w-[237px]">
 					<img
 						src={`${proImgBase}modules.png`}
-						alt="ThumbPress modules"
+						alt={__( 'ThumbPress modules', 'image-sizes' )}
 						className="shadow-2xl cursor-pointer hover:opacity-90 transition-opacity duration-300"
 						onClick={() => (
 							document.getElementById('thumbpress-pro-features')?.scrollIntoView({ behavior: 'smooth' })

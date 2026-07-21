@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import { toast } from 'sonner';
 import { Switch } from '../ui/switch';
 import { saveDisabledThumbnails, ThumbnailsSizes } from '../../api';
+import { numberFormat } from '../../lib/i18n';
 
 interface RegenerateThumbnailsProps {
 	sizes: ThumbnailsSizes;
@@ -84,7 +85,7 @@ export default function RegenerateThumbnails({
 						>
 							<div>
 								<h4 className="2xl:text-base lg:text-sm font-medium text-thumbpress-title capitalize">
-									{size.name} {name === 'full' ? '' : `(${size.width}x${size.height})`}
+									{name === 'full' ? size.name : sprintf( /* translators: %1$s is the size name, %2$s is the width, %3$s is the height. */ __( '%1$s (%2$s×%3$s)', 'image-sizes' ), size.name, numberFormat(size.width), numberFormat(size.height) )}
 								</h4>
 								{name !== 'full' ? (
 									<p className="2xl:text-sm lg:text-xs text-[#64748B] mt-1">

@@ -102,7 +102,7 @@ export default function Settings() {
 		const text = JSON.stringify(debugInfo, null, 2);
 		const finish = () => {
 			setDebugCopied(true);
-			toast.success('Debug info copied to clipboard.');
+			toast.success(__( 'Debug info copied to clipboard.', 'image-sizes' ));
 			setTimeout(() => setDebugCopied(false), 2000);
 		};
 		if (navigator.clipboard?.writeText) {
@@ -125,14 +125,14 @@ export default function Settings() {
 
 	const defaultTabs = [
 		{
-			label: 'General',
+			label: __( 'General', 'image-sizes' ),
 			slug: 'general',
 			content: <General settings={pluginSettings} onSave={refreshSettings} />,
-			title: 'General Settings',
-			tooltip: 'General settings for the plugin',
+			title: __( 'General Settings', 'image-sizes' ),
+			tooltip: __( 'General settings for the plugin', 'image-sizes' ),
 		},
 		{
-			label: 'Thumbnails',
+			label: __( 'Thumbnails', 'image-sizes' ),
 			slug: 'thumbnails',
 			content: (
 				<RegenerateThumbnails
@@ -142,8 +142,8 @@ export default function Settings() {
 					loading={!thumbnailsLoaded}
 				/>
 			),
-			title: 'Thumbnail Generation',
-			tooltip: 'Disable thumbnail generation for specific image sizes',
+			title: __( 'Thumbnail Generation', 'image-sizes' ),
+			tooltip: __( 'Disable thumbnail generation for specific image sizes', 'image-sizes' ),
 			headerAction: allToggleable.length > 0 ? (
 				<Switch
 					checked={allEnabled}
@@ -154,46 +154,46 @@ export default function Settings() {
 			) : undefined,
 		},
 		{
-			label: 'Duplicate Images',
+			label: __( 'Duplicate Images', 'image-sizes' ),
 			slug: 'duplicate-images',
 			content: <DuplicateImages />,
-			title: 'Duplicate Upload Prevention',
-			tooltip: 'Prevent uploading duplicate images to your media library',
+			title: __( 'Duplicate Upload Prevention', 'image-sizes' ),
+			tooltip: __( 'Prevent uploading duplicate images to your media library', 'image-sizes' ),
 		},
 		{
-			label: 'Compress Images',
+			label: __( 'Compress Images', 'image-sizes' ),
 			slug: 'compress-images',
 			content: <CompressImages />,
-			title: 'File Compression Settings',
-			tooltip: 'Image compression additional settings',
+			title: __( 'File Compression Settings', 'image-sizes' ),
+			tooltip: __( 'Image compression additional settings', 'image-sizes' ),
 		},
 		{
-			label: 'Convert to WebP',
+			label: __( 'Convert to WebP', 'image-sizes' ),
 			slug: 'convert-to-webp',
 			content: <ConvertToWebP settings={pluginSettings} onSave={refreshSettings} />,
-			title: 'Convert to WebP',
-			tooltip: 'WebP Image Converter additional settings',
+			title: __( 'Convert to WebP', 'image-sizes' ),
+			tooltip: __( 'WebP Image Converter additional settings', 'image-sizes' ),
 		},
 		{
-			label: 'Convert to AVIF',
+			label: __( 'Convert to AVIF', 'image-sizes' ),
 			slug: 'convert-to-avif',
 			content: <ConvertToAvif settings={pluginSettings} onSave={refreshSettings} />,
-			title: 'Convert to AVIF',
-			tooltip: 'AVIF Image Converter additional settings',
+			title: __( 'Convert to AVIF', 'image-sizes' ),
+			tooltip: __( 'AVIF Image Converter additional settings', 'image-sizes' ),
 		},
 		{
-			label: 'Social Share Image',
+			label: __( 'Social Share Image', 'image-sizes' ),
 			slug: 'social-share-image',
 			content: <SocialShareImage settings={pluginSettings} onSave={refreshSettings} />,
-			title: 'Platform Configuration',
-			tooltip: 'Manage the image used for social media sharing',
+			title: __( 'Platform Configuration', 'image-sizes' ),
+			tooltip: __( 'Manage the image used for social media sharing', 'image-sizes' ),
 		},
 		{
-			label: 'Debug',
+			label: __( 'Debug', 'image-sizes' ),
 			slug: 'debug',
 			content: <Debug onDataLoaded={setDebugInfo} />,
-			title: 'Debug Information',
-			tooltip: 'System and plugin info for support',
+			title: __( 'Debug Information', 'image-sizes' ),
+			tooltip: __( 'System and plugin info for support', 'image-sizes' ),
 			headerAction: (
 				<button
 					onClick={handleDebugCopy}
@@ -201,7 +201,7 @@ export default function Settings() {
 					className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#E2E8F0] text-sm text-[#64748B] hover:border-thumbpress-primary hover:text-thumbpress-primary transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
 				>
 					{debugCopied ? <Check size={14} className="text-green-600" /> : <Copy size={14} />}
-					{debugCopied ? 'Copied!' : 'Copy as JSON'}
+					{debugCopied ? __( 'Copied!', 'image-sizes' ) : __( 'Copy as JSON', 'image-sizes' )}
 				</button>
 			),
 		},
@@ -242,7 +242,7 @@ export default function Settings() {
 							{tab.slug === 'general' && !window.THUMBPRESS?.is_new_user && (
 								<div className="max-w-[900px] text-center mt-4">
 									<p className="text-sm text-[#64748B]">
-										Miss the old interface?{' '}
+										{__( 'Miss the old interface?', 'image-sizes' )}{' '}
 										<a
 											href="#"
 											onClick={(e) => {
@@ -264,7 +264,7 @@ export default function Settings() {
 											}}
 											className="text-thumbpress-primary hover:underline cursor-pointer"
 										>
-											Turn on legacy mode.
+											{__( 'Turn on legacy mode.', 'image-sizes' )}
 										</a>
 									</p>
 								</div>

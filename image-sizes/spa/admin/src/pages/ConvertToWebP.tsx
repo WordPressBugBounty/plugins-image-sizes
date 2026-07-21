@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { __ } from '@wordpress/i18n';
+import { numberFormat, percentFormat, formatBytes } from '../lib/i18n';
 import { useNavigate } from 'react-router-dom';
 import { Image } from 'lucide-react';
 import SettingsButton from '../components/ui/settings-button';
@@ -354,7 +355,7 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 										type="number"
 										value={chunkSize}
 										onChange={(e) => setChunkSize(e.target.value)}
-										placeholder="e.g. 50"
+										placeholder={__('e.g. 50', 'image-sizes')}
 										className="flex w-full !rounded-lg !border !border-thumbpress-border bg-white !px-4 !h-[56px] text-sm placeholder:text-gray-400 focus:!outline-none focus:!shadow-none"
 									/>
 								</div>
@@ -402,13 +403,13 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 										transform="rotate(-90 110 110)" className="transition-all duration-500" />
 								</svg>
 								<div className="absolute inset-0 flex items-center justify-center">
-									<span className="text-4xl font-bold text-gray-900">{progress}%</span>
+									<span className="text-4xl font-bold text-gray-900">{ percentFormat( progress ) }</span>
 								</div>
 							</div>
 
 							<div className="grid grid-cols-3 gap-4 w-full max-w-[700px]">
-								<StatCard icon={<TotalImagesIcon2 />} value={total} label={__('Total Images', 'image-sizes')} />
-								<StatCard icon={<ImageProcessedIcon />} value={processed} label={__('Images Processed', 'image-sizes')} />
+								<StatCard icon={<TotalImagesIcon2 />} value={ numberFormat( total ) } label={__('Total Images', 'image-sizes')} />
+								<StatCard icon={<ImageProcessedIcon />} value={ numberFormat( processed ) } label={__('Images Processed', 'image-sizes')} />
 								<StatCard
 									icon={
 										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="currentColor" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -418,12 +419,12 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 											<path d="M3 16L7.50036 11.5004M21 16L18.5303 13.5303C18.1908 13.1908 17.7302 13 17.25 13C16.7698 13 16.3092 13.1908 15.9697 13.5303L14.75 14.75" />
 										</svg>
 									}
-									value={notFound || 0}
+									value={ numberFormat( notFound || 0 ) }
 									label={__('Images Not Found', 'image-sizes')}
 								/>
-								<StatCard icon={<ConvertedIcon />} value={converted} label={__('Images Converted', 'image-sizes')} />
-								<StatCard icon={<RemainingIcon />} value={remaining} label={__('Images Remaining', 'image-sizes')} />
-								<StatCard icon={<SpaceSavedIcon2 />} value={spaceSaved > 1048576 ? `${(spaceSaved / 1048576).toFixed(1)} MB` : `${(spaceSaved / 1024).toFixed(1)} KB`} label={__('Space Saved', 'image-sizes')} />
+								<StatCard icon={<ConvertedIcon />} value={ numberFormat( converted ) } label={__('Images Converted', 'image-sizes')} />
+								<StatCard icon={<RemainingIcon />} value={ numberFormat( remaining ) } label={__('Images Remaining', 'image-sizes')} />
+								<StatCard icon={<SpaceSavedIcon2 />} value={ formatBytes( spaceSaved ) } label={__('Space Saved', 'image-sizes')} />
 							</div>
 
 						</div>

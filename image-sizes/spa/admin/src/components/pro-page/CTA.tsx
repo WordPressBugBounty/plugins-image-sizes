@@ -46,7 +46,7 @@ const CTA = () => {
 							fill="white"
 						/>
 					</svg>
-					Upgrade to Pro
+					{__( 'Upgrade to Pro', 'image-sizes' )}
 				</button>
 			</div>
 		</div>

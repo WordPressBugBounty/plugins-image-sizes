@@ -3,6 +3,9 @@
     "build": "wp-scripts build",
     "start": "wp-scripts start",
     "watch": "wp-scripts start",
+    "make-pot": "wp i18n make-pot . languages/image-sizes.pot --slug=image-sizes",
+    "make-json": "wp i18n make-json languages/ --pretty-print",
+    "i18n": "yarn make-pot && yarn make-json",
     "merge-backend": "git checkout feature/dashboard-restructure && git pull && git checkout feature/dashboard-restructure-frontend && git merge feature/dashboard-restructure",
     "merge-frontend": "git checkout feature/dashboard-restructure-frontend && git pull && git checkout feature/dashboard-restructure && git merge feature/dashboard-restructure-frontend"
   },

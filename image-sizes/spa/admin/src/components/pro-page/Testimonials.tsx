@@ -9,7 +9,7 @@ const Testimonials = () => {
 		{
 			name: '@pressnine',
 			rating: 5,
-			comment: "This saved me money when I realised I was about to exceed my host’s image allowance, enabling me to wipe out excess duplicate images.",
+			comment: __( 'This saved me money when I realised I was about to exceed my host’s image allowance, enabling me to wipe out excess duplicate images.', 'image-sizes' ),
 			avatar: '1.png',
 			link: 'https://wordpress.org/support/topic/works-great-9314/',
 		},
@@ -17,14 +17,14 @@ const Testimonials = () => {
 			name: '@tobthijm',
 			rating: 5,
 			comment:
-				'At the moment I’m using it to resize my pictures, I see a lot of things to use in the future to keep the site smaller then it was. So far it’s working fine and the one question I had was answered right away!! Keep up the good work!!!',
+				__( 'At the moment I’m using it to resize my pictures, I see a lot of things to use in the future to keep the site smaller then it was. So far it’s working fine and the one question I had was answered right away!! Keep up the good work!!!', 'image-sizes' ),
 			avatar: '2.png',
 			link: 'https://wordpress.org/support/topic/very-nice-plugin-1063/',
 		},
 		{
 			name: '@raygulick',
 			rating: 5,
-			comment: "This plugin is extremely useful, and a must for sites with a lot of images. I had a problem with activation of the Pro version, and the support team resolved the issue quickly and without fuss.",
+			comment: __( 'This plugin is extremely useful, and a must for sites with a lot of images. I had a problem with activation of the Pro version, and the support team resolved the issue quickly and without fuss.', 'image-sizes' ),
 			avatar: '3.png',
 			link: 'https://wordpress.org/support/topic/great-features-helpful-support/',
 		},

@@ -1,4 +1,5 @@
 import { Check } from 'lucide-react';
+import { __, sprintf } from '@wordpress/i18n';
 
 interface PricingCardProps {
 	plan: {
@@ -22,7 +23,7 @@ const PricingCard = ({ plan, duration }: PricingCardProps) => {
 		>
 			{plan.featured && (
 				<div className="absolute top-0 right-0 bg-thumbpress-primary pointer-events-none py-2 px-4 text-white text-sm font-medium rounded-bl-lg">
-					Best Value
+					{__( 'Best Value', 'image-sizes' )}
 				</div>
 			)}
 
@@ -40,11 +41,11 @@ const PricingCard = ({ plan, duration }: PricingCardProps) => {
 						{plan.price}
 					</span>
 					{duration === 'Yearly' && (
-						<span className="text-base text-thumbpress-body">/ Month</span>
+						<span className="text-base text-thumbpress-body">{__( '/ Month', 'image-sizes' )}</span>
 					)}
 
 					{duration === 'Lifetime' && (
-						<span className="text-base text-thumbpress-body">/ Lifetime</span>
+						<span className="text-base text-thumbpress-body">{__( '/ Lifetime', 'image-sizes' )}</span>
 					)}
 					{plan.discount && (
 						<span className="ml-auto self-center bg-[#F97316] text-white text-xs font-semibold px-2.5 py-1 rounded">
@@ -54,7 +55,7 @@ const PricingCard = ({ plan, duration }: PricingCardProps) => {
 				</div>
 
 				{duration === 'Yearly' && (
-					<span className='text-[#4A4C56] italic text-sm'>Billed annually. You pay {plan.totalPrice} today</span>
+					<span className='text-[#4A4C56] italic text-sm'>{sprintf( /* translators: %s is the total yearly price. */ __( 'Billed annually. You pay %s today', 'image-sizes' ), plan.totalPrice ?? '' )}</span>
 				)}
 			</div>
 
@@ -75,7 +76,7 @@ const PricingCard = ({ plan, duration }: PricingCardProps) => {
 				rel="noopener noreferrer"
 				className={`block text-center py-3 rounded-lg text-sm font-medium no-underline transition-colors duration-300 border-2 border-thumbpress-primary ${plan.featured ? 'bg-thumbpress-primary !text-white' : ' !text-thumbpress-primary hover:bg-thumbpress-primary hover:!text-white'}`}
 			>
-				Purchase
+				{__( 'Purchase', 'image-sizes' )}
 			</a>
 		</div>
 	);

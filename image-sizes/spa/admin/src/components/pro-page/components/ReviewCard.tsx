@@ -1,4 +1,5 @@
 import React from 'react';
+import { __ } from '@wordpress/i18n';
 
 type ReviewProps = {
 	name: string;
@@ -26,7 +27,7 @@ const ReviewCard = (review: ReviewProps) => {
 
             <div className="flex items-center gap-3 2xl:mt-0 lg:mt-8">
                 <a href={review.link} target="_blank" rel="noreferrer">
-                    <img src={`${imgUrl}/${review.avatar}`} alt="reviewer" className='rounded-full 2xl:w-[60px] 2xl:h-[60px] lg:w-[40px] lg:h-[40px] object-cover' />
+                    <img src={`${imgUrl}/${review.avatar}`} alt={__( 'reviewer', 'image-sizes' )} className='rounded-full 2xl:w-[60px] 2xl:h-[60px] lg:w-[40px] lg:h-[40px] object-cover' />
                 </a>
 
                 <div>

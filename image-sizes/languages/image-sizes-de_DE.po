@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Last-Translator: \n"
+"Language-Team: German\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,259 +11,261 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.13.0-alpha-3eb2dd7\n"
 "X-Domain: image-sizes\n"
+"Language: de_DE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: app/API/Convert_Avif.php:18
 msgid "AVIF conversion requires PHP 8.0 or higher."
-msgstr ""
+msgstr "Die AVIF-Konvertierung erfordert PHP 8.0 oder höher."
 
 #: app/API/Convert_Avif.php:24
 #: app/API/Convert_Webp.php:377
 msgid "Invalid image ID."
-msgstr ""
+msgstr "Ungültige Bild-ID."
 
 #: app/API/Convert_Avif.php:30
 #: app/API/Convert_Avif.php:38
 #: app/API/Convert_Webp.php:383
 #: app/API/Convert_Webp.php:391
 msgid "Source image file not found."
-msgstr ""
+msgstr "Quellbilddatei nicht gefunden."
 
 #: app/API/Convert_Avif.php:72
 #: app/API/Convert_Webp.php:424
 msgid "metadata generation returned nothing"
-msgstr ""
+msgstr "Metadatenerstellung lieferte kein Ergebnis"
 
 #. translators: %s: underlying reason metadata generation failed
 #: app/API/Convert_Avif.php:76
 msgid "Converted the image to AVIF but could not generate its metadata (%s); rolled back."
-msgstr ""
+msgstr "Das Bild wurde in AVIF konvertiert, aber die Metadaten konnten nicht erstellt werden (%s); Änderung wurde zurückgenommen."
 
 #: app/API/Convert_Avif.php:149
 msgid "Image converted to AVIF successfully."
-msgstr ""
+msgstr "Bild erfolgreich in AVIF konvertiert."
 
 #: app/API/Convert_Webp.php:51
 #: app/API/Convert_Webp.php:291
 msgid "No file formats selected."
-msgstr ""
+msgstr "Keine Dateiformate ausgewählt."
 
 #: app/API/Convert_Webp.php:57
 #: app/API/Convert_Webp.php:296
 msgid "No valid file formats selected."
-msgstr ""
+msgstr "Keine gültigen Dateiformate ausgewählt."
 
 #: app/API/Convert_Webp.php:100
 #: app/API/Convert_Webp.php:317
 #: app/API/Regenerate.php:34
 #: app/API/Regenerate.php:121
 msgid "No images found."
-msgstr ""
+msgstr "Keine Bilder gefunden."
 
 #: app/API/Convert_Webp.php:115
 #: app/API/Convert_Webp.php:262
 msgid "Congratulations, Converting Images to WebP is Completed!"
-msgstr ""
+msgstr "Glückwunsch, die Konvertierung der Bilder in WebP ist abgeschlossen!"
 
 #: app/API/Convert_Webp.php:260
 msgid "Converting Images to WebP..."
-msgstr ""
+msgstr "Bilder werden in WebP konvertiert..."
 
 #: app/API/Convert_Webp.php:336
 #: app/API/Regenerate.php:130
 msgid "Failed to schedule action."
-msgstr ""
+msgstr "Aktion konnte nicht geplant werden."
 
 #: app/API/Convert_Webp.php:341
 msgid "Your images are being converted in the background."
-msgstr ""
+msgstr "Ihre Bilder werden im Hintergrund konvertiert."
 
 #. translators: %s: underlying reason metadata generation failed
 #: app/API/Convert_Webp.php:428
 msgid "Converted the image but could not generate its metadata (%s); rolled back."
-msgstr ""
+msgstr "Das Bild wurde konvertiert, aber die Metadaten konnten nicht erstellt werden (%s); Änderung wurde zurückgenommen."
 
 #: app/API/Convert_Webp.php:498
 msgid "Image converted successfully."
-msgstr ""
+msgstr "Bild erfolgreich konvertiert."
 
 #: app/API/Regenerate.php:77
 msgid "Regenerating Thumbnails..."
-msgstr ""
+msgstr "Thumbnails werden neu erstellt..."
 
 #: app/API/Regenerate.php:79
 msgid "Congratulations, Thumbnail Regeneration is Completed!"
-msgstr ""
+msgstr "Glückwunsch, die Neuerstellung der Thumbnails ist abgeschlossen!"
 
 #: app/API/Regenerate.php:135
 msgid "Your images are being regenerated in the background."
-msgstr ""
+msgstr "Ihre Bilder werden im Hintergrund neu erstellt."
 
 #: app/API/Regenerate.php:148
 msgid "Invalid attachment."
-msgstr ""
+msgstr "Ungültiger Anhang."
 
 #: app/API/Regenerate.php:157
 msgid "Image file not found."
-msgstr ""
+msgstr "Bilddatei nicht gefunden."
 
 #: app/API/Regenerate.php:165
 msgid "Thumbnails regenerated successfully."
-msgstr ""
+msgstr "Thumbnails erfolgreich neu erstellt."
 
 #: app/API/Settings.php:198
 #: build/admin.js:13
 msgid "Settings saved successfully."
-msgstr ""
+msgstr "Einstellungen erfolgreich gespeichert."
 
 #: app/API/Thumbnails.php:150
 msgid "Invalid data format. Array expected."
-msgstr ""
+msgstr "Ungültiges Datenformat. Array erwartet."
 
 #: app/API/Thumbnails.php:160
 msgid "Disabled sizes saved successfully."
-msgstr ""
+msgstr "Deaktivierte Größen erfolgreich gespeichert."
 
 #: app/API/Thumbnails.php:163
 msgid "No changes detected."
-msgstr ""
+msgstr "Keine Änderungen erkannt."
 
 #: app/Bootstrap/AdminNotice.php:87
 #: app/Bootstrap/AdminNotice.php:167
 #: app/Bootstrap/AdminNotice.php:295
 #: app/Controllers/Admin/Init.php:229
 msgid "Dismiss this notice."
-msgstr ""
+msgstr "Diesen Hinweis ausblenden."
 
 #: app/Bootstrap/AdminNotice.php:90
 msgid "ThumbPress Pro update required!"
-msgstr ""
+msgstr "Update von ThumbPress Pro erforderlich!"
 
 #. translators: 1: installed pro version, 2: required pro version
 #: app/Bootstrap/AdminNotice.php:93
 msgid "ThumbPress requires ThumbPress Pro version %2$s or higher. You have version %1$s. Please update to use all new features."
-msgstr ""
+msgstr "ThumbPress benötigt ThumbPress Pro Version %2$s oder höher. Sie haben Version %1$s. Bitte aktualisieren Sie, um alle neuen Funktionen zu nutzen."
 
 #: app/Bootstrap/AdminNotice.php:100
 msgid "Update ThumbPress Pro Now"
-msgstr ""
+msgstr "ThumbPress Pro jetzt aktualisieren"
 
 #: app/Bootstrap/AdminNotice.php:170
 msgid "ThumbPress Pro is installed but not activated!"
-msgstr ""
+msgstr "ThumbPress Pro ist installiert, aber nicht aktiviert!"
 
 #: app/Bootstrap/AdminNotice.php:171
 msgid "Activate ThumbPress Pro to unlock all premium features including image compression, unused image detection, large image detection, and more."
-msgstr ""
+msgstr "Aktivieren Sie ThumbPress Pro, um alle Premium-Funktionen freizuschalten, darunter Bildkomprimierung, Erkennung unbenutzter Bilder, Erkennung großer Bilder und mehr."
 
 #: app/Bootstrap/AdminNotice.php:175
 msgid "Activate ThumbPress Pro"
-msgstr ""
+msgstr "ThumbPress Pro aktivieren"
 
 #: app/Bootstrap/AdminNotice.php:299
 msgid "A new version of ThumbPress is ready!"
-msgstr ""
+msgstr "Eine neue Version von ThumbPress ist verfügbar!"
 
 #: app/Bootstrap/AdminNotice.php:302
 msgid "You are using the new dashboard. Switch back to classic anytime."
-msgstr ""
+msgstr "Sie verwenden das neue Dashboard. Sie können jederzeit zur klassischen Ansicht zurückwechseln."
 
 #: app/Bootstrap/AdminNotice.php:304
 msgid "Would you like to try the new modern dashboard, or keep using the classic version?"
-msgstr ""
+msgstr "Möchten Sie das neue moderne Dashboard ausprobieren oder weiterhin die klassische Version verwenden?"
 
 #: app/Bootstrap/AdminNotice.php:311
 msgid "Using New Version"
-msgstr ""
+msgstr "Neue Version aktiv"
 
 #: app/Bootstrap/AdminNotice.php:314
 msgid "Switch to Classic"
-msgstr ""
+msgstr "Zur klassischen Version wechseln"
 
 #: app/Bootstrap/AdminNotice.php:318
 msgid "Try New Version"
-msgstr ""
+msgstr "Neue Version testen"
 
 #: app/Bootstrap/AdminNotice.php:321
 msgid "Using Classic"
-msgstr ""
+msgstr "Klassische Version aktiv"
 
 #: app/Controllers/Admin/Init.php:70
 msgid "July 19"
-msgstr ""
+msgstr "19. Juli"
 
 #: app/Controllers/Admin/Init.php:74
 msgid "July 22"
-msgstr ""
+msgstr "22. Juli"
 
 #. translators: %s: offer deadline date, e.g. "July 19".
 #: app/Controllers/Admin/Init.php:96
 msgid "ThumbPress: World Cup - 48%% Off - Ends %s"
-msgstr ""
+msgstr "ThumbPress: World Cup - 48 %% Rabatt - endet %s"
 
 #: app/Controllers/Admin/Init.php:98
 msgid "ThumbPress: World Cup - 48% Off"
-msgstr ""
+msgstr "ThumbPress: World Cup - 48 % Rabatt"
 
 #: app/Controllers/Admin/Init.php:104
 msgid "Dismiss"
-msgstr ""
+msgstr "Ausblenden"
 
 #: app/Controllers/Admin/Init.php:194
 msgid "Permission denied."
-msgstr ""
+msgstr "Zugriff verweigert."
 
 #: app/Controllers/Admin/Init.php:232
 msgid "ThumbPress is installed!"
-msgstr ""
+msgstr "ThumbPress ist installiert!"
 
 #: app/Controllers/Admin/Init.php:233
 msgid "Your images are ready to be optimized. Visit the dashboard to get started."
-msgstr ""
+msgstr "Ihre Bilder sind bereit zur Optimierung. Besuchen Sie das Dashboard, um zu starten."
 
 #: app/Controllers/Admin/Init.php:237
 msgid "Go to Dashboard"
-msgstr ""
+msgstr "Zum Dashboard"
 
 #: app/Controllers/Admin/Menu.php:67
 #: app/Controllers/Admin/Menu.php:68
 msgid "ThumbPress"
-msgstr ""
+msgstr "ThumbPress"
 
 #: app/Controllers/Admin/Menu.php:80
 #: app/Controllers/Admin/Menu.php:175
 #: build/admin.js:13
 msgid "Dashboard"
-msgstr ""
+msgstr "Dashboard"
 
 #: app/Controllers/Admin/Menu.php:84
 #: app/Controllers/Admin/Menu.php:180
 #: build/admin.js:13
 msgid "Thumbnails"
-msgstr ""
+msgstr "Thumbnails"
 
 #: app/Controllers/Admin/Menu.php:88
 #: app/Controllers/Admin/Menu.php:185
 #: build/admin.js:13
 msgid "Unused Images"
-msgstr ""
+msgstr "Unbenutzte Bilder"
 
 #: app/Controllers/Admin/Menu.php:92
 #: app/Controllers/Admin/Menu.php:191
 #: build/admin.js:13
 msgid "Duplicate Images"
-msgstr ""
+msgstr "Doppelte Bilder"
 
 #: app/Controllers/Admin/Menu.php:96
 #: app/Controllers/Admin/Menu.php:197
 #: build/admin.js:13
 msgid "Large Images"
-msgstr ""
+msgstr "Große Bilder"
 
 #: app/Controllers/Admin/Menu.php:100
 #: app/Controllers/Admin/Menu.php:203
 #: build/admin.js:13
 msgid "Compress Images"
-msgstr ""
+msgstr "Bilder komprimieren"
 
 #: app/Controllers/Admin/Menu.php:104
 #: app/Controllers/Admin/Menu.php:209
@@ -271,7 +273,7 @@ msgstr ""
 #: app/Controllers/Common/Convert_Webp.php:135
 #: build/admin.js:13
 msgid "Convert to WebP"
-msgstr ""
+msgstr "In WebP konvertieren"
 
 #: app/Controllers/Admin/Menu.php:108
 #: app/Controllers/Admin/Menu.php:214
@@ -280,1794 +282,1794 @@ msgstr ""
 #: app/Controllers/Common/Convert_Avif.php:147
 #: build/admin.js:13
 msgid "Convert to AVIF"
-msgstr ""
+msgstr "In AVIF konvertieren"
 
 #: app/Controllers/Admin/Menu.php:112
 #: app/Controllers/Admin/Menu.php:220
 #: build/admin.js:13
 msgid "Trashed Images"
-msgstr ""
+msgstr "Bilder im Papierkorb"
 
 #: app/Controllers/Admin/Menu.php:116
 #: app/Controllers/Admin/Menu.php:226
 #: build/admin.js:13
 msgid "Settings"
-msgstr ""
+msgstr "Einstellungen"
 
 #: app/Controllers/Admin/Menu.php:121
 #: app/Controllers/Admin/Menu.php:231
 #: build/admin.js:13
 msgid "Pro"
-msgstr ""
+msgstr "Pro"
 
 #: app/Controllers/Admin/Menu.php:122
 msgid "World Cup 48% Off"
-msgstr ""
+msgstr "World Cup 48 % Rabatt"
 
 #: app/Controllers/Admin/Menu.php:157
 msgid "Loading.."
-msgstr ""
+msgstr "Wird geladen.."
 
 #: app/Controllers/Common/API.php:63
 msgid "Array of disabled size names"
-msgstr ""
+msgstr "Array mit Namen deaktivierter Größen"
 
 #: app/Controllers/Common/API.php:83
 msgid "Offset for pagination"
-msgstr ""
+msgstr "Offset für die Seitennummerierung"
 
 #: app/Controllers/Common/API.php:88
 #: app/Controllers/Common/API.php:206
 msgid "Number of images to process"
-msgstr ""
+msgstr "Anzahl der zu verarbeitenden Bilder"
 
 #: app/Controllers/Common/API.php:93
 msgid "Previously deleted thumbnails count"
-msgstr ""
+msgstr "Anzahl der zuvor gelöschten Thumbnails"
 
 #: app/Controllers/Common/API.php:98
 msgid "Previously created thumbnails count"
-msgstr ""
+msgstr "Anzahl der zuvor erstellten Thumbnails"
 
 #: app/Controllers/Common/API.php:115
 #: app/Controllers/Common/API.php:233
 msgid "Batch size for background processing"
-msgstr ""
+msgstr "Batch-Größe für die Hintergrundverarbeitung"
 
 #: app/Controllers/Common/API.php:142
 msgid "Attachment ID to regenerate"
-msgstr ""
+msgstr "Anhang-ID zum Neuerstellen"
 
 #: app/Controllers/Common/API.php:201
 msgid "Last processed attachment ID (pagination cursor)"
-msgstr ""
+msgstr "Zuletzt verarbeitete Anhang-ID (Paginierungs-Cursor)"
 
 #: app/Controllers/Common/API.php:211
 msgid "Cumulative processed count"
-msgstr ""
+msgstr "Kumulierte Anzahl verarbeiteter Bilder"
 
 #: app/Controllers/Common/API.php:216
 msgid "Cumulative converted count"
-msgstr ""
+msgstr "Kumulierte Anzahl konvertierter Bilder"
 
 #: app/Controllers/Common/API.php:260
 #: app/Controllers/Common/API.php:280
 msgid "Attachment ID to convert"
-msgstr ""
+msgstr "Anhang-ID zum Konvertieren"
 
 #: app/Controllers/Common/Convert_Avif.php:189
 msgid "This image is already an AVIF file."
-msgstr ""
+msgstr "Dieses Bild ist bereits eine AVIF-Datei."
 
 #. translators: 1: estimated memory needed in MB, 2: current PHP memory limit in MB
 #: app/Controllers/Common/Convert_Avif.php:220
 #: app/Controllers/Common/Convert_Webp.php:206
 msgid "Image is too large to convert within the server memory limit (needs ~%1$d MB, limit %2$d MB). Increase PHP memory_limit or WP_MAX_MEMORY_LIMIT and try again."
-msgstr ""
+msgstr "Das Bild ist zu groß, um es innerhalb des Server-Speicherlimits zu konvertieren (benötigt ca. %1$d MB, Limit %2$d MB). Erhöhen Sie PHP memory_limit oder WP_MAX_MEMORY_LIMIT und versuchen Sie es erneut."
 
 #. translators: %s: underlying image-editor error message
 #: app/Controllers/Common/Convert_Avif.php:234
 #: app/Controllers/Common/Convert_Webp.php:220
 msgid "No image editor is available to process this file (%s)."
-msgstr ""
+msgstr "Es steht kein Bildeditor zur Verfügung, um diese Datei zu verarbeiten (%s)."
 
 #. translators: %s: underlying image-editor error message
 #: app/Controllers/Common/Convert_Avif.php:246
 msgid "Could not write the AVIF file (%s)."
-msgstr ""
+msgstr "Die AVIF-Datei konnte nicht geschrieben werden (%s)."
 
 #: app/Controllers/Common/Convert_Avif.php:264
 msgid "The server image library could not produce an AVIF file (AVIF output is not supported here)."
-msgstr ""
+msgstr "Die Bildbibliothek des Servers konnte keine AVIF-Datei erzeugen (AVIF-Ausgabe wird hier nicht unterstützt)."
 
 #: app/Controllers/Common/Convert_Webp.php:177
 msgid "This image is already a WebP file."
-msgstr ""
+msgstr "Dieses Bild ist bereits eine WebP-Datei."
 
 #. translators: %s: underlying image-editor error message
 #: app/Controllers/Common/Convert_Webp.php:232
 msgid "Could not write the WebP file (%s)."
-msgstr ""
+msgstr "Die WebP-Datei konnte nicht geschrieben werden (%s)."
 
 #: app/Controllers/Common/Convert_Webp.php:247
 msgid "The server image library could not produce a WebP file (WebP output is not supported here)."
-msgstr ""
+msgstr "Die Bildbibliothek des Servers konnte keine WebP-Datei erzeugen (WebP-Ausgabe wird hier nicht unterstützt)."
 
 #: app/Controllers/Common/Hotlink_Protection.php:101
 msgid "Hotlinking not allowed."
-msgstr ""
+msgstr "Hotlinking ist nicht erlaubt."
 
 #. translators: %1$s: maximum allowed image size, %2$s: size unit (KB or MB)
 #: app/Controllers/Common/Image_Max_Size.php:37
 msgid "[ ThumbPress Alert ] Image exceeds the maximum allowed size of %1$s %2$s."
-msgstr ""
+msgstr "[ ThumbPress Alert ] Das Bild überschreitet die maximal zulässige Größe von %1$s %2$s."
 
 #. translators: %1$s: maximum allowed image width in pixels, %2$s: maximum allowed image height in pixels
 #: app/Controllers/Common/Image_Max_Size.php:52
 msgid "[ ThumbPress Alert ] Image exceeds the maximum allowed resolution of %1$sx%2$s pixels."
-msgstr ""
+msgstr "[ ThumbPress Alert ] Das Bild überschreitet die maximal zulässige Auflösung von %1$sx%2$s Pixeln."
 
 #: app/Controllers/Common/Media_Buttons.php:68
 msgid "Image Compression is a Pro feature"
-msgstr ""
+msgstr "Bildkomprimierung ist eine Pro-Funktion"
 
 #: app/Controllers/Common/Media_Buttons.php:69
 msgid "Reduce file sizes without losing visual quality. Compress images in bulk or one at a time to speed up your site."
-msgstr ""
+msgstr "Reduzieren Sie Dateigrößen ohne sichtbaren Qualitätsverlust. Komprimieren Sie Bilder einzeln oder als Massenvorgang, um Ihre Website zu beschleunigen."
 
 #: app/Controllers/Common/Media_Buttons.php:70
 msgid "Upgrade to compress images"
-msgstr ""
+msgstr "Upgrade zum Komprimieren von Bildern"
 
 #: app/Controllers/Common/Media_Buttons.php:73
 msgid "Image Replacement is a Pro feature"
-msgstr ""
+msgstr "Bilder ersetzen ist eine Pro-Funktion"
 
 #: app/Controllers/Common/Media_Buttons.php:74
 msgid "Swap out images without losing their metadata or breaking existing links. Drop in a new file and ThumbPress handles the rest."
-msgstr ""
+msgstr "Tauschen Sie Bilder aus, ohne deren Metadaten zu verlieren oder bestehende Links zu zerstören. Laden Sie einfach eine neue Datei hoch, und ThumbPress erledigt den Rest."
 
 #: app/Controllers/Common/Media_Buttons.php:75
 msgid "Upgrade to replace images"
-msgstr ""
+msgstr "Upgrade zum Ersetzen von Bildern"
 
 #: app/Controllers/Common/Media_Buttons.php:78
 msgid "Image Editor is a Pro feature"
-msgstr ""
+msgstr "Der Bildeditor ist eine Pro-Funktion"
 
 #: app/Controllers/Common/Media_Buttons.php:79
 msgid "Crop, rotate, flip and adjust images directly inside WordPress — no external tools needed."
-msgstr ""
+msgstr "Schneiden, drehen, spiegeln und optimieren Sie Bilder direkt in WordPress — ganz ohne externe Tools."
 
 #: app/Controllers/Common/Media_Buttons.php:80
 msgid "Upgrade to edit images"
-msgstr ""
+msgstr "Upgrade zum Bearbeiten von Bildern"
 
 #: app/Controllers/Common/Media_Buttons.php:109
 msgid "Select Option"
-msgstr ""
+msgstr "Option auswählen"
 
 #: app/Controllers/Common/Media_Buttons.php:120
 msgid "Compress"
-msgstr ""
+msgstr "Komprimieren"
 
 #: app/Controllers/Common/Media_Buttons.php:124
 msgid "Compress Image"
-msgstr ""
+msgstr "Bild komprimieren"
 
 #: app/Controllers/Common/Media_Buttons.php:143
 #: app/Controllers/Common/Media_Buttons.php:148
 msgid "Replace New File"
-msgstr ""
+msgstr "Durch neue Datei ersetzen"
 
 #: app/Controllers/Common/Media_Buttons.php:169
 msgid "Edit with ThumbPress"
-msgstr ""
+msgstr "Mit ThumbPress bearbeiten"
 
 #: app/Controllers/Common/Media_Buttons.php:174
 msgid "Edit Image"
-msgstr ""
+msgstr "Bild bearbeiten"
 
 #: app/Controllers/Common/Media_Buttons.php:193
 #: build/admin.js:1
 msgid "Close"
-msgstr ""
+msgstr "Schließen"
 
 #: app/Controllers/Common/Social_Share.php:41
 #: build/admin.js:13
 msgid "Social Share Image"
-msgstr ""
+msgstr "Bild für Social Sharing"
 
 #: app/Controllers/Common/Social_Share.php:69
 msgid "Facebook Image:"
-msgstr ""
+msgstr "Facebook-Bild:"
 
 #: app/Controllers/Common/Social_Share.php:71
 #: app/Controllers/Common/Social_Share.php:82
 #: app/Controllers/Common/Social_Share.php:93
 #: app/Controllers/Common/Social_Share.php:104
 msgid "Upload Image"
-msgstr ""
+msgstr "Bild hochladen"
 
 #: app/Controllers/Common/Social_Share.php:72
 #: app/Controllers/Common/Social_Share.php:83
 #: app/Controllers/Common/Social_Share.php:94
 #: app/Controllers/Common/Social_Share.php:105
 msgid "Remove Image"
-msgstr ""
+msgstr "Bild entfernen"
 
 #: app/Controllers/Common/Social_Share.php:80
 msgid "LinkedIn Image:"
-msgstr ""
+msgstr "LinkedIn-Bild:"
 
 #: app/Controllers/Common/Social_Share.php:91
 msgid "Twitter Image:"
-msgstr ""
+msgstr "Twitter-Bild:"
 
 #: app/Controllers/Common/Social_Share.php:102
 msgid "Pinterest Image:"
-msgstr ""
+msgstr "Pinterest-Bild:"
 
 #: app/Controllers/Common/Thumbnails.php:52
 #: app/Controllers/Common/Thumbnails.php:56
 #: build/admin.js:13
 msgid "Regenerate Thumbnails"
-msgstr ""
+msgstr "Thumbnails neu erstellen"
 
 #: app/Helpers/Email.php:76
 msgid "Thumbpress. All rights reserved."
-msgstr ""
+msgstr "Thumbpress. Alle Rechte vorbehalten."
 
 #: app/Helpers/functions.php:26
 #: build/admin.js:13
 msgid "General"
-msgstr ""
+msgstr "Allgemein"
 
 #: app/Helpers/functions.php:27
 msgid "General settings"
-msgstr ""
+msgstr "Allgemeine Einstellungen"
 
 #: app/Helpers/functions.php:31
 msgid "Pages"
-msgstr ""
+msgstr "Seiten"
 
 #: app/Helpers/functions.php:32
 msgid "Page Settings"
-msgstr ""
+msgstr "Seiteneinstellungen"
 
 #: app/Helpers/functions.php:35
 msgid "Main Pages"
-msgstr ""
+msgstr "Hauptseiten"
 
 #: app/Helpers/functions.php:36
 msgid "Main Pages Settings"
-msgstr ""
+msgstr "Einstellungen für Hauptseiten"
 
 #: app/Helpers/functions.php:41
 msgid "Homepage"
-msgstr ""
+msgstr "Startseite"
 
 #: app/Helpers/functions.php:47
 msgid "Landing Page"
-msgstr ""
+msgstr "Landingpage"
 
 #: app/Helpers/functions.php:57
 msgid "Email"
-msgstr ""
+msgstr "E-Mail"
 
 #: app/Helpers/functions.php:58
 msgid "Email settings"
-msgstr ""
+msgstr "E-Mail-Einstellungen"
 
 #: app/Helpers/functions.php:62
 msgid "New Ticket"
-msgstr ""
+msgstr "Neues Ticket"
 
 #: app/Helpers/functions.php:63
 msgid "New Ticket Notification"
-msgstr ""
+msgstr "Benachrichtigung über neues Ticket"
 
 #: app/Helpers/functions.php:66
 msgid "Agent Email"
-msgstr ""
+msgstr "Agenten-E-Mail"
 
 #: app/Helpers/functions.php:67
 msgid "Email to an Agent"
-msgstr ""
+msgstr "E-Mail an einen Agenten"
 
 #: app/Helpers/functions.php:72
 #: app/Helpers/functions.php:93
 #: app/Helpers/functions.php:120
 msgid "Header"
-msgstr ""
+msgstr "Kopfzeile"
 
 #: app/Helpers/functions.php:77
 #: app/Helpers/functions.php:98
 #: app/Helpers/functions.php:125
 msgid "Subject"
-msgstr ""
+msgstr "Betreff"
 
 #: app/Helpers/functions.php:82
 #: app/Helpers/functions.php:103
 #: app/Helpers/functions.php:130
 msgid "Body"
-msgstr ""
+msgstr "Inhalt"
 
 #: app/Helpers/functions.php:87
 msgid "Client Email"
-msgstr ""
+msgstr "Kunden-E-Mail"
 
 #: app/Helpers/functions.php:88
 #: app/Helpers/functions.php:115
 msgid "Email to a Client"
-msgstr ""
+msgstr "E-Mail an einen Kunden"
 
 #: app/Helpers/functions.php:110
 msgid "Agent Reply"
-msgstr ""
+msgstr "Antwort des Agenten"
 
 #: app/Helpers/functions.php:111
 msgid "Agent Reply Notification"
-msgstr ""
+msgstr "Benachrichtigung über Agentenantwort"
 
 #: app/Helpers/functions.php:114
 msgid "Agent Reply Email"
-msgstr ""
+msgstr "E-Mail zur Agentenantwort"
 
 #: app/Helpers/Utility.php:147
 msgid "- Choose a %s -"
-msgstr ""
+msgstr "- %s auswählen -"
 
 #: build/admin.js:1
 msgid "Days"
-msgstr ""
+msgstr "Tage"
 
 #: build/admin.js:1
 msgid "Hrs"
-msgstr ""
+msgstr "Std"
 
 #: build/admin.js:1
 msgid "Min"
-msgstr ""
+msgstr "Min"
 
 #: build/admin.js:1
 msgid "Sec"
-msgstr ""
+msgstr "Sek"
 
 #: build/admin.js:1
 msgid "FIFA World Cup Sale is Live!"
-msgstr ""
+msgstr "FIFA World Cup Sale läuft!"
 
 #: build/admin.js:1
 msgid "Score up to 48% off ThumbPress Pro during our FIFA World Cup sale. The discount is auto-applied at checkout — grab it before the whistle blows!"
-msgstr ""
+msgstr "Sichern Sie sich bis zu 48 % Rabatt auf ThumbPress Pro während unseres FIFA World Cup Sale. Der Rabatt wird beim Bezahlen automatisch angewendet — greifen Sie zu, bevor der Schlusspfiff ertönt!"
 
 #: build/admin.js:1
 msgid "Offer expired"
-msgstr ""
+msgstr "Angebot abgelaufen"
 
 #: build/admin.js:1
 msgid "Offer ends July 19"
-msgstr ""
+msgstr "Angebot endet am 19. Juli"
 
 #: build/admin.js:1
 msgid "World Cup discount applied!"
-msgstr ""
+msgstr "World-Cup-Rabatt angewendet!"
 
 #: build/admin.js:1
 msgid "Your up-to-48% discount is auto-applied at checkout."
-msgstr ""
+msgstr "Ihr Rabatt von bis zu 48 % wird beim Bezahlen automatisch angewendet."
 
 #: build/admin.js:1
 msgid "Get 48% Off — View Pricing →"
-msgstr ""
+msgstr "48 % Rabatt sichern — Preise ansehen →"
 
 #: build/admin.js:1
 msgid "No thanks, I don't want a discount"
-msgstr ""
+msgstr "Nein danke, ich möchte keinen Rabatt"
 
 #: build/admin.js:1
 msgid "Community"
-msgstr ""
+msgstr "Community"
 
 #: build/admin.js:1
 msgid "Support"
-msgstr ""
+msgstr "Support"
 
 #: build/admin.js:1
 msgid "Docs"
-msgstr ""
+msgstr "Docs"
 
 #: build/admin.js:1
 #: build/admin.js:13
 msgid "Upgrade to Pro"
-msgstr ""
+msgstr "Auf Pro upgraden"
 
 #: build/admin.js:1
 msgid "Upgrade to View"
-msgstr ""
+msgstr "Upgrade zum Anzeigen"
 
 #. translators: %s is a locale-formatted number.
 #: build/admin.js:3
 msgid "%s%%"
-msgstr ""
+msgstr "%s%%"
 
 #. translators: %s is a locale-formatted number of bytes.
 #: build/admin.js:5
 msgid "%s B"
-msgstr ""
+msgstr "%s B"
 
 #. translators: %s is a locale-formatted number of kilobytes.
 #: build/admin.js:7
 msgid "%s KB"
-msgstr ""
+msgstr "%s KB"
 
 #. translators: %s is a locale-formatted number of megabytes.
 #: build/admin.js:9
 msgid "%s MB"
-msgstr ""
+msgstr "%s MB"
 
 #. translators: %s is a locale-formatted number of gigabytes.
 #: build/admin.js:11
 msgid "%s GB"
-msgstr ""
+msgstr "%s GB"
 
 #. translators: %s is a locale-formatted number of terabytes.
 #: build/admin.js:13
 msgid "%s TB"
-msgstr ""
+msgstr "%s TB"
 
 #: build/admin.js:13
 msgid "Good"
-msgstr ""
+msgstr "Gut"
 
 #: build/admin.js:13
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: build/admin.js:13
 msgid "Danger"
-msgstr ""
+msgstr "Kritisch"
 
 #: build/admin.js:13
 msgid "Overall"
-msgstr ""
+msgstr "Gesamt"
 
 #: build/admin.js:13
 msgid "Health Score"
-msgstr ""
+msgstr "Zustandsbewertung"
 
 #: build/admin.js:13
 msgid "Status:"
-msgstr ""
+msgstr "Status:"
 
 #: build/admin.js:13
 msgid "Quick Facts"
-msgstr ""
+msgstr "Kurzinfos"
 
 #: build/admin.js:13
 msgid "EasyCommerce promotional notice"
-msgstr ""
+msgstr "EasyCommerce-Werbehinweis"
 
 #: build/admin.js:13
 msgid "New from the ThumbPress team - Try"
-msgstr ""
+msgstr "Neu vom ThumbPress-Team - Probieren Sie"
 
 #: build/admin.js:13
 msgid "EasyCommerce"
-msgstr ""
+msgstr "EasyCommerce"
 
 #: build/admin.js:13
 msgid ". A fast, AI-powered way to sell on WordPress."
-msgstr ""
+msgstr ". Eine schnelle, AI-gestützte Art, mit WordPress zu verkaufen."
 
 #: build/admin.js:13
 msgid "Learn more"
-msgstr ""
+msgstr "Mehr erfahren"
 
 #: build/admin.js:13
 msgid "Dismiss EasyCommerce notice"
-msgstr ""
+msgstr "EasyCommerce-Hinweis ausblenden"
 
 #: build/admin.js:13
 msgid "Activate License"
-msgstr ""
+msgstr "Lizenz aktivieren"
 
 #: build/admin.js:13
 msgid "Image Editor"
-msgstr ""
+msgstr "Bildeditor"
 
 #: build/admin.js:13
 msgid "Enhance images with filters and adjustments to showcase their best versions."
-msgstr ""
+msgstr "Verbessern Sie Bilder mit Filtern und Anpassungen, um sie von ihrer besten Seite zu zeigen."
 
 #: build/admin.js:13
 msgid "The built-in Image Editor is a Pro feature"
-msgstr ""
+msgstr "Der integrierte Bildeditor ist eine Pro-Funktion"
 
 #: build/admin.js:13
 msgid "Leaving WordPress just to crop an image breaks your whole workflow. Edit, resize, and re-optimize everything without switching tools."
-msgstr ""
+msgstr "WordPress zu verlassen, nur um ein Bild zuzuschneiden, unterbricht Ihren gesamten Workflow. Bearbeiten, skalieren und optimieren Sie alles neu, ohne das Tool zu wechseln."
 
 #: build/admin.js:13
 msgid "Upgrade to edit images in WordPress"
-msgstr ""
+msgstr "Upgrade zum Bearbeiten von Bildern in WordPress"
 
 #: build/admin.js:13
 msgid "Replace Images With New Version"
-msgstr ""
+msgstr "Bilder durch neue Version ersetzen"
 
 #: build/admin.js:13
 msgid "Upload new versions of images and replace the old ones without any issues."
-msgstr ""
+msgstr "Laden Sie neue Versionen von Bildern hoch und ersetzen Sie die alten problemlos."
 
 #: build/admin.js:13
 msgid "Replacing Image is a Pro feature"
-msgstr ""
+msgstr "Bilder ersetzen ist eine Pro-Funktion"
 
 #: build/admin.js:13
 msgid "Outdated images live on more pages than you think. Swap in a new version once, and every page updates instantly."
-msgstr ""
+msgstr "Veraltete Bilder erscheinen auf mehr Seiten, als Sie denken. Tauschen Sie eine neue Version einmal aus, und jede Seite wird sofort aktualisiert."
 
 #: build/admin.js:13
 msgid "Upgrade to replace images seamlessly"
-msgstr ""
+msgstr "Upgrade zum nahtlosen Ersetzen von Bildern"
 
 #: build/admin.js:13
 msgid "Disable Right Click on Image"
-msgstr ""
+msgstr "Rechtsklick auf Bilder deaktivieren"
 
 #: build/admin.js:13
 msgid "Prevent visitors from downloading your images by turning off the right-click option on your website."
-msgstr ""
+msgstr "Verhindern Sie, dass Besucher Ihre Bilder herunterladen, indem Sie die Rechtsklick-Option auf Ihrer Website deaktivieren."
 
 #: build/admin.js:13
 msgid "Image Size Limit"
-msgstr ""
+msgstr "Bildgrößenlimit"
 
 #: build/admin.js:13
 msgid "Set a limit for maximum image upload size."
-msgstr ""
+msgstr "Legen Sie ein Limit für die maximale Upload-Größe von Bildern fest."
 
 #: build/admin.js:13
 msgid "120"
-msgstr ""
+msgstr "120"
 
 #: build/admin.js:13
 msgid "KB"
-msgstr ""
+msgstr "KB"
 
 #: build/admin.js:13
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 #. translators: %s is the server upload size limit.
 #: build/admin.js:13
 msgid "Server limit: %s"
-msgstr ""
+msgstr "Serverlimit: %s"
 
 #: build/admin.js:13
 msgid "Image Dimension Limit"
-msgstr ""
+msgstr "Limit für Bildabmessungen"
 
 #: build/admin.js:13
 msgid "Set a limit for maximum image upload dimensions (in pixels)."
-msgstr ""
+msgstr "Legen Sie ein Limit für die maximalen Bildabmessungen beim Upload fest (in Pixeln)."
 
 #: build/admin.js:13
 msgid "Height"
-msgstr ""
+msgstr "Höhe"
 
 #: build/admin.js:13
 msgid "Width"
-msgstr ""
+msgstr "Breite"
 
 #: build/admin.js:13
 msgid "Lazy load"
-msgstr ""
+msgstr "Lazy Load"
 
 #: build/admin.js:13
 msgid "Load images only when they enter the user's viewport, improving page speed and reducing bandwidth usage."
-msgstr ""
+msgstr "Bilder erst laden, wenn sie in den sichtbaren Bereich des Nutzers gelangen. Das verbessert die Seitengeschwindigkeit und reduziert den Bandbreitenverbrauch."
 
 #: build/admin.js:13
 msgid "Hotlink Protection"
-msgstr ""
+msgstr "Hotlink-Schutz"
 
 #: build/admin.js:13
 msgid "Block other websites from embedding your images directly, preventing bandwidth theft from external hotlinking."
-msgstr ""
+msgstr "Verhindern Sie, dass andere Websites Ihre Bilder direkt einbinden, und stoppen Sie so Bandbreitendiebstahl durch externes Hotlinking."
 
 #: build/admin.js:13
 msgid "Auto Set Featured Image"
-msgstr ""
+msgstr "Beitragsbild automatisch festlegen"
 
 #: build/admin.js:13
 msgid "Automatically use the first image in post content as the featured image if none is set."
-msgstr ""
+msgstr "Automatisch das erste Bild im Beitragsinhalt als Beitragsbild verwenden, wenn keines festgelegt ist."
 
 #: build/admin.js:13
 msgid "Settings reset successfully."
-msgstr ""
+msgstr "Einstellungen erfolgreich zurückgesetzt."
 
 #: build/admin.js:13
 msgid "Reset Options"
-msgstr ""
+msgstr "Optionen zurücksetzen"
 
 #: build/admin.js:13
 msgid "Failed to save settings."
-msgstr ""
+msgstr "Einstellungen konnten nicht gespeichert werden."
 
 #: build/admin.js:13
 msgid "Save Changes"
-msgstr ""
+msgstr "Änderungen speichern"
 
 #: build/admin.js:13
 msgid "No thumbnail sizes found."
-msgstr ""
+msgstr "Keine Thumbnail-Größen gefunden."
 
 #. translators: %1$s is the size name, %2$s is the width, %3$s is the height.
 #: build/admin.js:13
 msgid "%1$s (%2$s×%3$s)"
-msgstr ""
+msgstr "%1$s (%2$s×%3$s)"
 
 #: build/admin.js:13
 msgid "Enabled - This size will be generated for new uploads."
-msgstr ""
+msgstr "Aktiviert - Diese Größe wird für neue Uploads erzeugt."
 
 #: build/admin.js:13
 msgid "Disabled - This size will not be generated for new uploads."
-msgstr ""
+msgstr "Deaktiviert - Diese Größe wird für neue Uploads nicht erzeugt."
 
 #: build/admin.js:13
 msgid "This is the original image size and cannot be disabled."
-msgstr ""
+msgstr "Dies ist die Originalbildgröße und kann nicht deaktiviert werden."
 
 #: build/admin.js:13
 msgid "Compress during upload"
-msgstr ""
+msgstr "Beim Upload komprimieren"
 
 #: build/admin.js:13
 msgid "Enable compression during upload to reduce file size and improve speed."
-msgstr ""
+msgstr "Aktivieren Sie die Komprimierung beim Upload, um die Dateigröße zu reduzieren und die Geschwindigkeit zu verbessern."
 
 #: build/admin.js:13
 msgid "Compression Percentage"
-msgstr ""
+msgstr "Komprimierungsprozentsatz"
 
 #: build/admin.js:13
 msgid "A measure of how much a file's size is reduced after compression."
-msgstr ""
+msgstr "Ein Maß dafür, wie stark die Größe einer Datei nach der Komprimierung reduziert wird."
 
 #: build/admin.js:13
 msgid "Single Image Compress"
-msgstr ""
+msgstr "Einzelbild-Komprimierung"
 
 #: build/admin.js:13
 msgid "Show the Optimize button on individual media attachments."
-msgstr ""
+msgstr "Die Schaltfläche „Optimieren“ bei einzelnen Medienanhängen anzeigen."
 
 #: build/admin.js:13
 msgid "Bulk Image Compression is a Pro feature"
-msgstr ""
+msgstr "Massen-Bildkomprimierung ist eine Pro-Funktion"
 
 #: build/admin.js:13
 msgid "Heavy images are silently costing you visitors. Compress your entire library in one click with absolutely no visible quality loss."
-msgstr ""
+msgstr "Schwere Bilder kosten Sie unbemerkt Besucher. Komprimieren Sie Ihre gesamte Mediathek mit einem Klick, ganz ohne sichtbaren Qualitätsverlust."
 
 #: build/admin.js:13
 msgid "Upgrade for a faster website"
-msgstr ""
+msgstr "Upgrade für eine schnellere Website"
 
 #: build/admin.js:13
 msgid "Prevent Duplicate Upload"
-msgstr ""
+msgstr "Doppelte Uploads verhindern"
 
 #: build/admin.js:13
 msgid "Block uploading images that already exist in your media library"
-msgstr ""
+msgstr "Das Hochladen von Bildern blockieren, die bereits in Ihrer Mediathek vorhanden sind"
 
 #: build/admin.js:13
 msgid "Duplicate Image Detection is a Pro feature"
-msgstr ""
+msgstr "Erkennung doppelter Bilder ist eine Pro-Funktion"
 
 #: build/admin.js:13
 msgid "Duplicate images quietly pile up and bloat your media library. Find and remove every copy you didn't even know existed."
-msgstr ""
+msgstr "Doppelte Bilder sammeln sich unbemerkt an und blähen Ihre Mediathek auf. Finden und entfernen Sie jede Kopie, von der Sie nicht einmal wussten, dass sie existiert."
 
 #: build/admin.js:13
 msgid "Upgrade to detect duplicate images"
-msgstr ""
+msgstr "Upgrade zum Erkennen doppelter Bilder"
 
 #: build/admin.js:13
 msgid "Convert during upload"
-msgstr ""
+msgstr "Beim Upload konvertieren"
 
 #: build/admin.js:13
 msgid "Automatically convert images to WebP when they are uploaded."
-msgstr ""
+msgstr "Bilder beim Hochladen automatisch in WebP konvertieren."
 
 #: build/admin.js:13
 msgid "Single image conversion"
-msgstr ""
+msgstr "Einzelbild-Konvertierung"
 
 #: build/admin.js:13
 msgid "Convert individual images to WebP directly from the media library."
-msgstr ""
+msgstr "Einzelne Bilder direkt aus der Mediathek in WebP konvertieren."
 
 #: build/admin.js:13
 msgid "Automatically convert images to AVIF when they are uploaded."
-msgstr ""
+msgstr "Bilder beim Hochladen automatisch in AVIF konvertieren."
 
 #: build/admin.js:13
 msgid "Convert individual images to AVIF directly from the media library."
-msgstr ""
+msgstr "Einzelne Bilder direkt aus der Mediathek in AVIF konvertieren."
 
 #: build/admin.js:13
 msgid "Facebook"
-msgstr ""
+msgstr "Facebook"
 
 #: build/admin.js:13
 msgid "Generate optimized share images for Facebook posts"
-msgstr ""
+msgstr "Optimierte Sharing-Bilder für Facebook-Beiträge erzeugen"
 
 #: build/admin.js:13
 msgid "LinkedIn"
-msgstr ""
+msgstr "LinkedIn"
 
 #: build/admin.js:13
 msgid "Create professional share images for LinkedIn"
-msgstr ""
+msgstr "Professionelle Sharing-Bilder für LinkedIn erstellen"
 
 #: build/admin.js:13
 msgid "Twitter"
-msgstr ""
+msgstr "Twitter"
 
 #: build/admin.js:13
 msgid "Optimize share images for Twitter cards"
-msgstr ""
+msgstr "Sharing-Bilder für Twitter Cards optimieren"
 
 #: build/admin.js:13
 msgid "Pinterest"
-msgstr ""
+msgstr "Pinterest"
 
 #: build/admin.js:13
 msgid "Generate Pinterest-optimized pin images"
-msgstr ""
+msgstr "Pinterest-optimierte Pin-Bilder erzeugen"
 
 #: build/admin.js:13
 msgid "Enabled"
-msgstr ""
+msgstr "Aktiviert"
 
 #: build/admin.js:13
 msgid "Disabled"
-msgstr ""
+msgstr "Deaktiviert"
 
 #: build/admin.js:13
 msgid "Failed to load debug info."
-msgstr ""
+msgstr "Debug-Informationen konnten nicht geladen werden."
 
 #: build/admin.js:13
 msgid "No data."
-msgstr ""
+msgstr "Keine Daten."
 
 #: build/admin.js:13
 msgid "System"
-msgstr ""
+msgstr "System"
 
 #: build/admin.js:13
 msgid "WordPress"
-msgstr ""
+msgstr "WordPress"
 
 #: build/admin.js:13
 msgid "PHP"
-msgstr ""
+msgstr "PHP"
 
 #: build/admin.js:13
 msgid "MySQL"
-msgstr ""
+msgstr "MySQL"
 
 #: build/admin.js:13
 msgid "Server"
-msgstr ""
+msgstr "Server"
 
 #: build/admin.js:13
 msgid "PHP Memory Limit"
-msgstr ""
+msgstr "PHP-Speicherlimit"
 
 #: build/admin.js:13
 msgid "WP Memory Limit"
-msgstr ""
+msgstr "WP-Speicherlimit"
 
 #: build/admin.js:13
 msgid "Max Execution Time"
-msgstr ""
+msgstr "Maximale Ausführungszeit"
 
 #. translators: %s is the maximum execution time in seconds.
 #: build/admin.js:13
 msgid "%ss"
-msgstr ""
+msgstr "%ss"
 
 #: build/admin.js:13
 msgid "Upload Max Filesize"
-msgstr ""
+msgstr "Maximale Upload-Dateigröße"
 
 #: build/admin.js:13
 msgid "Total Images"
-msgstr ""
+msgstr "Bilder gesamt"
 
 #: build/admin.js:13
 msgid "WordPress Config"
-msgstr ""
+msgstr "WordPress-Konfiguration"
 
 #: build/admin.js:13
 msgid "WP_DEBUG"
-msgstr ""
+msgstr "WP_DEBUG"
 
 #: build/admin.js:13
 msgid "WP_DEBUG_DISPLAY"
-msgstr ""
+msgstr "WP_DEBUG_DISPLAY"
 
 #: build/admin.js:13
 msgid "WP_DEBUG_LOG"
-msgstr ""
+msgstr "WP_DEBUG_LOG"
 
 #: build/admin.js:13
 msgid "Version"
-msgstr ""
+msgstr "Version"
 
 #: build/admin.js:13
 msgid "Pro Plugin"
-msgstr ""
+msgstr "Pro-Plugin"
 
 #. translators: %s is a version number.
 #: build/admin.js:13
 msgid "v%s"
-msgstr ""
+msgstr "v%s"
 
 #: build/admin.js:13
 msgid "License Status"
-msgstr ""
+msgstr "Lizenzstatus"
 
 #: build/admin.js:13
 msgid "Lazy Load"
-msgstr ""
+msgstr "Lazy Load"
 
 #: build/admin.js:13
 msgid "Right-Click Disable"
-msgstr ""
+msgstr "Rechtsklick-Sperre"
 
 #: build/admin.js:13
 msgid "WebP on Upload"
-msgstr ""
+msgstr "WebP beim Upload"
 
 #: build/admin.js:13
 msgid "AVIF on Upload"
-msgstr ""
+msgstr "AVIF beim Upload"
 
 #: build/admin.js:13
 msgid "Max Image Size"
-msgstr ""
+msgstr "Max. Bildgröße"
 
 #: build/admin.js:13
 msgid "Max Image Dimensions"
-msgstr ""
+msgstr "Max. Bildabmessungen"
 
 #: build/admin.js:13
 msgid "Disabled Sizes"
-msgstr ""
+msgstr "Deaktivierte Größen"
 
 #: build/admin.js:13
 msgid "None"
-msgstr ""
+msgstr "Keine"
 
 #: build/admin.js:13
 msgid "Active Theme"
-msgstr ""
+msgstr "Aktives Theme"
 
 #: build/admin.js:13
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: build/admin.js:13
 msgid "Parent Theme"
-msgstr ""
+msgstr "Parent-Theme"
 
 #. translators: %1$s is the parent theme name, %2$s is its version.
 #: build/admin.js:13
 msgid "%1$s v%2$s"
-msgstr ""
+msgstr "%1$s v%2$s"
 
 #. translators: %d is the number of active plugins.
 #: build/admin.js:13
 msgid "Active Plugin (%d)"
 msgid_plural "Active Plugins (%d)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Aktives Plugin (%d)"
+msgstr[1] "Aktive Plugins (%d)"
 
 #: build/admin.js:13
 msgid "Your Media Library is Silently Slowing Down Your Site."
-msgstr ""
+msgstr "Ihre Mediathek bremst Ihre Website unbemerkt aus."
 
 #: build/admin.js:13
 msgid "Unused images, oversized files, and missing optimization pile up with every upload. Pro finds them all and fixes them — without touching a single file manually."
-msgstr ""
+msgstr "Unbenutzte Bilder, überdimensionierte Dateien und fehlende Optimierung häufen sich mit jedem Upload. Pro findet sie alle und behebt sie, ohne dass Sie eine einzige Datei manuell anfassen müssen."
 
 #: build/admin.js:13
 msgid "Price starts from $5/month."
-msgstr ""
+msgstr "Der Preis beginnt bei 5 $/Monat."
 
 #: build/admin.js:13
 msgid "ThumbPress modules"
-msgstr ""
+msgstr "ThumbPress-Module"
 
 #: build/admin.js:13
 msgid "What Pro Fixes Today"
-msgstr ""
+msgstr "Was Pro heute für Sie löst"
 
 #: build/admin.js:13
 msgid "Every Pro feature is designed to solve a specific real problem. Here's what exactly an upgrade unlocks."
-msgstr ""
+msgstr "Jede Pro-Funktion löst ein konkretes reales Problem. Hier sehen Sie genau, was ein Upgrade freischaltet."
 
 #. translators: %d is the number of images found.
 #: build/admin.js:13
 msgid "%d image found!"
 msgid_plural "%d images found!"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d Bild gefunden!"
+msgstr[1] "%d Bilder gefunden!"
 
 #: build/admin.js:13
 msgid "Detect Large Images"
-msgstr ""
+msgstr "Große Bilder erkennen"
 
 #: build/admin.js:13
 msgid "Scan your media library and find oversized images instantly. See exactly which files are bloating your pages and fix them before they cost you rankings."
-msgstr ""
+msgstr "Scannen Sie Ihre Mediathek und finden Sie überdimensionierte Bilder sofort. Sehen Sie genau, welche Dateien Ihre Seiten aufblähen, und beheben Sie das, bevor es Sie Rankings kostet."
 
 #: build/admin.js:13
 msgid "Detect Now"
-msgstr ""
+msgstr "Jetzt erkennen"
 
 #: build/admin.js:13
 msgid "Delete Unused Images"
-msgstr ""
+msgstr "Unbenutzte Bilder löschen"
 
 #: build/admin.js:13
 msgid "Scan your media library and find unused images instantly. See exactly which files are taking up space and delete them to reclaim server space."
-msgstr ""
+msgstr "Scannen Sie Ihre Mediathek und finden Sie unbenutzte Bilder sofort. Sehen Sie genau, welche Dateien Speicherplatz belegen, und löschen Sie sie, um Serverplatz zurückzugewinnen."
 
 #: build/admin.js:13
 msgid "Delete Now"
-msgstr ""
+msgstr "Jetzt löschen"
 
 #: build/admin.js:13
 msgid "Compress Large Images"
-msgstr ""
+msgstr "Große Bilder komprimieren"
 
 #: build/admin.js:13
 msgid "Large images are costing you speed. Optimize them without visible loss and deliver a faster, smoother browsing experience."
-msgstr ""
+msgstr "Große Bilder kosten Sie Geschwindigkeit. Optimieren Sie sie ohne sichtbaren Verlust und bieten Sie ein schnelleres, flüssigeres Surferlebnis."
 
 #: build/admin.js:13
 msgid "Compress Now"
-msgstr ""
+msgstr "Jetzt komprimieren"
 
 #: build/admin.js:13
 msgid "Bulk Convert to AVIF"
-msgstr ""
+msgstr "Massenkonvertierung in AVIF"
 
 #: build/admin.js:13
 msgid "Your images shouldn't be stuck in the past. Convert them all to AVIF - the format the modern web is built on - in a single click."
-msgstr ""
+msgstr "Ihre Bilder sollten nicht in der Vergangenheit feststecken. Konvertieren Sie sie alle mit einem einzigen Klick in AVIF - das Format, auf dem das moderne Web aufbaut."
 
 #: build/admin.js:13
 msgid "Convert Now"
-msgstr ""
+msgstr "Jetzt konvertieren"
 
 #: build/admin.js:13
 msgid "Crop, resize, or tweak any image right inside your WordPress dashboard. No need to re-upload or touch a third-party tool."
-msgstr ""
+msgstr "Schneiden, skalieren oder optimieren Sie jedes Bild direkt in Ihrem WordPress-Dashboard. Kein erneutes Hochladen und kein Drittanbieter-Tool nötig."
 
 #: build/admin.js:13
 msgid "Edit Now"
-msgstr ""
+msgstr "Jetzt bearbeiten"
 
 #: build/admin.js:13
 msgid "Merge Duplicate Images"
-msgstr ""
+msgstr "Doppelte Bilder zusammenführen"
 
 #: build/admin.js:13
 msgid "Find images that have been uploaded more than once. Clean up the clutter and stop wasting space on files you already have."
-msgstr ""
+msgstr "Finden Sie Bilder, die mehr als einmal hochgeladen wurden. Räumen Sie auf und verschwenden Sie keinen Speicherplatz mehr für Dateien, die Sie bereits haben."
 
 #: build/admin.js:13
 msgid "Merge Now"
-msgstr ""
+msgstr "Jetzt zusammenführen"
 
 #: build/admin.js:13
 msgid "IMAGE CONTROL"
-msgstr ""
+msgstr "BILDSTEUERUNG"
 
 #: build/admin.js:13
 msgid "Disable Thumbnails"
-msgstr ""
+msgstr "Thumbnails deaktivieren"
 
 #: build/admin.js:13
 msgid "Set Image Upload Limit"
-msgstr ""
+msgstr "Upload-Limit für Bilder festlegen"
 
 #: build/admin.js:13
 msgid "STORAGE & CLEANUP"
-msgstr ""
+msgstr "SPEICHER & BEREINIGUNG"
 
 #: build/admin.js:13
 msgid "Find Unused Images"
-msgstr ""
+msgstr "Unbenutzte Bilder finden"
 
 #: build/admin.js:13
 msgid "Find Duplicate Images"
-msgstr ""
+msgstr "Doppelte Bilder finden"
 
 #: build/admin.js:13
 msgid "MEDIA MANAGEMENT"
-msgstr ""
+msgstr "MEDIENVERWALTUNG"
 
 #: build/admin.js:13
 msgid "Replace Images"
-msgstr ""
+msgstr "Bilder ersetzen"
 
 #: build/admin.js:13
 msgid "Social Media Thumbnails"
-msgstr ""
+msgstr "Social-Media-Thumbnails"
 
 #: build/admin.js:13
 msgid "Free vs. Pro Side by Side"
-msgstr ""
+msgstr "Free und Pro im direkten Vergleich"
 
 #: build/admin.js:13
 msgid "See a clear comparison between your current version and the Pro version you're about to get."
-msgstr ""
+msgstr "Sehen Sie einen klaren Vergleich zwischen Ihrer aktuellen Version und der Pro-Version, die Sie erhalten."
 
 #: build/admin.js:13
 msgid "Features"
-msgstr ""
+msgstr "Funktionen"
 
 #: build/admin.js:13
 msgid "Free"
-msgstr ""
+msgstr "Free"
 
 #: build/admin.js:13
 msgid "Future uploads only"
-msgstr ""
+msgstr "Nur zukünftige Uploads"
 
 #: build/admin.js:13
 msgid "Fully unlocked"
-msgstr ""
+msgstr "Vollständig freigeschaltet"
 
 #: build/admin.js:13
 msgid "Best Value"
-msgstr ""
+msgstr "Bestes Angebot"
 
 #: build/admin.js:13
 msgid "/ Month"
-msgstr ""
+msgstr "/ Monat"
 
 #: build/admin.js:13
 msgid "/ Lifetime"
-msgstr ""
+msgstr "/ Lebenslang"
 
 #. translators: %s is the total yearly price.
 #: build/admin.js:13
 msgid "Billed annually. You pay %s today"
-msgstr ""
+msgstr "Jährliche Abrechnung. Sie zahlen heute %s"
 
 #: build/admin.js:13
 msgid "Purchase"
-msgstr ""
+msgstr "Kaufen"
 
 #: build/admin.js:13
 msgid "Personal"
-msgstr ""
+msgstr "Personal"
 
 #. translators: %d is the discount percentage.
 #: build/admin.js:13
 msgid "%d%% OFF"
-msgstr ""
+msgstr "%d%% RABATT"
 
 #: build/admin.js:13
 msgid "1 Site"
-msgstr ""
+msgstr "1 Website"
 
 #: build/admin.js:13
 msgid "1 Year Support"
-msgstr ""
+msgstr "1 Jahr Support"
 
 #: build/admin.js:13
 msgid "All Features Included"
-msgstr ""
+msgstr "Alle Funktionen enthalten"
 
 #: build/admin.js:13
 msgid "Professional"
-msgstr ""
+msgstr "Professional"
 
 #: build/admin.js:13
 msgid "5 Sites"
-msgstr ""
+msgstr "5 Websites"
 
 #: build/admin.js:13
 msgid "Agency"
-msgstr ""
+msgstr "Agency"
 
 #: build/admin.js:13
 msgid "Unlimited Sites"
-msgstr ""
+msgstr "Unbegrenzte Websites"
 
 #: build/admin.js:13
 msgid "Lifetime Support"
-msgstr ""
+msgstr "Lebenslanger Support"
 
 #: build/admin.js:13
 msgid "ThumbPress Pro Pricing"
-msgstr ""
+msgstr "ThumbPress Pro Preise"
 
 #: build/admin.js:13
 msgid "Every plan includes the full set of Pro features. Just pick how many sites you need to cover."
-msgstr ""
+msgstr "Jeder Plan enthält den vollen Umfang aller Pro-Funktionen. Wählen Sie einfach, wie viele Websites Sie abdecken möchten."
 
 #: build/admin.js:13
 msgid "Yearly"
-msgstr ""
+msgstr "Jährlich"
 
 #: build/admin.js:13
 msgid "Lifetime"
-msgstr ""
+msgstr "Lebenslang"
 
 #: build/admin.js:13
 msgid "30-day money back guarantee"
-msgstr ""
+msgstr "30 Tage Geld-zurück-Garantie"
 
 #: build/admin.js:13
 msgid "Access future features for the subscription period"
-msgstr ""
+msgstr "Zugriff auf künftige Funktionen für die Laufzeit des Abonnements"
 
 #: build/admin.js:13
 msgid "reviewer"
-msgstr ""
+msgstr "Rezensent"
 
 #: build/admin.js:13
 msgid "This saved me money when I realised I was about to exceed my host’s image allowance, enabling me to wipe out excess duplicate images."
-msgstr ""
+msgstr "Das hat mir Geld gespart, als mir klar wurde, dass ich das Bildkontingent meines Hosters fast überschritten hätte, denn so konnte ich überflüssige doppelte Bilder entfernen."
 
 #: build/admin.js:13
 msgid "At the moment I’m using it to resize my pictures, I see a lot of things to use in the future to keep the site smaller then it was. So far it’s working fine and the one question I had was answered right away!! Keep up the good work!!!"
-msgstr ""
+msgstr "Momentan nutze ich es, um meine Bilder zu verkleinern. Ich sehe viele Dinge, die ich künftig nutzen kann, um die Website kleiner zu halten als zuvor. Bisher funktioniert alles einwandfrei, und die eine Frage, die ich hatte, wurde sofort beantwortet!! Weiter so!!!"
 
 #: build/admin.js:13
 msgid "This plugin is extremely useful, and a must for sites with a lot of images. I had a problem with activation of the Pro version, and the support team resolved the issue quickly and without fuss."
-msgstr ""
+msgstr "Dieses Plugin ist äußerst nützlich und ein Muss für Websites mit vielen Bildern. Ich hatte ein Problem bei der Aktivierung der Pro-Version, und das Support-Team hat es schnell und unkompliziert gelöst."
 
 #: build/admin.js:13
 msgid "Trusted by 30,000+ WordPress Users Just Like You"
-msgstr ""
+msgstr "Über 30.000 WordPress-Nutzer wie Sie vertrauen darauf"
 
 #: build/admin.js:13
 msgid "What image formats does ThumbPress convert?"
-msgstr ""
+msgstr "Welche Bildformate konvertiert ThumbPress?"
 
 #: build/admin.js:13
 msgid "Free version converts images to WebP (25-35% smaller files). Pro adds AVIF conversion (50% smaller than WebP) plus intelligent compression for all formats. Both reduce file size without visible quality loss, dramatically improving site speed and lowering bandwidth costs."
-msgstr ""
+msgstr "Die kostenlose Version konvertiert Bilder in WebP (25-35 % kleinere Dateien). Pro ergänzt die AVIF-Konvertierung (50 % kleiner als WebP) sowie intelligente Komprimierung für alle Formate. Beides reduziert die Dateigröße ohne sichtbaren Qualitätsverlust, beschleunigt die Website deutlich und senkt die Bandbreitenkosten."
 
 #: build/admin.js:13
 msgid "How much can I save on storage and bandwidth?"
-msgstr ""
+msgstr "Wie viel kann ich bei Speicherplatz und Bandbreite sparen?"
 
 #: build/admin.js:13
 msgid "Most sites save 30-60% of image storage. WebP reduces files by 25-35%, AVIF by 50% more than WebP. A typical site with 5,000 images saves 50-100GB. Smaller images also cut bandwidth costs and improve Core Web Vitals scores for better SEO rankings."
-msgstr ""
+msgstr "Die meisten Websites sparen 30-60 % ihres Bildspeichers. WebP verkleinert Dateien um 25-35 %, AVIF um weitere 50 % gegenüber WebP. Eine typische Website mit 5.000 Bildern spart 50-100 GB. Kleinere Bilder senken zudem die Bandbreitenkosten und verbessern die Core-Web-Vitals-Werte für bessere SEO-Rankings."
 
 #: build/admin.js:13
 msgid "What's the difference between Free and Pro?"
-msgstr ""
+msgstr "Was ist der Unterschied zwischen Free und Pro?"
 
 #: build/admin.js:13
 msgid "Free: Basic optimization (WebP, regenerate thumbnails). Pro: Advanced detection (find unused images, duplicates, oversized files), bulk compression, AVIF conversion, one-click automation. Best for sites with hundreds or thousands of images where optimization pays for itself."
-msgstr ""
+msgstr "Free: Grundlegende Optimierung (WebP, Thumbnails neu erstellen). Pro: Erweiterte Erkennung (unbenutzte Bilder, Duplikate und überdimensionierte Dateien finden), Massenkomprimierung, AVIF-Konvertierung, Automatisierung mit einem Klick. Ideal für Websites mit Hunderten oder Tausenden Bildern, bei denen sich die Optimierung von selbst bezahlt macht."
 
 #: build/admin.js:13
 msgid "How does pricing work? Is there a trial?"
-msgstr ""
+msgstr "Wie funktioniert die Preisgestaltung? Gibt es eine Testphase?"
 
 #: build/admin.js:13
 msgid "No hidden fees or surprise renewals - renewal costs the same as initial purchase. Free version is your trial. Test WebP conversion and regeneration risk-free. Upgrade anytime if you need Pro features. 30-day money-back guarantee on all paid plans."
-msgstr ""
+msgstr "Keine versteckten Gebühren und keine überraschenden Verlängerungen - die Verlängerung kostet genauso viel wie der Erstkauf. Die kostenlose Version ist Ihre Testphase. Testen Sie WebP-Konvertierung und Neuerstellung ohne Risiko. Sie können jederzeit upgraden, wenn Sie Pro-Funktionen benötigen. 30 Tage Geld-zurück-Garantie auf alle kostenpflichtigen Pläne."
 
 #: build/admin.js:13
 msgid "Can I use Pro on multiple sites? How many?"
-msgstr ""
+msgstr "Kann ich Pro auf mehreren Websites nutzen? Auf wie vielen?"
 
 #: build/admin.js:13
 msgid "Yes. Professional plan covers up to 5 sites. Agency plan covers unlimited. Perfect for freelancers and agencies managing multiple client sites. Licensing is per-plan, not per-site."
-msgstr ""
+msgstr "Ja. Der Professional-Plan deckt bis zu 5 Websites ab, der Agency-Plan unbegrenzt viele. Perfekt für Freelancer und Agenturen, die mehrere Kundenwebsites betreuen. Die Lizenzierung erfolgt pro Plan, nicht pro Website."
 
 #: build/admin.js:13
 msgid "Is my media library safe? Will images be deleted automatically?"
-msgstr ""
+msgstr "Ist meine Mediathek sicher? Werden Bilder automatisch gelöscht?"
 
 #: build/admin.js:13
 msgid "Completely safe. ThumbPress shows you exactly what it found and requires your approval before any action. Nothing is ever deleted automatically. Unused images, duplicates, and large files are flagged for review - you decide what to remove."
-msgstr ""
+msgstr "Absolut sicher. ThumbPress zeigt Ihnen genau, was gefunden wurde, und holt vor jeder Aktion Ihre Zustimmung ein. Es wird niemals etwas automatisch gelöscht. Unbenutzte Bilder, Duplikate und große Dateien werden zur Prüfung markiert - Sie entscheiden, was entfernt wird."
 
 #: build/admin.js:13
 msgid "What if it doesn't deliver results or doesn't work on my site?"
-msgstr ""
+msgstr "Was, wenn es keine Ergebnisse liefert oder auf meiner Website nicht funktioniert?"
 
 #: build/admin.js:13
 msgid "100% money-back within 30 days, no questions asked. Our team provides setup assistance to ensure it works perfectly. We also stand behind the results - if optimization doesn't improve your metrics, we refund immediately."
-msgstr ""
+msgstr "100 % Geld zurück innerhalb von 30 Tagen, ohne Wenn und Aber. Unser Team unterstützt Sie bei der Einrichtung, damit alles einwandfrei funktioniert. Wir stehen auch für die Ergebnisse ein: Wenn die Optimierung Ihre Kennzahlen nicht verbessert, erstatten wir sofort."
 
 #: build/admin.js:13
 msgid "Is it compatible with WooCommerce, Elementor, and my theme?"
-msgstr ""
+msgstr "Ist es mit WooCommerce, Elementor und meinem Theme kompatibel?"
 
 #: build/admin.js:13
 msgid "Yes. ThumbPress works with WooCommerce, Gutenberg, Elementor, Divi, and all major themes. It operates at the WordPress media layer, not inside specific plugins, so compatibility is universal."
-msgstr ""
+msgstr "Ja. ThumbPress funktioniert mit WooCommerce, Gutenberg, Elementor, Divi und allen gängigen Themes. Es arbeitet auf der Medienebene von WordPress und nicht innerhalb einzelner Plugins, daher ist die Kompatibilität universell."
 
 #: build/admin.js:13
 msgid "How long does bulk processing take? Will it slow my site?"
-msgstr ""
+msgstr "Wie lange dauert die Massenverarbeitung? Wird meine Website dadurch langsamer?"
 
 #: build/admin.js:13
 msgid "All heavy operations run in the background - zero impact on your site. Most sites process 500-1000 (or more) images per hour depending on hosting. Background processing handles thousands overnight. Your dashboard and frontend stay fast."
-msgstr ""
+msgstr "Alle aufwendigen Vorgänge laufen im Hintergrund - ohne Auswirkung auf Ihre Website. Die meisten Websites verarbeiten je nach Hosting 500-1000 (oder mehr) Bilder pro Stunde. Die Hintergrundverarbeitung schafft über Nacht Tausende. Ihr Dashboard und Ihr Frontend bleiben schnell."
 
 #: build/admin.js:13
 msgid "Do I get support? What if I need help implementing?"
-msgstr ""
+msgstr "Erhalte ich Support? Was, wenn ich Hilfe bei der Umsetzung brauche?"
 
 #: build/admin.js:13
 msgid "All customers get support with 24-hour response time. Professional and Agency plans include priority support. Our team helps with setup, troubleshooting, and optimization recommendations to maximize your results."
-msgstr ""
+msgstr "Alle Kunden erhalten Support mit 24 Stunden Reaktionszeit. Die Pläne Professional und Agency beinhalten Priority-Support. Unser Team hilft bei Einrichtung, Fehlerbehebung und Optimierungsempfehlungen, damit Sie das Maximum herausholen."
 
 #: build/admin.js:13
 msgid "Frequently Asked Questions"
-msgstr ""
+msgstr "Häufig gestellte Fragen"
 
 #: build/admin.js:13
 msgid "Ready to take control of your Images?"
-msgstr ""
+msgstr "Bereit, die Kontrolle über Ihre Bilder zu übernehmen?"
 
 #: build/admin.js:13
 msgid "Join 30,000+ users who manage their media smarter with ThumbPress Pro"
-msgstr ""
+msgstr "Schließen Sie sich über 30.000 Nutzern an, die ihre Medien mit ThumbPress Pro intelligenter verwalten"
 
 #: build/admin.js:13
 msgid "In media library"
-msgstr ""
+msgstr "In der Mediathek"
 
 #: build/admin.js:13
 msgid "Total Thumbnails"
-msgstr ""
+msgstr "Thumbnails gesamt"
 
 #: build/admin.js:13
 msgid "Thumbnails found"
-msgstr ""
+msgstr "Thumbnails gefunden"
 
 #: build/admin.js:13
 msgid "Unoptimized Images"
-msgstr ""
+msgstr "Nicht optimierte Bilder"
 
 #: build/admin.js:13
 msgid "Images yet to be fixed"
-msgstr ""
+msgstr "Bilder, die noch optimiert werden müssen"
 
 #: build/admin.js:13
 msgid "Space Saved"
-msgstr ""
+msgstr "Gesparter Speicherplatz"
 
 #: build/admin.js:13
 msgid "Worth of space saved"
-msgstr ""
+msgstr "An Speicherplatz gespart"
 
 #: build/admin.js:13
 msgid "Images (over 1 MB)"
-msgstr ""
+msgstr "Bilder (über 1 MB)"
 
 #: build/admin.js:13
 msgid "Upgrade to Compress"
-msgstr ""
+msgstr "Upgrade zum Komprimieren"
 
 #: build/admin.js:13
 msgid "Unattached images"
-msgstr ""
+msgstr "Nicht zugeordnete Bilder"
 
 #: build/admin.js:13
 msgid "Uncompressed Images"
-msgstr ""
+msgstr "Unkomprimierte Bilder"
 
 #: build/admin.js:13
 msgid "Images need compression"
-msgstr ""
+msgstr "Bilder benötigen Komprimierung"
 
 #: build/admin.js:13
 msgid "Duplicate images found"
-msgstr ""
+msgstr "Doppelte Bilder gefunden"
 
 #: build/admin.js:13
 msgid "Upgrade to Merge"
-msgstr ""
+msgstr "Upgrade zum Zusammenführen"
 
 #: build/admin.js:13
 msgid "Non-AVIF images found"
-msgstr ""
+msgstr "Nicht-AVIF-Bilder gefunden"
 
 #: build/admin.js:13
 msgid "Upgrade to Convert"
-msgstr ""
+msgstr "Upgrade zum Konvertieren"
 
 #: build/admin.js:13
 msgid "Non-WebP images found"
-msgstr ""
+msgstr "Nicht-WebP-Bilder gefunden"
 
 #: build/admin.js:13
 msgid "Thumbnail Disabled"
-msgstr ""
+msgstr "Thumbnail deaktiviert"
 
 #. translators: %1$s is the number of disabled sizes, %2$s is the total number of sizes.
 #: build/admin.js:13
 msgid "%1$s/%2$s"
-msgstr ""
+msgstr "%1$s/%2$s"
 
 #: build/admin.js:13
 msgid "These sizes won't be generated"
-msgstr ""
+msgstr "Diese Größen werden nicht erzeugt"
 
 #: build/admin.js:13
 msgid "Lazy Loading"
-msgstr ""
+msgstr "Lazy Loading"
 
 #: build/admin.js:13
 msgid "Active"
-msgstr ""
+msgstr "Aktiv"
 
 #: build/admin.js:13
 msgid "Inactive"
-msgstr ""
+msgstr "Inaktiv"
 
 #. translators: %s is the lazy-load status (On or Off).
 #: build/admin.js:13
 msgid "Status: %s"
-msgstr ""
+msgstr "Status: %s"
 
 #: build/admin.js:13
 msgid "On"
-msgstr ""
+msgstr "An"
 
 #: build/admin.js:13
 msgid "Off"
-msgstr ""
+msgstr "Aus"
 
 #: build/admin.js:13
 msgid "Regenerate All Thumbnails"
-msgstr ""
+msgstr "Alle Thumbnails neu erstellen"
 
 #: build/admin.js:13
 msgid "Broken thumbnails hurt layouts and lose visitors. Regenerate once - every image across your site snaps back to the perfect size and crop."
-msgstr ""
+msgstr "Defekte Thumbnails ruinieren Layouts und kosten Besucher. Einmal neu erstellen - und jedes Bild auf Ihrer Website hat wieder die perfekte Größe und den perfekten Zuschnitt."
 
 #: build/admin.js:13
 msgid "Generate Again"
-msgstr ""
+msgstr "Erneut erzeugen"
 
 #: build/admin.js:13
 msgid "No Images Found"
-msgstr ""
+msgstr "Keine Bilder gefunden"
 
 #: build/admin.js:13
 msgid "Ready to Regenerate Thumbnails?"
-msgstr ""
+msgstr "Bereit, Thumbnails neu zu erstellen?"
 
 #: build/admin.js:13
 msgid "There are no images to regenerate."
-msgstr ""
+msgstr "Es gibt keine Bilder zum Neuerstellen."
 
 #: build/admin.js:13
 msgid "Click \"Regenerate Now\" to create fresh thumbnails for all images. Configure your thumbnail sizes in "
-msgstr ""
+msgstr "Klicken Sie auf „Jetzt neu erstellen“, um frische Thumbnails für alle Bilder zu erzeugen. Konfigurieren Sie Ihre Thumbnail-Größen in "
 
 #: build/admin.js:13
 msgid "settings"
-msgstr ""
+msgstr "Einstellungen"
 
 #: build/admin.js:13
 msgid "."
-msgstr ""
+msgstr "."
 
 #: build/admin.js:13
 msgid "Chunk Size"
-msgstr ""
+msgstr "Chunk-Größe"
 
 #: build/admin.js:13
 msgid "Number of images processed in a single batch per server request."
-msgstr ""
+msgstr "Anzahl der Bilder, die pro Serveranfrage in einem einzigen Batch verarbeitet werden."
 
 #: build/admin.js:13
 msgid "e.g. 50"
-msgstr ""
+msgstr "z. B. 50"
 
 #: build/admin.js:13
 msgid "Regenerate Now"
-msgstr ""
+msgstr "Jetzt neu erstellen"
 
 #: build/admin.js:13
 msgid "Regenerate In Background"
-msgstr ""
+msgstr "Im Hintergrund neu erstellen"
 
 #: build/admin.js:13
 msgid "Image Regeneration Complete"
-msgstr ""
+msgstr "Bild-Neuerstellung abgeschlossen"
 
 #: build/admin.js:13
 msgid "Image Regeneration in Progress"
-msgstr ""
+msgstr "Bild-Neuerstellung läuft"
 
 #: build/admin.js:13
 msgid "All thumbnails have been regenerated successfully."
-msgstr ""
+msgstr "Alle Thumbnails wurden erfolgreich neu erstellt."
 
 #: build/admin.js:13
 msgid "Regenerating media library thumbnails using selected sizes."
-msgstr ""
+msgstr "Thumbnails der Mediathek werden mit den ausgewählten Größen neu erstellt."
 
 #: build/admin.js:13
 msgid "Cancel"
-msgstr ""
+msgstr "Abbrechen"
 
 #: build/admin.js:13
 msgid "Images Processed"
-msgstr ""
+msgstr "Verarbeitete Bilder"
 
 #: build/admin.js:13
 msgid "Images Not Found"
-msgstr ""
+msgstr "Nicht gefundene Bilder"
 
 #: build/admin.js:13
 msgid "Images Deleted"
-msgstr ""
+msgstr "Gelöschte Bilder"
 
 #: build/admin.js:13
 msgid "Images Created"
-msgstr ""
+msgstr "Erstellte Bilder"
 
 #: build/admin.js:13
 msgid "Find & Remove Unused Images"
-msgstr ""
+msgstr "Unbenutzte Bilder finden & entfernen"
 
 #: build/admin.js:13
 msgid "You're paying to host images nobody sees. Remove orphaned files and cut hosting costs, backup size, and storage waste instantly."
-msgstr ""
+msgstr "Sie bezahlen dafür, Bilder zu hosten, die niemand sieht. Entfernen Sie verwaiste Dateien und senken Sie sofort Hosting-Kosten, Backup-Größe und Speicherverschwendung."
 
 #: build/admin.js:13
 msgid "Ready to Scan for Unused Images?"
-msgstr ""
+msgstr "Bereit, nach unbenutzten Bildern zu suchen?"
 
 #: build/admin.js:13
 msgid "Click \"Detect Now\" to scan your library across Gutenberg, Elementor, WooCommerce, ACF, and LayerSlider for unused images."
-msgstr ""
+msgstr "Klicken Sie auf „Jetzt erkennen“, um Ihre Mediathek in Gutenberg, Elementor, WooCommerce, ACF und LayerSlider nach unbenutzten Bildern zu durchsuchen."
 
 #: build/admin.js:13
 msgid "Detect in background"
-msgstr ""
+msgstr "Im Hintergrund erkennen"
 
 #: build/admin.js:13
 msgid "Unused Image Cleanup is a Pro feature"
-msgstr ""
+msgstr "Bereinigung unbenutzter Bilder ist eine Pro-Funktion"
 
 #: build/admin.js:13
 msgid "A bloated library slows uploads, backups, and searches. Remove dead weight and keep your site lean and fast."
-msgstr ""
+msgstr "Eine aufgeblähte Mediathek verlangsamt Uploads, Backups und Suchvorgänge. Entfernen Sie Ballast und halten Sie Ihre Website schlank und schnell."
 
 #: build/admin.js:13
 msgid "Upgrade to clean up unused images"
-msgstr ""
+msgstr "Upgrade zum Bereinigen unbenutzter Bilder"
 
 #: build/admin.js:13
 msgid "Find & Remove Duplicate Images"
-msgstr ""
+msgstr "Doppelte Bilder finden & entfernen"
 
 #: build/admin.js:13
 msgid "Duplicates inflate storage and bloat backups. Find every redundant file and clean house without risking your originals."
-msgstr ""
+msgstr "Duplikate blähen Speicher und Backups auf. Finden Sie jede überflüssige Datei und räumen Sie auf, ohne Ihre Originale zu gefährden."
 
 #: build/admin.js:13
 msgid "Ready to Scan for Duplicates?"
-msgstr ""
+msgstr "Bereit, nach Duplikaten zu suchen?"
 
 #: build/admin.js:13
 msgid "Click \"Detect Now\" to scan your library and identify redundant files taking up unnecessary storage space."
-msgstr ""
+msgstr "Klicken Sie auf „Jetzt erkennen“, um Ihre Mediathek zu durchsuchen und überflüssige Dateien zu finden, die unnötig Speicherplatz belegen."
 
 #: build/admin.js:13
 msgid "The same file uploaded twice wastes space every day. Surface every duplicate and reclaim storage you didn't know you were losing."
-msgstr ""
+msgstr "Dieselbe Datei zweimal hochgeladen verschwendet jeden Tag Speicherplatz. Bringen Sie jedes Duplikat ans Licht und gewinnen Sie Speicher zurück, von dessen Verlust Sie nichts wussten."
 
 #: build/admin.js:13
 msgid "One oversized image tanks your page score. Find every offender and fix it before it costs you rankings and revenue."
-msgstr ""
+msgstr "Ein einziges überdimensioniertes Bild ruiniert Ihren Seiten-Score. Finden Sie jeden Übeltäter und beheben Sie ihn, bevor er Sie Rankings und Umsatz kostet."
 
 #: build/admin.js:13
 msgid "Ready to Scan for Large Images?"
-msgstr ""
+msgstr "Bereit, nach großen Bildern zu suchen?"
 
 #: build/admin.js:13
 msgid "Set your file size threshold above and click \"Detect Now\" to find images exceeding your size limit."
-msgstr ""
+msgstr "Legen Sie oben Ihren Schwellenwert für die Dateigröße fest und klicken Sie auf „Jetzt erkennen“, um Bilder zu finden, die Ihr Größenlimit überschreiten."
 
 #: build/admin.js:13
 msgid "File Size Threshold"
-msgstr ""
+msgstr "Schwellenwert für Dateigröße"
 
 #: build/admin.js:13
 msgid "Images larger than this size will be marked as large. Set the limit to detect oversized images."
-msgstr ""
+msgstr "Bilder, die größer als diese Größe sind, werden als groß markiert. Legen Sie das Limit fest, um überdimensionierte Bilder zu erkennen."
 
 #: build/admin.js:13
 msgid "e.g. 1 for 1MB"
-msgstr ""
+msgstr "z. B. 1 für 1 MB"
 
 #: build/admin.js:13
 msgid "Large Image Detection is a Pro feature"
-msgstr ""
+msgstr "Erkennung großer Bilder ist eine Pro-Funktion"
 
 #: build/admin.js:13
 msgid "Slow pages bleed traffic. Find the heavy images hurting your Core Web Vitals before they cost you visitors."
-msgstr ""
+msgstr "Langsame Seiten verlieren Traffic. Finden Sie die schweren Bilder, die Ihre Core Web Vitals beeinträchtigen, bevor sie Sie Besucher kosten."
 
 #: build/admin.js:13
 msgid "Upgrade to find and fix large images"
-msgstr ""
+msgstr "Upgrade zum Finden und Beheben großer Bilder"
 
 #: build/admin.js:13
 msgid "Compress Your Images"
-msgstr ""
+msgstr "Ihre Bilder komprimieren"
 
 #: build/admin.js:13
 msgid "Uncompressed images are the #1 reason sites fail Core Web Vitals. Compress your library in minutes - smaller files, higher rankings, zero quality loss."
-msgstr ""
+msgstr "Unkomprimierte Bilder sind der häufigste Grund, warum Websites bei den Core Web Vitals durchfallen. Komprimieren Sie Ihre Mediathek in Minuten - kleinere Dateien, bessere Rankings, kein Qualitätsverlust."
 
 #: build/admin.js:13
 msgid "Ready to Compress Your Images?"
-msgstr ""
+msgstr "Bereit, Ihre Bilder zu komprimieren?"
 
 #: build/admin.js:13
 msgid "Configure your compression settings above and click \"Compress Now\" to optimize your image library."
-msgstr ""
+msgstr "Konfigurieren Sie oben Ihre Komprimierungseinstellungen und klicken Sie auf „Jetzt komprimieren“, um Ihre Mediathek zu optimieren."
 
 #: build/admin.js:13
 msgid "Quality Level"
-msgstr ""
+msgstr "Qualitätsstufe"
 
 #: build/admin.js:13
 msgid "Compression quality from 0-100. Higher values preserve more detail but result in larger files. 80+ recommended for best results."
-msgstr ""
+msgstr "Komprimierungsqualität von 0-100. Höhere Werte erhalten mehr Details, führen aber zu größeren Dateien. Für beste Ergebnisse werden 80+ empfohlen."
 
 #: build/admin.js:13
 msgid "e.g. 80 (0-100)"
-msgstr ""
+msgstr "z. B. 80 (0-100)"
 
 #: build/admin.js:13
 msgid "Compress In Background"
-msgstr ""
+msgstr "Im Hintergrund komprimieren"
 
 #: build/admin.js:13
 msgid "Every heavy image loses you a visitor. Compress your entire library in one click and watch page speed - and conversions - climb."
-msgstr ""
+msgstr "Jedes schwere Bild kostet Sie einen Besucher. Komprimieren Sie Ihre gesamte Mediathek mit einem Klick und sehen Sie zu, wie Seitengeschwindigkeit - und Conversions - steigen."
 
 #: build/admin.js:13
 msgid "Convert Images to WebP"
-msgstr ""
+msgstr "Bilder in WebP konvertieren"
 
 #: build/admin.js:13
 msgid "Slow images cost you sales. Switch to WebP and cut file sizes by 35% - faster pages, lower bounce rates, and better rankings, zero quality loss."
-msgstr ""
+msgstr "Langsame Bilder kosten Sie Umsatz. Wechseln Sie zu WebP und reduzieren Sie Dateigrößen um 35 % - schnellere Seiten, geringere Absprungraten und bessere Rankings, ganz ohne Qualitätsverlust."
 
 #: build/admin.js:13
 msgid "Convert Again"
-msgstr ""
+msgstr "Erneut konvertieren"
 
 #: build/admin.js:13
 msgid "Ready to Convert to WebP?"
-msgstr ""
+msgstr "Bereit für die Konvertierung in WebP?"
 
 #: build/admin.js:13
 msgid "There are no images to convert to WebP."
-msgstr ""
+msgstr "Es gibt keine Bilder, die in WebP konvertiert werden können."
 
 #: build/admin.js:13
 msgid "Select file formats above and click \"Convert Now\" to start converting images to WebP for faster loading."
-msgstr ""
+msgstr "Wählen Sie oben die Dateiformate aus und klicken Sie auf „Jetzt konvertieren“, um Bilder für schnelleres Laden in WebP zu konvertieren."
 
 #: build/admin.js:13
 msgid "Select File Format"
-msgstr ""
+msgstr "Dateiformat auswählen"
 
 #: build/admin.js:13
 msgid "Convert In Background"
-msgstr ""
+msgstr "Im Hintergrund konvertieren"
 
 #: build/admin.js:13
 msgid "WebP Conversion Complete"
-msgstr ""
+msgstr "WebP-Konvertierung abgeschlossen"
 
 #: build/admin.js:13
 msgid "WebP Conversion in Progress"
-msgstr ""
+msgstr "WebP-Konvertierung läuft"
 
 #: build/admin.js:13
 msgid "All images have been converted to WebP."
-msgstr ""
+msgstr "Alle Bilder wurden in WebP konvertiert."
 
 #: build/admin.js:13
 msgid "We're scanning your media library and converting eligible images to WebP."
-msgstr ""
+msgstr "Wir durchsuchen Ihre Mediathek und konvertieren geeignete Bilder in WebP."
 
 #: build/admin.js:13
 msgid "Images Converted"
-msgstr ""
+msgstr "Konvertierte Bilder"
 
 #: build/admin.js:13
 msgid "Images Remaining"
-msgstr ""
+msgstr "Verbleibende Bilder"
 
 #: build/admin.js:13
 msgid "Convert Images to AVIF"
-msgstr ""
+msgstr "Bilder in AVIF konvertieren"
 
 #: build/admin.js:13
 msgid "The format Google rewards. Cut image sizes by 50% over WebP, slash bandwidth costs, and pass Core Web Vitals with ease."
-msgstr ""
+msgstr "Das Format, das Google belohnt. Reduzieren Sie Bildgrößen um 50 % gegenüber WebP, senken Sie Bandbreitenkosten und bestehen Sie die Core Web Vitals mühelos."
 
 #: build/admin.js:13
 msgid "Ready to Convert to AVIF?"
-msgstr ""
+msgstr "Bereit für die Konvertierung in AVIF?"
 
 #: build/admin.js:13
 msgid "Select file formats above and click \"Convert Now\" to convert images to AVIF for even smaller file sizes."
-msgstr ""
+msgstr "Wählen Sie oben die Dateiformate aus und klicken Sie auf „Jetzt konvertieren“, um Bilder für noch kleinere Dateigrößen in AVIF zu konvertieren."
 
 #: build/admin.js:13
 msgid "AVIF Conversion is a Pro feature"
-msgstr ""
+msgstr "AVIF-Konvertierung ist eine Pro-Funktion"
 
 #: build/admin.js:13
 msgid "Slow loads kill conversions. AVIF halves your file sizes with no visible quality loss - faster pages, higher rankings."
-msgstr ""
+msgstr "Langsames Laden killt Conversions. AVIF halbiert Ihre Dateigrößen ohne sichtbaren Qualitätsverlust - schnellere Seiten, bessere Rankings."
 
 #: build/admin.js:13
 msgid "Upgrade to convert images to AVIF"
-msgstr ""
+msgstr "Upgrade zum Konvertieren von Bildern in AVIF"
 
 #: build/admin.js:13
 msgid "Manage Trashed Images"
-msgstr ""
+msgstr "Bilder im Papierkorb verwalten"
 
 #: build/admin.js:13
 msgid "Leftover files from old conversions and failed uploads quietly pile up. Delete the junk and reclaim real disk space in seconds."
-msgstr ""
+msgstr "Übrig gebliebene Dateien aus alten Konvertierungen und fehlgeschlagenen Uploads häufen sich unbemerkt an. Löschen Sie den Ballast und gewinnen Sie in Sekunden echten Speicherplatz zurück."
 
 #: build/admin.js:13
 msgid "File Name"
-msgstr ""
+msgstr "Dateiname"
 
 #: build/admin.js:13
 msgid "Image"
-msgstr ""
+msgstr "Bild"
 
 #: build/admin.js:13
 msgid "Upload Date"
-msgstr ""
+msgstr "Upload-Datum"
 
 #: build/admin.js:13
 msgid "File Size"
-msgstr ""
+msgstr "Dateigröße"
 
 #: build/admin.js:13
 msgid "Action"
-msgstr ""
+msgstr "Aktion"
 
 #: build/admin.js:13
 msgid "No trashed images found."
-msgstr ""
+msgstr "Keine Bilder im Papierkorb gefunden."
 
 #: build/admin.js:13
 msgid "Manage Trashed Images is a Pro feature"
-msgstr ""
+msgstr "Bilder im Papierkorb verwalten ist eine Pro-Funktion"
 
 #: build/admin.js:13
 msgid "Restore or permanently delete images you've moved to trash. Keep your library clean and reclaim disk space."
-msgstr ""
+msgstr "Stellen Sie Bilder wieder her, die Sie in den Papierkorb verschoben haben, oder löschen Sie sie endgültig. Halten Sie Ihre Mediathek sauber und gewinnen Sie Speicherplatz zurück."
 
 #: build/admin.js:13
 msgid "Activate License to manage trashed images"
-msgstr ""
+msgstr "Lizenz aktivieren, um Bilder im Papierkorb zu verwalten"
 
 #: build/admin.js:13
 msgid "General Settings"
-msgstr ""
+msgstr "Allgemeine Einstellungen"
 
 #: build/admin.js:13
 msgid "General settings for the plugin"
-msgstr ""
+msgstr "Allgemeine Einstellungen für das Plugin"
 
 #: build/admin.js:13
 msgid "Thumbnail Generation"
-msgstr ""
+msgstr "Thumbnail-Erstellung"
 
 #: build/admin.js:13
 msgid "Disable thumbnail generation for specific image sizes"
-msgstr ""
+msgstr "Thumbnail-Erstellung für bestimmte Bildgrößen deaktivieren"
 
 #: build/admin.js:13
 msgid "Duplicate Upload Prevention"
-msgstr ""
+msgstr "Verhinderung doppelter Uploads"
 
 #: build/admin.js:13
 msgid "Prevent uploading duplicate images to your media library"
-msgstr ""
+msgstr "Verhindern Sie das Hochladen doppelter Bilder in Ihre Mediathek"
 
 #: build/admin.js:13
 msgid "File Compression Settings"
-msgstr ""
+msgstr "Einstellungen zur Dateikomprimierung"
 
 #: build/admin.js:13
 msgid "Image compression additional settings"
-msgstr ""
+msgstr "Zusätzliche Einstellungen zur Bildkomprimierung"
 
 #: build/admin.js:13
 msgid "WebP Image Converter additional settings"
-msgstr ""
+msgstr "Zusätzliche Einstellungen für den WebP-Bildkonverter"
 
 #: build/admin.js:13
 msgid "AVIF Image Converter additional settings"
-msgstr ""
+msgstr "Zusätzliche Einstellungen für den AVIF-Bildkonverter"
 
 #: build/admin.js:13
 msgid "Platform Configuration"
-msgstr ""
+msgstr "Plattform-Konfiguration"
 
 #: build/admin.js:13
 msgid "Manage the image used for social media sharing"
-msgstr ""
+msgstr "Das für das Teilen in sozialen Medien verwendete Bild verwalten"
 
 #: build/admin.js:13
 msgid "Debug"
-msgstr ""
+msgstr "Debug"
 
 #: build/admin.js:13
 msgid "Debug Information"
-msgstr ""
+msgstr "Debug-Informationen"
 
 #: build/admin.js:13
 msgid "System and plugin info for support"
-msgstr ""
+msgstr "System- und Plugin-Informationen für den Support"
 
 #: build/admin.js:13
 msgid "Debug info copied to clipboard."
-msgstr ""
+msgstr "Debug-Informationen in die Zwischenablage kopiert."
 
 #: build/admin.js:13
 msgid "Copied!"
-msgstr ""
+msgstr "Kopiert!"
 
 #: build/admin.js:13
 msgid "Copy as JSON"
-msgstr ""
+msgstr "Als JSON kopieren"
 
 #: build/admin.js:13
 msgid "Miss the old interface?"
-msgstr ""
+msgstr "Vermissen Sie die alte Oberfläche?"
 
 #: build/admin.js:13
 msgid "Turn on legacy mode."
-msgstr ""
+msgstr "Legacy-Modus aktivieren."

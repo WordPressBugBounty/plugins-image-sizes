@@ -1,1232 +1,2075 @@
-# Bengali (বাংলা) translation for ThumbPress Image Sizes plugin.
-# Copyright (C) 2024 ThumbPress
-# This file is distributed under the same license as the Image Sizes package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Image Sizes\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/image-sizes\n"
-"POT-Creation-Date: 2024-05-16 10:00:00+0000\n"
-"PO-Revision-Date: 2024-05-16 10:00:00+0000\n"
-"Last-Translator: Auto-generated\n"
-"Language-Team: Bengali\n"
-"Language: bn_BD\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: Bengali (Bangladesh)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"POT-Creation-Date: 2026-07-19T08:57:49+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.13.0-alpha-3eb2dd7\n"
 "X-Domain: image-sizes\n"
+"Language: bn_BD\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid " Thumbnails disabled"
-msgstr " থাম্বনেইল অক্ষম"
-
-msgid " Thumbnails will be generated"
-msgstr " থাম্বনেইল তৈরি করা হবে"
-
-msgid "(will not be generated)"
-msgstr "(তৈরি করা হবে না)"
-
-msgid "- Choose a %s -"
-msgstr "- %s নির্বাচন করুন -"
-
-msgid "100%"
-msgstr "100%"
-
-msgid "100% Hassle-Free Money Back Guarantee!"
-msgstr "100% ঝামেলামুক্ত অর্থ ফেরত গ্যারান্টি!"
-
-msgid "120"
-msgstr "120"
-
-msgid "500,000+"
-msgstr "500,000+"
-
-msgid "60,000+"
-msgstr "60,000+"
-
-msgid "7+"
-msgstr "7+"
-
-msgid "<strong>%d</strong> uncompressed images possibly slowing down your WooCommerce store - Boost your site speed & sales by compressing them"
-msgstr "<strong>%d</strong> সংকুচিত না করা ছবি সম্ভবত আপনার WooCommerce স্টোর ধীর করছে - সেগুলি সংকুচিত করে আপনার সাইটের গতি এবং বিক্রয় বৃদ্ধি করুন"
-
-msgid "A new version of ThumbPress is ready!"
-msgstr "ThumbPress এর একটি নতুন সংস্করণ প্রস্তুত!"
-
+#: app/API/Convert_Avif.php:18
 msgid "AVIF conversion requires PHP 8.0 or higher."
 msgstr "AVIF রূপান্তরের জন্য PHP 8.0 বা তার উপরে প্রয়োজন।"
 
-msgid "Achieve maximum compression and lightning-fast loading. AVIF delivers 50% better compression than WebP, reducing bandwidth dramatically on modern browsers."
-msgstr "সর্বোচ্চ সংকুচন এবং বিদ্যুত-দ্রুত লোডিং অর্জন করুন। AVIF WebP এর চেয়ে 50% ভাল সংকুচন প্রদান করে, আধুনিক ব্রাউজারে ব্যান্ডউইথ নাটকীয়ভাবে হ্রাস করে।"
-
-msgid "Activate License"
-msgstr "লাইসেন্স সক্রিয় করুন"
-
-msgid "Active"
-msgstr "সক্রিয়"
-
-msgid "Active Users"
-msgstr "সক্রিয় ব্যবহারকারী"
-
-msgid "Active Years"
-msgstr "সক্রিয় বছর"
-
-msgid "Agency"
-msgstr "এজেন্সি"
-
-msgid "Agent Email"
-msgstr "এজেন্ট ইমেল"
-
-msgid "Agent Reply"
-msgstr "এজেন্ট উত্তর"
-
-msgid "Agent Reply Email"
-msgstr "এজেন্ট উত্তর ইমেল"
-
-msgid "Agent Reply Notification"
-msgstr "এজেন্ট উত্তর বিজ্ঞপ্তি"
-
-msgid "All"
-msgstr "সব"
-
-msgid "All images have been converted to WebP."
-msgstr "সমস্ত ছবি WebP এ রূপান্তরিত হয়েছে।"
-
-msgid "All thumbnails have been regenerated successfully."
-msgstr "সমস্ত থাম্বনেইল সফলভাবে পুনরায় তৈরি করা হয়েছে।"
-
-msgid "Analyze"
-msgstr "বিশ্লেষণ করুন"
-
-msgid "Analyzed"
-msgstr "বিশ্লেষিত"
-
-msgid "Analyzing.."
-msgstr "বিশ্লেষণ চলছে.."
-
-msgid "Are you sure you want to delete these? The data and their associated files will be completely erased. This action cannot be undone!"
-msgstr "আপনি কি এগুলি মুছতে চান? ডেটা এবং সম্পর্কিত ফাইলগুলি সম্পূর্ণভাবে মুছে ফেলা হবে। এই পদক্ষেপটি পূর্বাবস্থায় আনা যায় না!"
-
-msgid "Are you sure you want to delete this? The data and its associated files will be completely erased. This action cannot be undone!"
-msgstr "আপনি কি এটি মুছতে চান? ডেটা এবং সম্পর্কিত ফাইলগুলি সম্পূর্ণভাবে মুছে ফেলা হবে। এই পদক্ষেপটি পূর্বাবস্থায় আনা যায় না!"
-
-msgid "Array of disabled size names"
-msgstr "অক্ষম আকারের নামের অ্যারে"
-
-msgid "Attachment ID to convert"
-msgstr "রূপান্তর করার জন্য সংযুক্তি ID"
-
-msgid "Attachment ID to regenerate"
-msgstr "পুনরায় তৈরি করার জন্য সংযুক্তি ID"
-
-msgid "Auto Set Featured Image"
-msgstr "স্বয়ংক্রিয়ভাবে বৈশিষ্ট্যযুক্ত ছবি সেট করুন"
-
-msgid "Automatically convert images to AVIF when they are uploaded."
-msgstr "আপলোড করার সময় ছবিগুলি স্বয়ংক্রিয়ভাবে AVIF এ রূপান্তর করুন।"
-
-msgid "Automatically use the first image in post content as the featured image if none is set."
-msgstr "যদি কোনও বৈশিষ্ট্যযুক্ত ছবি সেট না থাকে তবে পোস্ট কন্টেন্টের প্রথম ছবি স্বয়ংক্রিয়ভাবে ব্যবহার করুন।"
-
-msgid "Batch size for background processing"
-msgstr "পটভূমি প্রক্রিয়াকরণের জন্য ব্যাচ আকার"
-
-msgid "Block other websites from embedding your images directly, preventing bandwidth theft from external hotlinking."
-msgstr "অন্যান্য ওয়েবসাইটগুলিকে সরাসরি আপনার ছবিগুলি এম্বেড করা থেকে রোক করুন, বাহ্যিক হটলিংকিং থেকে ব্যান্ডউইথ চুরি প্রতিরোধ করুন।"
-
-msgid "Block uploading images that already exist in your media library"
-msgstr "আপনার মিডিয়া লাইব্রেরিতে ইতিমধ্যে বিদ্যমান ছবি আপলোড করা ব্লক করুন"
-
-msgid "Body"
-msgstr "বডি"
-
-msgid "Bulk Convert to AVIF"
-msgstr "বাল্ক AVIF এ রূপান্তর করুন"
-
-msgid "Bulk Image Compression is a Pro feature"
-msgstr "বাল্ক ইমেজ কম্প্রেশন একটি প্রো বৈশিষ্ট্য"
-
-msgid "Cancel"
-msgstr "বাতিল"
-
-msgid "Chunk Size"
-msgstr "খণ্ড আকার"
-
-msgid "Client Email"
-msgstr "ক্লায়েন্ট ইমেল"
-
-msgid "Community"
-msgstr "কমিউনিটি"
-
-msgid "Compare Free Vs. Pro"
-msgstr "বিনামূল্যে বনাম প্রো তুলনা করুন"
-
-msgid "Compress"
-msgstr "সংকুচিত করুন"
-
-msgid "Compress Images"
-msgstr "ছবি সংকুচিত করুন"
-
-msgid "Compress Large Images"
-msgstr "বড় ছবি সংকুচিত করুন"
-
-msgid "Compress Now"
-msgstr "এখনই সংকুচিত করুন"
-
-msgid "Compress during upload"
-msgstr "আপলোড করার সময় সংকুচিত করুন"
-
-msgid "Compress your images to reduce image size, save server space, and boost page speed."
-msgstr "ছবি আকার কমাতে, সার্ভার স্থান সঞ্চয় করতে এবং পৃষ্ঠার গতি বৃদ্ধি করতে আপনার ছবিগুলি সংকুচিত করুন।"
-
-msgid "Compress your images to reduce image size, save server space, and boost site speed."
-msgstr "ছবি আকার কমাতে, সার্ভার স্থান সঞ্চয় করতে এবং সাইটের গতি বৃদ্ধি করতে আপনার ছবিগুলি সংকুচিত করুন।"
-
-msgid "Compressing.."
-msgstr "সংকুচিত হচ্ছে.."
-
-msgid "Compression Percentage"
-msgstr "সংকুচন শতাংশ"
-
-msgid "Congratulations, Converting Images to WebP is Completed!"
-msgstr "অভিনন্দন, ছবিগুলি WebP এ রূপান্তর সম্পূর্ণ হয়েছে!"
-
-msgid "Congratulations, Thumbnail Regeneration is Completed!"
-msgstr "অভিনন্দন, থাম্বনেইল পুনর্নির্মাণ সম্পূর্ণ হয়েছে!"
-
-msgid "Convert Again"
-msgstr "আবার রূপান্তর করুন"
-
-msgid "Convert Image"
-msgstr "ছবি রূপান্তর করুন"
-
-msgid "Convert Image on Upload"
-msgstr "আপলোডের সময় ছবি রূপান্তর করুন"
-
-msgid "Convert Images into WebP"
-msgstr "ছবিগুলি WebP এ রূপান্তর করুন"
-
-msgid "Convert Images to AVIF"
-msgstr "ছবিগুলি AVIF এ রূপান্তর করুন"
-
-msgid "Convert Images to WebP"
-msgstr "ইমেজগুলি WebP এ রূপান্তর করুন"
-
-msgid "Convert In Background"
-msgstr "পটভূমিতে রূপান্তর করুন"
-
-msgid "Convert Now"
-msgstr "এখনই রূপান্তর করুন"
-
-msgid "Convert during upload"
-msgstr "আপলোড করার সময় রূপান্তর করুন"
-
-msgid "Convert images to WebP format to retain image quality without needing"
-msgstr "ছবির গুণমান বজায় রেখে WebP ফরম্যাটে ছবি রূপান্তর করুন"
-
-msgid "Convert images to WebP format to retain image quality without needing to compress."
-msgstr "সংকুচন না করে ছবির গুণমান বজায় রেখে WebP ফরম্যাটে ছবি রূপান্তর করুন।"
-
-msgid "Convert in Background"
-msgstr "পটভূমিতে রূপান্তর করুন"
-
-msgid "Convert individual images to AVIF directly from the media library."
-msgstr "মিডিয়া লাইব্রেরি থেকে সরাসরি পৃথক ছবিগুলি AVIF এ রূপান্তর করুন।"
-
-msgid "Convert individual images to WebP directly from the media library."
-msgstr "মিডিয়া লাইব্রেরি থেকে সরাসরি পৃথক ছবিগুলি WebP এ রূপান্তর করুন।"
-
-msgid "Convert to AVIF"
-msgstr "AVIF এ রূপান্তর করুন"
-
-msgid "Convert to WebP"
-msgstr "WebP এ রূপান্তর করুন"
-
-msgid "Convert to WebP is a highly server-dependent feature and the converting process may timeout if you process a large number of images. You may need to work on your server side to solve the issues if you face any when using this feature. Also keep in mind that once you convert your images to WebP, you can never undo it."
-msgstr "WebP এ রূপান্তর একটি উচ্চ সার্ভার-নির্ভর বৈশিষ্ট্য এবং যদি আপনি প্রচুর সংখ্যক ছবি প্রক্রিয়া করেন তবে রূপান্তর প্রক্রিয়া সময়সীমা শেষ হতে পারে। এই বৈশিষ্ট্যটি ব্যবহার করার সময় আপনি যদি কোনো সমস্যার সম্মুখীন হন তবে সমস্যার সমাধান করতে আপনাকে সার্ভার পক্ষে কাজ করতে হতে পারে। মনে রাখবেন যে একবার আপনার ছবিগুলি WebP এ রূপান্তর করলে আপনি এটি কখনো পূর্বাবস্থায় আনতে পারবেন না।"
-
-msgid "Converted"
-msgstr "রূপান্তরিত"
-
-msgid "Converted %s images."
-msgstr "%s ছবি রূপান্তরিত হয়েছে।"
-
-msgid "Converting"
-msgstr "রূপান্তর করছে"
-
-msgid "Converting Images to WebP in Background"
-msgstr "পটভূমিতে WebP এ ছবি রূপান্তর করছে"
-
-msgid "Converting Images to WebP in Background Failed."
-msgstr "পটভূমিতে WebP এ ছবি রূপান্তর ব্যর্থ হয়েছে।"
-
-msgid "Converting Images to WebP in background was completed %s"
-msgstr "পটভূমিতে WebP এ ছবি রূপান্তর %s এ সম্পূর্ণ হয়েছে"
-
-msgid "Converting Images to WebP..."
-msgstr "WebP এ ছবি রূপান্তর করছে..."
-
-msgid "Create professional share images for LinkedIn"
-msgstr "লিংকডইনের জন্য পেশাদার শেয়ার ইমেজ তৈরি করুন"
-
-msgid "Created %s images."
-msgstr "%s ছবি তৈরি করা হয়েছে।"
-
-msgid "Crop, resize, or tweak any image right inside your WordPress dashboard. No need to re-upload or touch a third-party tool."
-msgstr "আপনার WordPress ড্যাশবোর্ডের ভিতরে সরাসরি যেকোনো ছবি ক্রপ, পুনরায় আকার দিন বা সামঞ্জস্য করুন। পুনরায় আপলোড বা তৃতীয় পক্ষের সরঞ্জাম স্পর্শ করার প্রয়োজন নেই।"
-
-msgid "Cropped?"
-msgstr "ক্রপ করা হয়েছে?"
-
-msgid "Dashboard"
-msgstr "ড্যাশবোর্ড"
-
-msgid "Delete Now"
-msgstr "এখনই মুছুন"
-
-msgid "Delete Unused Images"
-msgstr "অব্যবহৃত ছবি মুছুন"
-
-msgid "Delete and disable unnecessary thumbnails for all uploaded images"
-msgstr "সমস্ত আপলোড করা ছবির জন্য অপ্রয়োজনীয় থাম্বনেইলগুলি মুছুন এবং অক্ষম করুন"
-
-msgid "Delete and disable unnecessary thumbnails for all uploaded images in a flash."
-msgstr "তাৎক্ষণিকভাবে সমস্ত আপলোড করা ছবির জন্য অপ্রয়োজনীয় থাম্বনেইলগুলি মুছুন এবং অক্ষম করুন।"
-
-msgid "Deleted %s images."
-msgstr "%s ছবি মুছে ফেলা হয়েছে।"
-
-msgid "Detect"
-msgstr "সনাক্ত করুন"
-
-msgid "Detect & Delete Large Images"
-msgstr "বড় ছবি সনাক্ত করুন এবং মুছুন"
-
-msgid "Detect Large Images"
-msgstr "বড় ছবি সনাক্ত করুন"
-
-msgid "Detect Now"
-msgstr "এখনই সনাক্ত করুন"
-
-msgid "Detect Unused Images"
-msgstr "অব্যবহৃত ছবি সনাক্ত করুন"
-
-msgid "Detect and delete large images that slow down your server and improve loading times."
-msgstr "আপনার সার্ভারকে ধীর করে এমন বড় ছবিগুলি সনাক্ত করুন এবং মুছুন এবং লোডিং সময় উন্নত করুন।"
-
-msgid "Detected"
-msgstr "সনাক্ত করা হয়েছে"
-
-msgid "Detecting"
-msgstr "সনাক্ত করছে"
-
-msgid "Disable All"
-msgstr "সব অক্ষম করুন"
-
-msgid "Disable Right Click on Image"
-msgstr "ছবিতে ডান ক্লিক অক্ষম করুন"
-
-msgid "Disable Thumbnails"
-msgstr "থাম্বনেইল অক্ষম করুন"
-
-msgid "Disabled"
-msgstr "অক্ষম"
-
-msgid "Disabled - This size will not be generated for new uploads."
-msgstr "অক্ষম - নতুন আপলোডের জন্য এই আকার তৈরি করা হবে না।"
-
-msgid "Disabled sizes saved successfully."
-msgstr "অক্ষম আকারগুলি সফলভাবে সংরক্ষণ করা হয়েছে।"
-
-msgid "Dismiss this notice."
-msgstr "এই বিজ্ঞপ্তিটি বরখাস্ত করুন।"
-
-msgid "Docs"
-msgstr "ডকুমেন্টেশন"
-
-msgid "Downloads"
-msgstr "ডাউনলোড"
-
-msgid "Duplicate Image Detection is a Pro feature"
-msgstr "নকল চিত্র সনাক্তকরণ একটি প্রো বৈশিষ্ট্য"
-
-msgid "Duplicate Images"
-msgstr "নকল ছবি"
-
-msgid "Duplicate images found"
-msgstr "নকল ছবি পাওয়া গেছে"
-
-msgid "Edit Images"
-msgstr "ছবি সম্পাদনা করুন"
-
-msgid "Edit Now"
-msgstr "এখনই সম্পাদনা করুন"
-
-msgid "Effortlessly Manage WordPress Images & Thumbnails"
-msgstr "অনায়াসে WordPress ছবি এবং থাম্বনেইল পরিচালনা করুন"
-
-msgid "Email"
-msgstr "ইমেল"
-
-msgid "Email settings"
-msgstr "ইমেল সেটিংস"
-
-msgid "Email to a Client"
-msgstr "ক্লায়েন্টকে ইমেল করুন"
-
-msgid "Email to an Agent"
-msgstr "এজেন্টকে ইমেল করুন"
-
-msgid "Enable All"
-msgstr "সব সক্ষম করুন"
-
-msgid "Enable Facebook Share Image"
-msgstr "Facebook শেয়ার ইমেজ সক্ষম করুন"
-
-msgid "Enable LinkedIn Share Image"
-msgstr "LinkedIn শেয়ার ইমেজ সক্ষম করুন"
-
-msgid "Enable Live Chat"
-msgstr "লাইভ চ্যাট সক্ষম করুন"
-
-msgid "Enable Pinterest Share Image"
-msgstr "Pinterest শেয়ার ইমেজ সক্ষম করুন"
-
-msgid "Enable Twitter Share Image"
-msgstr "Twitter শেয়ার ইমেজ সক্ষম করুন"
-
-msgid "Enable compression during upload to reduce file size and improve speed."
-msgstr "ফাইল আকার কমাতে এবং গতি উন্নত করতে আপলোড করার সময় সংকুচন সক্ষম করুন।"
-
-msgid "Enable this if you want to convert your image to webp on upload."
-msgstr "আপলোডের সময় আপনার ছবি webp এ রূপান্তর করতে চাইলে এটি সক্ষম করুন।"
-
-msgid "Enable this if you want to convert your image to webp one by one."
-msgstr "আপনার ছবিগুলি একটি একটি করে webp এ রূপান্তর করতে চাইলে এটি সক্ষম করুন।"
-
-msgid "Enabled"
-msgstr "সক্ষম"
-
-msgid "Enabled - This size will be generated for new uploads."
-msgstr "সক্ষম - নতুন আপলোডের জন্য এই আকার তৈরি করা হবে।"
-
-msgid "Enhance images with filters and adjustments to showcase their best"
-msgstr "ছবিগুলি তাদের সেরা প্রদর্শন করার জন্য ফিল্টার এবং সমন্বয় দিয়ে উন্নত করুন"
-
-msgid "Enhance images with filters and adjustments to showcase their best versions."
-msgstr "ছবিগুলি তাদের সেরা সংস্করণ প্রদর্শন করার জন্য ফিল্টার এবং সমন্বয় দিয়ে উন্নত করুন।"
-
-msgid "Enjoy the freedom of setting separate thumbnails for different social media"
-msgstr "বিভিন্ন সোশ্যাল মিডিয়ার জন্য পৃথক থাম্বনেইল সেট করার স্বাধীনতা উপভোগ করুন"
-
-msgid "Enjoy the freedom of setting separate thumbnails for different social media channels."
-msgstr "বিভিন্ন সোশ্যাল মিডিয়া চ্যানেলের জন্য পৃথক থাম্বনেইল সেট করার স্বাধীনতা উপভোগ করুন।"
-
-msgid "Enter the maximum height in px"
-msgstr "পিক্সেলে সর্বোচ্চ উচ্চতা প্রবেশ করুন"
-
-msgid "Enter the maximum size in KB"
-msgstr "KB তে সর্বোচ্চ আকার প্রবেশ করুন"
-
-msgid "Enter the maximum width in px"
-msgstr "পিক্সেলে সর্বোচ্চ প্রস্থ প্রবেশ করুন"
-
-msgid "Explore our blogs for fresh insights on WordPress images and Thumbnails. Join the conversation today!"
-msgstr "WordPress ছবি এবং থাম্বনেইল সম্পর্কে তাজা অন্তর্দৃষ্টির জন্য আমাদের ব্লগ অন্বেষণ করুন। আজই কথোপকথনে যোগ দিন!"
-
-msgid "Facebook"
-msgstr "ফেসবুক"
-
-msgid "Facebook Image:"
-msgstr "Facebook ইমেজ:"
-
-msgid "Failed"
-msgstr "ব্যর্থ"
-
-msgid "Failed to convert image"
-msgstr "ছবি রূপান্তর করতে ব্যর্থ"
-
-msgid "Failed to convert image to AVIF."
-msgstr "ছবি AVIF এ রূপান্তর করতে ব্যর্থ।"
-
-msgid "Failed to convert image."
-msgstr "ছবি রূপান্তর করতে ব্যর্থ।"
-
-msgid "Failed to load debug info."
-msgstr "ডিবাগ তথ্য লোড করতে ব্যর্থ।"
-
-msgid "Failed to save settings."
-msgstr "সেটিংস সংরক্ষণ করতে ব্যর্থ।"
-
-msgid "Failed to schedule action."
-msgstr "ক্রিয়া নির্ধারণ করতে ব্যর্থ।"
-
-msgid "Failed to schedule image conversion"
-msgstr "ছবি রূপান্তর নির্ধারণ করতে ব্যর্থ"
-
-msgid "Failed to update attachment metadata"
-msgstr "সংযুক্তি মেটাডেটা আপডেট করতে ব্যর্থ"
-
-msgid "Feature"
-msgstr "বৈশিষ্ট্য"
-
-msgid "Find images that have been uploaded more than once. Clean up the clutter and stop wasting space on files you already have."
-msgstr "এমন ছবি খুঁজুন যা একাধিকবার আপলোড করা হয়েছে। বিশৃঙ্খলা পরিষ্কার করুন এবং আপনার ইতিমধ্যে থাকা ফাইলগুলিতে স্থান নষ্ট করা বন্ধ করুন।"
-
-msgid "Find unused images & delete them from your website anytime with just one click."
-msgstr "অব্যবহৃত ছবি খুঁজুন এবং সেগুলি যেকোনো সময় মাত্র এক ক্লিকে আপনার ওয়েবসাইট থেকে মুছুন।"
-
-msgid "Focus on crafting your blazing-fast WordPress site and leave the image & thumbnail management to ThumbPress!"
-msgstr "আপনার দ্রুত WordPress সাইট তৈরিতে ফোকাস করুন এবং ছবি এবং থাম্বনেইল পরিচালনা ThumbPress এর উপর ছেড়ে দিন!"
-
-msgid "Free"
-msgstr "বিনামূল্যে"
-
-msgid "Free up space by detecting and removing images not used anywhere on your website."
-msgstr "আপনার ওয়েবসাইটে কোথাও ব্যবহার করা হয় না এমন ছবি সনাক্ত করে এবং সরিয়ে স্থান খালি করুন।"
-
-msgid "General"
-msgstr "সাধারণ"
-
-msgid "General settings"
-msgstr "সাধারণ সেটিংস"
-
-msgid "Generate Again"
-msgstr "আবার তৈরি করুন"
-
-msgid "Generate Pinterest-optimized pin images"
-msgstr "পিন্টারেস্ট-অপ্টিমাইজড পিন ইমেজ তৈরি করুন"
-
-msgid "Generate optimized share images for Facebook posts"
-msgstr "ফেসবুক পোস্টের জন্য অপ্টিমাইজড শেয়ার ইমেজ তৈরি করুন"
-
-msgid "Get Best Out of ThumbPress"
-msgstr "ThumbPress এর সেরাটি পান"
-
-msgid "Get Pro (On Sale)"
-msgstr "প্রো পান (বিক্রয়ে)"
-
-msgid "Get Support"
-msgstr "সহায়তা পান"
-
-msgid "Get ThumbPress Pro"
-msgstr "ThumbPress Pro পান"
-
-msgid "Get this Premium Feature"
-msgstr "এই প্রিমিয়াম বৈশিষ্ট্য পান"
-
-msgid "Go to Dashboard"
-msgstr "ড্যাশবোর্ডে যান"
-
-msgid "Go to Disable Thumbnails Settings"
-msgstr "থাম্বনেইল অক্ষম করার সেটিংসে যান"
-
-msgid "Go to Regenerate Thumbnails Settings"
-msgstr "থাম্বনেইল পুনর্নির্মাণ সেটিংসে যান"
-
-msgid "Grab Now"
-msgstr "এখনই গ্রহণ করুন"
-
-msgid "Header"
-msgstr "হেডার"
-
-msgid "Heavy images are silently costing you visitors. Compress your entire library in one click with absolutely no visible quality loss."
-msgstr "ভারী ছবিগুলি আপনার পরিদর্শকদের নীরবে খরচ করছে। এক ক্লিকে আপনার সম্পূর্ণ লাইব্রেরি সংকুচিত করুন কোনো দৃশ্যমান গুণমান হ্রাস ছাড়াই।"
-
-msgid "Height"
-msgstr "উচ্চতা"
-
-msgid "Help"
-msgstr "সাহায্য"
-
-msgid "Homepage"
-msgstr "হোম পৃষ্ঠা"
-
-msgid "Hotlink Protection"
-msgstr "হটলিংক সুরক্ষা"
-
-msgid "Hotlinking not allowed."
-msgstr "হটলিংক অনুমতিপ্রাপ্ত নয়।"
-
-msgid "IMAGE CONTROL"
-msgstr "ছবি নিয়ন্ত্রণ"
-
-msgid "Identify and compress or delete large images to free up your website"
-msgstr "আপনার ওয়েবসাইট খালি করতে বড় ছবি সনাক্ত করুন এবং সংকুচিত করুন বা মুছুন"
-
-msgid "Identify and compress or delete large images to free up your website server space."
-msgstr "আপনার ওয়েবসাইট সার্ভার স্থান খালি করতে বড় ছবি সনাক্ত করুন এবং সংকুচিত করুন বা মুছুন।"
-
-msgid "Image Created"
-msgstr "ছবি তৈরি করা হয়েছে"
-
-msgid "Image Deleted"
-msgstr "ছবি মুছে ফেলা হয়েছে"
-
-msgid "Image Editor"
-msgstr "ইমেজ সম্পাদক"
-
-msgid "Image Processed"
-msgstr "ছবি প্রক্রিয়া করা হয়েছে"
-
-msgid "Image Regenerate in Progress"
-msgstr "ছবি পুনর্নির্মাণ চলছে"
-
-msgid "Image Regeneration Complete"
-msgstr "ছবি পুনর্নির্মাণ সম্পূর্ণ"
-
-msgid "Image Upload Limit"
-msgstr "ছবি আপলোড সীমা"
-
-msgid "Image converted successfully."
-msgstr "ছবি সফলভাবে রূপান্তরিত হয়েছে।"
-
-msgid "Image converted to AVIF successfully."
-msgstr "ছবি সফলভাবে AVIF এ রূপান্তরিত হয়েছে।"
-
-msgid "Image file not found."
-msgstr "ছবি ফাইল পাওয়া যায়নি।"
-
-msgid "Images (over 1 MB)"
-msgstr "ছবি (1 MB এর বেশি)"
-
-msgid "Images needs compression"
-msgstr "ছবিগুলির সংকুচন প্রয়োজন"
-
-msgid "Images yet to be fixed"
-msgstr "সংশোধন করার জন্য অপেক্ষারত ছবি"
-
-msgid "Images/request. Default is 50"
-msgstr "ছবি/অনুরোধ। ডিফল্ট হল 50"
-
-msgid "In media library"
-msgstr "মিডিয়া লাইব্রেরিতে"
-
-msgid "Inactive"
-msgstr "নিষ্ক্রিয়"
-
-msgid "Invalid attachment."
-msgstr "অবৈধ সংযুক্তি।"
-
-msgid "Invalid data format. Array expected."
-msgstr "অবৈধ ডেটা ফরম্যাট। অ্যারে প্রত্যাশিত।"
-
+#: app/API/Convert_Avif.php:24
+#: app/API/Convert_Webp.php:377
 msgid "Invalid image ID."
 msgstr "অবৈধ ছবি ID।"
 
-msgid "Join 30,000+ users who manage their media smarter with ThumbPress Pro"
-msgstr "ThumbPress Pro এর সাথে তাদের মিডিয়া আরও স্মার্টভাবে পরিচালনা করে এমন 30,000+ ব্যবহারকারীদের সাথে যোগ দিন"
-
-msgid "Keep all thumbnails synchronized with current settings for consistency and optimal quality. Regenerate when you change dimensions or update images."
-msgstr "সামঞ্জস্য এবং সর্বোত্তম গুণমানের জন্য বর্তমান সেটিংসের সাথে সমস্ত থাম্বনেইল সিঙ্ক্রোনাইজ করুন। যখন আপনি মাত্রা পরিবর্তন করেন বা ছবিগুলি আপডেট করেন তখন পুনরায় তৈরি করুন।"
-
-msgid "Landing Page"
-msgstr "ল্যান্ডিং পৃষ্ঠা"
-
-msgid "Languages"
-msgstr "ভাষা"
-
-msgid "Large Images"
-msgstr "বড় ছবি"
-
-msgid "Large images are costing you speed. Optimize them without visible loss and deliver a faster, smoother browsing experience."
-msgstr "বড় ছবিগুলি আপনার গতি খরচ করছে। সেগুলিকে দৃশ্যমান হ্রাস ছাড়াই অপ্টিমাইজ করুন এবং দ্রুত, মসৃণ ব্রাউজিং অভিজ্ঞতা প্রদান করুন।"
-
-msgid "Lazy Loading"
-msgstr "লেজি লোডিং"
-
-msgid "Lazy load"
-msgstr "লেজি লোড"
-
-msgid "Leave a review"
-msgstr "একটি পর্যালোচনা রেখে যান"
-
-msgid "License Status"
-msgstr "লাইসেন্স স্ট্যাটাস"
-
-msgid "LinkedIn"
-msgstr "লিংকডইন"
-
-msgid "LinkedIn Image:"
-msgstr "LinkedIn ইমেজ:"
-
-msgid "Loading.."
-msgstr "লোড হচ্ছে.."
-
-msgid "MEDIA MANAGEMENT"
-msgstr "মিডিয়া ম্যানেজমেন্ট"
-
-msgid "Main Pages"
-msgstr "মূল পৃষ্ঠা"
-
-msgid "Main Pages Settings"
-msgstr "মূল পৃষ্ঠার সেটিংস"
-
-msgid "Make a smart choice today; a <strong>small investment</strong> can lead to a <strong>big boost</strong> in your website performance. Unlock All Premium Features."
-msgstr "আজ একটি স্মার্ট পছন্দ করুন; একটি <strong>ছোট বিনিয়োগ</strong> আপনার ওয়েবসাইটের কর্মক্ষমতায় একটি <strong>বড় বৃদ্ধি</strong> নিয়ে আসতে পারে। সমস্ত প্রিমিয়াম বৈশিষ্ট্য আনলক করুন।"
-
-msgid "Max Height"
-msgstr "সর্বোচ্চ উচ্চতা"
-
-msgid "Max Size"
-msgstr "সর্বোচ্চ আকার"
-
-msgid "Max Width"
-msgstr "সর্বোচ্চ প্রস্থ"
-
-msgid "Merge Duplicate Images"
-msgstr "নকল ছবি একত্রিত করুন"
-
-msgid "Merge Now"
-msgstr "এখনই একত্রিত করুন"
-
-msgid "Modules"
-msgstr "মডিউল"
-
-msgid "Name"
-msgstr "নাম"
-
-msgid "New Ticket"
-msgstr "নতুন টিকিট"
-
-msgid "New Ticket Notification"
-msgstr "নতুন টিকিট বিজ্ঞপ্তি"
-
-msgid "No"
-msgstr "না"
-
-msgid "No Images Found"
-msgstr "কোনো ছবি পাওয়া যায়নি"
-
-msgid "No Scan Results Yet"
-msgstr "এখনও কোনো স্ক্যান ফলাফল নেই"
-
-msgid "No changes detected."
-msgstr "কোনো পরিবর্তন সনাক্ত করা হয়নি।"
-
-msgid "No data."
-msgstr "কোনো ডেটা নেই।"
-
-msgid "No file formats selected."
-msgstr "কোনো ফাইল ফরম্যাট নির্বাচিত হয়নি।"
-
-msgid "No images found."
-msgstr "কোনো ছবি পাওয়া যায়নি।"
-
-msgid "No thumbnail sizes found."
-msgstr "কোনো থাম্বনেইল আকার পাওয়া যায়নি।"
-
-msgid "No valid file formats selected."
-msgstr "কোনো বৈধ ফাইল ফরম্যাট নির্বাচিত হয়নি।"
-
-msgid "Non-AVIF images found"
-msgstr "অ-AVIF ছবি পাওয়া গেছে"
-
-msgid "Non-WebP images found"
-msgstr "অ-WebP ছবি পাওয়া গেছে"
-
-msgid "None"
-msgstr "কোনো নেই"
-
-msgid "Notice Removed"
-msgstr "বিজ্ঞপ্তি সরানো হয়েছে"
-
-msgid "Notice Removed!"
-msgstr "বিজ্ঞপ্তি সরানো হয়েছে!"
-
-msgid "Number of images processed in a single batch per server request."
-msgstr "প্রতি সার্ভার অনুরোধে একটি একক ব্যাচে প্রক্রিয়া করা ইমেজের সংখ্যা।"
-
-msgid "Number of images to process"
-msgstr "প্রক্রিয়া করার জন্য ছবির সংখ্যা"
-
-msgid "Number of images to process per request:"
-msgstr "প্রতি অনুরোধে প্রক্রিয়া করার জন্য ছবির সংখ্যা:"
-
-msgid "Offset for pagination"
-msgstr "পেজিনেশনের জন্য অফসেট"
-
-msgid "Optimize share images for Twitter cards"
-msgstr "টুইটার কার্ডের জন্য শেয়ার ইমেজ অপ্টিমাইজ করুন"
-
-msgid "Original"
-msgstr "মূল"
-
-msgid "Original Image"
-msgstr "মূল ছবি"
-
-msgid "Page Settings"
-msgstr "পৃষ্ঠার সেটিংস"
-
-msgid "Pages"
-msgstr "পৃষ্ঠা"
-
-msgid "Personal"
-msgstr "ব্যক্তিগত"
-
-msgid "Pinterest"
-msgstr "পিন্টারেস্ট"
-
-msgid "Pinterest Image:"
-msgstr "Pinterest ইমেজ:"
-
-msgid "Please click the button to start converting images."
-msgstr "ছবি রূপান্তর শুরু করতে বোতাম ক্লিক করুন।"
-
-msgid "Please click the button to start detecting images."
-msgstr "ছবি সনাক্ত করা শুরু করতে বোতাম ক্লিক করুন।"
-
-msgid "Pointer Removed"
-msgstr "পয়েন্টার সরানো হয়েছে"
-
-msgid "Prevent Duplicate Upload"
-msgstr "নকল আপলোড প্রতিরোধ করুন"
-
-msgid "Prevent visitors from downloading your images by turning off the right-click"
-msgstr "ডান ক্লিক বন্ধ করে দর্শকদের আপনার ছবি ডাউনলোড করা প্রতিরোধ করুন"
-
-msgid "Prevent visitors from downloading your images by turning off the right-click option on your website."
-msgstr "আপনার ওয়েবসাইটে ডান ক্লিক অপশন বন্ধ করে দর্শকদের আপনার ছবি ডাউনলোড করা প্রতিরোধ করুন।"
-
-msgid "Previously created thumbnails count"
-msgstr "আগে তৈরি করা থাম্বনেইল সংখ্যা"
-
-msgid "Previously deleted thumbnails count"
-msgstr "আগে মুছে ফেলা থাম্বনেইল সংখ্যা"
-
-msgid "Price starts from $5/month."
-msgstr "মূল্য $5/মাস থেকে শুরু।"
-
-msgid "Pro"
-msgstr "প্রো"
-
-msgid "Processed %s images"
-msgstr "%s ছবি প্রক্রিয়া করা হয়েছে"
-
-msgid "Professional"
-msgstr "পেশাদার"
-
-msgid "Read Blogs"
-msgstr "ব্লগ পড়ুন"
-
-msgid "Read Our Blogs"
-msgstr "আমাদের ব্লগ পড়ুন"
-
-msgid "Ready to take control of your Images?"
-msgstr "আপনার ছবি নিয়ন্ত্রণ করতে প্রস্তুত?"
-
-msgid "Reduce image size and speed up your website with our built-in image compressor."
-msgstr "আমাদের অন্তর্নির্মিত ছবি সংকোচক দিয়ে ছবির আকার কমান এবং আপনার ওয়েবসাইট দ্রুত করুন।"
-
-msgid "Refine your WordPress images, save server space, and maximize your thumbnail potential with ThumbPress Pro."
-msgstr "ThumbPress Pro দিয়ে আপনার WordPress ছবি পরিশোধন করুন, সার্ভার স্থান সঞ্চয় করুন এবং আপনার থাম্বনেইল সম্ভাবনা সর্বাধিক করুন।"
-
-msgid "Regenerate All Thumbnails"
-msgstr "সমস্ত থাম্বনেইল পুনরায় তৈরি করুন"
-
-msgid "Regenerate In Background"
-msgstr "পটভূমিতে পুনরায় তৈরি করুন"
-
-msgid "Regenerate Now"
-msgstr "এখনই পুনরায় তৈরি করুন"
-
-msgid "Regenerate Thumbnails"
-msgstr "থাম্বনেইল পুনরায় তৈরি করুন"
-
-msgid "Regenerate Thumbnails is a server-dependent feature and the regeneration process may timeout if you process a large number of images. We suggest doing this process in the background to avoid any issues."
-msgstr "থাম্বনেইল পুনর্নির্মাণ একটি সার্ভার-নির্ভর বৈশিষ্ট্য এবং যদি আপনি প্রচুর সংখ্যক ছবি প্রক্রিয়া করেন তবে পুনর্নির্মাণ প্রক্রিয়া সময়সীমা শেষ হতে পারে। কোনো সমস্যা এড়াতে আমরা এই প্রক্রিয়াটি পটভূমিতে করার পরামর্শ দিই।"
-
-msgid "Regenerate previously deleted thumbnails anytime, no matter the size"
-msgstr "যেকোনো সময় আগে মুছে ফেলা থাম্বনেইলগুলি পুনরায় তৈরি করুন, আকার যাই হোক না কেন"
-
-msgid "Regenerate previously deleted thumbnails anytime, no matter the size."
-msgstr "যেকোনো সময় আগে মুছে ফেলা থাম্বনেইলগুলি পুনরায় তৈরি করুন, আকার যাই হোক না কেন।"
-
-msgid "Regenerating Thumbnails in Background"
-msgstr "পটভূমিতে থাম্বনেইল পুনর্নির্মাণ করছে"
-
-msgid "Regenerating Thumbnails in Background Failed."
-msgstr "পটভূমিতে থাম্বনেইল পুনর্নির্মাণ ব্যর্থ হয়েছে।"
-
-msgid "Regenerating Thumbnails in background was completed at %s"
-msgstr "পটভূমিতে থাম্বনেইল পুনর্নির্মাণ %s এ সম্পূর্ণ হয়েছে"
-
-msgid "Regenerating Thumbnails..."
-msgstr "থাম্বনেইল পুনর্নির্মাণ করছে..."
-
-msgid "Regenerating media library thumbnails using selected sizes."
-msgstr "নির্বাচিত আকার ব্যবহার করে মিডিয়া লাইব্রেরি থাম্বনেইল পুনর্নির্মাণ করছে।"
-
-msgid "Regenerating.."
-msgstr "পুনর্নির্মাণ করছে.."
-
-msgid "Remaining"
-msgstr "বাকি"
-
-msgid "Remove Image"
-msgstr "ছবি সরান"
-
-msgid "Replace Image With New Version"
-msgstr "ছবি নতুন সংস্করণ দিয়ে প্রতিস্থাপন করুন"
-
-msgid "Replace Image with New Version"
-msgstr "ছবি নতুন সংস্করণ দিয়ে প্রতিস্থাপন করুন"
-
-msgid "Replace Images"
-msgstr "ছবি প্রতিস্থাপন করুন"
-
-msgid "Reset Options"
-msgstr "অপশন রিসেট করুন"
-
-msgid "Reset Settings"
-msgstr "সেটিংস রিসেট করুন"
-
-msgid "Rich in Features, Light in Cost!"
-msgstr "বৈশিষ্ট্যে সমৃদ্ধ, খরচে হালকা!"
-
-msgid "STORAGE & CLEANUP"
-msgstr "স্টোরেজ এবং পরিষ্কার"
-
-msgid "Save Changes"
-msgstr "পরিবর্তন সংরক্ষণ করুন"
-
-msgid "Save Settings"
-msgstr "সেটিংস সংরক্ষণ করুন"
-
-msgid "Scan your media library and find oversized images instantly. See exactly which files are bloating your pages and fix them before they cost you rankings."
-msgstr "আপনার মিডিয়া লাইব্রেরি স্ক্যান করুন এবং অতিরিক্ত আকারের ছবিগুলি তাৎক্ষণিকভাবে খুঁজুন। দেখুন কোন ফাইলগুলি আপনার পৃষ্ঠাগুলিকে ফুলিয়ে তুলছে এবং সেগুলি আপনার র‍্যাঙ্কিংয়ের খরচ দেওয়ার আগে সেগুলি ঠিক করুন।"
-
-msgid "Scan your media library and find unused images instantly. See exactly which files are taking up space and delete them to reclaim server space."
-msgstr "আপনার মিডিয়া লাইব্রেরি স্ক্যান করুন এবং অব্যবহৃত ছবিগুলি তাৎক্ষণিকভাবে খুঁজুন। দেখুন কোন ফাইলগুলি স্থান নিচ্ছে এবং সার্ভার স্থান পুনরুদ্ধার করতে সেগুলি মুছুন।"
-
-msgid "See Why 60,000+ Users Love ThumbPress"
-msgstr "দেখুন কেন 60,000+ ব্যবহারকারী ThumbPress পছন্দ করেন"
-
-msgid "Select File Format"
-msgstr "ফাইল ফরম্যাট নির্বাচন করুন"
-
-msgid "Server limit:"
-msgstr "সার্ভার সীমা:"
-
-msgid "Set a limit for maximum image upload size and resolution to speed up"
-msgstr "দ্রুত করার জন্য সর্বোচ্চ ছবি আপলোড আকার এবং রেজোলিউশনের জন্য একটি সীমা নির্ধারণ করুন"
-
-msgid "Set a limit for maximum image upload size and resolution to speed up your website."
-msgstr "আপনার ওয়েবসাইট দ্রুত করার জন্য সর্বোচ্চ ছবি আপলোড আকার এবং রেজোলিউশনের জন্য একটি সীমা নির্ধারণ করুন।"
-
-msgid "Settings"
-msgstr "সেটিংস"
-
-msgid "Settings reset successfully."
-msgstr "সেটিংস সফলভাবে রিসেট করা হয়েছে।"
-
-msgid "Settings saved successfully."
-msgstr "সেটিংস সফলভাবে সংরক্ষণ করা হয়েছে।"
-
-msgid "Share Feedback"
-msgstr "প্রতিক্রিয়া শেয়ার করুন"
-
-msgid "Share Your Feedback"
-msgstr "আপনার প্রতিক্রিয়া শেয়ার করুন"
-
-msgid "Share your ideas or suggestions to help make ThumbPress better. We would love to hear about them!"
-msgstr "ThumbPress উন্নত করতে আপনার ধারণা বা পরামর্শ শেয়ার করুন। আমরা সেগুলি শুনতে পছন্দ করব!"
-
-msgid "Show Your Love"
-msgstr "আপনার ভালোবাসা দেখান"
-
-msgid "Show the Optimize button on individual media attachments."
-msgstr "পৃথক মিডিয়া সংযুক্তিতে অপ্টিমাইজ বোতাম দেখান।"
-
-msgid "Single Image Compress"
-msgstr "একক ছবি সংকুচিত করুন"
-
-msgid "Single Image Conversion"
-msgstr "একক ছবি রূপান্তর"
-
-msgid "Single image conversion"
-msgstr "একক ছবি রূপান্তর"
-
-msgid "Size"
-msgstr "আকার"
-
-msgid "Sizes Disabled"
-msgstr "আকারগুলি অক্ষম"
-
-msgid "Sizes Enabled "
-msgstr "আকারগুলি সক্ষম "
-
-msgid "Social Media Thumbnails"
-msgstr "সোশ্যাল মিডিয়া থাম্বনেইল"
-
-msgid "Social Share Image"
-msgstr "সোশ্যাল শেয়ার ইমেজ"
-
-msgid "Something went wrong!"
-msgstr "কিছু ভুল হয়েছে!"
-
+#: app/API/Convert_Avif.php:30
+#: app/API/Convert_Avif.php:38
+#: app/API/Convert_Webp.php:383
+#: app/API/Convert_Webp.php:391
 msgid "Source image file not found."
 msgstr "উৎস ছবি ফাইল পাওয়া যায়নি।"
 
-msgid "Space Saved"
-msgstr "সঞ্চিত স্থান"
-
-msgid "Speed up your site and cut bandwidth costs. WebP files are 25-35% smaller than JPEG/PNG, dramatically improving performance without quality loss."
-msgstr "আপনার সাইটকে দ্রুত করুন এবং ব্যান্ডউইথ খরচ কমান। WebP ফাইলগুলি JPEG/PNG থেকে 25-35% ছোট, গুণমান হ্রাস ছাড়াই কর্মক্ষমতা নাটকীয়ভাবে উন্নত করে।"
-
-msgid "Start Live Chat"
-msgstr "লাইভ চ্যাট শুরু করুন"
-
-msgid "Start Now"
-msgstr "এখনই শুরু করুন"
-
-msgid "Stuck with something? Our support team is always ready to help you out."
-msgstr "কিছু নিয়ে আটকা? আমাদের সহায়তা দল সর্বদা আপনাকে সাহায্য করতে প্রস্তুত।"
-
-msgid "Subject"
-msgstr "বিষয়"
-
-msgid "Success"
-msgstr "সফলতা"
-
-msgid "Support"
-msgstr "সহায়তা"
-
-msgid "Switch to Classic"
-msgstr "ক্লাসিকে স্যুইচ করুন"
-
-msgid "Take 2 minutes to review ThumbPress and help us keep motivated."
-msgstr "ThumbPress পর্যালোচনা করতে 2 মিনিট সময় নিন এবং আমাদের প্রেরণা বজায় রাখতে সাহায্য করুন।"
-
-msgid "Template not found!"
-msgstr "টেমপ্লেট পাওয়া যায়নি!"
-
-msgid "There are no images to convert to WebP."
-msgstr "WebP তে রূপান্তর করার জন্য কোনো ছবি নেই।"
-
-msgid "There are no images to regenerate."
-msgstr "পুনরায় তৈরি করার জন্য কোনো ছবি নেই।"
-
-msgid "This is a Premium Feature. This feature is only available in <strong>ThumbPress Pro</strong>!"
-msgstr "এটি একটি প্রিমিয়াম বৈশিষ্ট্য। এই বৈশিষ্ট্যটি শুধুমাত্র <strong>ThumbPress Pro</strong> এ উপলব্ধ!"
-
-msgid "This is the original image size and cannot be disabled."
-msgstr "এটি মূল চিত্রের আকার এবং অক্ষম করা যায় না।"
-
-msgid "ThumbPress"
-msgstr "ThumbPress"
-
-msgid "ThumbPress - All in One WordPress Image & Thumbnail Management Solution"
-msgstr "ThumbPress - সব-এক-এ WordPress ছবি এবং থাম্বনেইল ম্যানেজমেন্ট সমাধান"
-
-msgid "ThumbPress Pro Modules"
-msgstr "ThumbPress Pro মডিউল"
-
-msgid "ThumbPress Pro update required!"
-msgstr "ThumbPress Pro আপডেট প্রয়োজন!"
-
-msgid "ThumbPress is installed!"
-msgstr "ThumbPress ইনস্টল করা হয়েছে!"
-
-msgid "ThumbPress requires ThumbPress Pro version %2$s or higher. You have version %1$s. Please update to use all new features."
-msgstr "ThumbPress এর জন্য ThumbPress Pro সংস্করণ %2$s বা তার উপরে প্রয়োজন। আপনার সংস্করণ %1$s রয়েছে। সমস্ত নতুন বৈশিষ্ট্য ব্যবহার করতে আপডেট করুন।"
-
-msgid "Thumbnail Disabled"
-msgstr "থাম্বনেইল অক্ষম"
-
-msgid "Thumbnails"
-msgstr "থাম্বনেইল"
-
-msgid "Thumbnails are generated based on the "
-msgstr "থাম্বনেইলগুলি এর ভিত্তিতে তৈরি করা হয় "
-
-msgid "Thumbnails found"
-msgstr "থাম্বনেইল পাওয়া গেছে"
-
-msgid "Thumbnails regenerated successfully."
-msgstr "থাম্বনেইলগুলি সফলভাবে পুনরায় তৈরি করা হয়েছে।"
-
-msgid "Thumbpress. All rights reserved."
-msgstr "Thumbpress। সমস্ত অধিকার সংরক্ষিত।"
-
-msgid "To use this Premium Feature. Activate your license now!"
-msgstr "এই প্রিমিয়াম বৈশিষ্ট্য ব্যবহার করতে। এখনই আপনার লাইসেন্স সক্রিয় করুন!"
-
-msgid "Tools"
-msgstr "সরঞ্জাম"
-
-msgid "Total"
-msgstr "মোট"
-
-msgid "Total Images"
-msgstr "মোট ছবি"
-
-msgid "Total Thumbnails"
-msgstr "মোট থাম্বনেইল"
-
-msgid "Trashed Images"
-msgstr "ট্রেশ করা ছবি"
-
-msgid "Trusted by 30,000+ WordPress Users Just Like You"
-msgstr "আপনার মতো 30,000+ ওয়ার্ডপ্রেস ব্যবহারকারী দ্বারা বিশ্বস্ত"
-
-msgid "Try New Version"
-msgstr "নতুন সংস্করণ চেষ্টা করুন"
-
-msgid "Twitter"
-msgstr "টুইটার"
-
-msgid "Twitter Image:"
-msgstr "Twitter ইমেজ:"
-
-msgid "Type"
-msgstr "ধরন"
-
-msgid "Unattached images"
-msgstr "সংযুক্ত না করা ছবি"
-
-msgid "Unauthorized"
-msgstr "অননুমোদিত"
-
-msgid "Unauthorized!"
-msgstr "অননুমোদিত!"
-
-msgid "Unlock Premium Features"
-msgstr "প্রিমিয়াম বৈশিষ্ট্য আনলক করুন"
-
-msgid "Unoptimized Images"
-msgstr "অপ্টিমাইজ করা হয়নি ছবি"
-
-msgid "Unused Images"
-msgstr "অব্যবহৃত ছবি"
-
-msgid "Unused images, oversized files, and missing optimization pile up with every upload. Pro finds them all and fixes them — without touching a single file manually."
-msgstr "অব্যবহৃত ছবি, অতিরিক্ত আকারের ফাইল এবং মিসিং অপ্টিমাইজেশন প্রতিটি আপলোডের সাথে জমা হয়। প্রো সেগুলি সব খুঁজে পায় এবং ঠিক করে — একটি ফাইল ম্যানুয়ালি স্পর্শ ছাড়াই।"
-
-msgid "Update ThumbPress Pro Now"
-msgstr "এখনই ThumbPress Pro আপডেট করুন"
-
-msgid "Update images with newer versions without changing their links on your site."
-msgstr "আপনার সাইটে তাদের লিঙ্কগুলি পরিবর্তন না করে নতুন সংস্করণ দিয়ে ছবি আপডেট করুন।"
-
-msgid "Upgrade for a faster website"
-msgstr "দ্রুত ওয়েবসাইটের জন্য আপগ্রেড করুন"
-
-msgid "Upgrade to Compress"
-msgstr "সংকুচিত করতে আপগ্রেড করুন"
-
-msgid "Upgrade to Convert"
-msgstr "রূপান্তর করতে আপগ্রেড করুন"
-
-msgid "Upgrade to Manage Your WordPress Images & Thumbnails Like a Pro"
-msgstr "পেশাদারদের মতো আপনার WordPress ছবি এবং থাম্বনেইল পরিচালনা করতে আপগ্রেড করুন"
-
-msgid "Upgrade to Merge"
-msgstr "একত্রিত করতে আপগ্রেড করুন"
-
-msgid "Upgrade to Pro"
-msgstr "প্রো-তে আপগ্রেড করুন"
-
-msgid "Upgrade to Pro (Up to 60% Off)"
-msgstr "প্রো-তে আপগ্রেড করুন (60% পর্যন্ত ছাড়)"
-
-msgid "Upgrade to detect duplicate images"
-msgstr "নকল ছবি সনাক্ত করতে আপগ্রেড করুন"
-
-msgid "Upload Image"
-msgstr "ছবি আপলোড করুন"
-
-msgid "Upload new versions of images and replace the old ones without any issues."
-msgstr "ছবির নতুন সংস্করণ আপলোড করুন এবং পুরানোগুলি কোনো সমস্যা ছাড়াই প্রতিস্থাপন করুন।"
-
-msgid "Using Classic"
-msgstr "ক্লাসিক ব্যবহার করছে"
-
-msgid "Using New Version"
-msgstr "নতুন সংস্করণ ব্যবহার করছে"
-
-msgid "View Details"
-msgstr "বিস্তারিত দেখুন"
-
-msgid "WebP Conversion Complete"
-msgstr "WebP রূপান্তর সম্পূর্ণ"
-
-msgid "WebP Conversion in Progress"
-msgstr "WebP রূপান্তর চলছে"
-
-msgid "WebP images are smaller with the same quality."
-msgstr "একই গুণমানের সাথে WebP ইমেজগুলি ছোট।"
-
-msgid "Width"
-msgstr "প্রস্থ"
-
-msgid "Worth of space saved"
-msgstr "সঞ্চিত স্থানের মূল্য"
-
-msgid "Would you like to try the new modern dashboard, or keep using the classic version?"
-msgstr "আপনি নতুন আধুনিক ড্যাশবোর্ড চেষ্টা করতে চান, না ক্লাসিক সংস্করণ ব্যবহার করতে চান?"
-
-msgid "Yes"
-msgstr "হ্যাঁ"
-
-msgid "You are using the new dashboard. Switch back to classic anytime."
-msgstr "আপনি নতুন ড্যাশবোর্ড ব্যবহার করছেন। যেকোনো সময় ক্লাসিকে ফিরে যান।"
-
-msgid "You have <strong>%d</strong> uncompressed images that are possibly slowing down your site - Boost your site speed by compressing them"
-msgstr "আপনার কাছে <strong>%d</strong> সংকুচিত না করা ছবি রয়েছে যা সম্ভবত আপনার সাইটকে ধীর করছে - সেগুলি সংকুচিত করে আপনার সাইটের গতি বৃদ্ধি করুন"
-
-msgid "You have no images to convert, please upload new images."
-msgstr "রূপান্তর করার জন্য আপনার কোনো ছবি নেই, দয়া করে নতুন ছবি আপলোড করুন।"
-
-msgid "You have no images. Please upload images."
-msgstr "আপনার কোনো ছবি নেই। দয়া করে ছবি আপলোড করুন।"
-
-msgid "Your Media Library is Silently Slowing Down Your Site."
-msgstr "আপনার মিডিয়া লাইব্রেরি নীরবে আপনার সাইটকে ধীর করছে।"
-
-msgid "Your WooCommerce store has total <strong>%d</strong> images - Find and delete unused images to save server space and money."
-msgstr "আপনার WooCommerce স্টোরের মোট <strong>%d</strong> ছবি রয়েছে - সার্ভার স্থান এবং অর্থ সঞ্চয় করতে অব্যবহৃত ছবি খুঁজুন এবং মুছুন।"
-
-msgid "Your WooCommerce store has total <strong>%d</strong> images - Save server space, speed up your site and boost sales by deleting large images."
-msgstr "আপনার WooCommerce স্টোরের মোট <strong>%d</strong> ছবি রয়েছে - বড় ছবি মুছে সার্ভার স্থান সঞ্চয় করুন, আপনার সাইট গতি বৃদ্ধি করুন এবং বিক্রয় বৃদ্ধি করুন।"
-
-msgid "Your background action failed. Please try again."
-msgstr "আপনার পটভূমি ক্রিয়া ব্যর্থ হয়েছে। আবার চেষ্টা করুন।"
-
+#: app/API/Convert_Avif.php:72
+#: app/API/Convert_Webp.php:424
+msgid "metadata generation returned nothing"
+msgstr "মেটাডেটা তৈরি কিছুই ফেরত দেয়নি"
+
+#. translators: %s: underlying reason metadata generation failed
+#: app/API/Convert_Avif.php:76
+msgid "Converted the image to AVIF but could not generate its metadata (%s); rolled back."
+msgstr "ছবিটি AVIF এ রূপান্তর করা হয়েছে কিন্তু এর মেটাডেটা তৈরি করা যায়নি (%s); রোলব্যাক করা হয়েছে।"
+
+#: app/API/Convert_Avif.php:149
+msgid "Image converted to AVIF successfully."
+msgstr "ছবি সফলভাবে AVIF এ রূপান্তরিত হয়েছে।"
+
+#: app/API/Convert_Webp.php:51
+#: app/API/Convert_Webp.php:291
+msgid "No file formats selected."
+msgstr "কোনো ফাইল ফরম্যাট নির্বাচিত হয়নি।"
+
+#: app/API/Convert_Webp.php:57
+#: app/API/Convert_Webp.php:296
+msgid "No valid file formats selected."
+msgstr "কোনো বৈধ ফাইল ফরম্যাট নির্বাচিত হয়নি।"
+
+#: app/API/Convert_Webp.php:100
+#: app/API/Convert_Webp.php:317
+#: app/API/Regenerate.php:34
+#: app/API/Regenerate.php:121
+msgid "No images found."
+msgstr "কোনো ছবি পাওয়া যায়নি।"
+
+#: app/API/Convert_Webp.php:115
+#: app/API/Convert_Webp.php:262
+msgid "Congratulations, Converting Images to WebP is Completed!"
+msgstr "অভিনন্দন, ছবিগুলি WebP এ রূপান্তর সম্পূর্ণ হয়েছে!"
+
+#: app/API/Convert_Webp.php:260
+msgid "Converting Images to WebP..."
+msgstr "WebP এ ছবি রূপান্তর করছে..."
+
+#: app/API/Convert_Webp.php:336
+#: app/API/Regenerate.php:130
+msgid "Failed to schedule action."
+msgstr "ক্রিয়া নির্ধারণ করতে ব্যর্থ।"
+
+#: app/API/Convert_Webp.php:341
 msgid "Your images are being converted in the background."
 msgstr "আপনার ছবিগুলি পটভূমিতে রূপান্তরিত হচ্ছে।"
 
-msgid "Your images are being converted. Please wait..."
-msgstr "আপনার ছবিগুলি রূপান্তরিত হচ্ছে। অনুগ্রহ করে অপেক্ষা করুন..."
+#. translators: %s: underlying reason metadata generation failed
+#: app/API/Convert_Webp.php:428
+msgid "Converted the image but could not generate its metadata (%s); rolled back."
+msgstr "ছবিটি রূপান্তর করা হয়েছে কিন্তু এর মেটাডেটা তৈরি করা যায়নি (%s); রোলব্যাক করা হয়েছে।"
 
+#: app/API/Convert_Webp.php:498
+msgid "Image converted successfully."
+msgstr "ছবি সফলভাবে রূপান্তরিত হয়েছে।"
+
+#: app/API/Regenerate.php:77
+msgid "Regenerating Thumbnails..."
+msgstr "থাম্বনেইল পুনর্নির্মাণ করছে..."
+
+#: app/API/Regenerate.php:79
+msgid "Congratulations, Thumbnail Regeneration is Completed!"
+msgstr "অভিনন্দন, থাম্বনেইল পুনর্নির্মাণ সম্পূর্ণ হয়েছে!"
+
+#: app/API/Regenerate.php:135
 msgid "Your images are being regenerated in the background."
 msgstr "আপনার ছবিগুলি পটভূমিতে পুনরায় তৈরি হচ্ছে।"
 
-msgid "Your images are being regenerating. Please wait..."
-msgstr "আপনার ছবিগুলি পুনর্নির্মাণ হচ্ছে। অনুগ্রহ করে অপেক্ষা করুন..."
+#: app/API/Regenerate.php:148
+msgid "Invalid attachment."
+msgstr "অবৈধ সংযুক্তি।"
 
+#: app/API/Regenerate.php:157
+msgid "Image file not found."
+msgstr "ছবি ফাইল পাওয়া যায়নি।"
+
+#: app/API/Regenerate.php:165
+msgid "Thumbnails regenerated successfully."
+msgstr "থাম্বনেইলগুলি সফলভাবে পুনরায় তৈরি করা হয়েছে।"
+
+#: app/API/Settings.php:198
+#: build/admin.js:13
+msgid "Settings saved successfully."
+msgstr "সেটিংস সফলভাবে সংরক্ষণ করা হয়েছে।"
+
+#: app/API/Thumbnails.php:150
+msgid "Invalid data format. Array expected."
+msgstr "অবৈধ ডেটা ফরম্যাট। অ্যারে প্রত্যাশিত।"
+
+#: app/API/Thumbnails.php:160
+msgid "Disabled sizes saved successfully."
+msgstr "অক্ষম আকারগুলি সফলভাবে সংরক্ষণ করা হয়েছে।"
+
+#: app/API/Thumbnails.php:163
+msgid "No changes detected."
+msgstr "কোনো পরিবর্তন সনাক্ত করা হয়নি।"
+
+#: app/Bootstrap/AdminNotice.php:87
+#: app/Bootstrap/AdminNotice.php:167
+#: app/Bootstrap/AdminNotice.php:295
+#: app/Controllers/Admin/Init.php:229
+msgid "Dismiss this notice."
+msgstr "এই বিজ্ঞপ্তিটি খারিজ করুন।"
+
+#: app/Bootstrap/AdminNotice.php:90
+msgid "ThumbPress Pro update required!"
+msgstr "ThumbPress Pro আপডেট প্রয়োজন!"
+
+#. translators: 1: installed pro version, 2: required pro version
+#: app/Bootstrap/AdminNotice.php:93
+msgid "ThumbPress requires ThumbPress Pro version %2$s or higher. You have version %1$s. Please update to use all new features."
+msgstr "ThumbPress এর জন্য ThumbPress Pro সংস্করণ %2$s বা তার উপরে প্রয়োজন। আপনার সংস্করণ %1$s রয়েছে। সমস্ত নতুন বৈশিষ্ট্য ব্যবহার করতে আপডেট করুন।"
+
+#: app/Bootstrap/AdminNotice.php:100
+msgid "Update ThumbPress Pro Now"
+msgstr "এখনই ThumbPress Pro আপডেট করুন"
+
+#: app/Bootstrap/AdminNotice.php:170
+msgid "ThumbPress Pro is installed but not activated!"
+msgstr "ThumbPress Pro ইনস্টল করা আছে কিন্তু সক্রিয় করা হয়নি!"
+
+#: app/Bootstrap/AdminNotice.php:171
+msgid "Activate ThumbPress Pro to unlock all premium features including image compression, unused image detection, large image detection, and more."
+msgstr "ছবি সংকুচন, অব্যবহৃত ছবি সনাক্তকরণ, বড় ছবি সনাক্তকরণ এবং আরও অনেক প্রিমিয়াম বৈশিষ্ট্য আনলক করতে ThumbPress Pro সক্রিয় করুন।"
+
+#: app/Bootstrap/AdminNotice.php:175
+msgid "Activate ThumbPress Pro"
+msgstr "ThumbPress Pro সক্রিয় করুন"
+
+#: app/Bootstrap/AdminNotice.php:299
+msgid "A new version of ThumbPress is ready!"
+msgstr "ThumbPress এর একটি নতুন সংস্করণ প্রস্তুত!"
+
+#: app/Bootstrap/AdminNotice.php:302
+msgid "You are using the new dashboard. Switch back to classic anytime."
+msgstr "আপনি নতুন ড্যাশবোর্ড ব্যবহার করছেন। যেকোনো সময় ক্লাসিকে ফিরে যান।"
+
+#: app/Bootstrap/AdminNotice.php:304
+msgid "Would you like to try the new modern dashboard, or keep using the classic version?"
+msgstr "আপনি নতুন আধুনিক ড্যাশবোর্ড চেষ্টা করতে চান, না ক্লাসিক সংস্করণ ব্যবহার করতে চান?"
+
+#: app/Bootstrap/AdminNotice.php:311
+msgid "Using New Version"
+msgstr "নতুন সংস্করণ ব্যবহার করছে"
+
+#: app/Bootstrap/AdminNotice.php:314
+msgid "Switch to Classic"
+msgstr "ক্লাসিকে স্যুইচ করুন"
+
+#: app/Bootstrap/AdminNotice.php:318
+msgid "Try New Version"
+msgstr "নতুন সংস্করণ চেষ্টা করুন"
+
+#: app/Bootstrap/AdminNotice.php:321
+msgid "Using Classic"
+msgstr "ক্লাসিক ব্যবহার করছে"
+
+#: app/Controllers/Admin/Init.php:70
+msgid "July 19"
+msgstr "19 জুলাই"
+
+#: app/Controllers/Admin/Init.php:74
+msgid "July 22"
+msgstr "22 জুলাই"
+
+#. translators: %s: offer deadline date, e.g. "July 19".
+#: app/Controllers/Admin/Init.php:96
+msgid "ThumbPress: World Cup - 48%% Off - Ends %s"
+msgstr "ThumbPress: বিশ্বকাপ - 48%% ছাড় - শেষ হচ্ছে %s"
+
+#: app/Controllers/Admin/Init.php:98
+msgid "ThumbPress: World Cup - 48% Off"
+msgstr "ThumbPress: বিশ্বকাপ - 48% ছাড়"
+
+#: app/Controllers/Admin/Init.php:104
+msgid "Dismiss"
+msgstr "খারিজ করুন"
+
+#: app/Controllers/Admin/Init.php:194
+msgid "Permission denied."
+msgstr "অনুমতি প্রত্যাখ্যান করা হয়েছে।"
+
+#: app/Controllers/Admin/Init.php:232
+msgid "ThumbPress is installed!"
+msgstr "ThumbPress ইনস্টল করা হয়েছে!"
+
+#: app/Controllers/Admin/Init.php:233
 msgid "Your images are ready to be optimized. Visit the dashboard to get started."
 msgstr "আপনার ছবিগুলি অপ্টিমাইজ করার জন্য প্রস্তুত। শুরু করতে ড্যাশবোর্ড ভিজিট করুন।"
 
-msgid "Your site has total <strong>%d</strong> images - Find and delete unused images to save more server space and money."
-msgstr "আপনার সাইটের মোট <strong>%d</strong> ছবি রয়েছে - আরও সার্ভার স্থান এবং অর্থ সঞ্চয় করতে অব্যবহৃত ছবি খুঁজুন এবং মুছুন।"
+#: app/Controllers/Admin/Init.php:237
+msgid "Go to Dashboard"
+msgstr "ড্যাশবোর্ডে যান"
 
-msgid "Your site has total <strong>%d</strong> images - Save server space and speed up your site by deleting large images."
-msgstr "আপনার সাইটের মোট <strong>%d</strong> ছবি রয়েছে - বড় ছবি মুছে সার্ভার স্থান সঞ্চয় করুন এবং আপনার সাইট গতি বৃদ্ধি করুন।"
+#: app/Controllers/Admin/Menu.php:67
+#: app/Controllers/Admin/Menu.php:68
+msgid "ThumbPress"
+msgstr "ThumbPress"
 
-msgid "[ ThumbPress Alert ] Image exceeds the maximum allowed resolution of %1$sx%2$s pixels."
-msgstr "[ ThumbPress Alert ] ছবি %1$sx%2$s পিক্সেলের সর্বাধিক অনুমোদিত রেজোলিউশন অতিক্রম করে।"
+#: app/Controllers/Admin/Menu.php:80
+#: app/Controllers/Admin/Menu.php:175
+#: build/admin.js:13
+msgid "Dashboard"
+msgstr "ড্যাশবোর্ড"
 
+#: app/Controllers/Admin/Menu.php:84
+#: app/Controllers/Admin/Menu.php:180
+#: build/admin.js:13
+msgid "Thumbnails"
+msgstr "থাম্বনেইল"
+
+#: app/Controllers/Admin/Menu.php:88
+#: app/Controllers/Admin/Menu.php:185
+#: build/admin.js:13
+msgid "Unused Images"
+msgstr "অব্যবহৃত ছবি"
+
+#: app/Controllers/Admin/Menu.php:92
+#: app/Controllers/Admin/Menu.php:191
+#: build/admin.js:13
+msgid "Duplicate Images"
+msgstr "নকল ছবি"
+
+#: app/Controllers/Admin/Menu.php:96
+#: app/Controllers/Admin/Menu.php:197
+#: build/admin.js:13
+msgid "Large Images"
+msgstr "বড় ছবি"
+
+#: app/Controllers/Admin/Menu.php:100
+#: app/Controllers/Admin/Menu.php:203
+#: build/admin.js:13
+msgid "Compress Images"
+msgstr "ছবি সংকুচিত করুন"
+
+#: app/Controllers/Admin/Menu.php:104
+#: app/Controllers/Admin/Menu.php:209
+#: app/Controllers/Common/Convert_Webp.php:131
+#: app/Controllers/Common/Convert_Webp.php:135
+#: build/admin.js:13
+msgid "Convert to WebP"
+msgstr "WebP এ রূপান্তর করুন"
+
+#: app/Controllers/Admin/Menu.php:108
+#: app/Controllers/Admin/Menu.php:214
+#: app/Controllers/Common/Convert_Avif.php:130
+#: app/Controllers/Common/Convert_Avif.php:143
+#: app/Controllers/Common/Convert_Avif.php:147
+#: build/admin.js:13
+msgid "Convert to AVIF"
+msgstr "AVIF এ রূপান্তর করুন"
+
+#: app/Controllers/Admin/Menu.php:112
+#: app/Controllers/Admin/Menu.php:220
+#: build/admin.js:13
+msgid "Trashed Images"
+msgstr "ট্রেশ করা ছবি"
+
+#: app/Controllers/Admin/Menu.php:116
+#: app/Controllers/Admin/Menu.php:226
+#: build/admin.js:13
+msgid "Settings"
+msgstr "সেটিংস"
+
+#: app/Controllers/Admin/Menu.php:121
+#: app/Controllers/Admin/Menu.php:231
+#: build/admin.js:13
+msgid "Pro"
+msgstr "প্রো"
+
+#: app/Controllers/Admin/Menu.php:122
+msgid "World Cup 48% Off"
+msgstr "বিশ্বকাপ 48% ছাড়"
+
+#: app/Controllers/Admin/Menu.php:157
+msgid "Loading.."
+msgstr "লোড হচ্ছে.."
+
+#: app/Controllers/Common/API.php:63
+msgid "Array of disabled size names"
+msgstr "অক্ষম আকারের নামের অ্যারে"
+
+#: app/Controllers/Common/API.php:83
+msgid "Offset for pagination"
+msgstr "পেজিনেশনের জন্য অফসেট"
+
+#: app/Controllers/Common/API.php:88
+#: app/Controllers/Common/API.php:206
+msgid "Number of images to process"
+msgstr "প্রক্রিয়া করার জন্য ছবির সংখ্যা"
+
+#: app/Controllers/Common/API.php:93
+msgid "Previously deleted thumbnails count"
+msgstr "আগে মুছে ফেলা থাম্বনেইল সংখ্যা"
+
+#: app/Controllers/Common/API.php:98
+msgid "Previously created thumbnails count"
+msgstr "আগে তৈরি করা থাম্বনেইল সংখ্যা"
+
+#: app/Controllers/Common/API.php:115
+#: app/Controllers/Common/API.php:233
+msgid "Batch size for background processing"
+msgstr "পটভূমি প্রক্রিয়াকরণের জন্য ব্যাচ আকার"
+
+#: app/Controllers/Common/API.php:142
+msgid "Attachment ID to regenerate"
+msgstr "পুনরায় তৈরি করার জন্য সংযুক্তি ID"
+
+#: app/Controllers/Common/API.php:201
+msgid "Last processed attachment ID (pagination cursor)"
+msgstr "সর্বশেষ প্রক্রিয়া করা সংযুক্তি ID (পেজিনেশন কার্সার)"
+
+#: app/Controllers/Common/API.php:211
+msgid "Cumulative processed count"
+msgstr "ক্রমসঞ্চিত প্রক্রিয়াকৃত সংখ্যা"
+
+#: app/Controllers/Common/API.php:216
+msgid "Cumulative converted count"
+msgstr "ক্রমসঞ্চিত রূপান্তরিত সংখ্যা"
+
+#: app/Controllers/Common/API.php:260
+#: app/Controllers/Common/API.php:280
+msgid "Attachment ID to convert"
+msgstr "রূপান্তর করার জন্য সংযুক্তি ID"
+
+#: app/Controllers/Common/Convert_Avif.php:189
+msgid "This image is already an AVIF file."
+msgstr "এই ছবিটি ইতিমধ্যে একটি AVIF ফাইল।"
+
+#. translators: 1: estimated memory needed in MB, 2: current PHP memory limit in MB
+#: app/Controllers/Common/Convert_Avif.php:220
+#: app/Controllers/Common/Convert_Webp.php:206
+msgid "Image is too large to convert within the server memory limit (needs ~%1$d MB, limit %2$d MB). Increase PHP memory_limit or WP_MAX_MEMORY_LIMIT and try again."
+msgstr "সার্ভারের মেমরি সীমার মধ্যে রূপান্তর করার জন্য ছবিটি খুব বড় (প্রয়োজন ~%1$d MB, সীমা %2$d MB)। PHP memory_limit বা WP_MAX_MEMORY_LIMIT বাড়িয়ে আবার চেষ্টা করুন।"
+
+#. translators: %s: underlying image-editor error message
+#: app/Controllers/Common/Convert_Avif.php:234
+#: app/Controllers/Common/Convert_Webp.php:220
+msgid "No image editor is available to process this file (%s)."
+msgstr "এই ফাইলটি প্রক্রিয়া করার জন্য কোনো ইমেজ এডিটর উপলব্ধ নেই (%s)।"
+
+#. translators: %s: underlying image-editor error message
+#: app/Controllers/Common/Convert_Avif.php:246
+msgid "Could not write the AVIF file (%s)."
+msgstr "AVIF ফাইলটি লেখা যায়নি (%s)।"
+
+#: app/Controllers/Common/Convert_Avif.php:264
+msgid "The server image library could not produce an AVIF file (AVIF output is not supported here)."
+msgstr "সার্ভারের ইমেজ লাইব্রেরি একটি AVIF ফাইল তৈরি করতে পারেনি (এখানে AVIF আউটপুট সমর্থিত নয়)।"
+
+#: app/Controllers/Common/Convert_Webp.php:177
+msgid "This image is already a WebP file."
+msgstr "এই ছবিটি ইতিমধ্যে একটি WebP ফাইল।"
+
+#. translators: %s: underlying image-editor error message
+#: app/Controllers/Common/Convert_Webp.php:232
+msgid "Could not write the WebP file (%s)."
+msgstr "WebP ফাইলটি লেখা যায়নি (%s)।"
+
+#: app/Controllers/Common/Convert_Webp.php:247
+msgid "The server image library could not produce a WebP file (WebP output is not supported here)."
+msgstr "সার্ভারের ইমেজ লাইব্রেরি একটি WebP ফাইল তৈরি করতে পারেনি (এখানে WebP আউটপুট সমর্থিত নয়)।"
+
+#: app/Controllers/Common/Hotlink_Protection.php:101
+msgid "Hotlinking not allowed."
+msgstr "হটলিংক অনুমতিপ্রাপ্ত নয়।"
+
+#. translators: %1$s: maximum allowed image size, %2$s: size unit (KB or MB)
+#: app/Controllers/Common/Image_Max_Size.php:37
 msgid "[ ThumbPress Alert ] Image exceeds the maximum allowed size of %1$s %2$s."
 msgstr "[ ThumbPress Alert ] ছবি %1$s %2$s এর সর্বাধিক অনুমোদিত আকার অতিক্রম করে।"
 
-msgid "[ ThumbPress Alert ] Image exceeds the maximum allowed size of %s KB."
-msgstr "[ ThumbPress Alert ] ছবি %s KB এর সর্বাধিক অনুমোদিত আকার অতিক্রম করে।"
+#. translators: %1$s: maximum allowed image width in pixels, %2$s: maximum allowed image height in pixels
+#: app/Controllers/Common/Image_Max_Size.php:52
+msgid "[ ThumbPress Alert ] Image exceeds the maximum allowed resolution of %1$sx%2$s pixels."
+msgstr "[ ThumbPress Alert ] ছবি %1$sx%2$s পিক্সেলের সর্বাধিক অনুমোদিত রেজোলিউশন অতিক্রম করে।"
 
-msgid "icon"
-msgstr "আইকন"
+#: app/Controllers/Common/Media_Buttons.php:68
+msgid "Image Compression is a Pro feature"
+msgstr "ইমেজ কম্প্রেশন একটি প্রো বৈশিষ্ট্য"
 
-msgid "settings here"
-msgstr "এখানে সেটিংস"
+#: app/Controllers/Common/Media_Buttons.php:69
+msgid "Reduce file sizes without losing visual quality. Compress images in bulk or one at a time to speed up your site."
+msgstr "দৃশ্যমান গুণমান না হারিয়ে ফাইলের আকার কমান। আপনার সাইটের গতি বাড়াতে ছবিগুলি বাল্কে বা একটি করে সংকুচিত করুন।"
 
-msgid "will be generated"
-msgstr "তৈরি করা হবে"
+#: app/Controllers/Common/Media_Buttons.php:70
+msgid "Upgrade to compress images"
+msgstr "ছবি সংকুচিত করতে আপগ্রেড করুন"
+
+#: app/Controllers/Common/Media_Buttons.php:73
+msgid "Image Replacement is a Pro feature"
+msgstr "ছবি প্রতিস্থাপন একটি প্রো বৈশিষ্ট্য"
+
+#: app/Controllers/Common/Media_Buttons.php:74
+msgid "Swap out images without losing their metadata or breaking existing links. Drop in a new file and ThumbPress handles the rest."
+msgstr "মেটাডেটা না হারিয়ে বা বিদ্যমান লিঙ্ক না ভেঙে ছবি বদলে নিন। শুধু একটি নতুন ফাইল দিন, বাকিটা ThumbPress সামলাবে।"
+
+#: app/Controllers/Common/Media_Buttons.php:75
+msgid "Upgrade to replace images"
+msgstr "ছবি প্রতিস্থাপন করতে আপগ্রেড করুন"
+
+#: app/Controllers/Common/Media_Buttons.php:78
+msgid "Image Editor is a Pro feature"
+msgstr "ইমেজ সম্পাদক একটি প্রো বৈশিষ্ট্য"
+
+#: app/Controllers/Common/Media_Buttons.php:79
+msgid "Crop, rotate, flip and adjust images directly inside WordPress — no external tools needed."
+msgstr "WordPress এর ভিতরেই সরাসরি ছবি ক্রপ, ঘোরানো, ফ্লিপ এবং সামঞ্জস্য করুন — কোনো বাহ্যিক সরঞ্জামের প্রয়োজন নেই।"
+
+#: app/Controllers/Common/Media_Buttons.php:80
+msgid "Upgrade to edit images"
+msgstr "ছবি সম্পাদনা করতে আপগ্রেড করুন"
+
+#: app/Controllers/Common/Media_Buttons.php:109
+msgid "Select Option"
+msgstr "অপশন নির্বাচন করুন"
+
+#: app/Controllers/Common/Media_Buttons.php:120
+msgid "Compress"
+msgstr "সংকুচিত করুন"
+
+#: app/Controllers/Common/Media_Buttons.php:124
+msgid "Compress Image"
+msgstr "ছবি সংকুচিত করুন"
+
+#: app/Controllers/Common/Media_Buttons.php:143
+#: app/Controllers/Common/Media_Buttons.php:148
+msgid "Replace New File"
+msgstr "নতুন ফাইল দিয়ে প্রতিস্থাপন করুন"
+
+#: app/Controllers/Common/Media_Buttons.php:169
+msgid "Edit with ThumbPress"
+msgstr "ThumbPress দিয়ে সম্পাদনা করুন"
+
+#: app/Controllers/Common/Media_Buttons.php:174
+msgid "Edit Image"
+msgstr "ছবি সম্পাদনা করুন"
+
+#: app/Controllers/Common/Media_Buttons.php:193
+#: build/admin.js:1
+msgid "Close"
+msgstr "বন্ধ করুন"
+
+#: app/Controllers/Common/Social_Share.php:41
+#: build/admin.js:13
+msgid "Social Share Image"
+msgstr "সোশ্যাল শেয়ার ইমেজ"
+
+#: app/Controllers/Common/Social_Share.php:69
+msgid "Facebook Image:"
+msgstr "Facebook ইমেজ:"
+
+#: app/Controllers/Common/Social_Share.php:71
+#: app/Controllers/Common/Social_Share.php:82
+#: app/Controllers/Common/Social_Share.php:93
+#: app/Controllers/Common/Social_Share.php:104
+msgid "Upload Image"
+msgstr "ছবি আপলোড করুন"
+
+#: app/Controllers/Common/Social_Share.php:72
+#: app/Controllers/Common/Social_Share.php:83
+#: app/Controllers/Common/Social_Share.php:94
+#: app/Controllers/Common/Social_Share.php:105
+msgid "Remove Image"
+msgstr "ছবি সরান"
+
+#: app/Controllers/Common/Social_Share.php:80
+msgid "LinkedIn Image:"
+msgstr "LinkedIn ইমেজ:"
+
+#: app/Controllers/Common/Social_Share.php:91
+msgid "Twitter Image:"
+msgstr "Twitter ইমেজ:"
+
+#: app/Controllers/Common/Social_Share.php:102
+msgid "Pinterest Image:"
+msgstr "Pinterest ইমেজ:"
+
+#: app/Controllers/Common/Thumbnails.php:52
+#: app/Controllers/Common/Thumbnails.php:56
+#: build/admin.js:13
+msgid "Regenerate Thumbnails"
+msgstr "থাম্বনেইল পুনরায় তৈরি করুন"
+
+#: app/Helpers/Email.php:76
+msgid "Thumbpress. All rights reserved."
+msgstr "Thumbpress। সমস্ত অধিকার সংরক্ষিত।"
+
+#: app/Helpers/functions.php:26
+#: build/admin.js:13
+msgid "General"
+msgstr "সাধারণ"
+
+#: app/Helpers/functions.php:27
+msgid "General settings"
+msgstr "সাধারণ সেটিংস"
+
+#: app/Helpers/functions.php:31
+msgid "Pages"
+msgstr "পৃষ্ঠা"
+
+#: app/Helpers/functions.php:32
+msgid "Page Settings"
+msgstr "পৃষ্ঠার সেটিংস"
+
+#: app/Helpers/functions.php:35
+msgid "Main Pages"
+msgstr "মূল পৃষ্ঠা"
+
+#: app/Helpers/functions.php:36
+msgid "Main Pages Settings"
+msgstr "মূল পৃষ্ঠার সেটিংস"
+
+#: app/Helpers/functions.php:41
+msgid "Homepage"
+msgstr "হোম পৃষ্ঠা"
+
+#: app/Helpers/functions.php:47
+msgid "Landing Page"
+msgstr "ল্যান্ডিং পৃষ্ঠা"
+
+#: app/Helpers/functions.php:57
+msgid "Email"
+msgstr "ইমেল"
+
+#: app/Helpers/functions.php:58
+msgid "Email settings"
+msgstr "ইমেল সেটিংস"
+
+#: app/Helpers/functions.php:62
+msgid "New Ticket"
+msgstr "নতুন টিকিট"
+
+#: app/Helpers/functions.php:63
+msgid "New Ticket Notification"
+msgstr "নতুন টিকিট বিজ্ঞপ্তি"
+
+#: app/Helpers/functions.php:66
+msgid "Agent Email"
+msgstr "এজেন্ট ইমেল"
+
+#: app/Helpers/functions.php:67
+msgid "Email to an Agent"
+msgstr "এজেন্টকে ইমেল করুন"
+
+#: app/Helpers/functions.php:72
+#: app/Helpers/functions.php:93
+#: app/Helpers/functions.php:120
+msgid "Header"
+msgstr "হেডার"
+
+#: app/Helpers/functions.php:77
+#: app/Helpers/functions.php:98
+#: app/Helpers/functions.php:125
+msgid "Subject"
+msgstr "বিষয়"
+
+#: app/Helpers/functions.php:82
+#: app/Helpers/functions.php:103
+#: app/Helpers/functions.php:130
+msgid "Body"
+msgstr "বডি"
+
+#: app/Helpers/functions.php:87
+msgid "Client Email"
+msgstr "ক্লায়েন্ট ইমেল"
+
+#: app/Helpers/functions.php:88
+#: app/Helpers/functions.php:115
+msgid "Email to a Client"
+msgstr "ক্লায়েন্টকে ইমেল করুন"
+
+#: app/Helpers/functions.php:110
+msgid "Agent Reply"
+msgstr "এজেন্ট উত্তর"
+
+#: app/Helpers/functions.php:111
+msgid "Agent Reply Notification"
+msgstr "এজেন্ট উত্তর বিজ্ঞপ্তি"
+
+#: app/Helpers/functions.php:114
+msgid "Agent Reply Email"
+msgstr "এজেন্ট উত্তর ইমেল"
+
+#: app/Helpers/Utility.php:147
+msgid "- Choose a %s -"
+msgstr "- %s নির্বাচন করুন -"
+
+#: build/admin.js:1
+msgid "Days"
+msgstr "দিন"
+
+#: build/admin.js:1
+msgid "Hrs"
+msgstr "ঘণ্টা"
+
+#: build/admin.js:1
+msgid "Min"
+msgstr "মিনিট"
+
+#: build/admin.js:1
+msgid "Sec"
+msgstr "সেকেন্ড"
+
+#: build/admin.js:1
+msgid "FIFA World Cup Sale is Live!"
+msgstr "FIFA বিশ্বকাপ সেল শুরু হয়ে গেছে!"
+
+#: build/admin.js:1
+msgid "Score up to 48% off ThumbPress Pro during our FIFA World Cup sale. The discount is auto-applied at checkout — grab it before the whistle blows!"
+msgstr "আমাদের FIFA বিশ্বকাপ সেলে ThumbPress Pro তে 48% পর্যন্ত ছাড় নিন। চেকআউটে ছাড়টি স্বয়ংক্রিয়ভাবে প্রয়োগ হয় — বাঁশি বাজার আগেই লুফে নিন!"
+
+#: build/admin.js:1
+msgid "Offer expired"
+msgstr "অফারের মেয়াদ শেষ"
+
+#: build/admin.js:1
+msgid "Offer ends July 19"
+msgstr "অফার শেষ হচ্ছে 19 জুলাই"
+
+#: build/admin.js:1
+msgid "World Cup discount applied!"
+msgstr "বিশ্বকাপ ছাড় প্রয়োগ করা হয়েছে!"
+
+#: build/admin.js:1
+msgid "Your up-to-48% discount is auto-applied at checkout."
+msgstr "আপনার 48% পর্যন্ত ছাড় চেকআউটে স্বয়ংক্রিয়ভাবে প্রয়োগ হবে।"
+
+#: build/admin.js:1
+msgid "Get 48% Off — View Pricing →"
+msgstr "48% ছাড় নিন — মূল্য দেখুন →"
+
+#: build/admin.js:1
+msgid "No thanks, I don't want a discount"
+msgstr "না ধন্যবাদ, আমি ছাড় চাই না"
+
+#: build/admin.js:1
+msgid "Community"
+msgstr "কমিউনিটি"
+
+#: build/admin.js:1
+msgid "Support"
+msgstr "সহায়তা"
+
+#: build/admin.js:1
+msgid "Docs"
+msgstr "ডকুমেন্টেশন"
+
+#: build/admin.js:1
+#: build/admin.js:13
+msgid "Upgrade to Pro"
+msgstr "প্রো-তে আপগ্রেড করুন"
+
+#: build/admin.js:1
+msgid "Upgrade to View"
+msgstr "দেখতে আপগ্রেড করুন"
+
+#. translators: %s is a locale-formatted number.
+#: build/admin.js:3
+msgid "%s%%"
+msgstr "%s%%"
+
+#. translators: %s is a locale-formatted number of bytes.
+#: build/admin.js:5
+msgid "%s B"
+msgstr "%s B"
+
+#. translators: %s is a locale-formatted number of kilobytes.
+#: build/admin.js:7
+msgid "%s KB"
+msgstr "%s KB"
+
+#. translators: %s is a locale-formatted number of megabytes.
+#: build/admin.js:9
+msgid "%s MB"
+msgstr "%s MB"
+
+#. translators: %s is a locale-formatted number of gigabytes.
+#: build/admin.js:11
+msgid "%s GB"
+msgstr "%s GB"
+
+#. translators: %s is a locale-formatted number of terabytes.
+#: build/admin.js:13
+msgid "%s TB"
+msgstr "%s TB"
+
+#: build/admin.js:13
+msgid "Good"
+msgstr "ভালো"
+
+#: build/admin.js:13
+msgid "Normal"
+msgstr "স্বাভাবিক"
+
+#: build/admin.js:13
+msgid "Danger"
+msgstr "বিপজ্জনক"
+
+#: build/admin.js:13
+msgid "Overall"
+msgstr "সামগ্রিক"
+
+#: build/admin.js:13
+msgid "Health Score"
+msgstr "স্বাস্থ্য স্কোর"
+
+#: build/admin.js:13
+msgid "Status:"
+msgstr "স্ট্যাটাস:"
+
+#: build/admin.js:13
+msgid "Quick Facts"
+msgstr "দ্রুত তথ্য"
+
+#: build/admin.js:13
+msgid "EasyCommerce promotional notice"
+msgstr "EasyCommerce প্রচারমূলক বিজ্ঞপ্তি"
+
+#: build/admin.js:13
+msgid "New from the ThumbPress team - Try"
+msgstr "ThumbPress টিম থেকে নতুন - ব্যবহার করে দেখুন"
+
+#: build/admin.js:13
+msgid "EasyCommerce"
+msgstr "EasyCommerce"
+
+#: build/admin.js:13
+msgid ". A fast, AI-powered way to sell on WordPress."
+msgstr "। WordPress এ বিক্রি করার একটি দ্রুত, AI-চালিত উপায়।"
+
+#: build/admin.js:13
+msgid "Learn more"
+msgstr "আরও জানুন"
+
+#: build/admin.js:13
+msgid "Dismiss EasyCommerce notice"
+msgstr "EasyCommerce বিজ্ঞপ্তি খারিজ করুন"
+
+#: build/admin.js:13
+msgid "Activate License"
+msgstr "লাইসেন্স সক্রিয় করুন"
+
+#: build/admin.js:13
+msgid "Image Editor"
+msgstr "ইমেজ সম্পাদক"
+
+#: build/admin.js:13
+msgid "Enhance images with filters and adjustments to showcase their best versions."
+msgstr "ফিল্টার ও সামঞ্জস্যের মাধ্যমে ছবিগুলি উন্নত করুন এবং তাদের সেরা রূপ তুলে ধরুন।"
+
+#: build/admin.js:13
+msgid "The built-in Image Editor is a Pro feature"
+msgstr "বিল্ট-ইন ইমেজ সম্পাদক একটি প্রো বৈশিষ্ট্য"
+
+#: build/admin.js:13
+msgid "Leaving WordPress just to crop an image breaks your whole workflow. Edit, resize, and re-optimize everything without switching tools."
+msgstr "শুধু একটি ছবি ক্রপ করার জন্য WordPress ছেড়ে যাওয়া আপনার পুরো কর্মপ্রবাহ ভেঙে দেয়। সরঞ্জাম না বদলেই সবকিছু সম্পাদনা, রিসাইজ এবং পুনরায় অপ্টিমাইজ করুন।"
+
+#: build/admin.js:13
+msgid "Upgrade to edit images in WordPress"
+msgstr "WordPress এ ছবি সম্পাদনা করতে আপগ্রেড করুন"
+
+#: build/admin.js:13
+msgid "Replace Images With New Version"
+msgstr "ছবিগুলি নতুন সংস্করণ দিয়ে প্রতিস্থাপন করুন"
+
+#: build/admin.js:13
+msgid "Upload new versions of images and replace the old ones without any issues."
+msgstr "ছবির নতুন সংস্করণ আপলোড করুন এবং কোনো সমস্যা ছাড়াই পুরনোগুলি প্রতিস্থাপন করুন।"
+
+#: build/admin.js:13
+msgid "Replacing Image is a Pro feature"
+msgstr "ছবি প্রতিস্থাপন একটি প্রো বৈশিষ্ট্য"
+
+#: build/admin.js:13
+msgid "Outdated images live on more pages than you think. Swap in a new version once, and every page updates instantly."
+msgstr "পুরনো ছবিগুলি আপনার ধারণার চেয়েও বেশি পৃষ্ঠায় রয়ে যায়। একবার নতুন সংস্করণ বসান, প্রতিটি পৃষ্ঠা তাৎক্ষণিকভাবে আপডেট হয়ে যাবে।"
+
+#: build/admin.js:13
+msgid "Upgrade to replace images seamlessly"
+msgstr "নির্বিঘ্নে ছবি প্রতিস্থাপন করতে আপগ্রেড করুন"
+
+#: build/admin.js:13
+msgid "Disable Right Click on Image"
+msgstr "ছবিতে রাইট ক্লিক নিষ্ক্রিয় করুন"
+
+#: build/admin.js:13
+msgid "Prevent visitors from downloading your images by turning off the right-click option on your website."
+msgstr "আপনার ওয়েবসাইটে রাইট-ক্লিক অপশন বন্ধ করে দর্শকদের আপনার ছবি ডাউনলোড করা থেকে বিরত রাখুন।"
+
+#: build/admin.js:13
+msgid "Image Size Limit"
+msgstr "ছবির আকারের সীমা"
+
+#: build/admin.js:13
+msgid "Set a limit for maximum image upload size."
+msgstr "সর্বাধিক ছবি আপলোড আকারের জন্য একটি সীমা নির্ধারণ করুন।"
+
+#: build/admin.js:13
+msgid "120"
+msgstr "120"
+
+#: build/admin.js:13
+msgid "KB"
+msgstr "KB"
+
+#: build/admin.js:13
+msgid "MB"
+msgstr "MB"
+
+#. translators: %s is the server upload size limit.
+#: build/admin.js:13
+msgid "Server limit: %s"
+msgstr "সার্ভার সীমা: %s"
+
+#: build/admin.js:13
+msgid "Image Dimension Limit"
+msgstr "ছবির মাত্রার সীমা"
+
+#: build/admin.js:13
+msgid "Set a limit for maximum image upload dimensions (in pixels)."
+msgstr "সর্বাধিক ছবি আপলোড মাত্রার জন্য একটি সীমা নির্ধারণ করুন (পিক্সেলে)।"
+
+#: build/admin.js:13
+msgid "Height"
+msgstr "উচ্চতা"
+
+#: build/admin.js:13
+msgid "Width"
+msgstr "প্রস্থ"
+
+#: build/admin.js:13
+msgid "Lazy load"
+msgstr "লেজি লোড"
+
+#: build/admin.js:13
+msgid "Load images only when they enter the user's viewport, improving page speed and reducing bandwidth usage."
+msgstr "ছবিগুলি কেবল তখনই লোড করুন যখন সেগুলি ব্যবহারকারীর ভিউপোর্টে আসে, এতে পৃষ্ঠার গতি বাড়ে এবং ব্যান্ডউইথ ব্যবহার কমে।"
+
+#: build/admin.js:13
+msgid "Hotlink Protection"
+msgstr "হটলিংক সুরক্ষা"
+
+#: build/admin.js:13
+msgid "Block other websites from embedding your images directly, preventing bandwidth theft from external hotlinking."
+msgstr "অন্যান্য ওয়েবসাইটগুলিকে সরাসরি আপনার ছবিগুলি এম্বেড করা থেকে রোক করুন, বাহ্যিক হটলিংকিং থেকে ব্যান্ডউইথ চুরি প্রতিরোধ করুন।"
+
+#: build/admin.js:13
+msgid "Auto Set Featured Image"
+msgstr "স্বয়ংক্রিয়ভাবে বৈশিষ্ট্যযুক্ত ছবি সেট করুন"
+
+#: build/admin.js:13
+msgid "Automatically use the first image in post content as the featured image if none is set."
+msgstr "যদি কোনও বৈশিষ্ট্যযুক্ত ছবি সেট না থাকে তবে পোস্ট কন্টেন্টের প্রথম ছবি স্বয়ংক্রিয়ভাবে ব্যবহার করুন।"
+
+#: build/admin.js:13
+msgid "Settings reset successfully."
+msgstr "সেটিংস সফলভাবে রিসেট করা হয়েছে।"
+
+#: build/admin.js:13
+msgid "Reset Options"
+msgstr "অপশন রিসেট করুন"
+
+#: build/admin.js:13
+msgid "Failed to save settings."
+msgstr "সেটিংস সংরক্ষণ করতে ব্যর্থ।"
+
+#: build/admin.js:13
+msgid "Save Changes"
+msgstr "পরিবর্তন সংরক্ষণ করুন"
+
+#: build/admin.js:13
+msgid "No thumbnail sizes found."
+msgstr "কোনো থাম্বনেইল আকার পাওয়া যায়নি।"
+
+#. translators: %1$s is the size name, %2$s is the width, %3$s is the height.
+#: build/admin.js:13
+msgid "%1$s (%2$s×%3$s)"
+msgstr "%1$s (%2$s×%3$s)"
+
+#: build/admin.js:13
+msgid "Enabled - This size will be generated for new uploads."
+msgstr "সক্ষম - নতুন আপলোডের জন্য এই আকার তৈরি করা হবে।"
+
+#: build/admin.js:13
+msgid "Disabled - This size will not be generated for new uploads."
+msgstr "অক্ষম - নতুন আপলোডের জন্য এই আকার তৈরি করা হবে না।"
+
+#: build/admin.js:13
+msgid "This is the original image size and cannot be disabled."
+msgstr "এটি মূল চিত্রের আকার এবং অক্ষম করা যায় না।"
+
+#: build/admin.js:13
+msgid "Compress during upload"
+msgstr "আপলোড করার সময় সংকুচিত করুন"
+
+#: build/admin.js:13
+msgid "Enable compression during upload to reduce file size and improve speed."
+msgstr "ফাইল আকার কমাতে এবং গতি উন্নত করতে আপলোড করার সময় সংকুচন সক্ষম করুন।"
+
+#: build/admin.js:13
+msgid "Compression Percentage"
+msgstr "সংকুচন শতাংশ"
+
+#: build/admin.js:13
+msgid "A measure of how much a file's size is reduced after compression."
+msgstr "সংকুচনের পরে একটি ফাইলের আকার কতটা কমেছে তার একটি পরিমাপ।"
+
+#: build/admin.js:13
+msgid "Single Image Compress"
+msgstr "একক ছবি সংকুচিত করুন"
+
+#: build/admin.js:13
+msgid "Show the Optimize button on individual media attachments."
+msgstr "পৃথক মিডিয়া সংযুক্তিতে অপ্টিমাইজ বোতাম দেখান।"
+
+#: build/admin.js:13
+msgid "Bulk Image Compression is a Pro feature"
+msgstr "বাল্ক ইমেজ কম্প্রেশন একটি প্রো বৈশিষ্ট্য"
+
+#: build/admin.js:13
+msgid "Heavy images are silently costing you visitors. Compress your entire library in one click with absolutely no visible quality loss."
+msgstr "ভারী ছবিগুলি আপনার পরিদর্শকদের নীরবে খরচ করছে। এক ক্লিকে আপনার সম্পূর্ণ লাইব্রেরি সংকুচিত করুন কোনো দৃশ্যমান গুণমান হ্রাস ছাড়াই।"
+
+#: build/admin.js:13
+msgid "Upgrade for a faster website"
+msgstr "দ্রুত ওয়েবসাইটের জন্য আপগ্রেড করুন"
+
+#: build/admin.js:13
+msgid "Prevent Duplicate Upload"
+msgstr "নকল আপলোড প্রতিরোধ করুন"
+
+#: build/admin.js:13
+msgid "Block uploading images that already exist in your media library"
+msgstr "আপনার মিডিয়া লাইব্রেরিতে ইতিমধ্যে বিদ্যমান ছবি আপলোড করা ব্লক করুন"
+
+#: build/admin.js:13
+msgid "Duplicate Image Detection is a Pro feature"
+msgstr "নকল চিত্র সনাক্তকরণ একটি প্রো বৈশিষ্ট্য"
+
+#: build/admin.js:13
+msgid "Duplicate images quietly pile up and bloat your media library. Find and remove every copy you didn't even know existed."
+msgstr "নকল ছবি নীরবে জমা হয়ে আপনার মিডিয়া লাইব্রেরি ফুলিয়ে তোলে। আপনি জানতেনও না এমন প্রতিটি কপি খুঁজে বের করে সরিয়ে ফেলুন।"
+
+#: build/admin.js:13
+msgid "Upgrade to detect duplicate images"
+msgstr "নকল ছবি সনাক্ত করতে আপগ্রেড করুন"
+
+#: build/admin.js:13
+msgid "Convert during upload"
+msgstr "আপলোড করার সময় রূপান্তর করুন"
+
+#: build/admin.js:13
+msgid "Automatically convert images to WebP when they are uploaded."
+msgstr "আপলোড করার সময় ছবিগুলি স্বয়ংক্রিয়ভাবে WebP এ রূপান্তর করুন।"
+
+#: build/admin.js:13
+msgid "Single image conversion"
+msgstr "একক ছবি রূপান্তর"
+
+#: build/admin.js:13
+msgid "Convert individual images to WebP directly from the media library."
+msgstr "মিডিয়া লাইব্রেরি থেকে সরাসরি পৃথক ছবিগুলি WebP এ রূপান্তর করুন।"
+
+#: build/admin.js:13
+msgid "Automatically convert images to AVIF when they are uploaded."
+msgstr "আপলোড করার সময় ছবিগুলি স্বয়ংক্রিয়ভাবে AVIF এ রূপান্তর করুন।"
+
+#: build/admin.js:13
+msgid "Convert individual images to AVIF directly from the media library."
+msgstr "মিডিয়া লাইব্রেরি থেকে সরাসরি পৃথক ছবিগুলি AVIF এ রূপান্তর করুন।"
+
+#: build/admin.js:13
+msgid "Facebook"
+msgstr "Facebook"
+
+#: build/admin.js:13
+msgid "Generate optimized share images for Facebook posts"
+msgstr "Facebook পোস্টের জন্য অপ্টিমাইজড শেয়ার ইমেজ তৈরি করুন"
+
+#: build/admin.js:13
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+#: build/admin.js:13
+msgid "Create professional share images for LinkedIn"
+msgstr "LinkedIn এর জন্য পেশাদার শেয়ার ইমেজ তৈরি করুন"
+
+#: build/admin.js:13
+msgid "Twitter"
+msgstr "Twitter"
+
+#: build/admin.js:13
+msgid "Optimize share images for Twitter cards"
+msgstr "Twitter কার্ডের জন্য শেয়ার ইমেজ অপ্টিমাইজ করুন"
+
+#: build/admin.js:13
+msgid "Pinterest"
+msgstr "Pinterest"
+
+#: build/admin.js:13
+msgid "Generate Pinterest-optimized pin images"
+msgstr "Pinterest-অপ্টিমাইজড পিন ইমেজ তৈরি করুন"
+
+#: build/admin.js:13
+msgid "Enabled"
+msgstr "সক্ষম"
+
+#: build/admin.js:13
+msgid "Disabled"
+msgstr "অক্ষম"
+
+#: build/admin.js:13
+msgid "Failed to load debug info."
+msgstr "ডিবাগ তথ্য লোড করতে ব্যর্থ।"
+
+#: build/admin.js:13
+msgid "No data."
+msgstr "কোনো ডেটা নেই।"
+
+#: build/admin.js:13
+msgid "System"
+msgstr "সিস্টেম"
+
+#: build/admin.js:13
+msgid "WordPress"
+msgstr "WordPress"
+
+#: build/admin.js:13
+msgid "PHP"
+msgstr "PHP"
+
+#: build/admin.js:13
+msgid "MySQL"
+msgstr "MySQL"
+
+#: build/admin.js:13
+msgid "Server"
+msgstr "সার্ভার"
+
+#: build/admin.js:13
+msgid "PHP Memory Limit"
+msgstr "PHP মেমরি সীমা"
+
+#: build/admin.js:13
+msgid "WP Memory Limit"
+msgstr "WP মেমরি সীমা"
+
+#: build/admin.js:13
+msgid "Max Execution Time"
+msgstr "সর্বাধিক এক্সিকিউশন সময়"
+
+#. translators: %s is the maximum execution time in seconds.
+#: build/admin.js:13
+msgid "%ss"
+msgstr "%ss"
+
+#: build/admin.js:13
+msgid "Upload Max Filesize"
+msgstr "সর্বাধিক আপলোড ফাইল আকার"
+
+#: build/admin.js:13
+msgid "Total Images"
+msgstr "মোট ছবি"
+
+#: build/admin.js:13
+msgid "WordPress Config"
+msgstr "WordPress কনফিগ"
+
+#: build/admin.js:13
+msgid "WP_DEBUG"
+msgstr "WP_DEBUG"
+
+#: build/admin.js:13
+msgid "WP_DEBUG_DISPLAY"
+msgstr "WP_DEBUG_DISPLAY"
+
+#: build/admin.js:13
+msgid "WP_DEBUG_LOG"
+msgstr "WP_DEBUG_LOG"
+
+#: build/admin.js:13
+msgid "Version"
+msgstr "সংস্করণ"
+
+#: build/admin.js:13
+msgid "Pro Plugin"
+msgstr "প্রো প্লাগইন"
+
+#. translators: %s is a version number.
+#: build/admin.js:13
+msgid "v%s"
+msgstr "v%s"
+
+#: build/admin.js:13
+msgid "License Status"
+msgstr "লাইসেন্স স্ট্যাটাস"
+
+#: build/admin.js:13
+msgid "Lazy Load"
+msgstr "লেজি লোড"
+
+#: build/admin.js:13
+msgid "Right-Click Disable"
+msgstr "রাইট-ক্লিক নিষ্ক্রিয়"
+
+#: build/admin.js:13
+msgid "WebP on Upload"
+msgstr "আপলোডে WebP"
+
+#: build/admin.js:13
+msgid "AVIF on Upload"
+msgstr "আপলোডে AVIF"
+
+#: build/admin.js:13
+msgid "Max Image Size"
+msgstr "সর্বাধিক ছবির আকার"
+
+#: build/admin.js:13
+msgid "Max Image Dimensions"
+msgstr "সর্বাধিক ছবির মাত্রা"
+
+#: build/admin.js:13
+msgid "Disabled Sizes"
+msgstr "অক্ষম আকার"
+
+#: build/admin.js:13
+msgid "None"
+msgstr "কোনো নেই"
+
+#: build/admin.js:13
+msgid "Active Theme"
+msgstr "সক্রিয় থিম"
+
+#: build/admin.js:13
+msgid "Name"
+msgstr "নাম"
+
+#: build/admin.js:13
+msgid "Parent Theme"
+msgstr "প্যারেন্ট থিম"
+
+#. translators: %1$s is the parent theme name, %2$s is its version.
+#: build/admin.js:13
+msgid "%1$s v%2$s"
+msgstr "%1$s v%2$s"
+
+#. translators: %d is the number of active plugins.
+#: build/admin.js:13
+msgid "Active Plugin (%d)"
+msgid_plural "Active Plugins (%d)"
+msgstr[0] "সক্রিয় প্লাগইন (%d)"
+msgstr[1] "সক্রিয় প্লাগইন (%d)"
+
+#: build/admin.js:13
+msgid "Your Media Library is Silently Slowing Down Your Site."
+msgstr "আপনার মিডিয়া লাইব্রেরি নীরবে আপনার সাইটকে ধীর করছে।"
+
+#: build/admin.js:13
+msgid "Unused images, oversized files, and missing optimization pile up with every upload. Pro finds them all and fixes them — without touching a single file manually."
+msgstr "অব্যবহৃত ছবি, অতিরিক্ত আকারের ফাইল এবং মিসিং অপ্টিমাইজেশন প্রতিটি আপলোডের সাথে জমা হয়। প্রো সেগুলি সব খুঁজে পায় এবং ঠিক করে — একটি ফাইল ম্যানুয়ালি স্পর্শ ছাড়াই।"
+
+#: build/admin.js:13
+msgid "Price starts from $5/month."
+msgstr "মূল্য $5/মাস থেকে শুরু।"
+
+#: build/admin.js:13
+msgid "ThumbPress modules"
+msgstr "ThumbPress মডিউল"
+
+#: build/admin.js:13
+msgid "What Pro Fixes Today"
+msgstr "প্রো আজ যা ঠিক করে"
+
+#: build/admin.js:13
+msgid "Every Pro feature is designed to solve a specific real problem. Here's what exactly an upgrade unlocks."
+msgstr "প্রতিটি প্রো বৈশিষ্ট্য একটি নির্দিষ্ট বাস্তব সমস্যা সমাধানের জন্য তৈরি। আপগ্রেড করলে ঠিক কী কী আনলক হয় তা এখানে দেখুন।"
+
+#. translators: %d is the number of images found.
+#: build/admin.js:13
+msgid "%d image found!"
+msgid_plural "%d images found!"
+msgstr[0] "%d টি ছবি পাওয়া গেছে!"
+msgstr[1] "%d টি ছবি পাওয়া গেছে!"
+
+#: build/admin.js:13
+msgid "Detect Large Images"
+msgstr "বড় ছবি সনাক্ত করুন"
+
+#: build/admin.js:13
+msgid "Scan your media library and find oversized images instantly. See exactly which files are bloating your pages and fix them before they cost you rankings."
+msgstr "আপনার মিডিয়া লাইব্রেরি স্ক্যান করুন এবং অতিরিক্ত আকারের ছবিগুলি তাৎক্ষণিকভাবে খুঁজুন। দেখুন কোন ফাইলগুলি আপনার পৃষ্ঠাগুলিকে ফুলিয়ে তুলছে এবং সেগুলি আপনার র‍্যাঙ্কিংয়ের খরচ দেওয়ার আগে সেগুলি ঠিক করুন।"
+
+#: build/admin.js:13
+msgid "Detect Now"
+msgstr "এখনই সনাক্ত করুন"
+
+#: build/admin.js:13
+msgid "Delete Unused Images"
+msgstr "অব্যবহৃত ছবি মুছুন"
+
+#: build/admin.js:13
+msgid "Scan your media library and find unused images instantly. See exactly which files are taking up space and delete them to reclaim server space."
+msgstr "আপনার মিডিয়া লাইব্রেরি স্ক্যান করুন এবং অব্যবহৃত ছবিগুলি তাৎক্ষণিকভাবে খুঁজুন। দেখুন কোন ফাইলগুলি স্থান নিচ্ছে এবং সার্ভার স্থান পুনরুদ্ধার করতে সেগুলি মুছুন।"
+
+#: build/admin.js:13
+msgid "Delete Now"
+msgstr "এখনই মুছুন"
+
+#: build/admin.js:13
+msgid "Compress Large Images"
+msgstr "বড় ছবি সংকুচিত করুন"
+
+#: build/admin.js:13
+msgid "Large images are costing you speed. Optimize them without visible loss and deliver a faster, smoother browsing experience."
+msgstr "বড় ছবিগুলি আপনার গতি খরচ করছে। সেগুলিকে দৃশ্যমান হ্রাস ছাড়াই অপ্টিমাইজ করুন এবং দ্রুত, মসৃণ ব্রাউজিং অভিজ্ঞতা প্রদান করুন।"
+
+#: build/admin.js:13
+msgid "Compress Now"
+msgstr "এখনই সংকুচিত করুন"
+
+#: build/admin.js:13
+msgid "Bulk Convert to AVIF"
+msgstr "বাল্ক AVIF এ রূপান্তর করুন"
+
+#: build/admin.js:13
+msgid "Your images shouldn't be stuck in the past. Convert them all to AVIF - the format the modern web is built on - in a single click."
+msgstr "আপনার ছবিগুলি অতীতে আটকে থাকা উচিত নয়। এক ক্লিকেই সেগুলি সব AVIF এ রূপান্তর করুন - আধুনিক ওয়েব যে ফরম্যাটের উপর গড়ে উঠেছে।"
+
+#: build/admin.js:13
+msgid "Convert Now"
+msgstr "এখনই রূপান্তর করুন"
+
+#: build/admin.js:13
+msgid "Crop, resize, or tweak any image right inside your WordPress dashboard. No need to re-upload or touch a third-party tool."
+msgstr "আপনার WordPress ড্যাশবোর্ডের ভিতরে সরাসরি যেকোনো ছবি ক্রপ, পুনরায় আকার দিন বা সামঞ্জস্য করুন। পুনরায় আপলোড বা তৃতীয় পক্ষের সরঞ্জাম স্পর্শ করার প্রয়োজন নেই।"
+
+#: build/admin.js:13
+msgid "Edit Now"
+msgstr "এখনই সম্পাদনা করুন"
+
+#: build/admin.js:13
+msgid "Merge Duplicate Images"
+msgstr "নকল ছবি একত্রিত করুন"
+
+#: build/admin.js:13
+msgid "Find images that have been uploaded more than once. Clean up the clutter and stop wasting space on files you already have."
+msgstr "এমন ছবি খুঁজুন যা একাধিকবার আপলোড করা হয়েছে। বিশৃঙ্খলা পরিষ্কার করুন এবং আপনার ইতিমধ্যে থাকা ফাইলগুলিতে স্থান নষ্ট করা বন্ধ করুন।"
+
+#: build/admin.js:13
+msgid "Merge Now"
+msgstr "এখনই একত্রিত করুন"
+
+#: build/admin.js:13
+msgid "IMAGE CONTROL"
+msgstr "ছবি নিয়ন্ত্রণ"
+
+#: build/admin.js:13
+msgid "Disable Thumbnails"
+msgstr "থাম্বনেইল নিষ্ক্রিয় করুন"
+
+#: build/admin.js:13
+msgid "Set Image Upload Limit"
+msgstr "ছবি আপলোডের সীমা নির্ধারণ করুন"
+
+#: build/admin.js:13
+msgid "STORAGE & CLEANUP"
+msgstr "স্টোরেজ এবং পরিষ্কার"
+
+#: build/admin.js:13
+msgid "Find Unused Images"
+msgstr "অব্যবহৃত ছবি খুঁজুন"
+
+#: build/admin.js:13
+msgid "Find Duplicate Images"
+msgstr "নকল ছবি খুঁজুন"
+
+#: build/admin.js:13
+msgid "MEDIA MANAGEMENT"
+msgstr "মিডিয়া ম্যানেজমেন্ট"
+
+#: build/admin.js:13
+msgid "Replace Images"
+msgstr "ছবি প্রতিস্থাপন করুন"
+
+#: build/admin.js:13
+msgid "Social Media Thumbnails"
+msgstr "সোশ্যাল মিডিয়া থাম্বনেইল"
+
+#: build/admin.js:13
+msgid "Free vs. Pro Side by Side"
+msgstr "ফ্রি বনাম প্রো পাশাপাশি"
+
+#: build/admin.js:13
+msgid "See a clear comparison between your current version and the Pro version you're about to get."
+msgstr "আপনার বর্তমান সংস্করণ এবং আপনি যে প্রো সংস্করণটি নিতে যাচ্ছেন তার মধ্যে একটি স্পষ্ট তুলনা দেখুন।"
+
+#: build/admin.js:13
+msgid "Features"
+msgstr "বৈশিষ্ট্য"
+
+#: build/admin.js:13
+msgid "Free"
+msgstr "ফ্রি"
+
+#: build/admin.js:13
+msgid "Future uploads only"
+msgstr "শুধুমাত্র ভবিষ্যতের আপলোড"
+
+#: build/admin.js:13
+msgid "Fully unlocked"
+msgstr "সম্পূর্ণ আনলক"
+
+#: build/admin.js:13
+msgid "Best Value"
+msgstr "সেরা মূল্য"
+
+#: build/admin.js:13
+msgid "/ Month"
+msgstr "/ মাস"
+
+#: build/admin.js:13
+msgid "/ Lifetime"
+msgstr "/ আজীবন"
+
+#. translators: %s is the total yearly price.
+#: build/admin.js:13
+msgid "Billed annually. You pay %s today"
+msgstr "বার্ষিক বিল করা হয়। আপনি আজ %s প্রদান করবেন"
+
+#: build/admin.js:13
+msgid "Purchase"
+msgstr "কিনুন"
+
+#: build/admin.js:13
+msgid "Personal"
+msgstr "ব্যক্তিগত"
+
+#. translators: %d is the discount percentage.
+#: build/admin.js:13
+msgid "%d%% OFF"
+msgstr "%d%% ছাড়"
+
+#: build/admin.js:13
+msgid "1 Site"
+msgstr "1টি সাইট"
+
+#: build/admin.js:13
+msgid "1 Year Support"
+msgstr "1 বছরের সহায়তা"
+
+#: build/admin.js:13
+msgid "All Features Included"
+msgstr "সমস্ত বৈশিষ্ট্য অন্তর্ভুক্ত"
+
+#: build/admin.js:13
+msgid "Professional"
+msgstr "পেশাদার"
+
+#: build/admin.js:13
+msgid "5 Sites"
+msgstr "5টি সাইট"
+
+#: build/admin.js:13
+msgid "Agency"
+msgstr "এজেন্সি"
+
+#: build/admin.js:13
+msgid "Unlimited Sites"
+msgstr "সীমাহীন সাইট"
+
+#: build/admin.js:13
+msgid "Lifetime Support"
+msgstr "আজীবন সহায়তা"
+
+#: build/admin.js:13
+msgid "ThumbPress Pro Pricing"
+msgstr "ThumbPress Pro মূল্য"
+
+#: build/admin.js:13
+msgid "Every plan includes the full set of Pro features. Just pick how many sites you need to cover."
+msgstr "প্রতিটি প্ল্যানে প্রো বৈশিষ্ট্যের সম্পূর্ণ সেট অন্তর্ভুক্ত। শুধু বেছে নিন আপনার কতগুলি সাইট কভার করা দরকার।"
+
+#: build/admin.js:13
+msgid "Yearly"
+msgstr "বার্ষিক"
+
+#: build/admin.js:13
+msgid "Lifetime"
+msgstr "আজীবন"
+
+#: build/admin.js:13
+msgid "30-day money back guarantee"
+msgstr "30 দিনের টাকা ফেরত গ্যারান্টি"
+
+#: build/admin.js:13
+msgid "Access future features for the subscription period"
+msgstr "সাবস্ক্রিপশনের সময়কাল জুড়ে ভবিষ্যতের বৈশিষ্ট্যগুলিতে অ্যাক্সেস"
+
+#: build/admin.js:13
+msgid "reviewer"
+msgstr "রিভিউয়ার"
+
+#: build/admin.js:13
+msgid "This saved me money when I realised I was about to exceed my host’s image allowance, enabling me to wipe out excess duplicate images."
+msgstr "যখন বুঝতে পারলাম আমি আমার হোস্টের ছবির সীমা ছাড়িয়ে যেতে চলেছি, তখন এটি আমার টাকা বাঁচিয়েছে — অতিরিক্ত নকল ছবিগুলি মুছে ফেলতে পেরেছি।"
+
+#: build/admin.js:13
+msgid "At the moment I’m using it to resize my pictures, I see a lot of things to use in the future to keep the site smaller then it was. So far it’s working fine and the one question I had was answered right away!! Keep up the good work!!!"
+msgstr "এই মুহূর্তে আমি আমার ছবিগুলি রিসাইজ করতে এটি ব্যবহার করছি, ভবিষ্যতে সাইটটি আগের চেয়ে ছোট রাখার জন্য ব্যবহার করার মতো আরও অনেক কিছু দেখতে পাচ্ছি। এখন পর্যন্ত এটি ভালোই কাজ করছে এবং আমার যে একটিমাত্র প্রশ্ন ছিল তার উত্তর সঙ্গে সঙ্গেই পেয়েছি!! ভালো কাজ চালিয়ে যান!!!"
+
+#: build/admin.js:13
+msgid "This plugin is extremely useful, and a must for sites with a lot of images. I had a problem with activation of the Pro version, and the support team resolved the issue quickly and without fuss."
+msgstr "এই প্লাগইনটি অত্যন্ত উপযোগী, এবং প্রচুর ছবিসমৃদ্ধ সাইটের জন্য অপরিহার্য। প্রো সংস্করণ সক্রিয় করতে গিয়ে আমার একটি সমস্যা হয়েছিল, এবং সাপোর্ট টিম কোনো ঝামেলা ছাড়াই দ্রুত সমস্যাটি সমাধান করে দিয়েছে।"
+
+#: build/admin.js:13
+msgid "Trusted by 30,000+ WordPress Users Just Like You"
+msgstr "আপনার মতো 30,000+ ওয়ার্ডপ্রেস ব্যবহারকারী দ্বারা বিশ্বস্ত"
+
+#: build/admin.js:13
+msgid "What image formats does ThumbPress convert?"
+msgstr "ThumbPress কোন কোন ইমেজ ফরম্যাট রূপান্তর করে?"
+
+#: build/admin.js:13
+msgid "Free version converts images to WebP (25-35% smaller files). Pro adds AVIF conversion (50% smaller than WebP) plus intelligent compression for all formats. Both reduce file size without visible quality loss, dramatically improving site speed and lowering bandwidth costs."
+msgstr "ফ্রি সংস্করণ ছবিগুলি WebP এ রূপান্তর করে (25-35% ছোট ফাইল)। প্রো যোগ করে AVIF রূপান্তর (WebP এর চেয়ে 50% ছোট) এবং সব ফরম্যাটের জন্য বুদ্ধিমান কম্প্রেশন। দুটোই দৃশ্যমান গুণমান হ্রাস ছাড়াই ফাইলের আকার কমায়, সাইটের গতি নাটকীয়ভাবে বাড়ায় এবং ব্যান্ডউইথ খরচ কমায়।"
+
+#: build/admin.js:13
+msgid "How much can I save on storage and bandwidth?"
+msgstr "স্টোরেজ এবং ব্যান্ডউইথে আমি কতটা সাশ্রয় করতে পারি?"
+
+#: build/admin.js:13
+msgid "Most sites save 30-60% of image storage. WebP reduces files by 25-35%, AVIF by 50% more than WebP. A typical site with 5,000 images saves 50-100GB. Smaller images also cut bandwidth costs and improve Core Web Vitals scores for better SEO rankings."
+msgstr "বেশিরভাগ সাইট ছবির স্টোরেজের 30-60% সাশ্রয় করে। WebP ফাইলের আকার 25-35% কমায়, AVIF কমায় WebP এর চেয়ে আরও 50%। 5,000 ছবিসহ একটি সাধারণ সাইট 50-100GB সাশ্রয় করে। ছোট ছবি ব্যান্ডউইথ খরচও কমায় এবং ভালো SEO র‍্যাঙ্কিংয়ের জন্য Core Web Vitals স্কোর উন্নত করে।"
+
+#: build/admin.js:13
+msgid "What's the difference between Free and Pro?"
+msgstr "ফ্রি এবং প্রো এর মধ্যে পার্থক্য কী?"
+
+#: build/admin.js:13
+msgid "Free: Basic optimization (WebP, regenerate thumbnails). Pro: Advanced detection (find unused images, duplicates, oversized files), bulk compression, AVIF conversion, one-click automation. Best for sites with hundreds or thousands of images where optimization pays for itself."
+msgstr "ফ্রি: মৌলিক অপ্টিমাইজেশন (WebP, থাম্বনেইল পুনরায় তৈরি)। প্রো: উন্নত সনাক্তকরণ (অব্যবহৃত ছবি, নকল, অতিরিক্ত আকারের ফাইল খুঁজে বের করা), বাল্ক কম্প্রেশন, AVIF রূপান্তর, এক-ক্লিক অটোমেশন। শত শত বা হাজার হাজার ছবিযুক্ত সাইটের জন্য সেরা, যেখানে অপ্টিমাইজেশন নিজের খরচ নিজেই তুলে নেয়।"
+
+#: build/admin.js:13
+msgid "How does pricing work? Is there a trial?"
+msgstr "মূল্য নির্ধারণ কীভাবে কাজ করে? কোনো ট্রায়াল আছে কি?"
+
+#: build/admin.js:13
+msgid "No hidden fees or surprise renewals - renewal costs the same as initial purchase. Free version is your trial. Test WebP conversion and regeneration risk-free. Upgrade anytime if you need Pro features. 30-day money-back guarantee on all paid plans."
+msgstr "কোনো লুকানো ফি বা অপ্রত্যাশিত নবায়ন নেই - নবায়নের খরচ প্রাথমিক ক্রয়ের সমানই। ফ্রি সংস্করণই আপনার ট্রায়াল। ঝুঁকি ছাড়াই WebP রূপান্তর এবং পুনরায় তৈরি করা পরীক্ষা করুন। প্রো বৈশিষ্ট্য প্রয়োজন হলে যেকোনো সময় আপগ্রেড করুন। সমস্ত পেইড প্ল্যানে 30 দিনের টাকা ফেরত গ্যারান্টি।"
+
+#: build/admin.js:13
+msgid "Can I use Pro on multiple sites? How many?"
+msgstr "আমি কি একাধিক সাইটে প্রো ব্যবহার করতে পারি? কতগুলিতে?"
+
+#: build/admin.js:13
+msgid "Yes. Professional plan covers up to 5 sites. Agency plan covers unlimited. Perfect for freelancers and agencies managing multiple client sites. Licensing is per-plan, not per-site."
+msgstr "হ্যাঁ। প্রফেশনাল প্ল্যান 5টি পর্যন্ত সাইট কভার করে। এজেন্সি প্ল্যান সীমাহীন সাইট কভার করে। একাধিক ক্লায়েন্ট সাইট পরিচালনাকারী ফ্রিল্যান্সার ও এজেন্সির জন্য উপযুক্ত। লাইসেন্সিং প্ল্যান অনুযায়ী, সাইট অনুযায়ী নয়।"
+
+#: build/admin.js:13
+msgid "Is my media library safe? Will images be deleted automatically?"
+msgstr "আমার মিডিয়া লাইব্রেরি কি নিরাপদ? ছবিগুলি কি স্বয়ংক্রিয়ভাবে মুছে যাবে?"
+
+#: build/admin.js:13
+msgid "Completely safe. ThumbPress shows you exactly what it found and requires your approval before any action. Nothing is ever deleted automatically. Unused images, duplicates, and large files are flagged for review - you decide what to remove."
+msgstr "সম্পূর্ণ নিরাপদ। ThumbPress ঠিক কী পাওয়া গেছে তা আপনাকে দেখায় এবং যেকোনো পদক্ষেপের আগে আপনার অনুমোদন চায়। কোনো কিছুই স্বয়ংক্রিয়ভাবে মুছে ফেলা হয় না। অব্যবহৃত ছবি, নকল এবং বড় ফাইলগুলি পর্যালোচনার জন্য চিহ্নিত করা হয় - কী সরাবেন তা আপনি সিদ্ধান্ত নেবেন।"
+
+#: build/admin.js:13
+msgid "What if it doesn't deliver results or doesn't work on my site?"
+msgstr "যদি এটি ফলাফল না দেয় বা আমার সাইটে কাজ না করে তাহলে কী হবে?"
+
+#: build/admin.js:13
+msgid "100% money-back within 30 days, no questions asked. Our team provides setup assistance to ensure it works perfectly. We also stand behind the results - if optimization doesn't improve your metrics, we refund immediately."
+msgstr "30 দিনের মধ্যে 100% টাকা ফেরত, কোনো প্রশ্ন ছাড়াই। এটি নিখুঁতভাবে কাজ করছে তা নিশ্চিত করতে আমাদের টিম সেটআপে সহায়তা করে। আমরা ফলাফলের পেছনেও দাঁড়াই - অপ্টিমাইজেশন যদি আপনার মেট্রিক উন্নত না করে, আমরা সঙ্গে সঙ্গে টাকা ফেরত দিই।"
+
+#: build/admin.js:13
+msgid "Is it compatible with WooCommerce, Elementor, and my theme?"
+msgstr "এটি কি WooCommerce, Elementor এবং আমার থিমের সাথে সামঞ্জস্যপূর্ণ?"
+
+#: build/admin.js:13
+msgid "Yes. ThumbPress works with WooCommerce, Gutenberg, Elementor, Divi, and all major themes. It operates at the WordPress media layer, not inside specific plugins, so compatibility is universal."
+msgstr "হ্যাঁ। ThumbPress WooCommerce, Gutenberg, Elementor, Divi এবং সমস্ত প্রধান থিমের সাথে কাজ করে। এটি নির্দিষ্ট প্লাগইনের ভিতরে নয়, WordPress মিডিয়া স্তরে কাজ করে, তাই সামঞ্জস্যতা সর্বজনীন।"
+
+#: build/admin.js:13
+msgid "How long does bulk processing take? Will it slow my site?"
+msgstr "বাল্ক প্রক্রিয়াকরণে কত সময় লাগে? এটি কি আমার সাইট ধীর করে দেবে?"
+
+#: build/admin.js:13
+msgid "All heavy operations run in the background - zero impact on your site. Most sites process 500-1000 (or more) images per hour depending on hosting. Background processing handles thousands overnight. Your dashboard and frontend stay fast."
+msgstr "সমস্ত ভারী কাজ পটভূমিতে চলে - আপনার সাইটে কোনো প্রভাব নেই। হোস্টিংয়ের উপর নির্ভর করে বেশিরভাগ সাইট প্রতি ঘণ্টায় 500-1000 (বা তার বেশি) ছবি প্রক্রিয়া করে। পটভূমি প্রক্রিয়াকরণ রাতারাতি হাজার হাজার ছবি সামলে নেয়। আপনার ড্যাশবোর্ড এবং ফ্রন্টএন্ড দ্রুতই থাকে।"
+
+#: build/admin.js:13
+msgid "Do I get support? What if I need help implementing?"
+msgstr "আমি কি সহায়তা পাব? বাস্তবায়নে সাহায্য দরকার হলে কী হবে?"
+
+#: build/admin.js:13
+msgid "All customers get support with 24-hour response time. Professional and Agency plans include priority support. Our team helps with setup, troubleshooting, and optimization recommendations to maximize your results."
+msgstr "সমস্ত গ্রাহক 24-ঘণ্টার প্রতিক্রিয়া সময়সহ সহায়তা পান। প্রফেশনাল এবং এজেন্সি প্ল্যানে অগ্রাধিকার সহায়তা অন্তর্ভুক্ত। আমাদের টিম সেটআপ, সমস্যা সমাধান এবং অপ্টিমাইজেশন পরামর্শে সাহায্য করে যাতে আপনি সর্বোচ্চ ফলাফল পান।"
+
+#: build/admin.js:13
+msgid "Frequently Asked Questions"
+msgstr "প্রায়শই জিজ্ঞাসিত প্রশ্ন"
+
+#: build/admin.js:13
+msgid "Ready to take control of your Images?"
+msgstr "আপনার ছবি নিয়ন্ত্রণ করতে প্রস্তুত?"
+
+#: build/admin.js:13
+msgid "Join 30,000+ users who manage their media smarter with ThumbPress Pro"
+msgstr "ThumbPress Pro এর সাথে তাদের মিডিয়া আরও স্মার্টভাবে পরিচালনা করে এমন 30,000+ ব্যবহারকারীদের সাথে যোগ দিন"
+
+#: build/admin.js:13
+msgid "In media library"
+msgstr "মিডিয়া লাইব্রেরিতে"
+
+#: build/admin.js:13
+msgid "Total Thumbnails"
+msgstr "মোট থাম্বনেইল"
+
+#: build/admin.js:13
+msgid "Thumbnails found"
+msgstr "থাম্বনেইল পাওয়া গেছে"
+
+#: build/admin.js:13
+msgid "Unoptimized Images"
+msgstr "অপ্টিমাইজ করা হয়নি ছবি"
+
+#: build/admin.js:13
+msgid "Images yet to be fixed"
+msgstr "সংশোধন করার জন্য অপেক্ষারত ছবি"
+
+#: build/admin.js:13
+msgid "Space Saved"
+msgstr "সঞ্চিত স্থান"
+
+#: build/admin.js:13
+msgid "Worth of space saved"
+msgstr "সঞ্চিত স্থানের মূল্য"
+
+#: build/admin.js:13
+msgid "Images (over 1 MB)"
+msgstr "ছবি (1 MB এর বেশি)"
+
+#: build/admin.js:13
+msgid "Upgrade to Compress"
+msgstr "সংকুচিত করতে আপগ্রেড করুন"
+
+#: build/admin.js:13
+msgid "Unattached images"
+msgstr "সংযুক্ত না করা ছবি"
+
+#: build/admin.js:13
+msgid "Uncompressed Images"
+msgstr "সংকুচিত না করা ছবি"
+
+#: build/admin.js:13
+msgid "Images need compression"
+msgstr "যে ছবিগুলির সংকুচন প্রয়োজন"
+
+#: build/admin.js:13
+msgid "Duplicate images found"
+msgstr "নকল ছবি পাওয়া গেছে"
+
+#: build/admin.js:13
+msgid "Upgrade to Merge"
+msgstr "একত্রিত করতে আপগ্রেড করুন"
+
+#: build/admin.js:13
+msgid "Non-AVIF images found"
+msgstr "অ-AVIF ছবি পাওয়া গেছে"
+
+#: build/admin.js:13
+msgid "Upgrade to Convert"
+msgstr "রূপান্তর করতে আপগ্রেড করুন"
+
+#: build/admin.js:13
+msgid "Non-WebP images found"
+msgstr "অ-WebP ছবি পাওয়া গেছে"
+
+#: build/admin.js:13
+msgid "Thumbnail Disabled"
+msgstr "থাম্বনেইল অক্ষম"
+
+#. translators: %1$s is the number of disabled sizes, %2$s is the total number of sizes.
+#: build/admin.js:13
+msgid "%1$s/%2$s"
+msgstr "%1$s/%2$s"
+
+#: build/admin.js:13
+msgid "These sizes won't be generated"
+msgstr "এই আকারগুলি তৈরি করা হবে না"
+
+#: build/admin.js:13
+msgid "Lazy Loading"
+msgstr "লেজি লোডিং"
+
+#: build/admin.js:13
+msgid "Active"
+msgstr "সক্রিয়"
+
+#: build/admin.js:13
+msgid "Inactive"
+msgstr "নিষ্ক্রিয়"
+
+#. translators: %s is the lazy-load status (On or Off).
+#: build/admin.js:13
+msgid "Status: %s"
+msgstr "স্ট্যাটাস: %s"
+
+#: build/admin.js:13
+msgid "On"
+msgstr "চালু"
+
+#: build/admin.js:13
+msgid "Off"
+msgstr "বন্ধ"
+
+#: build/admin.js:13
+msgid "Regenerate All Thumbnails"
+msgstr "সমস্ত থাম্বনেইল পুনরায় তৈরি করুন"
+
+#: build/admin.js:13
+msgid "Broken thumbnails hurt layouts and lose visitors. Regenerate once - every image across your site snaps back to the perfect size and crop."
+msgstr "ভাঙা থাম্বনেইল লেআউট নষ্ট করে এবং দর্শক হারায়। একবার পুনরায় তৈরি করুন - আপনার সাইটের প্রতিটি ছবি নিখুঁত আকার ও ক্রপে ফিরে আসবে।"
+
+#: build/admin.js:13
+msgid "Generate Again"
+msgstr "আবার তৈরি করুন"
+
+#: build/admin.js:13
+msgid "No Images Found"
+msgstr "কোনো ছবি পাওয়া যায়নি"
+
+#: build/admin.js:13
+msgid "Ready to Regenerate Thumbnails?"
+msgstr "থাম্বনেইল পুনরায় তৈরি করতে প্রস্তুত?"
+
+#: build/admin.js:13
+msgid "There are no images to regenerate."
+msgstr "পুনরায় তৈরি করার জন্য কোনো ছবি নেই।"
+
+#: build/admin.js:13
+msgid "Click \"Regenerate Now\" to create fresh thumbnails for all images. Configure your thumbnail sizes in "
+msgstr "সমস্ত ছবির জন্য নতুন থাম্বনেইল তৈরি করতে \"এখনই পুনরায় তৈরি করুন\" ক্লিক করুন। আপনার থাম্বনেইলের আকার কনফিগার করুন "
+
+#: build/admin.js:13
+msgid "settings"
+msgstr "সেটিংসে"
+
+#: build/admin.js:13
+msgid "."
+msgstr "."
+
+#: build/admin.js:13
+msgid "Chunk Size"
+msgstr "খণ্ড আকার"
+
+#: build/admin.js:13
+msgid "Number of images processed in a single batch per server request."
+msgstr "প্রতি সার্ভার অনুরোধে একটি একক ব্যাচে প্রক্রিয়া করা ইমেজের সংখ্যা।"
+
+#: build/admin.js:13
+msgid "e.g. 50"
+msgstr "যেমন 50"
+
+#: build/admin.js:13
+msgid "Regenerate Now"
+msgstr "এখনই পুনরায় তৈরি করুন"
+
+#: build/admin.js:13
+msgid "Regenerate In Background"
+msgstr "পটভূমিতে পুনরায় তৈরি করুন"
+
+#: build/admin.js:13
+msgid "Image Regeneration Complete"
+msgstr "ছবি পুনর্নির্মাণ সম্পূর্ণ"
+
+#: build/admin.js:13
+msgid "Image Regeneration in Progress"
+msgstr "ছবি পুনর্নির্মাণ চলছে"
+
+#: build/admin.js:13
+msgid "All thumbnails have been regenerated successfully."
+msgstr "সমস্ত থাম্বনেইল সফলভাবে পুনরায় তৈরি করা হয়েছে।"
+
+#: build/admin.js:13
+msgid "Regenerating media library thumbnails using selected sizes."
+msgstr "নির্বাচিত আকার ব্যবহার করে মিডিয়া লাইব্রেরি থাম্বনেইল পুনর্নির্মাণ করছে।"
+
+#: build/admin.js:13
+msgid "Cancel"
+msgstr "বাতিল"
+
+#: build/admin.js:13
+msgid "Images Processed"
+msgstr "প্রক্রিয়াকৃত ছবি"
+
+#: build/admin.js:13
+msgid "Images Not Found"
+msgstr "ছবি পাওয়া যায়নি"
+
+#: build/admin.js:13
+msgid "Images Deleted"
+msgstr "মুছে ফেলা ছবি"
+
+#: build/admin.js:13
+msgid "Images Created"
+msgstr "তৈরি করা ছবি"
+
+#: build/admin.js:13
+msgid "Find & Remove Unused Images"
+msgstr "অব্যবহৃত ছবি খুঁজুন ও সরান"
+
+#: build/admin.js:13
+msgid "You're paying to host images nobody sees. Remove orphaned files and cut hosting costs, backup size, and storage waste instantly."
+msgstr "কেউ দেখে না এমন ছবি হোস্ট করার জন্য আপনি টাকা দিচ্ছেন। অনাথ ফাইলগুলি সরিয়ে ফেলুন এবং তাৎক্ষণিকভাবে হোস্টিং খরচ, ব্যাকআপের আকার এবং স্টোরেজের অপচয় কমান।"
+
+#: build/admin.js:13
+msgid "Ready to Scan for Unused Images?"
+msgstr "অব্যবহৃত ছবি স্ক্যান করতে প্রস্তুত?"
+
+#: build/admin.js:13
+msgid "Click \"Detect Now\" to scan your library across Gutenberg, Elementor, WooCommerce, ACF, and LayerSlider for unused images."
+msgstr "অব্যবহৃত ছবির জন্য Gutenberg, Elementor, WooCommerce, ACF এবং LayerSlider জুড়ে আপনার লাইব্রেরি স্ক্যান করতে \"এখনই সনাক্ত করুন\" ক্লিক করুন।"
+
+#: build/admin.js:13
+msgid "Detect in background"
+msgstr "পটভূমিতে সনাক্ত করুন"
+
+#: build/admin.js:13
+msgid "Unused Image Cleanup is a Pro feature"
+msgstr "অব্যবহৃত ছবি পরিষ্কার করা একটি প্রো বৈশিষ্ট্য"
+
+#: build/admin.js:13
+msgid "A bloated library slows uploads, backups, and searches. Remove dead weight and keep your site lean and fast."
+msgstr "ফুলে ওঠা লাইব্রেরি আপলোড, ব্যাকআপ এবং অনুসন্ধান ধীর করে দেয়। অপ্রয়োজনীয় বোঝা সরিয়ে আপনার সাইট হালকা ও দ্রুত রাখুন।"
+
+#: build/admin.js:13
+msgid "Upgrade to clean up unused images"
+msgstr "অব্যবহৃত ছবি পরিষ্কার করতে আপগ্রেড করুন"
+
+#: build/admin.js:13
+msgid "Find & Remove Duplicate Images"
+msgstr "নকল ছবি খুঁজুন ও সরান"
+
+#: build/admin.js:13
+msgid "Duplicates inflate storage and bloat backups. Find every redundant file and clean house without risking your originals."
+msgstr "নকল ছবি স্টোরেজ বাড়িয়ে দেয় এবং ব্যাকআপ ভারী করে তোলে। প্রতিটি অপ্রয়োজনীয় ফাইল খুঁজে বের করুন এবং মূল ফাইলগুলি ঝুঁকিতে না ফেলেই পরিষ্কার করুন।"
+
+#: build/admin.js:13
+msgid "Ready to Scan for Duplicates?"
+msgstr "নকল ছবি স্ক্যান করতে প্রস্তুত?"
+
+#: build/admin.js:13
+msgid "Click \"Detect Now\" to scan your library and identify redundant files taking up unnecessary storage space."
+msgstr "আপনার লাইব্রেরি স্ক্যান করে অপ্রয়োজনীয় স্টোরেজ দখল করা ফাইলগুলি শনাক্ত করতে \"এখনই সনাক্ত করুন\" ক্লিক করুন।"
+
+#: build/admin.js:13
+msgid "The same file uploaded twice wastes space every day. Surface every duplicate and reclaim storage you didn't know you were losing."
+msgstr "একই ফাইল দুবার আপলোড হলে প্রতিদিন স্থান নষ্ট হয়। প্রতিটি নকল সামনে আনুন এবং আপনি যে স্টোরেজ হারাচ্ছেন তা পুনরুদ্ধার করুন।"
+
+#: build/admin.js:13
+msgid "One oversized image tanks your page score. Find every offender and fix it before it costs you rankings and revenue."
+msgstr "একটি অতিরিক্ত আকারের ছবিই আপনার পৃষ্ঠার স্কোর নামিয়ে দেয়। প্রতিটি দোষী ফাইল খুঁজে বের করে ঠিক করুন, র‍্যাঙ্কিং ও আয় হারানোর আগেই।"
+
+#: build/admin.js:13
+msgid "Ready to Scan for Large Images?"
+msgstr "বড় ছবি স্ক্যান করতে প্রস্তুত?"
+
+#: build/admin.js:13
+msgid "Set your file size threshold above and click \"Detect Now\" to find images exceeding your size limit."
+msgstr "উপরে আপনার ফাইল আকারের সীমা নির্ধারণ করুন এবং আপনার আকারের সীমা অতিক্রমকারী ছবিগুলি খুঁজতে \"এখনই সনাক্ত করুন\" ক্লিক করুন।"
+
+#: build/admin.js:13
+msgid "File Size Threshold"
+msgstr "ফাইল আকারের থ্রেশহোল্ড"
+
+#: build/admin.js:13
+msgid "Images larger than this size will be marked as large. Set the limit to detect oversized images."
+msgstr "এই আকারের চেয়ে বড় ছবিগুলি বড় হিসেবে চিহ্নিত হবে। অতিরিক্ত আকারের ছবি সনাক্ত করতে সীমা নির্ধারণ করুন।"
+
+#: build/admin.js:13
+msgid "e.g. 1 for 1MB"
+msgstr "যেমন 1MB এর জন্য 1"
+
+#: build/admin.js:13
+msgid "Large Image Detection is a Pro feature"
+msgstr "বড় ছবি সনাক্তকরণ একটি প্রো বৈশিষ্ট্য"
+
+#: build/admin.js:13
+msgid "Slow pages bleed traffic. Find the heavy images hurting your Core Web Vitals before they cost you visitors."
+msgstr "ধীর পৃষ্ঠা ট্র্যাফিক হারায়। দর্শক হারানোর আগেই আপনার Core Web Vitals ক্ষতিগ্রস্ত করা ভারী ছবিগুলি খুঁজে বের করুন।"
+
+#: build/admin.js:13
+msgid "Upgrade to find and fix large images"
+msgstr "বড় ছবি খুঁজে ঠিক করতে আপগ্রেড করুন"
+
+#: build/admin.js:13
+msgid "Compress Your Images"
+msgstr "আপনার ছবি সংকুচিত করুন"
+
+#: build/admin.js:13
+msgid "Uncompressed images are the #1 reason sites fail Core Web Vitals. Compress your library in minutes - smaller files, higher rankings, zero quality loss."
+msgstr "সংকুচিত না করা ছবিই সাইটগুলির Core Web Vitals ব্যর্থ হওয়ার #1 কারণ। কয়েক মিনিটেই আপনার লাইব্রেরি সংকুচিত করুন - ছোট ফাইল, উঁচু র‍্যাঙ্কিং, শূন্য গুণমান হ্রাস।"
+
+#: build/admin.js:13
+msgid "Ready to Compress Your Images?"
+msgstr "আপনার ছবি সংকুচিত করতে প্রস্তুত?"
+
+#: build/admin.js:13
+msgid "Configure your compression settings above and click \"Compress Now\" to optimize your image library."
+msgstr "উপরে আপনার সংকুচন সেটিংস কনফিগার করুন এবং আপনার ছবির লাইব্রেরি অপ্টিমাইজ করতে \"এখনই সংকুচিত করুন\" ক্লিক করুন।"
+
+#: build/admin.js:13
+msgid "Quality Level"
+msgstr "গুণমানের স্তর"
+
+#: build/admin.js:13
+msgid "Compression quality from 0-100. Higher values preserve more detail but result in larger files. 80+ recommended for best results."
+msgstr "0-100 এর মধ্যে সংকুচনের গুণমান। বেশি মান বেশি বিস্তারিত ধরে রাখে কিন্তু ফাইল বড় হয়। সেরা ফলাফলের জন্য 80+ সুপারিশ করা হয়।"
+
+#: build/admin.js:13
+msgid "e.g. 80 (0-100)"
+msgstr "যেমন 80 (0-100)"
+
+#: build/admin.js:13
+msgid "Compress In Background"
+msgstr "পটভূমিতে সংকুচিত করুন"
+
+#: build/admin.js:13
+msgid "Every heavy image loses you a visitor. Compress your entire library in one click and watch page speed - and conversions - climb."
+msgstr "প্রতিটি ভারী ছবি আপনার একজন দর্শক কেড়ে নেয়। এক ক্লিকে আপনার সম্পূর্ণ লাইব্রেরি সংকুচিত করুন এবং দেখুন পৃষ্ঠার গতি - ও কনভার্সন - কীভাবে বাড়ে।"
+
+#: build/admin.js:13
+msgid "Convert Images to WebP"
+msgstr "ছবিগুলি WebP এ রূপান্তর করুন"
+
+#: build/admin.js:13
+msgid "Slow images cost you sales. Switch to WebP and cut file sizes by 35% - faster pages, lower bounce rates, and better rankings, zero quality loss."
+msgstr "ধীর ছবি আপনার বিক্রি কমায়। WebP এ যান এবং ফাইলের আকার 35% কমান - দ্রুত পৃষ্ঠা, কম বাউন্স রেট, ভালো র‍্যাঙ্কিং, শূন্য গুণমান হ্রাস।"
+
+#: build/admin.js:13
+msgid "Convert Again"
+msgstr "আবার রূপান্তর করুন"
+
+#: build/admin.js:13
+msgid "Ready to Convert to WebP?"
+msgstr "WebP এ রূপান্তর করতে প্রস্তুত?"
+
+#: build/admin.js:13
+msgid "There are no images to convert to WebP."
+msgstr "WebP তে রূপান্তর করার জন্য কোনো ছবি নেই।"
+
+#: build/admin.js:13
+msgid "Select file formats above and click \"Convert Now\" to start converting images to WebP for faster loading."
+msgstr "দ্রুত লোডিংয়ের জন্য ছবিগুলি WebP এ রূপান্তর শুরু করতে উপরে ফাইল ফরম্যাট নির্বাচন করুন এবং \"এখনই রূপান্তর করুন\" ক্লিক করুন।"
+
+#: build/admin.js:13
+msgid "Select File Format"
+msgstr "ফাইল ফরম্যাট নির্বাচন করুন"
+
+#: build/admin.js:13
+msgid "Convert In Background"
+msgstr "পটভূমিতে রূপান্তর করুন"
+
+#: build/admin.js:13
+msgid "WebP Conversion Complete"
+msgstr "WebP রূপান্তর সম্পূর্ণ"
+
+#: build/admin.js:13
+msgid "WebP Conversion in Progress"
+msgstr "WebP রূপান্তর চলছে"
+
+#: build/admin.js:13
+msgid "All images have been converted to WebP."
+msgstr "সমস্ত ছবি WebP এ রূপান্তরিত হয়েছে।"
+
+#: build/admin.js:13
+msgid "We're scanning your media library and converting eligible images to WebP."
+msgstr "আমরা আপনার মিডিয়া লাইব্রেরি স্ক্যান করছি এবং উপযুক্ত ছবিগুলি WebP এ রূপান্তর করছি।"
+
+#: build/admin.js:13
+msgid "Images Converted"
+msgstr "রূপান্তরিত ছবি"
+
+#: build/admin.js:13
+msgid "Images Remaining"
+msgstr "বাকি ছবি"
+
+#: build/admin.js:13
+msgid "Convert Images to AVIF"
+msgstr "ছবিগুলি AVIF এ রূপান্তর করুন"
+
+#: build/admin.js:13
+msgid "The format Google rewards. Cut image sizes by 50% over WebP, slash bandwidth costs, and pass Core Web Vitals with ease."
+msgstr "যে ফরম্যাটকে Google পুরস্কৃত করে। WebP এর তুলনায় ছবির আকার 50% কমান, ব্যান্ডউইথ খরচ কমান এবং সহজেই Core Web Vitals পাস করুন।"
+
+#: build/admin.js:13
+msgid "Ready to Convert to AVIF?"
+msgstr "AVIF এ রূপান্তর করতে প্রস্তুত?"
+
+#: build/admin.js:13
+msgid "Select file formats above and click \"Convert Now\" to convert images to AVIF for even smaller file sizes."
+msgstr "আরও ছোট ফাইলের আকারের জন্য ছবিগুলি AVIF এ রূপান্তর করতে উপরে ফাইল ফরম্যাট নির্বাচন করুন এবং \"এখনই রূপান্তর করুন\" ক্লিক করুন।"
+
+#: build/admin.js:13
+msgid "AVIF Conversion is a Pro feature"
+msgstr "AVIF রূপান্তর একটি প্রো বৈশিষ্ট্য"
+
+#: build/admin.js:13
+msgid "Slow loads kill conversions. AVIF halves your file sizes with no visible quality loss - faster pages, higher rankings."
+msgstr "ধীর লোডিং কনভার্সন নষ্ট করে। AVIF কোনো দৃশ্যমান গুণমান হ্রাস ছাড়াই আপনার ফাইলের আকার অর্ধেক করে - দ্রুত পৃষ্ঠা, উঁচু র‍্যাঙ্কিং।"
+
+#: build/admin.js:13
+msgid "Upgrade to convert images to AVIF"
+msgstr "ছবিগুলি AVIF এ রূপান্তর করতে আপগ্রেড করুন"
+
+#: build/admin.js:13
+msgid "Manage Trashed Images"
+msgstr "ট্রেশ করা ছবি পরিচালনা করুন"
+
+#: build/admin.js:13
+msgid "Leftover files from old conversions and failed uploads quietly pile up. Delete the junk and reclaim real disk space in seconds."
+msgstr "পুরনো রূপান্তর এবং ব্যর্থ আপলোড থেকে থেকে যাওয়া ফাইলগুলি নীরবে জমা হয়। আবর্জনা মুছে ফেলুন এবং কয়েক সেকেন্ডেই প্রকৃত ডিস্ক স্পেস পুনরুদ্ধার করুন।"
+
+#: build/admin.js:13
+msgid "File Name"
+msgstr "ফাইলের নাম"
+
+#: build/admin.js:13
+msgid "Image"
+msgstr "ছবি"
+
+#: build/admin.js:13
+msgid "Upload Date"
+msgstr "আপলোডের তারিখ"
+
+#: build/admin.js:13
+msgid "File Size"
+msgstr "ফাইলের আকার"
+
+#: build/admin.js:13
+msgid "Action"
+msgstr "ক্রিয়া"
+
+#: build/admin.js:13
+msgid "No trashed images found."
+msgstr "কোনো ট্রেশ করা ছবি পাওয়া যায়নি।"
+
+#: build/admin.js:13
+msgid "Manage Trashed Images is a Pro feature"
+msgstr "ট্রেশ করা ছবি পরিচালনা একটি প্রো বৈশিষ্ট্য"
+
+#: build/admin.js:13
+msgid "Restore or permanently delete images you've moved to trash. Keep your library clean and reclaim disk space."
+msgstr "ট্রেশে সরানো ছবিগুলি পুনরুদ্ধার করুন বা স্থায়ীভাবে মুছে ফেলুন। আপনার লাইব্রেরি পরিষ্কার রাখুন এবং ডিস্ক স্পেস পুনরুদ্ধার করুন।"
+
+#: build/admin.js:13
+msgid "Activate License to manage trashed images"
+msgstr "ট্রেশ করা ছবি পরিচালনা করতে লাইসেন্স সক্রিয় করুন"
+
+#: build/admin.js:13
+msgid "General Settings"
+msgstr "সাধারণ সেটিংস"
+
+#: build/admin.js:13
+msgid "General settings for the plugin"
+msgstr "প্লাগইনের জন্য সাধারণ সেটিংস"
+
+#: build/admin.js:13
+msgid "Thumbnail Generation"
+msgstr "থাম্বনেইল তৈরি"
+
+#: build/admin.js:13
+msgid "Disable thumbnail generation for specific image sizes"
+msgstr "নির্দিষ্ট ছবির আকারের জন্য থাম্বনেইল তৈরি নিষ্ক্রিয় করুন"
+
+#: build/admin.js:13
+msgid "Duplicate Upload Prevention"
+msgstr "নকল আপলোড প্রতিরোধ"
+
+#: build/admin.js:13
+msgid "Prevent uploading duplicate images to your media library"
+msgstr "আপনার মিডিয়া লাইব্রেরিতে নকল ছবি আপলোড করা প্রতিরোধ করুন"
+
+#: build/admin.js:13
+msgid "File Compression Settings"
+msgstr "ফাইল সংকুচন সেটিংস"
+
+#: build/admin.js:13
+msgid "Image compression additional settings"
+msgstr "ইমেজ কম্প্রেশনের অতিরিক্ত সেটিংস"
+
+#: build/admin.js:13
+msgid "WebP Image Converter additional settings"
+msgstr "WebP ইমেজ কনভার্টারের অতিরিক্ত সেটিংস"
+
+#: build/admin.js:13
+msgid "AVIF Image Converter additional settings"
+msgstr "AVIF ইমেজ কনভার্টারের অতিরিক্ত সেটিংস"
+
+#: build/admin.js:13
+msgid "Platform Configuration"
+msgstr "প্ল্যাটফর্ম কনফিগারেশন"
+
+#: build/admin.js:13
+msgid "Manage the image used for social media sharing"
+msgstr "সোশ্যাল মিডিয়া শেয়ারিংয়ের জন্য ব্যবহৃত ছবি পরিচালনা করুন"
+
+#: build/admin.js:13
+msgid "Debug"
+msgstr "ডিবাগ"
+
+#: build/admin.js:13
+msgid "Debug Information"
+msgstr "ডিবাগ তথ্য"
+
+#: build/admin.js:13
+msgid "System and plugin info for support"
+msgstr "সহায়তার জন্য সিস্টেম ও প্লাগইন তথ্য"
+
+#: build/admin.js:13
+msgid "Debug info copied to clipboard."
+msgstr "ডিবাগ তথ্য ক্লিপবোর্ডে কপি করা হয়েছে।"
+
+#: build/admin.js:13
+msgid "Copied!"
+msgstr "কপি করা হয়েছে!"
+
+#: build/admin.js:13
+msgid "Copy as JSON"
+msgstr "JSON হিসেবে কপি করুন"
+
+#: build/admin.js:13
+msgid "Miss the old interface?"
+msgstr "পুরনো ইন্টারফেস মিস করছেন?"
+
+#: build/admin.js:13
+msgid "Turn on legacy mode."
+msgstr "লিগ্যাসি মোড চালু করুন।"

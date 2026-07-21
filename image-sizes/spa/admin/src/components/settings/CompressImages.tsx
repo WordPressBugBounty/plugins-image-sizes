@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { __ } from '@wordpress/i18n';
 import { Switch } from '../ui/switch';
 import ProAlert from '../ui/pro-alert';
+import { percentFormat } from '../../lib/i18n';
 
 export default function CompressImages() {
 	const [alertOpen, setAlertOpen] = useState(false);
@@ -62,7 +63,7 @@ export default function CompressImages() {
 				</div>
 				<input
 					type="text"
-					defaultValue="80%"
+					defaultValue={percentFormat( 80 )}
 					onClick={openAlert}
 					onChange={openAlert}
 					className="!w-20 text-center flex !rounded-lg !border !border-thumbpress-border bg-white !px-4 !py-2 text-sm focus:!outline-none focus:!shadow-none cursor-pointer"

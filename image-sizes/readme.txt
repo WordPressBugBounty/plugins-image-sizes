@@ -4,7 +4,7 @@ Tags: image optimization, compress images, thumbnail manager, WebP converter, me
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 6.4
+Stable tag: 6.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -268,6 +268,12 @@ ThumbPress may connect to the WordPress.org API (api.wordpress.org) to check for
 The plugin links to thumbpress.co for Pro upgrade information. No data is sent automatically; links only open when the user clicks them.
 
 == Changelog ==
+
+= 6.4.1 - 2026-07-21 =
+* [add] Added Spanish (es_ES), German (de_DE), French (fr_FR), and Brazilian Portuguese (pt_BR) translations, and refreshed the Bengali (bn_BD) translation
+* [add] Internationalized all frontend strings and numbers so they can be translated
+* [perf] Improved WebP/AVIF conversion performance by batching database URL rewrites across a full convert run
+* [fix] Fixed React SPA and PHP translations not loading for the current site locale
 
 = 6.4 - 2026-07-16 =
 * [imp] Convert to WebP/AVIF: the single-image convert buttons now show the real reason a conversion failed instead of a generic "Failed to convert image" — including a memory-limit message stating how much memory was needed vs the server limit and how to raise it

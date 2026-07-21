@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { __ } from '@wordpress/i18n';
 
 export interface ProAlertProps {
 	title: string;
@@ -29,7 +30,7 @@ const ProAlert: React.FC<ProAlertProps> = ({
 	// Pro plugin active but license not activated → prompt to activate, not upgrade.
 	const proInstalled = !!(window as any).THUMBPRESS?.pro_installed;
 	const proActive = !!(window as any).THUMBPRESS?.pro_active;
-	const ctaLabel = proInstalled && ! proActive ? 'Activate License' : buttonText;
+	const ctaLabel = proInstalled && ! proActive ? __( 'Activate License', 'image-sizes' ) : buttonText;
 
 	return (
 		<>
@@ -62,7 +63,7 @@ const ProAlert: React.FC<ProAlertProps> = ({
 						</clipPath>
 					</defs>
 				</svg>
-				Pro
+				{__( 'Pro', 'image-sizes' )}
 			</button>
 			)}
 

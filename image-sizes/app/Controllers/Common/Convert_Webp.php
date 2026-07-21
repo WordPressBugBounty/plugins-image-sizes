@@ -316,6 +316,7 @@ class Convert_Webp {
 		$batch_not_found = 0;
 		$batch_converted = 0;
 		$new_last_id     = $last_id;
+		$url_rewrites    = array();
 
 		foreach ( $attachments as $attachment ) {
 			$img_id      = (int) $attachment->ID;
@@ -409,8 +410,13 @@ class Convert_Webp {
 
 			Utility::refresh_file_meta( $img_id, $webp_file_path );
 
-			// Repoint stored URLs (post content, meta, options) at the new file.
-			Utility::replace_attachment_urls( $img_id, $main_img, $old_metadata );
+			// Queue the stored-URL rewrite; flushed as one batch after the loop so a full
+			// AS batch is 3 table scans total, not 3 unindexed LIKE scans per image (#385).
+			$url_rewrites[] = array(
+				'attachment_id' => $img_id,
+				'old_main_path' => $main_img,
+				'old_metadata'  => $old_metadata,
+			);
 
 			// Calculate new total size after conversion.
 			$new_size     = file_exists( $webp_file_path ) ? filesize( $webp_file_path ) : 0;
@@ -426,6 +432,11 @@ class Convert_Webp {
 			$space_saved += max( 0, $old_size - $new_size );
 			$batch_saved += max( 0, $old_size - $new_size );
 			$batch_converted++;
+		}
+
+		// One rewrite pass for the whole batch (3 table scans) instead of 3 per image.
+		if ( ! empty( $url_rewrites ) ) {
+			Utility::replace_attachment_urls_batch( $url_rewrites );
 		}
 
 		thumbpress_add_space_saved( $batch_saved );
