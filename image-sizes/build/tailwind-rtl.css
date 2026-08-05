@@ -636,9 +636,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .col-span-2 {
 	grid-column: span 2 / span 2;
 }
-#image-sizes_render .col-start-2 {
-	grid-column-start: 2;
-}
 #image-sizes_render .-mx-1 {
 	margin-right: -0.25rem;
 	margin-left: -0.25rem;
@@ -1411,6 +1408,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 	--tw-bg-opacity: 1;
 	background-color: rgb(249 115 22 / var(--tw-bg-opacity, 1));
 }
+#image-sizes_render .bg-\[\#FDECEC\] {
+	--tw-bg-opacity: 1;
+	background-color: rgb(253 236 236 / var(--tw-bg-opacity, 1));
+}
 #image-sizes_render .bg-\[\#FDF1EC\] {
 	--tw-bg-opacity: 1;
 	background-color: rgb(253 241 236 / var(--tw-bg-opacity, 1));
@@ -1890,6 +1891,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 	--tw-text-opacity: 1;
 	color: rgb(255 54 104 / var(--tw-text-opacity, 1));
 }
+#image-sizes_render .text-\[\#FF3A52\] {
+	--tw-text-opacity: 1;
+	color: rgb(255 58 82 / var(--tw-text-opacity, 1));
+}
 #image-sizes_render .text-amber-700 {
 	--tw-text-opacity: 1;
 	color: rgb(180 83 9 / var(--tw-text-opacity, 1));
@@ -1940,6 +1945,9 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .text-thumbpress-body {
 	--tw-text-opacity: 1;
 	color: rgb(60 60 66 / var(--tw-text-opacity, 1));
+}
+#image-sizes_render .text-thumbpress-body\/70 {
+	color: rgb(60 60 66 / 0.7);
 }
 #image-sizes_render .text-thumbpress-primary {
 	--tw-text-opacity: 1;

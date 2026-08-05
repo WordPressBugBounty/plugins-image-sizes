@@ -118,6 +118,9 @@ class AdminNotice {
 	}
 
 	public function dismiss_pro_not_activated_notice() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => 'Unauthorized' ) );
+		}
 		check_ajax_referer( 'thumbpress_dismiss_pro_not_activated' );
 
 		if ( ! function_exists( 'get_plugins' ) ) {

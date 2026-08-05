@@ -1,0 +1,2073 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ThumbPress\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: Chinese (China)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-07-23T07:06:16+00:00\n"
+"PO-Revision-Date: 2026-07-23 08:00+0000\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: WP-CLI 2.13.0-alpha-3eb2dd7\n"
+"X-Domain: image-sizes\n"
+
+#: app/API/Convert_Avif.php:18
+msgid "AVIF conversion requires PHP 8.0 or higher."
+msgstr "AVIF 转换需要 PHP 8.0 或更高版本。"
+
+#: app/API/Convert_Avif.php:24
+#: app/API/Convert_Webp.php:377
+msgid "Invalid image ID."
+msgstr "无效的图片 ID。"
+
+#: app/API/Convert_Avif.php:30
+#: app/API/Convert_Avif.php:38
+#: app/API/Convert_Webp.php:383
+#: app/API/Convert_Webp.php:391
+msgid "Source image file not found."
+msgstr "未找到源图片文件。"
+
+#: app/API/Convert_Avif.php:72
+#: app/API/Convert_Webp.php:424
+msgid "metadata generation returned nothing"
+msgstr "元数据生成未返回任何内容"
+
+#. translators: %s: underlying reason metadata generation failed
+#: app/API/Convert_Avif.php:76
+msgid "Converted the image to AVIF but could not generate its metadata (%s); rolled back."
+msgstr "已将图片转换为 AVIF，但无法生成其元数据（%s）；已回滚。"
+
+#: app/API/Convert_Avif.php:149
+msgid "Image converted to AVIF successfully."
+msgstr "图片已成功转换为 AVIF。"
+
+#: app/API/Convert_Webp.php:51
+#: app/API/Convert_Webp.php:291
+msgid "No file formats selected."
+msgstr "未选择任何文件格式。"
+
+#: app/API/Convert_Webp.php:57
+#: app/API/Convert_Webp.php:296
+msgid "No valid file formats selected."
+msgstr "未选择有效的文件格式。"
+
+#: app/API/Convert_Webp.php:100
+#: app/API/Convert_Webp.php:317
+#: app/API/Regenerate.php:34
+#: app/API/Regenerate.php:121
+msgid "No images found."
+msgstr "未找到图片。"
+
+#: app/API/Convert_Webp.php:115
+#: app/API/Convert_Webp.php:262
+msgid "Congratulations, Converting Images to WebP is Completed!"
+msgstr "恭喜，图片转换为 WebP 已完成！"
+
+#: app/API/Convert_Webp.php:260
+msgid "Converting Images to WebP..."
+msgstr "正在将图片转换为 WebP……"
+
+#: app/API/Convert_Webp.php:336
+#: app/API/Regenerate.php:130
+msgid "Failed to schedule action."
+msgstr "计划操作失败。"
+
+#: app/API/Convert_Webp.php:341
+msgid "Your images are being converted in the background."
+msgstr "您的图片正在后台转换中。"
+
+#. translators: %s: underlying reason metadata generation failed
+#: app/API/Convert_Webp.php:428
+msgid "Converted the image but could not generate its metadata (%s); rolled back."
+msgstr "已转换图片，但无法生成其元数据（%s）；已回滚。"
+
+#: app/API/Convert_Webp.php:498
+msgid "Image converted successfully."
+msgstr "图片转换成功。"
+
+#: app/API/Regenerate.php:77
+msgid "Regenerating Thumbnails..."
+msgstr "正在重新生成缩略图……"
+
+#: app/API/Regenerate.php:79
+msgid "Congratulations, Thumbnail Regeneration is Completed!"
+msgstr "恭喜，缩略图重新生成已完成！"
+
+#: app/API/Regenerate.php:135
+msgid "Your images are being regenerated in the background."
+msgstr "您的图片正在后台重新生成中。"
+
+#: app/API/Regenerate.php:148
+msgid "Invalid attachment."
+msgstr "无效的附件。"
+
+#: app/API/Regenerate.php:157
+msgid "Image file not found."
+msgstr "未找到图片文件。"
+
+#: app/API/Regenerate.php:165
+msgid "Thumbnails regenerated successfully."
+msgstr "缩略图重新生成成功。"
+
+#: app/API/Settings.php:198
+#: build/admin.js:13
+msgid "Settings saved successfully."
+msgstr "设置保存成功。"
+
+#: app/API/Thumbnails.php:150
+msgid "Invalid data format. Array expected."
+msgstr "数据格式无效。应为数组。"
+
+#: app/API/Thumbnails.php:160
+msgid "Disabled sizes saved successfully."
+msgstr "已禁用的尺寸保存成功。"
+
+#: app/API/Thumbnails.php:163
+msgid "No changes detected."
+msgstr "未检测到任何更改。"
+
+#: app/Bootstrap/AdminNotice.php:87
+#: app/Bootstrap/AdminNotice.php:167
+#: app/Bootstrap/AdminNotice.php:295
+#: app/Controllers/Admin/Init.php:229
+msgid "Dismiss this notice."
+msgstr "关闭此通知。"
+
+#: app/Bootstrap/AdminNotice.php:90
+msgid "ThumbPress Pro update required!"
+msgstr "需要更新 ThumbPress Pro！"
+
+#. translators: 1: installed pro version, 2: required pro version
+#: app/Bootstrap/AdminNotice.php:93
+msgid "ThumbPress requires ThumbPress Pro version %2$s or higher. You have version %1$s. Please update to use all new features."
+msgstr "ThumbPress 需要 ThumbPress Pro %2$s 或更高版本。您当前的版本为 %1$s。请更新以使用所有新功能。"
+
+#: app/Bootstrap/AdminNotice.php:100
+msgid "Update ThumbPress Pro Now"
+msgstr "立即更新 ThumbPress Pro"
+
+#: app/Bootstrap/AdminNotice.php:170
+msgid "ThumbPress Pro is installed but not activated!"
+msgstr "ThumbPress Pro 已安装但尚未激活！"
+
+#: app/Bootstrap/AdminNotice.php:171
+msgid "Activate ThumbPress Pro to unlock all premium features including image compression, unused image detection, large image detection, and more."
+msgstr "激活 ThumbPress Pro 以解锁所有高级功能，包括图片压缩、未使用图片检测、大图片检测等。"
+
+#: app/Bootstrap/AdminNotice.php:175
+msgid "Activate ThumbPress Pro"
+msgstr "激活 ThumbPress Pro"
+
+#: app/Bootstrap/AdminNotice.php:299
+msgid "A new version of ThumbPress is ready!"
+msgstr "ThumbPress 的新版本已就绪！"
+
+#: app/Bootstrap/AdminNotice.php:302
+msgid "You are using the new dashboard. Switch back to classic anytime."
+msgstr "您正在使用新版仪表盘。可随时切换回经典版。"
+
+#: app/Bootstrap/AdminNotice.php:304
+msgid "Would you like to try the new modern dashboard, or keep using the classic version?"
+msgstr "您想试用全新的现代仪表盘，还是继续使用经典版本？"
+
+#: app/Bootstrap/AdminNotice.php:311
+msgid "Using New Version"
+msgstr "正在使用新版本"
+
+#: app/Bootstrap/AdminNotice.php:314
+msgid "Switch to Classic"
+msgstr "切换到经典版"
+
+#: app/Bootstrap/AdminNotice.php:318
+msgid "Try New Version"
+msgstr "试用新版本"
+
+#: app/Bootstrap/AdminNotice.php:321
+msgid "Using Classic"
+msgstr "正在使用经典版"
+
+#: app/Controllers/Admin/Init.php:70
+msgid "July 19"
+msgstr "7 月 19 日"
+
+#: app/Controllers/Admin/Init.php:74
+msgid "July 22"
+msgstr "7 月 22 日"
+
+#. translators: %s: offer deadline date, e.g. "July 19".
+#: app/Controllers/Admin/Init.php:96
+msgid "ThumbPress: World Cup - 48%% Off - Ends %s"
+msgstr "ThumbPress：世界杯 - 48%% 优惠 - 截止 %s"
+
+#: app/Controllers/Admin/Init.php:98
+msgid "ThumbPress: World Cup - 48% Off"
+msgstr "ThumbPress：世界杯 - 48% 优惠"
+
+#: app/Controllers/Admin/Init.php:104
+msgid "Dismiss"
+msgstr "关闭"
+
+#: app/Controllers/Admin/Init.php:194
+msgid "Permission denied."
+msgstr "权限被拒绝。"
+
+#: app/Controllers/Admin/Init.php:232
+msgid "ThumbPress is installed!"
+msgstr "ThumbPress 已安装！"
+
+#: app/Controllers/Admin/Init.php:233
+msgid "Your images are ready to be optimized. Visit the dashboard to get started."
+msgstr "您的图片已准备好进行优化。前往仪表盘即可开始。"
+
+#: app/Controllers/Admin/Init.php:237
+msgid "Go to Dashboard"
+msgstr "前往仪表盘"
+
+#: app/Controllers/Admin/Menu.php:62
+#: app/Controllers/Admin/Menu.php:63
+msgid "ThumbPress"
+msgstr "ThumbPress"
+
+#: app/Controllers/Admin/Menu.php:75
+#: app/Controllers/Admin/Menu.php:170
+#: build/admin.js:13
+msgid "Dashboard"
+msgstr "仪表盘"
+
+#: app/Controllers/Admin/Menu.php:79
+#: app/Controllers/Admin/Menu.php:175
+#: build/admin.js:13
+msgid "Thumbnails"
+msgstr "缩略图"
+
+#: app/Controllers/Admin/Menu.php:83
+#: app/Controllers/Admin/Menu.php:180
+#: build/admin.js:13
+msgid "Unused Images"
+msgstr "未使用的图片"
+
+#: app/Controllers/Admin/Menu.php:87
+#: app/Controllers/Admin/Menu.php:186
+#: build/admin.js:13
+msgid "Duplicate Images"
+msgstr "重复图片"
+
+#: app/Controllers/Admin/Menu.php:91
+#: app/Controllers/Admin/Menu.php:192
+#: build/admin.js:13
+msgid "Large Images"
+msgstr "大图片"
+
+#: app/Controllers/Admin/Menu.php:95
+#: app/Controllers/Admin/Menu.php:198
+#: build/admin.js:13
+msgid "Compress Images"
+msgstr "压缩图片"
+
+#: app/Controllers/Admin/Menu.php:99
+#: app/Controllers/Admin/Menu.php:204
+#: app/Controllers/Common/Convert_Webp.php:131
+#: app/Controllers/Common/Convert_Webp.php:135
+#: build/admin.js:13
+msgid "Convert to WebP"
+msgstr "转换为 WebP"
+
+#: app/Controllers/Admin/Menu.php:103
+#: app/Controllers/Admin/Menu.php:209
+#: app/Controllers/Common/Convert_Avif.php:130
+#: app/Controllers/Common/Convert_Avif.php:143
+#: app/Controllers/Common/Convert_Avif.php:147
+#: build/admin.js:13
+msgid "Convert to AVIF"
+msgstr "转换为 AVIF"
+
+#: app/Controllers/Admin/Menu.php:107
+#: app/Controllers/Admin/Menu.php:215
+#: build/admin.js:13
+msgid "Trashed Images"
+msgstr "回收站图片"
+
+#: app/Controllers/Admin/Menu.php:111
+#: app/Controllers/Admin/Menu.php:221
+#: build/admin.js:13
+msgid "Settings"
+msgstr "设置"
+
+#: app/Controllers/Admin/Menu.php:116
+#: app/Controllers/Admin/Menu.php:226
+#: build/admin.js:13
+msgid "Pro"
+msgstr "Pro"
+
+#: app/Controllers/Admin/Menu.php:117
+msgid "World Cup 48% Off"
+msgstr "世界杯 48% 优惠"
+
+#: app/Controllers/Admin/Menu.php:152
+msgid "Loading.."
+msgstr "加载中……"
+
+#: app/Controllers/Common/API.php:63
+msgid "Array of disabled size names"
+msgstr "已禁用尺寸名称的数组"
+
+#: app/Controllers/Common/API.php:83
+msgid "Offset for pagination"
+msgstr "分页偏移量"
+
+#: app/Controllers/Common/API.php:88
+#: app/Controllers/Common/API.php:206
+msgid "Number of images to process"
+msgstr "要处理的图片数量"
+
+#: app/Controllers/Common/API.php:93
+msgid "Previously deleted thumbnails count"
+msgstr "先前删除的缩略图数量"
+
+#: app/Controllers/Common/API.php:98
+msgid "Previously created thumbnails count"
+msgstr "先前创建的缩略图数量"
+
+#: app/Controllers/Common/API.php:115
+#: app/Controllers/Common/API.php:233
+msgid "Batch size for background processing"
+msgstr "后台处理的批次大小"
+
+#: app/Controllers/Common/API.php:142
+msgid "Attachment ID to regenerate"
+msgstr "要重新生成的附件 ID"
+
+#: app/Controllers/Common/API.php:201
+msgid "Last processed attachment ID (pagination cursor)"
+msgstr "上次处理的附件 ID（分页游标）"
+
+#: app/Controllers/Common/API.php:211
+msgid "Cumulative processed count"
+msgstr "累计处理数量"
+
+#: app/Controllers/Common/API.php:216
+msgid "Cumulative converted count"
+msgstr "累计转换数量"
+
+#: app/Controllers/Common/API.php:260
+#: app/Controllers/Common/API.php:280
+msgid "Attachment ID to convert"
+msgstr "要转换的附件 ID"
+
+#: app/Controllers/Common/Convert_Avif.php:189
+msgid "This image is already an AVIF file."
+msgstr "此图片已经是 AVIF 文件。"
+
+#. translators: 1: estimated memory needed in MB, 2: current PHP memory limit in MB
+#: app/Controllers/Common/Convert_Avif.php:220
+#: app/Controllers/Common/Convert_Webp.php:206
+msgid "Image is too large to convert within the server memory limit (needs ~%1$d MB, limit %2$d MB). Increase PHP memory_limit or WP_MAX_MEMORY_LIMIT and try again."
+msgstr "图片过大，无法在服务器内存限制内完成转换（需要约 %1$d MB，限制为 %2$d MB）。请提高 PHP memory_limit 或 WP_MAX_MEMORY_LIMIT 后重试。"
+
+#. translators: %s: underlying image-editor error message
+#: app/Controllers/Common/Convert_Avif.php:234
+#: app/Controllers/Common/Convert_Webp.php:220
+msgid "No image editor is available to process this file (%s)."
+msgstr "没有可用的图片编辑器来处理此文件（%s）。"
+
+#. translators: %s: underlying image-editor error message
+#: app/Controllers/Common/Convert_Avif.php:246
+msgid "Could not write the AVIF file (%s)."
+msgstr "无法写入 AVIF 文件（%s）。"
+
+#: app/Controllers/Common/Convert_Avif.php:264
+msgid "The server image library could not produce an AVIF file (AVIF output is not supported here)."
+msgstr "服务器图片库无法生成 AVIF 文件（此处不支持 AVIF 输出）。"
+
+#: app/Controllers/Common/Convert_Webp.php:177
+msgid "This image is already a WebP file."
+msgstr "此图片已经是 WebP 文件。"
+
+#. translators: %s: underlying image-editor error message
+#: app/Controllers/Common/Convert_Webp.php:232
+msgid "Could not write the WebP file (%s)."
+msgstr "无法写入 WebP 文件（%s）。"
+
+#: app/Controllers/Common/Convert_Webp.php:247
+msgid "The server image library could not produce a WebP file (WebP output is not supported here)."
+msgstr "服务器图片库无法生成 WebP 文件（此处不支持 WebP 输出）。"
+
+#: app/Controllers/Common/Hotlink_Protection.php:101
+msgid "Hotlinking not allowed."
+msgstr "不允许盗链。"
+
+#. translators: %1$s: maximum allowed image size, %2$s: size unit (KB or MB)
+#: app/Controllers/Common/Image_Max_Size.php:37
+msgid "[ ThumbPress Alert ] Image exceeds the maximum allowed size of %1$s %2$s."
+msgstr "[ ThumbPress 警告 ] 图片超过了允许的最大大小 %1$s %2$s。"
+
+#. translators: %1$s: maximum allowed image width in pixels, %2$s: maximum allowed image height in pixels
+#: app/Controllers/Common/Image_Max_Size.php:52
+msgid "[ ThumbPress Alert ] Image exceeds the maximum allowed resolution of %1$sx%2$s pixels."
+msgstr "[ ThumbPress 警告 ] 图片超过了允许的最大分辨率 %1$sx%2$s 像素。"
+
+#: app/Controllers/Common/Media_Buttons.php:68
+msgid "Image Compression is a Pro feature"
+msgstr "图片压缩是 Pro 功能"
+
+#: app/Controllers/Common/Media_Buttons.php:69
+msgid "Reduce file sizes without losing visual quality. Compress images in bulk or one at a time to speed up your site."
+msgstr "在不损失视觉质量的前提下减小文件体积。批量或逐张压缩图片，加快您的站点速度。"
+
+#: app/Controllers/Common/Media_Buttons.php:70
+msgid "Upgrade to compress images"
+msgstr "升级以压缩图片"
+
+#: app/Controllers/Common/Media_Buttons.php:73
+msgid "Image Replacement is a Pro feature"
+msgstr "图片替换是 Pro 功能"
+
+#: app/Controllers/Common/Media_Buttons.php:74
+msgid "Swap out images without losing their metadata or breaking existing links. Drop in a new file and ThumbPress handles the rest."
+msgstr "替换图片时不会丢失其元数据或破坏现有链接。只需放入新文件，其余交由 ThumbPress 处理。"
+
+#: app/Controllers/Common/Media_Buttons.php:75
+msgid "Upgrade to replace images"
+msgstr "升级以替换图片"
+
+#: app/Controllers/Common/Media_Buttons.php:78
+msgid "Image Editor is a Pro feature"
+msgstr "图片编辑器是 Pro 功能"
+
+#: app/Controllers/Common/Media_Buttons.php:79
+msgid "Crop, rotate, flip and adjust images directly inside WordPress — no external tools needed."
+msgstr "直接在 WordPress 中裁剪、旋转、翻转和调整图片——无需任何外部工具。"
+
+#: app/Controllers/Common/Media_Buttons.php:80
+msgid "Upgrade to edit images"
+msgstr "升级以编辑图片"
+
+#: app/Controllers/Common/Media_Buttons.php:109
+msgid "Select Option"
+msgstr "选择选项"
+
+#: app/Controllers/Common/Media_Buttons.php:120
+msgid "Compress"
+msgstr "压缩"
+
+#: app/Controllers/Common/Media_Buttons.php:124
+msgid "Compress Image"
+msgstr "压缩图片"
+
+#: app/Controllers/Common/Media_Buttons.php:143
+#: app/Controllers/Common/Media_Buttons.php:148
+msgid "Replace New File"
+msgstr "替换为新文件"
+
+#: app/Controllers/Common/Media_Buttons.php:169
+msgid "Edit with ThumbPress"
+msgstr "使用 ThumbPress 编辑"
+
+#: app/Controllers/Common/Media_Buttons.php:174
+msgid "Edit Image"
+msgstr "编辑图片"
+
+#: app/Controllers/Common/Media_Buttons.php:193
+#: build/admin.js:1
+msgid "Close"
+msgstr "关闭"
+
+#: app/Controllers/Common/Social_Share.php:41
+#: build/admin.js:13
+msgid "Social Share Image"
+msgstr "社交分享图片"
+
+#: app/Controllers/Common/Social_Share.php:69
+msgid "Facebook Image:"
+msgstr "Facebook 图片："
+
+#: app/Controllers/Common/Social_Share.php:71
+#: app/Controllers/Common/Social_Share.php:82
+#: app/Controllers/Common/Social_Share.php:93
+#: app/Controllers/Common/Social_Share.php:104
+msgid "Upload Image"
+msgstr "上传图片"
+
+#: app/Controllers/Common/Social_Share.php:72
+#: app/Controllers/Common/Social_Share.php:83
+#: app/Controllers/Common/Social_Share.php:94
+#: app/Controllers/Common/Social_Share.php:105
+msgid "Remove Image"
+msgstr "移除图片"
+
+#: app/Controllers/Common/Social_Share.php:80
+msgid "LinkedIn Image:"
+msgstr "LinkedIn 图片："
+
+#: app/Controllers/Common/Social_Share.php:91
+msgid "Twitter Image:"
+msgstr "Twitter 图片："
+
+#: app/Controllers/Common/Social_Share.php:102
+msgid "Pinterest Image:"
+msgstr "Pinterest 图片："
+
+#: app/Controllers/Common/Thumbnails.php:52
+#: app/Controllers/Common/Thumbnails.php:56
+#: build/admin.js:13
+msgid "Regenerate Thumbnails"
+msgstr "重新生成缩略图"
+
+#: app/Helpers/Email.php:76
+msgid "Thumbpress. All rights reserved."
+msgstr "Thumbpress。保留所有权利。"
+
+#: app/Helpers/functions.php:26
+#: build/admin.js:13
+msgid "General"
+msgstr "常规"
+
+#: app/Helpers/functions.php:27
+msgid "General settings"
+msgstr "常规设置"
+
+#: app/Helpers/functions.php:31
+msgid "Pages"
+msgstr "页面"
+
+#: app/Helpers/functions.php:32
+msgid "Page Settings"
+msgstr "页面设置"
+
+#: app/Helpers/functions.php:35
+msgid "Main Pages"
+msgstr "主要页面"
+
+#: app/Helpers/functions.php:36
+msgid "Main Pages Settings"
+msgstr "主要页面设置"
+
+#: app/Helpers/functions.php:41
+msgid "Homepage"
+msgstr "首页"
+
+#: app/Helpers/functions.php:47
+msgid "Landing Page"
+msgstr "落地页"
+
+#: app/Helpers/functions.php:57
+msgid "Email"
+msgstr "电子邮件"
+
+#: app/Helpers/functions.php:58
+msgid "Email settings"
+msgstr "电子邮件设置"
+
+#: app/Helpers/functions.php:62
+msgid "New Ticket"
+msgstr "新工单"
+
+#: app/Helpers/functions.php:63
+msgid "New Ticket Notification"
+msgstr "新工单通知"
+
+#: app/Helpers/functions.php:66
+msgid "Agent Email"
+msgstr "客服邮件"
+
+#: app/Helpers/functions.php:67
+msgid "Email to an Agent"
+msgstr "发送给客服的邮件"
+
+#: app/Helpers/functions.php:72
+#: app/Helpers/functions.php:93
+#: app/Helpers/functions.php:120
+msgid "Header"
+msgstr "页眉"
+
+#: app/Helpers/functions.php:77
+#: app/Helpers/functions.php:98
+#: app/Helpers/functions.php:125
+msgid "Subject"
+msgstr "主题"
+
+#: app/Helpers/functions.php:82
+#: app/Helpers/functions.php:103
+#: app/Helpers/functions.php:130
+msgid "Body"
+msgstr "正文"
+
+#: app/Helpers/functions.php:87
+msgid "Client Email"
+msgstr "客户邮件"
+
+#: app/Helpers/functions.php:88
+#: app/Helpers/functions.php:115
+msgid "Email to a Client"
+msgstr "发送给客户的邮件"
+
+#: app/Helpers/functions.php:110
+msgid "Agent Reply"
+msgstr "客服回复"
+
+#: app/Helpers/functions.php:111
+msgid "Agent Reply Notification"
+msgstr "客服回复通知"
+
+#: app/Helpers/functions.php:114
+msgid "Agent Reply Email"
+msgstr "客服回复邮件"
+
+#: app/Helpers/Utility.php:147
+msgid "- Choose a %s -"
+msgstr "- 选择 %s -"
+
+#: build/admin.js:1
+msgid "Days"
+msgstr "天"
+
+#: build/admin.js:1
+msgid "Hrs"
+msgstr "时"
+
+#: build/admin.js:1
+msgid "Min"
+msgstr "分"
+
+#: build/admin.js:1
+msgid "Sec"
+msgstr "秒"
+
+#: build/admin.js:1
+msgid "FIFA World Cup Sale is Live!"
+msgstr "FIFA 世界杯促销进行中！"
+
+#: build/admin.js:1
+msgid "Score up to 48% off ThumbPress Pro during our FIFA World Cup sale. The discount is auto-applied at checkout — grab it before the whistle blows!"
+msgstr "在我们的 FIFA 世界杯促销期间，最高可享 ThumbPress Pro 48% 的优惠。折扣将在结账时自动应用——赶在开赛哨响前抢购吧！"
+
+#: build/admin.js:1
+msgid "Offer expired"
+msgstr "优惠已过期"
+
+#: build/admin.js:1
+msgid "Offer ends July 19"
+msgstr "优惠截止于 7 月 19 日"
+
+#: build/admin.js:1
+msgid "World Cup discount applied!"
+msgstr "世界杯折扣已应用！"
+
+#: build/admin.js:1
+msgid "Your up-to-48% discount is auto-applied at checkout."
+msgstr "您最高 48% 的折扣将在结账时自动应用。"
+
+#: build/admin.js:1
+msgid "Get 48% Off — View Pricing →"
+msgstr "获取 48% 优惠——查看价格 →"
+
+#: build/admin.js:1
+msgid "No thanks, I don't want a discount"
+msgstr "不用了，我不需要折扣"
+
+#: build/admin.js:1
+msgid "Community"
+msgstr "社区"
+
+#: build/admin.js:1
+msgid "Support"
+msgstr "支持"
+
+#: build/admin.js:1
+msgid "Docs"
+msgstr "文档"
+
+#: build/admin.js:1
+#: build/admin.js:13
+msgid "Upgrade to Pro"
+msgstr "升级到 Pro"
+
+#: build/admin.js:1
+msgid "Upgrade to View"
+msgstr "升级以查看"
+
+#. translators: %s is a locale-formatted number.
+#: build/admin.js:3
+msgid "%s%%"
+msgstr "%s%%"
+
+#. translators: %s is a locale-formatted number of bytes.
+#: build/admin.js:5
+msgid "%s B"
+msgstr "%s B"
+
+#. translators: %s is a locale-formatted number of kilobytes.
+#: build/admin.js:7
+msgid "%s KB"
+msgstr "%s KB"
+
+#. translators: %s is a locale-formatted number of megabytes.
+#: build/admin.js:9
+msgid "%s MB"
+msgstr "%s MB"
+
+#. translators: %s is a locale-formatted number of gigabytes.
+#: build/admin.js:11
+msgid "%s GB"
+msgstr "%s GB"
+
+#. translators: %s is a locale-formatted number of terabytes.
+#: build/admin.js:13
+msgid "%s TB"
+msgstr "%s TB"
+
+#: build/admin.js:13
+msgid "Good"
+msgstr "良好"
+
+#: build/admin.js:13
+msgid "Normal"
+msgstr "一般"
+
+#: build/admin.js:13
+msgid "Danger"
+msgstr "危险"
+
+#: build/admin.js:13
+msgid "Overall"
+msgstr "总体"
+
+#: build/admin.js:13
+msgid "Health Score"
+msgstr "健康评分"
+
+#: build/admin.js:13
+msgid "Status:"
+msgstr "状态："
+
+#: build/admin.js:13
+msgid "Quick Facts"
+msgstr "快速概览"
+
+#: build/admin.js:13
+msgid "EasyCommerce promotional notice"
+msgstr "EasyCommerce 推广通知"
+
+#: build/admin.js:13
+msgid "New from the ThumbPress team - Try"
+msgstr "ThumbPress 团队的新作品 - 试用"
+
+#: build/admin.js:13
+msgid "EasyCommerce"
+msgstr "EasyCommerce"
+
+#: build/admin.js:13
+msgid ". A fast, AI-powered way to sell on WordPress."
+msgstr "。一种在 WordPress 上销售的快速、AI 驱动的方式。"
+
+#: build/admin.js:13
+msgid "Learn more"
+msgstr "了解更多"
+
+#: build/admin.js:13
+msgid "Dismiss EasyCommerce notice"
+msgstr "关闭 EasyCommerce 通知"
+
+#: build/admin.js:13
+msgid "Activate License"
+msgstr "激活许可证"
+
+#: build/admin.js:13
+msgid "Image Editor"
+msgstr "图片编辑器"
+
+#: build/admin.js:13
+msgid "Enhance images with filters and adjustments to showcase their best versions."
+msgstr "使用滤镜和调整功能增强图片，展现它们的最佳效果。"
+
+#: build/admin.js:13
+msgid "The built-in Image Editor is a Pro feature"
+msgstr "内置图片编辑器是 Pro 功能"
+
+#: build/admin.js:13
+msgid "Leaving WordPress just to crop an image breaks your whole workflow. Edit, resize, and re-optimize everything without switching tools."
+msgstr "仅仅为了裁剪一张图片就离开 WordPress 会打断您的整个工作流程。无需切换工具即可编辑、调整大小并重新优化一切。"
+
+#: build/admin.js:13
+msgid "Upgrade to edit images in WordPress"
+msgstr "升级以在 WordPress 中编辑图片"
+
+#: build/admin.js:13
+msgid "Replace Images With New Version"
+msgstr "用新版本替换图片"
+
+#: build/admin.js:13
+msgid "Upload new versions of images and replace the old ones without any issues."
+msgstr "上传图片的新版本并替换旧版本，不会出现任何问题。"
+
+#: build/admin.js:13
+msgid "Replacing Image is a Pro feature"
+msgstr "图片替换是 Pro 功能"
+
+#: build/admin.js:13
+msgid "Outdated images live on more pages than you think. Swap in a new version once, and every page updates instantly."
+msgstr "过时的图片出现在比您想象中更多的页面上。只需替换一次新版本，每个页面都会即时更新。"
+
+#: build/admin.js:13
+msgid "Upgrade to replace images seamlessly"
+msgstr "升级以无缝替换图片"
+
+#: build/admin.js:13
+msgid "Disable Right Click on Image"
+msgstr "禁用图片右键点击"
+
+#: build/admin.js:13
+msgid "Prevent visitors from downloading your images by turning off the right-click option on your website."
+msgstr "通过在您的网站上关闭右键点击选项，防止访客下载您的图片。"
+
+#: build/admin.js:13
+msgid "Image Size Limit"
+msgstr "图片大小限制"
+
+#: build/admin.js:13
+msgid "Set a limit for maximum image upload size."
+msgstr "设置图片上传的最大体积限制。"
+
+#: build/admin.js:13
+msgid "120"
+msgstr "120"
+
+#: build/admin.js:13
+msgid "KB"
+msgstr "KB"
+
+#: build/admin.js:13
+msgid "MB"
+msgstr "MB"
+
+#. translators: %s is the server upload size limit.
+#: build/admin.js:13
+msgid "Server limit: %s"
+msgstr "服务器限制：%s"
+
+#: build/admin.js:13
+msgid "Image Dimension Limit"
+msgstr "图片尺寸限制"
+
+#: build/admin.js:13
+msgid "Set a limit for maximum image upload dimensions (in pixels)."
+msgstr "设置图片上传的最大尺寸限制（以像素为单位）。"
+
+#: build/admin.js:13
+msgid "Height"
+msgstr "高度"
+
+#: build/admin.js:13
+msgid "Width"
+msgstr "宽度"
+
+#: build/admin.js:13
+msgid "Lazy load"
+msgstr "懒加载"
+
+#: build/admin.js:13
+msgid "Load images only when they enter the user's viewport, improving page speed and reducing bandwidth usage."
+msgstr "仅在图片进入用户视口时才加载，从而提升页面速度并减少带宽消耗。"
+
+#: build/admin.js:13
+msgid "Hotlink Protection"
+msgstr "盗链保护"
+
+#: build/admin.js:13
+msgid "Block other websites from embedding your images directly, preventing bandwidth theft from external hotlinking."
+msgstr "阻止其他网站直接嵌入您的图片，防止外部盗链窃取带宽。"
+
+#: build/admin.js:13
+msgid "Auto Set Featured Image"
+msgstr "自动设置特色图片"
+
+#: build/admin.js:13
+msgid "Automatically use the first image in post content as the featured image if none is set."
+msgstr "如果未设置特色图片，则自动使用文章内容中的第一张图片作为特色图片。"
+
+#: build/admin.js:13
+msgid "Settings reset successfully."
+msgstr "设置重置成功。"
+
+#: build/admin.js:13
+msgid "Reset Options"
+msgstr "重置选项"
+
+#: build/admin.js:13
+msgid "Failed to save settings."
+msgstr "保存设置失败。"
+
+#: build/admin.js:13
+msgid "Save Changes"
+msgstr "保存更改"
+
+#: build/admin.js:13
+msgid "No thumbnail sizes found."
+msgstr "未找到缩略图尺寸。"
+
+#. translators: %1$s is the size name, %2$s is the width, %3$s is the height.
+#: build/admin.js:13
+msgid "%1$s (%2$s×%3$s)"
+msgstr "%1$s（%2$s×%3$s）"
+
+#: build/admin.js:13
+msgid "Enabled - This size will be generated for new uploads."
+msgstr "已启用 - 将为新上传的图片生成此尺寸。"
+
+#: build/admin.js:13
+msgid "Disabled - This size will not be generated for new uploads."
+msgstr "已禁用 - 不会为新上传的图片生成此尺寸。"
+
+#: build/admin.js:13
+msgid "This is the original image size and cannot be disabled."
+msgstr "这是原始图片尺寸，无法禁用。"
+
+#: build/admin.js:13
+msgid "Compress during upload"
+msgstr "上传时压缩"
+
+#: build/admin.js:13
+msgid "Enable compression during upload to reduce file size and improve speed."
+msgstr "启用上传时压缩，以减小文件体积并提升速度。"
+
+#: build/admin.js:13
+msgid "Compression Percentage"
+msgstr "压缩百分比"
+
+#: build/admin.js:13
+msgid "A measure of how much a file's size is reduced after compression."
+msgstr "衡量文件在压缩后体积减小程度的指标。"
+
+#: build/admin.js:13
+msgid "Single Image Compress"
+msgstr "单张图片压缩"
+
+#: build/admin.js:13
+msgid "Show the Optimize button on individual media attachments."
+msgstr "在单个媒体附件上显示“优化”按钮。"
+
+#: build/admin.js:13
+msgid "Bulk Image Compression is a Pro feature"
+msgstr "批量图片压缩是 Pro 功能"
+
+#: build/admin.js:13
+msgid "Heavy images are silently costing you visitors. Compress your entire library in one click with absolutely no visible quality loss."
+msgstr "过大的图片正在悄悄让您流失访客。一键压缩整个媒体库，完全没有可见的质量损失。"
+
+#: build/admin.js:13
+msgid "Upgrade for a faster website"
+msgstr "升级以获得更快的网站"
+
+#: build/admin.js:13
+msgid "Prevent Duplicate Upload"
+msgstr "阻止重复上传"
+
+#: build/admin.js:13
+msgid "Block uploading images that already exist in your media library"
+msgstr "阻止上传您媒体库中已存在的图片"
+
+#: build/admin.js:13
+msgid "Duplicate Image Detection is a Pro feature"
+msgstr "重复图片检测是 Pro 功能"
+
+#: build/admin.js:13
+msgid "Duplicate images quietly pile up and bloat your media library. Find and remove every copy you didn't even know existed."
+msgstr "重复图片会悄然堆积并使您的媒体库变得臃肿。找出并移除每一个您甚至不知道存在的副本。"
+
+#: build/admin.js:13
+msgid "Upgrade to detect duplicate images"
+msgstr "升级以检测重复图片"
+
+#: build/admin.js:13
+msgid "Convert during upload"
+msgstr "上传时转换"
+
+#: build/admin.js:13
+msgid "Automatically convert images to WebP when they are uploaded."
+msgstr "在图片上传时自动将其转换为 WebP。"
+
+#: build/admin.js:13
+msgid "Single image conversion"
+msgstr "单张图片转换"
+
+#: build/admin.js:13
+msgid "Convert individual images to WebP directly from the media library."
+msgstr "直接从媒体库中将单张图片转换为 WebP。"
+
+#: build/admin.js:13
+msgid "Automatically convert images to AVIF when they are uploaded."
+msgstr "在图片上传时自动将其转换为 AVIF。"
+
+#: build/admin.js:13
+msgid "Convert individual images to AVIF directly from the media library."
+msgstr "直接从媒体库中将单张图片转换为 AVIF。"
+
+#: build/admin.js:13
+msgid "Facebook"
+msgstr "Facebook"
+
+#: build/admin.js:13
+msgid "Generate optimized share images for Facebook posts"
+msgstr "为 Facebook 帖子生成优化的分享图片"
+
+#: build/admin.js:13
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+#: build/admin.js:13
+msgid "Create professional share images for LinkedIn"
+msgstr "为 LinkedIn 创建专业的分享图片"
+
+#: build/admin.js:13
+msgid "Twitter"
+msgstr "Twitter"
+
+#: build/admin.js:13
+msgid "Optimize share images for Twitter cards"
+msgstr "为 Twitter 卡片优化分享图片"
+
+#: build/admin.js:13
+msgid "Pinterest"
+msgstr "Pinterest"
+
+#: build/admin.js:13
+msgid "Generate Pinterest-optimized pin images"
+msgstr "生成针对 Pinterest 优化的 Pin 图片"
+
+#: build/admin.js:13
+msgid "Enabled"
+msgstr "已启用"
+
+#: build/admin.js:13
+msgid "Disabled"
+msgstr "已禁用"
+
+#: build/admin.js:13
+msgid "Failed to load debug info."
+msgstr "加载调试信息失败。"
+
+#: build/admin.js:13
+msgid "No data."
+msgstr "无数据。"
+
+#: build/admin.js:13
+msgid "System"
+msgstr "系统"
+
+#: build/admin.js:13
+msgid "WordPress"
+msgstr "WordPress"
+
+#: build/admin.js:13
+msgid "PHP"
+msgstr "PHP"
+
+#: build/admin.js:13
+msgid "MySQL"
+msgstr "MySQL"
+
+#: build/admin.js:13
+msgid "Server"
+msgstr "服务器"
+
+#: build/admin.js:13
+msgid "PHP Memory Limit"
+msgstr "PHP 内存限制"
+
+#: build/admin.js:13
+msgid "WP Memory Limit"
+msgstr "WP 内存限制"
+
+#: build/admin.js:13
+msgid "Max Execution Time"
+msgstr "最大执行时间"
+
+#. translators: %s is the maximum execution time in seconds.
+#: build/admin.js:13
+msgid "%ss"
+msgstr "%s 秒"
+
+#: build/admin.js:13
+msgid "Upload Max Filesize"
+msgstr "最大上传文件大小"
+
+#: build/admin.js:13
+msgid "Total Images"
+msgstr "图片总数"
+
+#: build/admin.js:13
+msgid "WordPress Config"
+msgstr "WordPress 配置"
+
+#: build/admin.js:13
+msgid "WP_DEBUG"
+msgstr "WP_DEBUG"
+
+#: build/admin.js:13
+msgid "WP_DEBUG_DISPLAY"
+msgstr "WP_DEBUG_DISPLAY"
+
+#: build/admin.js:13
+msgid "WP_DEBUG_LOG"
+msgstr "WP_DEBUG_LOG"
+
+#: build/admin.js:13
+msgid "Version"
+msgstr "版本"
+
+#: build/admin.js:13
+msgid "Pro Plugin"
+msgstr "Pro 插件"
+
+#. translators: %s is a version number.
+#: build/admin.js:13
+msgid "v%s"
+msgstr "v%s"
+
+#: build/admin.js:13
+msgid "License Status"
+msgstr "许可证状态"
+
+#: build/admin.js:13
+msgid "Lazy Load"
+msgstr "懒加载"
+
+#: build/admin.js:13
+msgid "Right-Click Disable"
+msgstr "禁用右键点击"
+
+#: build/admin.js:13
+msgid "WebP on Upload"
+msgstr "上传时转 WebP"
+
+#: build/admin.js:13
+msgid "AVIF on Upload"
+msgstr "上传时转 AVIF"
+
+#: build/admin.js:13
+msgid "Max Image Size"
+msgstr "最大图片大小"
+
+#: build/admin.js:13
+msgid "Max Image Dimensions"
+msgstr "最大图片尺寸"
+
+#: build/admin.js:13
+msgid "Disabled Sizes"
+msgstr "已禁用的尺寸"
+
+#: build/admin.js:13
+msgid "None"
+msgstr "无"
+
+#: build/admin.js:13
+msgid "Active Theme"
+msgstr "当前主题"
+
+#: build/admin.js:13
+msgid "Name"
+msgstr "名称"
+
+#: build/admin.js:13
+msgid "Parent Theme"
+msgstr "父主题"
+
+#. translators: %1$s is the parent theme name, %2$s is its version.
+#: build/admin.js:13
+msgid "%1$s v%2$s"
+msgstr "%1$s v%2$s"
+
+#. translators: %d is the number of active plugins.
+#: build/admin.js:13
+msgid "Active Plugin (%d)"
+msgid_plural "Active Plugins (%d)"
+msgstr[0] "启用的插件（%d）"
+
+#: build/admin.js:13
+msgid "Your Media Library is Silently Slowing Down Your Site."
+msgstr "您的媒体库正在悄悄拖慢您的站点。"
+
+#: build/admin.js:13
+msgid "Unused images, oversized files, and missing optimization pile up with every upload. Pro finds them all and fixes them — without touching a single file manually."
+msgstr "未使用的图片、过大的文件以及缺失的优化会随着每次上传不断堆积。Pro 会全部找出并修复它们——无需手动处理任何一个文件。"
+
+#: build/admin.js:13
+msgid "Price starts from $5/month."
+msgstr "价格低至 $5/月。"
+
+#: build/admin.js:13
+msgid "ThumbPress modules"
+msgstr "ThumbPress 模块"
+
+#: build/admin.js:13
+msgid "What Pro Fixes Today"
+msgstr "Pro 现在能解决什么"
+
+#: build/admin.js:13
+msgid "Every Pro feature is designed to solve a specific real problem. Here's what exactly an upgrade unlocks."
+msgstr "每一项 Pro 功能都旨在解决一个具体的实际问题。以下正是升级后能解锁的内容。"
+
+#. translators: %d is the number of images found.
+#: build/admin.js:13
+msgid "%d image found!"
+msgid_plural "%d images found!"
+msgstr[0] "找到 %d 张图片！"
+
+#: build/admin.js:13
+msgid "Detect Large Images"
+msgstr "检测大图片"
+
+#: build/admin.js:13
+msgid "Scan your media library and find oversized images instantly. See exactly which files are bloating your pages and fix them before they cost you rankings."
+msgstr "扫描您的媒体库并即时找出过大的图片。准确了解哪些文件正在拖累您的页面，并在它们损害排名之前加以修复。"
+
+#: build/admin.js:13
+msgid "Detect Now"
+msgstr "立即检测"
+
+#: build/admin.js:13
+msgid "Delete Unused Images"
+msgstr "删除未使用的图片"
+
+#: build/admin.js:13
+msgid "Scan your media library and find unused images instantly. See exactly which files are taking up space and delete them to reclaim server space."
+msgstr "扫描您的媒体库并即时找出未使用的图片。准确了解哪些文件占用了空间，并删除它们以回收服务器空间。"
+
+#: build/admin.js:13
+msgid "Delete Now"
+msgstr "立即删除"
+
+#: build/admin.js:13
+msgid "Compress Large Images"
+msgstr "压缩大图片"
+
+#: build/admin.js:13
+msgid "Large images are costing you speed. Optimize them without visible loss and deliver a faster, smoother browsing experience."
+msgstr "大图片正在拖慢您的速度。在没有可见损失的情况下优化它们，带来更快、更流畅的浏览体验。"
+
+#: build/admin.js:13
+msgid "Compress Now"
+msgstr "立即压缩"
+
+#: build/admin.js:13
+msgid "Bulk Convert to AVIF"
+msgstr "批量转换为 AVIF"
+
+#: build/admin.js:13
+msgid "Your images shouldn't be stuck in the past. Convert them all to AVIF - the format the modern web is built on - in a single click."
+msgstr "您的图片不应停留在过去。一键将它们全部转换为 AVIF——现代网络所依托的格式。"
+
+#: build/admin.js:13
+msgid "Convert Now"
+msgstr "立即转换"
+
+#: build/admin.js:13
+msgid "Crop, resize, or tweak any image right inside your WordPress dashboard. No need to re-upload or touch a third-party tool."
+msgstr "直接在您的 WordPress 仪表盘中裁剪、调整大小或微调任何图片。无需重新上传或使用任何第三方工具。"
+
+#: build/admin.js:13
+msgid "Edit Now"
+msgstr "立即编辑"
+
+#: build/admin.js:13
+msgid "Merge Duplicate Images"
+msgstr "合并重复图片"
+
+#: build/admin.js:13
+msgid "Find images that have been uploaded more than once. Clean up the clutter and stop wasting space on files you already have."
+msgstr "找出被多次上传的图片。清理杂乱，不再为您已拥有的文件浪费空间。"
+
+#: build/admin.js:13
+msgid "Merge Now"
+msgstr "立即合并"
+
+#: build/admin.js:13
+msgid "IMAGE CONTROL"
+msgstr "图片控制"
+
+#: build/admin.js:13
+msgid "Disable Thumbnails"
+msgstr "禁用缩略图"
+
+#: build/admin.js:13
+msgid "Set Image Upload Limit"
+msgstr "设置图片上传限制"
+
+#: build/admin.js:13
+msgid "STORAGE & CLEANUP"
+msgstr "存储与清理"
+
+#: build/admin.js:13
+msgid "Find Unused Images"
+msgstr "查找未使用的图片"
+
+#: build/admin.js:13
+msgid "Find Duplicate Images"
+msgstr "查找重复图片"
+
+#: build/admin.js:13
+msgid "MEDIA MANAGEMENT"
+msgstr "媒体管理"
+
+#: build/admin.js:13
+msgid "Replace Images"
+msgstr "替换图片"
+
+#: build/admin.js:13
+msgid "Social Media Thumbnails"
+msgstr "社交媒体缩略图"
+
+#: build/admin.js:13
+msgid "Free vs. Pro Side by Side"
+msgstr "免费版与 Pro 版并排对比"
+
+#: build/admin.js:13
+msgid "See a clear comparison between your current version and the Pro version you're about to get."
+msgstr "清晰对比您当前的版本与即将获得的 Pro 版本。"
+
+#: build/admin.js:13
+msgid "Features"
+msgstr "功能"
+
+#: build/admin.js:13
+msgid "Free"
+msgstr "免费版"
+
+#: build/admin.js:13
+msgid "Future uploads only"
+msgstr "仅限日后上传"
+
+#: build/admin.js:13
+msgid "Fully unlocked"
+msgstr "完全解锁"
+
+#: build/admin.js:13
+msgid "Best Value"
+msgstr "超值之选"
+
+#: build/admin.js:13
+msgid "/ Month"
+msgstr "/ 月"
+
+#: build/admin.js:13
+msgid "/ Lifetime"
+msgstr "/ 终身"
+
+#. translators: %s is the total yearly price.
+#: build/admin.js:13
+msgid "Billed annually. You pay %s today"
+msgstr "按年计费。您今日支付 %s"
+
+#: build/admin.js:13
+msgid "Purchase"
+msgstr "购买"
+
+#: build/admin.js:13
+msgid "Personal"
+msgstr "个人版"
+
+#. translators: %d is the discount percentage.
+#: build/admin.js:13
+msgid "%d%% OFF"
+msgstr "%d%% 优惠"
+
+#: build/admin.js:13
+msgid "1 Site"
+msgstr "1 个站点"
+
+#: build/admin.js:13
+msgid "1 Year Support"
+msgstr "1 年支持"
+
+#: build/admin.js:13
+msgid "All Features Included"
+msgstr "包含所有功能"
+
+#: build/admin.js:13
+msgid "Professional"
+msgstr "专业版"
+
+#: build/admin.js:13
+msgid "5 Sites"
+msgstr "5 个站点"
+
+#: build/admin.js:13
+msgid "Agency"
+msgstr "代理版"
+
+#: build/admin.js:13
+msgid "Unlimited Sites"
+msgstr "无限站点"
+
+#: build/admin.js:13
+msgid "Lifetime Support"
+msgstr "终身支持"
+
+#: build/admin.js:13
+msgid "ThumbPress Pro Pricing"
+msgstr "ThumbPress Pro 价格"
+
+#: build/admin.js:13
+msgid "Every plan includes the full set of Pro features. Just pick how many sites you need to cover."
+msgstr "每个套餐都包含完整的 Pro 功能。只需选择您需要覆盖的站点数量即可。"
+
+#: build/admin.js:13
+msgid "Yearly"
+msgstr "按年"
+
+#: build/admin.js:13
+msgid "Lifetime"
+msgstr "终身"
+
+#: build/admin.js:13
+msgid "30-day money back guarantee"
+msgstr "30 天退款保证"
+
+#: build/admin.js:13
+msgid "Access future features for the subscription period"
+msgstr "在订阅期内可使用未来推出的功能"
+
+#: build/admin.js:13
+msgid "reviewer"
+msgstr "评论者"
+
+#: build/admin.js:13
+msgid "This saved me money when I realised I was about to exceed my host’s image allowance, enabling me to wipe out excess duplicate images."
+msgstr "当我意识到自己即将超出主机的图片配额时，它为我省了钱，让我得以清除多余的重复图片。"
+
+#: build/admin.js:13
+msgid "At the moment I’m using it to resize my pictures, I see a lot of things to use in the future to keep the site smaller then it was. So far it’s working fine and the one question I had was answered right away!! Keep up the good work!!!"
+msgstr "目前我用它来调整图片大小，我看到未来还有很多可用之处，能让站点比以前更精简。到目前为止运行良好，我唯一的问题也立刻得到了解答！！继续加油！！！"
+
+#: build/admin.js:13
+msgid "This plugin is extremely useful, and a must for sites with a lot of images. I had a problem with activation of the Pro version, and the support team resolved the issue quickly and without fuss."
+msgstr "这个插件非常有用，对于图片众多的站点来说是必备之选。我在激活 Pro 版本时遇到了问题，支持团队迅速且利落地解决了它。"
+
+#: build/admin.js:13
+msgid "Trusted by 30,000+ WordPress Users Just Like You"
+msgstr "深受 30,000 多位像您一样的 WordPress 用户信赖"
+
+#: build/admin.js:13
+msgid "What image formats does ThumbPress convert?"
+msgstr "ThumbPress 支持转换哪些图片格式？"
+
+#: build/admin.js:13
+msgid "Free version converts images to WebP (25-35% smaller files). Pro adds AVIF conversion (50% smaller than WebP) plus intelligent compression for all formats. Both reduce file size without visible quality loss, dramatically improving site speed and lowering bandwidth costs."
+msgstr "免费版可将图片转换为 WebP（文件缩小 25-35%）。Pro 版增加了 AVIF 转换（比 WebP 再小 50%），以及针对所有格式的智能压缩。两者都能在没有可见质量损失的情况下减小文件体积，大幅提升站点速度并降低带宽成本。"
+
+#: build/admin.js:13
+msgid "How much can I save on storage and bandwidth?"
+msgstr "我在存储和带宽上能节省多少？"
+
+#: build/admin.js:13
+msgid "Most sites save 30-60% of image storage. WebP reduces files by 25-35%, AVIF by 50% more than WebP. A typical site with 5,000 images saves 50-100GB. Smaller images also cut bandwidth costs and improve Core Web Vitals scores for better SEO rankings."
+msgstr "大多数站点可节省 30-60% 的图片存储空间。WebP 可将文件缩小 25-35%，AVIF 比 WebP 再小 50%。一个拥有 5,000 张图片的典型站点可节省 50-100GB。更小的图片还能降低带宽成本，并提升 Core Web Vitals 评分，从而获得更好的 SEO 排名。"
+
+#: build/admin.js:13
+msgid "What's the difference between Free and Pro?"
+msgstr "免费版和 Pro 版有什么区别？"
+
+#: build/admin.js:13
+msgid "Free: Basic optimization (WebP, regenerate thumbnails). Pro: Advanced detection (find unused images, duplicates, oversized files), bulk compression, AVIF conversion, one-click automation. Best for sites with hundreds or thousands of images where optimization pays for itself."
+msgstr "免费版：基础优化（WebP、重新生成缩略图）。Pro 版：高级检测（查找未使用的图片、重复图片、过大文件）、批量压缩、AVIF 转换、一键自动化。最适合拥有成百上千张图片的站点，优化带来的收益足以物有所值。"
+
+#: build/admin.js:13
+msgid "How does pricing work? Is there a trial?"
+msgstr "价格如何计算？有试用吗？"
+
+#: build/admin.js:13
+msgid "No hidden fees or surprise renewals - renewal costs the same as initial purchase. Free version is your trial. Test WebP conversion and regeneration risk-free. Upgrade anytime if you need Pro features. 30-day money-back guarantee on all paid plans."
+msgstr "没有隐藏费用，也没有意外的续费——续费价格与首次购买相同。免费版就是您的试用。零风险测试 WebP 转换和缩略图重新生成。如果需要 Pro 功能可随时升级。所有付费套餐均享 30 天退款保证。"
+
+#: build/admin.js:13
+msgid "Can I use Pro on multiple sites? How many?"
+msgstr "我可以在多个站点上使用 Pro 吗？可以用在几个站点？"
+
+#: build/admin.js:13
+msgid "Yes. Professional plan covers up to 5 sites. Agency plan covers unlimited. Perfect for freelancers and agencies managing multiple client sites. Licensing is per-plan, not per-site."
+msgstr "可以。专业版套餐最多覆盖 5 个站点，代理版套餐覆盖无限站点。非常适合管理多个客户站点的自由职业者和代理机构。授权按套餐计算，而非按站点计算。"
+
+#: build/admin.js:13
+msgid "Is my media library safe? Will images be deleted automatically?"
+msgstr "我的媒体库安全吗？图片会被自动删除吗？"
+
+#: build/admin.js:13
+msgid "Completely safe. ThumbPress shows you exactly what it found and requires your approval before any action. Nothing is ever deleted automatically. Unused images, duplicates, and large files are flagged for review - you decide what to remove."
+msgstr "完全安全。ThumbPress 会准确地向您展示它找到的内容，并在执行任何操作前征得您的同意。任何内容都不会被自动删除。未使用的图片、重复图片和大文件都会被标记以供审查——由您决定移除哪些。"
+
+#: build/admin.js:13
+msgid "What if it doesn't deliver results or doesn't work on my site?"
+msgstr "如果它没有效果或在我的站点上无法运行怎么办？"
+
+#: build/admin.js:13
+msgid "100% money-back within 30 days, no questions asked. Our team provides setup assistance to ensure it works perfectly. We also stand behind the results - if optimization doesn't improve your metrics, we refund immediately."
+msgstr "30 天内 100% 退款，无需任何理由。我们的团队会提供设置协助，确保它完美运行。我们也对效果负责——如果优化没有改善您的各项指标，我们会立即退款。"
+
+#: build/admin.js:13
+msgid "Is it compatible with WooCommerce, Elementor, and my theme?"
+msgstr "它与 WooCommerce、Elementor 以及我的主题兼容吗？"
+
+#: build/admin.js:13
+msgid "Yes. ThumbPress works with WooCommerce, Gutenberg, Elementor, Divi, and all major themes. It operates at the WordPress media layer, not inside specific plugins, so compatibility is universal."
+msgstr "兼容。ThumbPress 可与 WooCommerce、Gutenberg、Elementor、Divi 以及所有主流主题配合使用。它在 WordPress 媒体层运行，而非特定插件内部，因此具备通用的兼容性。"
+
+#: build/admin.js:13
+msgid "How long does bulk processing take? Will it slow my site?"
+msgstr "批量处理需要多长时间？会拖慢我的站点吗？"
+
+#: build/admin.js:13
+msgid "All heavy operations run in the background - zero impact on your site. Most sites process 500-1000 (or more) images per hour depending on hosting. Background processing handles thousands overnight. Your dashboard and frontend stay fast."
+msgstr "所有繁重操作都在后台运行——对您的站点零影响。大多数站点每小时可处理 500-1000 张（或更多）图片，具体取决于主机性能。后台处理可在一夜之间处理数千张图片。您的仪表盘和前端始终保持流畅。"
+
+#: build/admin.js:13
+msgid "Do I get support? What if I need help implementing?"
+msgstr "我能获得支持吗？如果我在实施时需要帮助怎么办？"
+
+#: build/admin.js:13
+msgid "All customers get support with 24-hour response time. Professional and Agency plans include priority support. Our team helps with setup, troubleshooting, and optimization recommendations to maximize your results."
+msgstr "所有客户都能获得 24 小时响应的支持。专业版和代理版套餐包含优先支持。我们的团队会协助您进行设置、故障排查以及优化建议，帮助您获得最大化的效果。"
+
+#: build/admin.js:13
+msgid "Frequently Asked Questions"
+msgstr "常见问题"
+
+#: build/admin.js:13
+msgid "Ready to take control of your Images?"
+msgstr "准备好掌控您的图片了吗？"
+
+#: build/admin.js:13
+msgid "Join 30,000+ users who manage their media smarter with ThumbPress Pro"
+msgstr "加入 30,000 多位用户，借助 ThumbPress Pro 更智能地管理媒体"
+
+#: build/admin.js:13
+msgid "In media library"
+msgstr "位于媒体库中"
+
+#: build/admin.js:13
+msgid "Total Thumbnails"
+msgstr "缩略图总数"
+
+#: build/admin.js:13
+msgid "Thumbnails found"
+msgstr "找到的缩略图"
+
+#: build/admin.js:13
+msgid "Unoptimized Images"
+msgstr "未优化的图片"
+
+#: build/admin.js:13
+msgid "Images yet to be fixed"
+msgstr "尚待修复的图片"
+
+#: build/admin.js:13
+msgid "Space Saved"
+msgstr "已节省的空间"
+
+#: build/admin.js:13
+msgid "Worth of space saved"
+msgstr "节省的空间量"
+
+#: build/admin.js:13
+msgid "Images (over 1 MB)"
+msgstr "图片（超过 1 MB）"
+
+#: build/admin.js:13
+msgid "Upgrade to Compress"
+msgstr "升级以压缩"
+
+#: build/admin.js:13
+msgid "Unattached images"
+msgstr "未附加的图片"
+
+#: build/admin.js:13
+msgid "Uncompressed Images"
+msgstr "未压缩的图片"
+
+#: build/admin.js:13
+msgid "Images need compression"
+msgstr "需要压缩的图片"
+
+#: build/admin.js:13
+msgid "Duplicate images found"
+msgstr "找到的重复图片"
+
+#: build/admin.js:13
+msgid "Upgrade to Merge"
+msgstr "升级以合并"
+
+#: build/admin.js:13
+msgid "Non-AVIF images found"
+msgstr "找到的非 AVIF 图片"
+
+#: build/admin.js:13
+msgid "Upgrade to Convert"
+msgstr "升级以转换"
+
+#: build/admin.js:13
+msgid "Non-WebP images found"
+msgstr "找到的非 WebP 图片"
+
+#: build/admin.js:13
+msgid "Thumbnail Disabled"
+msgstr "已禁用的缩略图"
+
+#. translators: %1$s is the number of disabled sizes, %2$s is the total number of sizes.
+#: build/admin.js:13
+msgid "%1$s/%2$s"
+msgstr "%1$s/%2$s"
+
+#: build/admin.js:13
+msgid "These sizes won't be generated"
+msgstr "这些尺寸将不会被生成"
+
+#: build/admin.js:13
+msgid "Lazy Loading"
+msgstr "懒加载"
+
+#: build/admin.js:13
+msgid "Active"
+msgstr "已启用"
+
+#: build/admin.js:13
+msgid "Inactive"
+msgstr "未启用"
+
+#. translators: %s is the lazy-load status (On or Off).
+#: build/admin.js:13
+msgid "Status: %s"
+msgstr "状态：%s"
+
+#: build/admin.js:13
+msgid "On"
+msgstr "开"
+
+#: build/admin.js:13
+msgid "Off"
+msgstr "关"
+
+#: build/admin.js:13
+msgid "Regenerate All Thumbnails"
+msgstr "重新生成所有缩略图"
+
+#: build/admin.js:13
+msgid "Broken thumbnails hurt layouts and lose visitors. Regenerate once - every image across your site snaps back to the perfect size and crop."
+msgstr "损坏的缩略图会破坏布局并流失访客。只需重新生成一次——您站点上的每张图片都会恢复到完美的尺寸和裁剪。"
+
+#: build/admin.js:13
+msgid "Generate Again"
+msgstr "再次生成"
+
+#: build/admin.js:13
+msgid "No Images Found"
+msgstr "未找到图片"
+
+#: build/admin.js:13
+msgid "Ready to Regenerate Thumbnails?"
+msgstr "准备好重新生成缩略图了吗？"
+
+#: build/admin.js:13
+msgid "There are no images to regenerate."
+msgstr "没有需要重新生成的图片。"
+
+#: build/admin.js:13
+msgid "Click \"Regenerate Now\" to create fresh thumbnails for all images. Configure your thumbnail sizes in "
+msgstr "点击“立即重新生成”，为所有图片生成全新的缩略图。可在此配置缩略图尺寸："
+
+#: build/admin.js:13
+msgid "settings"
+msgstr "设置"
+
+#: build/admin.js:13
+msgid "."
+msgstr "。"
+
+#: build/admin.js:13
+msgid "Chunk Size"
+msgstr "分块大小"
+
+#: build/admin.js:13
+msgid "Number of images processed in a single batch per server request."
+msgstr "每次服务器请求在单个批次中处理的图片数量。"
+
+#: build/admin.js:13
+msgid "e.g. 50"
+msgstr "例如 50"
+
+#: build/admin.js:13
+msgid "Regenerate Now"
+msgstr "立即重新生成"
+
+#: build/admin.js:13
+msgid "Regenerate In Background"
+msgstr "在后台重新生成"
+
+#: build/admin.js:13
+msgid "Image Regeneration Complete"
+msgstr "图片重新生成完成"
+
+#: build/admin.js:13
+msgid "Image Regeneration in Progress"
+msgstr "图片重新生成进行中"
+
+#: build/admin.js:13
+msgid "All thumbnails have been regenerated successfully."
+msgstr "所有缩略图均已成功重新生成。"
+
+#: build/admin.js:13
+msgid "Regenerating media library thumbnails using selected sizes."
+msgstr "正在使用所选尺寸重新生成媒体库缩略图。"
+
+#: build/admin.js:13
+msgid "Cancel"
+msgstr "取消"
+
+#: build/admin.js:13
+msgid "Images Processed"
+msgstr "已处理的图片"
+
+#: build/admin.js:13
+msgid "Images Not Found"
+msgstr "未找到的图片"
+
+#: build/admin.js:13
+msgid "Images Deleted"
+msgstr "已删除的图片"
+
+#: build/admin.js:13
+msgid "Images Created"
+msgstr "已创建的图片"
+
+#: build/admin.js:13
+msgid "Find & Remove Unused Images"
+msgstr "查找并移除未使用的图片"
+
+#: build/admin.js:13
+msgid "You're paying to host images nobody sees. Remove orphaned files and cut hosting costs, backup size, and storage waste instantly."
+msgstr "您正在为无人查看的图片支付托管费用。移除孤立文件，立即削减托管成本、备份体积和存储浪费。"
+
+#: build/admin.js:13
+msgid "Ready to Scan for Unused Images?"
+msgstr "准备好扫描未使用的图片了吗？"
+
+#: build/admin.js:13
+msgid "Click \"Detect Now\" to scan your library across Gutenberg, Elementor, WooCommerce, ACF, and LayerSlider for unused images."
+msgstr "点击“立即检测”，跨 Gutenberg、Elementor、WooCommerce、ACF 和 LayerSlider 扫描您的媒体库以查找未使用的图片。"
+
+#: build/admin.js:13
+msgid "Detect in background"
+msgstr "在后台检测"
+
+#: build/admin.js:13
+msgid "Unused Image Cleanup is a Pro feature"
+msgstr "未使用图片清理是 Pro 功能"
+
+#: build/admin.js:13
+msgid "A bloated library slows uploads, backups, and searches. Remove dead weight and keep your site lean and fast."
+msgstr "臃肿的媒体库会拖慢上传、备份和搜索。移除冗余负担，让您的站点保持精简和快速。"
+
+#: build/admin.js:13
+msgid "Upgrade to clean up unused images"
+msgstr "升级以清理未使用的图片"
+
+#: build/admin.js:13
+msgid "Find & Remove Duplicate Images"
+msgstr "查找并移除重复图片"
+
+#: build/admin.js:13
+msgid "Duplicates inflate storage and bloat backups. Find every redundant file and clean house without risking your originals."
+msgstr "重复文件会膨胀存储并使备份臃肿。找出每一个冗余文件并彻底清理，同时不会危及您的原始文件。"
+
+#: build/admin.js:13
+msgid "Ready to Scan for Duplicates?"
+msgstr "准备好扫描重复图片了吗？"
+
+#: build/admin.js:13
+msgid "Click \"Detect Now\" to scan your library and identify redundant files taking up unnecessary storage space."
+msgstr "点击“立即检测”，扫描您的媒体库并识别占用不必要存储空间的冗余文件。"
+
+#: build/admin.js:13
+msgid "The same file uploaded twice wastes space every day. Surface every duplicate and reclaim storage you didn't know you were losing."
+msgstr "同一个文件上传两次每天都在浪费空间。找出每一个重复项，回收您未曾察觉正在流失的存储空间。"
+
+#: build/admin.js:13
+msgid "One oversized image tanks your page score. Find every offender and fix it before it costs you rankings and revenue."
+msgstr "一张过大的图片就会拖垮您的页面评分。找出每一个问题图片并加以修复，以免它损害您的排名和收入。"
+
+#: build/admin.js:13
+msgid "Ready to Scan for Large Images?"
+msgstr "准备好扫描大图片了吗？"
+
+#: build/admin.js:13
+msgid "Set your file size threshold above and click \"Detect Now\" to find images exceeding your size limit."
+msgstr "在上方设置您的文件大小阈值，然后点击“立即检测”，以查找超出您大小限制的图片。"
+
+#: build/admin.js:13
+msgid "File Size Threshold"
+msgstr "文件大小阈值"
+
+#: build/admin.js:13
+msgid "Images larger than this size will be marked as large. Set the limit to detect oversized images."
+msgstr "大于此大小的图片将被标记为大图片。设置该限制以检测过大的图片。"
+
+#: build/admin.js:13
+msgid "e.g. 1 for 1MB"
+msgstr "例如 1 表示 1MB"
+
+#: build/admin.js:13
+msgid "Large Image Detection is a Pro feature"
+msgstr "大图片检测是 Pro 功能"
+
+#: build/admin.js:13
+msgid "Slow pages bleed traffic. Find the heavy images hurting your Core Web Vitals before they cost you visitors."
+msgstr "缓慢的页面会流失流量。在过大的图片损害您的访客之前，找出正在拖累 Core Web Vitals 的它们。"
+
+#: build/admin.js:13
+msgid "Upgrade to find and fix large images"
+msgstr "升级以查找并修复大图片"
+
+#: build/admin.js:13
+msgid "Compress Your Images"
+msgstr "压缩您的图片"
+
+#: build/admin.js:13
+msgid "Uncompressed images are the #1 reason sites fail Core Web Vitals. Compress your library in minutes - smaller files, higher rankings, zero quality loss."
+msgstr "未压缩的图片是站点未能通过 Core Web Vitals 的首要原因。几分钟内压缩您的媒体库——文件更小、排名更高、零质量损失。"
+
+#: build/admin.js:13
+msgid "Ready to Compress Your Images?"
+msgstr "准备好压缩您的图片了吗？"
+
+#: build/admin.js:13
+msgid "Configure your compression settings above and click \"Compress Now\" to optimize your image library."
+msgstr "在上方配置您的压缩设置，然后点击“立即压缩”，以优化您的图片库。"
+
+#: build/admin.js:13
+msgid "Quality Level"
+msgstr "质量级别"
+
+#: build/admin.js:13
+msgid "Compression quality from 0-100. Higher values preserve more detail but result in larger files. 80+ recommended for best results."
+msgstr "压缩质量范围为 0-100。数值越高保留的细节越多，但文件也越大。建议使用 80 以上以获得最佳效果。"
+
+#: build/admin.js:13
+msgid "e.g. 80 (0-100)"
+msgstr "例如 80（0-100）"
+
+#: build/admin.js:13
+msgid "Compress In Background"
+msgstr "在后台压缩"
+
+#: build/admin.js:13
+msgid "Every heavy image loses you a visitor. Compress your entire library in one click and watch page speed - and conversions - climb."
+msgstr "每一张过大的图片都会让您失去一位访客。一键压缩整个媒体库，见证页面速度——以及转化率——的攀升。"
+
+#: build/admin.js:13
+msgid "Convert Images to WebP"
+msgstr "将图片转换为 WebP"
+
+#: build/admin.js:13
+msgid "Slow images cost you sales. Switch to WebP and cut file sizes by 35% - faster pages, lower bounce rates, and better rankings, zero quality loss."
+msgstr "缓慢的图片会让您损失销售额。切换到 WebP，将文件体积缩减 35%——页面更快、跳出率更低、排名更好，且零质量损失。"
+
+#: build/admin.js:13
+msgid "Convert Again"
+msgstr "再次转换"
+
+#: build/admin.js:13
+msgid "Ready to Convert to WebP?"
+msgstr "准备好转换为 WebP 了吗？"
+
+#: build/admin.js:13
+msgid "There are no images to convert to WebP."
+msgstr "没有需要转换为 WebP 的图片。"
+
+#: build/admin.js:13
+msgid "Select file formats above and click \"Convert Now\" to start converting images to WebP for faster loading."
+msgstr "在上方选择文件格式，然后点击“立即转换”，开始将图片转换为 WebP 以加快加载速度。"
+
+#: build/admin.js:13
+msgid "Select File Format"
+msgstr "选择文件格式"
+
+#: build/admin.js:13
+msgid "Convert In Background"
+msgstr "在后台转换"
+
+#: build/admin.js:13
+msgid "WebP Conversion Complete"
+msgstr "WebP 转换完成"
+
+#: build/admin.js:13
+msgid "WebP Conversion in Progress"
+msgstr "WebP 转换进行中"
+
+#: build/admin.js:13
+msgid "All images have been converted to WebP."
+msgstr "所有图片均已转换为 WebP。"
+
+#: build/admin.js:13
+msgid "We're scanning your media library and converting eligible images to WebP."
+msgstr "我们正在扫描您的媒体库，并将符合条件的图片转换为 WebP。"
+
+#: build/admin.js:13
+msgid "Images Converted"
+msgstr "已转换的图片"
+
+#: build/admin.js:13
+msgid "Images Remaining"
+msgstr "剩余的图片"
+
+#: build/admin.js:13
+msgid "Convert Images to AVIF"
+msgstr "将图片转换为 AVIF"
+
+#: build/admin.js:13
+msgid "The format Google rewards. Cut image sizes by 50% over WebP, slash bandwidth costs, and pass Core Web Vitals with ease."
+msgstr "Google 青睐的格式。相比 WebP 再将图片体积缩减 50%，大幅削减带宽成本，并轻松通过 Core Web Vitals。"
+
+#: build/admin.js:13
+msgid "Ready to Convert to AVIF?"
+msgstr "准备好转换为 AVIF 了吗？"
+
+#: build/admin.js:13
+msgid "Select file formats above and click \"Convert Now\" to convert images to AVIF for even smaller file sizes."
+msgstr "在上方选择文件格式，然后点击“立即转换”，将图片转换为 AVIF 以获得更小的文件体积。"
+
+#: build/admin.js:13
+msgid "AVIF Conversion is a Pro feature"
+msgstr "AVIF 转换是 Pro 功能"
+
+#: build/admin.js:13
+msgid "Slow loads kill conversions. AVIF halves your file sizes with no visible quality loss - faster pages, higher rankings."
+msgstr "加载缓慢会扼杀转化。AVIF 可在没有可见质量损失的情况下将您的文件体积减半——页面更快、排名更高。"
+
+#: build/admin.js:13
+msgid "Upgrade to convert images to AVIF"
+msgstr "升级以将图片转换为 AVIF"
+
+#: build/admin.js:13
+msgid "Manage Trashed Images"
+msgstr "管理回收站图片"
+
+#: build/admin.js:13
+msgid "Leftover files from old conversions and failed uploads quietly pile up. Delete the junk and reclaim real disk space in seconds."
+msgstr "旧转换和失败上传遗留的文件会悄然堆积。删除这些垃圾，几秒钟内即可回收实实在在的磁盘空间。"
+
+#: build/admin.js:13
+msgid "File Name"
+msgstr "文件名"
+
+#: build/admin.js:13
+msgid "Image"
+msgstr "图片"
+
+#: build/admin.js:13
+msgid "Upload Date"
+msgstr "上传日期"
+
+#: build/admin.js:13
+msgid "File Size"
+msgstr "文件大小"
+
+#: build/admin.js:13
+msgid "Action"
+msgstr "操作"
+
+#: build/admin.js:13
+msgid "No trashed images found."
+msgstr "未找到回收站图片。"
+
+#: build/admin.js:13
+msgid "Manage Trashed Images is a Pro feature"
+msgstr "管理回收站图片是 Pro 功能"
+
+#: build/admin.js:13
+msgid "Restore or permanently delete images you've moved to trash. Keep your library clean and reclaim disk space."
+msgstr "恢复或永久删除您已移至回收站的图片。保持媒体库整洁并回收磁盘空间。"
+
+#: build/admin.js:13
+msgid "Activate License to manage trashed images"
+msgstr "激活许可证以管理回收站图片"
+
+#: build/admin.js:13
+msgid "General Settings"
+msgstr "常规设置"
+
+#: build/admin.js:13
+msgid "General settings for the plugin"
+msgstr "插件的常规设置"
+
+#: build/admin.js:13
+msgid "Thumbnail Generation"
+msgstr "缩略图生成"
+
+#: build/admin.js:13
+msgid "Disable thumbnail generation for specific image sizes"
+msgstr "为特定图片尺寸禁用缩略图生成"
+
+#: build/admin.js:13
+msgid "Duplicate Upload Prevention"
+msgstr "重复上传阻止"
+
+#: build/admin.js:13
+msgid "Prevent uploading duplicate images to your media library"
+msgstr "阻止向您的媒体库上传重复图片"
+
+#: build/admin.js:13
+msgid "File Compression Settings"
+msgstr "文件压缩设置"
+
+#: build/admin.js:13
+msgid "Image compression additional settings"
+msgstr "图片压缩的其他设置"
+
+#: build/admin.js:13
+msgid "WebP Image Converter additional settings"
+msgstr "WebP 图片转换器的其他设置"
+
+#: build/admin.js:13
+msgid "AVIF Image Converter additional settings"
+msgstr "AVIF 图片转换器的其他设置"
+
+#: build/admin.js:13
+msgid "Platform Configuration"
+msgstr "平台配置"
+
+#: build/admin.js:13
+msgid "Manage the image used for social media sharing"
+msgstr "管理用于社交媒体分享的图片"
+
+#: build/admin.js:13
+msgid "Debug"
+msgstr "调试"
+
+#: build/admin.js:13
+msgid "Debug Information"
+msgstr "调试信息"
+
+#: build/admin.js:13
+msgid "System and plugin info for support"
+msgstr "供支持使用的系统和插件信息"
+
+#: build/admin.js:13
+msgid "Debug info copied to clipboard."
+msgstr "调试信息已复制到剪贴板。"
+
+#: build/admin.js:13
+msgid "Copied!"
+msgstr "已复制！"
+
+#: build/admin.js:13
+msgid "Copy as JSON"
+msgstr "复制为 JSON"
+
+#: build/admin.js:13
+msgid "Miss the old interface?"
+msgstr "怀念旧版界面？"
+
+#: build/admin.js:13
+msgid "Turn on legacy mode."
+msgstr "开启旧版模式。"

@@ -1,0 +1,1139 @@
+{
+    "translation-revision-date": "2026-07-23 00:00+0000",
+    "generator": "WP-CLI\/2.13.0-alpha-3eb2dd7",
+    "source": "build\/admin.js",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "nl_NL",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
+            },
+            "Settings saved successfully.": [
+                "Instellingen succesvol opgeslagen."
+            ],
+            "Dashboard": [
+                "Dashboard"
+            ],
+            "Thumbnails": [
+                "Miniaturen"
+            ],
+            "Unused Images": [
+                "Ongebruikte afbeeldingen"
+            ],
+            "Duplicate Images": [
+                "Dubbele afbeeldingen"
+            ],
+            "Large Images": [
+                "Grote afbeeldingen"
+            ],
+            "Compress Images": [
+                "Afbeeldingen comprimeren"
+            ],
+            "Convert to WebP": [
+                "Naar WebP converteren"
+            ],
+            "Convert to AVIF": [
+                "Naar AVIF converteren"
+            ],
+            "Trashed Images": [
+                "Afbeeldingen in prullenbak"
+            ],
+            "Settings": [
+                "Instellingen"
+            ],
+            "Pro": [
+                "Pro"
+            ],
+            "Close": [
+                "Sluiten"
+            ],
+            "Social Share Image": [
+                "Afbeelding voor sociaal delen"
+            ],
+            "Regenerate Thumbnails": [
+                "Miniaturen opnieuw genereren"
+            ],
+            "General": [
+                "Algemeen"
+            ],
+            "Days": [
+                "Dagen"
+            ],
+            "Hrs": [
+                "Uur"
+            ],
+            "Min": [
+                "Min"
+            ],
+            "Sec": [
+                "Sec"
+            ],
+            "FIFA World Cup Sale is Live!": [
+                "FIFA WK-uitverkoop is live!"
+            ],
+            "Score up to 48% off ThumbPress Pro during our FIFA World Cup sale. The discount is auto-applied at checkout \u2014 grab it before the whistle blows!": [
+                "Scoor tot 48% korting op ThumbPress Pro tijdens onze FIFA WK-uitverkoop. De korting wordt automatisch toegepast bij het afrekenen \u2014 pak hem voordat het eindsignaal klinkt!"
+            ],
+            "Offer expired": [
+                "Aanbieding verlopen"
+            ],
+            "Offer ends July 19": [
+                "Aanbieding eindigt op 19 juli"
+            ],
+            "World Cup discount applied!": [
+                "WK-korting toegepast!"
+            ],
+            "Your up-to-48% discount is auto-applied at checkout.": [
+                "Je korting van maximaal 48% wordt automatisch toegepast bij het afrekenen."
+            ],
+            "Get 48% Off \u2014 View Pricing \u2192": [
+                "Krijg 48% korting \u2014 Bekijk prijzen \u2192"
+            ],
+            "No thanks, I don't want a discount": [
+                "Nee bedankt, ik wil geen korting"
+            ],
+            "Community": [
+                "Community"
+            ],
+            "Support": [
+                "Ondersteuning"
+            ],
+            "Docs": [
+                "Documentatie"
+            ],
+            "Upgrade to Pro": [
+                "Upgrade naar Pro"
+            ],
+            "Upgrade to View": [
+                "Upgrade om te bekijken"
+            ],
+            "%s%%": [
+                "%s%%"
+            ],
+            "%s B": [
+                "%s B"
+            ],
+            "%s KB": [
+                "%s KB"
+            ],
+            "%s MB": [
+                "%s MB"
+            ],
+            "%s GB": [
+                "%s GB"
+            ],
+            "%s TB": [
+                "%s TB"
+            ],
+            "Good": [
+                "Goed"
+            ],
+            "Normal": [
+                "Normaal"
+            ],
+            "Danger": [
+                "Kritiek"
+            ],
+            "Overall": [
+                "Algemeen"
+            ],
+            "Health Score": [
+                "Gezondheidsscore"
+            ],
+            "Status:": [
+                "Status:"
+            ],
+            "Quick Facts": [
+                "Snelle feiten"
+            ],
+            "EasyCommerce promotional notice": [
+                "EasyCommerce promotiemelding"
+            ],
+            "New from the ThumbPress team - Try": [
+                "Nieuw van het ThumbPress-team - Probeer"
+            ],
+            "EasyCommerce": [
+                "EasyCommerce"
+            ],
+            ". A fast, AI-powered way to sell on WordPress.": [
+                ". Een snelle, AI-aangedreven manier om te verkopen met WordPress."
+            ],
+            "Learn more": [
+                "Meer informatie"
+            ],
+            "Dismiss EasyCommerce notice": [
+                "EasyCommerce-melding sluiten"
+            ],
+            "Activate License": [
+                "Licentie activeren"
+            ],
+            "Image Editor": [
+                "Afbeeldingseditor"
+            ],
+            "Enhance images with filters and adjustments to showcase their best versions.": [
+                "Verbeter afbeeldingen met filters en aanpassingen om hun beste versie te laten zien."
+            ],
+            "The built-in Image Editor is a Pro feature": [
+                "De ingebouwde afbeeldingseditor is een Pro-functie"
+            ],
+            "Leaving WordPress just to crop an image breaks your whole workflow. Edit, resize, and re-optimize everything without switching tools.": [
+                "WordPress verlaten alleen om een afbeelding bij te snijden verstoort je hele workflow. Bewerk, verklein en heroptimaliseer alles zonder van tool te wisselen."
+            ],
+            "Upgrade to edit images in WordPress": [
+                "Upgrade om afbeeldingen te bewerken in WordPress"
+            ],
+            "Replace Images With New Version": [
+                "Afbeeldingen vervangen door nieuwe versie"
+            ],
+            "Upload new versions of images and replace the old ones without any issues.": [
+                "Upload nieuwe versies van afbeeldingen en vervang de oude zonder problemen."
+            ],
+            "Replacing Image is a Pro feature": [
+                "Afbeeldingen vervangen is een Pro-functie"
+            ],
+            "Outdated images live on more pages than you think. Swap in a new version once, and every page updates instantly.": [
+                "Verouderde afbeeldingen staan op meer pagina's dan je denkt. Vervang ze \u00e9\u00e9n keer door een nieuwe versie en elke pagina wordt direct bijgewerkt."
+            ],
+            "Upgrade to replace images seamlessly": [
+                "Upgrade om afbeeldingen naadloos te vervangen"
+            ],
+            "Disable Right Click on Image": [
+                "Rechtsklikken op afbeelding uitschakelen"
+            ],
+            "Prevent visitors from downloading your images by turning off the right-click option on your website.": [
+                "Voorkom dat bezoekers je afbeeldingen downloaden door de rechtsklikoptie op je website uit te schakelen."
+            ],
+            "Image Size Limit": [
+                "Limiet afbeeldingsgrootte"
+            ],
+            "Set a limit for maximum image upload size.": [
+                "Stel een limiet in voor de maximale uploadgrootte van afbeeldingen."
+            ],
+            "120": [
+                "120"
+            ],
+            "KB": [
+                "KB"
+            ],
+            "MB": [
+                "MB"
+            ],
+            "Server limit: %s": [
+                "Serverlimiet: %s"
+            ],
+            "Image Dimension Limit": [
+                "Limiet afbeeldingsafmetingen"
+            ],
+            "Set a limit for maximum image upload dimensions (in pixels).": [
+                "Stel een limiet in voor de maximale uploadafmetingen van afbeeldingen (in pixels)."
+            ],
+            "Height": [
+                "Hoogte"
+            ],
+            "Width": [
+                "Breedte"
+            ],
+            "Lazy load": [
+                "Lazy load"
+            ],
+            "Load images only when they enter the user's viewport, improving page speed and reducing bandwidth usage.": [
+                "Laad afbeeldingen pas wanneer ze in beeld komen bij de gebruiker, wat de laadsnelheid verbetert en het bandbreedtegebruik vermindert."
+            ],
+            "Hotlink Protection": [
+                "Hotlink-bescherming"
+            ],
+            "Block other websites from embedding your images directly, preventing bandwidth theft from external hotlinking.": [
+                "Blokkeer dat andere websites je afbeeldingen rechtstreeks insluiten en voorkom bandbreedtediefstal door externe hotlinking."
+            ],
+            "Auto Set Featured Image": [
+                "Uitgelichte afbeelding automatisch instellen"
+            ],
+            "Automatically use the first image in post content as the featured image if none is set.": [
+                "Gebruik automatisch de eerste afbeelding in de berichtinhoud als uitgelichte afbeelding als er geen is ingesteld."
+            ],
+            "Settings reset successfully.": [
+                "Instellingen succesvol gereset."
+            ],
+            "Reset Options": [
+                "Opties resetten"
+            ],
+            "Failed to save settings.": [
+                "Kan instellingen niet opslaan."
+            ],
+            "Save Changes": [
+                "Wijzigingen opslaan"
+            ],
+            "No thumbnail sizes found.": [
+                "Geen miniatuurformaten gevonden."
+            ],
+            "%1$s (%2$s\u00d7%3$s)": [
+                "%1$s (%2$s\u00d7%3$s)"
+            ],
+            "Enabled - This size will be generated for new uploads.": [
+                "Ingeschakeld - Dit formaat wordt gegenereerd voor nieuwe uploads."
+            ],
+            "Disabled - This size will not be generated for new uploads.": [
+                "Uitgeschakeld - Dit formaat wordt niet gegenereerd voor nieuwe uploads."
+            ],
+            "This is the original image size and cannot be disabled.": [
+                "Dit is de oorspronkelijke afbeeldingsgrootte en kan niet worden uitgeschakeld."
+            ],
+            "Compress during upload": [
+                "Comprimeren tijdens uploaden"
+            ],
+            "Enable compression during upload to reduce file size and improve speed.": [
+                "Schakel compressie tijdens het uploaden in om de bestandsgrootte te verkleinen en de snelheid te verbeteren."
+            ],
+            "Compression Percentage": [
+                "Compressiepercentage"
+            ],
+            "A measure of how much a file's size is reduced after compression.": [
+                "Een maat voor hoeveel de bestandsgrootte wordt verkleind na compressie."
+            ],
+            "Single Image Compress": [
+                "Losse afbeelding comprimeren"
+            ],
+            "Show the Optimize button on individual media attachments.": [
+                "Toon de knop Optimaliseren op afzonderlijke mediabijlagen."
+            ],
+            "Bulk Image Compression is a Pro feature": [
+                "Bulkcompressie van afbeeldingen is een Pro-functie"
+            ],
+            "Heavy images are silently costing you visitors. Compress your entire library in one click with absolutely no visible quality loss.": [
+                "Zware afbeeldingen kosten je ongemerkt bezoekers. Comprimeer je hele bibliotheek met \u00e9\u00e9n klik zonder enig zichtbaar kwaliteitsverlies."
+            ],
+            "Upgrade for a faster website": [
+                "Upgrade voor een snellere website"
+            ],
+            "Prevent Duplicate Upload": [
+                "Dubbele upload voorkomen"
+            ],
+            "Block uploading images that already exist in your media library": [
+                "Blokkeer het uploaden van afbeeldingen die al in je mediabibliotheek staan"
+            ],
+            "Duplicate Image Detection is a Pro feature": [
+                "Detectie van dubbele afbeeldingen is een Pro-functie"
+            ],
+            "Duplicate images quietly pile up and bloat your media library. Find and remove every copy you didn't even know existed.": [
+                "Dubbele afbeeldingen stapelen zich ongemerkt op en laten je mediabibliotheek uitdijen. Vind en verwijder elke kopie waarvan je niet eens wist dat die bestond."
+            ],
+            "Upgrade to detect duplicate images": [
+                "Upgrade om dubbele afbeeldingen te detecteren"
+            ],
+            "Convert during upload": [
+                "Converteren tijdens uploaden"
+            ],
+            "Automatically convert images to WebP when they are uploaded.": [
+                "Converteer afbeeldingen automatisch naar WebP wanneer ze worden ge\u00fcpload."
+            ],
+            "Single image conversion": [
+                "Losse afbeelding converteren"
+            ],
+            "Convert individual images to WebP directly from the media library.": [
+                "Converteer afzonderlijke afbeeldingen naar WebP rechtstreeks vanuit de mediabibliotheek."
+            ],
+            "Automatically convert images to AVIF when they are uploaded.": [
+                "Converteer afbeeldingen automatisch naar AVIF wanneer ze worden ge\u00fcpload."
+            ],
+            "Convert individual images to AVIF directly from the media library.": [
+                "Converteer afzonderlijke afbeeldingen naar AVIF rechtstreeks vanuit de mediabibliotheek."
+            ],
+            "Facebook": [
+                "Facebook"
+            ],
+            "Generate optimized share images for Facebook posts": [
+                "Genereer geoptimaliseerde deelafbeeldingen voor Facebook-berichten"
+            ],
+            "LinkedIn": [
+                "LinkedIn"
+            ],
+            "Create professional share images for LinkedIn": [
+                "Maak professionele deelafbeeldingen voor LinkedIn"
+            ],
+            "Twitter": [
+                "Twitter"
+            ],
+            "Optimize share images for Twitter cards": [
+                "Optimaliseer deelafbeeldingen voor Twitter-kaarten"
+            ],
+            "Pinterest": [
+                "Pinterest"
+            ],
+            "Generate Pinterest-optimized pin images": [
+                "Genereer voor Pinterest geoptimaliseerde pin-afbeeldingen"
+            ],
+            "Enabled": [
+                "Ingeschakeld"
+            ],
+            "Disabled": [
+                "Uitgeschakeld"
+            ],
+            "Failed to load debug info.": [
+                "Kan foutopsporingsinformatie niet laden."
+            ],
+            "No data.": [
+                "Geen gegevens."
+            ],
+            "System": [
+                "Systeem"
+            ],
+            "WordPress": [
+                "WordPress"
+            ],
+            "PHP": [
+                "PHP"
+            ],
+            "MySQL": [
+                "MySQL"
+            ],
+            "Server": [
+                "Server"
+            ],
+            "PHP Memory Limit": [
+                "PHP-geheugenlimiet"
+            ],
+            "WP Memory Limit": [
+                "WP-geheugenlimiet"
+            ],
+            "Max Execution Time": [
+                "Maximale uitvoeringstijd"
+            ],
+            "%ss": [
+                "%ss"
+            ],
+            "Upload Max Filesize": [
+                "Maximale uploadbestandsgrootte"
+            ],
+            "Total Images": [
+                "Totaal aantal afbeeldingen"
+            ],
+            "WordPress Config": [
+                "WordPress-configuratie"
+            ],
+            "WP_DEBUG": [
+                "WP_DEBUG"
+            ],
+            "WP_DEBUG_DISPLAY": [
+                "WP_DEBUG_DISPLAY"
+            ],
+            "WP_DEBUG_LOG": [
+                "WP_DEBUG_LOG"
+            ],
+            "Version": [
+                "Versie"
+            ],
+            "Pro Plugin": [
+                "Pro-plugin"
+            ],
+            "v%s": [
+                "v%s"
+            ],
+            "License Status": [
+                "Licentiestatus"
+            ],
+            "Lazy Load": [
+                "Lazy Load"
+            ],
+            "Right-Click Disable": [
+                "Rechtsklikken uitschakelen"
+            ],
+            "WebP on Upload": [
+                "WebP bij uploaden"
+            ],
+            "AVIF on Upload": [
+                "AVIF bij uploaden"
+            ],
+            "Max Image Size": [
+                "Max. afbeeldingsgrootte"
+            ],
+            "Max Image Dimensions": [
+                "Max. afbeeldingsafmetingen"
+            ],
+            "Disabled Sizes": [
+                "Uitgeschakelde formaten"
+            ],
+            "None": [
+                "Geen"
+            ],
+            "Active Theme": [
+                "Actief thema"
+            ],
+            "Name": [
+                "Naam"
+            ],
+            "Parent Theme": [
+                "Bovenliggend thema"
+            ],
+            "%1$s v%2$s": [
+                "%1$s v%2$s"
+            ],
+            "Active Plugin (%d)": [
+                "Actieve plugin (%d)",
+                "Actieve plugins (%d)"
+            ],
+            "Your Media Library is Silently Slowing Down Your Site.": [
+                "Je mediabibliotheek vertraagt ongemerkt je site."
+            ],
+            "Unused images, oversized files, and missing optimization pile up with every upload. Pro finds them all and fixes them \u2014 without touching a single file manually.": [
+                "Ongebruikte afbeeldingen, te grote bestanden en ontbrekende optimalisatie stapelen zich op bij elke upload. Pro vindt ze allemaal en lost ze op \u2014 zonder ook maar \u00e9\u00e9n bestand handmatig aan te raken."
+            ],
+            "Price starts from $5\/month.": [
+                "Prijzen vanaf $5\/maand."
+            ],
+            "ThumbPress modules": [
+                "ThumbPress-modules"
+            ],
+            "What Pro Fixes Today": [
+                "Wat Pro vandaag oplost"
+            ],
+            "Every Pro feature is designed to solve a specific real problem. Here's what exactly an upgrade unlocks.": [
+                "Elke Pro-functie is ontworpen om een specifiek, re\u00ebel probleem op te lossen. Dit is precies wat een upgrade ontgrendelt."
+            ],
+            "%d image found!": [
+                "%d afbeelding gevonden!",
+                "%d afbeeldingen gevonden!"
+            ],
+            "Detect Large Images": [
+                "Grote afbeeldingen detecteren"
+            ],
+            "Scan your media library and find oversized images instantly. See exactly which files are bloating your pages and fix them before they cost you rankings.": [
+                "Scan je mediabibliotheek en vind direct te grote afbeeldingen. Zie precies welke bestanden je pagina's opblazen en los ze op voordat ze je rankings kosten."
+            ],
+            "Detect Now": [
+                "Nu detecteren"
+            ],
+            "Delete Unused Images": [
+                "Ongebruikte afbeeldingen verwijderen"
+            ],
+            "Scan your media library and find unused images instantly. See exactly which files are taking up space and delete them to reclaim server space.": [
+                "Scan je mediabibliotheek en vind direct ongebruikte afbeeldingen. Zie precies welke bestanden ruimte innemen en verwijder ze om serverruimte terug te winnen."
+            ],
+            "Delete Now": [
+                "Nu verwijderen"
+            ],
+            "Compress Large Images": [
+                "Grote afbeeldingen comprimeren"
+            ],
+            "Large images are costing you speed. Optimize them without visible loss and deliver a faster, smoother browsing experience.": [
+                "Grote afbeeldingen kosten je snelheid. Optimaliseer ze zonder zichtbaar verlies en bied een snellere, soepelere surfervaring."
+            ],
+            "Compress Now": [
+                "Nu comprimeren"
+            ],
+            "Bulk Convert to AVIF": [
+                "In bulk naar AVIF converteren"
+            ],
+            "Your images shouldn't be stuck in the past. Convert them all to AVIF - the format the modern web is built on - in a single click.": [
+                "Je afbeeldingen horen niet in het verleden thuis. Converteer ze allemaal naar AVIF - het formaat waarop het moderne web is gebouwd - met \u00e9\u00e9n klik."
+            ],
+            "Convert Now": [
+                "Nu converteren"
+            ],
+            "Crop, resize, or tweak any image right inside your WordPress dashboard. No need to re-upload or touch a third-party tool.": [
+                "Snijd bij, verklein of pas elke afbeelding aan direct in je WordPress-dashboard. Geen noodzaak om opnieuw te uploaden of een externe tool te gebruiken."
+            ],
+            "Edit Now": [
+                "Nu bewerken"
+            ],
+            "Merge Duplicate Images": [
+                "Dubbele afbeeldingen samenvoegen"
+            ],
+            "Find images that have been uploaded more than once. Clean up the clutter and stop wasting space on files you already have.": [
+                "Vind afbeeldingen die meer dan eens zijn ge\u00fcpload. Ruim de rommel op en verspil geen ruimte meer aan bestanden die je al hebt."
+            ],
+            "Merge Now": [
+                "Nu samenvoegen"
+            ],
+            "IMAGE CONTROL": [
+                "AFBEELDINGSBEHEER"
+            ],
+            "Disable Thumbnails": [
+                "Miniaturen uitschakelen"
+            ],
+            "Set Image Upload Limit": [
+                "Uploadlimiet voor afbeeldingen instellen"
+            ],
+            "STORAGE & CLEANUP": [
+                "OPSLAG & OPSCHONEN"
+            ],
+            "Find Unused Images": [
+                "Ongebruikte afbeeldingen vinden"
+            ],
+            "Find Duplicate Images": [
+                "Dubbele afbeeldingen vinden"
+            ],
+            "MEDIA MANAGEMENT": [
+                "MEDIABEHEER"
+            ],
+            "Replace Images": [
+                "Afbeeldingen vervangen"
+            ],
+            "Social Media Thumbnails": [
+                "Miniaturen voor sociale media"
+            ],
+            "Free vs. Pro Side by Side": [
+                "Gratis vs. Pro naast elkaar"
+            ],
+            "See a clear comparison between your current version and the Pro version you're about to get.": [
+                "Zie een duidelijke vergelijking tussen je huidige versie en de Pro-versie die je gaat krijgen."
+            ],
+            "Features": [
+                "Functies"
+            ],
+            "Free": [
+                "Gratis"
+            ],
+            "Future uploads only": [
+                "Alleen toekomstige uploads"
+            ],
+            "Fully unlocked": [
+                "Volledig ontgrendeld"
+            ],
+            "Best Value": [
+                "Beste waarde"
+            ],
+            "\/ Month": [
+                "\/ maand"
+            ],
+            "\/ Lifetime": [
+                "\/ levenslang"
+            ],
+            "Billed annually. You pay %s today": [
+                "Jaarlijks gefactureerd. Je betaalt vandaag %s"
+            ],
+            "Purchase": [
+                "Kopen"
+            ],
+            "Personal": [
+                "Persoonlijk"
+            ],
+            "%d%% OFF": [
+                "%d%% KORTING"
+            ],
+            "1 Site": [
+                "1 site"
+            ],
+            "1 Year Support": [
+                "1 jaar ondersteuning"
+            ],
+            "All Features Included": [
+                "Alle functies inbegrepen"
+            ],
+            "Professional": [
+                "Professioneel"
+            ],
+            "5 Sites": [
+                "5 sites"
+            ],
+            "Agency": [
+                "Bureau"
+            ],
+            "Unlimited Sites": [
+                "Onbeperkt aantal sites"
+            ],
+            "Lifetime Support": [
+                "Levenslange ondersteuning"
+            ],
+            "ThumbPress Pro Pricing": [
+                "Prijzen ThumbPress Pro"
+            ],
+            "Every plan includes the full set of Pro features. Just pick how many sites you need to cover.": [
+                "Elk plan bevat het volledige pakket Pro-functies. Kies gewoon voor hoeveel sites je dekking nodig hebt."
+            ],
+            "Yearly": [
+                "Jaarlijks"
+            ],
+            "Lifetime": [
+                "Levenslang"
+            ],
+            "30-day money back guarantee": [
+                "30 dagen niet-goed-geld-terug-garantie"
+            ],
+            "Access future features for the subscription period": [
+                "Toegang tot toekomstige functies gedurende de abonnementsperiode"
+            ],
+            "reviewer": [
+                "recensent"
+            ],
+            "This saved me money when I realised I was about to exceed my host\u2019s image allowance, enabling me to wipe out excess duplicate images.": [
+                "Dit heeft me geld bespaard toen ik me realiseerde dat ik bijna de afbeeldingslimiet van mijn host zou overschrijden, doordat ik overbodige dubbele afbeeldingen kon wissen."
+            ],
+            "At the moment I\u2019m using it to resize my pictures, I see a lot of things to use in the future to keep the site smaller then it was. So far it\u2019s working fine and the one question I had was answered right away!! Keep up the good work!!!": [
+                "Op dit moment gebruik ik het om mijn afbeeldingen te verkleinen, en ik zie een heleboel dingen die ik in de toekomst kan gebruiken om de site kleiner te houden dan hij was. Tot nu toe werkt het prima en de ene vraag die ik had, werd meteen beantwoord!! Ga zo door!!!"
+            ],
+            "This plugin is extremely useful, and a must for sites with a lot of images. I had a problem with activation of the Pro version, and the support team resolved the issue quickly and without fuss.": [
+                "Deze plugin is enorm handig en een must voor sites met veel afbeeldingen. Ik had een probleem met de activering van de Pro-versie, en het ondersteuningsteam loste het snel en zonder gedoe op."
+            ],
+            "Trusted by 30,000+ WordPress Users Just Like You": [
+                "Vertrouwd door 30.000+ WordPress-gebruikers net als jij"
+            ],
+            "What image formats does ThumbPress convert?": [
+                "Welke afbeeldingsformaten converteert ThumbPress?"
+            ],
+            "Free version converts images to WebP (25-35% smaller files). Pro adds AVIF conversion (50% smaller than WebP) plus intelligent compression for all formats. Both reduce file size without visible quality loss, dramatically improving site speed and lowering bandwidth costs.": [
+                "De gratis versie converteert afbeeldingen naar WebP (25-35% kleinere bestanden). Pro voegt AVIF-conversie toe (50% kleiner dan WebP) plus intelligente compressie voor alle formaten. Beide verkleinen de bestandsgrootte zonder zichtbaar kwaliteitsverlies, wat de sitesnelheid drastisch verbetert en de bandbreedtekosten verlaagt."
+            ],
+            "How much can I save on storage and bandwidth?": [
+                "Hoeveel kan ik besparen op opslag en bandbreedte?"
+            ],
+            "Most sites save 30-60% of image storage. WebP reduces files by 25-35%, AVIF by 50% more than WebP. A typical site with 5,000 images saves 50-100GB. Smaller images also cut bandwidth costs and improve Core Web Vitals scores for better SEO rankings.": [
+                "De meeste sites besparen 30-60% aan afbeeldingsopslag. WebP verkleint bestanden met 25-35%, AVIF met 50% meer dan WebP. Een typische site met 5.000 afbeeldingen bespaart 50-100GB. Kleinere afbeeldingen verlagen ook de bandbreedtekosten en verbeteren de Core Web Vitals-scores voor betere SEO-rankings."
+            ],
+            "What's the difference between Free and Pro?": [
+                "Wat is het verschil tussen Gratis en Pro?"
+            ],
+            "Free: Basic optimization (WebP, regenerate thumbnails). Pro: Advanced detection (find unused images, duplicates, oversized files), bulk compression, AVIF conversion, one-click automation. Best for sites with hundreds or thousands of images where optimization pays for itself.": [
+                "Gratis: basisoptimalisatie (WebP, miniaturen opnieuw genereren). Pro: geavanceerde detectie (ongebruikte afbeeldingen, duplicaten en te grote bestanden vinden), bulkcompressie, AVIF-conversie en automatisering met \u00e9\u00e9n klik. Ideaal voor sites met honderden of duizenden afbeeldingen, waar optimalisatie zichzelf terugverdient."
+            ],
+            "How does pricing work? Is there a trial?": [
+                "Hoe werkt de prijsstelling? Is er een proefversie?"
+            ],
+            "No hidden fees or surprise renewals - renewal costs the same as initial purchase. Free version is your trial. Test WebP conversion and regeneration risk-free. Upgrade anytime if you need Pro features. 30-day money-back guarantee on all paid plans.": [
+                "Geen verborgen kosten of verrassende verlengingen - verlengen kost hetzelfde als de eerste aankoop. De gratis versie is je proefversie. Test WebP-conversie en het opnieuw genereren risicovrij. Upgrade wanneer je maar wilt als je Pro-functies nodig hebt. 30 dagen niet-goed-geld-terug-garantie op alle betaalde plannen."
+            ],
+            "Can I use Pro on multiple sites? How many?": [
+                "Kan ik Pro op meerdere sites gebruiken? Hoeveel?"
+            ],
+            "Yes. Professional plan covers up to 5 sites. Agency plan covers unlimited. Perfect for freelancers and agencies managing multiple client sites. Licensing is per-plan, not per-site.": [
+                "Ja. Het Professioneel-plan dekt maximaal 5 sites. Het Bureau-plan dekt onbeperkt. Perfect voor freelancers en bureaus die meerdere klantsites beheren. Licenties zijn per plan, niet per site."
+            ],
+            "Is my media library safe? Will images be deleted automatically?": [
+                "Is mijn mediabibliotheek veilig? Worden afbeeldingen automatisch verwijderd?"
+            ],
+            "Completely safe. ThumbPress shows you exactly what it found and requires your approval before any action. Nothing is ever deleted automatically. Unused images, duplicates, and large files are flagged for review - you decide what to remove.": [
+                "Volledig veilig. ThumbPress laat je precies zien wat het heeft gevonden en vraagt om je goedkeuring voordat er iets gebeurt. Er wordt nooit automatisch iets verwijderd. Ongebruikte afbeeldingen, duplicaten en grote bestanden worden gemarkeerd voor beoordeling - jij beslist wat je verwijdert."
+            ],
+            "What if it doesn't deliver results or doesn't work on my site?": [
+                "Wat als het geen resultaten oplevert of niet werkt op mijn site?"
+            ],
+            "100% money-back within 30 days, no questions asked. Our team provides setup assistance to ensure it works perfectly. We also stand behind the results - if optimization doesn't improve your metrics, we refund immediately.": [
+                "100% geld terug binnen 30 dagen, zonder vragen. Ons team helpt bij het instellen om ervoor te zorgen dat alles perfect werkt. We staan ook achter de resultaten - als optimalisatie je statistieken niet verbetert, geven we direct je geld terug."
+            ],
+            "Is it compatible with WooCommerce, Elementor, and my theme?": [
+                "Is het compatibel met WooCommerce, Elementor en mijn thema?"
+            ],
+            "Yes. ThumbPress works with WooCommerce, Gutenberg, Elementor, Divi, and all major themes. It operates at the WordPress media layer, not inside specific plugins, so compatibility is universal.": [
+                "Ja. ThumbPress werkt met WooCommerce, Gutenberg, Elementor, Divi en alle grote thema's. Het werkt op de medialaag van WordPress, niet binnen specifieke plugins, dus de compatibiliteit is universeel."
+            ],
+            "How long does bulk processing take? Will it slow my site?": [
+                "Hoe lang duurt bulkverwerking? Vertraagt het mijn site?"
+            ],
+            "All heavy operations run in the background - zero impact on your site. Most sites process 500-1000 (or more) images per hour depending on hosting. Background processing handles thousands overnight. Your dashboard and frontend stay fast.": [
+                "Alle zware bewerkingen worden op de achtergrond uitgevoerd - geen enkele impact op je site. De meeste sites verwerken 500-1000 (of meer) afbeeldingen per uur, afhankelijk van de hosting. Achtergrondverwerking handelt er 's nachts duizenden af. Je dashboard en frontend blijven snel."
+            ],
+            "Do I get support? What if I need help implementing?": [
+                "Krijg ik ondersteuning? Wat als ik hulp nodig heb bij het implementeren?"
+            ],
+            "All customers get support with 24-hour response time. Professional and Agency plans include priority support. Our team helps with setup, troubleshooting, and optimization recommendations to maximize your results.": [
+                "Alle klanten krijgen ondersteuning met een reactietijd van 24 uur. Het Professioneel- en Bureau-plan bevatten prioriteitsondersteuning. Ons team helpt met instellen, probleemoplossing en optimalisatieadviezen om je resultaten te maximaliseren."
+            ],
+            "Frequently Asked Questions": [
+                "Veelgestelde vragen"
+            ],
+            "Ready to take control of your Images?": [
+                "Klaar om de controle over je afbeeldingen te nemen?"
+            ],
+            "Join 30,000+ users who manage their media smarter with ThumbPress Pro": [
+                "Sluit je aan bij 30.000+ gebruikers die hun media slimmer beheren met ThumbPress Pro"
+            ],
+            "In media library": [
+                "In mediabibliotheek"
+            ],
+            "Total Thumbnails": [
+                "Totaal aantal miniaturen"
+            ],
+            "Thumbnails found": [
+                "Miniaturen gevonden"
+            ],
+            "Unoptimized Images": [
+                "Niet-geoptimaliseerde afbeeldingen"
+            ],
+            "Images yet to be fixed": [
+                "Afbeeldingen die nog moeten worden hersteld"
+            ],
+            "Space Saved": [
+                "Bespaarde ruimte"
+            ],
+            "Worth of space saved": [
+                "Aan bespaarde ruimte"
+            ],
+            "Images (over 1 MB)": [
+                "Afbeeldingen (groter dan 1 MB)"
+            ],
+            "Upgrade to Compress": [
+                "Upgrade om te comprimeren"
+            ],
+            "Unattached images": [
+                "Niet-gekoppelde afbeeldingen"
+            ],
+            "Uncompressed Images": [
+                "Niet-gecomprimeerde afbeeldingen"
+            ],
+            "Images need compression": [
+                "Afbeeldingen hebben compressie nodig"
+            ],
+            "Duplicate images found": [
+                "Dubbele afbeeldingen gevonden"
+            ],
+            "Upgrade to Merge": [
+                "Upgrade om samen te voegen"
+            ],
+            "Non-AVIF images found": [
+                "Niet-AVIF-afbeeldingen gevonden"
+            ],
+            "Upgrade to Convert": [
+                "Upgrade om te converteren"
+            ],
+            "Non-WebP images found": [
+                "Niet-WebP-afbeeldingen gevonden"
+            ],
+            "Thumbnail Disabled": [
+                "Miniatuur uitgeschakeld"
+            ],
+            "%1$s\/%2$s": [
+                "%1$s\/%2$s"
+            ],
+            "These sizes won't be generated": [
+                "Deze formaten worden niet gegenereerd"
+            ],
+            "Lazy Loading": [
+                "Lazy loading"
+            ],
+            "Active": [
+                "Actief"
+            ],
+            "Inactive": [
+                "Inactief"
+            ],
+            "Status: %s": [
+                "Status: %s"
+            ],
+            "On": [
+                "Aan"
+            ],
+            "Off": [
+                "Uit"
+            ],
+            "Regenerate All Thumbnails": [
+                "Alle miniaturen opnieuw genereren"
+            ],
+            "Broken thumbnails hurt layouts and lose visitors. Regenerate once - every image across your site snaps back to the perfect size and crop.": [
+                "Kapotte miniaturen verstoren je lay-outs en kosten je bezoekers. Genereer \u00e9\u00e9n keer opnieuw - elke afbeelding op je site springt terug naar de perfecte grootte en uitsnede."
+            ],
+            "Generate Again": [
+                "Opnieuw genereren"
+            ],
+            "No Images Found": [
+                "Geen afbeeldingen gevonden"
+            ],
+            "Ready to Regenerate Thumbnails?": [
+                "Klaar om miniaturen opnieuw te genereren?"
+            ],
+            "There are no images to regenerate.": [
+                "Er zijn geen afbeeldingen om opnieuw te genereren."
+            ],
+            "Click \"Regenerate Now\" to create fresh thumbnails for all images. Configure your thumbnail sizes in ": [
+                "Klik op \"Nu opnieuw genereren\" om verse miniaturen te maken voor alle afbeeldingen. Configureer je miniatuurformaten in "
+            ],
+            "settings": [
+                "instellingen"
+            ],
+            ".": [
+                "."
+            ],
+            "Chunk Size": [
+                "Chunkgrootte"
+            ],
+            "Number of images processed in a single batch per server request.": [
+                "Aantal afbeeldingen dat in \u00e9\u00e9n batch per serververzoek wordt verwerkt."
+            ],
+            "e.g. 50": [
+                "bijv. 50"
+            ],
+            "Regenerate Now": [
+                "Nu opnieuw genereren"
+            ],
+            "Regenerate In Background": [
+                "Op de achtergrond opnieuw genereren"
+            ],
+            "Image Regeneration Complete": [
+                "Opnieuw genereren van afbeeldingen voltooid"
+            ],
+            "Image Regeneration in Progress": [
+                "Opnieuw genereren van afbeeldingen bezig"
+            ],
+            "All thumbnails have been regenerated successfully.": [
+                "Alle miniaturen zijn succesvol opnieuw gegenereerd."
+            ],
+            "Regenerating media library thumbnails using selected sizes.": [
+                "Miniaturen van de mediabibliotheek worden opnieuw gegenereerd met de geselecteerde formaten."
+            ],
+            "Cancel": [
+                "Annuleren"
+            ],
+            "Images Processed": [
+                "Verwerkte afbeeldingen"
+            ],
+            "Images Not Found": [
+                "Afbeeldingen niet gevonden"
+            ],
+            "Images Deleted": [
+                "Verwijderde afbeeldingen"
+            ],
+            "Images Created": [
+                "Gemaakte afbeeldingen"
+            ],
+            "Find & Remove Unused Images": [
+                "Ongebruikte afbeeldingen vinden en verwijderen"
+            ],
+            "You're paying to host images nobody sees. Remove orphaned files and cut hosting costs, backup size, and storage waste instantly.": [
+                "Je betaalt voor het hosten van afbeeldingen die niemand ziet. Verwijder verweesde bestanden en verlaag direct de hostingkosten, back-upgrootte en opslagverspilling."
+            ],
+            "Ready to Scan for Unused Images?": [
+                "Klaar om te scannen op ongebruikte afbeeldingen?"
+            ],
+            "Click \"Detect Now\" to scan your library across Gutenberg, Elementor, WooCommerce, ACF, and LayerSlider for unused images.": [
+                "Klik op \"Nu detecteren\" om je bibliotheek in Gutenberg, Elementor, WooCommerce, ACF en LayerSlider te scannen op ongebruikte afbeeldingen."
+            ],
+            "Detect in background": [
+                "Op de achtergrond detecteren"
+            ],
+            "Unused Image Cleanup is a Pro feature": [
+                "Opschonen van ongebruikte afbeeldingen is een Pro-functie"
+            ],
+            "A bloated library slows uploads, backups, and searches. Remove dead weight and keep your site lean and fast.": [
+                "Een opgeblazen bibliotheek vertraagt uploads, back-ups en zoekopdrachten. Verwijder overbodig gewicht en houd je site slank en snel."
+            ],
+            "Upgrade to clean up unused images": [
+                "Upgrade om ongebruikte afbeeldingen op te schonen"
+            ],
+            "Find & Remove Duplicate Images": [
+                "Dubbele afbeeldingen vinden en verwijderen"
+            ],
+            "Duplicates inflate storage and bloat backups. Find every redundant file and clean house without risking your originals.": [
+                "Duplicaten laten de opslag uitdijen en blazen back-ups op. Vind elk overbodig bestand en ruim op zonder je originelen te riskeren."
+            ],
+            "Ready to Scan for Duplicates?": [
+                "Klaar om te scannen op duplicaten?"
+            ],
+            "Click \"Detect Now\" to scan your library and identify redundant files taking up unnecessary storage space.": [
+                "Klik op \"Nu detecteren\" om je bibliotheek te scannen en overbodige bestanden te identificeren die onnodig opslagruimte innemen."
+            ],
+            "The same file uploaded twice wastes space every day. Surface every duplicate and reclaim storage you didn't know you were losing.": [
+                "Hetzelfde bestand dat twee keer is ge\u00fcpload verspilt elke dag ruimte. Breng elk duplicaat aan het licht en win opslag terug waarvan je niet wist dat je die verloor."
+            ],
+            "One oversized image tanks your page score. Find every offender and fix it before it costs you rankings and revenue.": [
+                "E\u00e9n te grote afbeelding verpest je paginascore. Vind elke boosdoener en los hem op voordat het je rankings en inkomsten kost."
+            ],
+            "Ready to Scan for Large Images?": [
+                "Klaar om te scannen op grote afbeeldingen?"
+            ],
+            "Set your file size threshold above and click \"Detect Now\" to find images exceeding your size limit.": [
+                "Stel hierboven je drempelwaarde voor de bestandsgrootte in en klik op \"Nu detecteren\" om afbeeldingen te vinden die je groottelimiet overschrijden."
+            ],
+            "File Size Threshold": [
+                "Drempelwaarde bestandsgrootte"
+            ],
+            "Images larger than this size will be marked as large. Set the limit to detect oversized images.": [
+                "Afbeeldingen die groter zijn dan deze grootte worden gemarkeerd als groot. Stel de limiet in om te grote afbeeldingen te detecteren."
+            ],
+            "e.g. 1 for 1MB": [
+                "bijv. 1 voor 1MB"
+            ],
+            "Large Image Detection is a Pro feature": [
+                "Detectie van grote afbeeldingen is een Pro-functie"
+            ],
+            "Slow pages bleed traffic. Find the heavy images hurting your Core Web Vitals before they cost you visitors.": [
+                "Trage pagina's laten verkeer weglekken. Vind de zware afbeeldingen die je Core Web Vitals schaden voordat ze je bezoekers kosten."
+            ],
+            "Upgrade to find and fix large images": [
+                "Upgrade om grote afbeeldingen te vinden en op te lossen"
+            ],
+            "Compress Your Images": [
+                "Comprimeer je afbeeldingen"
+            ],
+            "Uncompressed images are the #1 reason sites fail Core Web Vitals. Compress your library in minutes - smaller files, higher rankings, zero quality loss.": [
+                "Niet-gecomprimeerde afbeeldingen zijn de belangrijkste reden dat sites zakken voor Core Web Vitals. Comprimeer je bibliotheek in enkele minuten - kleinere bestanden, hogere rankings, geen kwaliteitsverlies."
+            ],
+            "Ready to Compress Your Images?": [
+                "Klaar om je afbeeldingen te comprimeren?"
+            ],
+            "Configure your compression settings above and click \"Compress Now\" to optimize your image library.": [
+                "Configureer hierboven je compressie-instellingen en klik op \"Nu comprimeren\" om je afbeeldingsbibliotheek te optimaliseren."
+            ],
+            "Quality Level": [
+                "Kwaliteitsniveau"
+            ],
+            "Compression quality from 0-100. Higher values preserve more detail but result in larger files. 80+ recommended for best results.": [
+                "Compressiekwaliteit van 0-100. Hogere waarden behouden meer detail maar leveren grotere bestanden op. 80+ aanbevolen voor de beste resultaten."
+            ],
+            "e.g. 80 (0-100)": [
+                "bijv. 80 (0-100)"
+            ],
+            "Compress In Background": [
+                "Op de achtergrond comprimeren"
+            ],
+            "Every heavy image loses you a visitor. Compress your entire library in one click and watch page speed - and conversions - climb.": [
+                "Elke zware afbeelding kost je een bezoeker. Comprimeer je hele bibliotheek met \u00e9\u00e9n klik en zie de laadsnelheid - en de conversies - stijgen."
+            ],
+            "Convert Images to WebP": [
+                "Afbeeldingen naar WebP converteren"
+            ],
+            "Slow images cost you sales. Switch to WebP and cut file sizes by 35% - faster pages, lower bounce rates, and better rankings, zero quality loss.": [
+                "Trage afbeeldingen kosten je verkopen. Schakel over naar WebP en verklein bestandsgroottes met 35% - snellere pagina's, lagere bouncepercentages en betere rankings, zonder kwaliteitsverlies."
+            ],
+            "Convert Again": [
+                "Opnieuw converteren"
+            ],
+            "Ready to Convert to WebP?": [
+                "Klaar om naar WebP te converteren?"
+            ],
+            "There are no images to convert to WebP.": [
+                "Er zijn geen afbeeldingen om naar WebP te converteren."
+            ],
+            "Select file formats above and click \"Convert Now\" to start converting images to WebP for faster loading.": [
+                "Selecteer hierboven bestandsformaten en klik op \"Nu converteren\" om afbeeldingen naar WebP te converteren voor sneller laden."
+            ],
+            "Select File Format": [
+                "Selecteer bestandsformaat"
+            ],
+            "Convert In Background": [
+                "Op de achtergrond converteren"
+            ],
+            "WebP Conversion Complete": [
+                "WebP-conversie voltooid"
+            ],
+            "WebP Conversion in Progress": [
+                "WebP-conversie bezig"
+            ],
+            "All images have been converted to WebP.": [
+                "Alle afbeeldingen zijn naar WebP geconverteerd."
+            ],
+            "We're scanning your media library and converting eligible images to WebP.": [
+                "We scannen je mediabibliotheek en converteren geschikte afbeeldingen naar WebP."
+            ],
+            "Images Converted": [
+                "Geconverteerde afbeeldingen"
+            ],
+            "Images Remaining": [
+                "Resterende afbeeldingen"
+            ],
+            "Convert Images to AVIF": [
+                "Afbeeldingen naar AVIF converteren"
+            ],
+            "The format Google rewards. Cut image sizes by 50% over WebP, slash bandwidth costs, and pass Core Web Vitals with ease.": [
+                "Het formaat dat Google beloont. Verklein afbeeldingsgroottes met 50% ten opzichte van WebP, verlaag de bandbreedtekosten en slaag met gemak voor Core Web Vitals."
+            ],
+            "Ready to Convert to AVIF?": [
+                "Klaar om naar AVIF te converteren?"
+            ],
+            "Select file formats above and click \"Convert Now\" to convert images to AVIF for even smaller file sizes.": [
+                "Selecteer hierboven bestandsformaten en klik op \"Nu converteren\" om afbeeldingen naar AVIF te converteren voor nog kleinere bestandsgroottes."
+            ],
+            "AVIF Conversion is a Pro feature": [
+                "AVIF-conversie is een Pro-functie"
+            ],
+            "Slow loads kill conversions. AVIF halves your file sizes with no visible quality loss - faster pages, higher rankings.": [
+                "Traag laden doodt conversies. AVIF halveert je bestandsgroottes zonder zichtbaar kwaliteitsverlies - snellere pagina's, hogere rankings."
+            ],
+            "Upgrade to convert images to AVIF": [
+                "Upgrade om afbeeldingen naar AVIF te converteren"
+            ],
+            "Manage Trashed Images": [
+                "Verwijderde afbeeldingen beheren"
+            ],
+            "Leftover files from old conversions and failed uploads quietly pile up. Delete the junk and reclaim real disk space in seconds.": [
+                "Restbestanden van oude conversies en mislukte uploads stapelen zich ongemerkt op. Verwijder de rommel en win in enkele seconden echte schijfruimte terug."
+            ],
+            "File Name": [
+                "Bestandsnaam"
+            ],
+            "Image": [
+                "Afbeelding"
+            ],
+            "Upload Date": [
+                "Uploaddatum"
+            ],
+            "File Size": [
+                "Bestandsgrootte"
+            ],
+            "Action": [
+                "Actie"
+            ],
+            "No trashed images found.": [
+                "Geen verwijderde afbeeldingen gevonden."
+            ],
+            "Manage Trashed Images is a Pro feature": [
+                "Verwijderde afbeeldingen beheren is een Pro-functie"
+            ],
+            "Restore or permanently delete images you've moved to trash. Keep your library clean and reclaim disk space.": [
+                "Herstel afbeeldingen die je naar de prullenbak hebt verplaatst of verwijder ze definitief. Houd je bibliotheek schoon en win schijfruimte terug."
+            ],
+            "Activate License to manage trashed images": [
+                "Activeer de licentie om verwijderde afbeeldingen te beheren"
+            ],
+            "General Settings": [
+                "Algemene instellingen"
+            ],
+            "General settings for the plugin": [
+                "Algemene instellingen voor de plugin"
+            ],
+            "Thumbnail Generation": [
+                "Miniaturen genereren"
+            ],
+            "Disable thumbnail generation for specific image sizes": [
+                "Schakel het genereren van miniaturen uit voor specifieke afbeeldingsgroottes"
+            ],
+            "Duplicate Upload Prevention": [
+                "Voorkomen van dubbele uploads"
+            ],
+            "Prevent uploading duplicate images to your media library": [
+                "Voorkom het uploaden van dubbele afbeeldingen naar je mediabibliotheek"
+            ],
+            "File Compression Settings": [
+                "Instellingen voor bestandscompressie"
+            ],
+            "Image compression additional settings": [
+                "Aanvullende instellingen voor afbeeldingscompressie"
+            ],
+            "WebP Image Converter additional settings": [
+                "Aanvullende instellingen voor de WebP-afbeeldingsconverter"
+            ],
+            "AVIF Image Converter additional settings": [
+                "Aanvullende instellingen voor de AVIF-afbeeldingsconverter"
+            ],
+            "Platform Configuration": [
+                "Platformconfiguratie"
+            ],
+            "Manage the image used for social media sharing": [
+                "Beheer de afbeelding die wordt gebruikt voor delen op sociale media"
+            ],
+            "Debug": [
+                "Foutopsporing"
+            ],
+            "Debug Information": [
+                "Foutopsporingsinformatie"
+            ],
+            "System and plugin info for support": [
+                "Systeem- en plugininformatie voor ondersteuning"
+            ],
+            "Debug info copied to clipboard.": [
+                "Foutopsporingsinformatie gekopieerd naar klembord."
+            ],
+            "Copied!": [
+                "Gekopieerd!"
+            ],
+            "Copy as JSON": [
+                "Kopi\u00ebren als JSON"
+            ],
+            "Miss the old interface?": [
+                "Mis je de oude interface?"
+            ],
+            "Turn on legacy mode.": [
+                "Schakel de verouderde modus in."
+            ]
+        }
+    }
+}

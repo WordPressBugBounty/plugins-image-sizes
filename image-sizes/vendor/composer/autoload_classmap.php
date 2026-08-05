@@ -21,6 +21,7 @@ return array(
     'Codexpert\\ThumbPress\\API\\Settings' => $baseDir . '/app/API/Settings.php',
     'Codexpert\\ThumbPress\\API\\Thumbnails' => $baseDir . '/app/API/Thumbnails.php',
     'Codexpert\\ThumbPress\\Abstracts\\Field' => $baseDir . '/app/Abstracts/Field.php',
+    'Codexpert\\ThumbPress\\Abstracts\\Image_Converter' => $baseDir . '/app/Abstracts/Image_Converter.php',
     'Codexpert\\ThumbPress\\Abstracts\\Meta' => $baseDir . '/app/Abstracts/Meta.php',
     'Codexpert\\ThumbPress\\Bootstrap\\Activator' => $baseDir . '/app/Bootstrap/Activator.php',
     'Codexpert\\ThumbPress\\Bootstrap\\AdminNotice' => $baseDir . '/app/Bootstrap/AdminNotice.php',

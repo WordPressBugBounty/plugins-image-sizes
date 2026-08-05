@@ -73,6 +73,20 @@ class Menu {
 			10.1
 		);
 
+		// Pro submenu label. Pro users see a plain "Pro" label. Otherwise the
+		// styled CTA pill is kept in both states — only the text changes: the
+		// discount copy while the promo campaign is live, "Upgrade to Pro" once it
+		// ends. The pill background is intentionally retained across the flip.
+		if ( apply_filters( 'thumbpress_is_pro_active', defined( 'THUMBPRESS_PRO_VERSION' ) ) ) {
+			$pro_label = __( 'Pro', 'image-sizes' );
+		} else {
+			$pro_cta_text = thumbpress_promo_active()
+				? __( 'Get Up to 48% OFF', 'image-sizes' )
+				: __( 'Upgrade to Pro', 'image-sizes' );
+
+			$pro_label = '<span style="background: #ea580c; width: 100%; display: inline-block; color: #fff; text-align: center; padding: 5px 0; border-radius: 4px; font-weight: bold;">' . $pro_cta_text . '</span>';
+		}
+
 		// All submenus point to the same page slug.
 		// React Router handles the actual routing via hash.
 		$submenus = array(
@@ -117,9 +131,7 @@ class Menu {
 				'hash'  => '#/settings',
 			),
 			array(
-				'label' => apply_filters( 'thumbpress_is_pro_active', defined( 'THUMBPRESS_PRO_VERSION' ) )
-					? __( 'Pro', 'image-sizes' )
-					: '<span style="background: #ea580c; width: 100%; display: inline-block; color: #fff; text-align: center; padding: 5px 0; border-radius: 4px; font-weight: bold;">' . __( 'Get Up to 48% OFF', 'image-sizes' ) . '</span>',
+				'label' => $pro_label,
 				'hash'  => '#/pro',
 			),
 		);

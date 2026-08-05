@@ -13,13 +13,16 @@ class Hotlink_Protection {
 		// Register rewrite rule for /thumbpress-image/ (Apache .htaccess + WordPress internal routing).
 		$this->action( 'init', array( $this, 'register_rewrite' ) );
 
-		// Handle proxy URL at init priority 1 — before any WordPress routing decision.
-		// Works on both Apache and Nginx by reading REQUEST_URI directly.
-		$this->action( 'init', array( $this, 'handle_image_request' ), 1 );
-
+		// The proxy must only serve files while hotlink protection is enabled.
+		// Registering handle_image_request unconditionally let any unauthenticated
+		// visitor stream uploads through readfile() even with the feature off (#366).
 		if ( ! get_option( 'thumbpress_hotlink_protection', 0 ) ) {
 			return;
 		}
+
+		// Handle proxy URL at init priority 1 — before any WordPress routing decision.
+		// Works on both Apache and Nginx by reading REQUEST_URI directly.
+		$this->action( 'init', array( $this, 'handle_image_request' ), 1 );
 
 		// URL rewriting via output buffer only works correctly on Apache.
 		// Nginx handles image delivery differently — rewriting URLs breaks CDN and media converters.
@@ -49,6 +52,11 @@ class Hotlink_Protection {
 	 * Works on Apache and Nginx — reads REQUEST_URI directly, no stored rewrite rule needed.
 	 */
 	public function handle_image_request() {
+		// Defense in depth: never serve through the proxy unless the feature is on.
+		if ( ! get_option( 'thumbpress_hotlink_protection', 0 ) ) {
+			return;
+		}
+
 		$image_path = '';
 
 		// Check /thumbpress-image/path URL format (works on both Apache + Nginx).
@@ -76,7 +84,9 @@ class Hotlink_Protection {
 		// Security: ensure the resolved path is within uploads.
 		$real_path = realpath( $file_path );
 		$real_base = realpath( $upload_dir['basedir'] );
-		if ( ! $real_path || ! $real_base || strpos( $real_path, $real_base ) !== 0 ) {
+		// Anchor to a real directory boundary — a bare prefix match also accepts sibling
+		// dirs whose name starts with the uploads dir name (e.g. uploads-backup) (#366).
+		if ( ! $real_path || ! $real_base || strpos( $real_path, $real_base . DIRECTORY_SEPARATOR ) !== 0 ) {
 			status_header( 404 );
 			exit;
 		}
@@ -86,27 +96,35 @@ class Hotlink_Protection {
 			exit;
 		}
 
-		// Only check referer when protection is enabled.
-		if ( get_option( 'thumbpress_hotlink_protection', 0 ) && ! empty( $_SERVER['HTTP_REFERER'] ) ) {
-			$referer_host = wp_parse_url( wp_unslash( $_SERVER['HTTP_REFERER'] ), PHP_URL_HOST );
-			$site_host    = wp_parse_url( home_url(), PHP_URL_HOST );
+		// Hotlink policy: only a same-site Referer may stream a file through the proxy.
+		// A missing, empty, or unparseable Referer is treated as a hotlink attempt and
+		// blocked — gating the check behind a non-empty Referer let any client defeat the
+		// protection just by omitting the header (rel=noreferrer, a no-referrer policy, or
+		// a direct request), so the feature gave little real protection (#367).
+		$referer      = ! empty( $_SERVER['HTTP_REFERER'] ) ? wp_unslash( $_SERVER['HTTP_REFERER'] ) : '';
+		$referer_host = '' !== $referer ? wp_parse_url( $referer, PHP_URL_HOST ) : '';
+		$site_host    = wp_parse_url( home_url(), PHP_URL_HOST );
 
-			if ( $referer_host && $site_host ) {
-				$referer_host = preg_replace( '/^www\./i', '', $referer_host );
-				$site_host    = preg_replace( '/^www\./i', '', $site_host );
+		$referer_host = $referer_host ? preg_replace( '/^www\./i', '', $referer_host ) : '';
+		$site_host    = $site_host ? preg_replace( '/^www\./i', '', $site_host ) : '';
 
-				if ( strcasecmp( $referer_host, $site_host ) !== 0 ) {
-					status_header( 403 );
-					header( 'Content-Type: text/plain' );
-					echo esc_html__( 'Hotlinking not allowed.', 'image-sizes' );
-					exit;
-				}
-			}
+		if ( '' === $referer_host || '' === $site_host || strcasecmp( $referer_host, $site_host ) !== 0 ) {
+			status_header( 403 );
+			header( 'Content-Type: text/plain' );
+			echo esc_html__( 'Hotlinking not allowed.', 'image-sizes' );
+			exit;
 		}
 
-		// Serve the image.
+		// Serve the image. Restrict to known image types so the proxy can't be used to
+		// exfiltrate .php/.sql/.log/backups that web-server rules would otherwise block
+		// on the uploads directory — readfile() bypasses those rules (#366).
 		$mime         = wp_check_filetype( $real_path );
-		$content_type = ! empty( $mime['type'] ) ? $mime['type'] : 'application/octet-stream';
+		$content_type = ! empty( $mime['type'] ) ? $mime['type'] : '';
+
+		if ( '' === $content_type || ! in_array( $content_type, thumbpress_supported_image_mimes(), true ) ) {
+			status_header( 404 );
+			exit;
+		}
 
 		header( 'Content-Type: ' . $content_type );
 		header( 'Content-Length: ' . filesize( $real_path ) );

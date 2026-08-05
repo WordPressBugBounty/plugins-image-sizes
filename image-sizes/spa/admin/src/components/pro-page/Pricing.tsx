@@ -8,40 +8,99 @@ const Pricing = () => {
 		'yearly',
 	);
 
-	const pricingPlansYearly = [
+	// Server-computed promo gate. When the campaign ends the discounted figures,
+	// struck-through prices, discount badges and coupon URLs all disappear — the
+	// regular pricing below is shown instead, with no "sale ended" remnants.
+	const promoActive = window.THUMBPRESS?.promo_active ?? false;
+
+	// Regular (non-promo) figures — the permanent pricing once the campaign ends.
+	const regularPlansYearly = [
+		{
+			name: __( 'Personal', 'image-sizes' ),
+			price: '$5',
+			totalPrice: '$59',
+			featured: false,
+			features: [__( '1 Site', 'image-sizes' ), __( '1 Year Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
+			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=1'
+		},
+		{
+			name: __( 'Professional', 'image-sizes' ),
+			price: '$10',
+			totalPrice: '$119',
+			featured: true,
+			features: [__( '5 Sites', 'image-sizes' ), __( '1 Year Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
+			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=2'
+		},
+		{
+			name: __( 'Agency', 'image-sizes' ),
+			price: '$25',
+			totalPrice: '$299',
+			featured: false,
+			features: [__( 'Unlimited Sites', 'image-sizes' ), __( '1 Year Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
+			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=4'
+		},
+	];
+
+	const regularPlansLifetime = [
+		{
+			name: __( 'Personal', 'image-sizes' ),
+			price: '$119',
+			featured: false,
+			features: [__( '1 Site', 'image-sizes' ), __( 'Lifetime Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
+			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=5'
+		},
+		{
+			name: __( 'Professional', 'image-sizes' ),
+			price: '$239',
+			featured: false,
+			features: [__( '5 Sites', 'image-sizes' ), __( 'Lifetime Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
+			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=6'
+		},
+		{
+			name: __( 'Agency', 'image-sizes' ),
+			price: '$599',
+			featured: true,
+			features: [__( 'Unlimited Sites', 'image-sizes' ), __( 'Lifetime Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
+			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=8'
+		},
+	];
+
+	// Promo (Summer Sale) figures — discounted price, struck-through original,
+	// discount badge and coupon-bearing checkout URLs.
+	const promoPlansYearly = [
 		{
 			name: __( 'Personal', 'image-sizes' ),
 			price: '$3.50',
 			originalPrice: '$5',
 			discount: sprintf( /* translators: %d is the discount percentage. */ __( '%d%% OFF', 'image-sizes' ), 30 ),
-			totalPrice: '$41',
+			totalPrice: '$42',
 			featured: false,
 			features: [__( '1 Site', 'image-sizes' ), __( '1 Year Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
-			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=1&discount=FIFA30'
+			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=1&discount=SUMMER30'
 		},
 		{
 			name: __( 'Professional', 'image-sizes' ),
 			price: '$7',
 			originalPrice: '$10',
 			discount: sprintf( /* translators: %d is the discount percentage. */ __( '%d%% OFF', 'image-sizes' ), 30 ),
-			totalPrice: '$83',
+			totalPrice: '$84',
 			featured: true,
 			features: [__( '5 Sites', 'image-sizes' ), __( '1 Year Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
-			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=2&discount=FIFA30'
+			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=2&discount=SUMMER30'
 		},
 		{
 			name: __( 'Agency', 'image-sizes' ),
 			price: '$17.50',
 			originalPrice: '$25',
 			discount: sprintf( /* translators: %d is the discount percentage. */ __( '%d%% OFF', 'image-sizes' ), 30 ),
-			totalPrice: '$209',
+			totalPrice: '$210',
 			featured: false,
 			features: [__( 'Unlimited Sites', 'image-sizes' ), __( '1 Year Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
-			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=4&discount=FIFA30'
+			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=4&discount=SUMMER30'
 		},
 	];
 
-	const pricingPlansLifetime = [
+	const promoPlansLifetime = [
 		{
 			name: __( 'Personal', 'image-sizes' ),
 			price: '$62',
@@ -49,27 +108,30 @@ const Pricing = () => {
 			discount: sprintf( /* translators: %d is the discount percentage. */ __( '%d%% OFF', 'image-sizes' ), 48 ),
 			featured: false,
 			features: [__( '1 Site', 'image-sizes' ), __( 'Lifetime Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
-			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=5&discount=FIFA48'
+			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=5&discount=SUMMER48'
 		},
 		{
 			name: __( 'Professional', 'image-sizes' ),
-			price: '$124',
+			price: '$125',
 			originalPrice: '$239',
 			discount: sprintf( /* translators: %d is the discount percentage. */ __( '%d%% OFF', 'image-sizes' ), 48 ),
 			featured: false,
 			features: [__( '5 Sites', 'image-sizes' ), __( 'Lifetime Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
-			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=6&discount=FIFA48'
+			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=6&discount=SUMMER48'
 		},
 		{
 			name: __( 'Agency', 'image-sizes' ),
-			price: '$311',
+			price: '$312',
 			originalPrice: '$599',
 			discount: sprintf( /* translators: %d is the discount percentage. */ __( '%d%% OFF', 'image-sizes' ), 48 ),
 			featured: true,
 			features: [__( 'Unlimited Sites', 'image-sizes' ), __( 'Lifetime Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
-			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=8&discount=FIFA48'
+			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=8&discount=SUMMER48'
 		},
 	];
+
+	const pricingPlansYearly = promoActive ? promoPlansYearly : regularPlansYearly;
+	const pricingPlansLifetime = promoActive ? promoPlansLifetime : regularPlansLifetime;
 
 	return (
 		<div className="px-[80px] py-16" id='thumbpress-pro-pricing'>

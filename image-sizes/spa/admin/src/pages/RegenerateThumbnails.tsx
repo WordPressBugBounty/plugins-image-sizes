@@ -25,6 +25,7 @@ import {
 	ImageDeletedIcon,
 	ImageCreatedIcon,
 	SpaceSavedIcon2,
+	FailedIcon,
 } from '../components/icons';
 
 import Header from '../components/layout/Header';
@@ -46,6 +47,7 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 		deleted: 0,
 		space_saved_label: '',
 		not_found: 0,
+		failed: 0,
 	});
 	const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
 	const generationRef = useRef(0);
@@ -83,6 +85,7 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 						deleted: res.data.deleted,
 						space_saved_label: res.data.space_saved_label || '',
 						not_found: res.data.not_found || 0,
+						failed: res.data.failed || 0,
 					});
 					if (res.data.is_complete) {
 						setRegenerating(false);
@@ -121,6 +124,7 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 						deleted: progressRes.data.deleted,
 						space_saved_label: progressRes.data.space_saved_label || '',
 						not_found: progressRes.data.not_found || 0,
+						failed: progressRes.data.failed || 0,
 					});
 					if (!progressRes.data.is_complete) {
 						setRegenerating(true);
@@ -153,6 +157,7 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 			deleted: 0,
 			space_saved_label: '',
 			not_found: 0,
+			failed: 0,
 		});
 		stopPolling();
 		cancelRegenerate();
@@ -171,6 +176,7 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 			deleted: 0,
 			space_saved_label: '',
 			not_found: 0,
+			failed: 0,
 		});
 
 		let offset = 0;
@@ -180,6 +186,7 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 		let thumbsCreated = 0;
 		let spaceSaved = 0;
 		let notFound = 0;
+		let failed = 0;
 		let processedCount = 0;
 		let firstChunk = true;
 
@@ -195,6 +202,7 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 					spaceSaved,
 					notFound,
 					processedCount,
+					failed,
 				);
 
 				if (generationRef.current !== myGen) return;
@@ -242,6 +250,7 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 					deleted: Number(data.thumbs_deleted) || 0,
 					space_saved_label: data.space_saved_label || '',
 					not_found: Number(data.not_found) || 0,
+					failed: Number(data.failed) || 0,
 				});
 
 				offset = currentOffset;
@@ -249,6 +258,7 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 				thumbsCreated = Number(data.thumbs_created) || 0;
 				spaceSaved = Number(data.space_saved) || 0;
 				notFound = Number(data.not_found) || 0;
+				failed = Number(data.failed) || 0;
 				processedCount = Number(data.processed_count) || 0;
 
 				if (currentProgress < 100 && currentOffset > 0) {
@@ -273,7 +283,7 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 			setHasStarted(true);
 			setNoImages(false);
 			setProgress(0);
-			setRegenStats({ processed: 0, created: 0, deleted: 0, space_saved_label: '', not_found: 0 });
+			setRegenStats({ processed: 0, created: 0, deleted: 0, space_saved_label: '', not_found: 0, failed: 0 });
 			const res = await regenerateBackground(limit);
 			if (!res.success || res.data?.total === 0) {
 				setRegenerating(false);
@@ -290,6 +300,7 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 				deleted: 0,
 				space_saved_label: '',
 				not_found: 0,
+				failed: 0,
 			});
 			pollProgress();
 		} catch (err) {
@@ -305,13 +316,15 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 		icon,
 		value,
 		label,
+		accent,
 	}: {
 		icon: React.ReactNode;
 		value: number | string;
 		label: string;
+		accent?: 'red';
 	}) => (
 		<div className="flex items-center gap-3 rounded-xl border border-[#E2E8F0] bg-white px-5 py-4">
-			<div className="w-10 h-10 rounded-lg bg-[#F0EBFF] flex items-center justify-center">
+			<div className={`w-10 h-10 rounded-lg flex items-center justify-center ${accent === 'red' ? 'bg-[#FDECEC] text-[#FF3A52]' : 'bg-[#F0EBFF]'}`}>
 				{icon}
 			</div>
 			<div>
@@ -490,6 +503,12 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 									label={__('Images Processed', 'image-sizes')}
 								/>
 								<StatCard
+									icon={<FailedIcon />}
+									value={ numberFormat( regenStats.failed || 0 ) }
+									label={__('Images Failed', 'image-sizes')}
+									accent="red"
+								/>
+								<StatCard
 									icon={
 										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="currentColor" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
 											<path d="M15.5 8C15.7761 8 16 7.77614 16 7.5C16 7.22386 15.7761 7 15.5 7M15.5 8C15.2239 8 15 7.77614 15 7.5C15 7.22386 15.2239 7 15.5 7M15.5 8V7" />
@@ -516,13 +535,11 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 									value={ numberFormat( regenStats.created ) }
 									label={__('Images Created', 'image-sizes')}
 								/>
-								<div className="col-start-2">
-									<StatCard
-										icon={<SpaceSavedIcon2 />}
-										value={regenStats.space_saved_label || formatBytes(0)}
-										label={__('Space Saved', 'image-sizes')}
-									/>
-								</div>
+								<StatCard
+									icon={<SpaceSavedIcon2 />}
+									value={regenStats.space_saved_label || formatBytes(0)}
+									label={__('Space Saved', 'image-sizes')}
+								/>
 							</div>
 						</div>
 					)}

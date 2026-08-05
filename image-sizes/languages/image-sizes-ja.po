@@ -1,0 +1,2073 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ThumbPress\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-23T07:06:16+00:00\n"
+"PO-Revision-Date: 2026-07-23 07:06+0000\n"
+"Last-Translator: \n"
+"Language-Team: Japanese\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: WP-CLI 2.13.0-alpha-3eb2dd7\n"
+"X-Domain: image-sizes\n"
+
+#: app/API/Convert_Avif.php:18
+msgid "AVIF conversion requires PHP 8.0 or higher."
+msgstr "AVIF変換にはPHP 8.0以上が必要です。"
+
+#: app/API/Convert_Avif.php:24
+#: app/API/Convert_Webp.php:377
+msgid "Invalid image ID."
+msgstr "無効な画像IDです。"
+
+#: app/API/Convert_Avif.php:30
+#: app/API/Convert_Avif.php:38
+#: app/API/Convert_Webp.php:383
+#: app/API/Convert_Webp.php:391
+msgid "Source image file not found."
+msgstr "元の画像ファイルが見つかりません。"
+
+#: app/API/Convert_Avif.php:72
+#: app/API/Convert_Webp.php:424
+msgid "metadata generation returned nothing"
+msgstr "メタデータの生成で何も返されませんでした"
+
+#. translators: %s: underlying reason metadata generation failed
+#: app/API/Convert_Avif.php:76
+msgid "Converted the image to AVIF but could not generate its metadata (%s); rolled back."
+msgstr "画像をAVIFに変換しましたが、メタデータを生成できなかったため（%s）、ロールバックしました。"
+
+#: app/API/Convert_Avif.php:149
+msgid "Image converted to AVIF successfully."
+msgstr "画像をAVIFに正常に変換しました。"
+
+#: app/API/Convert_Webp.php:51
+#: app/API/Convert_Webp.php:291
+msgid "No file formats selected."
+msgstr "ファイル形式が選択されていません。"
+
+#: app/API/Convert_Webp.php:57
+#: app/API/Convert_Webp.php:296
+msgid "No valid file formats selected."
+msgstr "有効なファイル形式が選択されていません。"
+
+#: app/API/Convert_Webp.php:100
+#: app/API/Convert_Webp.php:317
+#: app/API/Regenerate.php:34
+#: app/API/Regenerate.php:121
+msgid "No images found."
+msgstr "画像が見つかりません。"
+
+#: app/API/Convert_Webp.php:115
+#: app/API/Convert_Webp.php:262
+msgid "Congratulations, Converting Images to WebP is Completed!"
+msgstr "おめでとうございます。画像のWebPへの変換が完了しました！"
+
+#: app/API/Convert_Webp.php:260
+msgid "Converting Images to WebP..."
+msgstr "画像をWebPに変換しています..."
+
+#: app/API/Convert_Webp.php:336
+#: app/API/Regenerate.php:130
+msgid "Failed to schedule action."
+msgstr "アクションのスケジュールに失敗しました。"
+
+#: app/API/Convert_Webp.php:341
+msgid "Your images are being converted in the background."
+msgstr "画像はバックグラウンドで変換されています。"
+
+#. translators: %s: underlying reason metadata generation failed
+#: app/API/Convert_Webp.php:428
+msgid "Converted the image but could not generate its metadata (%s); rolled back."
+msgstr "画像を変換しましたが、メタデータを生成できなかったため（%s）、ロールバックしました。"
+
+#: app/API/Convert_Webp.php:498
+msgid "Image converted successfully."
+msgstr "画像を正常に変換しました。"
+
+#: app/API/Regenerate.php:77
+msgid "Regenerating Thumbnails..."
+msgstr "サムネイルを再生成しています..."
+
+#: app/API/Regenerate.php:79
+msgid "Congratulations, Thumbnail Regeneration is Completed!"
+msgstr "おめでとうございます。サムネイルの再生成が完了しました！"
+
+#: app/API/Regenerate.php:135
+msgid "Your images are being regenerated in the background."
+msgstr "画像はバックグラウンドで再生成されています。"
+
+#: app/API/Regenerate.php:148
+msgid "Invalid attachment."
+msgstr "無効な添付ファイルです。"
+
+#: app/API/Regenerate.php:157
+msgid "Image file not found."
+msgstr "画像ファイルが見つかりません。"
+
+#: app/API/Regenerate.php:165
+msgid "Thumbnails regenerated successfully."
+msgstr "サムネイルを正常に再生成しました。"
+
+#: app/API/Settings.php:198
+#: build/admin.js:13
+msgid "Settings saved successfully."
+msgstr "設定を正常に保存しました。"
+
+#: app/API/Thumbnails.php:150
+msgid "Invalid data format. Array expected."
+msgstr "無効なデータ形式です。配列が必要です。"
+
+#: app/API/Thumbnails.php:160
+msgid "Disabled sizes saved successfully."
+msgstr "無効化したサイズを正常に保存しました。"
+
+#: app/API/Thumbnails.php:163
+msgid "No changes detected."
+msgstr "変更は検出されませんでした。"
+
+#: app/Bootstrap/AdminNotice.php:87
+#: app/Bootstrap/AdminNotice.php:167
+#: app/Bootstrap/AdminNotice.php:295
+#: app/Controllers/Admin/Init.php:229
+msgid "Dismiss this notice."
+msgstr "この通知を非表示にする。"
+
+#: app/Bootstrap/AdminNotice.php:90
+msgid "ThumbPress Pro update required!"
+msgstr "ThumbPress Proの更新が必要です！"
+
+#. translators: 1: installed pro version, 2: required pro version
+#: app/Bootstrap/AdminNotice.php:93
+msgid "ThumbPress requires ThumbPress Pro version %2$s or higher. You have version %1$s. Please update to use all new features."
+msgstr "ThumbPressにはThumbPress Proバージョン%2$s以上が必要です。現在お使いのバージョンは%1$sです。すべての新機能を利用するには更新してください。"
+
+#: app/Bootstrap/AdminNotice.php:100
+msgid "Update ThumbPress Pro Now"
+msgstr "今すぐThumbPress Proを更新"
+
+#: app/Bootstrap/AdminNotice.php:170
+msgid "ThumbPress Pro is installed but not activated!"
+msgstr "ThumbPress Proはインストールされていますが、有効化されていません！"
+
+#: app/Bootstrap/AdminNotice.php:171
+msgid "Activate ThumbPress Pro to unlock all premium features including image compression, unused image detection, large image detection, and more."
+msgstr "ThumbPress Proを有効化すると、画像圧縮、未使用画像の検出、大きな画像の検出など、すべてのプレミアム機能が利用できるようになります。"
+
+#: app/Bootstrap/AdminNotice.php:175
+msgid "Activate ThumbPress Pro"
+msgstr "ThumbPress Proを有効化"
+
+#: app/Bootstrap/AdminNotice.php:299
+msgid "A new version of ThumbPress is ready!"
+msgstr "ThumbPressの新しいバージョンが利用可能です！"
+
+#: app/Bootstrap/AdminNotice.php:302
+msgid "You are using the new dashboard. Switch back to classic anytime."
+msgstr "現在、新しいダッシュボードを使用しています。いつでもクラシック版に戻せます。"
+
+#: app/Bootstrap/AdminNotice.php:304
+msgid "Would you like to try the new modern dashboard, or keep using the classic version?"
+msgstr "新しいモダンなダッシュボードを試しますか、それともクラシック版を使い続けますか？"
+
+#: app/Bootstrap/AdminNotice.php:311
+msgid "Using New Version"
+msgstr "新バージョンを使用中"
+
+#: app/Bootstrap/AdminNotice.php:314
+msgid "Switch to Classic"
+msgstr "クラシック版に切り替え"
+
+#: app/Bootstrap/AdminNotice.php:318
+msgid "Try New Version"
+msgstr "新バージョンを試す"
+
+#: app/Bootstrap/AdminNotice.php:321
+msgid "Using Classic"
+msgstr "クラシック版を使用中"
+
+#: app/Controllers/Admin/Init.php:70
+msgid "July 19"
+msgstr "7月19日"
+
+#: app/Controllers/Admin/Init.php:74
+msgid "July 22"
+msgstr "7月22日"
+
+#. translators: %s: offer deadline date, e.g. "July 19".
+#: app/Controllers/Admin/Init.php:96
+msgid "ThumbPress: World Cup - 48%% Off - Ends %s"
+msgstr "ThumbPress: ワールドカップ - 48%%オフ - %sで終了"
+
+#: app/Controllers/Admin/Init.php:98
+msgid "ThumbPress: World Cup - 48% Off"
+msgstr "ThumbPress: ワールドカップ - 48%オフ"
+
+#: app/Controllers/Admin/Init.php:104
+msgid "Dismiss"
+msgstr "閉じる"
+
+#: app/Controllers/Admin/Init.php:194
+msgid "Permission denied."
+msgstr "権限がありません。"
+
+#: app/Controllers/Admin/Init.php:232
+msgid "ThumbPress is installed!"
+msgstr "ThumbPressがインストールされました！"
+
+#: app/Controllers/Admin/Init.php:233
+msgid "Your images are ready to be optimized. Visit the dashboard to get started."
+msgstr "画像を最適化する準備が整いました。ダッシュボードにアクセスして始めましょう。"
+
+#: app/Controllers/Admin/Init.php:237
+msgid "Go to Dashboard"
+msgstr "ダッシュボードへ移動"
+
+#: app/Controllers/Admin/Menu.php:62
+#: app/Controllers/Admin/Menu.php:63
+msgid "ThumbPress"
+msgstr "ThumbPress"
+
+#: app/Controllers/Admin/Menu.php:75
+#: app/Controllers/Admin/Menu.php:170
+#: build/admin.js:13
+msgid "Dashboard"
+msgstr "ダッシュボード"
+
+#: app/Controllers/Admin/Menu.php:79
+#: app/Controllers/Admin/Menu.php:175
+#: build/admin.js:13
+msgid "Thumbnails"
+msgstr "サムネイル"
+
+#: app/Controllers/Admin/Menu.php:83
+#: app/Controllers/Admin/Menu.php:180
+#: build/admin.js:13
+msgid "Unused Images"
+msgstr "未使用の画像"
+
+#: app/Controllers/Admin/Menu.php:87
+#: app/Controllers/Admin/Menu.php:186
+#: build/admin.js:13
+msgid "Duplicate Images"
+msgstr "重複画像"
+
+#: app/Controllers/Admin/Menu.php:91
+#: app/Controllers/Admin/Menu.php:192
+#: build/admin.js:13
+msgid "Large Images"
+msgstr "大きな画像"
+
+#: app/Controllers/Admin/Menu.php:95
+#: app/Controllers/Admin/Menu.php:198
+#: build/admin.js:13
+msgid "Compress Images"
+msgstr "画像を圧縮"
+
+#: app/Controllers/Admin/Menu.php:99
+#: app/Controllers/Admin/Menu.php:204
+#: app/Controllers/Common/Convert_Webp.php:131
+#: app/Controllers/Common/Convert_Webp.php:135
+#: build/admin.js:13
+msgid "Convert to WebP"
+msgstr "WebPに変換"
+
+#: app/Controllers/Admin/Menu.php:103
+#: app/Controllers/Admin/Menu.php:209
+#: app/Controllers/Common/Convert_Avif.php:130
+#: app/Controllers/Common/Convert_Avif.php:143
+#: app/Controllers/Common/Convert_Avif.php:147
+#: build/admin.js:13
+msgid "Convert to AVIF"
+msgstr "AVIFに変換"
+
+#: app/Controllers/Admin/Menu.php:107
+#: app/Controllers/Admin/Menu.php:215
+#: build/admin.js:13
+msgid "Trashed Images"
+msgstr "ゴミ箱の画像"
+
+#: app/Controllers/Admin/Menu.php:111
+#: app/Controllers/Admin/Menu.php:221
+#: build/admin.js:13
+msgid "Settings"
+msgstr "設定"
+
+#: app/Controllers/Admin/Menu.php:116
+#: app/Controllers/Admin/Menu.php:226
+#: build/admin.js:13
+msgid "Pro"
+msgstr "Pro"
+
+#: app/Controllers/Admin/Menu.php:117
+msgid "World Cup 48% Off"
+msgstr "ワールドカップ 48%オフ"
+
+#: app/Controllers/Admin/Menu.php:152
+msgid "Loading.."
+msgstr "読み込み中.."
+
+#: app/Controllers/Common/API.php:63
+msgid "Array of disabled size names"
+msgstr "無効化されたサイズ名の配列"
+
+#: app/Controllers/Common/API.php:83
+msgid "Offset for pagination"
+msgstr "ページネーションのオフセット"
+
+#: app/Controllers/Common/API.php:88
+#: app/Controllers/Common/API.php:206
+msgid "Number of images to process"
+msgstr "処理する画像の数"
+
+#: app/Controllers/Common/API.php:93
+msgid "Previously deleted thumbnails count"
+msgstr "以前に削除されたサムネイルの数"
+
+#: app/Controllers/Common/API.php:98
+msgid "Previously created thumbnails count"
+msgstr "以前に作成されたサムネイルの数"
+
+#: app/Controllers/Common/API.php:115
+#: app/Controllers/Common/API.php:233
+msgid "Batch size for background processing"
+msgstr "バックグラウンド処理のバッチサイズ"
+
+#: app/Controllers/Common/API.php:142
+msgid "Attachment ID to regenerate"
+msgstr "再生成する添付ファイルID"
+
+#: app/Controllers/Common/API.php:201
+msgid "Last processed attachment ID (pagination cursor)"
+msgstr "最後に処理した添付ファイルID（ページネーションカーソル）"
+
+#: app/Controllers/Common/API.php:211
+msgid "Cumulative processed count"
+msgstr "累計処理数"
+
+#: app/Controllers/Common/API.php:216
+msgid "Cumulative converted count"
+msgstr "累計変換数"
+
+#: app/Controllers/Common/API.php:260
+#: app/Controllers/Common/API.php:280
+msgid "Attachment ID to convert"
+msgstr "変換する添付ファイルID"
+
+#: app/Controllers/Common/Convert_Avif.php:189
+msgid "This image is already an AVIF file."
+msgstr "この画像はすでにAVIFファイルです。"
+
+#. translators: 1: estimated memory needed in MB, 2: current PHP memory limit in MB
+#: app/Controllers/Common/Convert_Avif.php:220
+#: app/Controllers/Common/Convert_Webp.php:206
+msgid "Image is too large to convert within the server memory limit (needs ~%1$d MB, limit %2$d MB). Increase PHP memory_limit or WP_MAX_MEMORY_LIMIT and try again."
+msgstr "画像が大きすぎるため、サーバーのメモリ制限内で変換できません（約%1$d MBが必要ですが、制限は%2$d MBです）。PHPのmemory_limitまたはWP_MAX_MEMORY_LIMITを引き上げてから再試行してください。"
+
+#. translators: %s: underlying image-editor error message
+#: app/Controllers/Common/Convert_Avif.php:234
+#: app/Controllers/Common/Convert_Webp.php:220
+msgid "No image editor is available to process this file (%s)."
+msgstr "このファイルを処理できる画像エディターがありません（%s）。"
+
+#. translators: %s: underlying image-editor error message
+#: app/Controllers/Common/Convert_Avif.php:246
+msgid "Could not write the AVIF file (%s)."
+msgstr "AVIFファイルを書き込めませんでした（%s）。"
+
+#: app/Controllers/Common/Convert_Avif.php:264
+msgid "The server image library could not produce an AVIF file (AVIF output is not supported here)."
+msgstr "サーバーの画像ライブラリでAVIFファイルを生成できませんでした（この環境ではAVIF出力がサポートされていません）。"
+
+#: app/Controllers/Common/Convert_Webp.php:177
+msgid "This image is already a WebP file."
+msgstr "この画像はすでにWebPファイルです。"
+
+#. translators: %s: underlying image-editor error message
+#: app/Controllers/Common/Convert_Webp.php:232
+msgid "Could not write the WebP file (%s)."
+msgstr "WebPファイルを書き込めませんでした（%s）。"
+
+#: app/Controllers/Common/Convert_Webp.php:247
+msgid "The server image library could not produce a WebP file (WebP output is not supported here)."
+msgstr "サーバーの画像ライブラリでWebPファイルを生成できませんでした（この環境ではWebP出力がサポートされていません）。"
+
+#: app/Controllers/Common/Hotlink_Protection.php:101
+msgid "Hotlinking not allowed."
+msgstr "ホットリンクは許可されていません。"
+
+#. translators: %1$s: maximum allowed image size, %2$s: size unit (KB or MB)
+#: app/Controllers/Common/Image_Max_Size.php:37
+msgid "[ ThumbPress Alert ] Image exceeds the maximum allowed size of %1$s %2$s."
+msgstr "[ ThumbPress Alert ] 画像が許可されている最大サイズ%1$s %2$sを超えています。"
+
+#. translators: %1$s: maximum allowed image width in pixels, %2$s: maximum allowed image height in pixels
+#: app/Controllers/Common/Image_Max_Size.php:52
+msgid "[ ThumbPress Alert ] Image exceeds the maximum allowed resolution of %1$sx%2$s pixels."
+msgstr "[ ThumbPress Alert ] 画像が許可されている最大解像度%1$sx%2$sピクセルを超えています。"
+
+#: app/Controllers/Common/Media_Buttons.php:68
+msgid "Image Compression is a Pro feature"
+msgstr "画像圧縮はPro機能です"
+
+#: app/Controllers/Common/Media_Buttons.php:69
+msgid "Reduce file sizes without losing visual quality. Compress images in bulk or one at a time to speed up your site."
+msgstr "見た目の品質を損なうことなくファイルサイズを削減します。画像を一括または個別に圧縮して、サイトを高速化しましょう。"
+
+#: app/Controllers/Common/Media_Buttons.php:70
+msgid "Upgrade to compress images"
+msgstr "アップグレードして画像を圧縮"
+
+#: app/Controllers/Common/Media_Buttons.php:73
+msgid "Image Replacement is a Pro feature"
+msgstr "画像の置き換えはPro機能です"
+
+#: app/Controllers/Common/Media_Buttons.php:74
+msgid "Swap out images without losing their metadata or breaking existing links. Drop in a new file and ThumbPress handles the rest."
+msgstr "メタデータを失ったり既存のリンクを壊したりすることなく、画像を差し替えられます。新しいファイルをドロップするだけで、あとはThumbPressが処理します。"
+
+#: app/Controllers/Common/Media_Buttons.php:75
+msgid "Upgrade to replace images"
+msgstr "アップグレードして画像を置き換え"
+
+#: app/Controllers/Common/Media_Buttons.php:78
+msgid "Image Editor is a Pro feature"
+msgstr "画像エディターはPro機能です"
+
+#: app/Controllers/Common/Media_Buttons.php:79
+msgid "Crop, rotate, flip and adjust images directly inside WordPress — no external tools needed."
+msgstr "WordPress内で画像を直接切り抜き、回転、反転、調整できます。外部ツールは不要です。"
+
+#: app/Controllers/Common/Media_Buttons.php:80
+msgid "Upgrade to edit images"
+msgstr "アップグレードして画像を編集"
+
+#: app/Controllers/Common/Media_Buttons.php:109
+msgid "Select Option"
+msgstr "オプションを選択"
+
+#: app/Controllers/Common/Media_Buttons.php:120
+msgid "Compress"
+msgstr "圧縮"
+
+#: app/Controllers/Common/Media_Buttons.php:124
+msgid "Compress Image"
+msgstr "画像を圧縮"
+
+#: app/Controllers/Common/Media_Buttons.php:143
+#: app/Controllers/Common/Media_Buttons.php:148
+msgid "Replace New File"
+msgstr "新しいファイルに置き換え"
+
+#: app/Controllers/Common/Media_Buttons.php:169
+msgid "Edit with ThumbPress"
+msgstr "ThumbPressで編集"
+
+#: app/Controllers/Common/Media_Buttons.php:174
+msgid "Edit Image"
+msgstr "画像を編集"
+
+#: app/Controllers/Common/Media_Buttons.php:193
+#: build/admin.js:1
+msgid "Close"
+msgstr "閉じる"
+
+#: app/Controllers/Common/Social_Share.php:41
+#: build/admin.js:13
+msgid "Social Share Image"
+msgstr "ソーシャルシェア画像"
+
+#: app/Controllers/Common/Social_Share.php:69
+msgid "Facebook Image:"
+msgstr "Facebook画像:"
+
+#: app/Controllers/Common/Social_Share.php:71
+#: app/Controllers/Common/Social_Share.php:82
+#: app/Controllers/Common/Social_Share.php:93
+#: app/Controllers/Common/Social_Share.php:104
+msgid "Upload Image"
+msgstr "画像をアップロード"
+
+#: app/Controllers/Common/Social_Share.php:72
+#: app/Controllers/Common/Social_Share.php:83
+#: app/Controllers/Common/Social_Share.php:94
+#: app/Controllers/Common/Social_Share.php:105
+msgid "Remove Image"
+msgstr "画像を削除"
+
+#: app/Controllers/Common/Social_Share.php:80
+msgid "LinkedIn Image:"
+msgstr "LinkedIn画像:"
+
+#: app/Controllers/Common/Social_Share.php:91
+msgid "Twitter Image:"
+msgstr "Twitter画像:"
+
+#: app/Controllers/Common/Social_Share.php:102
+msgid "Pinterest Image:"
+msgstr "Pinterest画像:"
+
+#: app/Controllers/Common/Thumbnails.php:52
+#: app/Controllers/Common/Thumbnails.php:56
+#: build/admin.js:13
+msgid "Regenerate Thumbnails"
+msgstr "サムネイルを再生成"
+
+#: app/Helpers/Email.php:76
+msgid "Thumbpress. All rights reserved."
+msgstr "Thumbpress. 無断転載を禁じます。"
+
+#: app/Helpers/functions.php:26
+#: build/admin.js:13
+msgid "General"
+msgstr "一般"
+
+#: app/Helpers/functions.php:27
+msgid "General settings"
+msgstr "一般設定"
+
+#: app/Helpers/functions.php:31
+msgid "Pages"
+msgstr "ページ"
+
+#: app/Helpers/functions.php:32
+msgid "Page Settings"
+msgstr "ページ設定"
+
+#: app/Helpers/functions.php:35
+msgid "Main Pages"
+msgstr "メインページ"
+
+#: app/Helpers/functions.php:36
+msgid "Main Pages Settings"
+msgstr "メインページ設定"
+
+#: app/Helpers/functions.php:41
+msgid "Homepage"
+msgstr "ホームページ"
+
+#: app/Helpers/functions.php:47
+msgid "Landing Page"
+msgstr "ランディングページ"
+
+#: app/Helpers/functions.php:57
+msgid "Email"
+msgstr "メール"
+
+#: app/Helpers/functions.php:58
+msgid "Email settings"
+msgstr "メール設定"
+
+#: app/Helpers/functions.php:62
+msgid "New Ticket"
+msgstr "新規チケット"
+
+#: app/Helpers/functions.php:63
+msgid "New Ticket Notification"
+msgstr "新規チケット通知"
+
+#: app/Helpers/functions.php:66
+msgid "Agent Email"
+msgstr "担当者メール"
+
+#: app/Helpers/functions.php:67
+msgid "Email to an Agent"
+msgstr "担当者へのメール"
+
+#: app/Helpers/functions.php:72
+#: app/Helpers/functions.php:93
+#: app/Helpers/functions.php:120
+msgid "Header"
+msgstr "ヘッダー"
+
+#: app/Helpers/functions.php:77
+#: app/Helpers/functions.php:98
+#: app/Helpers/functions.php:125
+msgid "Subject"
+msgstr "件名"
+
+#: app/Helpers/functions.php:82
+#: app/Helpers/functions.php:103
+#: app/Helpers/functions.php:130
+msgid "Body"
+msgstr "本文"
+
+#: app/Helpers/functions.php:87
+msgid "Client Email"
+msgstr "顧客メール"
+
+#: app/Helpers/functions.php:88
+#: app/Helpers/functions.php:115
+msgid "Email to a Client"
+msgstr "顧客へのメール"
+
+#: app/Helpers/functions.php:110
+msgid "Agent Reply"
+msgstr "担当者の返信"
+
+#: app/Helpers/functions.php:111
+msgid "Agent Reply Notification"
+msgstr "担当者返信通知"
+
+#: app/Helpers/functions.php:114
+msgid "Agent Reply Email"
+msgstr "担当者返信メール"
+
+#: app/Helpers/Utility.php:147
+msgid "- Choose a %s -"
+msgstr "- %sを選択 -"
+
+#: build/admin.js:1
+msgid "Days"
+msgstr "日"
+
+#: build/admin.js:1
+msgid "Hrs"
+msgstr "時間"
+
+#: build/admin.js:1
+msgid "Min"
+msgstr "分"
+
+#: build/admin.js:1
+msgid "Sec"
+msgstr "秒"
+
+#: build/admin.js:1
+msgid "FIFA World Cup Sale is Live!"
+msgstr "FIFAワールドカップセール開催中！"
+
+#: build/admin.js:1
+msgid "Score up to 48% off ThumbPress Pro during our FIFA World Cup sale. The discount is auto-applied at checkout — grab it before the whistle blows!"
+msgstr "FIFAワールドカップセール期間中、ThumbPress Proが最大48%オフ。割引はチェックアウト時に自動適用されます。試合終了のホイッスルが鳴る前に手に入れましょう！"
+
+#: build/admin.js:1
+msgid "Offer expired"
+msgstr "オファーは終了しました"
+
+#: build/admin.js:1
+msgid "Offer ends July 19"
+msgstr "オファーは7月19日に終了"
+
+#: build/admin.js:1
+msgid "World Cup discount applied!"
+msgstr "ワールドカップ割引が適用されました！"
+
+#: build/admin.js:1
+msgid "Your up-to-48% discount is auto-applied at checkout."
+msgstr "最大48%の割引がチェックアウト時に自動適用されます。"
+
+#: build/admin.js:1
+msgid "Get 48% Off — View Pricing →"
+msgstr "48%オフを入手 — 料金を見る →"
+
+#: build/admin.js:1
+msgid "No thanks, I don't want a discount"
+msgstr "いいえ、割引は必要ありません"
+
+#: build/admin.js:1
+msgid "Community"
+msgstr "コミュニティ"
+
+#: build/admin.js:1
+msgid "Support"
+msgstr "サポート"
+
+#: build/admin.js:1
+msgid "Docs"
+msgstr "ドキュメント"
+
+#: build/admin.js:1
+#: build/admin.js:13
+msgid "Upgrade to Pro"
+msgstr "Proにアップグレード"
+
+#: build/admin.js:1
+msgid "Upgrade to View"
+msgstr "アップグレードして表示"
+
+#. translators: %s is a locale-formatted number.
+#: build/admin.js:3
+msgid "%s%%"
+msgstr "%s%%"
+
+#. translators: %s is a locale-formatted number of bytes.
+#: build/admin.js:5
+msgid "%s B"
+msgstr "%s B"
+
+#. translators: %s is a locale-formatted number of kilobytes.
+#: build/admin.js:7
+msgid "%s KB"
+msgstr "%s KB"
+
+#. translators: %s is a locale-formatted number of megabytes.
+#: build/admin.js:9
+msgid "%s MB"
+msgstr "%s MB"
+
+#. translators: %s is a locale-formatted number of gigabytes.
+#: build/admin.js:11
+msgid "%s GB"
+msgstr "%s GB"
+
+#. translators: %s is a locale-formatted number of terabytes.
+#: build/admin.js:13
+msgid "%s TB"
+msgstr "%s TB"
+
+#: build/admin.js:13
+msgid "Good"
+msgstr "良好"
+
+#: build/admin.js:13
+msgid "Normal"
+msgstr "普通"
+
+#: build/admin.js:13
+msgid "Danger"
+msgstr "危険"
+
+#: build/admin.js:13
+msgid "Overall"
+msgstr "総合"
+
+#: build/admin.js:13
+msgid "Health Score"
+msgstr "ヘルススコア"
+
+#: build/admin.js:13
+msgid "Status:"
+msgstr "ステータス:"
+
+#: build/admin.js:13
+msgid "Quick Facts"
+msgstr "基本情報"
+
+#: build/admin.js:13
+msgid "EasyCommerce promotional notice"
+msgstr "EasyCommerceのプロモーション通知"
+
+#: build/admin.js:13
+msgid "New from the ThumbPress team - Try"
+msgstr "ThumbPressチームからの新着 - ぜひお試しください:"
+
+#: build/admin.js:13
+msgid "EasyCommerce"
+msgstr "EasyCommerce"
+
+#: build/admin.js:13
+msgid ". A fast, AI-powered way to sell on WordPress."
+msgstr "。WordPressで商品を販売できる、高速かつAI搭載の方法です。"
+
+#: build/admin.js:13
+msgid "Learn more"
+msgstr "詳しく見る"
+
+#: build/admin.js:13
+msgid "Dismiss EasyCommerce notice"
+msgstr "EasyCommerceの通知を閉じる"
+
+#: build/admin.js:13
+msgid "Activate License"
+msgstr "ライセンスを有効化"
+
+#: build/admin.js:13
+msgid "Image Editor"
+msgstr "画像エディター"
+
+#: build/admin.js:13
+msgid "Enhance images with filters and adjustments to showcase their best versions."
+msgstr "フィルターや調整で画像を引き立て、最高の状態で見せましょう。"
+
+#: build/admin.js:13
+msgid "The built-in Image Editor is a Pro feature"
+msgstr "内蔵の画像エディターはPro機能です"
+
+#: build/admin.js:13
+msgid "Leaving WordPress just to crop an image breaks your whole workflow. Edit, resize, and re-optimize everything without switching tools."
+msgstr "画像を切り抜くためだけにWordPressを離れると、ワークフロー全体が中断されます。ツールを切り替えることなく、編集、リサイズ、再最適化のすべてを行えます。"
+
+#: build/admin.js:13
+msgid "Upgrade to edit images in WordPress"
+msgstr "アップグレードしてWordPress内で画像を編集"
+
+#: build/admin.js:13
+msgid "Replace Images With New Version"
+msgstr "画像を新しいバージョンに置き換え"
+
+#: build/admin.js:13
+msgid "Upload new versions of images and replace the old ones without any issues."
+msgstr "画像の新しいバージョンをアップロードし、問題なく古いものを置き換えます。"
+
+#: build/admin.js:13
+msgid "Replacing Image is a Pro feature"
+msgstr "画像の置き換えはPro機能です"
+
+#: build/admin.js:13
+msgid "Outdated images live on more pages than you think. Swap in a new version once, and every page updates instantly."
+msgstr "古い画像は、思っている以上に多くのページに残っています。新しいバージョンに一度差し替えれば、すべてのページが即座に更新されます。"
+
+#: build/admin.js:13
+msgid "Upgrade to replace images seamlessly"
+msgstr "アップグレードして画像をシームレスに置き換え"
+
+#: build/admin.js:13
+msgid "Disable Right Click on Image"
+msgstr "画像の右クリックを無効化"
+
+#: build/admin.js:13
+msgid "Prevent visitors from downloading your images by turning off the right-click option on your website."
+msgstr "ウェブサイトで右クリックを無効にして、訪問者が画像をダウンロードするのを防ぎます。"
+
+#: build/admin.js:13
+msgid "Image Size Limit"
+msgstr "画像サイズの上限"
+
+#: build/admin.js:13
+msgid "Set a limit for maximum image upload size."
+msgstr "画像アップロードの最大サイズの上限を設定します。"
+
+#: build/admin.js:13
+msgid "120"
+msgstr "120"
+
+#: build/admin.js:13
+msgid "KB"
+msgstr "KB"
+
+#: build/admin.js:13
+msgid "MB"
+msgstr "MB"
+
+#. translators: %s is the server upload size limit.
+#: build/admin.js:13
+msgid "Server limit: %s"
+msgstr "サーバーの上限: %s"
+
+#: build/admin.js:13
+msgid "Image Dimension Limit"
+msgstr "画像寸法の上限"
+
+#: build/admin.js:13
+msgid "Set a limit for maximum image upload dimensions (in pixels)."
+msgstr "画像アップロードの最大寸法（ピクセル単位）の上限を設定します。"
+
+#: build/admin.js:13
+msgid "Height"
+msgstr "高さ"
+
+#: build/admin.js:13
+msgid "Width"
+msgstr "幅"
+
+#: build/admin.js:13
+msgid "Lazy load"
+msgstr "遅延読み込み"
+
+#: build/admin.js:13
+msgid "Load images only when they enter the user's viewport, improving page speed and reducing bandwidth usage."
+msgstr "画像をユーザーのビューポートに入ったときにのみ読み込み、ページ速度を向上させ、帯域幅の使用量を削減します。"
+
+#: build/admin.js:13
+msgid "Hotlink Protection"
+msgstr "ホットリンク保護"
+
+#: build/admin.js:13
+msgid "Block other websites from embedding your images directly, preventing bandwidth theft from external hotlinking."
+msgstr "他のウェブサイトが画像を直接埋め込むのをブロックし、外部のホットリンクによる帯域幅の盗用を防ぎます。"
+
+#: build/admin.js:13
+msgid "Auto Set Featured Image"
+msgstr "アイキャッチ画像を自動設定"
+
+#: build/admin.js:13
+msgid "Automatically use the first image in post content as the featured image if none is set."
+msgstr "設定されていない場合、投稿コンテンツ内の最初の画像を自動的にアイキャッチ画像として使用します。"
+
+#: build/admin.js:13
+msgid "Settings reset successfully."
+msgstr "設定を正常にリセットしました。"
+
+#: build/admin.js:13
+msgid "Reset Options"
+msgstr "オプションをリセット"
+
+#: build/admin.js:13
+msgid "Failed to save settings."
+msgstr "設定の保存に失敗しました。"
+
+#: build/admin.js:13
+msgid "Save Changes"
+msgstr "変更を保存"
+
+#: build/admin.js:13
+msgid "No thumbnail sizes found."
+msgstr "サムネイルサイズが見つかりません。"
+
+#. translators: %1$s is the size name, %2$s is the width, %3$s is the height.
+#: build/admin.js:13
+msgid "%1$s (%2$s×%3$s)"
+msgstr "%1$s (%2$s×%3$s)"
+
+#: build/admin.js:13
+msgid "Enabled - This size will be generated for new uploads."
+msgstr "有効 - このサイズは新しいアップロードに対して生成されます。"
+
+#: build/admin.js:13
+msgid "Disabled - This size will not be generated for new uploads."
+msgstr "無効 - このサイズは新しいアップロードに対して生成されません。"
+
+#: build/admin.js:13
+msgid "This is the original image size and cannot be disabled."
+msgstr "これは元の画像サイズであり、無効にできません。"
+
+#: build/admin.js:13
+msgid "Compress during upload"
+msgstr "アップロード時に圧縮"
+
+#: build/admin.js:13
+msgid "Enable compression during upload to reduce file size and improve speed."
+msgstr "アップロード時の圧縮を有効にして、ファイルサイズを削減し速度を向上させます。"
+
+#: build/admin.js:13
+msgid "Compression Percentage"
+msgstr "圧縮率"
+
+#: build/admin.js:13
+msgid "A measure of how much a file's size is reduced after compression."
+msgstr "圧縮後にファイルサイズがどれだけ削減されるかを示す指標です。"
+
+#: build/admin.js:13
+msgid "Single Image Compress"
+msgstr "個別画像の圧縮"
+
+#: build/admin.js:13
+msgid "Show the Optimize button on individual media attachments."
+msgstr "個々のメディア添付ファイルに最適化ボタンを表示します。"
+
+#: build/admin.js:13
+msgid "Bulk Image Compression is a Pro feature"
+msgstr "一括画像圧縮はPro機能です"
+
+#: build/admin.js:13
+msgid "Heavy images are silently costing you visitors. Compress your entire library in one click with absolutely no visible quality loss."
+msgstr "重い画像は知らないうちに訪問者を失わせています。ライブラリ全体をワンクリックで、目に見える品質の低下を一切伴わずに圧縮できます。"
+
+#: build/admin.js:13
+msgid "Upgrade for a faster website"
+msgstr "アップグレードしてより高速なウェブサイトを実現"
+
+#: build/admin.js:13
+msgid "Prevent Duplicate Upload"
+msgstr "重複アップロードを防止"
+
+#: build/admin.js:13
+msgid "Block uploading images that already exist in your media library"
+msgstr "メディアライブラリに既に存在する画像のアップロードをブロックします"
+
+#: build/admin.js:13
+msgid "Duplicate Image Detection is a Pro feature"
+msgstr "重複画像の検出はPro機能です"
+
+#: build/admin.js:13
+msgid "Duplicate images quietly pile up and bloat your media library. Find and remove every copy you didn't even know existed."
+msgstr "重複画像は静かに積み重なり、メディアライブラリを肥大化させます。存在すら知らなかったすべてのコピーを見つけて削除しましょう。"
+
+#: build/admin.js:13
+msgid "Upgrade to detect duplicate images"
+msgstr "アップグレードして重複画像を検出"
+
+#: build/admin.js:13
+msgid "Convert during upload"
+msgstr "アップロード時に変換"
+
+#: build/admin.js:13
+msgid "Automatically convert images to WebP when they are uploaded."
+msgstr "アップロード時に画像を自動的にWebPに変換します。"
+
+#: build/admin.js:13
+msgid "Single image conversion"
+msgstr "個別画像の変換"
+
+#: build/admin.js:13
+msgid "Convert individual images to WebP directly from the media library."
+msgstr "メディアライブラリから個々の画像を直接WebPに変換します。"
+
+#: build/admin.js:13
+msgid "Automatically convert images to AVIF when they are uploaded."
+msgstr "アップロード時に画像を自動的にAVIFに変換します。"
+
+#: build/admin.js:13
+msgid "Convert individual images to AVIF directly from the media library."
+msgstr "メディアライブラリから個々の画像を直接AVIFに変換します。"
+
+#: build/admin.js:13
+msgid "Facebook"
+msgstr "Facebook"
+
+#: build/admin.js:13
+msgid "Generate optimized share images for Facebook posts"
+msgstr "Facebook投稿向けに最適化されたシェア画像を生成します"
+
+#: build/admin.js:13
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+#: build/admin.js:13
+msgid "Create professional share images for LinkedIn"
+msgstr "LinkedIn向けにプロフェッショナルなシェア画像を作成します"
+
+#: build/admin.js:13
+msgid "Twitter"
+msgstr "Twitter"
+
+#: build/admin.js:13
+msgid "Optimize share images for Twitter cards"
+msgstr "Twitterカード向けにシェア画像を最適化します"
+
+#: build/admin.js:13
+msgid "Pinterest"
+msgstr "Pinterest"
+
+#: build/admin.js:13
+msgid "Generate Pinterest-optimized pin images"
+msgstr "Pinterest向けに最適化されたピン画像を生成します"
+
+#: build/admin.js:13
+msgid "Enabled"
+msgstr "有効"
+
+#: build/admin.js:13
+msgid "Disabled"
+msgstr "無効"
+
+#: build/admin.js:13
+msgid "Failed to load debug info."
+msgstr "デバッグ情報の読み込みに失敗しました。"
+
+#: build/admin.js:13
+msgid "No data."
+msgstr "データがありません。"
+
+#: build/admin.js:13
+msgid "System"
+msgstr "システム"
+
+#: build/admin.js:13
+msgid "WordPress"
+msgstr "WordPress"
+
+#: build/admin.js:13
+msgid "PHP"
+msgstr "PHP"
+
+#: build/admin.js:13
+msgid "MySQL"
+msgstr "MySQL"
+
+#: build/admin.js:13
+msgid "Server"
+msgstr "サーバー"
+
+#: build/admin.js:13
+msgid "PHP Memory Limit"
+msgstr "PHPメモリ制限"
+
+#: build/admin.js:13
+msgid "WP Memory Limit"
+msgstr "WPメモリ制限"
+
+#: build/admin.js:13
+msgid "Max Execution Time"
+msgstr "最大実行時間"
+
+#. translators: %s is the maximum execution time in seconds.
+#: build/admin.js:13
+msgid "%ss"
+msgstr "%ss"
+
+#: build/admin.js:13
+msgid "Upload Max Filesize"
+msgstr "最大アップロードファイルサイズ"
+
+#: build/admin.js:13
+msgid "Total Images"
+msgstr "画像総数"
+
+#: build/admin.js:13
+msgid "WordPress Config"
+msgstr "WordPress設定"
+
+#: build/admin.js:13
+msgid "WP_DEBUG"
+msgstr "WP_DEBUG"
+
+#: build/admin.js:13
+msgid "WP_DEBUG_DISPLAY"
+msgstr "WP_DEBUG_DISPLAY"
+
+#: build/admin.js:13
+msgid "WP_DEBUG_LOG"
+msgstr "WP_DEBUG_LOG"
+
+#: build/admin.js:13
+msgid "Version"
+msgstr "バージョン"
+
+#: build/admin.js:13
+msgid "Pro Plugin"
+msgstr "Proプラグイン"
+
+#. translators: %s is a version number.
+#: build/admin.js:13
+msgid "v%s"
+msgstr "v%s"
+
+#: build/admin.js:13
+msgid "License Status"
+msgstr "ライセンスステータス"
+
+#: build/admin.js:13
+msgid "Lazy Load"
+msgstr "遅延読み込み"
+
+#: build/admin.js:13
+msgid "Right-Click Disable"
+msgstr "右クリック無効化"
+
+#: build/admin.js:13
+msgid "WebP on Upload"
+msgstr "アップロード時のWebP"
+
+#: build/admin.js:13
+msgid "AVIF on Upload"
+msgstr "アップロード時のAVIF"
+
+#: build/admin.js:13
+msgid "Max Image Size"
+msgstr "最大画像サイズ"
+
+#: build/admin.js:13
+msgid "Max Image Dimensions"
+msgstr "最大画像寸法"
+
+#: build/admin.js:13
+msgid "Disabled Sizes"
+msgstr "無効化されたサイズ"
+
+#: build/admin.js:13
+msgid "None"
+msgstr "なし"
+
+#: build/admin.js:13
+msgid "Active Theme"
+msgstr "有効なテーマ"
+
+#: build/admin.js:13
+msgid "Name"
+msgstr "名前"
+
+#: build/admin.js:13
+msgid "Parent Theme"
+msgstr "親テーマ"
+
+#. translators: %1$s is the parent theme name, %2$s is its version.
+#: build/admin.js:13
+msgid "%1$s v%2$s"
+msgstr "%1$s v%2$s"
+
+#. translators: %d is the number of active plugins.
+#: build/admin.js:13
+msgid "Active Plugin (%d)"
+msgid_plural "Active Plugins (%d)"
+msgstr[0] "有効なプラグイン (%d)"
+
+#: build/admin.js:13
+msgid "Your Media Library is Silently Slowing Down Your Site."
+msgstr "メディアライブラリが密かにサイトの速度を低下させています。"
+
+#: build/admin.js:13
+msgid "Unused images, oversized files, and missing optimization pile up with every upload. Pro finds them all and fixes them — without touching a single file manually."
+msgstr "未使用の画像、サイズの大きすぎるファイル、最適化漏れは、アップロードのたびに積み重なっていきます。Proはそれらすべてを見つけ出し、ファイルを一つも手作業で触ることなく修正します。"
+
+#: build/admin.js:13
+msgid "Price starts from $5/month."
+msgstr "価格は月額$5から。"
+
+#: build/admin.js:13
+msgid "ThumbPress modules"
+msgstr "ThumbPressモジュール"
+
+#: build/admin.js:13
+msgid "What Pro Fixes Today"
+msgstr "Proが今日解決すること"
+
+#: build/admin.js:13
+msgid "Every Pro feature is designed to solve a specific real problem. Here's what exactly an upgrade unlocks."
+msgstr "すべてのPro機能は、具体的な実際の問題を解決するために設計されています。アップグレードで何が解放されるのかを正確にご紹介します。"
+
+#. translators: %d is the number of images found.
+#: build/admin.js:13
+msgid "%d image found!"
+msgid_plural "%d images found!"
+msgstr[0] "%d件の画像が見つかりました！"
+
+#: build/admin.js:13
+msgid "Detect Large Images"
+msgstr "大きな画像を検出"
+
+#: build/admin.js:13
+msgid "Scan your media library and find oversized images instantly. See exactly which files are bloating your pages and fix them before they cost you rankings."
+msgstr "メディアライブラリをスキャンして、サイズの大きすぎる画像を瞬時に見つけます。どのファイルがページを肥大化させているかを正確に把握し、検索順位に悪影響が出る前に修正しましょう。"
+
+#: build/admin.js:13
+msgid "Detect Now"
+msgstr "今すぐ検出"
+
+#: build/admin.js:13
+msgid "Delete Unused Images"
+msgstr "未使用の画像を削除"
+
+#: build/admin.js:13
+msgid "Scan your media library and find unused images instantly. See exactly which files are taking up space and delete them to reclaim server space."
+msgstr "メディアライブラリをスキャンして、未使用の画像を瞬時に見つけます。どのファイルが容量を占有しているかを正確に把握し、削除してサーバー容量を取り戻しましょう。"
+
+#: build/admin.js:13
+msgid "Delete Now"
+msgstr "今すぐ削除"
+
+#: build/admin.js:13
+msgid "Compress Large Images"
+msgstr "大きな画像を圧縮"
+
+#: build/admin.js:13
+msgid "Large images are costing you speed. Optimize them without visible loss and deliver a faster, smoother browsing experience."
+msgstr "大きな画像は速度を犠牲にしています。目に見える劣化なく最適化して、より速く滑らかな閲覧体験を提供しましょう。"
+
+#: build/admin.js:13
+msgid "Compress Now"
+msgstr "今すぐ圧縮"
+
+#: build/admin.js:13
+msgid "Bulk Convert to AVIF"
+msgstr "AVIFに一括変換"
+
+#: build/admin.js:13
+msgid "Your images shouldn't be stuck in the past. Convert them all to AVIF - the format the modern web is built on - in a single click."
+msgstr "画像を過去のフォーマットに留めておく必要はありません。現代のウェブを支えるフォーマットであるAVIFに、ワンクリックですべて変換しましょう。"
+
+#: build/admin.js:13
+msgid "Convert Now"
+msgstr "今すぐ変換"
+
+#: build/admin.js:13
+msgid "Crop, resize, or tweak any image right inside your WordPress dashboard. No need to re-upload or touch a third-party tool."
+msgstr "WordPressダッシュボード内で、あらゆる画像を切り抜き、リサイズ、微調整できます。再アップロードやサードパーティ製ツールの利用は不要です。"
+
+#: build/admin.js:13
+msgid "Edit Now"
+msgstr "今すぐ編集"
+
+#: build/admin.js:13
+msgid "Merge Duplicate Images"
+msgstr "重複画像を統合"
+
+#: build/admin.js:13
+msgid "Find images that have been uploaded more than once. Clean up the clutter and stop wasting space on files you already have."
+msgstr "複数回アップロードされた画像を見つけます。散らかりを整理して、すでに持っているファイルで容量を無駄にするのをやめましょう。"
+
+#: build/admin.js:13
+msgid "Merge Now"
+msgstr "今すぐ統合"
+
+#: build/admin.js:13
+msgid "IMAGE CONTROL"
+msgstr "画像管理"
+
+#: build/admin.js:13
+msgid "Disable Thumbnails"
+msgstr "サムネイルを無効化"
+
+#: build/admin.js:13
+msgid "Set Image Upload Limit"
+msgstr "画像アップロードの上限を設定"
+
+#: build/admin.js:13
+msgid "STORAGE & CLEANUP"
+msgstr "ストレージとクリーンアップ"
+
+#: build/admin.js:13
+msgid "Find Unused Images"
+msgstr "未使用の画像を検索"
+
+#: build/admin.js:13
+msgid "Find Duplicate Images"
+msgstr "重複画像を検索"
+
+#: build/admin.js:13
+msgid "MEDIA MANAGEMENT"
+msgstr "メディア管理"
+
+#: build/admin.js:13
+msgid "Replace Images"
+msgstr "画像を置き換え"
+
+#: build/admin.js:13
+msgid "Social Media Thumbnails"
+msgstr "ソーシャルメディアサムネイル"
+
+#: build/admin.js:13
+msgid "Free vs. Pro Side by Side"
+msgstr "無料版とPro版を並べて比較"
+
+#: build/admin.js:13
+msgid "See a clear comparison between your current version and the Pro version you're about to get."
+msgstr "現在お使いのバージョンと、これから手に入れるPro版との明確な比較をご覧ください。"
+
+#: build/admin.js:13
+msgid "Features"
+msgstr "機能"
+
+#: build/admin.js:13
+msgid "Free"
+msgstr "無料"
+
+#: build/admin.js:13
+msgid "Future uploads only"
+msgstr "今後のアップロードのみ"
+
+#: build/admin.js:13
+msgid "Fully unlocked"
+msgstr "すべて利用可能"
+
+#: build/admin.js:13
+msgid "Best Value"
+msgstr "最もお得"
+
+#: build/admin.js:13
+msgid "/ Month"
+msgstr "/ 月"
+
+#: build/admin.js:13
+msgid "/ Lifetime"
+msgstr "/ 買い切り"
+
+#. translators: %s is the total yearly price.
+#: build/admin.js:13
+msgid "Billed annually. You pay %s today"
+msgstr "年額請求。本日%sをお支払いいただきます"
+
+#: build/admin.js:13
+msgid "Purchase"
+msgstr "購入"
+
+#: build/admin.js:13
+msgid "Personal"
+msgstr "パーソナル"
+
+#. translators: %d is the discount percentage.
+#: build/admin.js:13
+msgid "%d%% OFF"
+msgstr "%d%%オフ"
+
+#: build/admin.js:13
+msgid "1 Site"
+msgstr "1サイト"
+
+#: build/admin.js:13
+msgid "1 Year Support"
+msgstr "1年間のサポート"
+
+#: build/admin.js:13
+msgid "All Features Included"
+msgstr "全機能を含む"
+
+#: build/admin.js:13
+msgid "Professional"
+msgstr "プロフェッショナル"
+
+#: build/admin.js:13
+msgid "5 Sites"
+msgstr "5サイト"
+
+#: build/admin.js:13
+msgid "Agency"
+msgstr "エージェンシー"
+
+#: build/admin.js:13
+msgid "Unlimited Sites"
+msgstr "無制限のサイト"
+
+#: build/admin.js:13
+msgid "Lifetime Support"
+msgstr "永久サポート"
+
+#: build/admin.js:13
+msgid "ThumbPress Pro Pricing"
+msgstr "ThumbPress Proの料金"
+
+#: build/admin.js:13
+msgid "Every plan includes the full set of Pro features. Just pick how many sites you need to cover."
+msgstr "すべてのプランにPro機能一式が含まれています。カバーするサイト数を選ぶだけです。"
+
+#: build/admin.js:13
+msgid "Yearly"
+msgstr "年払い"
+
+#: build/admin.js:13
+msgid "Lifetime"
+msgstr "買い切り"
+
+#: build/admin.js:13
+msgid "30-day money back guarantee"
+msgstr "30日間の返金保証"
+
+#: build/admin.js:13
+msgid "Access future features for the subscription period"
+msgstr "サブスクリプション期間中は今後の機能を利用可能"
+
+#: build/admin.js:13
+msgid "reviewer"
+msgstr "レビュアー"
+
+#: build/admin.js:13
+msgid "This saved me money when I realised I was about to exceed my host’s image allowance, enabling me to wipe out excess duplicate images."
+msgstr "ホストの画像容量の上限を超えそうだと気づいたとき、これのおかげで費用を節約できました。余分な重複画像を一掃できたのです。"
+
+#: build/admin.js:13
+msgid "At the moment I’m using it to resize my pictures, I see a lot of things to use in the future to keep the site smaller then it was. So far it’s working fine and the one question I had was answered right away!! Keep up the good work!!!"
+msgstr "今は写真のリサイズに使っていますが、サイトを以前より小さく保つために今後使えそうな機能がたくさんあると感じています。今のところ問題なく動作していて、唯一あった質問にもすぐに回答してもらえました！！これからも頑張ってください！！！"
+
+#: build/admin.js:13
+msgid "This plugin is extremely useful, and a must for sites with a lot of images. I had a problem with activation of the Pro version, and the support team resolved the issue quickly and without fuss."
+msgstr "このプラグインは非常に便利で、画像が多いサイトには必須です。Pro版の有効化で問題がありましたが、サポートチームが手間をかけずに素早く解決してくれました。"
+
+#: build/admin.js:13
+msgid "Trusted by 30,000+ WordPress Users Just Like You"
+msgstr "あなたと同じ30,000人以上のWordPressユーザーに信頼されています"
+
+#: build/admin.js:13
+msgid "What image formats does ThumbPress convert?"
+msgstr "ThumbPressはどの画像形式を変換しますか？"
+
+#: build/admin.js:13
+msgid "Free version converts images to WebP (25-35% smaller files). Pro adds AVIF conversion (50% smaller than WebP) plus intelligent compression for all formats. Both reduce file size without visible quality loss, dramatically improving site speed and lowering bandwidth costs."
+msgstr "無料版は画像をWebPに変換します（ファイルサイズが25〜35%小さくなります）。Pro版ではAVIF変換（WebPより50%小さい）に加え、すべての形式に対応したインテリジェントな圧縮が利用できます。どちらも目に見える品質の低下なくファイルサイズを削減し、サイト速度を大幅に向上させ、帯域幅コストを削減します。"
+
+#: build/admin.js:13
+msgid "How much can I save on storage and bandwidth?"
+msgstr "ストレージと帯域幅をどれくらい節約できますか？"
+
+#: build/admin.js:13
+msgid "Most sites save 30-60% of image storage. WebP reduces files by 25-35%, AVIF by 50% more than WebP. A typical site with 5,000 images saves 50-100GB. Smaller images also cut bandwidth costs and improve Core Web Vitals scores for better SEO rankings."
+msgstr "ほとんどのサイトで画像ストレージを30〜60%節約できます。WebPはファイルを25〜35%、AVIFはWebPよりさらに50%削減します。5,000枚の画像がある一般的なサイトでは50〜100GBを節約できます。画像が小さくなると帯域幅コストも削減され、Core Web Vitalsのスコアが向上してSEOの検索順位も改善します。"
+
+#: build/admin.js:13
+msgid "What's the difference between Free and Pro?"
+msgstr "無料版とPro版の違いは何ですか？"
+
+#: build/admin.js:13
+msgid "Free: Basic optimization (WebP, regenerate thumbnails). Pro: Advanced detection (find unused images, duplicates, oversized files), bulk compression, AVIF conversion, one-click automation. Best for sites with hundreds or thousands of images where optimization pays for itself."
+msgstr "無料版：基本的な最適化（WebP、サムネイルの再生成）。Pro版：高度な検出（未使用画像、重複、サイズの大きすぎるファイルの検出）、一括圧縮、AVIF変換、ワンクリックの自動化。数百〜数千枚の画像があり、最適化の効果が投資に見合うサイトに最適です。"
+
+#: build/admin.js:13
+msgid "How does pricing work? Is there a trial?"
+msgstr "料金はどのような仕組みですか？無料トライアルはありますか？"
+
+#: build/admin.js:13
+msgid "No hidden fees or surprise renewals - renewal costs the same as initial purchase. Free version is your trial. Test WebP conversion and regeneration risk-free. Upgrade anytime if you need Pro features. 30-day money-back guarantee on all paid plans."
+msgstr "隠れた料金や予期しない更新料はありません。更新費用は初回購入と同額です。無料版がトライアル代わりになります。WebP変換や再生成をリスクなくお試しいただけます。Pro機能が必要になったら、いつでもアップグレードできます。すべての有料プランに30日間の返金保証が付いています。"
+
+#: build/admin.js:13
+msgid "Can I use Pro on multiple sites? How many?"
+msgstr "Pro版を複数のサイトで使えますか？何サイトまでですか？"
+
+#: build/admin.js:13
+msgid "Yes. Professional plan covers up to 5 sites. Agency plan covers unlimited. Perfect for freelancers and agencies managing multiple client sites. Licensing is per-plan, not per-site."
+msgstr "はい。プロフェッショナルプランは最大5サイト、エージェンシープランは無制限に対応しています。複数のクライアントサイトを管理するフリーランサーやエージェンシーに最適です。ライセンスはサイト単位ではなくプラン単位です。"
+
+#: build/admin.js:13
+msgid "Is my media library safe? Will images be deleted automatically?"
+msgstr "メディアライブラリは安全ですか？画像が自動的に削除されることはありますか？"
+
+#: build/admin.js:13
+msgid "Completely safe. ThumbPress shows you exactly what it found and requires your approval before any action. Nothing is ever deleted automatically. Unused images, duplicates, and large files are flagged for review - you decide what to remove."
+msgstr "完全に安全です。ThumbPressは検出した内容を正確に表示し、いかなる操作の前にもあなたの承認を求めます。自動的に削除されるものは一切ありません。未使用の画像、重複、大きなファイルは確認のためにフラグ付けされ、何を削除するかはあなたが決定します。"
+
+#: build/admin.js:13
+msgid "What if it doesn't deliver results or doesn't work on my site?"
+msgstr "効果が得られなかったり、自分のサイトで動作しなかったりした場合はどうなりますか？"
+
+#: build/admin.js:13
+msgid "100% money-back within 30 days, no questions asked. Our team provides setup assistance to ensure it works perfectly. We also stand behind the results - if optimization doesn't improve your metrics, we refund immediately."
+msgstr "30日以内であれば、理由を問わず100%返金します。当社チームが完璧に動作するようセットアップをサポートします。結果にも責任を持ちます。最適化で指標が改善しない場合は、直ちに返金いたします。"
+
+#: build/admin.js:13
+msgid "Is it compatible with WooCommerce, Elementor, and my theme?"
+msgstr "WooCommerce、Elementor、そしてお使いのテーマと互換性はありますか？"
+
+#: build/admin.js:13
+msgid "Yes. ThumbPress works with WooCommerce, Gutenberg, Elementor, Divi, and all major themes. It operates at the WordPress media layer, not inside specific plugins, so compatibility is universal."
+msgstr "はい。ThumbPressはWooCommerce、Gutenberg、Elementor、Divi、そしてすべての主要なテーマで動作します。特定のプラグイン内ではなくWordPressのメディアレイヤーで動作するため、互換性は普遍的です。"
+
+#: build/admin.js:13
+msgid "How long does bulk processing take? Will it slow my site?"
+msgstr "一括処理にはどのくらい時間がかかりますか？サイトが遅くなりますか？"
+
+#: build/admin.js:13
+msgid "All heavy operations run in the background - zero impact on your site. Most sites process 500-1000 (or more) images per hour depending on hosting. Background processing handles thousands overnight. Your dashboard and frontend stay fast."
+msgstr "重い処理はすべてバックグラウンドで実行されるため、サイトへの影響はゼロです。ほとんどのサイトでは、ホスティング環境に応じて1時間あたり500〜1000枚（またはそれ以上）の画像を処理します。バックグラウンド処理なら一晩で数千枚を処理できます。ダッシュボードもフロントエンドも高速なままです。"
+
+#: build/admin.js:13
+msgid "Do I get support? What if I need help implementing?"
+msgstr "サポートは受けられますか？導入に助けが必要な場合はどうすればよいですか？"
+
+#: build/admin.js:13
+msgid "All customers get support with 24-hour response time. Professional and Agency plans include priority support. Our team helps with setup, troubleshooting, and optimization recommendations to maximize your results."
+msgstr "すべてのお客様が24時間以内に返信するサポートを受けられます。プロフェッショナルプランとエージェンシープランには優先サポートが含まれます。当社チームがセットアップ、トラブルシューティング、最適化の提案をお手伝いし、成果を最大化します。"
+
+#: build/admin.js:13
+msgid "Frequently Asked Questions"
+msgstr "よくある質問"
+
+#: build/admin.js:13
+msgid "Ready to take control of your Images?"
+msgstr "画像を思いのままに管理する準備はできましたか？"
+
+#: build/admin.js:13
+msgid "Join 30,000+ users who manage their media smarter with ThumbPress Pro"
+msgstr "ThumbPress Proでメディアをよりスマートに管理する30,000人以上のユーザーに加わりましょう"
+
+#: build/admin.js:13
+msgid "In media library"
+msgstr "メディアライブラリ内"
+
+#: build/admin.js:13
+msgid "Total Thumbnails"
+msgstr "サムネイル総数"
+
+#: build/admin.js:13
+msgid "Thumbnails found"
+msgstr "見つかったサムネイル"
+
+#: build/admin.js:13
+msgid "Unoptimized Images"
+msgstr "未最適化の画像"
+
+#: build/admin.js:13
+msgid "Images yet to be fixed"
+msgstr "まだ修正されていない画像"
+
+#: build/admin.js:13
+msgid "Space Saved"
+msgstr "節約した容量"
+
+#: build/admin.js:13
+msgid "Worth of space saved"
+msgstr "節約できた容量"
+
+#: build/admin.js:13
+msgid "Images (over 1 MB)"
+msgstr "画像（1 MB超）"
+
+#: build/admin.js:13
+msgid "Upgrade to Compress"
+msgstr "アップグレードして圧縮"
+
+#: build/admin.js:13
+msgid "Unattached images"
+msgstr "未添付の画像"
+
+#: build/admin.js:13
+msgid "Uncompressed Images"
+msgstr "未圧縮の画像"
+
+#: build/admin.js:13
+msgid "Images need compression"
+msgstr "圧縮が必要な画像"
+
+#: build/admin.js:13
+msgid "Duplicate images found"
+msgstr "見つかった重複画像"
+
+#: build/admin.js:13
+msgid "Upgrade to Merge"
+msgstr "アップグレードして統合"
+
+#: build/admin.js:13
+msgid "Non-AVIF images found"
+msgstr "見つかった非AVIF画像"
+
+#: build/admin.js:13
+msgid "Upgrade to Convert"
+msgstr "アップグレードして変換"
+
+#: build/admin.js:13
+msgid "Non-WebP images found"
+msgstr "見つかった非WebP画像"
+
+#: build/admin.js:13
+msgid "Thumbnail Disabled"
+msgstr "無効化されたサムネイル"
+
+#. translators: %1$s is the number of disabled sizes, %2$s is the total number of sizes.
+#: build/admin.js:13
+msgid "%1$s/%2$s"
+msgstr "%1$s/%2$s"
+
+#: build/admin.js:13
+msgid "These sizes won't be generated"
+msgstr "これらのサイズは生成されません"
+
+#: build/admin.js:13
+msgid "Lazy Loading"
+msgstr "遅延読み込み"
+
+#: build/admin.js:13
+msgid "Active"
+msgstr "有効"
+
+#: build/admin.js:13
+msgid "Inactive"
+msgstr "無効"
+
+#. translators: %s is the lazy-load status (On or Off).
+#: build/admin.js:13
+msgid "Status: %s"
+msgstr "ステータス: %s"
+
+#: build/admin.js:13
+msgid "On"
+msgstr "オン"
+
+#: build/admin.js:13
+msgid "Off"
+msgstr "オフ"
+
+#: build/admin.js:13
+msgid "Regenerate All Thumbnails"
+msgstr "すべてのサムネイルを再生成"
+
+#: build/admin.js:13
+msgid "Broken thumbnails hurt layouts and lose visitors. Regenerate once - every image across your site snaps back to the perfect size and crop."
+msgstr "壊れたサムネイルはレイアウトを崩し、訪問者を失わせます。一度再生成するだけで、サイト全体のすべての画像が完璧なサイズと切り抜きに戻ります。"
+
+#: build/admin.js:13
+msgid "Generate Again"
+msgstr "再生成"
+
+#: build/admin.js:13
+msgid "No Images Found"
+msgstr "画像が見つかりません"
+
+#: build/admin.js:13
+msgid "Ready to Regenerate Thumbnails?"
+msgstr "サムネイルを再生成する準備はできましたか？"
+
+#: build/admin.js:13
+msgid "There are no images to regenerate."
+msgstr "再生成する画像はありません。"
+
+#: build/admin.js:13
+msgid "Click \"Regenerate Now\" to create fresh thumbnails for all images. Configure your thumbnail sizes in "
+msgstr "「今すぐ再生成」をクリックすると、すべての画像の新しいサムネイルが作成されます。サムネイルサイズは以下で設定できます → "
+
+#: build/admin.js:13
+msgid "settings"
+msgstr "設定"
+
+#: build/admin.js:13
+msgid "."
+msgstr "。"
+
+#: build/admin.js:13
+msgid "Chunk Size"
+msgstr "チャンクサイズ"
+
+#: build/admin.js:13
+msgid "Number of images processed in a single batch per server request."
+msgstr "1回のサーバーリクエストあたり、1バッチで処理される画像の数。"
+
+#: build/admin.js:13
+msgid "e.g. 50"
+msgstr "例: 50"
+
+#: build/admin.js:13
+msgid "Regenerate Now"
+msgstr "今すぐ再生成"
+
+#: build/admin.js:13
+msgid "Regenerate In Background"
+msgstr "バックグラウンドで再生成"
+
+#: build/admin.js:13
+msgid "Image Regeneration Complete"
+msgstr "画像の再生成が完了しました"
+
+#: build/admin.js:13
+msgid "Image Regeneration in Progress"
+msgstr "画像を再生成中"
+
+#: build/admin.js:13
+msgid "All thumbnails have been regenerated successfully."
+msgstr "すべてのサムネイルが正常に再生成されました。"
+
+#: build/admin.js:13
+msgid "Regenerating media library thumbnails using selected sizes."
+msgstr "選択したサイズを使用して、メディアライブラリのサムネイルを再生成しています。"
+
+#: build/admin.js:13
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: build/admin.js:13
+msgid "Images Processed"
+msgstr "処理された画像"
+
+#: build/admin.js:13
+msgid "Images Not Found"
+msgstr "見つからなかった画像"
+
+#: build/admin.js:13
+msgid "Images Deleted"
+msgstr "削除された画像"
+
+#: build/admin.js:13
+msgid "Images Created"
+msgstr "作成された画像"
+
+#: build/admin.js:13
+msgid "Find & Remove Unused Images"
+msgstr "未使用の画像を検索して削除"
+
+#: build/admin.js:13
+msgid "You're paying to host images nobody sees. Remove orphaned files and cut hosting costs, backup size, and storage waste instantly."
+msgstr "誰も見ない画像のホスティング料を払っています。孤立したファイルを削除して、ホスティングコスト、バックアップサイズ、ストレージの無駄を即座に削減しましょう。"
+
+#: build/admin.js:13
+msgid "Ready to Scan for Unused Images?"
+msgstr "未使用の画像をスキャンする準備はできましたか？"
+
+#: build/admin.js:13
+msgid "Click \"Detect Now\" to scan your library across Gutenberg, Elementor, WooCommerce, ACF, and LayerSlider for unused images."
+msgstr "「今すぐ検出」をクリックすると、Gutenberg、Elementor、WooCommerce、ACF、LayerSliderにわたってライブラリをスキャンし、未使用の画像を検出します。"
+
+#: build/admin.js:13
+msgid "Detect in background"
+msgstr "バックグラウンドで検出"
+
+#: build/admin.js:13
+msgid "Unused Image Cleanup is a Pro feature"
+msgstr "未使用画像のクリーンアップはPro機能です"
+
+#: build/admin.js:13
+msgid "A bloated library slows uploads, backups, and searches. Remove dead weight and keep your site lean and fast."
+msgstr "肥大化したライブラリは、アップロード、バックアップ、検索を遅くします。不要なものを取り除き、サイトを軽量で高速に保ちましょう。"
+
+#: build/admin.js:13
+msgid "Upgrade to clean up unused images"
+msgstr "アップグレードして未使用の画像をクリーンアップ"
+
+#: build/admin.js:13
+msgid "Find & Remove Duplicate Images"
+msgstr "重複画像を検索して削除"
+
+#: build/admin.js:13
+msgid "Duplicates inflate storage and bloat backups. Find every redundant file and clean house without risking your originals."
+msgstr "重複はストレージを圧迫し、バックアップを肥大化させます。すべての冗長なファイルを見つけ、オリジナルを危険にさらすことなく整理しましょう。"
+
+#: build/admin.js:13
+msgid "Ready to Scan for Duplicates?"
+msgstr "重複をスキャンする準備はできましたか？"
+
+#: build/admin.js:13
+msgid "Click \"Detect Now\" to scan your library and identify redundant files taking up unnecessary storage space."
+msgstr "「今すぐ検出」をクリックすると、ライブラリをスキャンして、不要なストレージ容量を占有している冗長なファイルを特定します。"
+
+#: build/admin.js:13
+msgid "The same file uploaded twice wastes space every day. Surface every duplicate and reclaim storage you didn't know you were losing."
+msgstr "同じファイルを2回アップロードすると、毎日容量を無駄にします。すべての重複を洗い出し、失っていることに気づかなかったストレージを取り戻しましょう。"
+
+#: build/admin.js:13
+msgid "One oversized image tanks your page score. Find every offender and fix it before it costs you rankings and revenue."
+msgstr "1枚のサイズの大きすぎる画像がページスコアを急落させます。すべての問題画像を見つけ、検索順位や収益に悪影響が出る前に修正しましょう。"
+
+#: build/admin.js:13
+msgid "Ready to Scan for Large Images?"
+msgstr "大きな画像をスキャンする準備はできましたか？"
+
+#: build/admin.js:13
+msgid "Set your file size threshold above and click \"Detect Now\" to find images exceeding your size limit."
+msgstr "上でファイルサイズのしきい値を設定し、「今すぐ検出」をクリックすると、サイズ上限を超える画像を見つけます。"
+
+#: build/admin.js:13
+msgid "File Size Threshold"
+msgstr "ファイルサイズのしきい値"
+
+#: build/admin.js:13
+msgid "Images larger than this size will be marked as large. Set the limit to detect oversized images."
+msgstr "このサイズより大きい画像は「大きい」としてマークされます。サイズの大きすぎる画像を検出するには上限を設定してください。"
+
+#: build/admin.js:13
+msgid "e.g. 1 for 1MB"
+msgstr "例: 1MBの場合は1"
+
+#: build/admin.js:13
+msgid "Large Image Detection is a Pro feature"
+msgstr "大きな画像の検出はPro機能です"
+
+#: build/admin.js:13
+msgid "Slow pages bleed traffic. Find the heavy images hurting your Core Web Vitals before they cost you visitors."
+msgstr "遅いページはトラフィックを失わせます。Core Web Vitalsに悪影響を与えている重い画像を、訪問者を失う前に見つけましょう。"
+
+#: build/admin.js:13
+msgid "Upgrade to find and fix large images"
+msgstr "アップグレードして大きな画像を見つけて修正"
+
+#: build/admin.js:13
+msgid "Compress Your Images"
+msgstr "画像を圧縮"
+
+#: build/admin.js:13
+msgid "Uncompressed images are the #1 reason sites fail Core Web Vitals. Compress your library in minutes - smaller files, higher rankings, zero quality loss."
+msgstr "未圧縮の画像は、サイトがCore Web Vitalsに合格しない最大の原因です。ライブラリを数分で圧縮しましょう。ファイルは小さく、検索順位は高く、品質の低下はゼロです。"
+
+#: build/admin.js:13
+msgid "Ready to Compress Your Images?"
+msgstr "画像を圧縮する準備はできましたか？"
+
+#: build/admin.js:13
+msgid "Configure your compression settings above and click \"Compress Now\" to optimize your image library."
+msgstr "上で圧縮設定を構成し、「今すぐ圧縮」をクリックして画像ライブラリを最適化しましょう。"
+
+#: build/admin.js:13
+msgid "Quality Level"
+msgstr "品質レベル"
+
+#: build/admin.js:13
+msgid "Compression quality from 0-100. Higher values preserve more detail but result in larger files. 80+ recommended for best results."
+msgstr "圧縮品質は0〜100で指定します。値が高いほど細部が保持されますが、ファイルは大きくなります。最良の結果を得るには80以上を推奨します。"
+
+#: build/admin.js:13
+msgid "e.g. 80 (0-100)"
+msgstr "例: 80 (0〜100)"
+
+#: build/admin.js:13
+msgid "Compress In Background"
+msgstr "バックグラウンドで圧縮"
+
+#: build/admin.js:13
+msgid "Every heavy image loses you a visitor. Compress your entire library in one click and watch page speed - and conversions - climb."
+msgstr "重い画像は1枚ごとに訪問者を失わせます。ライブラリ全体をワンクリックで圧縮し、ページ速度とコンバージョンが上昇するのを見届けましょう。"
+
+#: build/admin.js:13
+msgid "Convert Images to WebP"
+msgstr "画像をWebPに変換"
+
+#: build/admin.js:13
+msgid "Slow images cost you sales. Switch to WebP and cut file sizes by 35% - faster pages, lower bounce rates, and better rankings, zero quality loss."
+msgstr "遅い画像は売上を犠牲にします。WebPに切り替えてファイルサイズを35%削減しましょう。ページは高速に、直帰率は低く、検索順位は向上し、品質の低下はゼロです。"
+
+#: build/admin.js:13
+msgid "Convert Again"
+msgstr "再変換"
+
+#: build/admin.js:13
+msgid "Ready to Convert to WebP?"
+msgstr "WebPに変換する準備はできましたか？"
+
+#: build/admin.js:13
+msgid "There are no images to convert to WebP."
+msgstr "WebPに変換する画像はありません。"
+
+#: build/admin.js:13
+msgid "Select file formats above and click \"Convert Now\" to start converting images to WebP for faster loading."
+msgstr "上でファイル形式を選択し、「今すぐ変換」をクリックすると、読み込みを高速化するために画像のWebPへの変換を開始します。"
+
+#: build/admin.js:13
+msgid "Select File Format"
+msgstr "ファイル形式を選択"
+
+#: build/admin.js:13
+msgid "Convert In Background"
+msgstr "バックグラウンドで変換"
+
+#: build/admin.js:13
+msgid "WebP Conversion Complete"
+msgstr "WebP変換が完了しました"
+
+#: build/admin.js:13
+msgid "WebP Conversion in Progress"
+msgstr "WebP変換中"
+
+#: build/admin.js:13
+msgid "All images have been converted to WebP."
+msgstr "すべての画像がWebPに変換されました。"
+
+#: build/admin.js:13
+msgid "We're scanning your media library and converting eligible images to WebP."
+msgstr "メディアライブラリをスキャンし、対象となる画像をWebPに変換しています。"
+
+#: build/admin.js:13
+msgid "Images Converted"
+msgstr "変換された画像"
+
+#: build/admin.js:13
+msgid "Images Remaining"
+msgstr "残りの画像"
+
+#: build/admin.js:13
+msgid "Convert Images to AVIF"
+msgstr "画像をAVIFに変換"
+
+#: build/admin.js:13
+msgid "The format Google rewards. Cut image sizes by 50% over WebP, slash bandwidth costs, and pass Core Web Vitals with ease."
+msgstr "Googleが評価するフォーマット。画像サイズをWebPより50%削減し、帯域幅コストを大幅に抑え、Core Web Vitalsを楽々クリアしましょう。"
+
+#: build/admin.js:13
+msgid "Ready to Convert to AVIF?"
+msgstr "AVIFに変換する準備はできましたか？"
+
+#: build/admin.js:13
+msgid "Select file formats above and click \"Convert Now\" to convert images to AVIF for even smaller file sizes."
+msgstr "上でファイル形式を選択し、「今すぐ変換」をクリックすると、さらに小さいファイルサイズを実現するために画像をAVIFに変換します。"
+
+#: build/admin.js:13
+msgid "AVIF Conversion is a Pro feature"
+msgstr "AVIF変換はPro機能です"
+
+#: build/admin.js:13
+msgid "Slow loads kill conversions. AVIF halves your file sizes with no visible quality loss - faster pages, higher rankings."
+msgstr "遅い読み込みはコンバージョンを台無しにします。AVIFは目に見える品質の低下なくファイルサイズを半分にします。ページは高速に、検索順位は向上します。"
+
+#: build/admin.js:13
+msgid "Upgrade to convert images to AVIF"
+msgstr "アップグレードして画像をAVIFに変換"
+
+#: build/admin.js:13
+msgid "Manage Trashed Images"
+msgstr "ゴミ箱の画像を管理"
+
+#: build/admin.js:13
+msgid "Leftover files from old conversions and failed uploads quietly pile up. Delete the junk and reclaim real disk space in seconds."
+msgstr "古い変換や失敗したアップロードで残ったファイルは、静かに積み重なっていきます。不要なものを削除して、実際のディスク容量を数秒で取り戻しましょう。"
+
+#: build/admin.js:13
+msgid "File Name"
+msgstr "ファイル名"
+
+#: build/admin.js:13
+msgid "Image"
+msgstr "画像"
+
+#: build/admin.js:13
+msgid "Upload Date"
+msgstr "アップロード日"
+
+#: build/admin.js:13
+msgid "File Size"
+msgstr "ファイルサイズ"
+
+#: build/admin.js:13
+msgid "Action"
+msgstr "操作"
+
+#: build/admin.js:13
+msgid "No trashed images found."
+msgstr "ゴミ箱の画像が見つかりません。"
+
+#: build/admin.js:13
+msgid "Manage Trashed Images is a Pro feature"
+msgstr "ゴミ箱の画像の管理はPro機能です"
+
+#: build/admin.js:13
+msgid "Restore or permanently delete images you've moved to trash. Keep your library clean and reclaim disk space."
+msgstr "ゴミ箱に移動した画像を復元または完全に削除します。ライブラリを整理して、ディスク容量を取り戻しましょう。"
+
+#: build/admin.js:13
+msgid "Activate License to manage trashed images"
+msgstr "ライセンスを有効化してゴミ箱の画像を管理"
+
+#: build/admin.js:13
+msgid "General Settings"
+msgstr "一般設定"
+
+#: build/admin.js:13
+msgid "General settings for the plugin"
+msgstr "プラグインの一般設定"
+
+#: build/admin.js:13
+msgid "Thumbnail Generation"
+msgstr "サムネイル生成"
+
+#: build/admin.js:13
+msgid "Disable thumbnail generation for specific image sizes"
+msgstr "特定の画像サイズのサムネイル生成を無効にします"
+
+#: build/admin.js:13
+msgid "Duplicate Upload Prevention"
+msgstr "重複アップロードの防止"
+
+#: build/admin.js:13
+msgid "Prevent uploading duplicate images to your media library"
+msgstr "メディアライブラリへの重複画像のアップロードを防止します"
+
+#: build/admin.js:13
+msgid "File Compression Settings"
+msgstr "ファイル圧縮設定"
+
+#: build/admin.js:13
+msgid "Image compression additional settings"
+msgstr "画像圧縮の追加設定"
+
+#: build/admin.js:13
+msgid "WebP Image Converter additional settings"
+msgstr "WebP画像変換の追加設定"
+
+#: build/admin.js:13
+msgid "AVIF Image Converter additional settings"
+msgstr "AVIF画像変換の追加設定"
+
+#: build/admin.js:13
+msgid "Platform Configuration"
+msgstr "プラットフォーム設定"
+
+#: build/admin.js:13
+msgid "Manage the image used for social media sharing"
+msgstr "ソーシャルメディア共有に使用する画像を管理します"
+
+#: build/admin.js:13
+msgid "Debug"
+msgstr "デバッグ"
+
+#: build/admin.js:13
+msgid "Debug Information"
+msgstr "デバッグ情報"
+
+#: build/admin.js:13
+msgid "System and plugin info for support"
+msgstr "サポート用のシステムおよびプラグイン情報"
+
+#: build/admin.js:13
+msgid "Debug info copied to clipboard."
+msgstr "デバッグ情報をクリップボードにコピーしました。"
+
+#: build/admin.js:13
+msgid "Copied!"
+msgstr "コピーしました！"
+
+#: build/admin.js:13
+msgid "Copy as JSON"
+msgstr "JSONとしてコピー"
+
+#: build/admin.js:13
+msgid "Miss the old interface?"
+msgstr "以前のインターフェースが恋しいですか？"
+
+#: build/admin.js:13
+msgid "Turn on legacy mode."
+msgstr "レガシーモードをオンにします。"

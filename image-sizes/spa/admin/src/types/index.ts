@@ -24,6 +24,10 @@ declare global {
 			assets_url?: string;
 			pro_active?: boolean;
 			is_new_user?: boolean;
+			/** Whether the promo campaign is live (server-computed date gate). */
+			promo_active?: boolean;
+			/** UTC Unix timestamp (seconds) when the promo ends. */
+			promo_end?: number;
 			menus?: Record<string, unknown>;
 			/** BCP-47 locale tag from PHP (get_locale() with "_" → "-"), e.g. "bn-BD". */
 			locale?: string;

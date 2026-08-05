@@ -29,6 +29,7 @@ class Settings {
 		// AVIF settings.
 		$avif_on_upload      = get_option( 'thumbpress_avif_convert_on_upload', 0 );
 		$avif_single_convert = get_option( 'thumbpress_avif_single_image_convert', 0 );
+		$avif_file_formats   = get_option( 'thumbpress_avif_file_formats', array( 'jpeg', 'png', 'jpg', 'webp' ) );
 
 		// Social share settings.
 		$social_share = get_option( 'thumbpress_social_share', array() );
@@ -50,6 +51,7 @@ class Settings {
 				'webp_file_formats'       => (array) $webp_file_formats,
 				'avif_on_upload'          => (bool) $avif_on_upload,
 				'avif_single_convert'     => (bool) $avif_single_convert,
+				'avif_file_formats'       => (array) $avif_file_formats,
 				'social_facebook'         => ! empty( $social_share['enable_fb_share_img'] ) && $social_share['enable_fb_share_img'] === 'on',
 				'social_linkedin'         => ! empty( $social_share['enable_ln_share_img'] ) && $social_share['enable_ln_share_img'] === 'on',
 				'social_twitter'          => ! empty( $social_share['enable_tw_share_img'] ) && $social_share['enable_tw_share_img'] === 'on',
@@ -143,6 +145,13 @@ class Settings {
 		$avif_single_convert = $request->get_param( 'avif_single_convert' );
 		if ( $avif_single_convert !== null ) {
 			update_option( 'thumbpress_avif_single_image_convert', $avif_single_convert ? 1 : 0 );
+		}
+
+		$avif_file_formats = $request->get_param( 'avif_file_formats' );
+		if ( $avif_file_formats !== null ) {
+			$allowed           = array( 'jpeg', 'png', 'jpg', 'webp', 'gif' );
+			$avif_file_formats = array_values( array_intersect( (array) $avif_file_formats, $allowed ) );
+			update_option( 'thumbpress_avif_file_formats', $avif_file_formats );
 		}
 
 		// Social share settings.

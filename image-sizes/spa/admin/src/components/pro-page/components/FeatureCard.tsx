@@ -1,5 +1,4 @@
 import React from 'react';
-import { iconLibraries } from 'shadcn/icons';
 
 interface FeatureCardProps {
 	icon: React.ReactNode;

@@ -62,7 +62,7 @@ export function getDashboardAnalysisStats() {
 }
 
 export function getSettings( key: string ) {
-	return apiFetch<{ success: boolean; data?: { value: unknown } }>( {
+	return apiFetch<{ value: unknown }>( {
 		url: addQueryArgs( `${ BASE_URL }/option`, { key } ),
 	} );
 }
@@ -89,12 +89,13 @@ export interface RegenerateResponse {
 		space_saved?: number;
 		space_saved_label?: string;
 		not_found?: number;
+		failed?: number;
 		processed_count?: number;
 	};
 	message?: string;
 }
 
-export function regenerateNow( offset: number, limit: number, thumbsDeleted: number, thumbsCreated: number, spaceSaved: number = 0, notFound: number = 0, processedCount: number = 0 ) {
+export function regenerateNow( offset: number, limit: number, thumbsDeleted: number, thumbsCreated: number, spaceSaved: number = 0, notFound: number = 0, processedCount: number = 0, failed: number = 0 ) {
 	return apiFetch<RegenerateResponse>( {
 		url: `${ BASE_URL }/regenerate/now`,
 		method: 'POST',
@@ -106,6 +107,7 @@ export function regenerateNow( offset: number, limit: number, thumbsDeleted: num
 			space_saved: spaceSaved,
 			not_found: notFound,
 			processed_count: processedCount,
+			failed,
 		},
 	} );
 }
@@ -128,6 +130,7 @@ export interface ProgressResponse {
 		total: number;
 		space_saved_label: string;
 		not_found: number;
+		failed?: number;
 		is_complete: boolean;
 	};
 }
@@ -203,6 +206,7 @@ export interface ConvertResponse {
 		message: string;
 		action_id?: number;
 		not_found?: number;
+		failed?: number;
 		is_complete?: boolean;
 	};
 	message?: string;
@@ -220,14 +224,15 @@ export interface ConvertProgressResponse {
 		is_complete: boolean;
 		completed_time: string;
 		not_found?: number;
+		failed?: number;
 	};
 }
 
-export function convertNow( lastId: number, limit: number, file_formats: string[], space_saved: number = 0, notFound: number = 0, processed: number = 0, converted: number = 0 ) {
+export function convertNow( lastId: number, limit: number, file_formats: string[], space_saved: number = 0, notFound: number = 0, processed: number = 0, converted: number = 0, failed: number = 0 ) {
 	return apiFetch<ConvertResponse>( {
 		url: `${ BASE_URL }/convert/now`,
 		method: 'POST',
-		data: { last_id: lastId, limit, file_formats, space_saved, not_found: notFound, processed, converted },
+		data: { last_id: lastId, limit, file_formats, space_saved, not_found: notFound, processed, converted, failed },
 	} );
 }
 
@@ -263,8 +268,10 @@ export interface PluginSettingsResponse {
 		max_height: string;
 		webp_on_upload: boolean;
 		webp_single_convert: boolean;
+		webp_file_formats: string[];
 		avif_on_upload: boolean;
 		avif_single_convert: boolean;
+		avif_file_formats: string[];
 		social_facebook: boolean;
 		social_linkedin: boolean;
 		social_twitter: boolean;
@@ -286,8 +293,10 @@ export interface PluginSettings {
 	max_height: string;
 	webp_on_upload: boolean;
 	webp_single_convert: boolean;
+	webp_file_formats: string[];
 	avif_on_upload: boolean;
 	avif_single_convert: boolean;
+	avif_file_formats: string[];
 	social_facebook: boolean;
 	social_linkedin: boolean;
 	social_twitter: boolean;
@@ -313,8 +322,10 @@ export function savePluginSettings( settings: {
 	max_height?: string;
 	webp_on_upload?: boolean;
 	webp_single_convert?: boolean;
+	webp_file_formats?: string[];
 	avif_on_upload?: boolean;
 	avif_single_convert?: boolean;
+	avif_file_formats?: string[];
 	social_facebook?: boolean;
 	social_linkedin?: boolean;
 	social_twitter?: boolean;

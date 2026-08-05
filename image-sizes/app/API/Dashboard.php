@@ -149,6 +149,49 @@ class Dashboard {
 		return $stats;
 	}
 
+	/**
+	 * Media Library health score, computed exactly the way the dashboard's
+	 * analysis endpoint does so the admin-bar notice and the dashboard always
+	 * agree: the same cached sub-stat getters, the same `thumbpress_dashboard_stats`
+	 * filter (so Pro's "unused" contribution is included), and the same
+	 * `calculate_health_score()`. It reuses the shared stat caches rather than a
+	 * separate score cache, so it auto-refreshes whenever those caches change.
+	 *
+	 * Only the sub-stats the score actually needs are gathered — notably NOT the
+	 * heavy thumbnail count — so it stays cheap on a warm cache. Returns null when
+	 * there are no images to score, letting callers hide gracefully.
+	 *
+	 * @return int|null 0–100 score, or null when there are no images.
+	 */
+	public function get_health_score() {
+		$total_images = $this->get_total_images();
+
+		if ( $total_images <= 0 ) {
+			return null;
+		}
+
+		$sizes_data = $this->get_sizes_data();
+
+		$stats = array(
+			'total_images'       => $total_images,
+			'total_sizes'        => $sizes_data['total_sizes'],
+			'disabled_sizes'     => $sizes_data['disabled_sizes'],
+			'unoptimized_images' => $this->get_unoptimized_count(),
+			'not_compressed'     => $this->get_not_compressed(),
+			'not_webp'           => $this->get_not_webp(),
+			'not_avif'           => $this->get_not_avif(),
+			'large_images'       => $this->count_large_images(),
+			'duplicate_images'   => $this->get_duplicate_count(),
+			'unused_images'      => 0,
+		);
+
+		$stats = apply_filters( 'thumbpress_dashboard_stats', $stats, $total_images );
+
+		$health_data = $this->calculate_health_score( $stats );
+
+		return (int) $health_data['score'];
+	}
+
 	private function get_total_images() {
 		$cached = $this->get_cache( 'stat_total_images' );
 		if ( false !== $cached ) {

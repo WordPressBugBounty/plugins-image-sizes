@@ -24,8 +24,13 @@ export default function Layout( { navItems }: LayoutProps ) {
 
 	const isProInstalled = () => typeof window.THUMBPRESS_PRO !== 'undefined';
 
+	// The exit-intent popup is a promo-only surface. Once the campaign ends
+	// (server gate) it never appears — no "offer expired" remnant.
+	const isPromoActive = () => window.THUMBPRESS?.promo_active ?? false;
+
 	// Called by Sidebar on nav link click. Returns true = handled (popup shown), false = let NavLink navigate normally.
 	const onNavRequest = ( to: string ): boolean => {
+		if ( ! isPromoActive() ) return false;
 		if ( location.pathname !== '/pro' ) return false;
 		if ( isProInstalled() ) return false;
 		if ( sessionStorage.getItem( STORAGE_KEY ) ) return false;
@@ -39,6 +44,7 @@ export default function Layout( { navItems }: LayoutProps ) {
 	// Exit intent: mouse leaves browser viewport from top while on /pro
 	useEffect( () => {
 		const handleMouseLeave = ( e: MouseEvent ) => {
+			if ( ! isPromoActive() ) return;
 			if ( e.clientY > 0 ) return;
 			if ( location.pathname !== '/pro' ) return;
 			if ( isProInstalled() ) return;
@@ -59,6 +65,7 @@ export default function Layout( { navItems }: LayoutProps ) {
 			const wpMenuLink = target.closest( '#adminmenu a, #adminmenu li > a' ) as HTMLAnchorElement | null;
 
 			if ( ! wpMenuLink ) return;
+			if ( ! isPromoActive() ) return;
 			if ( location.pathname !== '/pro' ) return;
 			if ( isProInstalled() ) return;
 			if ( sessionStorage.getItem( STORAGE_KEY ) ) return;
@@ -105,7 +112,7 @@ export default function Layout( { navItems }: LayoutProps ) {
 				<Outlet />
 			</main>
 
-			{ showPopup && (
+			{ showPopup && isPromoActive() && (
 				<ExitIntentPopup onClose={ handleClose } onScrollToPricing={ handleScrollToPricing } />
 			) }
 		</div>

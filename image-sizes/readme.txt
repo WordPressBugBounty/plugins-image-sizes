@@ -4,7 +4,7 @@ Tags: image optimization, compress images, thumbnail manager, WebP converter, me
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 6.4.1
+Stable tag: 6.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -269,11 +269,22 @@ The plugin links to thumbpress.co for Pro upgrade information. No data is sent a
 
 == Changelog ==
 
+= 6.5 - 2026-08-05 =
+* [new] New "Media Health at N%" notice in the admin bar, colour-coded by score and linking to the dashboard
+* [new] Convert to WebP and Regenerate Thumbnails progress now show a separate "Images Failed" count, so a genuine failure is no longer counted as a missing file
+* [new] Added Italian, Dutch, Russian, Japanese and Simplified Chinese translations
+* [security] Fixed a file-disclosure hole in the hotlink image proxy: it served files even when hotlink protection was off, and could be tricked into serving non-image files such as backups and logs
+* [security] Fixed hotlink protection being bypassable by omitting the Referer header
+* [security] Dismissing the "Pro not activated" notice now requires administrator privileges
+* [fix] Duplicate detection no longer misses duplicates when the image-hash backfill never finished — it now self-heals until every image is hashed
+* [fix] Convert to WebP now pre-checks the source formats saved in Settings instead of its built-in defaults
+* [fix] The AVIF source-format setting now saves and loads correctly
+
 = 6.4.1 - 2026-07-21 =
-* [add] Added Spanish (es_ES), German (de_DE), French (fr_FR), and Brazilian Portuguese (pt_BR) translations, and refreshed the Bengali (bn_BD) translation
-* [add] Internationalized all frontend strings and numbers so they can be translated
-* [perf] Improved WebP/AVIF conversion performance by batching database URL rewrites across a full convert run
-* [fix] Fixed React SPA and PHP translations not loading for the current site locale
+* [new] Added Spanish, German, French and Brazilian Portuguese translations, and refreshed Bengali
+* [new] Internationalized all admin strings and numbers so they can be translated
+* [perf] Faster WebP/AVIF conversion — database URL rewrites are now batched across the whole run
+* [fix] Fixed translations not loading for the current site locale
 
 = 6.4 - 2026-07-16 =
 * [imp] Convert to WebP/AVIF: the single-image convert buttons now show the real reason a conversion failed instead of a generic "Failed to convert image" — including a memory-limit message stating how much memory was needed vs the server limit and how to raise it

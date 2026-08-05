@@ -112,6 +112,7 @@ class Thumbnails {
 	public function regenerate_one( $image_id ) {
 		$result = array(
 			'skipped'        => false,
+			'failed'         => false,
 			'thumbs_deleted' => 0,
 			'thumbs_created' => 0,
 			'space_saved'    => 0,
@@ -169,6 +170,9 @@ class Thumbnails {
 			if ( ! empty( $updated_metadata['file'] ) ) {
 				update_post_meta( $image_id, '_wp_attached_file', $updated_metadata['file'] );
 			}
+		} else {
+			// Metadata generation failed — surface as a distinct "Failed" count.
+			$result['failed'] = true;
 		}
 
 		// Count created thumbnails as unique physical files so the tally mirrors
@@ -245,11 +249,16 @@ class Thumbnails {
 		$thumbs_deleted    = 0;
 		$batch_space_saved = 0;
 		$batch_not_found   = 0;
+		$batch_failed      = 0;
 
 		foreach ( $images as $image ) {
 			$res                = $this->regenerate_one( $image->ID );
 			if ( ! empty( $res['skipped'] ) ) {
 				$batch_not_found++;
+				continue;
+			}
+			if ( ! empty( $res['failed'] ) ) {
+				$batch_failed++;
 				continue;
 			}
 			$thumbs_deleted    += $res['thumbs_deleted'];
@@ -275,6 +284,8 @@ class Thumbnails {
 		update_option( 'thumbpress_regenerate_total_deleted', $total_deleted );
 		update_option( 'thumbpress_regenerate_total_created', $total_created );
 		update_option( 'thumbpress_regenerate_total_not_found', $prev_not_found + $batch_not_found );
+		$prev_failed = (int) get_option( 'thumbpress_regenerate_total_failed', 0 );
+		update_option( 'thumbpress_regenerate_total_failed', $prev_failed + $batch_failed );
 
 		if ( $count < $total_attachments && ! get_option( 'thumbpress_regenerate_cancelled', false ) ) {
 			$new_offset = $offset + $limit;

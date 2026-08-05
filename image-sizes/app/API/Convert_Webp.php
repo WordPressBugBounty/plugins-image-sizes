@@ -44,6 +44,7 @@ class Convert_Webp {
 		$chunk_saved = 0;
 
 		$not_found_prev = absint( $request->get_param( 'not_found' ) );
+		$failed_prev    = absint( $request->get_param( 'failed' ) );
 		$converted_prev = absint( $request->get_param( 'converted' ) );
 
 		$file_formats = $request->get_param( 'file_formats' );
@@ -121,6 +122,7 @@ class Convert_Webp {
 					'total'       => $total_attachments,
 					'space_saved' => $space_saved,
 					'not_found'   => $not_found_prev,
+					'failed'      => $failed_prev,
 					'is_complete' => true,
 				)
 			);
@@ -129,6 +131,7 @@ class Convert_Webp {
 		require_once ABSPATH . 'wp-admin/includes/image.php';
 
 		$batch_not_found = 0;
+		$batch_failed    = 0;
 		$batch_converted = 0;
 		$new_last_id     = $last_id;
 		$url_rewrites    = array();
@@ -168,8 +171,9 @@ class Convert_Webp {
 			$webp_file_path = $this->convert_image_to_webp( $main_img );
 
 			if ( is_wp_error( $webp_file_path ) ) {
-				// Conversion failed (unsupported/decode/memory). Count it so it surfaces in stats.
-				$batch_not_found++;
+				// Genuine conversion failure (unsupported/decode/memory) — tracked separately
+				// from missing source files so the UI can show a distinct "Failed" count.
+				$batch_failed++;
 				continue;
 			}
 
@@ -183,7 +187,7 @@ class Convert_Webp {
 				if ( file_exists( $webp_file_path ) ) {
 					wp_delete_file( $webp_file_path );
 				}
-				$batch_not_found++;
+				$batch_failed++;
 				continue;
 			}
 
@@ -256,6 +260,7 @@ class Convert_Webp {
 
 		$processed_new   = $processed + count( $attachments );
 		$total_not_found = $not_found_prev + $batch_not_found;
+		$total_failed    = $failed_prev + $batch_failed;
 		$converted_total = $converted_prev + $batch_converted;
 		$is_complete     = ( $processed_new >= $total_attachments );
 		$progress        = $total_attachments > 0 ? ( $processed_new / $total_attachments ) * 100 : 100;
@@ -266,6 +271,7 @@ class Convert_Webp {
 		update_option( 'thumbpress_convert_total_converted', $converted_total );
 		update_option( 'thumbpress_convert_space_saved', $space_saved );
 		update_option( 'thumbpress_webp_total_not_found', $total_not_found );
+		update_option( 'thumbpress_convert_total_failed', $total_failed );
 		thumbpress_add_space_saved( $chunk_saved );
 
 		$message = __( 'Converting Images to WebP...', 'image-sizes' );
@@ -288,6 +294,7 @@ class Convert_Webp {
 				'total'       => $total_attachments,
 				'space_saved' => $space_saved,
 				'not_found'   => $total_not_found,
+				'failed'      => $total_failed,
 				'is_complete' => $is_complete,
 			)
 		);
@@ -314,6 +321,7 @@ class Convert_Webp {
 		delete_option( 'thumbpress_convert_total_converted' );
 		delete_option( 'thumbpress_convert_space_saved' );
 		delete_option( 'thumbpress_webp_total_not_found' );
+		delete_option( 'thumbpress_convert_total_failed' );
 
 		$total_attachments_query = "
 			SELECT COUNT(ID)
@@ -365,6 +373,7 @@ class Convert_Webp {
 
 		$space_saved = (int) get_option( 'thumbpress_convert_space_saved', 0 );
 		$not_found   = (int) get_option( 'thumbpress_webp_total_not_found', 0 );
+		$failed      = (int) get_option( 'thumbpress_convert_total_failed', 0 );
 
 		return $this->response_success(
 			array(
@@ -375,6 +384,7 @@ class Convert_Webp {
 				'total'          => $total,
 				'space_saved'    => $space_saved,
 				'not_found'      => $not_found,
+				'failed'         => $failed,
 				'is_complete'    => $progress >= 100,
 				'completed_time' => $completed_time,
 			)

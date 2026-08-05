@@ -70,10 +70,17 @@ class Init {
 	}
 
 	/**
-	 * Schedule batch hash generation for all existing images (runs once).
+	 * Ensure every existing image gets a content hash.
+	 *
+	 * Re-arms the backfill whenever images are still missing the hash/size meta
+	 * and no batch is queued — self-healing when a previous run never finished
+	 * (Action Scheduler queue cleared, cron never fired, or a fatal mid-batch).
+	 * The old one-shot `thumbpress_hashes_scheduled` gate could strand images
+	 * permanently unhashed; unhashed images are excluded from the hash GROUP BY,
+	 * so a stalled backfill silently hides genuine duplicates (#427).
 	 */
 	public function schedule_hash_generation() {
-		if ( get_option( 'thumbpress_hashes_scheduled' ) ) {
+		if ( get_option( 'thumbpress_hashes_generated' ) ) {
 			return;
 		}
 
@@ -85,8 +92,39 @@ class Init {
 			return;
 		}
 
+		if ( ! $this->has_unhashed_images() ) {
+			update_option( 'thumbpress_hashes_generated', true );
+			return;
+		}
+
 		as_schedule_single_action( wp_date( 'U' ) + 5, 'thumbpress_generate_image_hashes', array( 'offset' => 0 ) );
 		update_option( 'thumbpress_hashes_scheduled', true );
+	}
+
+	/**
+	 * Whether any non-trashed image attachment is still missing the hash or size meta.
+	 */
+	private function has_unhashed_images() {
+		global $wpdb;
+
+		$id = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT p.ID
+			 FROM {$wpdb->posts} p
+			 LEFT JOIN {$wpdb->postmeta} pm_hash ON p.ID = pm_hash.post_id AND pm_hash.meta_key = %s
+			 LEFT JOIN {$wpdb->postmeta} pm_size ON p.ID = pm_size.post_id AND pm_size.meta_key = %s
+			 WHERE p.post_type = 'attachment'
+			 AND p.post_mime_type LIKE %s
+			 AND p.post_status != 'trash'
+			 AND ( pm_hash.post_id IS NULL OR pm_size.post_id IS NULL )
+			 LIMIT 1",
+				Utility::HASH_META_KEY,
+				Utility::SIZE_META_KEY,
+				'image/%'
+			)
+		);
+
+		return ! empty( $id );
 	}
 
 	/**

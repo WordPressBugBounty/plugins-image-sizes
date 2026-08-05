@@ -13,6 +13,7 @@ import {
 	cancelConvert,
 	getSettings,
 	saveSettings,
+	getPluginSettings,
 } from '../api';
 
 import {
@@ -21,6 +22,7 @@ import {
 	ConvertedIcon,
 	RemainingIcon,
 	SpaceSavedIcon2,
+	FailedIcon,
 } from '../components/icons';
 
 import Header from '../components/layout/Header';
@@ -58,12 +60,23 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 	const [total, setTotal] = useState(0);
 	const [spaceSaved, setSpaceSaved] = useState(0);
 	const [notFound, setNotFound] = useState(0);
+	const [failed, setFailed] = useState(0);
 	const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
 	const generationRef = useRef(0);
 
 	const circumference = 2 * Math.PI * 80;
 	const strokeDashoffset = circumference - (progress / 100) * circumference;
 	const detectImageUrl = (window.THUMBPRESS?.assets_url || '') + 'admin/img/no-search-result.png';
+
+	useEffect(() => {
+		// Reflect the source formats saved on the Settings tab instead of DEFAULT_FORMATS (#443).
+		getPluginSettings().then((res) => {
+			const saved = res?.data?.webp_file_formats ?? [];
+			if (Array.isArray(saved) && saved.length) {
+				setFormats((prev) => prev.map((f) => ({ ...f, checked: saved.includes(f.value) })));
+			}
+		}).catch(() => { });
+	}, []);
 
 	useEffect(() => {
 		// Always check live progress first — saved state may be stale if user reloaded before API responded.
@@ -78,6 +91,7 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 				setTotal(progressRes.data.total);
 				setSpaceSaved(progressRes.data.space_saved || 0);
 				setNotFound(progressRes.data.not_found || 0);
+				setFailed(progressRes.data.failed || 0);
 				pollRef.current = setInterval(async () => {
 					const pr = await getConvertProgress();
 					if (pr?.data) {
@@ -88,6 +102,7 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 						setTotal(pr.data.total);
 						setSpaceSaved(pr.data.space_saved || 0);
 						setNotFound(pr.data.not_found || 0);
+						setFailed(pr.data.failed || 0);
 						if (pr.data.is_complete) {
 							if (pollRef.current) clearInterval(pollRef.current);
 							setConverting(false);
@@ -107,6 +122,7 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 							setTotal(progressRes.data.total);
 							setSpaceSaved(progressRes.data.space_saved || 0);
 							setNotFound(progressRes.data.not_found || 0);
+							setFailed(progressRes.data.failed || 0);
 						}
 					}
 				}).catch(() => { }).finally(() => setLoading(false));
@@ -157,18 +173,20 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 		setProcessed(0);
 		setRemaining(0);
 		setSpaceSaved(0);
+		setFailed(0);
 
 		let lastId = 0;
 		let currentProcessed = 0;
 		let currentConverted = 0;
 		let currentSpaceSaved = 0;
 		let currentNotFound = 0;
+		let currentFailed = 0;
 		let firstChunk = true;
 
 		const processChunk = async () => {
 			if (generationRef.current !== myGen) return;
 			try {
-				const res = await convertNow(lastId, limit, fileFormats, currentSpaceSaved, currentNotFound, currentProcessed, currentConverted);
+				const res = await convertNow(lastId, limit, fileFormats, currentSpaceSaved, currentNotFound, currentProcessed, currentConverted, currentFailed);
 				if (generationRef.current !== myGen) return;
 				if (!res?.success) {
 					setConverting(false);
@@ -200,11 +218,13 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 					setTotal(data.total || 0);
 					setSpaceSaved(data.space_saved || 0);
 					setNotFound(Number(data.not_found) || 0);
+					setFailed(Number(data.failed) || 0);
 					lastId = data.last_id || 0;
 					currentProcessed = data.processed || 0;
 					currentConverted = data.converted || 0;
 					currentSpaceSaved = data.space_saved || 0;
 					currentNotFound = Number(data.not_found) || 0;
+					currentFailed = Number(data.failed) || 0;
 
 					if (data.is_complete || data.progress === undefined || data.progress >= 100) {
 						setConverting(false);
@@ -235,6 +255,7 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 		setProcessed(0);
 		setRemaining(0);
 		setSpaceSaved(0);
+		setFailed(0);
 
 		try {
 			const res = await convertBackground(limit, fileFormats);
@@ -257,6 +278,7 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 						setTotal(progressRes.data.total);
 						setSpaceSaved(progressRes.data.space_saved || 0);
 						setNotFound(progressRes.data.not_found || 0);
+						setFailed(progressRes.data.failed || 0);
 
 						if (progressRes.data.is_complete) {
 							if (pollRef.current) clearInterval(pollRef.current);
@@ -270,9 +292,9 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 		}
 	};
 
-	const StatCard = ({ icon, value, label }: { icon: React.ReactNode, value: number | string; label: string }) => (
+	const StatCard = ({ icon, value, label, accent }: { icon: React.ReactNode, value: number | string; label: string; accent?: 'red' }) => (
 		<div className="flex items-center gap-3 rounded-xl border border-[#E2E8F0] bg-white px-5 py-4">
-			<div className="w-10 h-10 rounded-lg bg-[#F0EBFF] flex items-center justify-center">
+			<div className={`w-10 h-10 rounded-lg flex items-center justify-center ${accent === 'red' ? 'bg-[#FDECEC] text-[#FF3A52]' : 'bg-[#F0EBFF]'}`}>
 				{icon}
 			</div>
 			<div>
@@ -410,6 +432,7 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 							<div className="grid grid-cols-3 gap-4 w-full max-w-[700px]">
 								<StatCard icon={<TotalImagesIcon2 />} value={ numberFormat( total ) } label={__('Total Images', 'image-sizes')} />
 								<StatCard icon={<ImageProcessedIcon />} value={ numberFormat( processed ) } label={__('Images Processed', 'image-sizes')} />
+								<StatCard icon={<FailedIcon />} value={ numberFormat( failed ) } label={__('Images Failed', 'image-sizes')} accent="red" />
 								<StatCard
 									icon={
 										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="currentColor" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -424,7 +447,7 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 								/>
 								<StatCard icon={<ConvertedIcon />} value={ numberFormat( converted ) } label={__('Images Converted', 'image-sizes')} />
 								<StatCard icon={<RemainingIcon />} value={ numberFormat( remaining ) } label={__('Images Remaining', 'image-sizes')} />
-								<StatCard icon={<SpaceSavedIcon2 />} value={ formatBytes( spaceSaved ) } label={__('Space Saved', 'image-sizes')} />
+							<StatCard icon={<SpaceSavedIcon2 />} value={ formatBytes( spaceSaved ) } label={__('Space Saved', 'image-sizes')} />
 							</div>
 
 						</div>
