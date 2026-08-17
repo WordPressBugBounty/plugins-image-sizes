@@ -106,7 +106,7 @@ class Convert_Webp {
 			}
 
 			// Otherwise we've reached the end of the set — report completion.
-			update_option( 'convert_last_completed_time', wp_date( 'U' ) );
+			update_option( 'thumbpress_convert_last_completed_time', wp_date( 'U' ) );
 			$this->delete_cache( 'stat_not_webp' );
 			$this->delete_cache( 'stat_not_avif' );
 			$this->delete_cache( 'stat_unoptimized' );
@@ -267,7 +267,7 @@ class Convert_Webp {
 		$progress        = $is_complete ? 100 : min( 99, (int) floor( $progress ) );
 
 		// Persist stats so dashboard can read them.
-		update_option( 'thumbpress_convert_total_processd', $processed_new );
+		update_option( 'thumbpress_convert_total_processed', $processed_new );
 		update_option( 'thumbpress_convert_total_converted', $converted_total );
 		update_option( 'thumbpress_convert_space_saved', $space_saved );
 		update_option( 'thumbpress_webp_total_not_found', $total_not_found );
@@ -277,7 +277,7 @@ class Convert_Webp {
 		$message = __( 'Converting Images to WebP...', 'image-sizes' );
 		if ( $is_complete ) {
 			$message = __( 'Congratulations, Converting Images to WebP is Completed!', 'image-sizes' );
-			update_option( 'convert_last_completed_time', wp_date( 'U' ) );
+			update_option( 'thumbpress_convert_last_completed_time', wp_date( 'U' ) );
 			$this->delete_cache( 'stat_not_webp' );
 			$this->delete_cache( 'stat_not_avif' );
 			$this->delete_cache( 'stat_unoptimized' );
@@ -317,6 +317,7 @@ class Convert_Webp {
 		global $wpdb;
 
 		delete_option( 'thumbpress_convert_progress' );
+		delete_option( 'thumbpress_convert_total_processed' );
 		delete_option( 'thumbpress_convert_total_processd' );
 		delete_option( 'thumbpress_convert_total_converted' );
 		delete_option( 'thumbpress_convert_space_saved' );
@@ -365,10 +366,17 @@ class Convert_Webp {
 
 	public function get_progress() {
 		$progress       = (float) get_option( 'thumbpress_convert_progress', 0 );
-		$processed      = (int) get_option( 'thumbpress_convert_total_processd', 0 );
+		$processed = (int) Utility::get_option_with_legacy_fallback(
+			'thumbpress_convert_total_processed',
+			'thumbpress_convert_total_processd',
+			0
+		);
 		$converted      = (int) get_option( 'thumbpress_convert_total_converted', 0 );
 		$total          = (int) get_option( 'thumbpress_now_convert_background_total_images', 0 );
-		$completed      = get_option( 'convert_last_completed_time' );
+		$completed = Utility::get_option_with_legacy_fallback(
+			'thumbpress_convert_last_completed_time',
+			'convert_last_completed_time'
+		);
 		$completed_time = $completed ? date_i18n( 'g:i a F j, Y', $completed ) : '';
 
 		$space_saved = (int) get_option( 'thumbpress_convert_space_saved', 0 );

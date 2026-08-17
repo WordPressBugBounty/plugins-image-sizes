@@ -24,7 +24,7 @@ class Menu {
 	public function add_assets() {
 		global $current_screen;
 
-		if ( strpos( $current_screen->base, 'thumbpress' ) !== false ) {
+		if ( isset( $current_screen->base ) && strpos( $current_screen->base, 'thumbpress' ) !== false ) {
 
 			$admin_asset = require THUMBPRESS_PLUGIN_DIR . 'build/admin.asset.php';
 

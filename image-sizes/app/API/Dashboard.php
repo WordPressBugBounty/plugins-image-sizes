@@ -385,29 +385,29 @@ class Dashboard {
 				'ok'     => $not_compressed === 0,
 				'weight' => 25,
 				'text'   => $not_compressed > 0
-					? number_format_i18n( $not_compressed ) . ' Images Need Compression'
-					: 'All Images Compressed',
+					? sprintf( __( '%s Images Need Compression', 'image-sizes' ), number_format_i18n( $not_compressed ) )
+					: __( 'All Images Compressed', 'image-sizes' ),
 			),
 			array(
 				'ok'     => $large_images === 0,
 				'weight' => 25,
 				'text'   => $large_images > 0
-					? number_format_i18n( $large_images ) . ' Images (Over 1 MB)'
-					: 'No Images Over 1 MB',
+					? sprintf( __( '%s Images (Over 1 MB)', 'image-sizes' ), number_format_i18n( $large_images ) )
+				    : __( 'No Images Over 1 MB', 'image-sizes' ),
 			),
 			array(
 				'ok'     => $webp_avif_count === 0,
 				'weight' => 8,
 				'text'   => $webp_avif_count > 0
-					? number_format_i18n( $webp_avif_count ) . ' Non-WebP/AVIF Images Found'
-					: 'All Images in WebP or AVIF Format',
+					? sprintf( __( '%s Non-WebP/AVIF Images Found', 'image-sizes' ), number_format_i18n( $webp_avif_count ) )
+				    : __( 'All Images in WebP or AVIF Format', 'image-sizes' ),
 			),
 			array(
 				'ok'     => $duplicates === 0,
 				'weight' => 10,
 				'text'   => $duplicates > 0
-					? number_format_i18n( $duplicates ) . ' Duplicate Images Found'
-					: 'No Duplicate Images Found',
+					? sprintf( __( '%s Duplicate Images Found', 'image-sizes' ), number_format_i18n( $duplicates ) )
+				    : __( 'No Duplicate Images Found', 'image-sizes' ),
 			),
 		);
 
@@ -530,7 +530,7 @@ class Dashboard {
 		if ( $total === 0 ) {
 			return array(
 				'score' => 100,
-				'issue' => 'No images in media library',
+				'issue' => __( 'No images in media library', 'image-sizes' ),
 			);
 		}
 
@@ -561,19 +561,19 @@ class Dashboard {
 		$score      = max( 0, min( 100, $score ) );
 		$unused     = (int) ( $stats['unused_images'] ?? 0 );
 		$duplicates = (int) ( $stats['duplicate_images'] ?? 0 );
-		$issue      = 'All images optimized';
+		$issue      = __( 'All images optimized', 'image-sizes' );
 
 		if ( $unoptimized > 0 ) {
-			$issue = sprintf( '%s images not in WebP/AVIF', number_format_i18n( $unoptimized ) );
+			$issue = sprintf( __( '%s images not in WebP/AVIF', 'image-sizes' ), number_format_i18n( $unoptimized ) );
 		} elseif ( $not_compressed > 0 ) {
-			$issue = sprintf( '%s uncompressed images', number_format_i18n( $not_compressed ) );
+			$issue = sprintf( __( '%s uncompressed images', 'image-sizes' ), number_format_i18n( $not_compressed ) );
 		} elseif ( $large > 0 ) {
-			$issue = sprintf( '%s images over 1 MB', number_format_i18n( $large ) );
+			$issue = sprintf( __( '%s images over 1 MB', 'image-sizes' ), number_format_i18n( $large ) );
 		} elseif ( isset( $stats['health_contributions'] ) ) {
 			if ( $unused > 0 ) {
-				$issue = sprintf( '%s unused images', number_format_i18n( $unused ) );
+				$issue = sprintf( __( '%s unused images', 'image-sizes' ), number_format_i18n( $unused ) );
 			} elseif ( $duplicates > 0 ) {
-				$issue = sprintf( '%s duplicate images', number_format_i18n( $duplicates ) );
+				$issue = sprintf( __( '%s duplicate images', 'image-sizes' ), number_format_i18n( $duplicates ) );
 			}
 		}
 

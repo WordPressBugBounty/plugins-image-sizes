@@ -59,7 +59,11 @@ class Convert_Webp extends Image_Converter {
 		$image_types       = $this->get_image_mime_types_for_webp( $file_formats );
 		$limit             = (int) get_option( 'thumbpress_convert_img_val', 100 );
 		$total_attachments = (int) get_option( 'thumbpress_now_convert_background_total_images' );
-		$processed_count   = (int) get_option( 'thumbpress_convert_total_processd', 0 );
+		$processed_count = (int) Utility::get_option_with_legacy_fallback(
+			'thumbpress_convert_total_processed',
+			'thumbpress_convert_total_processd',
+			0
+		);
 		$converted_count   = (int) get_option( 'thumbpress_convert_total_converted', 0 );
 		$space_saved       = (int) get_option( 'thumbpress_convert_space_saved', 0 );
 
@@ -91,7 +95,7 @@ class Convert_Webp extends Image_Converter {
 		// No more rows — we've reached the end of the set. Mark complete.
 		if ( empty( $attachments ) ) {
 			update_option( 'thumbpress_convert_progress', 100 );
-			update_option( 'convert_last_completed_time', wp_date( 'U' ) );
+			update_option( 'thumbpress_convert_last_completed_time', wp_date( 'U' ) );
 			$this->clear_webp_caches();
 			return;
 		}
@@ -238,7 +242,7 @@ class Convert_Webp extends Image_Converter {
 		$progress         = $is_complete ? 100 : min( 99, floor( $progress ) );
 
 		update_option( 'thumbpress_convert_progress', $progress );
-		update_option( 'thumbpress_convert_total_processd', $processed_count );
+		update_option( 'thumbpress_convert_total_processed', $processed_count );
 		update_option( 'thumbpress_convert_total_converted', $converted_count + $batch_converted );
 		update_option( 'thumbpress_convert_space_saved', $space_saved );
 
@@ -255,7 +259,7 @@ class Convert_Webp extends Image_Converter {
 			}
 		} else {
 			update_option( 'thumbpress_convert_progress', 100 );
-			update_option( 'convert_last_completed_time', wp_date( 'U' ) );
+			update_option( 'thumbpress_convert_last_completed_time', wp_date( 'U' ) );
 			$this->clear_webp_caches();
 		}
 	}

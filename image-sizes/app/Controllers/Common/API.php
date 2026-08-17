@@ -176,6 +176,7 @@ class API {
 					update_option( 'thumbpress_webp_cancelled', true );
 					as_unschedule_all_actions( 'thumbpress_convert_all_image' );
 					delete_option( 'thumbpress_convert_progress' );
+					delete_option( 'thumbpress_convert_total_processed' );
 					delete_option( 'thumbpress_convert_total_processd' );
 					delete_option( 'thumbpress_convert_total_converted' );
 					delete_option( 'thumbpress_convert_space_saved' );

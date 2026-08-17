@@ -16,6 +16,26 @@ class Init {
 	use Cache;
 
 	/**
+	 * Bumping this re-evaluates the backfill once on sites that already flagged it done.
+	 */
+	const BACKFILL_VERSION = 2;
+
+	/**
+	 * Images hashed per batch.
+	 */
+	const BATCH_SIZE = 500;
+
+	/**
+	 * Seconds between batches — long enough for the Action Scheduler ajax chain to drain.
+	 */
+	const BATCH_DELAY = 60;
+
+	/**
+	 * Seconds a batch may spend hashing — half of Action Scheduler's 30s budget.
+	 */
+	const BATCH_TIME_BUDGET = 15;
+
+	/**
 	 * Constructor to add all hooks.
 	 */
 	public function __construct() {
@@ -80,7 +100,12 @@ class Init {
 	 * so a stalled backfill silently hides genuine duplicates (#427).
 	 */
 	public function schedule_hash_generation() {
-		if ( get_option( 'thumbpress_hashes_generated' ) ) {
+		if ( (int) get_option( 'thumbpress_hashes_backfill_version' ) >= self::BACKFILL_VERSION ) {
+			return;
+		}
+
+		// Action Scheduler drains its queue over admin-ajax, which fires admin_init — never re-arm from there (#463).
+		if ( wp_doing_ajax() ) {
 			return;
 		}
 
@@ -93,12 +118,27 @@ class Init {
 		}
 
 		if ( ! $this->has_unhashed_images() ) {
-			update_option( 'thumbpress_hashes_generated', true );
+			$this->mark_backfill_complete();
 			return;
 		}
 
-		as_schedule_single_action( wp_date( 'U' ) + 5, 'thumbpress_generate_image_hashes', array( 'offset' => 0 ) );
+		as_schedule_single_action( wp_date( 'U' ) + self::BATCH_DELAY, 'thumbpress_generate_image_hashes', array( 'offset' => 0 ) );
 		update_option( 'thumbpress_hashes_scheduled', true );
+	}
+
+	/**
+	 * Seconds this batch may spend hashing.
+	 */
+	protected function batch_time_budget() {
+		return self::BATCH_TIME_BUDGET;
+	}
+
+	/**
+	 * Flag the backfill as finished for this version.
+	 */
+	private function mark_backfill_complete() {
+		update_option( 'thumbpress_hashes_generated', true );
+		update_option( 'thumbpress_hashes_backfill_version', self::BACKFILL_VERSION );
 	}
 
 	/**
@@ -214,11 +254,22 @@ class Init {
 
 	/**
 	 * Background batch: generate hashes for images missing the meta.
+	 *
+	 * Walks forward by attachment ID rather than re-querying from the top. An image
+	 * whose file is unreadable never gets the meta, so a top-anchored query re-selects
+	 * it every batch and the chain reschedules itself forever (#463). Plain OFFSET
+	 * cannot be used: hashed rows leave the result set, so it would skip live work.
+	 *
+	 * BATCH_SIZE is a ceiling, not a promise — the loop also stops at BATCH_TIME_BUDGET
+	 * so a slow host with multi-MB originals cannot overrun Action Scheduler's 30s limit.
+	 *
+	 * @param int $offset Highest attachment ID already visited.
 	 */
 	public function generate_hashes_batch( $offset ) {
 		global $wpdb;
 
-		$limit = 200;
+		$limit  = self::BATCH_SIZE;
+		$offset = absint( $offset );
 
 		$ids = $wpdb->get_col(
 			$wpdb->prepare(
@@ -229,29 +280,45 @@ class Init {
 			 WHERE p.post_type = 'attachment'
 			 AND p.post_mime_type LIKE %s
 			 AND p.post_status != 'trash'
+			 AND p.ID > %d
 			 AND (pm_hash.post_id IS NULL OR pm_size.post_id IS NULL)
+			 ORDER BY p.ID ASC
 			 LIMIT %d",
 				Utility::HASH_META_KEY,
 				Utility::SIZE_META_KEY,
 				'image/%',
+				$offset,
 				$limit
 			)
 		);
 
 		if ( empty( $ids ) ) {
-			update_option( 'thumbpress_hashes_generated', true );
+			$this->mark_backfill_complete();
+			$this->delete_cache( 'stat_duplicates' );
 			return;
 		}
 
+		$deadline  = microtime( true ) + $this->batch_time_budget();
+		$last      = $offset;
+		$processed = 0;
+
 		foreach ( $ids as $id ) {
 			Utility::refresh_file_meta( $id );
+			$last = (int) $id;
+			++$processed;
+
+			// Checked after the first image, so a batch always advances the watermark.
+			if ( microtime( true ) >= $deadline ) {
+				break;
+			}
 		}
 
-		if ( count( $ids ) >= $limit ) {
-			as_schedule_single_action( wp_date( 'U' ) + 5, 'thumbpress_generate_image_hashes', array( 'offset' => 0 ) );
-		} else {
-			update_option( 'thumbpress_hashes_generated', true );
-			$this->delete_cache( 'stat_duplicates' );
+		if ( $processed < count( $ids ) || count( $ids ) >= $limit ) {
+			as_schedule_single_action( wp_date( 'U' ) + self::BATCH_DELAY, 'thumbpress_generate_image_hashes', array( 'offset' => $last ) );
+			return;
 		}
+
+		$this->mark_backfill_complete();
+		$this->delete_cache( 'stat_duplicates' );
 	}
 }

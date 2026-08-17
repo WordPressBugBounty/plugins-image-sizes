@@ -82,6 +82,7 @@ class Utility {
 		}
 	}
 
+
 	/**
 	 * Includes a template file from the 'view' directory.
 	 *
@@ -112,41 +113,6 @@ class Utility {
 		} else {
 			error_log( 'Template file not found: ' . $path );
 		}
-	}
-
-	/**
-	 * @param bool $show_cached either to use a cached list of posts or not. If enabled, make sure to wp_cache_delete() with the `save_post` hook
-	 */
-	public static function get_posts( $args = array(), $show_heading = false, $show_cached = false ) {
-
-		$defaults = array(
-			'post_type'      => 'post',
-			'posts_per_page' => -1,
-			'post_status'    => 'publish',
-		);
-
-		$_args = wp_parse_args( $args, $defaults );
-
-		// use cache
-		if ( true === $show_cached && ( $cached_posts = wp_cache_get( "image-sizes_{$_args['post_type']}", 'image-sizes' ) ) ) {
-			$posts = $cached_posts;
-		}
-
-		// don't use cache
-		else {
-			$queried = new \WP_Query( $_args );
-
-			$posts = array();
-			foreach ( $queried->posts as $post ) :
-				$posts[ $post->ID ] = $post->post_title;
-			endforeach;
-
-			wp_cache_add( "image-sizes_{$_args['post_type']}", $posts, 'image-sizes', 3600 );
-		}
-
-		$posts = $show_heading ? array( '' => sprintf( __( '- Choose a %s -', 'image-sizes' ), $_args['post_type'] ) ) + $posts : $posts;
-
-		return apply_filters( 'image-sizes_get_posts', $posts, $_args );
 	}
 
 	public static function get_option( $option, $section, $field, $default = '' ) {
@@ -641,5 +607,32 @@ class Utility {
 	private static function swap_ext( $filename, $new_ext ) {
 		$dot = strrpos( $filename, '.' );
 		return ( false === $dot ? $filename : substr( $filename, 0, $dot ) ) . '.' . $new_ext;
+	}
+
+
+	/**
+	 * Read an option, falling back to (and migrating from) a legacy misspelled key.
+	 *
+	 * @param string $key        Correct option key.
+	 * @param string $legacy_key Old/misspelled option key to fall back to.
+	 * @param mixed  $default    Default if neither key is set.
+	 * @return mixed
+	 */
+	public static function get_option_with_legacy_fallback( $key, $legacy_key, $default = false ) {
+		$value = get_option( $key, null );
+		if ( null !== $value ) {
+			return $value;
+		}
+
+		$legacy_value = get_option( $legacy_key, null );
+		if ( null !== $legacy_value ) {
+			// One-time migration: move the value to the correctly-spelled key and
+			// clean up the old one so future reads hit the fast path above.
+			update_option( $key, $legacy_value );
+			delete_option( $legacy_key );
+			return $legacy_value;
+		}
+
+		return $default;
 	}
 }

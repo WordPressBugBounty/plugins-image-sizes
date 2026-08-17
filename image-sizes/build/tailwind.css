@@ -1431,6 +1431,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 	--tw-bg-opacity: 1;
 	background-color: rgb(254 243 199 / var(--tw-bg-opacity, 1));
 }
+#image-sizes_render .bg-amber-50 {
+	--tw-bg-opacity: 1;
+	background-color: rgb(255 251 235 / var(--tw-bg-opacity, 1));
+}
 #image-sizes_render .bg-black\/50 {
 	background-color: rgb(0 0 0 / 0.5);
 }
@@ -1459,6 +1463,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .bg-red-100 {
 	--tw-bg-opacity: 1;
 	background-color: rgb(254 226 226 / var(--tw-bg-opacity, 1));
+}
+#image-sizes_render .bg-red-50 {
+	--tw-bg-opacity: 1;
+	background-color: rgb(254 242 242 / var(--tw-bg-opacity, 1));
 }
 #image-sizes_render .bg-red-600 {
 	--tw-bg-opacity: 1;
@@ -1775,6 +1783,9 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .tracking-wider {
 	letter-spacing: 0.05em;
 }
+#image-sizes_render .tracking-widest {
+	letter-spacing: 0.1em;
+}
 #image-sizes_render .\!text-\[\#059669\] {
 	--tw-text-opacity: 1 !important;
 	color: rgb(5 150 105 / var(--tw-text-opacity, 1)) !important;
@@ -1894,6 +1905,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .text-\[\#FF3A52\] {
 	--tw-text-opacity: 1;
 	color: rgb(255 58 82 / var(--tw-text-opacity, 1));
+}
+#image-sizes_render .text-amber-600 {
+	--tw-text-opacity: 1;
+	color: rgb(217 119 6 / var(--tw-text-opacity, 1));
 }
 #image-sizes_render .text-amber-700 {
 	--tw-text-opacity: 1;

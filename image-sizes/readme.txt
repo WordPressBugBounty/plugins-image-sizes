@@ -4,7 +4,7 @@ Tags: image optimization, compress images, thumbnail manager, WebP converter, me
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 6.5
+Stable tag: 6.5.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -268,6 +268,19 @@ ThumbPress may connect to the WordPress.org API (api.wordpress.org) to check for
 The plugin links to thumbpress.co for Pro upgrade information. No data is sent automatically; links only open when the user clicks them.
 
 == Changelog ==
+
+= 6.5.2 - 2026-08-17 =
+* [fix] Fixed the image-hash backfill never finishing on large media libraries — images whose files could not be read were scanned again on every pass, so the background job restarted itself indefinitely and sent a constant stream of requests to `admin-ajax.php`. The backfill now works through images in order and stops when it reaches the end
+* [perf] The backfill is gentler on the server: larger batches spaced further apart mean far fewer background requests, and each batch now stops on a time limit so it is never cut off mid-run on slower hosting
+* [fix] Sites that stopped a runaway backfill by hand get one corrected pass automatically, so their images finish being hashed and duplicate detection sees the full library
+
+= 6.5.1 - 2026-08-13 =
+* [compat] Version compatibility tested with 7.0.4
+* [fix] The Dashboard health score and Quick Facts now use your site's language — these strings were previously always shown in English
+* [fix] Fixed the Convert to WebP "Images Processed" count being saved under a misspelled option key; existing progress is carried over automatically, so no counts are lost
+* [fix] Plugin option keys are now consistently prefixed with `thumbpress_`, avoiding clashes with other plugins; older keys are still read and migrated automatically
+* [fix] Fixed a PHP warning on admin screens that do not report a screen base
+* [chore] Removed unused internal scaffolding — the unreachable field-rendering framework, an unconditionally-true permission helper that was never wired to any endpoint, and other dead helpers. No change to plugin behaviour
 
 = 6.5 - 2026-08-05 =
 * [new] New "Media Health at N%" notice in the admin bar, colour-coded by score and linking to the dashboard
