@@ -64,11 +64,13 @@ class Hotlink_Protection {
 			$uri    = strtok( wp_unslash( $_SERVER['REQUEST_URI'] ), '?' );
 			$prefix = '/thumbpress-image/';
 			if ( 0 === strpos( $uri, $prefix ) ) {
-				$image_path = substr( $uri, strlen( $prefix ) );
+				// Decode here — only REQUEST_URI is percent-encoded ($_GET is pre-decoded by PHP).
+				// Lets non-ASCII filenames survive the removal of sanitize_text_field() below (#474).
+				$image_path = rawurldecode( substr( $uri, strlen( $prefix ) ) );
 			}
 		}
 
-		// Legacy: ?thumbpress_image=path query string format.
+		// Older ?thumbpress_image=path query-string form, still linked from some sites.
 		if ( empty( $image_path ) && ! empty( $_GET['thumbpress_image'] ) ) {
 			$image_path = $_GET['thumbpress_image'];
 		}
@@ -77,7 +79,9 @@ class Hotlink_Protection {
 			return;
 		}
 
-		$image_path = sanitize_text_field( wp_unslash( $image_path ) );
+		// Strip null bytes only; no sanitize_text_field() — it deletes %XX and mangles non-ASCII
+		// names. The realpath() boundary check below enforces containment (#366, #474).
+		$image_path = str_replace( "\0", '', wp_unslash( $image_path ) );
 		$upload_dir = wp_get_upload_dir();
 		$file_path  = trailingslashit( $upload_dir['basedir'] ) . $image_path;
 
@@ -129,7 +133,7 @@ class Hotlink_Protection {
 		header( 'Content-Type: ' . $content_type );
 		header( 'Content-Length: ' . filesize( $real_path ) );
 		header( 'Cache-Control: public, max-age=31536000' );
-		readfile( $real_path );
+		readfile( $real_path ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_readfile -- Streams the image; WP_Filesystem would buffer the whole file in memory.
 		exit;
 	}
 

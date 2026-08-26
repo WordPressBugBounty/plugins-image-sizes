@@ -391,7 +391,7 @@ class Database {
 					foreach ( $condition as $column => $value ) {
 
 						// Handle nested conditions like `[ 'key' => [ '>=', 'value' ] ]`.
-						if ( is_array( $value ) && count( $value ) == 2 && ! is_array( $value[1] ) ) {
+						if ( is_array( $value ) && 2 === count( $value ) && ! is_array( $value[1] ) ) {
 							$operator       = $value[0];
 							$_value         = $value[1];
 							$placeholder    = is_numeric( $_value ) ? '%d' : '%s';
@@ -400,7 +400,7 @@ class Database {
 						}
 
 						// Handle IN operator explicitly when value is `[ 'IN', [ value1, value2, ... ] ]`.
-						elseif ( is_array( $value ) && count( $value ) == 2 && strtoupper( $value[0] ) === 'IN' && is_array( $value[1] ) ) {
+						elseif ( is_array( $value ) && 2 === count( $value ) && strtoupper( $value[0] ) === 'IN' && is_array( $value[1] ) ) {
 							$_values        = $value[1];
 							$placeholders   = implode( ', ', array_fill( 0, count( $_values ), is_numeric( reset( $_values ) ) ? '%d' : '%s' ) );
 							$where_clause[] = "{$column} IN ({$placeholders})";

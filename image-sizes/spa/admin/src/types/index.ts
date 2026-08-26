@@ -19,7 +19,6 @@ declare global {
 		THUMBPRESS_PRO?: Record<string, unknown>;
 		THUMBPRESS?: {
 			api_base?: string;
-			version_switch_url?: string;
 			nonce?: string;
 			assets_url?: string;
 			pro_active?: boolean;

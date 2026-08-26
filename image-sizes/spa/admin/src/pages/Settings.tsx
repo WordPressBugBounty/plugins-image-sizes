@@ -239,36 +239,6 @@ export default function Settings() {
 							<Card title={tab.title} tooltip={tab.tooltip} headerAction={tab.headerAction} className='max-w-[900px]'>
 								{tab.content}
 							</Card>
-							{tab.slug === 'general' && !window.THUMBPRESS?.is_new_user && (
-								<div className="max-w-[900px] text-center mt-4">
-									<p className="text-sm text-[#64748B]">
-										{__( 'Miss the old interface?', 'image-sizes' )}{' '}
-										<a
-											href="#"
-											onClick={(e) => {
-												e.preventDefault();
-												fetch(
-													window.THUMBPRESS!.version_switch_url!,
-													{
-														method: 'POST',
-														headers: {
-															'Content-Type': 'application/json',
-															'X-WP-Nonce': window.THUMBPRESS?.nonce || '',
-														},
-														body: JSON.stringify({ preference: 'legacy' }),
-													},
-												).then(() => {
-													window.location.href = window.location.pathname + '?page=thumbpress#thumbpress_modules';
-													window.location.reload();
-												});
-											}}
-											className="text-thumbpress-primary hover:underline cursor-pointer"
-										>
-											{__( 'Turn on legacy mode.', 'image-sizes' )}
-										</a>
-									</p>
-								</div>
-							)}
 						</TabsContent>
 					))}
 				</Tabs>

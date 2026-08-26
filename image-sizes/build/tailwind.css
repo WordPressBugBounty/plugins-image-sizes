@@ -725,9 +725,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .inline-block {
 	display: inline-block;
 }
-#image-sizes_render .inline {
-	display: inline;
-}
 #image-sizes_render .flex {
 	display: flex;
 }
@@ -2155,9 +2152,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .hover\:text-thumbpress-primary:hover {
 	--tw-text-opacity: 1;
 	color: rgb(64 24 157 / var(--tw-text-opacity, 1));
-}
-#image-sizes_render .hover\:underline:hover {
-	text-decoration-line: underline;
 }
 #image-sizes_render .hover\:opacity-90:hover {
 	opacity: 0.9;

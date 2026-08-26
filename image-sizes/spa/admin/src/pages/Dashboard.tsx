@@ -232,7 +232,7 @@ export default function Dashboard() {
 					{/* ANALYSIS */}
 					{analysisLoading ? <InfoCardSkeleton hasArrow /> : applyFilters(
 						'thumbpress_dashboard_card_unused',
-						<LockedFeatureCard icon={<UnusedImagesIconPro />} title={__('Unused Images', 'image-sizes')} description={__('Unattached images', 'image-sizes')} />,
+						<LockedFeatureCard icon={<UnusedImagesIconPro />} title={__('Unused Images', 'image-sizes')} description={__('Images with no detected usage', 'image-sizes')} />,
 						mergedStats, navigate,
 					) as React.ReactNode}
 

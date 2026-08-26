@@ -41,7 +41,7 @@ class Utility {
 		WP_Filesystem();
 
 		if ( ! is_string( $message ) ) {
-			$message = json_encode( $message );
+			$message = wp_json_encode( $message );
 		}
 
 		$upload_dir = wp_upload_dir();
@@ -71,8 +71,10 @@ class Utility {
 
 		echo '<pre>';
 		if ( is_object( $data ) || is_array( $data ) ) {
+			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r -- Developer-only debug helper.
 			print_r( $data );
 		} else {
+			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_dump -- Developer-only debug helper.
 			var_dump( $data );
 		}
 		echo '</pre>';
@@ -81,7 +83,6 @@ class Utility {
 			echo '<style>#adminmenumain{display:none;}</style>';
 		}
 	}
-
 
 	/**
 	 * Includes a template file from the 'view' directory.
@@ -110,8 +111,9 @@ class Utility {
 			include $path;
 
 			return ob_get_clean();
-		} else {
-			error_log( 'Template file not found: ' . $path );
+		} elseif ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Debug-only diagnostic for a missing template.
+			error_log( 'ThumbPress: template file not found: ' . $path );
 		}
 	}
 
@@ -610,29 +612,27 @@ class Utility {
 	}
 
 
+
 	/**
-	 * Read an option, falling back to (and migrating from) a legacy misspelled key.
+	 * Re-arm a self-chaining Action Scheduler batch that died before scheduling its successor.
 	 *
-	 * @param string $key        Correct option key.
-	 * @param string $legacy_key Old/misspelled option key to fall back to.
-	 * @param mixed  $default    Default if neither key is set.
-	 * @return mixed
+	 * @param string $hook Action Scheduler hook name.
+	 * @param array  $args Arguments the resumed batch should run with, in the hook's own shape.
+	 * @return bool Whether a batch was scheduled.
 	 */
-	public static function get_option_with_legacy_fallback( $key, $legacy_key, $default = false ) {
-		$value = get_option( $key, null );
-		if ( null !== $value ) {
-			return $value;
+	public static function rearm_batch( $hook, $args = array() ) {
+		if ( wp_doing_ajax() ) {
+			return false;
 		}
 
-		$legacy_value = get_option( $legacy_key, null );
-		if ( null !== $legacy_value ) {
-			// One-time migration: move the value to the correctly-spelled key and
-			// clean up the old one so future reads hit the fast path above.
-			update_option( $key, $legacy_value );
-			delete_option( $legacy_key );
-			return $legacy_value;
+		if ( ! function_exists( 'as_has_scheduled_action' ) || ! function_exists( 'as_schedule_single_action' ) ) {
+			return false;
 		}
 
-		return $default;
+		if ( as_has_scheduled_action( $hook ) ) {
+			return false;
+		}
+
+		return (bool) as_schedule_single_action( wp_date( 'U' ) - 10, $hook, (array) $args );
 	}
 }

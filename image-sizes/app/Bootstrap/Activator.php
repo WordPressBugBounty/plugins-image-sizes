@@ -16,8 +16,7 @@ class Activator {
 
 		$activator->set_cron();
 
-		// Migrate legacy option values to new format.
-		Migrator::migrate();
+		self::set_default_options();
 
 		// Detect fresh install or upgrade by comparing stored version.
 		$stored_version = get_option( self::VERSION_OPTION, '' );
@@ -30,6 +29,28 @@ class Activator {
 
 		// Set a flag that indicates the plugin has been activated
 		update_option( 'thumbpress_activated', true );
+	}
+
+	/**
+	 * Seed default values for options that have none yet.
+	 */
+	private static function set_default_options() {
+		$defaults = array(
+			'thumbpress_lazy_load'                 => 0,
+			'thumbpress_hotlink_protection'        => 0,
+			'thumbpress_image_editor'              => 0,
+			'thumbpress_replace_images'            => 0,
+			'thumbpress_avif_convert_on_upload'    => 0,
+			'thumbpress_avif_single_image_convert' => 0,
+			'thumbpress_convert_file_formats'      => array( 'jpeg', 'png', 'jpg' ),
+			'thumbpress_avif_file_formats'         => array( 'jpeg', 'png', 'jpg', 'webp' ),
+		);
+
+		foreach ( $defaults as $key => $value ) {
+			if ( get_option( $key ) === false ) {
+				add_option( $key, $value );
+			}
+		}
 	}
 
 	/**

@@ -6,6 +6,23 @@ const BASE_URL = window.THUMBPRESS?.api_base || '/wp-json/thumbpress/v1';
 
 ( apiFetch as any ).use( ( apiFetch as any ).createNonceMiddleware( window.THUMBPRESS?.nonce || '' ) );
 
+// A host rule can overwrite our no-store headers after PHP, so keep poll URLs unique.
+( apiFetch as any ).use( ( options: any, next: any ) => {
+	const method = ( options.method || 'GET' ).toUpperCase();
+	const target = options.url || options.path || '';
+
+	if ( 'GET' !== method || ! /thumbpress(-pro)?\/v1\//.test( target ) ) {
+		return next( options );
+	}
+
+	const key = options.url ? 'url' : 'path';
+
+	return next( {
+		...options,
+		[ key ]: target + ( target.includes( '?' ) ? '&' : '?' ) + '_ts=' + Date.now(),
+	} );
+} );
+
 export interface DashboardCountsStats {
 	total_images: number;
 	total_sizes: number;

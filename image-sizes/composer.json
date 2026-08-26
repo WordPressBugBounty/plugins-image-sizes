@@ -59,7 +59,9 @@
     "scripts": {
         "test": "php -d auto_prepend_file=tests/php/define-abspath.php vendor/bin/phpunit",
         "test-f": "php -d auto_prepend_file=tests/php/define-abspath.php vendor/bin/phpunit --filter",
-        "makepot": "wp i18n make-pot . languages/image-sizes.pot --exclude=node_modules,vendor,docs,legacy,spa,release,sample-data,tests --allow-root",
+        "phpcs": "php -d auto_prepend_file=tests/php/define-abspath.php vendor/bin/phpcs",
+        "phpcbf": "php -d auto_prepend_file=tests/php/define-abspath.php vendor/bin/phpcbf",
+        "makepot": "wp i18n make-pot . languages/image-sizes.pot --exclude=node_modules,vendor,docs,spa,release,sample-data,tests --allow-root",
         "release": [
             "rm -rf release vendor build/*",
             "npm run build",

@@ -3,7 +3,6 @@ namespace Codexpert\ThumbPress\Controllers\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
-use Codexpert\ThumbPress\Bootstrap\VersionManager;
 use Codexpert\ThumbPress\API\Dashboard;
 use Codexpert\ThumbPress\Traits\Hook;
 use Codexpert\ThumbPress\Traits\Asset;
@@ -476,15 +475,12 @@ class Init {
 
 		global $thumbpress_menus;
 
-		$version_manager = new VersionManager();
-
 		$this->localize_script(
 			'image-sizes_admin',
 			'THUMBPRESS',
 			array(
 				'menus'              => $thumbpress_menus,
 				'api_base'           => rest_url( 'thumbpress/v1' ),
-				'version_switch_url' => rest_url( 'cx/v1/version-preference' ),
 				'nonce'              => wp_create_nonce( 'wp_rest' ),
 				'assets_url'         => THUMBPRESS_ASSETS_URL,
 				'pro_active'         => apply_filters( 'thumbpress_is_pro_active', defined( 'THUMBPRESS_PRO_VERSION' ) ),

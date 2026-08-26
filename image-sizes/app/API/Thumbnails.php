@@ -60,12 +60,13 @@ class Thumbnails {
 			$width  = isset( $option_map[ "{$size}_size_w" ] ) ? $option_map[ "{$size}_size_w" ] : 0;
 			$height = isset( $option_map[ "{$size}_size_h" ] ) ? $option_map[ "{$size}_size_h" ] : 0;
 			$crop   = isset( $option_map[ "{$size}_crop" ] ) ? $option_map[ "{$size}_crop" ] : '';
+			$crop   = maybe_unserialize( $crop );
 
 			$all_sizes[ $size ] = array(
 				'name'   => $size,
 				'width'  => $width ? absint( $width ) : 0,
 				'height' => $height ? absint( $height ) : 0,
-				'crop'   => is_array( @unserialize( $crop ) ) && ! empty( @unserialize( $crop ) ) ? true : false,
+				'crop'   => is_array( $crop ) && ! empty( $crop ),
 			);
 		}
 

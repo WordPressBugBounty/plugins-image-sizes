@@ -3,6 +3,7 @@ namespace Codexpert\ThumbPress\Controllers\Common;
 
 defined( 'ABSPATH' ) || exit;
 
+use Codexpert\ThumbPress\Helpers\Utility;
 use Codexpert\ThumbPress\Traits\Hook;
 use Codexpert\ThumbPress\Traits\Asset;
 use Codexpert\ThumbPress\Traits\Cache;
@@ -13,10 +14,24 @@ class Thumbnails {
 	use Asset;
 	use Cache;
 
+	/**
+	 * Offset watermark the watchdog resumes a stalled background regeneration from.
+	 */
+	const OFFSET_OPTION = 'thumbpress_regenerate_offset';
+
+	const BATCH_TIME_BUDGET = 15;
+
+	const INFLIGHT_OPTION = 'thumbpress_regenerate_inflight';
+
+	const FAILED_IDS_OPTION = 'thumbpress_regenerate_failed_ids';
+
+	const FAILED_IDS_LIMIT = 500;
+
 	public function __construct() {
 		$this->filter( 'intermediate_image_sizes_advanced', array( $this, 'filter_image_sizes' ) );
 		$this->filter( 'big_image_size_threshold', array( $this, 'filter_big_image_size' ) );
 		$this->action( 'thumbpress_regenerate_all_image', array( $this, 'regenerate_all_image' ) );
+		$this->action( 'admin_init', array( $this, 'rearm_stalled_regeneration' ) );
 		$this->action( 'activated_plugin', array( $this, 'clear_size_caches' ) );
 		$this->action( 'deactivated_plugin', array( $this, 'clear_size_caches' ) );
 		$this->action( 'upgrader_process_complete', array( $this, 'clear_size_on_plugin_update' ), 10, 2 );
@@ -100,7 +115,7 @@ class Thumbnails {
 		$option   = get_option( 'prevent_image_sizes', array() );
 		$disables = isset( $option['disables'] ) ? $option['disables'] : array();
 
-		return in_array( 'scaled', $disables ) ? false : $threshold;
+		return in_array( 'scaled', $disables, true ) ? false : $threshold;
 	}
 
 	/**
@@ -124,13 +139,17 @@ class Thumbnails {
 			return $result;
 		}
 
-		$file_info    = pathinfo( $main_img );
-		$extension    = strtolower( $file_info['extension'] );
-		$main_img     = str_replace( "-scaled.{$extension}", ".{$extension}", $main_img );
+		// The -scaled rendition can carry a different extension than the original.
+		$attached_file = $main_img;
+		$original      = wp_get_original_image_path( $image_id );
+		if ( $original && file_exists( $original ) ) {
+			$main_img = $original;
+		}
 		$old_metadata = wp_get_attachment_metadata( $image_id );
-		$thumb_dir    = dirname( $main_img ) . DIRECTORY_SEPARATOR;
+		$thumb_dir    = dirname( $attached_file ) . DIRECTORY_SEPARATOR;
 
 		$old_thumb_size = 0;
+		$old_paths      = array();
 		if ( ! empty( $old_metadata['sizes'] ) ) {
 			foreach ( $old_metadata['sizes'] as $size_data ) {
 				if ( isset( $size_data['mime-type'] ) && 'image/svg+xml' === $size_data['mime-type'] ) {
@@ -138,20 +157,17 @@ class Thumbnails {
 				}
 				$thumb_path = $thumb_dir . $size_data['file'];
 				if ( file_exists( $thumb_path ) ) {
-					$old_thumb_size += filesize( $thumb_path );
-					wp_delete_file( $thumb_path );
+					$old_thumb_size                  += filesize( $thumb_path );
+					$old_paths[ $size_data['file'] ]  = $thumb_path;
 					++$result['thumbs_deleted'];
 				}
 			}
 		}
 
-		if ( strpos( $file_info['basename'], "-scaled.{$extension}" ) !== false ) {
-			$scaled_path = $thumb_dir . $file_info['basename'];
-			if ( file_exists( $scaled_path ) ) {
-				$old_thumb_size += filesize( $scaled_path );
-				wp_delete_file( $scaled_path );
-				++$result['thumbs_deleted'];
-			}
+		if ( $attached_file !== $main_img && file_exists( $attached_file ) ) {
+			$old_thumb_size                          += filesize( $attached_file );
+			$old_paths[ basename( $attached_file ) ]  = $attached_file;
+			++$result['thumbs_deleted'];
 		}
 
 		// Default so the size-calculation block below is safe even if regeneration fails
@@ -160,9 +176,7 @@ class Thumbnails {
 
 		$new_thumbs = wp_generate_attachment_metadata( $image_id, $main_img );
 
-		// Guard against false / WP_Error / empty so a failed regeneration can't wipe the
-		// attachment metadata. Regeneration doesn't change the filename, so on failure we
-		// simply leave the existing metadata and _wp_attached_file untouched.
+		// Guard explicitly (WP_Error is truthy) and keep the old renditions on failure.
 		if ( $new_thumbs && ! is_wp_error( $new_thumbs ) ) {
 			wp_update_attachment_metadata( $image_id, $new_thumbs );
 
@@ -172,7 +186,9 @@ class Thumbnails {
 			}
 		} else {
 			// Metadata generation failed — surface as a distinct "Failed" count.
-			$result['failed'] = true;
+			$result['failed']         = true;
+			$result['thumbs_deleted'] = 0;
+			return $result;
 		}
 
 		// Count created thumbnails as unique physical files so the tally mirrors
@@ -207,10 +223,42 @@ class Thumbnails {
 			$created_files[ basename( $scaled_file ) ] = true;
 		}
 
+		// Delete only now that the fresh metadata is stored, and never what it still names.
+		foreach ( $old_paths as $old_file => $old_path ) {
+			if ( ! isset( $created_files[ $old_file ] ) && file_exists( $old_path ) ) {
+				wp_delete_file( $old_path );
+			}
+		}
+
 		$result['space_saved']    = max( 0, $old_thumb_size - $new_thumb_size );
 		$result['thumbs_created'] = count( $created_files );
 
 		return $result;
+	}
+
+	/**
+	 * Re-arm a background regeneration whose batch died before scheduling its successor (#466).
+	 */
+	public function rearm_stalled_regeneration() {
+		$total = (int) get_option( 'thumbpress_regenerate_total_image', 0 );
+		if ( $total < 1 ) {
+			return;
+		}
+
+		if ( get_option( 'thumbpress_regenerate_cancelled', false ) ) {
+			return;
+		}
+
+		if ( (float) get_option( 'thumbpress_regenerate_progress', 0 ) >= 100 ) {
+			return;
+		}
+
+		$offset = (int) get_option( self::OFFSET_OPTION, 0 );
+		if ( $offset >= $total ) {
+			return;
+		}
+
+		Utility::rearm_batch( 'thumbpress_regenerate_all_image', array( 'offset' => $offset ) );
 	}
 
 	/**
@@ -241,58 +289,149 @@ class Thumbnails {
 			)
 		);
 
+		// A dry page means the library shrank mid-run, so the recorded total is never reached.
 		if ( count( $images ) === 0 ) {
+			$this->finish_regeneration( $offset );
 			return;
 		}
 
-		$thumbs_created    = 0;
-		$thumbs_deleted    = 0;
-		$batch_space_saved = 0;
-		$batch_not_found   = 0;
-		$batch_failed      = 0;
+		$total_processed = (int) get_option( 'thumbpress_regenerate_total_processed', 0 );
+		$total_not_found = (int) get_option( 'thumbpress_regenerate_total_not_found', 0 );
+		$total_failed    = (int) get_option( 'thumbpress_regenerate_total_failed', 0 );
+		$total_space     = (int) get_option( 'thumbpress_regenerate_space_saved', 0 );
+		$total_deleted   = $thumbs_deleteds;
+		$total_created   = $thumbs_createds;
+
+		$started  = microtime( true );
+		$done     = 0;
+		$inflight = (int) get_option( self::INFLIGHT_OPTION, 0 );
 
 		foreach ( $images as $image ) {
-			$res                = $this->regenerate_one( $image->ID );
+			// A marker left from the previous run means this image killed it — count it failed and move past.
+			if ( $inflight && (int) $image->ID === $inflight ) {
+				$inflight = 0;
+				delete_option( self::INFLIGHT_OPTION );
+				++$done;
+				++$total_failed;
+				++$total_processed;
+				$this->record_failed_image( (int) $image->ID );
+				$this->persist_regenerate_progress(
+					$offset + $done,
+					$total_attachments,
+					$total_space,
+					$total_processed,
+					$total_deleted,
+					$total_created,
+					$total_not_found,
+					$total_failed
+				);
+				continue;
+			}
+
+			update_option( self::INFLIGHT_OPTION, (int) $image->ID );
+
+			$res = $this->regenerate_one( $image->ID );
+			++$done;
+
+			delete_option( self::INFLIGHT_OPTION );
+
 			if ( ! empty( $res['skipped'] ) ) {
-				$batch_not_found++;
-				continue;
+				++$total_not_found;
+			} elseif ( ! empty( $res['failed'] ) ) {
+				++$total_failed;
+				++$total_processed;
+				$this->record_failed_image( (int) $image->ID );
+			} else {
+				++$total_processed;
+				$total_deleted += $res['thumbs_deleted'];
+				$total_created += $res['thumbs_created'];
+				$total_space   += $res['space_saved'];
+				thumbpress_add_space_saved( $res['space_saved'] );
 			}
-			if ( ! empty( $res['failed'] ) ) {
-				$batch_failed++;
-				continue;
+
+			$this->persist_regenerate_progress(
+				$offset + $done,
+				$total_attachments,
+				$total_space,
+				$total_processed,
+				$total_deleted,
+				$total_created,
+				$total_not_found,
+				$total_failed
+			);
+
+			if ( microtime( true ) - $started >= self::BATCH_TIME_BUDGET ) {
+				break;
 			}
-			$thumbs_deleted    += $res['thumbs_deleted'];
-			$thumbs_created    += $res['thumbs_created'];
-			$batch_space_saved += $res['space_saved'];
 		}
 
-		thumbpress_add_space_saved( $batch_space_saved );
-
-		$prev_not_found = (int) get_option( 'thumbpress_regenerate_total_not_found', 0 );
-		$total_deleted  = $thumbs_deleteds + $thumbs_deleted;
-		$total_created  = $thumbs_createds + $thumbs_created;
-		$count          = $offset + count( $images );
-		$progress       = ( $count / $total_attachments ) * 100;
-		$progress       = min( $progress, 100 );
-
-		$cumulative_space   = (int) get_option( 'thumbpress_regenerate_space_saved', 0 );
-		$prev_valid         = (int) get_option( 'thumbpress_regenerate_total_processed', 0 );
-		$batch_valid        = count( $images ) - $batch_not_found;
-		update_option( 'thumbpress_regenerate_space_saved', $cumulative_space + $batch_space_saved );
-		update_option( 'thumbpress_regenerate_progress', $progress );
-		update_option( 'thumbpress_regenerate_total_processed', $prev_valid + $batch_valid );
-		update_option( 'thumbpress_regenerate_total_deleted', $total_deleted );
-		update_option( 'thumbpress_regenerate_total_created', $total_created );
-		update_option( 'thumbpress_regenerate_total_not_found', $prev_not_found + $batch_not_found );
-		$prev_failed = (int) get_option( 'thumbpress_regenerate_total_failed', 0 );
-		update_option( 'thumbpress_regenerate_total_failed', $prev_failed + $batch_failed );
+		$count = $offset + $done;
 
 		if ( $count < $total_attachments && ! get_option( 'thumbpress_regenerate_cancelled', false ) ) {
-			$new_offset = $offset + $limit;
-			as_schedule_single_action( wp_date( 'U' ) - 10, 'thumbpress_regenerate_all_image', array( 'offset' => $new_offset ) );
+			as_schedule_single_action( wp_date( 'U' ) - 10, 'thumbpress_regenerate_all_image', array( 'offset' => $count ) );
 		} else {
-			update_option( 'thumbpress_regenerate_last_schedule_time', wp_date( 'U' ) );
-			$this->clear_thumbnail_count_cache();
+			$this->finish_regeneration( $count );
 		}
+	}
+
+	/**
+	 * Close out a run so the progress screen can leave 'in progress'.
+	 *
+	 * @param int $count Images consumed by the run.
+	 */
+	private function finish_regeneration( $count ) {
+		$total = (int) get_option( 'thumbpress_regenerate_total_image', 0 );
+
+		if ( $count < $total ) {
+			update_option( 'thumbpress_regenerate_total_image', $count );
+		}
+
+		update_option( 'thumbpress_regenerate_progress', 100 );
+		update_option( self::OFFSET_OPTION, $count );
+		delete_option( self::INFLIGHT_OPTION );
+		update_option( 'thumbpress_regenerate_last_schedule_time', wp_date( 'U' ) );
+		$this->clear_thumbnail_count_cache();
+	}
+
+	/**
+	 * Write the run cursor and counters so a killed batch still advances.
+	 *
+	 * @param int $count      Images consumed so far across the run.
+	 * @param int $total      Total images in the run.
+	 * @param int $space      Cumulative bytes saved.
+	 * @param int $processed  Cumulative processed count.
+	 * @param int $deleted    Cumulative thumbnails deleted.
+	 * @param int $created    Cumulative thumbnails created.
+	 * @param int $not_found  Cumulative missing-file count.
+	 * @param int $failed     Cumulative failed count.
+	 */
+	private function persist_regenerate_progress( $count, $total, $space, $processed, $deleted, $created, $not_found, $failed ) {
+		$progress = $total > 0 ? min( ( $count / $total ) * 100, 100 ) : 100;
+
+		update_option( 'thumbpress_regenerate_space_saved', $space );
+		update_option( 'thumbpress_regenerate_progress', $progress );
+		update_option( self::OFFSET_OPTION, $count );
+		update_option( 'thumbpress_regenerate_total_processed', $processed );
+		update_option( 'thumbpress_regenerate_total_deleted', $deleted );
+		update_option( 'thumbpress_regenerate_total_created', $created );
+		update_option( 'thumbpress_regenerate_total_not_found', $not_found );
+		update_option( 'thumbpress_regenerate_total_failed', $failed );
+	}
+
+	/**
+	 * Add an attachment to the run's failed list so the UI can show which images were skipped.
+	 *
+	 * @param int $image_id Attachment ID.
+	 */
+	private function record_failed_image( $image_id ) {
+		$failed = (array) get_option( self::FAILED_IDS_OPTION, array() );
+
+		if ( in_array( $image_id, $failed, true ) || count( $failed ) >= self::FAILED_IDS_LIMIT ) {
+			return;
+		}
+
+		$failed[] = $image_id;
+
+		update_option( self::FAILED_IDS_OPTION, $failed );
 	}
 }

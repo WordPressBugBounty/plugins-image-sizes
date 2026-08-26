@@ -5,7 +5,7 @@
  * Plugin Name:       ThumbPress
  * Plugin URI:        https://wordpress.org/plugins/image-sizes/
  * Description:       WordPress Image Optimization & Media Management Toolkit
- * Version:           6.5.2
+ * Version:           6.6.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            ThumbPress
@@ -25,7 +25,7 @@ use Pluggable\Marketing\Deactivator;
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'THUMBPRESS_VERSION', '6.5.2' );
+define( 'THUMBPRESS_VERSION', '6.6.0' );
 define( 'THUMBPRESS_FILE', __FILE__ );
 define( 'THUMBPRESS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'THUMBPRESS_URL', plugin_dir_url( __FILE__ ) );
@@ -33,7 +33,6 @@ define( 'THUMBPRESS_ASSETS_PATH', THUMBPRESS_PATH . 'assets/' );
 define( 'THUMBPRESS_ASSETS_URL', THUMBPRESS_URL . 'assets/' );
 define( 'THUMBPRESS_CACHE_ENABLED', true );
 
-require_once THUMBPRESS_PATH . 'app/Bootstrap/VersionManager.php';
 require_once THUMBPRESS_PATH . 'vendor/autoload.php';
 require_once THUMBPRESS_PATH . 'vendor/woocommerce/action-scheduler/action-scheduler.php';
 
@@ -81,6 +80,11 @@ final class ThumbPress {
 	 * @return void
 	 */
 	public function define(): void {
+		// get_plugin_data()'s file is only auto-loaded since WP 6.8 (Trac #62244), but define()
+		// runs on every request — load it on demand so WP 6.0–6.7 doesn't fatal (#472).
+		if ( ! function_exists( 'get_plugin_data' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
 		$this->plugin                     = get_plugin_data( THUMBPRESS_FILE, true, false );
 		$this->plugin['basename']         = plugin_basename( THUMBPRESS_FILE );
 		$this->plugin['file']             = THUMBPRESS_FILE;
@@ -93,6 +97,21 @@ final class ThumbPress {
 		// under "External Services" (what is sent, when, ToS + Privacy Policy links).
 		$this->plugin['hash_deactivator'] = 'f490a1f1-c3a1-4d3a-bc2a-70d4b405aa11';
 		$this->plugin['hash_survey']      = '55b6c7ca-9102-495f-a6bd-581285447c0a';
+	}
+
+	/**
+	 * Get plugin metadata parsed once in define() — callers reuse it instead of
+	 * calling get_plugin_data() again (#472).
+	 *
+	 * @param string $key     Optional. Metadata key; whole array when empty.
+	 * @param mixed  $default Optional. Returned when $key is absent.
+	 * @return mixed
+	 */
+	public function get_plugin( string $key = '', $default = null ) {
+		if ( '' === $key ) {
+			return $this->plugin;
+		}
+		return $this->plugin[ $key ] ?? $default;
 	}
 
 	/**

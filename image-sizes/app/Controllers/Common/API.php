@@ -10,6 +10,9 @@ use Codexpert\ThumbPress\API\Convert_Webp;
 use Codexpert\ThumbPress\API\Convert_Avif;
 use Codexpert\ThumbPress\API\Settings;
 use Codexpert\ThumbPress\API\Dashboard;
+use Codexpert\ThumbPress\Controllers\Common\Thumbnails as Thumbnails_Controller;
+use Codexpert\ThumbPress\Controllers\Common\Convert_Webp as Convert_Webp_Controller;
+use Codexpert\ThumbPress\ThumbPress;
 use Codexpert\ThumbPress\Traits\Hook;
 use Codexpert\ThumbPress\Traits\Auth;
 use Codexpert\ThumbPress\Traits\Rest;
@@ -25,6 +28,35 @@ class API {
 	 */
 	public function __construct() {
 		$this->action( 'rest_api_init', array( $this, 'register_endpoints' ) );
+		$this->filter( 'rest_pre_dispatch', array( $this, 'send_nocache_headers' ), 10, 3 );
+	}
+
+	/**
+	 * Forbid caching of action and progress responses.
+	 *
+	 * @param mixed             $result
+	 * @param \WP_REST_Server   $server
+	 * @param \WP_REST_Request  $request
+	 * @return mixed
+	 */
+	public function send_nocache_headers( $result, $server, $request ) {
+		if ( headers_sent() || ! is_object( $request ) ) {
+			return $result;
+		}
+
+		$route = (string) $request->get_route();
+		$ours  = 0 === strpos( $route, '/thumbpress/v1/' ) || 0 === strpos( $route, '/thumbpress-pro/v1/' );
+
+		if ( ! $ours ) {
+			return $result;
+		}
+
+		// Our handlers answer with wp_send_json(), which dies inside dispatch, so the headers must go out before it runs.
+		header( 'Cache-Control: no-store, no-cache, must-revalidate, max-age=0' );
+		header( 'Pragma: no-cache' );
+		header( 'Expires: Wed, 11 Jan 1984 05:00:00 GMT' );
+
+		return $result;
 	}
 
 	public function register_endpoints() {
@@ -156,11 +188,14 @@ class API {
 				'callback'            => function () {
 					update_option( 'thumbpress_regenerate_cancelled', true );
 					as_unschedule_all_actions( 'thumbpress_regenerate_all_image' );
+					delete_option( Thumbnails_Controller::OFFSET_OPTION );
 					delete_option( 'thumbpress_regenerate_progress' );
 					delete_option( 'thumbpress_regenerate_total_processed' );
 					delete_option( 'thumbpress_regenerate_total_deleted' );
 					delete_option( 'thumbpress_regenerate_total_created' );
 					delete_option( 'thumbpress_regenerate_total_image' );
+					delete_option( Thumbnails_Controller::INFLIGHT_OPTION );
+					delete_option( Thumbnails_Controller::FAILED_IDS_OPTION );
 					return rest_ensure_response( array( 'success' => true ) );
 				},
 				'permission_callback' => array( $this, 'is_admin' ),
@@ -175,6 +210,8 @@ class API {
 				'callback'            => function () {
 					update_option( 'thumbpress_webp_cancelled', true );
 					as_unschedule_all_actions( 'thumbpress_convert_all_image' );
+					delete_option( Convert_Webp_Controller::LAST_ID_OPTION );
+					delete_option( Convert_Webp_Controller::FORMATS_OPTION );
 					delete_option( 'thumbpress_convert_progress' );
 					delete_option( 'thumbpress_convert_total_processed' );
 					delete_option( 'thumbpress_convert_total_processd' );
@@ -354,7 +391,6 @@ class API {
 					}
 					$allowed_keys = apply_filters( 'thumbpress_allowed_option_keys', [
 						'thumbpress_fresh_install_notice_dismissed',
-						'thumbpress_pro_outdated_notice_dismissed',
 						'thumbpress_regen_view_state',
 						'thumbpress_webp_view_state',
 						'thumbpress_avif_view_state',
@@ -382,7 +418,6 @@ class API {
 					}
 					$allowed_keys = apply_filters( 'thumbpress_allowed_option_keys', [
 						'thumbpress_fresh_install_notice_dismissed',
-						'thumbpress_pro_outdated_notice_dismissed',
 						'thumbpress_regen_view_state',
 						'thumbpress_webp_view_state',
 						'thumbpress_avif_view_state',
@@ -503,7 +538,8 @@ class API {
 			'disabled_sizes'     => $disabled,
 			'max_file_size'      => isset( $max_size_raw['max-size'] ) && $max_size_raw['max-size'] !== '' ? $max_size_raw['max-size'] . ' ' . ( $max_size_raw['max-size-unit'] ?? 'KB' ) : 'Not set',
 			'max_dimensions'     => ( isset( $max_size_raw['max-width'] ) && $max_size_raw['max-width'] ) ? $max_size_raw['max-width'] . 'x' . ( $max_size_raw['max-height'] ?? '0' ) . 'px' : 'Not set',
-			'thumbpress_version' => defined( 'THUMBPRESS_VERSION' ) ? THUMBPRESS_VERSION : get_plugin_data( WP_PLUGIN_DIR . '/image-sizes/image-sizes.php' )['Version'] ?? 'Unknown',
+			// Reuse the header parsed in define(); get_plugin_data() isn't loaded on REST (#472).
+			'thumbpress_version' => ThumbPress::instance()->get_plugin( 'Version', 'Unknown' ),
 			'pro_active'         => defined( 'THUMBPRESS_PRO_VERSION' ),
 			'pro_version'        => defined( 'THUMBPRESS_PRO_VERSION' ) ? THUMBPRESS_PRO_VERSION : null,
 			'license_status'     => apply_filters( 'thumbpress_debug_license_status', null ),

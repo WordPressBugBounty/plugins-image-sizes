@@ -16,5 +16,5 @@
     }
   },
   "include": ["spa/admin/src/**/*"],
-  "exclude": ["node_modules", "dist", "build", "legacy"]
+  "exclude": ["node_modules", "dist", "build"]
 }

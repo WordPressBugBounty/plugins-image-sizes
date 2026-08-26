@@ -110,7 +110,7 @@ abstract class Image_Converter {
 			return $file_info;
 		}
 
-		if ( ! in_array( $file_info['type'], thumbpress_supported_image_mimes( array( $target_mime ) ) ) ) {
+		if ( ! in_array( $file_info['type'], thumbpress_supported_image_mimes( array( $target_mime ) ), true ) ) {
 			return $file_info;
 		}
 
@@ -155,7 +155,7 @@ abstract class Image_Converter {
 		$config      = $this->get_config();
 		$target_mime = 'image/' . $config['format'];
 
-		if ( ! in_array( $post->post_mime_type, thumbpress_supported_image_mimes( array( $target_mime ) ) ) ) {
+		if ( ! in_array( $post->post_mime_type, thumbpress_supported_image_mimes( array( $target_mime ) ), true ) ) {
 			return $form_fields;
 		}
 
@@ -213,7 +213,7 @@ abstract class Image_Converter {
 		$option   = get_option( 'prevent_image_sizes', array() );
 		$disables = isset( $option['disables'] ) ? $option['disables'] : array();
 
-		return in_array( 'scaled', $disables ) ? false : $threshold;
+		return in_array( 'scaled', $disables, true ) ? false : $threshold;
 	}
 
 	/**
@@ -246,7 +246,7 @@ abstract class Image_Converter {
 
 		// Skip if image too big to safely decode — width*height*4 bytes + overhead. Bailing before we
 		// touch disk avoids a mid-encode fatal that would leave a half-written file behind.
-		$dims = @getimagesize( $source );
+		$dims = wp_getimagesize( $source );
 		if ( is_array( $dims ) ) {
 			$pixels       = (int) $dims[0] * (int) $dims[1];
 			$needed_bytes = $pixels * 4 * 2; // Decoded buffer + working copy.
@@ -265,7 +265,8 @@ abstract class Image_Converter {
 			}
 		}
 
-		$editor = wp_get_image_editor( $source );
+		// output_mime_type makes core prefer an implementation that can write the target.
+		$editor = wp_get_image_editor( $source, array( 'output_mime_type' => $mime ) );
 		if ( is_wp_error( $editor ) ) {
 			return new \WP_Error(
 				'thumbpress_editor_unavailable',
@@ -274,6 +275,15 @@ abstract class Image_Converter {
 					__( 'No image editor is available to process this file (%s).', 'image-sizes' ),
 					$editor->get_error_message()
 				)
+			);
+		}
+
+		// Bail before writing: an editor that cannot emit $mime falls back to JPEG and rewrites
+		// the target filename back onto the source, so save() would overwrite the original.
+		if ( ! $editor->supports_mime_type( $mime ) ) {
+			return new \WP_Error(
+				'thumbpress_' . $format . '_unsupported',
+				$config['unsupported_message']
 			);
 		}
 
@@ -294,12 +304,27 @@ abstract class Image_Converter {
 		$saved_mime = $result['mime-type'] ?? '';
 
 		if ( $saved_mime && $saved_mime !== $mime ) {
-			if ( file_exists( $saved_path ) ) {
+			// Never roll back onto the source: the fallback rewrites the target extension, so a
+			// .jpg source and a failed .webp target resolve to the same file.
+			$is_source = wp_normalize_path( $saved_path ) === wp_normalize_path( $source );
+
+			if ( ! $is_source && file_exists( $saved_path ) ) {
 				wp_delete_file( $saved_path );
 			}
 			return new \WP_Error(
 				'thumbpress_' . $format . '_unsupported',
 				$config['unsupported_message']
+			);
+		}
+
+		// An editor can report success and still write an empty or truncated file; returning that deletes the original.
+		if ( ! file_exists( $saved_path ) || 0 === filesize( $saved_path ) || ! wp_getimagesize( $saved_path ) ) {
+			if ( file_exists( $saved_path ) ) {
+				wp_delete_file( $saved_path );
+			}
+			return new \WP_Error(
+				'thumbpress_' . $format . '_invalid_output',
+				__( 'Conversion produced an unreadable file; the original was left untouched.', 'image-sizes' )
 			);
 		}
 

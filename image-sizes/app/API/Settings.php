@@ -215,14 +215,32 @@ class Settings {
 	}
 
 	/**
+	 * Initialise and return the WP_Filesystem instance.
+	 *
+	 * @return \WP_Filesystem_Base|null
+	 */
+	private function filesystem() {
+		global $wp_filesystem;
+
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+
+		WP_Filesystem();
+
+		return $wp_filesystem;
+	}
+
+	/**
 	 * Add hotlink protection rules to .htaccess.
 	 * Rules are inserted BEFORE the WordPress block so Apache processes them
 	 * before static file serving — otherwise image files bypass the rules entirely.
 	 */
 	private function add_hotlink_rules() {
-		$htaccess = ABSPATH . '.htaccess';
+		$htaccess   = ABSPATH . '.htaccess';
+		$filesystem = $this->filesystem();
 
-		if ( ! is_writable( $htaccess ) ) {
+		if ( ! $filesystem || ! $filesystem->is_writable( $htaccess ) ) {
 			return;
 		}
 
@@ -237,7 +255,7 @@ class Settings {
 		$rules   .= "</IfModule>\n";
 		$rules   .= "# END ThumbPress Hotlink Protection\n";
 
-		$content = file_get_contents( $htaccess );
+		$content = (string) $filesystem->get_contents( $htaccess );
 
 		// Always remove existing rules first so we can re-insert in the correct position.
 		$pattern = '/\n?# BEGIN ThumbPress Hotlink Protection.*?# END ThumbPress Hotlink Protection\n?/s';
@@ -250,7 +268,7 @@ class Settings {
 			$content = rtrim( $content ) . "\n\n" . $rules;
 		}
 
-		file_put_contents( $htaccess, $content );
+		$filesystem->put_contents( $htaccess, $content, FS_CHMOD_FILE );
 	}
 
 	/**
@@ -260,8 +278,9 @@ class Settings {
 	private function add_uploads_htaccess() {
 		$upload_dir = wp_get_upload_dir();
 		$htaccess   = trailingslashit( $upload_dir['basedir'] ) . '.htaccess';
+		$filesystem = $this->filesystem();
 
-		if ( ! is_writable( dirname( $htaccess ) ) ) {
+		if ( ! $filesystem || ! $filesystem->is_writable( dirname( $htaccess ) ) ) {
 			return;
 		}
 
@@ -275,13 +294,13 @@ class Settings {
 		$rules   .= "</IfModule>\n";
 		$rules   .= "# END ThumbPress Hotlink Protection\n";
 
-		$content = file_exists( $htaccess ) ? file_get_contents( $htaccess ) : '';
+		$content = $filesystem->exists( $htaccess ) ? (string) $filesystem->get_contents( $htaccess ) : '';
 
 		$pattern = '/\n?# BEGIN ThumbPress Hotlink Protection.*?# END ThumbPress Hotlink Protection\n?/s';
 		$content = preg_replace( $pattern, '', $content );
 		$content = $rules . ltrim( $content );
 
-		file_put_contents( $htaccess, $content );
+		$filesystem->put_contents( $htaccess, $content, FS_CHMOD_FILE );
 	}
 
 	/**
@@ -290,19 +309,20 @@ class Settings {
 	private function remove_uploads_htaccess() {
 		$upload_dir = wp_get_upload_dir();
 		$htaccess   = trailingslashit( $upload_dir['basedir'] ) . '.htaccess';
+		$filesystem = $this->filesystem();
 
-		if ( ! file_exists( $htaccess ) || ! is_writable( $htaccess ) ) {
+		if ( ! $filesystem || ! $filesystem->exists( $htaccess ) || ! $filesystem->is_writable( $htaccess ) ) {
 			return;
 		}
 
-		$content = file_get_contents( $htaccess );
+		$content = (string) $filesystem->get_contents( $htaccess );
 		$pattern = '/\n?# BEGIN ThumbPress Hotlink Protection.*?# END ThumbPress Hotlink Protection\n?/s';
 		$content = preg_replace( $pattern, '', $content );
 
 		if ( '' === trim( $content ) ) {
 			wp_delete_file( $htaccess );
 		} else {
-			file_put_contents( $htaccess, $content );
+			$filesystem->put_contents( $htaccess, $content, FS_CHMOD_FILE );
 		}
 	}
 
@@ -310,16 +330,17 @@ class Settings {
 	 * Remove hotlink protection rules from .htaccess.
 	 */
 	private function remove_hotlink_rules() {
-		$htaccess = ABSPATH . '.htaccess';
+		$htaccess   = ABSPATH . '.htaccess';
+		$filesystem = $this->filesystem();
 
-		if ( ! is_writable( $htaccess ) ) {
+		if ( ! $filesystem || ! $filesystem->is_writable( $htaccess ) ) {
 			return;
 		}
 
-		$content = file_get_contents( $htaccess );
+		$content = (string) $filesystem->get_contents( $htaccess );
 		$pattern = '/\n?# BEGIN ThumbPress Hotlink Protection.*?# END ThumbPress Hotlink Protection\n?/s';
 		$content = preg_replace( $pattern, '', $content );
 
-		file_put_contents( $htaccess, $content );
+		$filesystem->put_contents( $htaccess, $content, FS_CHMOD_FILE );
 	}
 }

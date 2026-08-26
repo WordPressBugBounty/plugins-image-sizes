@@ -238,7 +238,7 @@ class Social_Share {
 			$post_author    = get_userdata( $post_author_id );
 			$post_type      = get_post_type();
 
-			if ( in_array( $post_type, array( 'post', 'page' ) ) ) {
+			if ( in_array( $post_type, array( 'post', 'page' ), true ) ) {
 				printf(
 					'<meta property="og:type" content="article" />
 					<meta property="og:title" content="%1$s" />

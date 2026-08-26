@@ -8,6 +8,16 @@ use Codexpert\ThumbPress\Abstracts\Image_Converter;
 
 class Convert_Webp extends Image_Converter {
 
+	/**
+	 * Keyset cursor the watchdog resumes a stalled background conversion from.
+	 */
+	const LAST_ID_OPTION = 'thumbpress_convert_last_id';
+
+	/**
+	 * Source formats the active background conversion was started with.
+	 */
+	const FORMATS_OPTION = 'thumbpress_convert_active_formats';
+
 	protected function get_config() {
 		return array(
 			'format'              => 'webp',
@@ -30,6 +40,37 @@ class Convert_Webp extends Image_Converter {
 	public function __construct() {
 		parent::__construct();
 		$this->action( 'thumbpress_convert_all_image', array( $this, 'convert_all_image' ), 10, 2 );
+		$this->action( 'admin_init', array( $this, 'rearm_stalled_conversion' ) );
+	}
+
+	/**
+	 * Re-arm a background conversion whose batch died before scheduling its successor (#469).
+	 */
+	public function rearm_stalled_conversion() {
+		if ( ! (int) get_option( 'thumbpress_now_convert_background_total_images', 0 ) ) {
+			return;
+		}
+
+		if ( get_option( 'thumbpress_webp_cancelled', false ) ) {
+			return;
+		}
+
+		if ( (float) get_option( 'thumbpress_convert_progress', 0 ) >= 100 ) {
+			return;
+		}
+
+		$formats = get_option( self::FORMATS_OPTION, array() );
+		if ( empty( $formats ) || ! is_array( $formats ) ) {
+			return;
+		}
+
+		Utility::rearm_batch(
+			'thumbpress_convert_all_image',
+			array(
+				'last_id'      => (int) get_option( self::LAST_ID_OPTION, 0 ),
+				'file_formats' => $formats,
+			)
+		);
 	}
 
 	/**
@@ -59,11 +100,7 @@ class Convert_Webp extends Image_Converter {
 		$image_types       = $this->get_image_mime_types_for_webp( $file_formats );
 		$limit             = (int) get_option( 'thumbpress_convert_img_val', 100 );
 		$total_attachments = (int) get_option( 'thumbpress_now_convert_background_total_images' );
-		$processed_count = (int) Utility::get_option_with_legacy_fallback(
-			'thumbpress_convert_total_processed',
-			'thumbpress_convert_total_processd',
-			0
-		);
+		$processed_count = (int) get_option( 'thumbpress_convert_total_processed', 0 );
 		$converted_count   = (int) get_option( 'thumbpress_convert_total_converted', 0 );
 		$space_saved       = (int) get_option( 'thumbpress_convert_space_saved', 0 );
 
@@ -185,7 +222,7 @@ class Convert_Webp extends Image_Converter {
 			// interrupted during metadata generation above, the original survives and the DB
 			// still resolves it — instead of a webp on disk with the attachment stuck on jpeg.
 			foreach ( ( $old_metadata['sizes'] ?? array() ) as $size_name => $size_data ) {
-				if ( 'image/svg+xml' == $size_data['mime-type'] ) {
+				if ( 'image/svg+xml' === $size_data['mime-type'] ) {
 					continue;
 				}
 				wp_delete_file( $thumb_dir . $size_data['file'] );
@@ -242,6 +279,8 @@ class Convert_Webp extends Image_Converter {
 		$progress         = $is_complete ? 100 : min( 99, floor( $progress ) );
 
 		update_option( 'thumbpress_convert_progress', $progress );
+		// The last row actually converted, never the page end — a resume must not skip work.
+		update_option( self::LAST_ID_OPTION, $new_last_id );
 		update_option( 'thumbpress_convert_total_processed', $processed_count );
 		update_option( 'thumbpress_convert_total_converted', $converted_count + $batch_converted );
 		update_option( 'thumbpress_convert_space_saved', $space_saved );

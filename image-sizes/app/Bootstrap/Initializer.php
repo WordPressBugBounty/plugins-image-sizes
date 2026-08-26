@@ -6,6 +6,15 @@ defined( 'ABSPATH' ) || exit;
 class Initializer {
 
 	/**
+	 * Controller class names per context. A new file must be added here to load.
+	 */
+	const CONTROLLERS = array(
+		'Admin'  => array( 'Init', 'Menu' ),
+		'Front'  => array( 'Image_Download_Disable', 'Lazy_Load' ),
+		'Common' => array( 'API', 'Auto_Featured_Image', 'Convert_Avif', 'Convert_Webp', 'Hotlink_Protection', 'Image_Max_Size', 'Init', 'Media_Buttons', 'Social_Share', 'Thumbnails' ),
+	);
+
+	/**
 	 * Initialize the plugin's components.
 	 */
 	public static function initialize() {
@@ -21,10 +30,7 @@ class Initializer {
 	 */
 	private function load_admin_controllers() {
 		if ( is_admin() ) {
-			$controller_dir = THUMBPRESS_PLUGIN_DIR . 'app/Controllers/Admin/';
-
-			foreach ( glob( $controller_dir . '*.php' ) as $file ) {
-				$class_name = basename( $file, '.php' );
+			foreach ( self::CONTROLLERS['Admin'] as $class_name ) {
 				$controller = "\\Codexpert\ThumbPress\\Controllers\\Admin\\{$class_name}";
 
 				if ( class_exists( $controller ) ) {
@@ -39,10 +45,7 @@ class Initializer {
 	 */
 	private function load_public_controllers() {
 		if ( ! is_admin() ) {
-			$controller_dir = THUMBPRESS_PLUGIN_DIR . 'app/Controllers/Front/';
-
-			foreach ( glob( $controller_dir . '*.php' ) as $file ) {
-				$class_name = basename( $file, '.php' );
+			foreach ( self::CONTROLLERS['Front'] as $class_name ) {
 				$controller = "\\Codexpert\ThumbPress\\Controllers\\Front\\{$class_name}";
 
 				if ( class_exists( $controller ) ) {
@@ -56,10 +59,7 @@ class Initializer {
 	 * Initialize controllers that operate on both admin and public.
 	 */
 	private function load_common_controllers() {
-		$controller_dir = THUMBPRESS_PLUGIN_DIR . 'app/Controllers/Common/';
-
-		foreach ( glob( $controller_dir . '*.php' ) as $file ) {
-			$class_name = basename( $file, '.php' );
+		foreach ( self::CONTROLLERS['Common'] as $class_name ) {
 			$controller = "\\Codexpert\ThumbPress\\Controllers\\Common\\{$class_name}";
 
 			if ( class_exists( $controller ) ) {

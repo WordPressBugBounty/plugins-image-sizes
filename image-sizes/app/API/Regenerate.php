@@ -82,7 +82,7 @@ class Regenerate {
 		update_option( 'thumbpress_regenerate_space_saved', $space_saved );
 
 		$message = __( 'Regenerating Thumbnails...', 'image-sizes' );
-		if ( $progress == 100 ) {
+		if ( 100 === (int) $progress ) {
 			$message = __( 'Congratulations, Thumbnail Regeneration is Completed!', 'image-sizes' );
 			$this->delete_cache( 'stat_total_thumbnails' );
 		}
@@ -114,6 +114,7 @@ class Regenerate {
 
 		as_unschedule_all_actions( 'thumbpress_regenerate_all_image' );
 		delete_option( 'thumbpress_regenerate_cancelled' );
+		delete_option( Thumbnails::OFFSET_OPTION );
 		delete_option( 'thumbpress_regenerate_progress' );
 		delete_option( 'thumbpress_regenerate_total_processed' );
 		delete_option( 'thumbpress_regenerate_total_deleted' );
@@ -121,6 +122,8 @@ class Regenerate {
 		delete_option( 'thumbpress_regenerate_space_saved' );
 		delete_option( 'thumbpress_regenerate_total_not_found' );
 		delete_option( 'thumbpress_regenerate_total_failed' );
+		delete_option( Thumbnails::INFLIGHT_OPTION );
+		delete_option( Thumbnails::FAILED_IDS_OPTION );
 
 		update_option( 'thumbpress_regenerate_limit', $limit );
 
@@ -166,6 +169,10 @@ class Regenerate {
 			return $this->response_error( __( 'Image file not found.', 'image-sizes' ) );
 		}
 
+		if ( $result['failed'] ) {
+			return $this->response_error( __( 'Thumbnails could not be regenerated for this image.', 'image-sizes' ) );
+		}
+
 		thumbpress_add_space_saved( $result['space_saved'] );
 		$this->delete_cache( 'stat_total_thumbnails' );
 
@@ -192,6 +199,7 @@ class Regenerate {
 		$space_saved_label = size_format( $space_saved );
 		$not_found         = (int) get_option( 'thumbpress_regenerate_total_not_found', 0 );
 		$failed            = (int) get_option( 'thumbpress_regenerate_total_failed', 0 );
+		$failed_images     = $this->get_failed_images();
 
 		return $this->response_success(
 			array(
@@ -203,8 +211,37 @@ class Regenerate {
 				'space_saved_label' => $space_saved_label,
 				'not_found'         => $not_found,
 				'failed'            => $failed,
+				'failed_images'     => $failed_images,
 				'is_complete'       => $progress >= 100,
 			)
 		);
+	}
+
+	/**
+	 * Attachments the current run skipped, for the failed list on the progress screen.
+	 *
+	 * @return array
+	 */
+	private function get_failed_images() {
+		$ids = (array) get_option( Thumbnails::FAILED_IDS_OPTION, array() );
+
+		if ( empty( $ids ) ) {
+			return array();
+		}
+
+		$images = array();
+
+		foreach ( $ids as $id ) {
+			$id = (int) $id;
+
+			$images[] = array(
+				'id'    => $id,
+				'title' => get_the_title( $id ),
+				'url'   => wp_get_attachment_url( $id ),
+				'edit'  => get_edit_post_link( $id, 'raw' ),
+			);
+		}
+
+		return $images;
 	}
 }

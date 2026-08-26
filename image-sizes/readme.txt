@@ -4,7 +4,7 @@ Tags: image optimization, compress images, thumbnail manager, WebP converter, me
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 6.5.1
+Stable tag: 6.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -268,6 +268,27 @@ ThumbPress may connect to the WordPress.org API (api.wordpress.org) to check for
 The plugin links to thumbpress.co for Pro upgrade information. No data is sent automatically; links only open when the user clicks them.
 
 == Changelog ==
+
+= 6.6.0 - 2026-08-26 =
+* [fix] Bulk WebP/AVIF conversion could delete your original images on servers whose image library cannot write WebP or AVIF — the "unsupported format" rollback removed the source file instead of the failed output, while the screen reported those images as merely "Failed"
+* [fix] Conversion now verifies the converted file before it replaces the original, so an empty or truncated output (disk full, interrupted write, broken GD/Imagick build) can no longer take the place of a working image
+* [fix] Regenerate Thumbnails no longer deletes the existing thumbnails before regenerating — a failed regeneration used to leave the image pointing at files that were already gone, with no way to repair it from the plugin
+* [fix] Regenerating an image whose original is not stored in the same format as its resized copy — an iPhone HEIC/HEIF upload, or any site converting uploads to another format — looked for a source file that never existed and failed; the true original is now used
+* [fix] The single-image "Regenerate Thumbnails" button reported "Thumbnails regenerated successfully" even when the regeneration had failed, and counted the removed thumbnails towards the Space Saved total
+* [fix] Fixed a fatal error that could take down the entire site — front end, admin and REST alike — on WordPress 6.0 to 6.7
+* [fix] Hotlink protection no longer breaks images whose filenames use non-Latin characters (Cyrillic, CJK, Bengali, Greek, Hebrew); they returned "not found" as soon as the feature was switched on
+* [fix] Background regeneration and bulk WebP conversion now restart themselves when a batch is killed by the server (timeout, memory limit, fatal error) instead of leaving the progress bar frozen with no error
+* [fix] Background regeneration now saves progress after each image, skips and reports an image that killed the previous batch, and finishes correctly when images are deleted while a run is in progress
+* [fix] Progress screens no longer freeze on sites behind aggressive caching — progress and action responses are now explicitly marked as non-cacheable
+* [perf] Lazy Load rewritten to use the browser's own native lazy loading: no front-end JavaScript, images still render with JavaScript disabled, the first images stay eager so the largest-contentful-paint image is not delayed, and it now covers images from themes, page builders and custom fields that WordPress itself never lazy-loads
+* [fix] Lazy Load now steps aside for other lazy-loading plugins and honours the standard `skip-lazy` / `no-lazy` opt-out, instead of adding a second loading attribute to markup another plugin already rewrote
+* [imp] Turning Lazy Load on or off now clears known page caches automatically, so the change takes effect without a manual purge
+* [perf] The plugin no longer reads its own directories on every request to work out which controllers to load
+* [fix] Removed the broken "Turn on legacy mode" link from the General settings tab, along with the rest of the dead version-switching scaffolding left over from the old UI
+* [imp] Dashboard: the Unused Images card now says "no detected usage" instead of the confusing "Unattached"
+* [chore] Removed the upgrade routines kept for installs older than 6.3.3.1 — a site upgrading directly from before that release now starts from the default settings rather than carrying its old values across, and the Convert to WebP screen may show its progress counter reset once
+* [chore] The free plugin no longer shows its own "update ThumbPress Pro" notice on sites running Pro below 6.0; Pro shows its own warning instead
+* [chore] Codebase brought in line with WordPress Coding Standards, with a PHPCS ruleset added for contributors
 
 = 6.5.2 - 2026-08-17 =
 * [fix] Fixed the image-hash backfill never finishing on large media libraries — images whose files could not be read were scanned again on every pass, so the background job restarted itself indefinitely and sent a constant stream of requests to `admin-ajax.php`. The backfill now works through images in order and stops when it reaches the end

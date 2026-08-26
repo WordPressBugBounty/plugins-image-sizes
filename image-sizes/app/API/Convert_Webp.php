@@ -213,7 +213,7 @@ class Convert_Webp {
 			// interrupted during metadata generation above, the original survives and the DB
 			// still resolves it — instead of a webp on disk with the attachment stuck on jpeg.
 			foreach ( ( $old_metadata['sizes'] ?? array() ) as $size_name => $size_data ) {
-				if ( 'image/svg+xml' == $size_data['mime-type'] ) {
+				if ( 'image/svg+xml' === $size_data['mime-type'] ) {
 					continue;
 				}
 				wp_delete_file( $thumb_dir . $size_data['file'] );
@@ -339,9 +339,11 @@ class Convert_Webp {
 
 		update_option( 'thumbpress_now_convert_background_total_images', $total_attachments );
 		update_option( 'thumbpress_convert_img_val', $limit );
+		update_option( Convert_Webp_Controller::FORMATS_OPTION, (array) $file_formats );
 
 		as_unschedule_all_actions( 'thumbpress_convert_all_image' );
 		delete_option( 'thumbpress_webp_cancelled' );
+		delete_option( Convert_Webp_Controller::LAST_ID_OPTION );
 
 		$action_id = as_schedule_single_action(
 			wp_date( 'U' ) - 10,
@@ -366,17 +368,10 @@ class Convert_Webp {
 
 	public function get_progress() {
 		$progress       = (float) get_option( 'thumbpress_convert_progress', 0 );
-		$processed = (int) Utility::get_option_with_legacy_fallback(
-			'thumbpress_convert_total_processed',
-			'thumbpress_convert_total_processd',
-			0
-		);
+		$processed = (int) get_option( 'thumbpress_convert_total_processed', 0 );
 		$converted      = (int) get_option( 'thumbpress_convert_total_converted', 0 );
 		$total          = (int) get_option( 'thumbpress_now_convert_background_total_images', 0 );
-		$completed = Utility::get_option_with_legacy_fallback(
-			'thumbpress_convert_last_completed_time',
-			'convert_last_completed_time'
-		);
+		$completed = get_option( 'thumbpress_convert_last_completed_time', false );
 		$completed_time = $completed ? date_i18n( 'g:i a F j, Y', $completed ) : '';
 
 		$space_saved = (int) get_option( 'thumbpress_convert_space_saved', 0 );
