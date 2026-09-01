@@ -24,8 +24,9 @@ class Regenerate {
 		$not_found_prev       = absint( $request->get_param( 'not_found' ) );
 		$failed_prev          = absint( $request->get_param( 'failed' ) );
 		$processed_count_prev = absint( $request->get_param( 'processed_count' ) );
+		$last_id              = absint( $request->get_param( 'last_id' ) );
 		$total_images         = (int) $wpdb->get_var( "SELECT COUNT(*) FROM `$wpdb->posts` WHERE `post_type` = 'attachment' AND `post_mime_type` LIKE 'image/%' AND `post_status` != 'trash'" );
-		$images               = $wpdb->get_results( $wpdb->prepare( "SELECT `ID` FROM `$wpdb->posts` WHERE `post_type` = 'attachment' AND `post_mime_type` LIKE 'image/%' AND `post_status` != 'trash' LIMIT %d OFFSET %d", $limit, $offset ) );
+		$images               = $wpdb->get_results( $wpdb->prepare( "SELECT `ID` FROM `$wpdb->posts` WHERE `post_type` = 'attachment' AND `post_mime_type` LIKE 'image/%' AND `post_status` != 'trash' AND `ID` > %d ORDER BY `ID` ASC LIMIT %d", $last_id, $limit ) );
 		$next_offset          = $offset + count( $images );
 		$thumbs_created       = $thumbs_deleted = 0;
 		$space_saved          = absint( $request->get_param( 'space_saved' ) );
@@ -46,8 +47,12 @@ class Regenerate {
 		$not_found       = 0;
 		$failed          = 0;
 		$processed_count = 0;
+		$new_last_id     = $last_id;
 
 		foreach ( $images as $image ) {
+			// Advance before the orphan skip below, or a missing file is re-selected by every chunk.
+			$new_last_id = (int) $image->ID;
+
 			$file = get_attached_file( $image->ID );
 			if ( ! $file || ! file_exists( $file ) ) {
 				++$not_found;
@@ -93,6 +98,7 @@ class Regenerate {
 			array(
 				'message'            => $message,
 				'offset'             => $next_offset,
+				'last_id'            => $new_last_id,
 				'progress'           => $progress,
 				'thumbs_deleted'     => $total_deleted,
 				'thumbs_created'     => $total_created,
@@ -115,6 +121,7 @@ class Regenerate {
 		as_unschedule_all_actions( 'thumbpress_regenerate_all_image' );
 		delete_option( 'thumbpress_regenerate_cancelled' );
 		delete_option( Thumbnails::OFFSET_OPTION );
+		delete_option( Thumbnails::LAST_ID_OPTION );
 		delete_option( 'thumbpress_regenerate_progress' );
 		delete_option( 'thumbpress_regenerate_total_processed' );
 		delete_option( 'thumbpress_regenerate_total_deleted' );

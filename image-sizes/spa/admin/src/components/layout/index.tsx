@@ -3,6 +3,8 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import ExitIntentPopup from '../pro-page/ExitIntentPopup';
 import EvergreenExitIntentPopup from '../pro-page/EvergreenExitIntentPopup';
+import CdnAnnouncementPopup from '../pro-page/CdnAnnouncementPopup';
+import { saveSettings } from '../../api';
 
 interface NavItemData {
 	to: string;
@@ -22,6 +24,48 @@ export default function Layout( { navItems }: LayoutProps ) {
 	const navigate = useNavigate();
 	const [ showPopup, setShowPopup ] = useState( false );
 	const pendingPath = useRef< string | null >( null );
+
+	// One-time "Meet ThumbPress CDN" announcement. Shown until the user dismisses
+	// it — the server sends show_cdn_announcement as the inverse of the
+	// thumbpress_cdn_announcement_dismissed option, so no arming step is needed.
+	// Held back 1.5s after mount so it eases in rather than flashing on immediately.
+	const [ showCdnPopup, setShowCdnPopup ] = useState( false );
+
+	useEffect( () => {
+		if ( ! window.THUMBPRESS?.show_cdn_announcement ) return;
+		const id = setTimeout( () => setShowCdnPopup( true ), 1500 );
+		return () => clearTimeout( id );
+	}, [] );
+
+	// Only the X and the CTA close the popup — there is no backdrop dismissal, so
+	// a stray click outside it cannot burn the single showing. Both paths persist.
+	const dismissCdnPopup = () => {
+		setShowCdnPopup( false );
+		saveSettings( 'thumbpress_cdn_announcement_dismissed', true ).catch( () => {} );
+	};
+
+	const handleCdnEnable = () => {
+		dismissCdnPopup();
+
+		// Pro active with an activated license (thumbpress_is_pro_active filter) —
+		// take the user straight to the CDN settings tab.
+		if ( window.THUMBPRESS?.pro_active ) {
+			navigate( '/cdn' );
+			return;
+		}
+
+		// Pro plugin activated but license not active — send to the Pro page.
+		if ( isProInstalled() ) {
+			navigate( '/pro' );
+			return;
+		}
+
+		// Free (Pro not installed) — Pro page, scrolled to the pricing section.
+		navigate( '/pro' );
+		setTimeout( () => {
+			document.getElementById( 'thumbpress-pro-pricing' )?.scrollIntoView( { behavior: 'smooth' } );
+		}, 300 );
+	};
 
 	const isProInstalled = () => typeof window.THUMBPRESS_PRO !== 'undefined';
 
@@ -117,6 +161,10 @@ export default function Layout( { navItems }: LayoutProps ) {
 				isPromoActive()
 					? <ExitIntentPopup onClose={ handleClose } onScrollToPricing={ handleScrollToPricing } />
 					: <EvergreenExitIntentPopup onClose={ handleClose } onScrollToPricing={ handleScrollToPricing } />
+			) }
+
+			{ showCdnPopup && (
+				<CdnAnnouncementPopup onDismiss={ dismissCdnPopup } onEnable={ handleCdnEnable } />
 			) }
 		</div>
 	);

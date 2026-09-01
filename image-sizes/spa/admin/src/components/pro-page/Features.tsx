@@ -133,29 +133,6 @@ const Features = () => {
                 <FeatureCard
                     icon={(
                         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="40" height="40" rx="10" fill="#06A10D" fill-opacity="0.05"/>
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.792 14.75C11.792 14.3358 12.1278 14 12.542 14H23.417C24.6597 14 25.667 15.0074 25.667 16.25V27.125C25.667 27.5392 25.3312 27.875 24.917 27.875C24.5028 27.875 24.167 27.5392 24.167 27.125V16.25C24.167 15.8358 23.8312 15.5 23.417 15.5H12.542C12.1278 15.5 11.792 15.1642 11.792 14.75Z" fill="#06A10D"/>
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M14.417 12.125C14.8312 12.125 15.167 12.4608 15.167 12.875V14.75C15.167 15.1642 14.8312 15.5 14.417 15.5C14.0028 15.5 13.667 15.1642 13.667 14.75V12.875C13.667 12.4608 14.0028 12.125 14.417 12.125ZM14.417 16.625C14.8312 16.625 15.167 16.9608 15.167 17.375V23.75C15.167 24.1642 15.5028 24.5 15.917 24.5H21.917C22.3312 24.5 22.667 24.8358 22.667 25.25C22.667 25.6642 22.3312 26 21.917 26H15.917C14.6744 26 13.667 24.9927 13.667 23.75V17.375C13.667 16.9608 14.0028 16.625 14.417 16.625ZM24.167 25.25C24.167 24.8358 24.5028 24.5 24.917 24.5H26.792C27.2062 24.5 27.542 24.8358 27.542 25.25C27.542 25.6642 27.2062 26 26.792 26H24.917C24.5028 26 24.167 25.6642 24.167 25.25Z" fill="#06A10D"/>
-                        </svg>
-                    )}
-                    subtitle={''}
-                    title={__( 'Image Editor', 'image-sizes' )}
-                    description={__( 'Crop, resize, or tweak any image right inside your WordPress dashboard. No need to re-upload or touch a third-party tool.', 'image-sizes' )}
-                    link={(
-                        <button
-                            onClick={() => (
-								document.getElementById('thumbpress-pro-pricing')?.scrollIntoView({ behavior: 'smooth' })
-							)}
-                            className="!text-[#06A10D] mt-6 inline-block text-sm border-b border-[#06A10D]"
-                        >
-                            {__( 'Edit Now', 'image-sizes' )}
-                        </button>
-                    )}
-                />
-
-                <FeatureCard
-                    icon={(
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect width="40" height="40" rx="10" fill="#F9733B" fill-opacity="0.08"/>
                             <g clip-path="url(#clip0_2765_6746)">
                             <path d="M19.583 27.5009C18.7546 27.5009 18.083 26.8293 18.083 26.0009V19.2519C18.083 18.4231 18.7552 17.7514 19.5841 17.752L26.3341 17.7567C27.1621 17.7573 27.833 18.4287 27.833 19.2567V26.0009C27.833 26.8293 27.1615 27.5009 26.333 27.5009H19.583Z" stroke="#F9733B" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
@@ -179,6 +156,30 @@ const Features = () => {
                             className="!text-[#F9733B] mt-6 inline-block text-sm border-b border-[#F9733B]"
                         >
                             {__( 'Merge Now', 'image-sizes' )}
+                        </button>
+                    )}
+                />
+
+                <FeatureCard
+                    icon={(
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="40" height="40" rx="10" fill="#06A10D" fill-opacity="0.05"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.792 14.75C11.792 14.3358 12.1278 14 12.542 14H23.417C24.6597 14 25.667 15.0074 25.667 16.25V27.125C25.667 27.5392 25.3312 27.875 24.917 27.875C24.5028 27.875 24.167 27.5392 24.167 27.125V16.25C24.167 15.8358 23.8312 15.5 23.417 15.5H12.542C12.1278 15.5 11.792 15.1642 11.792 14.75Z" fill="#06A10D"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M14.417 12.125C14.8312 12.125 15.167 12.4608 15.167 12.875V14.75C15.167 15.1642 14.8312 15.5 14.417 15.5C14.0028 15.5 13.667 15.1642 13.667 14.75V12.875C13.667 12.4608 14.0028 12.125 14.417 12.125ZM14.417 16.625C14.8312 16.625 15.167 16.9608 15.167 17.375V23.75C15.167 24.1642 15.5028 24.5 15.917 24.5H21.917C22.3312 24.5 22.667 24.8358 22.667 25.25C22.667 25.6642 22.3312 26 21.917 26H15.917C14.6744 26 13.667 24.9927 13.667 23.75V17.375C13.667 16.9608 14.0028 16.625 14.417 16.625ZM24.167 25.25C24.167 24.8358 24.5028 24.5 24.917 24.5H26.792C27.2062 24.5 27.542 24.8358 27.542 25.25C27.542 25.6642 27.2062 26 26.792 26H24.917C24.5028 26 24.167 25.6642 24.167 25.25Z" fill="#06A10D"/>
+                        </svg>
+                    )}
+                    subtitle={''}
+                    title={__( 'CDN Offloading', 'image-sizes' )}
+                    description={__( 'Serve your images from a global edge network instead of a single server. Pages load faster for visitors everywhere, with zero setup required.', 'image-sizes' )}
+                    newBadge={true}
+                    link={(
+                        <button
+                            onClick={() => (
+								document.getElementById('thumbpress-pro-pricing')?.scrollIntoView({ behavior: 'smooth' })
+							)}
+                            className="!text-[#06A10D] mt-6 inline-block text-sm border-b border-[#06A10D]"
+                        >
+                            {__( 'Enable Now', 'image-sizes' )}
                         </button>
                     )}
                 />

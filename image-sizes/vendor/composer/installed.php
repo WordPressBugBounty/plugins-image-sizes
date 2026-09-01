@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'image-sizes/image-sizes',
-        'pretty_version' => 'v6.6.0',
-        'version' => '6.6.0.0',
-        'reference' => '71595654d30478d8d5dc2fbf0390bc4d14d40cac',
+        'pretty_version' => 'v6.7.0.1',
+        'version' => '6.7.0.1',
+        'reference' => '6bc2a98f60332897ae26d125578b39667fb7d237',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,9 +22,9 @@
             'dev_requirement' => false,
         ),
         'image-sizes/image-sizes' => array(
-            'pretty_version' => 'v6.6.0',
-            'version' => '6.6.0.0',
-            'reference' => '71595654d30478d8d5dc2fbf0390bc4d14d40cac',
+            'pretty_version' => 'v6.7.0.1',
+            'version' => '6.7.0.1',
+            'reference' => '6bc2a98f60332897ae26d125578b39667fb7d237',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

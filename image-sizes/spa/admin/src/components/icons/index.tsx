@@ -385,3 +385,16 @@ export function FailedIcon( { className }: { className?: string } ) {
 	)
 }
 
+
+/**
+ * Sidebar icon for the CDN page. Matches the icon pro registers through
+ * `thumbpress_icon_map`, so the item looks identical before and after upgrade.
+ */
+export function CdnIcon( { className }: { className?: string } ) {
+	return (
+		<svg className={ className } width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M10 2C7.17 2 4.84 4.03 4.18 6.72C2.35 7.29 1 9 1 11C1 13.76 3.24 16 6 16H14.5C16.99 16 19 13.99 19 11.5C19 9.14 17.21 7.21 14.92 7.03C14.35 4.19 11.92 2 10 2ZM10 4C11.98 4 13.74 5.43 14.25 7.37L14.53 8.44L15.64 8.53C17.05 8.64 18 9.76 18 11.5C18 13.43 16.43 15 14.5 15H6C3.79 15 2 13.21 2 11C2 9.32 3.05 7.88 4.56 7.32L5.57 6.94L5.81 5.9C6.32 3.74 8.05 4 10 4Z" fill="currentColor"/>
+			<path d="M8 10.5L10 8.5L12 10.5M10 8.5V14.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+		</svg>
+	);
+}

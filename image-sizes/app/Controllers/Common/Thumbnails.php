@@ -19,6 +19,11 @@ class Thumbnails {
 	 */
 	const OFFSET_OPTION = 'thumbpress_regenerate_offset';
 
+	/**
+	 * ID of the last attachment processed, so a batch pages by cursor instead of a deep OFFSET.
+	 */
+	const LAST_ID_OPTION = 'thumbpress_regenerate_last_id';
+
 	const BATCH_TIME_BUDGET = 15;
 
 	const INFLIGHT_OPTION = 'thumbpress_regenerate_inflight';
@@ -30,7 +35,7 @@ class Thumbnails {
 	public function __construct() {
 		$this->filter( 'intermediate_image_sizes_advanced', array( $this, 'filter_image_sizes' ) );
 		$this->filter( 'big_image_size_threshold', array( $this, 'filter_big_image_size' ) );
-		$this->action( 'thumbpress_regenerate_all_image', array( $this, 'regenerate_all_image' ) );
+		$this->action( 'thumbpress_regenerate_all_image', array( $this, 'regenerate_all_image' ), 10, 2 );
 		$this->action( 'admin_init', array( $this, 'rearm_stalled_regeneration' ) );
 		$this->action( 'activated_plugin', array( $this, 'clear_size_caches' ) );
 		$this->action( 'deactivated_plugin', array( $this, 'clear_size_caches' ) );
@@ -258,21 +263,33 @@ class Thumbnails {
 			return;
 		}
 
-		Utility::rearm_batch( 'thumbpress_regenerate_all_image', array( 'offset' => $offset ) );
+		Utility::rearm_batch(
+			'thumbpress_regenerate_all_image',
+			array(
+				'offset'  => $offset,
+				'last_id' => (int) get_option( self::LAST_ID_OPTION, 0 ),
+			)
+		);
 	}
 
 	/**
 	 * Action Scheduler callback for background regeneration.
 	 * Processes a batch then schedules the next batch if not done.
 	 */
-	public function regenerate_all_image( $offset ) {
+	public function regenerate_all_image( $offset, $last_id = 0 ) {
 		require_once ABSPATH . 'wp-admin/includes/image.php';
 		global $wpdb;
 
+		$last_id           = absint( $last_id );
 		$limit             = get_option( 'thumbpress_regenerate_limit', 500 );
-		$total_attachments = get_option( 'thumbpress_regenerate_total_image' );
+		$total_attachments = (int) get_option( 'thumbpress_regenerate_total_image', 0 );
 		$thumbs_deleteds   = (int) get_option( 'thumbpress_regenerate_total_deleted', 0 );
 		$thumbs_createds   = (int) get_option( 'thumbpress_regenerate_total_created', 0 );
+
+		// No total means no run: cancelled, so finishing it here would restore what cancel deleted.
+		if ( $total_attachments < 1 ) {
+			return;
+		}
 
 		$images = $wpdb->get_results(
 			$wpdb->prepare(
@@ -282,10 +299,12 @@ class Thumbnails {
 			WHERE post_type = 'attachment'
 			AND post_mime_type LIKE 'image%%'
 			AND post_status != 'trash'
-			LIMIT %d OFFSET %d
+			AND ID > %d
+			ORDER BY ID ASC
+			LIMIT %d
 		",
-				$limit,
-				$offset
+				$last_id,
+				$limit
 			)
 		);
 
@@ -302,9 +321,10 @@ class Thumbnails {
 		$total_deleted   = $thumbs_deleteds;
 		$total_created   = $thumbs_createds;
 
-		$started  = microtime( true );
-		$done     = 0;
-		$inflight = (int) get_option( self::INFLIGHT_OPTION, 0 );
+		$started     = microtime( true );
+		$done        = 0;
+		$new_last_id = $last_id;
+		$inflight    = (int) get_option( self::INFLIGHT_OPTION, 0 );
 
 		foreach ( $images as $image ) {
 			// A marker left from the previous run means this image killed it — count it failed and move past.
@@ -314,6 +334,7 @@ class Thumbnails {
 				++$done;
 				++$total_failed;
 				++$total_processed;
+				$new_last_id = (int) $image->ID;
 				$this->record_failed_image( (int) $image->ID );
 				$this->persist_regenerate_progress(
 					$offset + $done,
@@ -323,7 +344,8 @@ class Thumbnails {
 					$total_deleted,
 					$total_created,
 					$total_not_found,
-					$total_failed
+					$total_failed,
+					$new_last_id
 				);
 				continue;
 			}
@@ -334,6 +356,7 @@ class Thumbnails {
 			++$done;
 
 			delete_option( self::INFLIGHT_OPTION );
+			$new_last_id = (int) $image->ID;
 
 			if ( ! empty( $res['skipped'] ) ) {
 				++$total_not_found;
@@ -357,7 +380,8 @@ class Thumbnails {
 				$total_deleted,
 				$total_created,
 				$total_not_found,
-				$total_failed
+				$total_failed,
+				$new_last_id
 			);
 
 			if ( microtime( true ) - $started >= self::BATCH_TIME_BUDGET ) {
@@ -368,7 +392,14 @@ class Thumbnails {
 		$count = $offset + $done;
 
 		if ( $count < $total_attachments && ! get_option( 'thumbpress_regenerate_cancelled', false ) ) {
-			as_schedule_single_action( wp_date( 'U' ) - 10, 'thumbpress_regenerate_all_image', array( 'offset' => $count ) );
+			as_schedule_single_action(
+				wp_date( 'U' ) - 10,
+				'thumbpress_regenerate_all_image',
+				array(
+					'offset'  => $count,
+					'last_id' => $new_last_id,
+				)
+			);
 		} else {
 			$this->finish_regeneration( $count );
 		}
@@ -404,13 +435,15 @@ class Thumbnails {
 	 * @param int $created    Cumulative thumbnails created.
 	 * @param int $not_found  Cumulative missing-file count.
 	 * @param int $failed     Cumulative failed count.
+	 * @param int $last_id    ID of the last attachment actually processed.
 	 */
-	private function persist_regenerate_progress( $count, $total, $space, $processed, $deleted, $created, $not_found, $failed ) {
+	private function persist_regenerate_progress( $count, $total, $space, $processed, $deleted, $created, $not_found, $failed, $last_id ) {
 		$progress = $total > 0 ? min( ( $count / $total ) * 100, 100 ) : 100;
 
 		update_option( 'thumbpress_regenerate_space_saved', $space );
 		update_option( 'thumbpress_regenerate_progress', $progress );
 		update_option( self::OFFSET_OPTION, $count );
+		update_option( self::LAST_ID_OPTION, $last_id );
 		update_option( 'thumbpress_regenerate_total_processed', $processed );
 		update_option( 'thumbpress_regenerate_total_deleted', $deleted );
 		update_option( 'thumbpress_regenerate_total_created', $created );

@@ -4,7 +4,7 @@ import { __ } from '@wordpress/i18n';
 const Comparison = () => {
 	const comparisonFeatures: Array<{
 		category: string;
-		features: Array<{ name: string; free: boolean; pro: boolean; key?: string }>;
+		features: Array<{ name: string; free: boolean; pro: boolean; freeLabel?: string; proLabel?: string }>;
 	}> = [
 		{
 			category: __( 'IMAGE CONTROL', 'image-sizes' ),
@@ -21,6 +21,11 @@ const Comparison = () => {
 				},
 				{
 					name: __( 'Set Image Upload Limit', 'image-sizes' ),
+					free: true,
+					pro: true,
+				},
+				{
+					name: __( 'Auto-Set Featured Image', 'image-sizes' ),
 					free: true,
 					pro: true,
 				},
@@ -49,6 +54,16 @@ const Comparison = () => {
 					free: false,
 					pro: true,
 				},
+				{
+					name: __( 'Prevent Duplicate Uploads', 'image-sizes' ),
+					free: false,
+					pro: true,
+				},
+				{
+					name: __( 'Trash & Recover', 'image-sizes' ),
+					free: false,
+					pro: true,
+				},
 			],
 		},
 		{
@@ -71,12 +86,35 @@ const Comparison = () => {
 				},
 				{
 					name: __( 'Convert to AVIF', 'image-sizes' ),
-					key: 'avif',
+					free: true,
+					pro: true,
+					freeLabel: __( 'Future uploads only', 'image-sizes' ),
+					proLabel: __( 'Fully unlocked', 'image-sizes' ),
+				},
+				{
+					name: __( 'Convert to WebP', 'image-sizes' ),
 					free: true,
 					pro: true,
 				},
 				{
-					name: __( 'Convert to WebP', 'image-sizes' ),
+					name: __( 'Hotlink Protection', 'image-sizes' ),
+					free: true,
+					pro: true,
+				},
+				{
+					name: __( 'CDN Offloading', 'image-sizes' ),
+					free: false,
+					pro: true,
+					freeLabel: __( 'Not Included', 'image-sizes' ),
+					proLabel: __( 'Included. <a href="https://thumbpress.co/features/image-cdn" target="_blank" rel="noopener noreferrer" style="color: #40189d; text-decoration: underline;">See Details</a>', 'image-sizes' ),
+				},
+				{
+					name: __( 'Lazy Load Images', 'image-sizes' ),
+					free: true,
+					pro: true,
+				},
+				{
+					name: __( 'Disable Right-Click', 'image-sizes' ),
 					free: true,
 					pro: true,
 				},
@@ -124,11 +162,11 @@ const Comparison = () => {
 											{feature.name}
 										</span>
 									</div>
-									
+
 									<div className="flex items-center justify-center border-x border-thumbpress-border col-span-1">
-										{feature.key === 'avif' ? (
+										{feature.freeLabel ? (
 											<span className="text-sm text-[#777980]">
-												{__( 'Future uploads only', 'image-sizes' )}
+												{feature.freeLabel}
 											</span>
 										) : feature.free ? (
 											<svg
@@ -162,10 +200,8 @@ const Comparison = () => {
 									</div>
 
 									<div className="flex items-center justify-center bg-[#6646B108] col-span-1">
-										{feature.key === 'avif' ? (
-											<span className="text-sm text-[#1D1F2C]">
-												{__( 'Fully unlocked', 'image-sizes' )}
-											</span>
+										{feature.proLabel ? (
+											<span className="text-sm text-[#1D1F2C]" dangerouslySetInnerHTML={{ __html: feature.proLabel }} />
 										) : (
 											<svg
 												width="20"

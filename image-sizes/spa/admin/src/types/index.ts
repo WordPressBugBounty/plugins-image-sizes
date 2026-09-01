@@ -27,6 +27,8 @@ declare global {
 			promo_active?: boolean;
 			/** UTC Unix timestamp (seconds) when the promo ends. */
 			promo_end?: number;
+			/** One-time "ThumbPress CDN is here" popup flag, armed on upgrade to the CDN release. */
+			show_cdn_announcement?: boolean;
 			menus?: Record<string, unknown>;
 			/** BCP-47 locale tag from PHP (get_locale() with "_" → "-"), e.g. "bn-BD". */
 			locale?: string;

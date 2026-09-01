@@ -32,6 +32,7 @@ import CompressImages from '../components/settings/CompressImages';
 import DuplicateImages from '../components/settings/DuplicateImages';
 import ConvertToWebP from '../components/settings/ConvertToWebP';
 import ConvertToAvif from '../components/settings/ConvertToAvif';
+import Cdn from '../components/settings/Cdn';
 import SocialShareImage from '../components/settings/SocialShareImage';
 import Debug from '../components/settings/Debug';
 import SettingsSkeleton from '../components/settings/SettingsSkeleton';
@@ -123,6 +124,11 @@ export default function Settings() {
 	const allToggleable = Object.keys(thumbnailSizes).filter((n) => n !== 'full');
 	const allEnabled = allToggleable.length > 0 && allToggleable.every((n) => !disabledSizes.includes(n));
 
+	// Pro registers the real CDN tab (same 'cdn' slug) through
+	// thumbpress_settings_tabs once the license is active, so the free promo tab
+	// is only added while pro is missing or unlicensed.
+	const isProActive = !! window.THUMBPRESS?.pro_active;
+
 	const defaultTabs = [
 		{
 			label: __( 'General', 'image-sizes' ),
@@ -188,6 +194,13 @@ export default function Settings() {
 			title: __( 'Platform Configuration', 'image-sizes' ),
 			tooltip: __( 'Manage the image used for social media sharing', 'image-sizes' ),
 		},
+		...( isProActive ? [] : [ {
+			label: __( 'CDN', 'image-sizes' ),
+			slug: 'cdn',
+			content: <Cdn />,
+			title: __( 'CDN Settings', 'image-sizes' ),
+			tooltip: __( 'Serve your images from a global edge network', 'image-sizes' ),
+		} ] ),
 		{
 			label: __( 'Debug', 'image-sizes' ),
 			slug: 'debug',

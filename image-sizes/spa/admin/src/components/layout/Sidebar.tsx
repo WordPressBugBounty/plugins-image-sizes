@@ -10,6 +10,7 @@ interface NavItemData {
 	label: string;
 	icon: string;
 	pro?: boolean;
+	isNew?: boolean;
 }
 
 interface SidebarProps {
@@ -69,7 +70,7 @@ export default function Sidebar( { navItems = [], onNavRequest }: SidebarProps )
 			</div>
 
 			<div className="flex flex-col p-3 gap-1">
-				{navItems.map(({ to, label, icon, pro }) => {
+				{navItems.map(({ to, label, icon, pro, isNew }) => {
 					const Icon = iconMap[ icon ];
 					return (
 						<NavLink
@@ -91,7 +92,25 @@ export default function Sidebar( { navItems = [], onNavRequest }: SidebarProps )
 							}
 						>
 							{ Icon && <Icon className="h-4 w-4 shrink-0" /> }
-							<span className="flex-1">{ label }</span>
+							<span className="flex-1 flex items-center gap-1.5">
+								{ label }
+								{ isNew && (
+									<svg className="shrink-0" width="34" height="16" viewBox="0 0 34 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<rect width="34" height="16" rx="8" fill="#FF3A52"/>
+										<text
+											x="17"
+											y="11.5"
+											textAnchor="middle"
+											fill="#FFFFFF"
+											fontSize="9"
+											fontWeight="600"
+											fontFamily="Inter, -apple-system, sans-serif"
+										>
+											New
+										</text>
+									</svg>
+								) }
+							</span>
 							{ pro && (
 								<span className="ml-auto shrink-0">
 									<svg width="20" height="17" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">

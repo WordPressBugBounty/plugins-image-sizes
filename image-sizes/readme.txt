@@ -1,29 +1,14 @@
 === ThumbPress – Compress Images, Manage Thumbnails, Detect Image Issues, WebP/AVIF, Lazy Loading, Hotlinking & More ===
 Contributors: thumbpressco, codexpert, mukto90
-Tags: image optimization, compress images, thumbnail manager, WebP converter, media library cleaner, AVIF converter, regenerate thumbnails, unused images, lazy load, hotlink protection
+Tags: image optimization, compress images, thumbnail manager, WebP converter, image cdn, media library cleaner, AVIF converter, regenerate thumbnails, unused images, lazy load
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 6.6.0
+Stable tag: 6.7.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-The all-in-one WordPress image optimization plugin. Disable thumbnails, compress images, convert to WebP & AVIF, clean your media library, and more.
-
-== Source Code ==
-
-This plugin includes a compiled JavaScript bundle (`build/admin.js`) built with webpack, React, and TypeScript. The full uncompiled, human-readable source is included **inside this plugin**, so it can be reviewed, studied, modified, and rebuilt with no external dependency:
-
-* React/TypeScript source: `spa/admin/src/`
-* Plain JS/CSS: `assets/`
-* Build configuration: `package.json`, `webpack.config.js`, `tailwind.config.js`, `postcss.config.js`, `tsconfig.json`
-
-To rebuild the compiled bundle from the included source, run these from the plugin directory:
-
-1. Install dependencies: `npm install`
-2. Build: `npm run build`
-
-This regenerates `build/admin.js` and `build/tailwind.css` from `spa/admin/src/`.
+All-in-one WordPress image optimization: disable thumbnails, compress, convert to WebP & AVIF, clean your media library, and offload images to a CDN.
 
 == Description ==
 
@@ -36,6 +21,7 @@ Here's what's quietly happening on your site right now:
 * Each upload creates 7+ thumbnails. Themes and plugins add more. Most stay unused and waste storage.
 * Many images are still JPG or PNG. They’re heavier, slow down pages, and hurt Core Web Vitals and rankings.
 * Unused, duplicate, and oversized images keep piling up. Updating them across pages takes extra time.
+* Every image is served from your one server, in one location. Visitors on the other side of the world wait for every byte to cross the planet.
 
 None of this is dramatic. It's just the slow, invisible damage that builds up on every WordPress site without a proper image management system.
 
@@ -43,7 +29,7 @@ None of this is dramatic. It's just the slow, invisible damage that builds up on
 
 ThumbPress is a complete WordPress image optimization and media management plugin built for site owners, developers, and agencies who want full control over their media library. Compress images, convert to WebP or AVIF, regenerate thumbnails, find duplicate images, detect unused files, and much more — all from your WordPress dashboard.
 
-**Version 6.0 is here** - with a redesigned interface, AVIF image conversion, and duplicate image detection.
+**New in 6.7 - ThumbPress CDN.** Offload your media library to a global edge network in one click and serve every image from the location nearest your visitor. Storage is included with ThumbPress Pro - no third-party CDN account, no API keys, no DNS changes.
 
 ---
 
@@ -70,6 +56,7 @@ ThumbPress is a complete WordPress image optimization and media management plugi
 * 🔥 [Image Editor](https://thumbpress.co/modules/image-editor)
 * 🔥 [Detect Duplicate Images](https://thumbpress.co/modules/detect-duplicate-images) *(New in 6.0)*
 * 🔥 [Bulk AVIF Conversion](https://thumbpress.co/modules/convert-images-to-avif) *(New in 6.0)*
+* 🔥 [Image CDN Offloading](https://thumbpress.co/features/image-cdn) *(New in 6.7)*
 * 🔥 Trash Images *(Not a module, but lets you recover deleted images)*
 
 ---
@@ -164,11 +151,43 @@ Duplicate images waste storage and create confusion in your media library. The s
 
 The new Duplicate Image Detection module identifies redundant files in your media library and helps you remove them safely. One of the most-requested features we've ever received — now available in ThumbPress 6.0.
 
+**ThumbPress CDN — Serve Every Image From a Global Edge Network 🆕**
+
+Every image on your site is served from one server in one location. A visitor on the other side of the world waits for every byte to cross the planet — and every one of those requests is bandwidth you pay for.
+
+ThumbPress CDN offloads your media library to a global edge network, so each image is delivered from the location closest to the visitor. Pages get faster, your server does less work, and your hosting bandwidth bill goes down.
+
+**No third-party CDN account. No API keys. No DNS changes.** CDN storage is included with your ThumbPress Pro license — connect from the dashboard and the nearest region is provisioned for you automatically.
+
+What you get:
+
+* 🌍 **One-click connect** — storage included with Pro, region auto-selected, nothing to configure
+* 📦 **Bulk offload** — push your existing media library to the CDN in the background, with live progress, cancel and automatic resume
+* ⚡ **Auto-offload new uploads** — every new image goes to the CDN on its own, without slowing the upload
+* 💾 **Reclaim disk space** — optionally drop the local copy after upload and keep only the CDN version
+* 🖼️ **Responsive images covered** — `srcset` URLs are rewritten too, so every size loads from the edge
+* 🛒 **WooCommerce ready** — product, variation, and gallery images served from the CDN
+* 🛡️ **Never breaks your site** — if the CDN is unreachable, images automatically fall back to your own server
+* 🎛️ **Full control** — exclude specific file types (SVG, PDF) or image sizes, and optionally lazy load CDN images
+* 📊 **Storage dashboard** — see exactly how much of your included storage is used, and how many images are being served from the edge
+* ↩️ **Leave any time** — disconnect and keep or delete the CDN copies; local files are restored so your images keep working either way
+
 **Image Editor — Edit Images Without Leaving WordPress**
 
 Sometimes an uploaded image just needs a small adjustment — a crop, a rotation, a brightness tweak. The ThumbPress Image Editor lets you make those changes without ever leaving your WordPress dashboard.
 
 No Photoshop. No re-uploading. Edit, save, and publish right from your media library.
+
+---
+
+🆕 **What's New in ThumbPress 6.7**
+
+* **ThumbPress CDN (Pro)** — offload your media library to a global edge network with storage included in your Pro license
+* Bulk offload with live progress, plus automatic offloading of every new upload
+* Optional local-copy removal to free server disk space
+* `srcset` and WooCommerce product, variation and gallery URLs rewritten to CDN URLs
+* Automatic fallback to your own server if the CDN is ever unreachable
+* Faster Regenerate Thumbnails on large media libraries
 
 ---
 
@@ -190,10 +209,26 @@ Most WordPress sites end up using 4–6 different plugins just to manage images:
 * One for WebP conversion
 * One for social media previews
 * One for image cleanup
+* One for CDN offloading
 
 Each plugin adds overhead. Each one adds potential conflicts. And none of them talks to each other.
 
 **ThumbPress is one plugin that does everything.** Thumbnail management, image compression, WebP and AVIF conversion, media library cleanup, duplicate detection, image protection — all in a single, unified interface. Install once, manage everything.
+
+== Source Code ==
+
+This plugin includes a compiled JavaScript bundle (`build/admin.js`) built with webpack, React, and TypeScript. The full uncompiled, human-readable source is included **inside this plugin**, so it can be reviewed, studied, modified, and rebuilt with no external dependency:
+
+* React/TypeScript source: `spa/admin/src/`
+* Plain JS/CSS: `assets/`
+* Build configuration: `package.json`, `webpack.config.js`, `tailwind.config.js`, `postcss.config.js`, `tsconfig.json`
+
+To rebuild the compiled bundle from the included source, run these from the plugin directory:
+
+1. Install dependencies: `npm install`
+2. Build: `npm run build`
+
+This regenerates `build/admin.js` and `build/tailwind.css` from `spa/admin/src/`.
 
 ---
 
@@ -225,6 +260,21 @@ WebP is a widely supported modern image format that reduces file sizes compared 
 
 = Can I bulk-convert images to AVIF for free? =
 No, you can convert individual images to AVIF in the free version. Bulk conversion across your entire media library requires ThumbPress Pro.
+
+= Do I need my own CDN account or API keys? =
+No. ThumbPress CDN storage is included with your ThumbPress Pro license. You connect from the ThumbPress dashboard, the nearest region is selected for you, and offloading starts — no third-party CDN signup, no API keys, no DNS changes. Storage allowances per plan are listed on the [Pricing page](https://thumbpress.co/pricing).
+
+= Does the CDN work with WooCommerce and page builders? =
+Yes. Product, variation, and gallery images are served from the CDN, and responsive `srcset` URLs are rewritten too, so every image size loads from the edge.
+
+= Can I delete the local copies to free disk space? =
+Yes. Keeping local copies is the default, but you can turn it off so the local file is removed once the CDN copy is confirmed. You can put local copies back at any time before disconnecting.
+
+= Do I need the CDN to use ThumbPress? =
+No. Every other module works exactly the same without it. CDN offloading is an optional Pro feature — the free plugin never uploads your images anywhere or contacts a CDN.
+
+= What happens to my images if I stop using the CDN? =
+Nothing is lost. If you kept local copies, your site keeps serving them from your own server. If local copies were removed to save disk space, the images can be pulled back down before you disconnect.
 
 = How does Duplicate Image Detection work? =
 ThumbPress scans your media library and compares image files using unique hashes to find exact duplicates. This method is highly accurate since identical files share the same hash. You review the matches and decide if a fix is required - nothing is deleted automatically.
@@ -268,6 +318,13 @@ ThumbPress may connect to the WordPress.org API (api.wordpress.org) to check for
 The plugin links to thumbpress.co for Pro upgrade information. No data is sent automatically; links only open when the user clicks them.
 
 == Changelog ==
+
+= 6.7.0 - 2026-09-01 =
+* [new] ThumbPress CDN (Pro): a new CDN screen and CDN settings tab. Serve your images from a global edge network — new uploads offloaded automatically, local copies optionally removed to free disk space, responsive `srcset` and WooCommerce product, variation and gallery images rewritten to CDN URLs, and an automatic fallback to your own server if the CDN is ever unreachable. The free plugin shows the screen and settings; offloading requires ThumbPress Pro
+* [perf] Regenerate Thumbnails now walks the media library by image ID instead of counting rows from the top on every batch, so a run no longer gets slower the further it goes — on large libraries the later batches are dramatically faster. Applies to both "Regenerate Now" and background regeneration
+* [fix] Regeneration batches are now ordered, so no image can be regenerated twice or skipped entirely because of the order the database happened to return rows in
+* [fix] Cancelling a background regeneration is now final — a batch that was already running could finish its images and write the progress counters back, leaving a cancelled run looking as though it had completed
+* [imp] Pro pricing now lists the CDN storage included with each plan
 
 = 6.6.0 - 2026-08-26 =
 * [fix] Bulk WebP/AVIF conversion could delete your original images on servers whose image library cannot write WebP or AVIF — the "unsupported format" rollback removed the source file instead of the failed output, while the screen reported those images as merely "Failed"
@@ -760,6 +817,9 @@ The plugin links to thumbpress.co for Pro upgrade information. No data is sent a
 View detailed Changelog from [👉 here](https://thumbpress.co/changelog/).
 
 == Upgrade Notice ==
+
+= 6.7 =
+ThumbPress 6.7 introduces ThumbPress CDN (Pro) — serve your media library from a global edge network with storage included in your Pro license — plus faster thumbnail regeneration on large libraries.
 
 = 6.0 =
 ThumbPress 6.0 includes a redesigned interface and two new modules — AVIF conversion and Duplicate Image Detection. Update recommended for all users.

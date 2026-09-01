@@ -38,6 +38,15 @@ class Init {
 	const HEALTH_NOTICE_DISMISSED_OPTION = 'thumbpress_health_notice_dismissed';
 
 	/**
+	 * Option recording that the "Meet ThumbPress CDN" announcement was dismissed.
+	 *
+	 * Absence of the option means "not yet seen", so the popup needs no server-side
+	 * arming and reaches sites that upgraded straight past the CDN release. Delete
+	 * the option to show it again.
+	 */
+	const CDN_ANNOUNCEMENT_DISMISSED_OPTION = 'thumbpress_cdn_announcement_dismissed';
+
+	/**
 	 * Add the promo offer OR the Media Health notice to the admin bar.
 	 *
 	 * The two are mutually exclusive and switch on the promo date gate: while the
@@ -490,6 +499,9 @@ class Init {
 				// its own deadline, so pricing/popup flip off in sync with PHP.
 				'promo_active'       => thumbpress_promo_active(),
 				'promo_end'          => thumbpress_promo_end_timestamp(), // UTC Unix seconds.
+				// One-time "Meet ThumbPress CDN" popup — shown until dismissed, so the
+				// absence of the dismissal flag is what makes it visible.
+				'show_cdn_announcement' => ! get_option( self::CDN_ANNOUNCEMENT_DISMISSED_OPTION, false ),
 				// BCP-47 locale tag for locale-aware number/size formatting in the SPA.
 				'locale'             => str_replace( '_', '-', get_locale() ),
 			)

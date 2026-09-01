@@ -189,6 +189,7 @@ class API {
 					update_option( 'thumbpress_regenerate_cancelled', true );
 					as_unschedule_all_actions( 'thumbpress_regenerate_all_image' );
 					delete_option( Thumbnails_Controller::OFFSET_OPTION );
+					delete_option( Thumbnails_Controller::LAST_ID_OPTION );
 					delete_option( 'thumbpress_regenerate_progress' );
 					delete_option( 'thumbpress_regenerate_total_processed' );
 					delete_option( 'thumbpress_regenerate_total_deleted' );
@@ -217,7 +218,7 @@ class API {
 					delete_option( 'thumbpress_convert_total_processd' );
 					delete_option( 'thumbpress_convert_total_converted' );
 					delete_option( 'thumbpress_convert_space_saved' );
-					delete_option( 'thumbpress_convert_total_image' );
+					delete_option( 'thumbpress_now_convert_total_image' );
 					delete_option( 'thumbpress_now_convert_background_total_images' );
 					return rest_ensure_response( array( 'success' => true ) );
 				},
@@ -395,6 +396,7 @@ class API {
 						'thumbpress_webp_view_state',
 						'thumbpress_avif_view_state',
 						'thumbpress_compress_view_state',
+						'thumbpress_cdn_announcement_dismissed',
 					] );
 					if ( ! in_array( $key, $allowed_keys, true ) ) {
 						return rest_ensure_response( array( 'value' => null ) );
@@ -422,6 +424,7 @@ class API {
 						'thumbpress_webp_view_state',
 						'thumbpress_avif_view_state',
 						'thumbpress_compress_view_state',
+						'thumbpress_cdn_announcement_dismissed',
 					] );
 					if ( ! in_array( $key, $allowed_keys, true ) ) {
 						return rest_ensure_response( array( 'success' => false ) );

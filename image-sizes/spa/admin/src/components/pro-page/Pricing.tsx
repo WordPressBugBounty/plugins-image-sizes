@@ -20,7 +20,7 @@ const Pricing = () => {
 			price: '$5',
 			totalPrice: '$59',
 			featured: false,
-			features: [__( '1 Site', 'image-sizes' ), __( '1 Year Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
+			sites: __( '1 Site', 'image-sizes' ), cdnStorage: '1 GB', support: __( '1 Year Support', 'image-sizes' ),
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=1'
 		},
 		{
@@ -28,7 +28,7 @@ const Pricing = () => {
 			price: '$10',
 			totalPrice: '$119',
 			featured: true,
-			features: [__( '5 Sites', 'image-sizes' ), __( '1 Year Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
+			sites: __( '5 Sites', 'image-sizes' ), cdnStorage: '5 GB', support: __( '1 Year Support', 'image-sizes' ),
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=2'
 		},
 		{
@@ -36,7 +36,7 @@ const Pricing = () => {
 			price: '$25',
 			totalPrice: '$299',
 			featured: false,
-			features: [__( 'Unlimited Sites', 'image-sizes' ), __( '1 Year Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
+			sites: __( 'Unlimited Sites', 'image-sizes' ), cdnStorage: '20 GB', support: __( '1 Year Support', 'image-sizes' ),
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=4'
 		},
 	];
@@ -46,21 +46,21 @@ const Pricing = () => {
 			name: __( 'Personal', 'image-sizes' ),
 			price: '$119',
 			featured: false,
-			features: [__( '1 Site', 'image-sizes' ), __( 'Lifetime Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
+			sites: __( '1 Site', 'image-sizes' ), cdnStorage: '1 GB', support: __( 'Lifetime Support', 'image-sizes' ),
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=5'
 		},
 		{
 			name: __( 'Professional', 'image-sizes' ),
 			price: '$239',
 			featured: false,
-			features: [__( '5 Sites', 'image-sizes' ), __( 'Lifetime Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
+			sites: __( '5 Sites', 'image-sizes' ), cdnStorage: '5 GB', support: __( 'Lifetime Support', 'image-sizes' ),
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=6'
 		},
 		{
 			name: __( 'Agency', 'image-sizes' ),
 			price: '$599',
 			featured: true,
-			features: [__( 'Unlimited Sites', 'image-sizes' ), __( 'Lifetime Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
+			sites: __( 'Unlimited Sites', 'image-sizes' ), cdnStorage: '20 GB', support: __( 'Lifetime Support', 'image-sizes' ),
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=8'
 		},
 	];
@@ -75,7 +75,7 @@ const Pricing = () => {
 			discount: sprintf( /* translators: %d is the discount percentage. */ __( '%d%% OFF', 'image-sizes' ), 30 ),
 			totalPrice: '$42',
 			featured: false,
-			features: [__( '1 Site', 'image-sizes' ), __( '1 Year Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
+			sites: __( '1 Site', 'image-sizes' ), cdnStorage: '1 GB', support: __( '1 Year Support', 'image-sizes' ),
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=1&discount=SUMMER30'
 		},
 		{
@@ -85,7 +85,7 @@ const Pricing = () => {
 			discount: sprintf( /* translators: %d is the discount percentage. */ __( '%d%% OFF', 'image-sizes' ), 30 ),
 			totalPrice: '$84',
 			featured: true,
-			features: [__( '5 Sites', 'image-sizes' ), __( '1 Year Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
+			sites: __( '5 Sites', 'image-sizes' ), cdnStorage: '5 GB', support: __( '1 Year Support', 'image-sizes' ),
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=2&discount=SUMMER30'
 		},
 		{
@@ -95,7 +95,7 @@ const Pricing = () => {
 			discount: sprintf( /* translators: %d is the discount percentage. */ __( '%d%% OFF', 'image-sizes' ), 30 ),
 			totalPrice: '$210',
 			featured: false,
-			features: [__( 'Unlimited Sites', 'image-sizes' ), __( '1 Year Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
+			sites: __( 'Unlimited Sites', 'image-sizes' ), cdnStorage: '20 GB', support: __( '1 Year Support', 'image-sizes' ),
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=4&discount=SUMMER30'
 		},
 	];
@@ -107,7 +107,7 @@ const Pricing = () => {
 			originalPrice: '$119',
 			discount: sprintf( /* translators: %d is the discount percentage. */ __( '%d%% OFF', 'image-sizes' ), 48 ),
 			featured: false,
-			features: [__( '1 Site', 'image-sizes' ), __( 'Lifetime Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
+			sites: __( '1 Site', 'image-sizes' ), cdnStorage: '1 GB', support: __( 'Lifetime Support', 'image-sizes' ),
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=5&discount=SUMMER48'
 		},
 		{
@@ -116,7 +116,7 @@ const Pricing = () => {
 			originalPrice: '$239',
 			discount: sprintf( /* translators: %d is the discount percentage. */ __( '%d%% OFF', 'image-sizes' ), 48 ),
 			featured: false,
-			features: [__( '5 Sites', 'image-sizes' ), __( 'Lifetime Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
+			sites: __( '5 Sites', 'image-sizes' ), cdnStorage: '5 GB', support: __( 'Lifetime Support', 'image-sizes' ),
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=6&discount=SUMMER48'
 		},
 		{
@@ -125,7 +125,7 @@ const Pricing = () => {
 			originalPrice: '$599',
 			discount: sprintf( /* translators: %d is the discount percentage. */ __( '%d%% OFF', 'image-sizes' ), 48 ),
 			featured: true,
-			features: [__( 'Unlimited Sites', 'image-sizes' ), __( 'Lifetime Support', 'image-sizes' ), __( 'All Features Included', 'image-sizes' )],
+			sites: __( 'Unlimited Sites', 'image-sizes' ), cdnStorage: '20 GB', support: __( 'Lifetime Support', 'image-sizes' ),
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=8&discount=SUMMER48'
 		},
 	];

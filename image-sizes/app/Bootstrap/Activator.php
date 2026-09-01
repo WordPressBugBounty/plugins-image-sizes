@@ -5,8 +5,34 @@ defined( 'ABSPATH' ) || exit;
 
 class Activator {
 
-	const REDIRECT_OPTION = 'thumbpress_activation_redirect';
-	const VERSION_OPTION     = 'thumbpress_redirect_version';
+	const REDIRECT_OPTION	= 'thumbpress_activation_redirect';
+	const VERSION_OPTION	= 'thumbpress_redirect_version';
+
+	/**
+	 * The release worth announcing — reaching it sends admins to the dashboard once.
+	 *
+	 * Deliberately NOT tied to THUMBPRESS_VERSION. That changes every release; this
+	 * changes only when a release is worth a redirect. A site qualifies when it
+	 * reaches this version *or anything above it*, whichever release it actually
+	 * lands on, so a site that sat on 6.6.0 and updated straight to 6.7.2 still
+	 * gets it. The value is then stamped into SIGNIFICANT_VERSION_OPTION.
+	 *
+	 * To announce a future release, bump this constant in that release's commit:
+	 * every site whose stamp is below the new value is redirected once more,
+	 * including sites already well past the previous mark. Leave it alone and no
+	 * update redirects anyone — that is what keeps #342 (redirect on every single
+	 * update) from coming back.
+	 */
+	const SIGNIFICANT_VERSION = '6.7.0';
+
+	/**
+	 * The SIGNIFICANT_VERSION this site has already been redirected for.
+	 *
+	 * Holds the constant, never THUMBPRESS_VERSION, so the comparison stays stable
+	 * across the patch releases that follow a significant one. Absent means the
+	 * site has never been redirected for any announcement.
+	 */
+	const SIGNIFICANT_VERSION_OPTION = 'thumbpress_significant_version';
 
 	/**
 	 * Static method for plugin activation tasks.
@@ -27,8 +53,42 @@ class Activator {
 			update_option( self::VERSION_OPTION, THUMBPRESS_VERSION );
 		}
 
+		self::maybe_arm_significant_redirect();
+
 		// Set a flag that indicates the plugin has been activated
 		update_option( 'thumbpress_activated', true );
+	}
+
+	/**
+	 * Arm the dashboard redirect once per significant release.
+	 *
+	 * Compared against the site's stamp rather than against the version it is
+	 * upgrading *from*, so it does not matter which release the site happens to
+	 * land on, nor whether it skipped the significant one entirely. The stamp is
+	 * written together with the flag, so this fires at most once per bump of
+	 * SIGNIFICANT_VERSION.
+	 *
+	 * Runs on every request rather than only inside the version-drift branch
+	 * above: that branch fires exactly once and cannot retry, so an upgrade
+	 * request that died before the flag was written would lose the redirect for
+	 * good. The flag itself is consumed by maybe_redirect() (loop-guarded).
+	 *
+	 * The CDN popup is NOT armed here — it shows until the user dismisses it, so
+	 * it needs no arming at all. See Init::CDN_ANNOUNCEMENT_DISMISSED_OPTION.
+	 */
+	private static function maybe_arm_significant_redirect() {
+		// Not there yet — the site is still below the announced release.
+		if ( version_compare( THUMBPRESS_VERSION, self::SIGNIFICANT_VERSION, '<' ) ) {
+			return;
+		}
+
+		// Already redirected for this announcement (empty stamp compares as lower).
+		if ( version_compare( get_option( self::SIGNIFICANT_VERSION_OPTION, '' ), self::SIGNIFICANT_VERSION, '>=' ) ) {
+			return;
+		}
+
+		update_option( self::SIGNIFICANT_VERSION_OPTION, self::SIGNIFICANT_VERSION );
+		update_option( self::REDIRECT_OPTION, true );
 	}
 
 	/**

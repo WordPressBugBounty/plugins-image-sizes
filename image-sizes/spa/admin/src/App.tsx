@@ -14,6 +14,7 @@ import ConvertToWebP from './pages/ConvertToWebP';
 import ConvertToAvif from './pages/ConvertToAvif';
 
 import TrashFiles from './pages/TrashFiles';
+import CDN from './pages/CDN';
 import Settings from './pages/Settings';
 import Pro from './pages/Pro';
 
@@ -27,6 +28,7 @@ interface NavItemData {
 	label: string;
 	icon: string;
 	pro?: boolean;
+	isNew?: boolean;
 }
 
 interface ThumbpressNavGlobal {
@@ -45,6 +47,7 @@ const componentMap: Record<string, React.ComponentType> = {
 	ConvertToWebP,
 	ConvertToAvif,
 	TrashFiles,
+	CDN,
 	Settings,
 	Pro,
 };
@@ -59,6 +62,7 @@ const defaultRoutes: RouteData[] = [
 	{ path: '/convert-to-webp', component: 'ConvertToWebP' },
 	{ path: '/convert-to-avif', component: 'ConvertToAvif' },
 	{ path: '/trashed-files', component: 'TrashFiles' },
+	{ path: '/cdn', component: 'CDN' },
 	{ path: '/settings', component: 'Settings' },
 	{ path: '/pro', component: 'Pro' },
 ];
@@ -72,6 +76,7 @@ const defaultNavItems: NavItemData[] = [
 	{ to: '/compress-images', label: 'Compress Images', icon: 'CompressImageIcon', pro: true },
 	{ to: '/convert-to-webp', label: 'Convert to WebP', icon: 'ConvertToWebPIcon' },
 	{ to: '/convert-to-avif', label: 'Convert to AVIF', icon: 'ConvertToAvifIcon', pro: true },
+	{ to: '/cdn', label: 'CDN', icon: 'CdnIcon', pro: true, isNew: true },
 	{ to: '/trashed-files', label: "Trashed Files", icon: 'TrashIcon', pro: true },
 	{ to: '/settings', label: 'Settings', icon: 'SettingsIcon' },
 	{ to: '/pro', label: 'Pro', icon: 'ProIcon' },

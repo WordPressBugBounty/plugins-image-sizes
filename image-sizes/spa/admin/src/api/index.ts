@@ -96,6 +96,7 @@ export interface RegenerateResponse {
 	success: boolean;
 	data?: {
 		offset: number;
+		last_id?: number;
 		progress: number;
 		thumbs_deleted: number;
 		thumbs_created: number;
@@ -112,12 +113,13 @@ export interface RegenerateResponse {
 	message?: string;
 }
 
-export function regenerateNow( offset: number, limit: number, thumbsDeleted: number, thumbsCreated: number, spaceSaved: number = 0, notFound: number = 0, processedCount: number = 0, failed: number = 0 ) {
+export function regenerateNow( offset: number, limit: number, thumbsDeleted: number, thumbsCreated: number, spaceSaved: number = 0, notFound: number = 0, processedCount: number = 0, failed: number = 0, lastId: number = 0 ) {
 	return apiFetch<RegenerateResponse>( {
 		url: `${ BASE_URL }/regenerate/now`,
 		method: 'POST',
 		data: {
 			offset,
+			last_id: lastId,
 			limit,
 			thumbs_deleteds: thumbsDeleted,
 			thumbs_createds: thumbsCreated,

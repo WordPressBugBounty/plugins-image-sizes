@@ -136,6 +136,28 @@ class Menu {
 			),
 		);
 
+		// CDN is pro-only. The free promo page owns #/cdn while pro is missing or
+		// unlicensed; once pro is active it registers the route itself, so the
+		// free submenu entry is dropped rather than pointing at a route the
+		// installed pro build may not have.
+		if ( ! apply_filters( 'thumbpress_is_pro_active', defined( 'THUMBPRESS_PRO_VERSION' ) ) ) {
+			$position = array_search( '#/trashed-files', array_column( $submenus, 'hash' ), true );
+			// "New" pill, same treatment as the Pro submenu label: WP prints submenu
+			// titles unescaped, so the badge travels with the label string.
+			$cdn_badge = '<span style="background: #FF3A52; color: #fff; font-size: 9px; font-weight: 600; line-height: 1; padding: 3px 6px; border-radius: 8px; margin-left: 6px; vertical-align: middle;">' . __( 'New', 'image-sizes' ) . '</span>';
+
+			$cdn_submenu = array(
+				'label' => __( 'CDN', 'image-sizes' ) . $cdn_badge,
+				'hash'  => '#/cdn',
+			);
+
+			if ( false !== $position ) {
+				array_splice( $submenus, $position, 0, array( $cdn_submenu ) );
+			} else {
+				$submenus[] = $cdn_submenu;
+			}
+		}
+
 		/**
 		 * Filter the admin submenus for ThumbPress.
 		 * Pro plugins can add their own submenu items here.
@@ -245,6 +267,25 @@ class Menu {
 			),
 		);
 
+		// CDN is pro-only. Pro registers its own /cdn item once the license is
+		// active, so the free promo item is added only while it is not.
+		if ( ! $pro_unlocked ) {
+			$cdn_item = array(
+				'to'    => '/cdn',
+				'label' => __( 'CDN', 'image-sizes' ),
+				'icon'  => 'CdnIcon',
+				'pro'   => true,
+				'isNew' => true,
+			);
+
+			$position = array_search( '/trashed-files', array_column( $items, 'to' ), true );
+			if ( false !== $position ) {
+				array_splice( $items, $position, 0, array( $cdn_item ) );
+			} else {
+				$items[] = $cdn_item;
+			}
+		}
+
 		return apply_filters( 'thumbpress_nav_items', $items );
 	}
 
@@ -304,6 +345,13 @@ class Menu {
 				'component' => 'Pro',
 			),
 		);
+
+		if ( ! apply_filters( 'thumbpress_is_pro_active', defined( 'THUMBPRESS_PRO_VERSION' ) ) ) {
+			$routes[] = array(
+				'path'      => '/cdn',
+				'component' => 'CDN',
+			);
+		}
 
 		return apply_filters( 'thumbpress_routes', $routes );
 	}

@@ -180,6 +180,7 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 		});
 
 		let offset = 0;
+		let lastId = 0;
 		let limit = chunkSize ? parseInt(chunkSize) : 20;
 		if (!limit || limit < 1) limit = 40;
 		let thumbsDeleted = 0;
@@ -203,6 +204,7 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 					notFound,
 					processedCount,
 					failed,
+					lastId,
 				);
 
 				if (generationRef.current !== myGen) return;
@@ -254,6 +256,7 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 				});
 
 				offset = currentOffset;
+				lastId = Number(data.last_id) || 0;
 				thumbsDeleted = Number(data.thumbs_deleted) || 0;
 				thumbsCreated = Number(data.thumbs_created) || 0;
 				spaceSaved = Number(data.space_saved) || 0;

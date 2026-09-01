@@ -42,7 +42,6 @@ import {
 import LockedFeatureCard from '../components/dashboard/LockedFeatureCard';
 import InfoCard from '../components/dashboard/InfoCard';
 import HealthScoreCard from '../components/dashboard/HealthScoreCard';
-import PromotionalNotice from '../components/dashboard/PromotionalNotice';
 import { numberFormat, formatBytes } from '../lib/i18n';
 
 function InfoCardSkeleton({ hasArrow = false }: { hasArrow?: boolean }) {
@@ -173,8 +172,6 @@ export default function Dashboard() {
 			<Header title={__('Dashboard', 'image-sizes')} />
 
 			<PluginPage>
-
-				<PromotionalNotice/>
 
 				{/* Top row: Health Score + stat cards */}
 				<div className="grid grid-cols-1 md:grid-cols-[1fr_auto] 2xl:gap-5 lg:gap-4 2xl:mb-5 lg:mb-4">
