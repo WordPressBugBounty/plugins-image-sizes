@@ -177,7 +177,13 @@ class Regenerate {
 		}
 
 		if ( $result['failed'] ) {
-			return $this->response_error( __( 'Thumbnails could not be regenerated for this image.', 'image-sizes' ) );
+			return $this->response_error(
+				array(
+					'message' => ! empty( $result['reason'] )
+						? $result['reason']
+						: __( 'Thumbnails could not be regenerated for this image.', 'image-sizes' ),
+				)
+			);
 		}
 
 		thumbpress_add_space_saved( $result['space_saved'] );

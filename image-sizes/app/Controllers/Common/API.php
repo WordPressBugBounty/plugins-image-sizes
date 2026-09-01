@@ -213,6 +213,7 @@ class API {
 					as_unschedule_all_actions( 'thumbpress_convert_all_image' );
 					delete_option( Convert_Webp_Controller::LAST_ID_OPTION );
 					delete_option( Convert_Webp_Controller::FORMATS_OPTION );
+					delete_option( Convert_Webp_Controller::INFLIGHT_OPTION );
 					delete_option( 'thumbpress_convert_progress' );
 					delete_option( 'thumbpress_convert_total_processed' );
 					delete_option( 'thumbpress_convert_total_processd' );

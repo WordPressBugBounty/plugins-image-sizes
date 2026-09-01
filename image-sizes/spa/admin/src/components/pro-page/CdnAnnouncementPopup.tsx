@@ -14,7 +14,7 @@ const BENEFITS = [
 	__( 'Images served from the edge location nearest each visitor, not from your server', 'image-sizes' ),
 	__( 'Faster page loads and better Core Web Vitals, everywhere in the world', 'image-sizes' ),
 	__( 'Image traffic moves off your host, so your server stays fast under load', 'image-sizes' ),
-	__( 'Up to 20GB of CDN storage in every Pro plan, at no extra cost', 'image-sizes' ),
+	__( 'Up to 100GB of CDN storage in every Pro plan, at no extra cost', 'image-sizes' ),
 ];
 
 /**

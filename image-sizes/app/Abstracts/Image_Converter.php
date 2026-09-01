@@ -247,7 +247,20 @@ abstract class Image_Converter {
 		// Skip if image too big to safely decode — width*height*4 bytes + overhead. Bailing before we
 		// touch disk avoids a mid-encode fatal that would leave a half-written file behind.
 		$dims = wp_getimagesize( $source );
-		if ( is_array( $dims ) ) {
+
+		// Only a GD decode lands in PHP's heap; Imagick holds the pixel buffer outside it.
+		$decodes_in_php = ! function_exists( '_wp_image_editor_choose' ) || is_a(
+			_wp_image_editor_choose(
+				array(
+					'mime_type'        => is_array( $dims ) ? $dims['mime'] : '',
+					'output_mime_type' => $mime,
+				)
+			),
+			'WP_Image_Editor_GD',
+			true
+		);
+
+		if ( is_array( $dims ) && $decodes_in_php ) {
 			$pixels       = (int) $dims[0] * (int) $dims[1];
 			$needed_bytes = $pixels * 4 * 2; // Decoded buffer + working copy.
 			$memory_limit = wp_convert_hr_to_bytes( ini_get( 'memory_limit' ) );
@@ -260,6 +273,29 @@ abstract class Image_Converter {
 						__( 'Image is too large to convert within the server memory limit (needs ~%1$d MB, limit %2$d MB). Increase PHP memory_limit or WP_MAX_MEMORY_LIMIT and try again.', 'image-sizes' ),
 						(int) ceil( $needed_bytes / MB_IN_BYTES ),
 						(int) ceil( $memory_limit / MB_IN_BYTES )
+					)
+				);
+			}
+		}
+
+		// AVIF costs seconds per megapixel, so a large image outlives a request the host will not extend.
+		if ( 'image/avif' === $mime && is_array( $dims ) ) {
+			$seconds = (int) ceil( ( (int) $dims[0] * (int) $dims[1] ) / 1000000 * (float) apply_filters( 'thumbpress_avif_seconds_per_megapixel', 3 ) );
+			$allowed = (int) ini_get( 'max_execution_time' );
+
+			if ( $allowed > 0 && $seconds > $allowed && function_exists( 'set_time_limit' ) ) {
+				set_time_limit( $seconds + 30 );
+				$allowed = (int) ini_get( 'max_execution_time' );
+			}
+
+			if ( $allowed > 0 && $seconds > $allowed ) {
+				return new \WP_Error(
+					'thumbpress_time_limit',
+					sprintf(
+						/* translators: 1: estimated seconds needed, 2: server max_execution_time in seconds */
+						__( 'Converting this image to AVIF needs about %1$d seconds but the server stops a request after %2$d. Increase max_execution_time, or convert it with a smaller image.', 'image-sizes' ),
+						$seconds,
+						$allowed
 					)
 				);
 			}

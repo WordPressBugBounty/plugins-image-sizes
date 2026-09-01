@@ -18,6 +18,16 @@ class Convert_Webp extends Image_Converter {
 	 */
 	const FORMATS_OPTION = 'thumbpress_convert_active_formats';
 
+	/**
+	 * Attachment the current batch is working on, so a run that kills the process can step past it.
+	 */
+	const INFLIGHT_OPTION = 'thumbpress_convert_inflight';
+
+	/**
+	 * Seconds a batch may spend before yielding, half of Action Scheduler's 30s default.
+	 */
+	const BATCH_TIME_BUDGET = 15;
+
 	protected function get_config() {
 		return array(
 			'format'              => 'webp',
@@ -133,6 +143,7 @@ class Convert_Webp extends Image_Converter {
 		if ( empty( $attachments ) ) {
 			update_option( 'thumbpress_convert_progress', 100 );
 			update_option( 'thumbpress_convert_last_completed_time', wp_date( 'U' ) );
+			delete_option( self::INFLIGHT_OPTION );
 			$this->clear_webp_caches();
 			return;
 		}
@@ -143,14 +154,33 @@ class Convert_Webp extends Image_Converter {
 		$batch_converted = 0;
 		$new_last_id     = $last_id;
 		$url_rewrites    = array();
+		$done            = 0;
+		$started         = microtime( true );
+		$inflight        = (int) get_option( self::INFLIGHT_OPTION, 0 );
+		$prev_not_found  = (int) get_option( 'thumbpress_webp_total_not_found', 0 );
+		$prev_failed     = (int) get_option( 'thumbpress_convert_total_failed', 0 );
 
 		foreach ( $attachments as $attachment ) {
 			$img_id      = (int) $attachment->ID;
 			$new_last_id = $img_id;
+
+			// A marker left from the previous run means this image killed it — count it failed and move past.
+			if ( $inflight && $img_id === $inflight ) {
+				$inflight = 0;
+				$batch_failed++;
+				++$done;
+				$this->persist( $processed_count + $done, $converted_count + $batch_converted, $space_saved, $prev_not_found + $batch_not_found, $prev_failed + $batch_failed, $new_last_id, $total_attachments );
+				continue;
+			}
+
+			update_option( self::INFLIGHT_OPTION, $img_id );
+			++$done;
+
 			$main_img    = get_attached_file( $img_id );
 
 			if ( ! $main_img || ! file_exists( $main_img ) ) {
 				$batch_not_found++;
+				$this->persist( $processed_count + $done, $converted_count + $batch_converted, $space_saved, $prev_not_found + $batch_not_found, $prev_failed + $batch_failed, $new_last_id, $total_attachments );
 				continue;
 			}
 
@@ -160,6 +190,7 @@ class Convert_Webp extends Image_Converter {
 
 			if ( ! file_exists( $main_img ) ) {
 				$batch_not_found++;
+				$this->persist( $processed_count + $done, $converted_count + $batch_converted, $space_saved, $prev_not_found + $batch_not_found, $prev_failed + $batch_failed, $new_last_id, $total_attachments );
 				continue;
 			}
 
@@ -183,6 +214,7 @@ class Convert_Webp extends Image_Converter {
 				// Genuine conversion failure (unsupported/decode/memory) — tracked separately
 				// from missing source files so the UI can show a distinct "Failed" count.
 				$batch_failed++;
+				$this->persist( $processed_count + $done, $converted_count + $batch_converted, $space_saved, $prev_not_found + $batch_not_found, $prev_failed + $batch_failed, $new_last_id, $total_attachments );
 				continue;
 			}
 
@@ -197,6 +229,7 @@ class Convert_Webp extends Image_Converter {
 					wp_delete_file( $webp_file_path );
 				}
 				$batch_failed++;
+				$this->persist( $processed_count + $done, $converted_count + $batch_converted, $space_saved, $prev_not_found + $batch_not_found, $prev_failed + $batch_failed, $new_last_id, $total_attachments );
 				continue;
 			}
 
@@ -259,6 +292,11 @@ class Convert_Webp extends Image_Converter {
 			$space_saved += max( 0, $old_size - $new_size );
 			$batch_saved += max( 0, $old_size - $new_size );
 			$batch_converted++;
+			$this->persist( $processed_count + $done, $converted_count + $batch_converted, $space_saved, $prev_not_found + $batch_not_found, $prev_failed + $batch_failed, $new_last_id, $total_attachments );
+
+			if ( microtime( true ) - $started >= self::BATCH_TIME_BUDGET ) {
+				break;
+			}
 		}
 
 		// One rewrite pass for the whole batch (3 table scans) instead of 3 per image.
@@ -268,22 +306,8 @@ class Convert_Webp extends Image_Converter {
 
 		thumbpress_add_space_saved( $batch_saved );
 
-		$prev_not_found = (int) get_option( 'thumbpress_webp_total_not_found', 0 );
-		update_option( 'thumbpress_webp_total_not_found', $prev_not_found + $batch_not_found );
-		$prev_failed = (int) get_option( 'thumbpress_convert_total_failed', 0 );
-		update_option( 'thumbpress_convert_total_failed', $prev_failed + $batch_failed );
-
-		$processed_count += count( $attachments );
+		$processed_count += $done;
 		$is_complete      = ( $processed_count >= $total_attachments );
-		$progress         = $total_attachments > 0 ? ( $processed_count / $total_attachments ) * 100 : 100;
-		$progress         = $is_complete ? 100 : min( 99, floor( $progress ) );
-
-		update_option( 'thumbpress_convert_progress', $progress );
-		// The last row actually converted, never the page end — a resume must not skip work.
-		update_option( self::LAST_ID_OPTION, $new_last_id );
-		update_option( 'thumbpress_convert_total_processed', $processed_count );
-		update_option( 'thumbpress_convert_total_converted', $converted_count + $batch_converted );
-		update_option( 'thumbpress_convert_space_saved', $space_saved );
 
 		if ( ! $is_complete ) {
 			if ( ! get_option( 'thumbpress_webp_cancelled', false ) ) {
@@ -299,7 +323,33 @@ class Convert_Webp extends Image_Converter {
 		} else {
 			update_option( 'thumbpress_convert_progress', 100 );
 			update_option( 'thumbpress_convert_last_completed_time', wp_date( 'U' ) );
+			delete_option( self::INFLIGHT_OPTION );
 			$this->clear_webp_caches();
 		}
+	}
+
+	/**
+	 * Write the run cursor and counters so a killed batch still advances.
+	 *
+	 * @param int $processed Cumulative processed count.
+	 * @param int $converted Cumulative converted count.
+	 * @param int $space     Cumulative bytes saved.
+	 * @param int $not_found Cumulative missing-file count.
+	 * @param int $failed    Cumulative failed count.
+	 * @param int $last_id   ID of the last attachment visited.
+	 * @param int $total     Total images in the run.
+	 */
+	private function persist( $processed, $converted, $space, $not_found, $failed, $last_id, $total ) {
+		$progress = $total > 0 ? ( $processed / $total ) * 100 : 100;
+
+		delete_option( self::INFLIGHT_OPTION );
+		update_option( 'thumbpress_convert_progress', $processed >= $total ? 100 : min( 99, floor( $progress ) ) );
+		// The last row actually converted, never the page end — a resume must not skip work.
+		update_option( self::LAST_ID_OPTION, $last_id );
+		update_option( 'thumbpress_convert_total_processed', $processed );
+		update_option( 'thumbpress_convert_total_converted', $converted );
+		update_option( 'thumbpress_convert_space_saved', $space );
+		update_option( 'thumbpress_webp_total_not_found', $not_found );
+		update_option( 'thumbpress_convert_total_failed', $failed );
 	}
 }

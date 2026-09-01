@@ -150,6 +150,24 @@ class Thumbnails {
 		if ( $original && file_exists( $original ) ) {
 			$main_img = $original;
 		}
+		// A decode too big for the machine kills the process outright, so refuse it as a failure instead.
+		$dims = wp_getimagesize( $main_img );
+		if ( is_array( $dims ) ) {
+			$needed = (int) $dims[0] * (int) $dims[1] * 4 * 2; // Decoded buffer + working copy.
+			$budget = $this->memory_budget( $dims['mime'], $needed );
+
+			if ( $budget > 0 && $needed > $budget ) {
+				$result['failed'] = true;
+				$result['reason'] = sprintf(
+					/* translators: 1: estimated memory needed in MB, 2: memory the server has left in MB */
+					__( 'This image is too large to regenerate with the memory the server has left: it needs about %1$d MB and only %2$d MB is available. Raise PHP memory_limit or free up server memory, then try again.', 'image-sizes' ),
+					(int) ceil( $needed / MB_IN_BYTES ),
+					(int) ceil( $budget / MB_IN_BYTES )
+				);
+				return $result;
+			}
+		}
+
 		$old_metadata = wp_get_attachment_metadata( $image_id );
 		$thumb_dir    = dirname( $attached_file ) . DIRECTORY_SEPARATOR;
 
@@ -239,6 +257,48 @@ class Thumbnails {
 		$result['thumbs_created'] = count( $created_files );
 
 		return $result;
+	}
+
+	/**
+	 * Memory a decode may actually claim, in bytes; 0 where no ceiling can be determined.
+	 *
+	 * @param string $mime   Source mime type.
+	 * @param int    $needed Estimated bytes the decode needs.
+	 * @return int
+	 */
+	private function memory_budget( $mime, $needed ) {
+		$bounds = array();
+
+		// Only a GD decode lands in PHP's heap; Imagick holds the pixel buffer outside it.
+		$decodes_in_php = ! function_exists( '_wp_image_editor_choose' ) || is_a( _wp_image_editor_choose( array( 'mime_type' => $mime ) ), 'WP_Image_Editor_GD', true );
+		$memory_limit   = $decodes_in_php ? wp_convert_hr_to_bytes( ini_get( 'memory_limit' ) ) : 0;
+
+		if ( $memory_limit > 0 ) {
+			$bounds[] = $memory_limit - memory_get_usage( true );
+		}
+
+		// Half of it, because the rest of the site keeps running and reported free memory counts reclaimable cache.
+		$available_ram = $this->available_ram();
+		if ( $available_ram > 0 ) {
+			$bounds[] = intdiv( $available_ram, 2 );
+		}
+
+		return (int) apply_filters( 'thumbpress_regenerate_memory_budget', $bounds ? min( $bounds ) : 0, $needed );
+	}
+
+	/**
+	 * Free system memory in bytes, 0 where the platform does not report it.
+	 *
+	 * @return int
+	 */
+	private function available_ram() {
+		if ( ! is_readable( '/proc/meminfo' ) ) {
+			return 0;
+		}
+
+		$meminfo = file_get_contents( '/proc/meminfo' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- local pseudo-file, not a remote request.
+
+		return preg_match( '/^MemAvailable:\s+(\d+) kB/m', (string) $meminfo, $matches ) ? (int) $matches[1] * KB_IN_BYTES : 0;
 	}
 
 	/**

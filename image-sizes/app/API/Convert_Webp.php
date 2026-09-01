@@ -344,6 +344,7 @@ class Convert_Webp {
 		as_unschedule_all_actions( 'thumbpress_convert_all_image' );
 		delete_option( 'thumbpress_webp_cancelled' );
 		delete_option( Convert_Webp_Controller::LAST_ID_OPTION );
+		delete_option( Convert_Webp_Controller::INFLIGHT_OPTION );
 
 		$action_id = as_schedule_single_action(
 			wp_date( 'U' ) - 10,
