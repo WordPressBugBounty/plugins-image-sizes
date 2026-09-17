@@ -4,7 +4,7 @@ Tags: image optimization, compress images, thumbnail manager, WebP converter, im
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 6.7.0.3
+Stable tag: 6.8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -319,6 +319,15 @@ ThumbPress may connect to the WordPress.org API (api.wordpress.org) to check for
 The plugin links to thumbpress.co for Pro upgrade information. No data is sent automatically; links only open when the user clicks them.
 
 == Changelog ==
+
+= 6.8.0 - 2026-09-17 =
+* [new] Scanning your media library is now something you start, not something the plugin decides to do for you. Duplicate and large-image counts show a "Run scan" button until you run one; the scan works through your library in the background, shows its progress, and can be cancelled at any time
+* [new] Counts are kept in a dedicated index from then on, so the scan is a one-time pass — new uploads, conversions, deletions and thumbnail regeneration keep the figures current on their own, with no second scan to run
+* [perf] Duplicate, large-image and thumbnail counts are read from that index instead of scanning the media library. On a library of 600,000 images the dashboard now answers in under a second, where the duplicate count alone previously took more than half a minute of database work
+* [fix] The plugin no longer starts heavy background work by itself. Image hashing used to begin on its own after an update and keep queueing new batches for hours, and the duplicate count could run on every admin page — several copies at once — which on very large libraries pushed database CPU to the ceiling
+* [fix] Adding, deleting or converting a single image no longer triggers a rebuild of every library-wide figure; only that image's entry is updated
+* [imp] Figures nobody has measured yet read "Not scanned yet" instead of reporting zero, on the dashboard cards and in Quick Facts alike
+* [fix] A foreground "Regenerate Now" run no longer ends early because one chunk ran long — chunks are bounded by time and retried, so the run continues instead of stopping partway
 
 = 6.7.0 - 2026-09-01 =
 * [new] ThumbPress CDN (Pro): a new CDN screen and CDN settings tab. Serve your images from a global edge network — new uploads offloaded automatically, local copies optionally removed to free disk space, responsive `srcset` and WooCommerce product, variation and gallery images rewritten to CDN URLs, and an automatic fallback to your own server if the CDN is ever unreachable. The free plugin shows the screen and settings; offloading requires ThumbPress Pro

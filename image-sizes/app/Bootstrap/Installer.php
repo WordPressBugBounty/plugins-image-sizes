@@ -3,7 +3,7 @@ namespace Codexpert\ThumbPress\Bootstrap;
 
 defined( 'ABSPATH' ) || exit;
 
-use Codexpert\ThumbPress\Models\Database;
+use Codexpert\ThumbPress\Models\Hash_Index;
 
 class Installer {
 
@@ -14,6 +14,7 @@ class Installer {
 		$installer = new self();
 
 		if ( ! $installer->is_database_up_to_date() ) {
+			Hash_Index::install();
 			$installer->update_db_version();
 		}
 	}

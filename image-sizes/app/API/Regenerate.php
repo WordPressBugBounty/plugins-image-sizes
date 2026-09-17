@@ -12,6 +12,11 @@ class Regenerate {
 	use Rest;
 	use Cache;
 
+	/**
+	 * Seconds a foreground chunk may spend, well under the proxy timeouts that cut these requests off.
+	 */
+	const REQUEST_TIME_BUDGET = 20;
+
 	public function regen_now( $request ) {
 		global $wpdb;
 
@@ -27,7 +32,6 @@ class Regenerate {
 		$last_id              = absint( $request->get_param( 'last_id' ) );
 		$total_images         = (int) $wpdb->get_var( "SELECT COUNT(*) FROM `$wpdb->posts` WHERE `post_type` = 'attachment' AND `post_mime_type` LIKE 'image/%' AND `post_status` != 'trash'" );
 		$images               = $wpdb->get_results( $wpdb->prepare( "SELECT `ID` FROM `$wpdb->posts` WHERE `post_type` = 'attachment' AND `post_mime_type` LIKE 'image/%' AND `post_status` != 'trash' AND `ID` > %d ORDER BY `ID` ASC LIMIT %d", $last_id, $limit ) );
-		$next_offset          = $offset + count( $images );
 		$thumbs_created       = $thumbs_deleted = 0;
 		$space_saved          = absint( $request->get_param( 'space_saved' ) );
 
@@ -48,10 +52,19 @@ class Regenerate {
 		$failed          = 0;
 		$processed_count = 0;
 		$new_last_id     = $last_id;
+		$done            = 0;
+		$started         = microtime( true );
+		$budget          = (float) apply_filters( 'thumbpress_regenerate_request_budget', self::REQUEST_TIME_BUDGET );
 
 		foreach ( $images as $image ) {
+			// Checked before the cursor advances, so a chunk cut short never claims an image it did not reach.
+			if ( $done && microtime( true ) - $started >= $budget ) {
+				break;
+			}
+
 			// Advance before the orphan skip below, or a missing file is re-selected by every chunk.
 			$new_last_id = (int) $image->ID;
+			++$done;
 
 			$file = get_attached_file( $image->ID );
 			if ( ! $file || ! file_exists( $file ) ) {
@@ -75,6 +88,7 @@ class Regenerate {
 
 		thumbpress_add_space_saved( $chunk_saved );
 
+		$next_offset           = $offset + $done;
 		$total_deleted         = $deleted + $thumbs_deleted;
 		$total_created         = $created + $thumbs_created;
 		$total_not_found       = $not_found_prev + $not_found;

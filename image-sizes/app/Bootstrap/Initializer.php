@@ -11,7 +11,7 @@ class Initializer {
 	const CONTROLLERS = array(
 		'Admin'  => array( 'Init', 'Menu' ),
 		'Front'  => array( 'Image_Download_Disable', 'Lazy_Load' ),
-		'Common' => array( 'API', 'Auto_Featured_Image', 'Convert_Avif', 'Convert_Webp', 'Hotlink_Protection', 'Image_Max_Size', 'Init', 'Media_Buttons', 'Social_Share', 'Thumbnails' ),
+		'Common' => array( 'API', 'Auto_Featured_Image', 'Convert_Avif', 'Convert_Webp', 'Hash_Index', 'Hotlink_Protection', 'Image_Max_Size', 'Init', 'Media_Buttons', 'Social_Share', 'Thumbnails' ),
 	);
 
 	/**

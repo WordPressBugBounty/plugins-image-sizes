@@ -2237,6 +2237,9 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .disabled\:pointer-events-none:disabled {
 	pointer-events: none;
 }
+#image-sizes_render .disabled\:cursor-default:disabled {
+	cursor: default;
+}
 #image-sizes_render .disabled\:cursor-not-allowed:disabled {
 	cursor: not-allowed;
 }

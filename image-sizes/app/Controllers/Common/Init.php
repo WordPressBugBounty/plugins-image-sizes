@@ -5,6 +5,7 @@ defined( 'ABSPATH' ) || exit;
 
 use Codexpert\ThumbPress\API\Dashboard;
 use Codexpert\ThumbPress\Helpers\Utility;
+use Codexpert\ThumbPress\Models\Hash_Index;
 use Codexpert\ThumbPress\Traits\Hook;
 use Codexpert\ThumbPress\Traits\Asset;
 use Codexpert\ThumbPress\Traits\Cache;
@@ -23,12 +24,12 @@ class Init {
 	/**
 	 * Images hashed per batch.
 	 */
-	const BATCH_SIZE = 500;
+	const BATCH_SIZE = 5000;
 
 	/**
 	 * Seconds between batches — long enough for the Action Scheduler ajax chain to drain.
 	 */
-	const BATCH_DELAY = 60;
+	const BATCH_DELAY = 5;
 
 	/**
 	 * Seconds a batch may spend hashing — half of Action Scheduler's 30s budget.
@@ -36,24 +37,31 @@ class Init {
 	const BATCH_TIME_BUDGET = 15;
 
 	/**
+	 * Set before the queue is cleared so an executing batch stops re-scheduling.
+	 */
+	const CANCEL_OPTION = 'thumbpress_scan_cancelled';
+
+	/**
+	 * Whether file-meta cache invalidation is held back for the duration of a batch.
+	 *
+	 * @var bool
+	 */
+	private static $suspend_file_meta_cache_clear = false;
+
+	/**
 	 * Constructor to add all hooks.
 	 */
 	public function __construct() {
 		$this->action( 'admin_footer', array( $this, 'modal' ) );
 		$this->action( 'admin_enqueue_scripts', array( $this, 'add_assets' ) );
-		$this->action( 'admin_init', array( $this, 'schedule_hash_generation' ) );
-		$this->action( 'admin_init', array( $this, 'schedule_initial_stat_cache_build' ) );
 		$this->action( 'add_attachment', array( $this, 'hash_on_upload' ) );
 		$this->action( 'add_attachment', array( $this, 'clear_media_cache' ) );
-		$this->action( 'add_attachment', array( $this, 'schedule_stat_cache_refresh' ), 20 );
 		$this->action( 'delete_attachment', array( $this, 'clear_media_cache' ) );
-		$this->action( 'delete_attachment', array( $this, 'schedule_stat_cache_refresh' ), 20 );
 		$this->action( 'thumbpress_thumbnail_sizes_saved', array( $this, 'clear_media_cache' ) );
 		$this->action( 'thumbpress_generate_image_hashes', array( $this, 'generate_hashes_batch' ) );
 		$this->action( 'thumbpress_build_stat_cache', array( $this, 'build_stat_cache' ) );
 		$this->action( 'thumbpress_file_meta_refreshed', array( $this, 'clear_file_meta_caches' ) );
 		$this->action( 'thumbpress_media_changed', array( $this, 'clear_media_cache' ) );
-		$this->action( 'thumbpress_media_changed', array( $this, 'schedule_stat_cache_refresh' ) );
 	}
 
 	public function modal() {
@@ -90,43 +98,6 @@ class Init {
 	}
 
 	/**
-	 * Ensure every existing image gets a content hash.
-	 *
-	 * Re-arms the backfill whenever images are still missing the hash/size meta
-	 * and no batch is queued — self-healing when a previous run never finished
-	 * (Action Scheduler queue cleared, cron never fired, or a fatal mid-batch).
-	 * The old one-shot `thumbpress_hashes_scheduled` gate could strand images
-	 * permanently unhashed; unhashed images are excluded from the hash GROUP BY,
-	 * so a stalled backfill silently hides genuine duplicates (#427).
-	 */
-	public function schedule_hash_generation() {
-		if ( (int) get_option( 'thumbpress_hashes_backfill_version' ) >= self::BACKFILL_VERSION ) {
-			return;
-		}
-
-		// Action Scheduler drains its queue over admin-ajax, which fires admin_init — never re-arm from there (#463).
-		if ( wp_doing_ajax() ) {
-			return;
-		}
-
-		if ( ! function_exists( 'as_has_scheduled_action' ) || ! function_exists( 'as_schedule_single_action' ) ) {
-			return;
-		}
-
-		if ( as_has_scheduled_action( 'thumbpress_generate_image_hashes' ) ) {
-			return;
-		}
-
-		if ( ! $this->has_unhashed_images() ) {
-			$this->mark_backfill_complete();
-			return;
-		}
-
-		as_schedule_single_action( wp_date( 'U' ) + self::BATCH_DELAY, 'thumbpress_generate_image_hashes', array( 'offset' => 0 ) );
-		update_option( 'thumbpress_hashes_scheduled', true );
-	}
-
-	/**
 	 * Seconds this batch may spend hashing.
 	 */
 	protected function batch_time_budget() {
@@ -141,72 +112,11 @@ class Init {
 		update_option( 'thumbpress_hashes_backfill_version', self::BACKFILL_VERSION );
 	}
 
-	/**
-	 * Whether any non-trashed image attachment is still missing the hash or size meta.
-	 */
-	private function has_unhashed_images() {
-		global $wpdb;
-
-		$id = $wpdb->get_var(
-			$wpdb->prepare(
-				"SELECT p.ID
-			 FROM {$wpdb->posts} p
-			 LEFT JOIN {$wpdb->postmeta} pm_hash ON p.ID = pm_hash.post_id AND pm_hash.meta_key = %s
-			 LEFT JOIN {$wpdb->postmeta} pm_size ON p.ID = pm_size.post_id AND pm_size.meta_key = %s
-			 WHERE p.post_type = 'attachment'
-			 AND p.post_mime_type LIKE %s
-			 AND p.post_status != 'trash'
-			 AND ( pm_hash.post_id IS NULL OR pm_size.post_id IS NULL )
-			 LIMIT 1",
-				Utility::HASH_META_KEY,
-				Utility::SIZE_META_KEY,
-				'image/%'
-			)
-		);
-
-		return ! empty( $id );
-	}
-
-	/**
-	 * One-time initial build of dashboard stat caches after hashes are ready.
-	 */
-	public function schedule_initial_stat_cache_build() {
-		if ( get_option( 'thumbpress_stats_prewarmed' ) ) {
-			return;
-		}
-
-		if ( ! get_option( 'thumbpress_hashes_generated' ) ) {
-			return;
-		}
-
-		if ( ! function_exists( 'as_has_scheduled_action' ) || ! function_exists( 'as_schedule_single_action' ) ) {
-			return;
-		}
-
-		if ( as_has_scheduled_action( 'thumbpress_build_stat_cache' ) ) {
-			return;
-		}
-
-		as_schedule_single_action( wp_date( 'U' ) - 10, 'thumbpress_build_stat_cache' );
-		update_option( 'thumbpress_stats_prewarmed', true );
-	}
-
-	/**
-	 * Schedule an immediate stat cache rebuild after media is added or deleted.
-	 */
-	public function schedule_stat_cache_refresh() {
-		if ( ! function_exists( 'as_has_scheduled_action' ) || ! function_exists( 'as_schedule_single_action' ) ) {
-			return;
-		}
-
-		if ( as_has_scheduled_action( 'thumbpress_build_stat_cache' ) ) {
-			return;
-		}
-
-		as_schedule_single_action( wp_date( 'U' ) - 10, 'thumbpress_build_stat_cache' );
-	}
-
 	public function clear_file_meta_caches( $attachment_id = null ) {
+		if ( self::$suspend_file_meta_cache_clear ) {
+			return;
+		}
+
 		$this->delete_cache( 'stat_duplicates' );
 		$this->delete_cache( 'stat_large_images' );
 	}
@@ -271,21 +181,20 @@ class Init {
 		$limit  = self::BATCH_SIZE;
 		$offset = absint( $offset );
 
+		if ( get_option( self::CANCEL_OPTION, false ) ) {
+			return;
+		}
+
 		$ids = $wpdb->get_col(
 			$wpdb->prepare(
 				"SELECT p.ID
 			 FROM {$wpdb->posts} p
-			 LEFT JOIN {$wpdb->postmeta} pm_hash ON p.ID = pm_hash.post_id AND pm_hash.meta_key = %s
-			 LEFT JOIN {$wpdb->postmeta} pm_size ON p.ID = pm_size.post_id AND pm_size.meta_key = %s
 			 WHERE p.post_type = 'attachment'
 			 AND p.post_mime_type LIKE %s
 			 AND p.post_status != 'trash'
 			 AND p.ID > %d
-			 AND (pm_hash.post_id IS NULL OR pm_size.post_id IS NULL)
 			 ORDER BY p.ID ASC
 			 LIMIT %d",
-				Utility::HASH_META_KEY,
-				Utility::SIZE_META_KEY,
 				'image/%',
 				$offset,
 				$limit
@@ -293,19 +202,39 @@ class Init {
 		);
 
 		if ( empty( $ids ) ) {
-			$this->mark_backfill_complete();
-			$this->delete_cache( 'stat_duplicates' );
+			$this->complete_scan();
 			return;
 		}
+
+		// One query for the batch's meta, so an already-hashed image costs a lookup, not a read.
+		update_meta_cache( 'post', $ids );
 
 		$deadline  = microtime( true ) + $this->batch_time_budget();
 		$last      = $offset;
 		$processed = 0;
+		$rows      = array();
+
+		// Per image this drops the duplicate cache once per row, so the count is never warm.
+		self::$suspend_file_meta_cache_clear = true;
 
 		foreach ( $ids as $id ) {
-			Utility::refresh_file_meta( $id );
-			$last = (int) $id;
+			$id   = (int) $id;
+			$hash = get_post_meta( $id, Utility::HASH_META_KEY, true );
+			$size = get_post_meta( $id, Utility::SIZE_META_KEY, true );
+
+			// Never hashed: read the file once, the expensive case the time budget bounds.
+			if ( empty( $hash ) || '' === $size ) {
+				Utility::refresh_file_meta( $id );
+				$hash = get_post_meta( $id, Utility::HASH_META_KEY, true );
+				$size = get_post_meta( $id, Utility::SIZE_META_KEY, true );
+			}
+
+			$last = $id;
 			++$processed;
+
+			if ( ! empty( $hash ) ) {
+				$rows[] = array( $id, $hash, (int) $size, Hash_Index::count_sizes( wp_get_attachment_metadata( $id ) ) );
+			}
 
 			// Checked after the first image, so a batch always advances the watermark.
 			if ( microtime( true ) >= $deadline ) {
@@ -313,12 +242,39 @@ class Init {
 			}
 		}
 
+		self::$suspend_file_meta_cache_clear = false;
+
+		// One statement for the batch; per image it was four round trips.
+		Hash_Index::bulk_put( $rows );
+
+		update_option( 'thumbpress_scan_processed', (int) get_option( 'thumbpress_scan_processed', 0 ) + $processed );
+
 		if ( $processed < count( $ids ) || count( $ids ) >= $limit ) {
-			as_schedule_single_action( wp_date( 'U' ) + self::BATCH_DELAY, 'thumbpress_generate_image_hashes', array( 'offset' => $last ) );
+			if ( ! get_option( self::CANCEL_OPTION, false ) ) {
+				as_schedule_single_action( wp_date( 'U' ) + self::BATCH_DELAY, 'thumbpress_generate_image_hashes', array( 'offset' => $last ) );
+			}
 			return;
 		}
 
+		$this->complete_scan();
+	}
+
+	/**
+	 * Flag the walk as finished: the meta is complete and the index may be read.
+	 */
+	private function complete_scan() {
 		$this->mark_backfill_complete();
-		$this->delete_cache( 'stat_duplicates' );
+
+		// The final empty batch adds nothing, so the bar would stop one batch short.
+		update_option( 'thumbpress_scan_processed', (int) get_option( 'thumbpress_scan_total', 0 ) );
+
+		// The only GROUP BY left: once per library, in the background, on our own table.
+		Hash_Index::rebuild_groups();
+		Hash_Index::mark_ready();
+
+		update_option( 'thumbpress_scan_completed_at', wp_date( 'U' ) );
+		delete_option( self::CANCEL_OPTION );
+
+		$this->clear_file_meta_caches();
 	}
 }

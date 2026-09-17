@@ -183,6 +183,7 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 		let lastId = 0;
 		let limit = chunkSize ? parseInt(chunkSize) : 20;
 		if (!limit || limit < 1) limit = 40;
+		const requestedLimit = limit;
 		let thumbsDeleted = 0;
 		let thumbsCreated = 0;
 		let spaceSaved = 0;
@@ -190,6 +191,7 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 		let failed = 0;
 		let processedCount = 0;
 		let firstChunk = true;
+		let retries = 0;
 
 		const processChunk = async () => {
 			if (generationRef.current !== myGen) return;
@@ -255,6 +257,8 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 					failed: Number(data.failed) || 0,
 				});
 
+				retries = 0;
+				limit = Math.min(requestedLimit, limit * 2);
 				offset = currentOffset;
 				lastId = Number(data.last_id) || 0;
 				thumbsDeleted = Number(data.thumbs_deleted) || 0;
@@ -271,8 +275,19 @@ export default function RegenerateThumbnails({ tooltip }: { tooltip?: string } =
 					refreshStats();
 				}
 			} catch (err) {
-				setRegenerating(false);
+				if (generationRef.current !== myGen) return;
 				console.error('Regenerate chunk failed:', err);
+
+				// A 524 is the proxy giving up, not the origin: retry the same cursor, asking for
+				// less work each time so the request lands inside whatever window the proxy allows.
+				if (retries < 3) {
+					retries++;
+					limit = Math.max(1, Math.floor(limit / 2));
+					setTimeout(processChunk, 2000 * retries);
+					return;
+				}
+
+				setRegenerating(false);
 			}
 		};
 

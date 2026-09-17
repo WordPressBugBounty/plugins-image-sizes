@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { __, sprintf } from '@wordpress/i18n';
 import { useNavigate } from 'react-router-dom';
 import { applyFilters } from '@wordpress/hooks';
+import { toast } from 'sonner';
 import {
 	FileImage,
 	Download,
@@ -29,10 +30,13 @@ import {
 
 import Header from '../components/layout/Header';
 import PluginPage from '../components/layout/PluginPage';
+import ScanPanel from '../components/dashboard/ScanPanel';
 import {
 	getDashboardCountsStats,
 	getDashboardOptimizationStats,
 	getDashboardAnalysisStats,
+	startScan,
+	type ScanProgress,
 	type DashboardCountsStats,
 	type DashboardOptimizationStats,
 	type DashboardAnalysisStats,
@@ -115,7 +119,30 @@ export default function Dashboard() {
 	const [countsLoading, setCountsLoading] = useState(true);
 	const [optimizationLoading, setOptimizationLoading] = useState(true);
 	const [analysisLoading, setAnalysisLoading] = useState(true);
+	const [scanState, setScanState] = useState<ScanProgress | null>(null);
 	const navigate = useNavigate();
+
+	// Starting from a card hands over to the panel at the top, which owns the polling.
+	const requestScan = async () => {
+		try {
+			const res: any = await startScan();
+			if (res?.data) setScanState(res.data);
+			window.dispatchEvent(new CustomEvent('thumbpress:scan-started'));
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		} catch {
+			toast.error(__('Could not start the scan.', 'image-sizes'));
+		}
+	};
+
+	const refreshAnalysis = async () => {
+		setAnalysisLoading(true);
+		try {
+			const res: any = await getDashboardAnalysisStats();
+			if (res?.data) setAnalysisStats(res.data);
+		} finally {
+			setAnalysisLoading(false);
+		}
+	};
 
 	useEffect(() => {
 		(async () => {
@@ -153,12 +180,16 @@ export default function Dashboard() {
 		);
 	}
 
-	const mergedStats: DashboardStats = {
+	const scanning = !!scanState?.is_running;
+
+	const mergedStats: DashboardStats & { scan_running: boolean } = {
+		scan_running: scanning,
 		...countsStats,
 		total_thumbnails: optimizationStats?.total_thumbnails ?? 0,
 		unoptimized_images: optimizationStats?.unoptimized_images ?? 0,
 		compressed: optimizationStats?.compressed ?? 0,
 		not_compressed: optimizationStats?.not_compressed ?? 0,
+		scanned: analysisStats?.scanned ?? false,
 		large_images: analysisStats?.large_images ?? 0,
 		duplicate_images: analysisStats?.duplicate_images ?? 0,
 		unused_images: analysisStats?.unused_images ?? 0,
@@ -172,6 +203,7 @@ export default function Dashboard() {
 			<Header title={__('Dashboard', 'image-sizes')} />
 
 			<PluginPage>
+				<ScanPanel onComplete={refreshAnalysis} onState={setScanState} />
 
 				{/* Top row: Health Score + stat cards */}
 				<div className="grid grid-cols-1 md:grid-cols-[1fr_auto] 2xl:gap-5 lg:gap-4 2xl:mb-5 lg:mb-4">
@@ -222,7 +254,7 @@ export default function Dashboard() {
 					{/* ANALYSIS */}
 					{analysisLoading ? <InfoCardSkeleton hasArrow /> : applyFilters(
 						'thumbpress_dashboard_card_large',
-						<LockedFeatureCard icon={<LargeImagesIcon />} title={__('Large Images', 'image-sizes')} description={__('Images (over 1 MB)', 'image-sizes')} value={numberFormat(mergedStats.large_images)} actionLabel={__('Upgrade to Compress', 'image-sizes')} />,
+						<LockedFeatureCard icon={<LargeImagesIcon />} title={__('Large Images', 'image-sizes')} description={__('Images (over 1 MB)', 'image-sizes')} value={numberFormat(mergedStats.large_images)} actionLabel={__('Upgrade to Compress', 'image-sizes')} needsScan={!mergedStats.scanned} scanning={scanning} onScan={requestScan} />,
 						mergedStats, navigate,
 					) as React.ReactNode}
 
@@ -243,7 +275,7 @@ export default function Dashboard() {
 					{/* ANALYSIS */}
 					{analysisLoading ? <InfoCardSkeleton hasArrow /> : applyFilters(
 						'thumbpress_dashboard_card_duplicate',
-						<LockedFeatureCard icon={<DuplicateImagesIcon />} title={__('Duplicate Images', 'image-sizes')} description={__('Duplicate images found', 'image-sizes')} value={numberFormat(mergedStats.duplicate_images)} actionLabel={__('Upgrade to Merge', 'image-sizes')} />,
+						<LockedFeatureCard icon={<DuplicateImagesIcon />} title={__('Duplicate Images', 'image-sizes')} description={__('Duplicate images found', 'image-sizes')} value={numberFormat(mergedStats.duplicate_images)} actionLabel={__('Upgrade to Merge', 'image-sizes')} needsScan={!mergedStats.scanned} scanning={scanning} onScan={requestScan} />,
 						mergedStats, navigate,
 					) as React.ReactNode}
 

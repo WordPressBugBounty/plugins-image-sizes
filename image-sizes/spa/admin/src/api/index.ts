@@ -42,6 +42,7 @@ export interface DashboardOptimizationStats {
 }
 
 export interface DashboardAnalysisStats {
+	scanned: boolean;
 	large_images: number;
 	duplicate_images: number;
 	unused_images: number;
@@ -170,6 +171,36 @@ export function cancelRegenerate() {
 export function cancelConvert() {
 	return apiFetch<{ success: boolean }>( {
 		url: `${ BASE_URL }/convert/cancel`,
+		method: 'POST',
+	} );
+}
+
+export interface ScanProgress {
+	is_running: boolean;
+	is_ready: boolean;
+	total: number;
+	processed: number;
+	percent: number;
+	indexed: number;
+	completed_at: number;
+}
+
+export function startScan() {
+	return apiFetch< { success: boolean; data: ScanProgress } >( {
+		url: `${ BASE_URL }/scan/start`,
+		method: 'POST',
+	} );
+}
+
+export function getScanProgress() {
+	return apiFetch< { success: boolean; data: ScanProgress } >( {
+		url: `${ BASE_URL }/scan/progress`,
+	} );
+}
+
+export function cancelScan() {
+	return apiFetch< { success: boolean; data: ScanProgress } >( {
+		url: `${ BASE_URL }/scan/cancel`,
 		method: 'POST',
 	} );
 }

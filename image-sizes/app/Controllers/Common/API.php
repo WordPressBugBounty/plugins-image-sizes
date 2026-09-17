@@ -10,6 +10,7 @@ use Codexpert\ThumbPress\API\Convert_Webp;
 use Codexpert\ThumbPress\API\Convert_Avif;
 use Codexpert\ThumbPress\API\Settings;
 use Codexpert\ThumbPress\API\Dashboard;
+use Codexpert\ThumbPress\API\Scan;
 use Codexpert\ThumbPress\Controllers\Common\Thumbnails as Thumbnails_Controller;
 use Codexpert\ThumbPress\Controllers\Common\Convert_Webp as Convert_Webp_Controller;
 use Codexpert\ThumbPress\ThumbPress;
@@ -322,6 +323,39 @@ class API {
 						'type'        => 'integer',
 					),
 				),
+				'permission_callback' => array( $this, 'is_admin' ),
+			)
+		);
+
+		/**
+		 * Library scan APIs — started only by an explicit request.
+		 */
+		register_rest_route(
+			$this->namespace,
+			'/scan/start',
+			array(
+				'methods'             => WP_REST_Server::CREATABLE,
+				'callback'            => array( new Scan(), 'start' ),
+				'permission_callback' => array( $this, 'is_admin' ),
+			)
+		);
+
+		register_rest_route(
+			$this->namespace,
+			'/scan/progress',
+			array(
+				'methods'             => WP_REST_Server::READABLE,
+				'callback'            => array( new Scan(), 'progress' ),
+				'permission_callback' => array( $this, 'is_admin' ),
+			)
+		);
+
+		register_rest_route(
+			$this->namespace,
+			'/scan/cancel',
+			array(
+				'methods'             => WP_REST_Server::CREATABLE,
+				'callback'            => array( new Scan(), 'cancel' ),
 				'permission_callback' => array( $this, 'is_admin' ),
 			)
 		);

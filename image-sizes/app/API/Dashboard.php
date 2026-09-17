@@ -4,6 +4,7 @@ namespace Codexpert\ThumbPress\API;
 defined( 'ABSPATH' ) || exit;
 
 use Codexpert\ThumbPress\Helpers\Utility;
+use Codexpert\ThumbPress\Models\Hash_Index;
 use Codexpert\ThumbPress\Traits\Rest;
 use Codexpert\ThumbPress\Traits\Cache;
 
@@ -93,6 +94,7 @@ class Dashboard {
 		$stats['quick_facts']  = $this->build_quick_facts( $stats );
 
 		return $this->response_success( array(
+			'scanned'          => Hash_Index::is_ready(),
 			'large_images'     => $stats['large_images'],
 			'duplicate_images' => $stats['duplicate_images'],
 			'unused_images'    => $stats['unused_images'],
@@ -106,10 +108,13 @@ class Dashboard {
 	 * Recompute and cache all dashboard stats (called by Action Scheduler).
 	 */
 	public function build_cache() {
-		$this->compute_stats();
+		$this->compute_stats( true );
 	}
 
-	private function compute_stats() {
+	/**
+	 * @param bool $compute Whether the caller may run the stats that are too heavy for a request.
+	 */
+	private function compute_stats( $compute = false ) {
 		$total_images   = $this->get_total_images();
 		$sizes_data     = $this->get_sizes_data();
 		$unoptimized    = $this->get_unoptimized_count();
@@ -117,7 +122,7 @@ class Dashboard {
 		$not_compressed = $this->get_not_compressed();
 		$not_webp       = $this->get_not_webp();
 		$not_avif       = $this->get_not_avif();
-		$duplicates     = $this->get_duplicate_count();
+		$duplicates     = $this->get_duplicate_count( $compute );
 		$thumbnails     = $this->count_total_thumbnails();
 		$large_images   = $this->count_large_images();
 
@@ -136,6 +141,7 @@ class Dashboard {
 			'large_images'       => $large_images,
 			'lazy_load'          => (bool) get_option( 'thumbpress_lazy_load', 0 ),
 			'duplicate_images'   => $duplicates,
+			'scanned'            => Hash_Index::is_ready(),
 			'pro_active'         => apply_filters( 'thumbpress_is_pro_active', defined( 'THUMBPRESS_PRO_VERSION' ) ),
 		);
 
@@ -334,10 +340,40 @@ class Dashboard {
 		return $value;
 	}
 
-	private function get_duplicate_count() {
+	/**
+	 * Duplicate-image count.
+	 *
+	 * @param bool $compute Whether this caller may run the query.
+	 * @return int
+	 */
+	private function get_duplicate_count( $compute = false ) {
+		// An index read needs no cache, no lock and no background job.
+		if ( Hash_Index::is_ready() ) {
+			return Hash_Index::duplicate_count();
+		}
+
 		$cached = $this->get_cache( 'stat_duplicates' );
 		if ( false !== $cached ) {
 			return $cached;
+		}
+
+		if ( ! apply_filters( 'thumbpress_count_duplicates', true ) ) {
+			return 0;
+		}
+
+		// Grouping on the hash meta under-counts until the backfill has hashed every image.
+		if ( ! get_option( 'thumbpress_hashes_generated' ) ) {
+			return 0;
+		}
+
+		// Grouping every hash filesorts the whole meta table, so no web request runs it.
+		if ( ! $compute ) {
+			$this->schedule_stat_cache_build();
+			return 0;
+		}
+
+		if ( ! $this->claim_stat_lock( 'stat_duplicates' ) ) {
+			return 0;
 		}
 
 		global $wpdb;
@@ -366,7 +402,58 @@ class Dashboard {
 		);
 
 		$this->set_cache( 'stat_duplicates', $value, 6 * HOUR_IN_SECONDS, true );
+		$this->release_stat_lock( 'stat_duplicates' );
+
 		return $value;
+	}
+
+	/**
+	 * Queue a background rebuild so a stat the request path refuses to compute fills itself in.
+	 */
+	private function schedule_stat_cache_build() {
+		if ( ! function_exists( 'as_has_scheduled_action' ) || ! function_exists( 'as_schedule_single_action' ) ) {
+			return;
+		}
+
+		if ( as_has_scheduled_action( 'thumbpress_build_stat_cache' ) ) {
+			return;
+		}
+
+		as_schedule_single_action( wp_date( 'U' ) - 10, 'thumbpress_build_stat_cache' );
+	}
+
+	/**
+	 * Claim the single-flight lock for an expensive stat.
+	 *
+	 * @param string $key Stat cache key.
+	 * @param int    $ttl Seconds after which an abandoned lock may be taken over.
+	 * @return bool Whether this caller may run the query.
+	 */
+	private function claim_stat_lock( $key, $ttl = 600 ) {
+		$option = $this->key_prefix . 'lock_' . $key;
+		$now    = time();
+
+		// add_option() fails on the option_name unique key, so exactly one caller wins.
+		if ( add_option( $option, $now, '', 'no' ) ) {
+			return true;
+		}
+
+		if ( (int) get_option( $option ) + $ttl > $now ) {
+			return false;
+		}
+
+		delete_option( $option );
+
+		return (bool) add_option( $option, $now, '', 'no' );
+	}
+
+	/**
+	 * Release the single-flight lock for a stat.
+	 *
+	 * @param string $key Stat cache key.
+	 */
+	private function release_stat_lock( $key ) {
+		delete_option( $this->key_prefix . 'lock_' . $key );
 	}
 
 	/**
@@ -389,8 +476,9 @@ class Dashboard {
 					: __( 'All Images Compressed', 'image-sizes' ),
 			),
 			array(
-				'ok'     => $large_images === 0,
-				'weight' => 25,
+				'ok'         => $large_images === 0,
+				'needs_scan' => true,
+				'weight'     => 25,
 				'text'   => $large_images > 0
 					? sprintf( __( '%s Images (Over 1 MB)', 'image-sizes' ), number_format_i18n( $large_images ) )
 				    : __( 'No Images Over 1 MB', 'image-sizes' ),
@@ -403,8 +491,9 @@ class Dashboard {
 				    : __( 'All Images in WebP or AVIF Format', 'image-sizes' ),
 			),
 			array(
-				'ok'     => $duplicates === 0,
-				'weight' => 10,
+				'ok'         => $duplicates === 0,
+				'needs_scan' => true,
+				'weight'     => 10,
 				'text'   => $duplicates > 0
 					? sprintf( __( '%s Duplicate Images Found', 'image-sizes' ), number_format_i18n( $duplicates ) )
 				    : __( 'No Duplicate Images Found', 'image-sizes' ),
@@ -441,6 +530,10 @@ class Dashboard {
 	 * Count images with file size over 1 MB.
 	 */
 	private function count_large_images() {
+		if ( Hash_Index::is_ready() ) {
+			return Hash_Index::large_count( 1024 );
+		}
+
 		return $this->remember( 'stat_large_images', 6 * HOUR_IN_SECONDS, function () {
 			global $wpdb;
 
@@ -463,6 +556,10 @@ class Dashboard {
 	 * Count total generated thumbnails across all images.
 	 */
 	private function count_total_thumbnails() {
+		if ( Hash_Index::is_ready() ) {
+			return Hash_Index::thumbnail_count();
+		}
+
 		return $this->remember( 'stat_total_thumbnails', 6 * HOUR_IN_SECONDS, array( $this, 'compute_total_thumbnails' ) );
 	}
 
