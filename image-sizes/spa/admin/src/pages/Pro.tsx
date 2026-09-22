@@ -1,5 +1,6 @@
 import React from 'react';
 import { __ } from '@wordpress/i18n';
+import { useSearchParams } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import PluginPage from '../components/layout/PluginPage';
 
@@ -13,6 +14,10 @@ import FAQ from '../components/pro-page/FAQ';
 import CTA from '../components/pro-page/CTA';
 
 export default function Pro() {
+	// Which screen sent the visitor, e.g. #/pro?src=compression-check, carried through to checkout.
+	const [ searchParams ] = useSearchParams();
+	const source = searchParams.get( 'src' ) ?? '';
+
 	return (
 		<>
 			<Header title={__( 'Pro', 'image-sizes' )} />
@@ -23,7 +28,7 @@ export default function Pro() {
 					<Features />
 					<Comparison />
 					<Testimonials />
-					<Pricing />
+					<Pricing source={ source } />
 					<FAQ />
 					<CTA />
 				</div>

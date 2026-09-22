@@ -39,6 +39,63 @@ export interface DashboardOptimizationStats {
 	unoptimized_images: number;
 	compressed: number;
 	not_compressed: number;
+	compression_check?: CompressionCheckResult | null;
+}
+
+export interface CompressionCheckResult {
+	saved_bytes: number;
+	saved_pct: number;
+	library_bytes: number;
+	image_count: number;
+	unmeasured: number;
+	samples_tested: number;
+	samples_planned: number;
+	level: number;
+	quality: number;
+	approximate: boolean;
+	worth: boolean;
+	groups: Record< string, { images: number; bytes: number; samples: number; ratio: number } >;
+	measured_at: number;
+}
+
+export interface CompressionCheckSample {
+	id: number;
+	name: string;
+	before: number;
+	after: number;
+	saved_pct: number;
+	before_url: string;
+	after_url: string;
+}
+
+export interface CompressionCheckStep {
+	index: number;
+	done: boolean;
+	sample: CompressionCheckSample | null;
+	samples?: CompressionCheckSample[];
+	result?: CompressionCheckResult;
+}
+
+export function startCompressionCheck() {
+	return apiFetch< { success: boolean; data: { token: string; planned: number } } >( {
+		url: `${ BASE_URL }/compression-check/start`,
+		method: 'POST',
+	} );
+}
+
+export function stepCompressionCheck( token: string, index: number ) {
+	return apiFetch< { success: boolean; data: CompressionCheckStep } >( {
+		url: `${ BASE_URL }/compression-check/step`,
+		method: 'POST',
+		data: { token, index },
+	} );
+}
+
+export function discardCompressionCheck() {
+	return apiFetch< { success: boolean } >( {
+		url: `${ BASE_URL }/compression-check/discard`,
+		method: 'POST',
+	} );
 }
 
 export interface DashboardAnalysisStats {

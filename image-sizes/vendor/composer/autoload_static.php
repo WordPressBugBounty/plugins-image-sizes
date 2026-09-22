@@ -34,6 +34,7 @@ class ComposerStaticInitd5395a936ea7b3fa018c8b97f69f4af0
         'Codexpert\\Plugin\\Setup' => __DIR__ . '/..' . '/codexpert/plugin/src/Setup.php',
         'Codexpert\\Plugin\\Table' => __DIR__ . '/..' . '/codexpert/plugin/src/Table.php',
         'Codexpert\\Plugin\\Widget' => __DIR__ . '/..' . '/codexpert/plugin/src/Widget.php',
+        'Codexpert\\ThumbPress\\API\\Compression_Check' => __DIR__ . '/../..' . '/app/API/Compression_Check.php',
         'Codexpert\\ThumbPress\\API\\Convert_Avif' => __DIR__ . '/../..' . '/app/API/Convert_Avif.php',
         'Codexpert\\ThumbPress\\API\\Convert_Webp' => __DIR__ . '/../..' . '/app/API/Convert_Webp.php',
         'Codexpert\\ThumbPress\\API\\Dashboard' => __DIR__ . '/../..' . '/app/API/Dashboard.php',

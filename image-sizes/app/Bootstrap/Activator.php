@@ -23,7 +23,7 @@ class Activator {
 	 * update redirects anyone — that is what keeps #342 (redirect on every single
 	 * update) from coming back.
 	 */
-	const SIGNIFICANT_VERSION = '6.7.0';
+	const SIGNIFICANT_VERSION = '6.8.1';
 
 	/**
 	 * The SIGNIFICANT_VERSION this site has already been redirected for.

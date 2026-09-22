@@ -3,7 +3,25 @@ import { __, sprintf } from '@wordpress/i18n';
 import { cn } from '../../lib/utils';
 import PricingCard from './components/PricingCard';
 
-const Pricing = () => {
+/**
+ * Tag a checkout URL with the in-plugin screen that sent the buyer, so a purchase
+ * can be traced to it. Untagged when no source is known; existing params are kept.
+ */
+export function withSource< T extends { url: string } >( plan: T, source: string ): T {
+	if ( ! /^[a-z0-9-]{1,40}$/.test( source ) ) {
+		return plan;
+	}
+
+	const url = new URL( plan.url );
+	url.searchParams.set( 'utm_source', 'thumbpress-free' );
+	url.searchParams.set( 'utm_medium', 'plugin' );
+	url.searchParams.set( 'utm_campaign', 'in-plugin' );
+	url.searchParams.set( 'utm_content', source );
+
+	return { ...plan, url: url.toString() };
+}
+
+const Pricing = ( { source = '' }: { source?: string } ) => {
 	const [billingCycle, setBillingCycle] = useState<'yearly' | 'lifetime'>(
 		'yearly',
 	);
@@ -16,51 +34,48 @@ const Pricing = () => {
 	// Regular (non-promo) figures — the permanent pricing once the campaign ends.
 	const regularPlansYearly = [
 		{
-			name: __( 'Personal', 'image-sizes' ),
-			price: '$5',
-			totalPrice: '$59',
+			name: __('Personal', 'image-sizes'),
+			price: '$59',
 			featured: false,
-			sites: __( '1 Site', 'image-sizes' ), cdnStorage: '10 GB', support: __( '1 Year Support', 'image-sizes' ),
+			sites: __('1 Site', 'image-sizes'), cdnStorage: '10 GB', support: __('1 Year Support', 'image-sizes'),
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=1'
 		},
 		{
-			name: __( 'Professional', 'image-sizes' ),
-			price: '$10',
-			totalPrice: '$119',
+			name: __('Professional', 'image-sizes'),
+			price: '$119',
 			featured: true,
-			sites: __( '5 Sites', 'image-sizes' ), cdnStorage: '50 GB', support: __( '1 Year Support', 'image-sizes' ),
+			sites: __('5 Sites', 'image-sizes'), cdnStorage: '50 GB', support: __('1 Year Support', 'image-sizes'),
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=2'
 		},
 		{
-			name: __( 'Agency', 'image-sizes' ),
-			price: '$25',
-			totalPrice: '$299',
+			name: __('Agency', 'image-sizes'),
+			price: '$299',
 			featured: false,
-			sites: __( 'Unlimited Sites', 'image-sizes' ), cdnStorage: '100 GB', support: __( '1 Year Support', 'image-sizes' ),
+			sites: __('Unlimited Sites', 'image-sizes'), cdnStorage: '100 GB', support: __('1 Year Support', 'image-sizes'),
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=4'
 		},
 	];
 
 	const regularPlansLifetime = [
 		{
-			name: __( 'Personal', 'image-sizes' ),
+			name: __('Personal', 'image-sizes'),
 			price: '$119',
 			featured: false,
-			sites: __( '1 Site', 'image-sizes' ), cdnStorage: '10 GB', support: __( 'Lifetime Support', 'image-sizes' ),
+			sites: __('1 Site', 'image-sizes'), cdnStorage: '10 GB', support: __('Lifetime Support', 'image-sizes'),
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=5'
 		},
 		{
-			name: __( 'Professional', 'image-sizes' ),
+			name: __('Professional', 'image-sizes'),
 			price: '$239',
 			featured: false,
-			sites: __( '5 Sites', 'image-sizes' ), cdnStorage: '50 GB', support: __( 'Lifetime Support', 'image-sizes' ),
+			sites: __('5 Sites', 'image-sizes'), cdnStorage: '50 GB', support: __('Lifetime Support', 'image-sizes'),
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=6'
 		},
 		{
-			name: __( 'Agency', 'image-sizes' ),
+			name: __('Agency', 'image-sizes'),
 			price: '$599',
 			featured: true,
-			sites: __( 'Unlimited Sites', 'image-sizes' ), cdnStorage: '100 GB', support: __( 'Lifetime Support', 'image-sizes' ),
+			sites: __('Unlimited Sites', 'image-sizes'), cdnStorage: '100 GB', support: __('Lifetime Support', 'image-sizes'),
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=8'
 		},
 	];
@@ -69,63 +84,63 @@ const Pricing = () => {
 	// discount badge and coupon-bearing checkout URLs.
 	const promoPlansYearly = [
 		{
-			name: __( 'Personal', 'image-sizes' ),
+			name: __('Personal', 'image-sizes'),
 			price: '$3.50',
 			originalPrice: '$5',
-			discount: sprintf( /* translators: %d is the discount percentage. */ __( '%d%% OFF', 'image-sizes' ), 30 ),
+			discount: sprintf( /* translators: %d is the discount percentage. */ __('%d%% OFF', 'image-sizes'), 30),
 			totalPrice: '$42',
 			featured: false,
-			sites: __( '1 Site', 'image-sizes' ), cdnStorage: '10 GB', support: __( '1 Year Support', 'image-sizes' ),
+			sites: __('1 Site', 'image-sizes'), cdnStorage: '10 GB', support: __('1 Year Support', 'image-sizes'),
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=1&discount=SUMMER30'
 		},
 		{
-			name: __( 'Professional', 'image-sizes' ),
+			name: __('Professional', 'image-sizes'),
 			price: '$7',
 			originalPrice: '$10',
-			discount: sprintf( /* translators: %d is the discount percentage. */ __( '%d%% OFF', 'image-sizes' ), 30 ),
+			discount: sprintf( /* translators: %d is the discount percentage. */ __('%d%% OFF', 'image-sizes'), 30),
 			totalPrice: '$84',
 			featured: true,
-			sites: __( '5 Sites', 'image-sizes' ), cdnStorage: '50 GB', support: __( '1 Year Support', 'image-sizes' ),
+			sites: __('5 Sites', 'image-sizes'), cdnStorage: '50 GB', support: __('1 Year Support', 'image-sizes'),
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=2&discount=SUMMER30'
 		},
 		{
-			name: __( 'Agency', 'image-sizes' ),
+			name: __('Agency', 'image-sizes'),
 			price: '$17.50',
 			originalPrice: '$25',
-			discount: sprintf( /* translators: %d is the discount percentage. */ __( '%d%% OFF', 'image-sizes' ), 30 ),
+			discount: sprintf( /* translators: %d is the discount percentage. */ __('%d%% OFF', 'image-sizes'), 30),
 			totalPrice: '$210',
 			featured: false,
-			sites: __( 'Unlimited Sites', 'image-sizes' ), cdnStorage: '100 GB', support: __( '1 Year Support', 'image-sizes' ),
+			sites: __('Unlimited Sites', 'image-sizes'), cdnStorage: '100 GB', support: __('1 Year Support', 'image-sizes'),
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=4&discount=SUMMER30'
 		},
 	];
 
 	const promoPlansLifetime = [
 		{
-			name: __( 'Personal', 'image-sizes' ),
+			name: __('Personal', 'image-sizes'),
 			price: '$62',
 			originalPrice: '$119',
-			discount: sprintf( /* translators: %d is the discount percentage. */ __( '%d%% OFF', 'image-sizes' ), 48 ),
+			discount: sprintf( /* translators: %d is the discount percentage. */ __('%d%% OFF', 'image-sizes'), 48),
 			featured: false,
-			sites: __( '1 Site', 'image-sizes' ), cdnStorage: '10 GB', support: __( 'Lifetime Support', 'image-sizes' ),
+			sites: __('1 Site', 'image-sizes'), cdnStorage: '10 GB', support: __('Lifetime Support', 'image-sizes'),
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=5&discount=SUMMER48'
 		},
 		{
-			name: __( 'Professional', 'image-sizes' ),
+			name: __('Professional', 'image-sizes'),
 			price: '$125',
 			originalPrice: '$239',
-			discount: sprintf( /* translators: %d is the discount percentage. */ __( '%d%% OFF', 'image-sizes' ), 48 ),
+			discount: sprintf( /* translators: %d is the discount percentage. */ __('%d%% OFF', 'image-sizes'), 48),
 			featured: false,
-			sites: __( '5 Sites', 'image-sizes' ), cdnStorage: '50 GB', support: __( 'Lifetime Support', 'image-sizes' ),
+			sites: __('5 Sites', 'image-sizes'), cdnStorage: '50 GB', support: __('Lifetime Support', 'image-sizes'),
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=6&discount=SUMMER48'
 		},
 		{
-			name: __( 'Agency', 'image-sizes' ),
+			name: __('Agency', 'image-sizes'),
 			price: '$312',
 			originalPrice: '$599',
-			discount: sprintf( /* translators: %d is the discount percentage. */ __( '%d%% OFF', 'image-sizes' ), 48 ),
+			discount: sprintf( /* translators: %d is the discount percentage. */ __('%d%% OFF', 'image-sizes'), 48),
 			featured: true,
-			sites: __( 'Unlimited Sites', 'image-sizes' ), cdnStorage: '100 GB', support: __( 'Lifetime Support', 'image-sizes' ),
+			sites: __('Unlimited Sites', 'image-sizes'), cdnStorage: '100 GB', support: __('Lifetime Support', 'image-sizes'),
 			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=8&discount=SUMMER48'
 		},
 	];
@@ -137,10 +152,10 @@ const Pricing = () => {
 		<div className="px-[80px] py-16" id='thumbpress-pro-pricing'>
 			<div className="text-center mb-10">
 				<h2 className="2xl:text-[32px] lg:text-[28px] font-semibold text-thumbpress-title mb-2 max-w-[600px] mx-auto leading-[1.4]">
-					{__( 'ThumbPress Pro Pricing', 'image-sizes' )}
+					{__('ThumbPress Pro Pricing', 'image-sizes')}
 				</h2>
 				<p className="text-base text-thumbpress-body max-w-[484px] mx-auto">
-					{__( 'Every plan includes the full set of Pro features. Just pick how many sites you need to cover.', 'image-sizes' )}
+					{__('Every plan includes the full set of Pro features. Just pick how many sites you need to cover.', 'image-sizes')}
 				</p>
 			</div>
 
@@ -150,7 +165,7 @@ const Pricing = () => {
 					onClick={() => setBillingCycle('yearly')}
 					className={`text-base text-thumbpress-title font-medium cursor-pointer`}
 				>
-					{__( 'Yearly', 'image-sizes' )}
+					{__('Yearly', 'image-sizes')}
 				</button>
 
 				<button
@@ -171,7 +186,7 @@ const Pricing = () => {
 					onClick={() => setBillingCycle('lifetime')}
 					className={`text-base text-thumbpress-title font-medium cursor-pointer`}
 				>
-					{__( 'Lifetime', 'image-sizes' )}
+					{__('Lifetime', 'image-sizes')}
 				</button>
 			</div>
 
@@ -179,12 +194,12 @@ const Pricing = () => {
 			<div className="grid grid-cols-3 2xl:gap-6 lg:gap-4 max-w-[1200px] mx-auto">
 				{billingCycle === 'yearly' &&
 					pricingPlansYearly.map((plan, index) => (
-						<PricingCard key={index} duration="Yearly" plan={plan} />
+						<PricingCard key={index} duration="Yearly" plan={withSource(plan, source)} />
 					))}
 
 				{billingCycle === 'lifetime' &&
 					pricingPlansLifetime.map((plan, index) => (
-						<PricingCard key={index} duration="Lifetime" plan={plan} />
+						<PricingCard key={index} duration="Lifetime" plan={withSource(plan, source)} />
 					))}
 			</div>
 
@@ -204,7 +219,7 @@ const Pricing = () => {
 					</svg>
 
 					<span className="text-thumbpress-title text-base font-medium max-w-[165px]">
-						{__( '30-day money back guarantee', 'image-sizes' )}
+						{__('30-day money back guarantee', 'image-sizes')}
 					</span>
 				</div>
 
@@ -225,7 +240,7 @@ const Pricing = () => {
 					</svg>
 
 					<span className="text-thumbpress-title text-base font-medium max-w-[249px]">
-						{__( 'Access future features for the subscription period', 'image-sizes' )}
+						{__('Access future features for the subscription period', 'image-sizes')}
 					</span>
 				</div>
 			</div>

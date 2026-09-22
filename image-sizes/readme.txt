@@ -4,7 +4,7 @@ Tags: image optimization, compress images, thumbnail manager, WebP converter, im
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 6.8.0
+Stable tag: 6.8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -319,6 +319,10 @@ ThumbPress may connect to the WordPress.org API (api.wordpress.org) to check for
 The plugin links to thumbpress.co for Pro upgrade information. No data is sent automatically; links only open when the user clicks them.
 
 == Changelog ==
+
+= 6.8.1 - 2026-09-22 =
+* [new] "Check my images" on the dashboard shows how much space compression would free on your own images.
+* [imp] The Media Health score in the admin bar now waits for your library scan.
 
 = 6.8.0 - 2026-09-17 =
 * [new] Scanning your media library is now something you start, not something the plugin decides to do for you. Duplicate and large-image counts show a "Run scan" button until you run one; the scan works through your library in the background, shows its progress, and can be cancelled at any time

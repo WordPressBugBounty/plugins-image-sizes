@@ -4,6 +4,9 @@ namespace Codexpert\ThumbPress\Controllers\Admin;
 defined( 'ABSPATH' ) || exit;
 
 use Codexpert\ThumbPress\API\Dashboard;
+use Codexpert\ThumbPress\API\Scan;
+use Codexpert\ThumbPress\Controllers\Common\Init as Common_Init;
+use Codexpert\ThumbPress\Models\Hash_Index;
 use Codexpert\ThumbPress\Traits\Hook;
 use Codexpert\ThumbPress\Traits\Asset;
 
@@ -159,6 +162,45 @@ class Init {
 	}
 
 	/**
+	 * Memo for scan_state(), per instance so each request (and test) reads it afresh.
+	 *
+	 * @var array|null
+	 */
+	private $scan_state = null;
+
+	/**
+	 * Where the library scan stands, so the notice never shows a score nobody measured.
+	 *
+	 * A scanned site pays one option read. An unscanned one reads the scan options
+	 * and asks Action Scheduler only when they say a scan is in flight, so an
+	 * abandoned run cannot show "Scanning…" forever.
+	 *
+	 * @return array{state:string,percent:int} State is `ready`, `scanning` or `unscanned`.
+	 */
+	protected function scan_state() {
+		if ( null !== $this->scan_state ) {
+			return $this->scan_state;
+		}
+
+		if ( Hash_Index::is_ready() ) {
+			return $this->scan_state = array( 'state' => 'ready', 'percent' => 100 );
+		}
+
+		$total     = (int) get_option( 'thumbpress_scan_total', 0 );
+		$processed = (int) get_option( 'thumbpress_scan_processed', 0 );
+		$in_flight = $total > 0 && ! get_option( 'thumbpress_scan_completed_at' ) && ! get_option( Common_Init::CANCEL_OPTION );
+
+		if ( $in_flight && function_exists( 'as_has_scheduled_action' ) && as_has_scheduled_action( Scan::ACTION ) ) {
+			return $this->scan_state = array(
+				'state'   => 'scanning',
+				'percent' => min( 99, (int) floor( $processed / $total * 100 ) ),
+			);
+		}
+
+		return $this->scan_state = array( 'state' => 'unscanned', 'percent' => 0 );
+	}
+
+	/**
 	 * Map a health score to the notice's premium gradient background and an
 	 * auto-contrast font color, switched across four score bands (per the campaign
 	 * spec): 0–50 red, 51–75 orange, 76–95 lime, 96–100 green. Font stays WCAG-AA
@@ -219,16 +261,38 @@ class Init {
 	protected function add_health_notice_node( $wp_admin_bar ) {
 		$score         = (int) $this->get_health_score();
 		$dashboard_url = admin_url( 'admin.php?page=thumbpress' );
+		$scan          = $this->scan_state();
 
-		// The whole node links to the dashboard; "View Details" is underlined to
-		// read as the actionable link, per the spec.
-		$notice_text = sprintf(
-			/* translators: 1: health score percentage, 2: opening span tag, 3: closing span tag. */
-			esc_html__( 'Media Health at %1$d%% - %2$sView Details%3$s', 'image-sizes' ),
-			$score,
-			'<span class="thumbpress-health-link">',
-			'</span>'
-		);
+		if ( 'unscanned' === $scan['state'] ) {
+			// A score before the scan would be a guess, so ask for the scan instead (#525).
+			// The dashboard starts it on arrival, where its progress is visible.
+			$dashboard_url = admin_url( 'admin.php?page=thumbpress#/?scan=start' );
+
+			// The icon's styles print on admin_head only; on the front end its glyph would render as a box.
+			$icon        = is_admin() ? '<span class="dashicons dashicons-warning thumbpress-health-icon" aria-hidden="true"></span>' : '';
+			$notice_text = $icon . sprintf(
+				/* translators: 1: opening span tag, 2: closing span tag. */
+				esc_html__( 'Media not scanned - %1$sScan now%2$s', 'image-sizes' ),
+				'<span class="thumbpress-health-link">',
+				'</span>'
+			);
+		} elseif ( 'scanning' === $scan['state'] ) {
+			$notice_text = sprintf(
+				/* translators: %d: percentage of the library scanned so far. */
+				esc_html__( 'Scanning media… %d%%', 'image-sizes' ),
+				$scan['percent']
+			);
+		} else {
+			// The whole node links to the dashboard; "View Details" is underlined to
+			// read as the actionable link, per the spec.
+			$notice_text = sprintf(
+				/* translators: 1: health score percentage, 2: opening span tag, 3: closing span tag. */
+				esc_html__( 'Media Health at %1$d%% - %2$sView Details%3$s', 'image-sizes' ),
+				$score,
+				'<span class="thumbpress-health-link">',
+				'</span>'
+			);
+		}
 
 		$title = sprintf(
 			'<span class="thumbpress-health-text">%1$s</span><span class="thumbpress-health-dismiss" role="button" tabindex="0" aria-label="%2$s" title="%2$s">&times;</span>',
@@ -317,7 +381,18 @@ class Init {
 	 * @return void
 	 */
 	protected function render_health_notice_assets() {
-		$colors = $this->health_band_colors( (int) $this->get_health_score() );
+		// Scanned: the score's band colour. Not scanned: red, so the prompt to scan is not
+		// overlooked. Scanning: brand purple, since progress is not a problem.
+		$state = $this->scan_state()['state'];
+
+		if ( 'ready' === $state ) {
+			$colors = $this->health_band_colors( (int) $this->get_health_score() );
+		} elseif ( 'scanning' === $state ) {
+			$colors = array( 'bg' => 'linear-gradient(135deg, #40189D, #1E0F53)', 'text' => '#FFFFFF' );
+		} else {
+			$colors = array( 'bg' => 'linear-gradient(135deg, #E5484D, #B4232B)', 'text' => '#FFFFFF' );
+		}
+
 		$nonce  = wp_create_nonce( 'thumbpress_dismiss_health_notice' );
 		?>
 		<style>
@@ -336,6 +411,14 @@ class Init {
 			}
 			#wpadminbar #wp-admin-bar-thumbpress-health-notice .thumbpress-health-link {
 				text-decoration: underline;
+			}
+			#wpadminbar #wp-admin-bar-thumbpress-health-notice .thumbpress-health-icon {
+				font: normal 16px/32px dashicons !important;
+				width: 16px;
+				height: 32px;
+				margin-right: 6px;
+				vertical-align: top;
+				color: #FFFFFF !important;
 			}
 			#wpadminbar #wp-admin-bar-thumbpress-health-notice .thumbpress-health-dismiss {
 				margin-left: 8px;

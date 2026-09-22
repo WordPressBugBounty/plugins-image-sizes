@@ -14,6 +14,7 @@ return array(
     'Codexpert\\Plugin\\Setup' => $vendorDir . '/codexpert/plugin/src/Setup.php',
     'Codexpert\\Plugin\\Table' => $vendorDir . '/codexpert/plugin/src/Table.php',
     'Codexpert\\Plugin\\Widget' => $vendorDir . '/codexpert/plugin/src/Widget.php',
+    'Codexpert\\ThumbPress\\API\\Compression_Check' => $baseDir . '/app/API/Compression_Check.php',
     'Codexpert\\ThumbPress\\API\\Convert_Avif' => $baseDir . '/app/API/Convert_Avif.php',
     'Codexpert\\ThumbPress\\API\\Convert_Webp' => $baseDir . '/app/API/Convert_Webp.php',
     'Codexpert\\ThumbPress\\API\\Dashboard' => $baseDir . '/app/API/Dashboard.php',

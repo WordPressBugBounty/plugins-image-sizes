@@ -22,6 +22,8 @@ declare global {
 			nonce?: string;
 			assets_url?: string;
 			pro_active?: boolean;
+			/** Pro is installed, whether or not its license is activated. */
+			pro_installed?: boolean;
 			is_new_user?: boolean;
 			/** Whether the promo campaign is live (server-computed date gate). */
 			promo_active?: boolean;

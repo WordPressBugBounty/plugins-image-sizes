@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { __, sprintf } from '@wordpress/i18n';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { applyFilters } from '@wordpress/hooks';
 import { toast } from 'sonner';
 import {
@@ -24,7 +24,6 @@ import {
 	LazyLoadingIcon,
 	LargeImagesIcon,
 	UnusedImagesIconPro,
-	CompressedImagesIcon,
 	DuplicateImagesIcon,
 } from '../components/icons';
 
@@ -36,6 +35,7 @@ import {
 	getDashboardOptimizationStats,
 	getDashboardAnalysisStats,
 	startScan,
+	getScanProgress,
 	type ScanProgress,
 	type DashboardCountsStats,
 	type DashboardOptimizationStats,
@@ -44,6 +44,7 @@ import {
 } from '../api';
 
 import LockedFeatureCard from '../components/dashboard/LockedFeatureCard';
+import CompressionCheckCard from '../components/dashboard/CompressionCheckCard';
 import InfoCard from '../components/dashboard/InfoCard';
 import HealthScoreCard from '../components/dashboard/HealthScoreCard';
 import { numberFormat, formatBytes } from '../lib/i18n';
@@ -120,6 +121,7 @@ export default function Dashboard() {
 	const [optimizationLoading, setOptimizationLoading] = useState(true);
 	const [analysisLoading, setAnalysisLoading] = useState(true);
 	const [scanState, setScanState] = useState<ScanProgress | null>(null);
+	const [searchParams, setSearchParams] = useSearchParams();
 	const navigate = useNavigate();
 
 	// Starting from a card hands over to the panel at the top, which owns the polling.
@@ -166,6 +168,28 @@ export default function Dashboard() {
 			}
 		})();
 	}, []);
+
+	// The admin bar's "Scan now" lands here with ?scan=start, so the scan runs where its
+	// progress is visible (#525). It starts only when nothing is running and the index is
+	// not ready, so a stale link cannot restart a scan; the param goes so a reload won't either.
+	useEffect(() => {
+		if (searchParams.get('scan') !== 'start') {
+			return;
+		}
+
+		setSearchParams({}, { replace: true });
+
+		(async () => {
+			try {
+				const res: any = await getScanProgress();
+				if (res?.data && !res.data.is_running && !res.data.is_ready) {
+					await requestScan();
+				}
+			} catch {
+				toast.error(__('Could not start the scan.', 'image-sizes'));
+			}
+		})();
+	}, [searchParams]); // Clicking the link while already on the dashboard only changes the hash.
 
 	if (countsLoading) {
 		return <DashboardSkeleton />;
@@ -265,10 +289,10 @@ export default function Dashboard() {
 						mergedStats, navigate,
 					) as React.ReactNode}
 
-					{/* OPTIMIZATION */}
-					{optimizationLoading ? <InfoCardSkeleton hasArrow /> : applyFilters(
+					{/* OPTIMIZATION + ANALYSIS — the check needs the scan state; a refresh after a scan keeps the card (and its result) mounted */}
+					{(optimizationLoading || (analysisLoading && !analysisStats)) ? <InfoCardSkeleton hasArrow /> : applyFilters(
 						'thumbpress_dashboard_card_compress',
-						<LockedFeatureCard icon={<CompressedImagesIcon />} title={__('Uncompressed Images', 'image-sizes')} description={__('Images need compression', 'image-sizes')} value={numberFormat(mergedStats.not_compressed)} actionLabel={__('Upgrade to Compress', 'image-sizes')} />,
+						<CompressionCheckCard notCompressed={mergedStats.not_compressed} totalImages={mergedStats.total_images} scanned={mergedStats.scanned} scanning={scanning} onScan={requestScan} initialResult={optimizationStats?.compression_check ?? null} />,
 						mergedStats, navigate,
 					) as React.ReactNode}
 

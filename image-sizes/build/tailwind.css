@@ -746,6 +746,9 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .grid {
 	display: grid;
 }
+#image-sizes_render .contents {
+	display: contents;
+}
 #image-sizes_render .hidden {
 	display: none;
 }
@@ -932,6 +935,9 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .w-80 {
 	width: 20rem;
 }
+#image-sizes_render .w-9 {
+	width: 2.25rem;
+}
 #image-sizes_render .w-\[10\%\] {
 	width: 10%;
 }
@@ -1027,6 +1033,9 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .max-w-\[700px\] {
 	max-width: 700px;
 }
+#image-sizes_render .max-w-\[720px\] {
+	max-width: 720px;
+}
 #image-sizes_render .max-w-\[760px\] {
 	max-width: 760px;
 }
@@ -1045,8 +1054,19 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .flex-shrink-0 {
 	flex-shrink: 0;
 }
+#image-sizes_render .shrink {
+	flex-shrink: 1;
+}
 #image-sizes_render .shrink-0 {
 	flex-shrink: 0;
+}
+#image-sizes_render .border-separate {
+	border-collapse: separate;
+}
+#image-sizes_render .border-spacing-0 {
+	--tw-border-spacing-x: 0px;
+	--tw-border-spacing-y: 0px;
+	border-spacing: var(--tw-border-spacing-x) var(--tw-border-spacing-y);
 }
 #image-sizes_render .transform {
 	transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -1285,6 +1305,9 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .border-t {
 	border-top-width: 1px;
 }
+#image-sizes_render .border-t-2 {
+	border-top-width: 2px;
+}
 #image-sizes_render .border-dashed {
 	border-style: dashed;
 }
@@ -1401,6 +1424,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .bg-\[\#E58D12\] {
 	--tw-bg-opacity: 1;
 	background-color: rgb(229 141 18 / var(--tw-bg-opacity, 1));
+}
+#image-sizes_render .bg-\[\#E8F7EE\] {
+	--tw-bg-opacity: 1;
+	background-color: rgb(232 247 238 / var(--tw-bg-opacity, 1));
 }
 #image-sizes_render .bg-\[\#EAF8FF\] {
 	--tw-bg-opacity: 1;
@@ -1522,8 +1549,22 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 	--tw-bg-opacity: 1;
 	background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
 }
+#image-sizes_render .bg-white\/15 {
+	background-color: rgb(255 255 255 / 0.15);
+}
 #image-sizes_render .bg-white\/20 {
 	background-color: rgb(255 255 255 / 0.2);
+}
+#image-sizes_render .bg-gradient-to-br {
+	background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
+}
+#image-sizes_render .from-thumbpress-primary {
+	--tw-gradient-from: #40189D var(--tw-gradient-from-position);
+	--tw-gradient-to: rgb(64 24 157 / 0) var(--tw-gradient-to-position);
+	--tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+#image-sizes_render .to-\[\#1E0F53\] {
+	--tw-gradient-to: #1E0F53 var(--tw-gradient-to-position);
 }
 #image-sizes_render .object-cover {
 	-o-object-fit: cover;
@@ -1684,6 +1725,9 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .pb-0 {
 	padding-bottom: 0px;
 }
+#image-sizes_render .pb-2 {
+	padding-bottom: 0.5rem;
+}
 #image-sizes_render .pb-4 {
 	padding-bottom: 1rem;
 }
@@ -1705,11 +1749,23 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .pr-3\.5 {
 	padding-right: 0.875rem;
 }
+#image-sizes_render .pr-4 {
+	padding-right: 1rem;
+}
 #image-sizes_render .pr-6 {
 	padding-right: 1.5rem;
 }
 #image-sizes_render .pt-0 {
 	padding-top: 0px;
+}
+#image-sizes_render .pt-2 {
+	padding-top: 0.5rem;
+}
+#image-sizes_render .pt-4 {
+	padding-top: 1rem;
+}
+#image-sizes_render .pt-5 {
+	padding-top: 1.25rem;
 }
 #image-sizes_render .pt-6 {
 	padding-top: 1.5rem;
@@ -1720,8 +1776,14 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .text-center {
 	text-align: center;
 }
+#image-sizes_render .text-right {
+	text-align: right;
+}
 #image-sizes_render .align-top {
 	vertical-align: top;
+}
+#image-sizes_render .align-middle {
+	vertical-align: middle;
 }
 #image-sizes_render .font-inter {
 	font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -1791,15 +1853,15 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .capitalize {
 	text-transform: capitalize;
 }
-#image-sizes_render .italic {
-	font-style: italic;
-}
 #image-sizes_render .tabular-nums {
 	--tw-numeric-spacing: tabular-nums;
 	font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction);
 }
 #image-sizes_render .leading-\[1\.4\] {
 	line-height: 1.4;
+}
+#image-sizes_render .leading-none {
+	line-height: 1;
 }
 #image-sizes_render .leading-normal {
 	line-height: 1.5;
@@ -1862,6 +1924,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 #image-sizes_render .text-\[\#04121D\] {
 	--tw-text-opacity: 1;
 	color: rgb(4 18 29 / var(--tw-text-opacity, 1));
+}
+#image-sizes_render .text-\[\#138A4B\] {
+	--tw-text-opacity: 1;
+	color: rgb(19 138 75 / var(--tw-text-opacity, 1));
 }
 #image-sizes_render .text-\[\#1D1F2C\] {
 	--tw-text-opacity: 1;
@@ -2008,6 +2074,15 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 	--tw-text-opacity: 1;
 	color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
+#image-sizes_render .text-white\/60 {
+	color: rgb(255 255 255 / 0.6);
+}
+#image-sizes_render .text-white\/70 {
+	color: rgb(255 255 255 / 0.7);
+}
+#image-sizes_render .text-white\/80 {
+	color: rgb(255 255 255 / 0.8);
+}
 #image-sizes_render .underline {
 	text-decoration-line: underline;
 }
@@ -2076,6 +2151,11 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 }
 #image-sizes_render .filter {
 	filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+#image-sizes_render .transition {
+	transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
 }
 #image-sizes_render .transition-all {
 	transition-property: all;
@@ -2165,6 +2245,9 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 	--tw-bg-opacity: 1;
 	background-color: rgb(255 58 82 / var(--tw-bg-opacity, 1));
 }
+#image-sizes_render .hover\:bg-white\/10:hover {
+	background-color: rgb(255 255 255 / 0.1);
+}
 #image-sizes_render .hover\:bg-yellow-500:hover {
 	--tw-bg-opacity: 1;
 	background-color: rgb(234 179 8 / var(--tw-bg-opacity, 1));
@@ -2185,11 +2268,19 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 	--tw-text-opacity: 1;
 	color: rgb(64 24 157 / var(--tw-text-opacity, 1));
 }
+#image-sizes_render .hover\:text-white:hover {
+	--tw-text-opacity: 1;
+	color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
 #image-sizes_render .hover\:opacity-80:hover {
 	opacity: 0.8;
 }
 #image-sizes_render .hover\:opacity-90:hover {
 	opacity: 0.9;
+}
+#image-sizes_render .hover\:brightness-95:hover {
+	--tw-brightness: brightness(.95);
+	filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 #image-sizes_render .focus\:text-thumbpress-primary:focus {
 	--tw-text-opacity: 1;

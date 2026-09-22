@@ -46,7 +46,7 @@ const PricingCard = ({ plan, duration }: PricingCardProps) => {
 		>
 			{plan.featured && (
 				<div className="absolute top-0 right-0 bg-thumbpress-primary pointer-events-none py-2 px-4 text-white text-sm font-medium rounded-bl-lg">
-					{__( 'Best Value', 'image-sizes' )}
+					{__('Best Value', 'image-sizes')}
 				</div>
 			)}
 
@@ -64,11 +64,11 @@ const PricingCard = ({ plan, duration }: PricingCardProps) => {
 						{plan.price}
 					</span>
 					{duration === 'Yearly' && (
-						<span className="text-base text-thumbpress-body">{__( '/ Month', 'image-sizes' )}</span>
+						<span className="text-base text-thumbpress-body">{__('/ Year', 'image-sizes')}</span>
 					)}
 
 					{duration === 'Lifetime' && (
-						<span className="text-base text-thumbpress-body">{__( '/ Lifetime', 'image-sizes' )}</span>
+						<span className="text-base text-thumbpress-body">{__('/ Lifetime', 'image-sizes')}</span>
 					)}
 					{plan.discount && (
 						<span className="ml-auto self-center bg-[#F97316] text-white text-xs font-semibold px-2.5 py-1 rounded">
@@ -76,10 +76,6 @@ const PricingCard = ({ plan, duration }: PricingCardProps) => {
 						</span>
 					)}
 				</div>
-
-				{duration === 'Yearly' && (
-					<span className='text-[#4A4C56] italic text-sm'>{sprintf( /* translators: %s is the total yearly price. */ __( 'Billed annually. You pay %s today', 'image-sizes' ), plan.totalPrice ?? '' )}</span>
-				)}
 			</div>
 
 			<ul className="space-y-4 mb-8">
@@ -91,7 +87,7 @@ const PricingCard = ({ plan, duration }: PricingCardProps) => {
 					<Check className="w-4 h-4 text-thumbpress-primary flex-shrink-0" />
 					<span>
 						<span className="font-bold text-thumbpress-primary">{plan.cdnStorage} </span>
-						{__( 'CDN Space', 'image-sizes' )}
+						{__('CDN Space', 'image-sizes')}
 					</span>
 					<NewBadge />
 				</li>
@@ -101,7 +97,7 @@ const PricingCard = ({ plan, duration }: PricingCardProps) => {
 				</li>
 				<li className="flex items-center gap-2 text-base text-thumbpress-body">
 					<Check className="w-4 h-4 text-thumbpress-primary flex-shrink-0" />
-					{__( 'All Pro Features Included', 'image-sizes' )}
+					{__('All Pro Features Included', 'image-sizes')}
 				</li>
 			</ul>
 			<a
@@ -110,7 +106,7 @@ const PricingCard = ({ plan, duration }: PricingCardProps) => {
 				rel="noopener noreferrer"
 				className={`block text-center py-3 rounded-lg text-sm font-medium no-underline transition-colors duration-300 border-2 border-thumbpress-primary ${plan.featured ? 'bg-thumbpress-primary !text-white' : ' !text-thumbpress-primary hover:bg-thumbpress-primary hover:!text-white'}`}
 			>
-				{__( 'Purchase', 'image-sizes' )}
+				{__('Purchase', 'image-sizes')}
 			</a>
 		</div>
 	);
