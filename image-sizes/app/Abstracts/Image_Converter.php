@@ -323,6 +323,9 @@ abstract class Image_Converter {
 			);
 		}
 
+		// The target format carries no EXIF, so bake the JPEG orientation into the pixels first.
+		$editor->maybe_exif_rotate();
+
 		$result = $editor->save( $target_path, $mime );
 		if ( is_wp_error( $result ) ) {
 			return new \WP_Error(

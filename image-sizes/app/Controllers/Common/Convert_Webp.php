@@ -24,6 +24,11 @@ class Convert_Webp extends Image_Converter {
 	const INFLIGHT_OPTION = 'thumbpress_convert_inflight';
 
 	/**
+	 * Stored-URL rewrites not yet flushed, so a killed batch cannot lose them.
+	 */
+	const PENDING_REWRITES_OPTION = 'thumbpress_convert_pending_rewrites';
+
+	/**
 	 * Seconds a batch may spend before yielding, half of Action Scheduler's 30s default.
 	 */
 	const BATCH_TIME_BUDGET = 15;
@@ -145,6 +150,9 @@ class Convert_Webp extends Image_Converter {
 			update_option( 'thumbpress_convert_last_completed_time', wp_date( 'U' ) );
 			delete_option( self::INFLIGHT_OPTION );
 			$this->clear_webp_caches();
+			// After completion, so a flush that dies cannot keep the watchdog re-arming this page.
+			Utility::replace_attachment_urls_batch( (array) get_option( self::PENDING_REWRITES_OPTION, array() ) );
+			delete_option( self::PENDING_REWRITES_OPTION );
 			return;
 		}
 
@@ -153,7 +161,7 @@ class Convert_Webp extends Image_Converter {
 		$batch_failed    = 0;
 		$batch_converted = 0;
 		$new_last_id     = $last_id;
-		$url_rewrites    = array();
+		$url_rewrites    = (array) get_option( self::PENDING_REWRITES_OPTION, array() );
 		$done            = 0;
 		$started         = microtime( true );
 		$inflight        = (int) get_option( self::INFLIGHT_OPTION, 0 );
@@ -277,6 +285,7 @@ class Convert_Webp extends Image_Converter {
 				'old_main_path' => $main_img,
 				'old_metadata'  => $old_metadata,
 			);
+			update_option( self::PENDING_REWRITES_OPTION, $url_rewrites, false );
 
 			// Calculate new total size after conversion.
 			$new_size     = file_exists( $webp_file_path ) ? filesize( $webp_file_path ) : 0;
@@ -302,6 +311,7 @@ class Convert_Webp extends Image_Converter {
 		// One rewrite pass for the whole batch (3 table scans) instead of 3 per image.
 		if ( ! empty( $url_rewrites ) ) {
 			Utility::replace_attachment_urls_batch( $url_rewrites );
+			delete_option( self::PENDING_REWRITES_OPTION );
 		}
 
 		thumbpress_add_space_saved( $batch_saved );

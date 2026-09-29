@@ -11,9 +11,9 @@ use Codexpert\ThumbPress\API\Convert_Avif;
 use Codexpert\ThumbPress\API\Settings;
 use Codexpert\ThumbPress\API\Dashboard;
 use Codexpert\ThumbPress\API\Scan;
-use Codexpert\ThumbPress\API\Compression_Check;
 use Codexpert\ThumbPress\Controllers\Common\Thumbnails as Thumbnails_Controller;
 use Codexpert\ThumbPress\Controllers\Common\Convert_Webp as Convert_Webp_Controller;
+use Codexpert\ThumbPress\Helpers\Utility;
 use Codexpert\ThumbPress\ThumbPress;
 use Codexpert\ThumbPress\Traits\Hook;
 use Codexpert\ThumbPress\Traits\Auth;
@@ -223,6 +223,8 @@ class API {
 					delete_option( 'thumbpress_convert_space_saved' );
 					delete_option( 'thumbpress_now_convert_total_image' );
 					delete_option( 'thumbpress_now_convert_background_total_images' );
+					Utility::replace_attachment_urls_batch( (array) get_option( Convert_Webp_Controller::PENDING_REWRITES_OPTION, array() ) );
+					delete_option( Convert_Webp_Controller::PENDING_REWRITES_OPTION );
 					return rest_ensure_response( array( 'success' => true ) );
 				},
 				'permission_callback' => array( $this, 'is_admin' ),
@@ -357,66 +359,6 @@ class API {
 			array(
 				'methods'             => WP_REST_Server::CREATABLE,
 				'callback'            => array( new Scan(), 'cancel' ),
-				'permission_callback' => array( $this, 'is_admin' ),
-			)
-		);
-
-		/**
-		 * Compression check APIs — compress throwaway copies to estimate savings; the library is never written.
-		 */
-		register_rest_route(
-			$this->namespace,
-			'/compression-check/start',
-			array(
-				'methods'             => WP_REST_Server::CREATABLE,
-				'callback'            => array( new Compression_Check(), 'start' ),
-				'permission_callback' => array( $this, 'is_admin' ),
-			)
-		);
-
-		register_rest_route(
-			$this->namespace,
-			'/compression-check/step',
-			array(
-				'methods'             => WP_REST_Server::CREATABLE,
-				'callback'            => array( new Compression_Check(), 'step' ),
-				'permission_callback' => array( $this, 'is_admin' ),
-				'args'                => array(
-					'token' => array(
-						'required' => true,
-						'type'     => 'string',
-					),
-					'index' => array(
-						'required' => true,
-						'type'     => 'integer',
-						'minimum'  => 0,
-					),
-				),
-			)
-		);
-
-		register_rest_route(
-			$this->namespace,
-			'/compression-check/preview',
-			array(
-				'methods'             => WP_REST_Server::READABLE,
-				'callback'            => array( new Compression_Check(), 'preview' ),
-				'permission_callback' => array( $this, 'is_admin' ),
-				'args'                => array(
-					'file' => array(
-						'required' => true,
-						'type'     => 'string',
-					),
-				),
-			)
-		);
-
-		register_rest_route(
-			$this->namespace,
-			'/compression-check/discard',
-			array(
-				'methods'             => WP_REST_Server::CREATABLE,
-				'callback'            => array( new Compression_Check(), 'discard' ),
 				'permission_callback' => array( $this, 'is_admin' ),
 			)
 		);

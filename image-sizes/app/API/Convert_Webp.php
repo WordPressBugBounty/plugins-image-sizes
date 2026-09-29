@@ -95,6 +95,9 @@ class Convert_Webp {
 		$attachments = $wpdb->get_results( $query );
 
 		if ( ! $attachments ) {
+			Utility::replace_attachment_urls_batch( (array) get_option( Convert_Webp_Controller::PENDING_REWRITES_OPTION, array() ) );
+			delete_option( Convert_Webp_Controller::PENDING_REWRITES_OPTION );
+
 			// First call with no rows means there is nothing to convert at all.
 			if ( $last_id === 0 ) {
 				return $this->response_error(
@@ -134,7 +137,7 @@ class Convert_Webp {
 		$batch_failed    = 0;
 		$batch_converted = 0;
 		$new_last_id     = $last_id;
-		$url_rewrites    = array();
+		$url_rewrites    = (array) get_option( Convert_Webp_Controller::PENDING_REWRITES_OPTION, array() );
 
 		foreach ( $attachments as $attachment ) {
 			$img_id      = (int) $attachment->ID;
@@ -235,6 +238,7 @@ class Convert_Webp {
 				'old_main_path' => $main_img,
 				'old_metadata'  => $old_metadata,
 			);
+			update_option( Convert_Webp_Controller::PENDING_REWRITES_OPTION, $url_rewrites, false );
 
 			// Calculate new total size after conversion.
 			$new_size     = file_exists( $webp_file_path ) ? filesize( $webp_file_path ) : 0;
@@ -256,6 +260,7 @@ class Convert_Webp {
 		// One rewrite pass for the whole chunk (3 table scans) instead of 3 per image.
 		if ( ! empty( $url_rewrites ) ) {
 			Utility::replace_attachment_urls_batch( $url_rewrites );
+			delete_option( Convert_Webp_Controller::PENDING_REWRITES_OPTION );
 		}
 
 		$processed_new   = $processed + count( $attachments );

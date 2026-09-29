@@ -54,7 +54,6 @@ class Dashboard {
 			'unoptimized_images' => $unoptimized,
 			'compressed'         => $total_images - $not_compressed,
 			'not_compressed'     => $not_compressed,
-			'compression_check'  => Compression_Check::get_result(),
 		) );
 	}
 

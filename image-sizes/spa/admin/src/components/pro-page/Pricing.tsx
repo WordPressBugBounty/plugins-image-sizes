@@ -3,25 +3,7 @@ import { __, sprintf } from '@wordpress/i18n';
 import { cn } from '../../lib/utils';
 import PricingCard from './components/PricingCard';
 
-/**
- * Tag a checkout URL with the in-plugin screen that sent the buyer, so a purchase
- * can be traced to it. Untagged when no source is known; existing params are kept.
- */
-export function withSource< T extends { url: string } >( plan: T, source: string ): T {
-	if ( ! /^[a-z0-9-]{1,40}$/.test( source ) ) {
-		return plan;
-	}
-
-	const url = new URL( plan.url );
-	url.searchParams.set( 'utm_source', 'thumbpress-free' );
-	url.searchParams.set( 'utm_medium', 'plugin' );
-	url.searchParams.set( 'utm_campaign', 'in-plugin' );
-	url.searchParams.set( 'utm_content', source );
-
-	return { ...plan, url: url.toString() };
-}
-
-const Pricing = ( { source = '' }: { source?: string } ) => {
+const Pricing = () => {
 	const [billingCycle, setBillingCycle] = useState<'yearly' | 'lifetime'>(
 		'yearly',
 	);
@@ -194,12 +176,12 @@ const Pricing = ( { source = '' }: { source?: string } ) => {
 			<div className="grid grid-cols-3 2xl:gap-6 lg:gap-4 max-w-[1200px] mx-auto">
 				{billingCycle === 'yearly' &&
 					pricingPlansYearly.map((plan, index) => (
-						<PricingCard key={index} duration="Yearly" plan={withSource(plan, source)} />
+						<PricingCard key={index} duration="Yearly" plan={plan} />
 					))}
 
 				{billingCycle === 'lifetime' &&
 					pricingPlansLifetime.map((plan, index) => (
-						<PricingCard key={index} duration="Lifetime" plan={withSource(plan, source)} />
+						<PricingCard key={index} duration="Lifetime" plan={plan} />
 					))}
 			</div>
 
