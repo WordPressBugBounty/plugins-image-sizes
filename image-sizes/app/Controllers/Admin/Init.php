@@ -4,6 +4,8 @@ namespace Codexpert\ThumbPress\Controllers\Admin;
 defined( 'ABSPATH' ) || exit;
 
 use Codexpert\ThumbPress\API\Dashboard;
+use Codexpert\ThumbPress\API\Review;
+use Codexpert\ThumbPress\Bootstrap\Activator;
 use Codexpert\ThumbPress\Traits\Hook;
 use Codexpert\ThumbPress\Traits\Asset;
 
@@ -36,15 +38,6 @@ class Init {
 	 * Option recording that the Media Health admin-bar notice was dismissed.
 	 */
 	const HEALTH_NOTICE_DISMISSED_OPTION = 'thumbpress_health_notice_dismissed';
-
-	/**
-	 * Option recording that the "Meet ThumbPress CDN" announcement was dismissed.
-	 *
-	 * Absence of the option means "not yet seen", so the popup needs no server-side
-	 * arming and reaches sites that upgraded straight past the CDN release. Delete
-	 * the option to show it again.
-	 */
-	const CDN_ANNOUNCEMENT_DISMISSED_OPTION = 'thumbpress_cdn_announcement_dismissed';
 
 	/**
 	 * Add the promo offer OR the Media Health notice to the admin bar.
@@ -436,7 +429,7 @@ class Init {
 		// return;
 		// }
 
-		$dashboard_url = admin_url( 'admin.php?page=thumbpress' );
+		$dashboard_url = admin_url( 'admin.php?page=thumbpress#/setup' );
 		?>
 		<div class="notice notice-info" id="thumbpress-fresh-install-notice" style="padding: 12px 16px; position: relative;">
 			<button type="button" class="notice-dismiss" id="thumbpress-fresh-install-dismiss">
@@ -444,11 +437,11 @@ class Init {
 			</button>
 			<p style="font-size: 14px; margin: 0 0 10px;">
 				<strong><?php esc_html_e( 'ThumbPress is installed!', 'image-sizes' ); ?></strong><br>
-				<?php esc_html_e( 'Your images are ready to be optimized. Visit the dashboard to get started.', 'image-sizes' ); ?>
+				<?php esc_html_e( 'Find out how your images are doing. The checkup takes about a minute and changes nothing until you say so.', 'image-sizes' ); ?>
 			</p>
 			<p style="margin: 0;">
 				<a href="<?php echo esc_url( $dashboard_url ); ?>" id="thumbpress-fresh-install-visit" class="button button-primary">
-					<?php esc_html_e( 'Go to Dashboard', 'image-sizes' ); ?>
+					<?php esc_html_e( 'Run your image checkup', 'image-sizes' ); ?>
 				</a>
 			</p>
 		</div>
@@ -484,6 +477,8 @@ class Init {
 
 		global $thumbpress_menus;
 
+		$whats_new_items = Activator::whats_new_pending() ? Activator::whats_new_items() : array();
+
 		$this->localize_script(
 			'image-sizes_admin',
 			'THUMBPRESS',
@@ -494,14 +489,27 @@ class Init {
 				'assets_url'         => THUMBPRESS_ASSETS_URL,
 				'pro_active'         => apply_filters( 'thumbpress_is_pro_active', defined( 'THUMBPRESS_PRO_VERSION' ) ),
 				'pro_installed'      => defined( 'THUMBPRESS_PRO_VERSION' ),
+				// The dashboard renders its own lines for Pro users; a Pro release that sees this skips its old cards.
+				'dashboard_lines'    => true,
+				// The site's own name, so the watermark preview shows what Pro would stamp by default.
+				'site_name'          => wp_specialchars_decode( (string) get_bloginfo( 'name' ), ENT_QUOTES ),
+				// The running release (the dashboard's cache key).
+				'version'            => THUMBPRESS_VERSION,
+				// The "What's new" popup: shown once per announced release, until dismissed.
+				'show_whats_new'     => ! empty( $whats_new_items ),
+				// The announced release, for the popup's title (a later patch still says "6.9").
+				'whats_new_version'  => Activator::announced(),
+				// Every item the site has not seen yet, from app/Config/whats-new.php.
+				'whats_new_items'    => $whats_new_items,
+				// The review prompt: due a while after install, until answered.
+				'show_review'        => Review::pending(),
+				// Pre-fills the feedback form's reply address; the admin can change it before sending.
+				'review_email'       => (string) wp_get_current_user()->user_email,
 				'is_new_user'        => ( false === get_option( 'thumbpress_modules', false ) ),
 				// Promo campaign gate — the SPA reads server truth instead of computing
 				// its own deadline, so pricing/popup flip off in sync with PHP.
 				'promo_active'       => thumbpress_promo_active(),
 				'promo_end'          => thumbpress_promo_end_timestamp(), // UTC Unix seconds.
-				// One-time "Meet ThumbPress CDN" popup — shown until dismissed, so the
-				// absence of the dismissal flag is what makes it visible.
-				'show_cdn_announcement' => ! get_option( self::CDN_ANNOUNCEMENT_DISMISSED_OPTION, false ),
 				// BCP-47 locale tag for locale-aware number/size formatting in the SPA.
 				'locale'             => str_replace( '_', '-', get_locale() ),
 			)

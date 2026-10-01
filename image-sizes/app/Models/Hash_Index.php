@@ -12,12 +12,24 @@ class Hash_Index {
 	/**
 	 * Bump to make every site repopulate the index on its next scan.
 	 */
-	const VERSION = 1;
+	const VERSION = 2;
 
 	/**
 	 * Option holding the index version a site has fully populated.
 	 */
 	const VERSION_OPTION = 'thumbpress_hash_index_version';
+
+	/**
+	 * Table layout version. Bump whenever a column is added, so an updated site upgrades its table
+	 * before anything writes the new column: the installer only runs on activation, and a plugin
+	 * update does not activate.
+	 */
+	const SCHEMA = 2;
+
+	/**
+	 * Option holding the layout version this site's tables are at.
+	 */
+	const SCHEMA_OPTION = 'thumbpress_hash_index_schema';
 
 	/**
 	 * One row per indexed image.
@@ -40,12 +52,17 @@ class Hash_Index {
 				'hash'          => 'CHAR(32) NOT NULL DEFAULT \'\'',
 				'size_kb'       => 'INT(10) UNSIGNED NOT NULL DEFAULT 0',
 				'thumbs'        => 'INT(10) UNSIGNED NOT NULL DEFAULT 0',
+				'alt_missing'   => 'TINYINT(1) UNSIGNED NOT NULL DEFAULT 0',
+				'bad_name'      => 'TINYINT(1) UNSIGNED NOT NULL DEFAULT 0',
+				'base'          => 'VARCHAR(191) NOT NULL DEFAULT \'\'',
+				'used'          => 'TINYINT(1) UNSIGNED NOT NULL DEFAULT 0',
 			),
 			array(
 				'primary_key' => 'attachment_id',
 				'indexes'     => array(
 					'hash'    => 'hash',
 					'size_kb' => 'size_kb',
+					'base'    => 'base',
 				),
 			)
 		);
@@ -63,6 +80,19 @@ class Hash_Index {
 				),
 			)
 		);
+
+		update_option( self::SCHEMA_OPTION, self::SCHEMA );
+	}
+
+	/**
+	 * Bring the tables up to the current layout once, the first time anything is about to write to them.
+	 */
+	public static function ensure_schema() {
+		if ( (int) get_option( self::SCHEMA_OPTION ) >= self::SCHEMA ) {
+			return;
+		}
+
+		self::install();
 	}
 
 	/**
@@ -172,7 +202,7 @@ class Hash_Index {
 	/**
 	 * Write a whole batch in one statement; group counts come from rebuild_groups().
 	 *
-	 * @param array $rows Each row: [ attachment_id, hash, size_kb, thumbs ].
+	 * @param array $rows Each row: [ attachment_id, hash, size_kb, thumbs, alt_missing, bad_name, base ].
 	 */
 	public static function bulk_put( array $rows ) {
 		global $wpdb;
@@ -185,12 +215,12 @@ class Hash_Index {
 		$values = array();
 
 		foreach ( $rows as $row ) {
-			$values[] = $wpdb->prepare( '( %d, %s, %d, %d )', (int) $row[0], (string) $row[1], (int) $row[2], (int) $row[3] );
+			$values[] = $wpdb->prepare( '( %d, %s, %d, %d, %d, %d, %s )', (int) $row[0], (string) $row[1], (int) $row[2], (int) $row[3], (int) $row[4], (int) $row[5], (string) $row[6] );
 		}
 
 		$wpdb->query( // phpcs:ignore WordPress.DB
-			"INSERT INTO {$hashes} ( attachment_id, hash, size_kb, thumbs ) VALUES " . implode( ',', $values ) .
-			' ON DUPLICATE KEY UPDATE hash = VALUES( hash ), size_kb = VALUES( size_kb ), thumbs = VALUES( thumbs )'
+			"INSERT INTO {$hashes} ( attachment_id, hash, size_kb, thumbs, alt_missing, bad_name, base ) VALUES " . implode( ',', $values ) .
+			' ON DUPLICATE KEY UPDATE hash = VALUES( hash ), size_kb = VALUES( size_kb ), thumbs = VALUES( thumbs ), alt_missing = VALUES( alt_missing ), bad_name = VALUES( bad_name ), base = VALUES( base )'
 		);
 	}
 
@@ -304,6 +334,219 @@ class Hash_Index {
 		$hashes = self::table( self::TABLE_HASHES );
 
 		return (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$hashes}" ); // phpcs:ignore WordPress.DB
+	}
+
+	/**
+	 * What the SEO and usage numbers need to know about one image, from meta already read.
+	 *
+	 * @param int $attachment_id Attachment ID.
+	 * @return array{0: int, 1: int, 2: string} alt_missing, bad_name, base.
+	 */
+	public static function flags( $attachment_id ) {
+		$alt  = trim( (string) get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ) );
+		$file = (string) get_post_meta( $attachment_id, '_wp_attached_file', true );
+
+		return array(
+			'' === $alt ? 1 : 0,
+			self::is_bad_name( $file ) ? 1 : 0,
+			self::base_of( $file ),
+		);
+	}
+
+	/**
+	 * Refresh only the flags of one image; the hash, size and thumbnails belong to other writers.
+	 *
+	 * @param int $attachment_id Attachment ID.
+	 */
+	public static function put_flags( $attachment_id ) {
+		global $wpdb;
+
+		$attachment_id = (int) $attachment_id;
+
+		if ( $attachment_id <= 0 ) {
+			return;
+		}
+
+		list( $alt_missing, $bad_name, $base ) = self::flags( $attachment_id );
+
+		$hashes = self::table( self::TABLE_HASHES );
+
+		$wpdb->query( // phpcs:ignore WordPress.DB
+			$wpdb->prepare(
+				"INSERT INTO {$hashes} ( attachment_id, alt_missing, bad_name, base ) VALUES ( %d, %d, %d, %s )
+				 ON DUPLICATE KEY UPDATE alt_missing = VALUES( alt_missing ), bad_name = VALUES( bad_name ), base = VALUES( base )",
+				$attachment_id,
+				$alt_missing,
+				$bad_name,
+				$base
+			)
+		);
+	}
+
+	/**
+	 * The name a file is looked up by: no folder, extension, -scaled or -WxH suffix, lower case.
+	 *
+	 * The original, its -scaled copy and every generated size share it, so one key matches whichever
+	 * of them a post happens to embed.
+	 *
+	 * @param string $file Path or URL.
+	 * @return string
+	 */
+	public static function base_of( $file ) {
+		$name = strtolower( pathinfo( wp_basename( (string) $file ), PATHINFO_FILENAME ) );
+		$name = preg_replace( '/-(?:scaled|\d+x\d+)$/', '', $name );
+
+		return substr( (string) $name, 0, 191 );
+	}
+
+	/**
+	 * Whether a filename says nothing about the picture: a camera or screenshot default, a counter or a hash.
+	 *
+	 * @param string $file Path or URL.
+	 * @return bool
+	 */
+	public static function is_bad_name( $file ) {
+		$name = self::base_of( $file );
+
+		if ( '' === $name ) {
+			return false;
+		}
+
+		// A screenshot is always vague; a camera prefix is vague on its own or followed by counters.
+		return (bool) preg_match( '/^(?:screen[ _-]?shot.*|(?:img|dsc|dscn|dscf|pxl|pic|photo|image|scan|untitled|wp)(?:[ _-]?\d+(?:[ _-][a-z]{0,3}\d+)*)?|\d+|[a-f0-9]{16,})$/', $name );
+	}
+
+	/**
+	 * Images without alt text.
+	 *
+	 * @return int
+	 */
+	public static function missing_alt_count() {
+		return self::sum( 'alt_missing' );
+	}
+
+	/**
+	 * Images whose filename says nothing.
+	 *
+	 * @return int
+	 */
+	public static function bad_name_count() {
+		return self::sum( 'bad_name' );
+	}
+
+	/**
+	 * Kilobytes held by every original.
+	 *
+	 * @return int
+	 */
+	public static function library_kb() {
+		return self::sum( 'size_kb' );
+	}
+
+	/**
+	 * Kilobytes taken by the copies: every image in a shared-hash group except one.
+	 *
+	 * @return int
+	 */
+	public static function duplicate_kb() {
+		global $wpdb;
+
+		$hashes = self::table( self::TABLE_HASHES );
+		$groups = self::table( self::TABLE_GROUPS );
+
+		// Each group's size less the one image that stays.
+		return (int) $wpdb->get_var( // phpcs:ignore WordPress.DB
+			"SELECT COALESCE( SUM( t.total - t.smallest ), 0 ) FROM (
+				SELECT SUM( h.size_kb ) AS total, MIN( h.size_kb ) AS smallest
+				FROM {$hashes} h INNER JOIN {$groups} g ON g.hash = h.hash AND g.cnt > 1
+				GROUP BY h.hash
+			) t"
+		);
+	}
+
+	/**
+	 * Forget which images were found in use, before a usage pass marks them again.
+	 */
+	public static function reset_usage() {
+		global $wpdb;
+
+		$hashes = self::table( self::TABLE_HASHES );
+
+		$wpdb->query( "UPDATE {$hashes} SET used = 0 WHERE used <> 0" ); // phpcs:ignore WordPress.DB
+	}
+
+	/**
+	 * Mark images as in use by attachment ID.
+	 *
+	 * @param int[] $ids Attachment IDs.
+	 */
+	public static function mark_used_ids( array $ids ) {
+		global $wpdb;
+
+		$ids = array_values( array_filter( array_map( 'absint', $ids ) ) );
+
+		if ( empty( $ids ) ) {
+			return;
+		}
+
+		$hashes = self::table( self::TABLE_HASHES );
+
+		foreach ( array_chunk( $ids, 1000 ) as $chunk ) {
+			$wpdb->query( "UPDATE {$hashes} SET used = 1 WHERE used = 0 AND attachment_id IN ( " . implode( ',', $chunk ) . ' )' ); // phpcs:ignore WordPress.DB
+		}
+	}
+
+	/**
+	 * Mark images as in use by the name a post embeds them under.
+	 *
+	 * @param string[] $bases Values of base_of().
+	 */
+	public static function mark_used_bases( array $bases ) {
+		global $wpdb;
+
+		$bases = array_values( array_unique( array_filter( array_map( 'strval', $bases ) ) ) );
+
+		if ( empty( $bases ) ) {
+			return;
+		}
+
+		$hashes = self::table( self::TABLE_HASHES );
+
+		foreach ( array_chunk( $bases, 500 ) as $chunk ) {
+			$marks = implode( ',', array_fill( 0, count( $chunk ), '%s' ) );
+
+			$wpdb->query( $wpdb->prepare( "UPDATE {$hashes} SET used = 1 WHERE used = 0 AND base IN ( {$marks} )", $chunk ) ); // phpcs:ignore WordPress.DB
+		}
+	}
+
+	/**
+	 * Images no post, page, meta value or option was found to use, and what they weigh.
+	 *
+	 * @return array{count: int, kb: int}
+	 */
+	public static function unused_estimate() {
+		global $wpdb;
+
+		$hashes = self::table( self::TABLE_HASHES );
+
+		$row = $wpdb->get_row( "SELECT COUNT(*) AS n, COALESCE( SUM( size_kb ), 0 ) AS kb FROM {$hashes} WHERE used = 0 AND hash <> ''", ARRAY_A ); // phpcs:ignore WordPress.DB
+
+		return array(
+			'count' => (int) ( $row['n'] ?? 0 ),
+			'kb'    => (int) ( $row['kb'] ?? 0 ),
+		);
+	}
+
+	/**
+	 * @param string $column Column to add up.
+	 * @return int
+	 */
+	private static function sum( $column ) {
+		global $wpdb;
+
+		$hashes = self::table( self::TABLE_HASHES );
+
+		return (int) $wpdb->get_var( "SELECT COALESCE( SUM( {$column} ), 0 ) FROM {$hashes}" ); // phpcs:ignore WordPress.DB
 	}
 
 	/**

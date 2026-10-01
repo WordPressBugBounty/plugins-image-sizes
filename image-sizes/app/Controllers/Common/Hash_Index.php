@@ -18,6 +18,24 @@ class Hash_Index {
 		$this->action( 'thumbpress_file_meta_refreshed', array( $this, 'index_attachment' ) );
 		$this->action( 'delete_attachment', array( $this, 'forget_attachment' ) );
 		$this->filter( 'wp_update_attachment_metadata', array( $this, 'index_thumbnails' ), 10, 2 );
+		$this->action( 'added_post_meta', array( $this, 'index_alt' ), 10, 3 );
+		$this->action( 'updated_post_meta', array( $this, 'index_alt' ), 10, 3 );
+		$this->action( 'deleted_post_meta', array( $this, 'index_alt' ), 10, 3 );
+	}
+
+	/**
+	 * Keep the missing-alt flag current when alt text is added, edited or cleared.
+	 *
+	 * @param int|int[] $meta_id      Meta ID (unused).
+	 * @param int       $attachment_id Post the meta belongs to.
+	 * @param string    $meta_key     Meta key.
+	 */
+	public function index_alt( $meta_id, $attachment_id, $meta_key ) {
+		if ( '_wp_attachment_image_alt' !== $meta_key || ! wp_attachment_is_image( $attachment_id ) ) {
+			return;
+		}
+
+		Index::put_flags( $attachment_id );
 	}
 
 	/**
@@ -28,6 +46,7 @@ class Hash_Index {
 	 * @return array
 	 */
 	public function index_thumbnails( $metadata, $attachment_id ) {
+		Index::ensure_schema();
 		Index::put_thumbs( $attachment_id, Index::count_sizes( $metadata ) );
 
 		return $metadata;
@@ -51,7 +70,9 @@ class Hash_Index {
 			return;
 		}
 
+		Index::ensure_schema();
 		Index::put( $attachment_id, $hash, (int) get_post_meta( $attachment_id, Utility::SIZE_META_KEY, true ) );
+		Index::put_flags( $attachment_id );
 	}
 
 	/**

@@ -26,6 +26,7 @@ class Media_Buttons {
 		$this->filter( 'attachment_fields_to_edit', array( $this, 'add_compress_field' ), 16, 2 );
 		$this->filter( 'attachment_fields_to_edit', array( $this, 'add_replace_button' ), 17, 2 );
 		$this->filter( 'attachment_fields_to_edit', array( $this, 'add_editor_button' ), 18, 2 );
+		$this->filter( 'attachment_fields_to_edit', array( $this, 'add_watermark_button' ), 19, 2 );
 		$this->action( 'admin_footer', array( $this, 'render_modal' ) );
 	}
 
@@ -73,6 +74,11 @@ class Media_Buttons {
 						'title'       => __( 'Image Replacement is a Pro feature', 'image-sizes' ),
 						'description' => __( 'Swap out images without losing their metadata or breaking existing links. Drop in a new file and ThumbPress handles the rest.', 'image-sizes' ),
 						'cta'         => __( 'Upgrade to replace images', 'image-sizes' ),
+					),
+					'watermark' => array(
+						'title'       => __( 'Watermarking is a Pro feature', 'image-sizes' ),
+						'description' => __( 'Put your name or logo on this photo, or on your whole library. The original is always kept, so you can remove the watermark any time.', 'image-sizes' ),
+						'cta'         => __( 'Upgrade to protect your images', 'image-sizes' ),
 					),
 					'editor'   => array(
 						'title'       => __( 'Image Editor is a Pro feature', 'image-sizes' ),
@@ -172,6 +178,30 @@ class Media_Buttons {
 				'<button id="thumbpress_edit_img" type="button" class="button thumbpress_img_btn thumbpress-media-btn" data-feature="editor">%s%s</button>',
 				$pencil_icon,
 				esc_html__( 'Edit Image', 'image-sizes' )
+			),
+		);
+
+		return $form_fields;
+	}
+
+	/**
+	 * "Watermark" row. Pro applies and removes it; here the button opens the upgrade prompt.
+	 */
+	public function add_watermark_button( $form_fields, $post ) {
+		// Only the types Pro can mark, so the row is not offered on an image it could never handle.
+		if ( ! in_array( $post->post_mime_type, array( 'image/jpeg', 'image/png', 'image/webp' ), true ) ) {
+			return $form_fields;
+		}
+
+		$icon = '<svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="2" stroke="currentColor" stroke-linejoin="round"/><path d="M7 13.5L10 6.5L13 13.5M8.1 11.5H11.9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+		$form_fields['thumbpress_watermark_field'] = array(
+			'label' => __( 'Watermark', 'image-sizes' ),
+			'input' => 'html',
+			'html'  => sprintf(
+				'<button type="button" class="button thumbpress_img_btn thumbpress-media-btn" data-feature="watermark">%s%s</button>',
+				$icon,
+				esc_html__( 'Apply watermark', 'image-sizes' )
 			),
 		);
 

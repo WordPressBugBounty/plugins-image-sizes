@@ -4,7 +4,7 @@ Tags: image optimization, compress images, thumbnail manager, WebP converter, im
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 6.8.2
+Stable tag: 6.9.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -54,6 +54,7 @@ ThumbPress is a complete WordPress image optimization and media management plugi
 * 🔥 [Compress Images](https://thumbpress.co/modules/compress-images)
 * 🔥 [Replace Image with New Version](https://thumbpress.co/modules/replace-image-with-new-version)
 * 🔥 [Image Editor](https://thumbpress.co/modules/image-editor)
+* 🔥 Watermark Images *(New)*
 * 🔥 [Detect Duplicate Images](https://thumbpress.co/modules/detect-duplicate-images) *(New in 6.0)*
 * 🔥 [Bulk AVIF Conversion](https://thumbpress.co/modules/convert-images-to-avif) *(New in 6.0)*
 * 🔥 [Image CDN Offloading](https://thumbpress.co/features/image-cdn) *(New in 6.7)*
@@ -144,6 +145,14 @@ Smaller images mean faster pages, better Core Web Vitals scores, and stronger SE
 Need to update a product image, fix a low-quality photo, or refresh a visual after a rebrand? Normally, replacing an image in WordPress means deleting the old file and updating every page where it appears manually.
 
 ThumbPress lets you replace an image with a newer version while keeping the same URL. Every page, post, or widget that uses that image updates automatically. No broken links. No manual edits.
+
+**Watermark Images — Keep Your Name on Your Photos 🆕**
+
+Photos get copied, re-uploaded and passed off as someone else's. A watermark keeps your name or logo on every copy.
+
+ThumbPress Pro stamps text or your logo on your images — as they are uploaded, or across your whole library in one run. Choose the position (or tile it across the image), size, opacity, margin and rotation, pick which image sizes carry the mark, and preview the result before you apply it. The untouched original is always kept, so you can remove the watermark or change it later without ever marking a photo twice.
+
+Everything is drawn on your own server. No image is sent anywhere.
 
 **Detect Duplicate Images — New in 6.0 🆕**
 
@@ -303,10 +312,11 @@ This plugin connects to the following external services. No personal data is eve
 **ThumbPress Feedback Service (pluggable.io / FluentCRM)**
 ThumbPress can send your information to our marketing/CRM endpoint (`https://my.pluggable.io/?fluentcrm=1`) so we can follow up, improve the plugin, and understand how it is used.
 
-This service is used in two places, and **only** when you choose to participate:
+This service is used in three places, and **only** when you choose to participate:
 
 * *Activation survey notice* — if (and only if) you click the "Ok, I agree" button on the optional survey notice, the plugin sends your WordPress user first name, last name, email address, the plugin slug, and your site URL. Clicking "Remind me later", dismissing, or ignoring the notice sends nothing.
 * *Deactivation feedback form* — if (and only if) you click "Submit & Deactivate" on the optional feedback form shown when deactivating the plugin, it sends your WordPress user first name, last name, email address, the plugin slug, your site URL, the time since install, the deactivation reason(s) you selected, and any free-text feedback you typed. Clicking "Skip & Deactivate" sends nothing.
+* *Feedback prompt* — about a week after install, ThumbPress may ask in its own admin screens whether it is working well. If (and only if) you answer "Not really" and click "Send feedback", the plugin sends the message you typed, the email address you entered, your WordPress user first name and last name, the plugin slug, and your site URL. Answering "Yes", "Maybe later", "Don't ask again" or closing the prompt sends nothing; "Leave a review" only opens the WordPress.org review page in a new tab.
 
 No data is sent on activation, on normal usage, in the background, or on a schedule. Nothing is sent unless you actively submit one of the forms above.
 
@@ -320,9 +330,25 @@ The plugin links to thumbpress.co for Pro upgrade information. No data is sent a
 
 == Changelog ==
 
+= 6.9.0 - 2026-10-01 =
+* [new] A redesigned dashboard: a letter grade for your media library, four scored areas (Speed, SEO, Storage and Protect), a recent-activity list, quick actions and a "Fix everything" button that switches on the free settings that help your site
+* [new] The dashboard now also reports images with no alt text, images with vague file names, the space your duplicates take up, and an estimate of images nothing on your site seems to use. The unused-image figure is an estimate — page builders can hide references
+* [new] Site Image Checkup: a short guided check for new installs that scans your library, grades it, shows before-and-after previews of your own photos and offers the free fixes in one click. Run it again any time from Settings > General
+* [new] Watermark Images (Pro): a new Watermark page, a Watermark tab in Settings and a Watermark row on each image's details screen. In the free plugin you can set up the text or logo, position, size and opacity and preview it on your own images before upgrading; applying it requires ThumbPress Pro
+* [new] A one-time "What's new" popup after a major update, and a "New" badge on the Watermark menu item
+* [new] A friendly prompt asks whether you'd like to leave a review 7 days after install. If you're not happy, you can send private feedback to the team instead — nothing is sent unless you click Send feedback
+* [imp] The dashboard shows an approximate size ("~2 GB smaller") for compression savings instead of a bare percentage
+* [imp] The Media Health score is now measured against your scanned library, and figures that haven't been measured yet say so instead of showing zero
+* [fix] Sites that update from an earlier version no longer risk database errors when uploading an image or editing alt text before the first scan has been run
+* [fix] The dashboard header no longer collapses into a single centred column when ThumbPress Pro is active
+
 = 6.8.2 - 2026-09-29 =
 * [fix] Portrait photos taken on a phone no longer turn sideways when converted to WebP or AVIF, whether converted on upload, with the single-image buttons, or in bulk
 * [fix] Converting to WebP no longer leaves broken image links in your posts and settings when the server stops a conversion partway through, or when you cancel a background conversion
+
+= 6.8.1 - 2026-09-22 =
+* [new] "Check my images" on the dashboard shows how much space compression would free on your own images.
+* [imp] The Media Health score in the admin bar now waits for your library scan.
 
 = 6.8.0 - 2026-09-17 =
 * [new] Scanning your media library is now something you start, not something the plugin decides to do for you. Duplicate and large-image counts show a "Run scan" button until you run one; the scan works through your library in the background, shows its progress, and can be cancelled at any time

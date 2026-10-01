@@ -233,7 +233,7 @@ class Init {
 			++$processed;
 
 			if ( ! empty( $hash ) ) {
-				$rows[] = array( $id, $hash, (int) $size, Hash_Index::count_sizes( wp_get_attachment_metadata( $id ) ) );
+				$rows[] = array_merge( array( $id, $hash, (int) $size, Hash_Index::count_sizes( wp_get_attachment_metadata( $id ) ) ), Hash_Index::flags( $id ) );
 			}
 
 			// Checked after the first image, so a batch always advances the watermark.
@@ -276,5 +276,7 @@ class Init {
 		delete_option( self::CANCEL_OPTION );
 
 		$this->clear_file_meta_caches();
+
+		do_action( 'thumbpress_library_scanned' );
 	}
 }

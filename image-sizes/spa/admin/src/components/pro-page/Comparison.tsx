@@ -109,6 +109,11 @@ const Comparison = () => {
 					proLabel: __( 'Included. <a href="https://thumbpress.co/features/image-cdn" target="_blank" rel="noopener noreferrer" style="color: #40189d; text-decoration: underline;">See Details</a>', 'image-sizes' ),
 				},
 				{
+					name: __( 'Watermark Images', 'image-sizes' ),
+					free: false,
+					pro: true,
+				},
+				{
 					name: __( 'Lazy Load Images', 'image-sizes' ),
 					free: true,
 					pro: true,

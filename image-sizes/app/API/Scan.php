@@ -8,6 +8,7 @@ namespace Codexpert\ThumbPress\API;
 defined( 'ABSPATH' ) || exit;
 
 use Codexpert\ThumbPress\Controllers\Common\Init;
+use Codexpert\ThumbPress\Controllers\Common\Usage_Scan;
 use Codexpert\ThumbPress\Models\Hash_Index;
 use Codexpert\ThumbPress\Traits\Rest;
 
@@ -16,6 +17,12 @@ class Scan {
 	use Rest;
 
 	const ACTION = 'thumbpress_generate_image_hashes';
+
+	/**
+	 * At most one runner wake-up per this many seconds, however often the screen polls.
+	 */
+	const NUDGE_INTERVAL = 10;
+	const NUDGE_LOCK     = 'thumbpress_scan_nudged';
 
 	/**
 	 * Begin a scan, discarding whatever a previous run left behind.
@@ -30,6 +37,7 @@ class Scan {
 
 		as_unschedule_all_actions( self::ACTION );
 		delete_option( Init::CANCEL_OPTION );
+		Usage_Scan::abort();
 
 		update_option( 'thumbpress_scan_total', $this->total_images() );
 		update_option( 'thumbpress_scan_processed', 0 );
@@ -39,6 +47,8 @@ class Scan {
 
 		as_schedule_single_action( wp_date( 'U' ) - 10, self::ACTION, array( 'offset' => 0 ) );
 
+		$this->nudge();
+
 		return $this->response_success( $this->state() );
 	}
 
@@ -46,7 +56,13 @@ class Scan {
 	 * Where the current scan has got to.
 	 */
 	public function progress() {
-		return $this->response_success( $this->state() );
+		$state = $this->state();
+
+		if ( $state['is_running'] ) {
+			$this->nudge();
+		}
+
+		return $this->response_success( $state );
 	}
 
 	/**
@@ -59,7 +75,27 @@ class Scan {
 			as_unschedule_all_actions( self::ACTION );
 		}
 
+		Usage_Scan::abort();
+
 		return $this->response_success( $this->state() );
+	}
+
+	/**
+	 * Wake Action Scheduler's runner so the scan starts now, not on the next WP-Cron tick.
+	 *
+	 * Action Scheduler dispatches its runner only on the shutdown of an admin page load, and
+	 * sets a 60s lock there even when nothing is due. The scan screens poll over REST, which
+	 * never dispatches, so a scan started just after the page loaded waited a minute or more.
+	 * The runner's own allow() still applies: nothing due, or a batch already running, sends nothing.
+	 */
+	private function nudge() {
+		if ( ! class_exists( 'ActionScheduler_AsyncRequest_QueueRunner' ) || get_transient( self::NUDGE_LOCK ) ) {
+			return;
+		}
+
+		set_transient( self::NUDGE_LOCK, 1, self::NUDGE_INTERVAL );
+
+		( new \ActionScheduler_AsyncRequest_QueueRunner( \ActionScheduler::store() ) )->maybe_dispatch();
 	}
 
 	/**

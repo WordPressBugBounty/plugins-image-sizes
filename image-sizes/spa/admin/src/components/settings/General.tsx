@@ -295,6 +295,23 @@ export default function General({ settings, onSave }: GeneralProps) {
 				/>
 			</div>
 
+			<div className="flex items-center justify-between py-4 border-b border-[#E2E8F0]">
+				<div>
+					<h4 className="2xl:text-base lg:text-sm font-medium text-thumbpress-title">
+						{__( 'Site Image Checkup', 'image-sizes' )}
+					</h4>
+					<p className="2xl:text-sm lg:text-xs text-[#64748B] mt-1">
+						{__( 'Scan your library again and see your image grade. Nothing changes until you say so.', 'image-sizes' )}
+					</p>
+				</div>
+				<a
+					href="#/setup?mode=manual"
+					className="px-6 py-2.5 rounded-lg border border-thumbpress-primary text-thumbpress-primary text-sm font-medium hover:bg-thumbpress-primary/5 transition-colors no-underline whitespace-nowrap"
+				>
+					{__( 'Run checkup again', 'image-sizes' )}
+				</a>
+			</div>
+
 			<div className="flex items-center justify-end gap-4 pt-6">
 				<button
 					onClick={handleReset}

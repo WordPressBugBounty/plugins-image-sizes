@@ -55,6 +55,15 @@ export function CompressImageIcon( { className }: { className?: string } ) {
     );
 }
 
+export function WatermarkIcon( { className }: { className?: string } ) {
+    return (
+        <svg className={ className } width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2.5" y="3.5" width="15" height="13" rx="2" stroke="currentColor" stroke-linejoin="round"/>
+            <path d="M7 13.5L10 6.5L13 13.5M8.1 11.5H11.9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    );
+}
+
 export function ConvertToWebPIcon( { className }: { className?: string } ) {
     return (
         <svg className={className} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

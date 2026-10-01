@@ -3,6 +3,9 @@ namespace Codexpert\ThumbPress\API;
 
 defined( 'ABSPATH' ) || exit;
 
+use Codexpert\ThumbPress\Controllers\Common\Missed_Savings;
+use Codexpert\ThumbPress\Controllers\Common\Usage_Scan;
+use Codexpert\ThumbPress\Helpers\Scorecard;
 use Codexpert\ThumbPress\Helpers\Utility;
 use Codexpert\ThumbPress\Models\Hash_Index;
 use Codexpert\ThumbPress\Traits\Rest;
@@ -54,6 +57,7 @@ class Dashboard {
 			'unoptimized_images' => $unoptimized,
 			'compressed'         => $total_images - $not_compressed,
 			'not_compressed'     => $not_compressed,
+			'compression_check'  => Compression_Check::get_result(),
 		) );
 	}
 
@@ -93,15 +97,191 @@ class Dashboard {
 		$stats['health_issue'] = $health_data['issue'];
 		$stats['quick_facts']  = $this->build_quick_facts( $stats );
 
-		return $this->response_success( array(
-			'scanned'          => Hash_Index::is_ready(),
-			'large_images'     => $stats['large_images'],
-			'duplicate_images' => $stats['duplicate_images'],
-			'unused_images'    => $stats['unused_images'],
-			'health_score'     => $stats['health_score'],
-			'health_issue'     => $stats['health_issue'],
-			'quick_facts'      => $stats['quick_facts'],
-		) );
+		return $this->response_success(
+			array_merge(
+				array(
+					'scanned'          => Hash_Index::is_ready(),
+					'large_images'     => $stats['large_images'],
+					'duplicate_images' => $stats['duplicate_images'],
+					'unused_images'    => $stats['unused_images'],
+					'health_score'     => $stats['health_score'],
+					'health_issue'     => $stats['health_issue'],
+					'quick_facts'      => $stats['quick_facts'],
+				),
+				$this->command_center( $stats )
+			)
+		);
+	}
+
+	/**
+	 * What the dashboard's grade, category cards, savings band and activity need beyond the base stats.
+	 *
+	 * Every number is an index read or an option, so nothing here scans the library on a request. It
+	 * runs after `thumbpress_dashboard_stats`, so Pro's exact unused count reaches the scorecard.
+	 *
+	 * @param array $stats Base stats, health score included.
+	 * @return array
+	 */
+	private function command_center( $stats ) {
+		$scanned   = Hash_Index::is_ready();
+		$scanning  = function_exists( 'as_has_scheduled_action' ) && as_has_scheduled_action( 'thumbpress_generate_image_hashes' );
+		$has_index = $scanned || $scanning;
+		$check     = Compression_Check::get_result();
+
+		$library_bytes   = $has_index ? Hash_Index::library_kb() * 1024 : 0;
+		$duplicate_bytes = $has_index ? Hash_Index::duplicate_kb() * 1024 : 0;
+		$likely_unused   = null;
+
+		if ( $scanned && Usage_Scan::is_current() ) {
+			$estimate      = Hash_Index::unused_estimate();
+			$likely_unused = array(
+				'count' => $estimate['count'],
+				'bytes' => $estimate['kb'] * 1024,
+			);
+		}
+
+		$unused_bytes = $likely_unused ? $likely_unused['bytes'] : 0;
+		$hotlink      = (bool) get_option( 'thumbpress_hotlink_protection', 0 );
+		$right_click  = (bool) get_option( 'thumbpress_image_download_disable', 0 );
+		$watermark    = ! empty( $stats['watermark'] );
+		$watermark_on = (bool) apply_filters( 'thumbpress_watermark_available', false );
+
+		$card_stats = array(
+			'total_images'      => (int) $stats['total_images'],
+			'large_images'      => (int) $stats['large_images'],
+			'not_compressed'    => (int) $stats['not_compressed'],
+			'not_webp'          => (int) $stats['not_webp'],
+			'not_avif'          => (int) $stats['not_avif'],
+			'lazy_load'         => ! empty( $stats['lazy_load'] ),
+			'missing_alt'       => $has_index ? Hash_Index::missing_alt_count() : 0,
+			'bad_names'         => $has_index ? Hash_Index::bad_name_count() : 0,
+			'reclaimable_bytes' => $duplicate_bytes + $unused_bytes + (int) ( $check['saved_bytes'] ?? 0 ),
+			'library_bytes'     => $library_bytes,
+			'hotlink'           => $hotlink,
+			'right_click'       => $right_click,
+			'watermark'         => $watermark,
+			'watermark_available' => $watermark_on,
+			'scored'            => $has_index,
+		);
+
+		$missed = Missed_Savings::read();
+
+		return array(
+			'grade'             => $has_index ? Scorecard::grade( $stats['health_score'] ) : '',
+			'scores'            => Scorecard::categories( $card_stats ),
+			'missing_alt'       => $card_stats['missing_alt'],
+			'bad_names'         => $card_stats['bad_names'],
+			'duplicate_bytes'   => $duplicate_bytes,
+			'library_bytes'     => $library_bytes,
+			'likely_unused'     => $likely_unused,
+			'hotlink'           => $hotlink,
+			'right_click'       => $right_click,
+			'watermark'         => $watermark,
+			'watermark_available' => $watermark_on,
+			'trend'             => $this->score_trend( $scanned && ! $scanning ? (int) $stats['health_score'] : null ),
+			'missed_bytes'      => $missed['bytes'],
+			'missed_since'      => $missed['since'],
+			'activity'          => $this->activity( $has_index ),
+			'scan_completed_at' => (int) get_option( 'thumbpress_scan_completed_at', 0 ),
+		);
+	}
+
+	/**
+	 * The score from about a week ago, so the dashboard can say which way it moved.
+	 *
+	 * Keeps one reading a day, eight deep, and only from a finished scan: a partial scan's score would
+	 * make the next week's comparison meaningless.
+	 *
+	 * @param int|null $score Today's score, or null when it should not be recorded.
+	 * @return array{previous: int|null, since: int|null}
+	 */
+	private function score_trend( $score ) {
+		$history = get_option( 'thumbpress_grade_history', array() );
+		$history = is_array( $history ) ? $history : array();
+		$now     = time();
+		$last    = end( $history );
+
+		if ( null !== $score && ( ! $last || $now - (int) $last[0] >= DAY_IN_SECONDS ) ) {
+			$history[] = array( $now, $score );
+			$history   = array_slice( $history, -8 );
+
+			update_option( 'thumbpress_grade_history', $history, false );
+		}
+
+		foreach ( array_reverse( $history ) as $reading ) {
+			if ( $now - (int) $reading[0] >= 6 * DAY_IN_SECONDS ) {
+				return array(
+					'previous' => (int) $reading[1],
+					'since'    => (int) $reading[0],
+				);
+			}
+		}
+
+		return array(
+			'previous' => null,
+			'since'    => null,
+		);
+	}
+
+	/**
+	 * Today's uploads and the last scan: events that happened, never filler.
+	 *
+	 * @param bool $has_index Whether the index can be read for the over-1 MB count.
+	 * @return array
+	 */
+	private function activity( $has_index ) {
+		global $wpdb;
+
+		$rows  = array();
+		$since = current_time( 'Y-m-d' ) . ' 00:00:00';
+		$join  = $has_index ? 'LEFT JOIN ' . Hash_Index::table( Hash_Index::TABLE_HASHES ) . ' h ON h.attachment_id = p.ID' : '';
+		$large = $has_index ? 'COALESCE( SUM( h.size_kb > 1024 ), 0 )' : '0';
+
+		$today = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT COUNT(*) AS n,
+				        COALESCE( SUM( p.post_mime_type IN ( 'image/webp', 'image/avif' ) ), 0 ) AS modern,
+				        {$large} AS large
+				 FROM {$wpdb->posts} p {$join}
+				 WHERE p.post_type = 'attachment' AND p.post_status = 'inherit'
+				 AND p.post_mime_type LIKE 'image/%%' AND p.post_date >= %s", // phpcs:ignore WordPress.DB
+				$since
+			),
+			ARRAY_A
+		);
+
+		if ( $today && (int) $today['n'] > 0 ) {
+			$rows[] = array(
+				'type'   => 'uploads',
+				'ts'     => time(),
+				'count'  => (int) $today['n'],
+				'modern' => (int) $today['modern'],
+				'large'  => (int) $today['large'],
+			);
+		}
+
+		$setup = Setup::state();
+
+		if ( (int) $setup['completed_at'] > 0 ) {
+			$rows[] = array(
+				'type'    => 'checkup',
+				'ts'      => (int) $setup['completed_at'],
+				'count'   => count( (array) $setup['free_fixes_applied'] ),
+				'grade'   => (string) $setup['grade_before'],
+			);
+		}
+
+		$completed = (int) get_option( 'thumbpress_scan_completed_at', 0 );
+
+		if ( $completed > 0 && Hash_Index::is_ready() ) {
+			$rows[] = array(
+				'type'  => 'scan',
+				'ts'    => $completed,
+				'count' => Hash_Index::indexed_count(),
+			);
+		}
+
+		return $rows;
 	}
 
 	/**

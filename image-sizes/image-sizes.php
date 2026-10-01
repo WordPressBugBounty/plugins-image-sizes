@@ -1,11 +1,11 @@
 <?php
 /**
- * @package Thumbpress
+ * @package ThumbPress
  *
  * Plugin Name:       ThumbPress
  * Plugin URI:        https://wordpress.org/plugins/image-sizes/
  * Description:       WordPress Image Optimization & Media Management Toolkit
- * Version:           6.8.2
+ * Version:           6.9.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            ThumbPress
@@ -25,7 +25,7 @@ use Pluggable\Marketing\Deactivator;
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'THUMBPRESS_VERSION', '6.8.2' );
+define( 'THUMBPRESS_VERSION', '6.9.0' );
 define( 'THUMBPRESS_FILE', __FILE__ );
 define( 'THUMBPRESS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'THUMBPRESS_URL', plugin_dir_url( __FILE__ ) );
@@ -122,7 +122,7 @@ final class ThumbPress {
 	public function includes(): void {
 		if ( is_admin() ) {
 			new Notice( $this->plugin );
-			new Survey( $this->plugin );
+			// new Survey( $this->plugin );
 			new Deactivator( $this->plugin );
 		}
 	}
@@ -162,6 +162,8 @@ final class ThumbPress {
 	 * @return void
 	 */
 	public function install(): void {
+		// Before the installer: it writes the database version that tells a new site from an old one.
+		Bootstrap\Activator::arm_setup_redirect();
 		Bootstrap\Installer::install();
 		update_option( Bootstrap\Activator::REDIRECT_OPTION, true );
 	}

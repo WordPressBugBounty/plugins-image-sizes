@@ -10,6 +10,7 @@ import DetectUnusedImages from './pages/DetectUnusedImages';
 import DetectDuplicateImages from './pages/DetectDuplicateImages';
 import DetectLargeImages from './pages/DetectLargeImages';
 import CompressImages from './pages/CompressImages';
+import Watermark from './pages/Watermark';
 import ConvertToWebP from './pages/ConvertToWebP';
 import ConvertToAvif from './pages/ConvertToAvif';
 
@@ -17,6 +18,7 @@ import TrashFiles from './pages/TrashFiles';
 import CDN from './pages/CDN';
 import Settings from './pages/Settings';
 import Pro from './pages/Pro';
+import Setup from './pages/Setup';
 
 interface RouteData {
 	path: string;
@@ -44,6 +46,7 @@ const componentMap: Record<string, React.ComponentType> = {
 	DetectDuplicateImages,
 	DetectLargeImages,
 	CompressImages,
+	Watermark,
 	ConvertToWebP,
 	ConvertToAvif,
 	TrashFiles,
@@ -59,6 +62,7 @@ const defaultRoutes: RouteData[] = [
 	{ path: '/duplicate-images', component: 'DetectDuplicateImages' },
 	{ path: '/large-images', component: 'DetectLargeImages' },
 	{ path: '/compress-images', component: 'CompressImages' },
+	{ path: '/watermark', component: 'Watermark' },
 	{ path: '/convert-to-webp', component: 'ConvertToWebP' },
 	{ path: '/convert-to-avif', component: 'ConvertToAvif' },
 	{ path: '/trashed-files', component: 'TrashFiles' },
@@ -74,6 +78,7 @@ const defaultNavItems: NavItemData[] = [
 	{ to: '/duplicate-images', label: 'Duplicate Images', icon: 'DuplicateImageIcon', pro: true },
 	{ to: '/large-images', label: 'Large Images', icon: 'LargeImageIcon', pro: true },
 	{ to: '/compress-images', label: 'Compress Images', icon: 'CompressImageIcon', pro: true },
+	{ to: '/watermark', label: 'Watermark', icon: 'WatermarkIcon', pro: true, isNew: true },
 	{ to: '/convert-to-webp', label: 'Convert to WebP', icon: 'ConvertToWebPIcon' },
 	{ to: '/convert-to-avif', label: 'Convert to AVIF', icon: 'ConvertToAvifIcon', pro: true },
 	{ to: '/cdn', label: 'CDN', icon: 'CdnIcon', pro: true, isNew: true },
@@ -103,6 +108,8 @@ function App() {
 			<HashRouter>
 			<Toaster position="top-right" richColors />
 			<Routes>
+				{ /* The checkup is full screen, so it sits outside the layout with its sidebar and header. */ }
+				<Route path="/setup/:step?" element={ <Setup /> } />
 				<Route element={ <Layout navItems={ uniqueNavItems } /> }>
 					{ routes.map( ( route ) => {
 						const Component = filteredComponentMap[ route.component ];

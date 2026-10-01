@@ -47,12 +47,10 @@ const CompressionCheckModal = ( { result, samples, healthGain, onClose }: {
 								__( '~%s', 'image-sizes' ),
 								formatBytes( result.saved_bytes, true ),
 							) }
-							
-							{" smaller"}
 					</p>
 					<p className="text-sm text-white/80">
 						{ byPercent
-							? __( 'with ThumbPress Pro, plus every thumbnail and new upload', 'image-sizes' )
+							? __( 'smaller with ThumbPress Pro, plus every thumbnail and new upload', 'image-sizes' )
 							: sprintf(
 								/* translators: %s: number of images. */
 								__( 'across your %s images with ThumbPress Pro', 'image-sizes' ),

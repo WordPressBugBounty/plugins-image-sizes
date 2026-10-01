@@ -29,6 +29,16 @@ export function numberFormat( value: number ): string {
 	}
 }
 
+/** Format a Unix timestamp (seconds) as a date in the current WordPress locale. */
+export function dateFormat( timestamp: number ): string {
+	const date = new Date( timestamp * 1000 );
+	try {
+		return date.toLocaleDateString( wpLocale(), { year: 'numeric', month: 'short', day: 'numeric' } );
+	} catch {
+		return date.toLocaleDateString();
+	}
+}
+
 /**
  * Format a percentage for display, e.g. "80%". The number is locale-formatted and
  * the "%" is part of the (translatable) template.
@@ -41,12 +51,15 @@ export function percentFormat( value: number ): string {
 /**
  * Human-readable, locale-aware, translatable file size (e.g. "1.5 MB").
  * The unit label is translatable and the number is locale-formatted.
+ *
+ * Pass `roundDown` for an estimate, which must never show more than was measured.
  */
-export function formatBytes( bytes: number ): string {
+export function formatBytes( bytes: number, roundDown = false ): string {
 	const safe = Number.isFinite( bytes ) && bytes > 0 ? bytes : 0;
 	const i = safe === 0 ? 0 : Math.min( 4, Math.floor( Math.log( safe ) / Math.log( 1024 ) ) );
 	const scaled = safe / Math.pow( 1024, i );
-	const rounded = scaled < 10 ? Math.round( scaled * 10 ) / 10 : Math.round( scaled );
+	const round = roundDown ? Math.floor : Math.round;
+	const rounded = scaled < 10 ? round( scaled * 10 ) / 10 : round( scaled );
 	const num = numberFormat( rounded );
 
 	switch ( i ) {

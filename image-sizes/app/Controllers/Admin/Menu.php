@@ -19,6 +19,27 @@ class Menu {
 	public function __construct() {
 		$this->action( 'admin_enqueue_scripts', array( $this, 'add_assets' ) );
 		$this->action( 'admin_menu', array( $this, 'register' ) );
+		$this->filter( 'plugin_action_links_' . plugin_basename( THUMBPRESS_FILE ), array( $this, 'action_links' ) );
+	}
+
+	/**
+	 * Settings and Setup Wizard links in the plugin's row on the Plugins screen, before Deactivate.
+	 *
+	 * @param string[] $links
+	 * @return string[]
+	 */
+	public function action_links( $links ) {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return $links;
+		}
+
+		return array_merge(
+			array(
+				'settings' => sprintf( '<a href="%s">%s</a>', esc_url( admin_url( 'admin.php?page=thumbpress#/settings' ) ), esc_html__( 'Settings', 'image-sizes' ) ),
+				'setup'    => sprintf( '<a href="%s">%s</a>', esc_url( admin_url( 'admin.php?page=thumbpress#/setup?mode=manual' ) ), esc_html__( 'Setup Wizard', 'image-sizes' ) ),
+			),
+			$links
+		);
 	}
 
 	public function add_assets() {
@@ -34,6 +55,9 @@ class Menu {
 				array_merge( $admin_asset['dependencies'], array( 'image-sizes_common' ) ),
 				$admin_asset['version']
 			);
+
+			// The Watermark settings pick their logo from the Media Library.
+			wp_enqueue_media();
 
 			// Feed the React bundle's __() strings the translations for the current locale.
 			// Reads languages/image-sizes-{locale}-image-sizes_main-menu.json (built via
@@ -87,6 +111,10 @@ class Menu {
 			$pro_label = '<span style="background: #ea580c; width: 100%; display: inline-block; color: #fff; text-align: center; padding: 5px 0; border-radius: 4px; font-weight: bold;">' . $pro_cta_text . '</span>';
 		}
 
+		// "New" pill, same treatment as the Pro submenu label: WP prints submenu
+		// titles unescaped, so the badge travels with the label string.
+		$new_badge = '<span style="background: #FF3A52; color: #fff; font-size: 9px; font-weight: 600; line-height: 1; padding: 3px 6px; border-radius: 8px; margin-left: 6px; vertical-align: middle;">' . __( 'New', 'image-sizes' ) . '</span>';
+
 		// All submenus point to the same page slug.
 		// React Router handles the actual routing via hash.
 		$submenus = array(
@@ -113,6 +141,10 @@ class Menu {
 			array(
 				'label' => __( 'Compress Images', 'image-sizes' ),
 				'hash'  => '#/compress-images',
+			),
+			array(
+				'label' => __( 'Watermark', 'image-sizes' ) . $new_badge,
+				'hash'  => '#/watermark',
 			),
 			array(
 				'label' => __( 'Convert to WebP', 'image-sizes' ),
@@ -142,12 +174,8 @@ class Menu {
 		// installed pro build may not have.
 		if ( ! apply_filters( 'thumbpress_is_pro_active', defined( 'THUMBPRESS_PRO_VERSION' ) ) ) {
 			$position = array_search( '#/trashed-files', array_column( $submenus, 'hash' ), true );
-			// "New" pill, same treatment as the Pro submenu label: WP prints submenu
-			// titles unescaped, so the badge travels with the label string.
-			$cdn_badge = '<span style="background: #FF3A52; color: #fff; font-size: 9px; font-weight: 600; line-height: 1; padding: 3px 6px; border-radius: 8px; margin-left: 6px; vertical-align: middle;">' . __( 'New', 'image-sizes' ) . '</span>';
-
 			$cdn_submenu = array(
-				'label' => __( 'CDN', 'image-sizes' ) . $cdn_badge,
+				'label' => __( 'CDN', 'image-sizes' ) . $new_badge,
 				'hash'  => '#/cdn',
 			);
 
@@ -239,6 +267,13 @@ class Menu {
 				'pro'   => ! $pro_unlocked,
 			),
 			array(
+				'to'    => '/watermark',
+				'label' => __( 'Watermark', 'image-sizes' ),
+				'icon'  => 'WatermarkIcon',
+				'pro'   => ! $pro_unlocked,
+				'isNew' => true,
+			),
+			array(
 				'to'    => '/convert-to-webp',
 				'label' => __( 'Convert to WebP', 'image-sizes' ),
 				'icon'  => 'ConvertToWebPIcon',
@@ -323,6 +358,10 @@ class Menu {
 			array(
 				'path'      => '/compress-images',
 				'component' => 'CompressImages',
+			),
+			array(
+				'path'      => '/watermark',
+				'component' => 'Watermark',
 			),
 			array(
 				'path'      => '/convert-to-webp',

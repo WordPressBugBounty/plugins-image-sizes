@@ -4,13 +4,17 @@ namespace Codexpert\ThumbPress\Controllers\Common;
 defined( 'ABSPATH' ) || exit;
 
 use WP_REST_Server;
+use Codexpert\ThumbPress\Bootstrap\Activator;
 use Codexpert\ThumbPress\API\Regenerate;
 use Codexpert\ThumbPress\API\Thumbnails;
 use Codexpert\ThumbPress\API\Convert_Webp;
 use Codexpert\ThumbPress\API\Convert_Avif;
 use Codexpert\ThumbPress\API\Settings;
 use Codexpert\ThumbPress\API\Dashboard;
+use Codexpert\ThumbPress\API\Review;
 use Codexpert\ThumbPress\API\Scan;
+use Codexpert\ThumbPress\API\Setup;
+use Codexpert\ThumbPress\API\Compression_Check;
 use Codexpert\ThumbPress\Controllers\Common\Thumbnails as Thumbnails_Controller;
 use Codexpert\ThumbPress\Controllers\Common\Convert_Webp as Convert_Webp_Controller;
 use Codexpert\ThumbPress\Helpers\Utility;
@@ -364,6 +368,97 @@ class API {
 		);
 
 		/**
+		 * Site Image Checkup state
+		 */
+		register_rest_route(
+			$this->namespace,
+			'/setup/state',
+			array(
+				array(
+					'methods'             => WP_REST_Server::READABLE,
+					'callback'            => array( new Setup(), 'get_state' ),
+					'permission_callback' => array( $this, 'is_admin' ),
+				),
+				array(
+					'methods'             => WP_REST_Server::CREATABLE,
+					'callback'            => array( new Setup(), 'save_state' ),
+					'args'                => array(
+						'site_type'          => array( 'type' => 'string' ),
+						'mode'               => array( 'type' => 'string' ),
+						'started'            => array( 'type' => 'boolean' ),
+						'completed'          => array( 'type' => 'boolean' ),
+						'skipped'            => array( 'type' => 'boolean' ),
+						'invite_dismissed'   => array( 'type' => 'boolean' ),
+						'grade_before'       => array( 'type' => 'string' ),
+						'score_before'       => array( 'type' => 'integer' ),
+						'free_fixes_applied' => array( 'type' => 'array' ),
+					),
+					'permission_callback' => array( $this, 'is_admin' ),
+				),
+			)
+		);
+
+		/**
+		 * Compression check APIs — compress throwaway copies to estimate savings; the library is never written.
+		 */
+		register_rest_route(
+			$this->namespace,
+			'/compression-check/start',
+			array(
+				'methods'             => WP_REST_Server::CREATABLE,
+				'callback'            => array( new Compression_Check(), 'start' ),
+				'permission_callback' => array( $this, 'is_admin' ),
+			)
+		);
+
+		register_rest_route(
+			$this->namespace,
+			'/compression-check/step',
+			array(
+				'methods'             => WP_REST_Server::CREATABLE,
+				'callback'            => array( new Compression_Check(), 'step' ),
+				'permission_callback' => array( $this, 'is_admin' ),
+				'args'                => array(
+					'token' => array(
+						'required' => true,
+						'type'     => 'string',
+					),
+					'index' => array(
+						'required' => true,
+						'type'     => 'integer',
+						'minimum'  => 0,
+					),
+				),
+			)
+		);
+
+		register_rest_route(
+			$this->namespace,
+			'/compression-check/preview',
+			array(
+				'methods'             => WP_REST_Server::READABLE,
+				'callback'            => array( new Compression_Check(), 'preview' ),
+				'permission_callback' => array( $this, 'is_admin' ),
+				'args'                => array(
+					'file' => array(
+						'required' => true,
+						'type'     => 'string',
+					),
+				),
+			)
+		);
+
+		register_rest_route(
+			$this->namespace,
+			'/compression-check/discard',
+			array(
+				'methods'             => WP_REST_Server::CREATABLE,
+				'callback'            => array( new Compression_Check(), 'discard' ),
+				'permission_callback' => array( $this, 'is_admin' ),
+			)
+		);
+
+		/**
 		 * Settings APIs
 		 */
 		register_rest_route(
@@ -434,7 +529,6 @@ class API {
 						'thumbpress_webp_view_state',
 						'thumbpress_avif_view_state',
 						'thumbpress_compress_view_state',
-						'thumbpress_cdn_announcement_dismissed',
 					] );
 					if ( ! in_array( $key, $allowed_keys, true ) ) {
 						return rest_ensure_response( array( 'value' => null ) );
@@ -462,7 +556,6 @@ class API {
 						'thumbpress_webp_view_state',
 						'thumbpress_avif_view_state',
 						'thumbpress_compress_view_state',
-						'thumbpress_cdn_announcement_dismissed',
 					] );
 					if ( ! in_array( $key, $allowed_keys, true ) ) {
 						return rest_ensure_response( array( 'success' => false ) );
@@ -470,6 +563,53 @@ class API {
 					update_option( $key, $value );
 					return rest_ensure_response( array( 'success' => true ) );
 				},
+				'permission_callback' => array( $this, 'is_admin' ),
+			)
+		);
+
+		/**
+		 * Dismiss the "What's new" popup. The server stamps the announced version itself, so the
+		 * browser cannot store anything else.
+		 */
+		register_rest_route(
+			$this->namespace,
+			'/whats-new/dismiss',
+			array(
+				'methods'             => WP_REST_Server::CREATABLE,
+				'callback'            => function () {
+					Activator::dismiss_whats_new();
+					return rest_ensure_response( array( 'success' => true ) );
+				},
+				'permission_callback' => array( $this, 'is_admin' ),
+			)
+		);
+
+		/**
+		 * Review prompt: an answer ("later" / "never" / "reviewed"), and unhappy feedback for our CRM.
+		 */
+		register_rest_route(
+			$this->namespace,
+			'/review/state',
+			array(
+				'methods'             => WP_REST_Server::CREATABLE,
+				'callback'            => array( new Review(), 'save_state' ),
+				'args'                => array(
+					'action' => array( 'type' => 'string' ),
+				),
+				'permission_callback' => array( $this, 'is_admin' ),
+			)
+		);
+
+		register_rest_route(
+			$this->namespace,
+			'/review/feedback',
+			array(
+				'methods'             => WP_REST_Server::CREATABLE,
+				'callback'            => array( new Review(), 'send_feedback' ),
+				'args'                => array(
+					'message' => array( 'type' => 'string' ),
+					'email'   => array( 'type' => 'string' ),
+				),
 				'permission_callback' => array( $this, 'is_admin' ),
 			)
 		);

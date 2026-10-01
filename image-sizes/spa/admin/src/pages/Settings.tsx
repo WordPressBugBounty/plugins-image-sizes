@@ -33,6 +33,7 @@ import DuplicateImages from '../components/settings/DuplicateImages';
 import ConvertToWebP from '../components/settings/ConvertToWebP';
 import ConvertToAvif from '../components/settings/ConvertToAvif';
 import Cdn from '../components/settings/Cdn';
+import Watermark from '../components/settings/Watermark';
 import SocialShareImage from '../components/settings/SocialShareImage';
 import Debug from '../components/settings/Debug';
 import SettingsSkeleton from '../components/settings/SettingsSkeleton';
@@ -193,6 +194,13 @@ export default function Settings() {
 			content: <SocialShareImage settings={pluginSettings} onSave={refreshSettings} />,
 			title: __( 'Platform Configuration', 'image-sizes' ),
 			tooltip: __( 'Manage the image used for social media sharing', 'image-sizes' ),
+		},
+		{
+			label: __( 'Watermark', 'image-sizes' ),
+			slug: 'watermark',
+			content: <Watermark />,
+			title: __( 'Watermark Settings', 'image-sizes' ),
+			tooltip: __( 'Stamp text or a logo on your images', 'image-sizes' ),
 		},
 		...( isProActive ? [] : [ {
 			label: __( 'CDN', 'image-sizes' ),
