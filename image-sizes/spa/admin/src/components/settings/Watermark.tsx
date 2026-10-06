@@ -59,6 +59,20 @@ export default function Watermark() {
 	const [ alertOpen, setAlertOpen ] = useState( false );
 	const openAlert = () => setAlertOpen( true );
 
+	// Pro replaces this tab by the `watermark` slug, so normally it is gone by the time Pro is
+	// active. A Pro build older than the watermark replaces nothing, and then this component is
+	// what a paying customer sees: the upsell below is correctly hidden from them, which left the
+	// Save button opening a dialog that never rendered and doing nothing at all (#575). Telling
+	// them to buy Pro would be wrong; they need a newer one.
+	const handleSave = () => {
+		if ( isProActive ) {
+			toast.error( __( 'This version of ThumbPress Pro cannot save a watermark yet. Update ThumbPress Pro to the latest version.', 'image-sizes' ) );
+			return;
+		}
+
+		openAlert();
+	};
+
 	const [ v, setV ] = useState<Values>( DEFAULTS );
 	const [ logoUrl, setLogoUrl ] = useState( '' );
 	const [ sample, setSample ] = useState<HTMLImageElement | null>( null );
@@ -331,7 +345,7 @@ export default function Watermark() {
 				<button onClick={ () => { setV( DEFAULTS ); setLogoUrl( '' ); } } className="px-8 py-2.5 rounded-lg border border-thumbpress-primary text-thumbpress-primary text-sm font-medium bg-white hover:bg-thumbpress-primary/5 transition-colors cursor-pointer">
 					{ __( 'Reset Options', 'image-sizes' ) }
 				</button>
-				<button onClick={ openAlert } className="px-8 py-2.5 rounded-lg bg-thumbpress-primary text-white text-sm font-medium hover:bg-purple-800 transition-colors cursor-pointer border-0">
+				<button onClick={ handleSave } className="px-8 py-2.5 rounded-lg bg-thumbpress-primary text-white text-sm font-medium hover:bg-purple-800 transition-colors cursor-pointer border-0">
 					{ __( 'Save Changes', 'image-sizes' ) }
 				</button>
 			</div>

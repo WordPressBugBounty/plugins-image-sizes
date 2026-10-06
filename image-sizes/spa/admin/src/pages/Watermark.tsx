@@ -1,6 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 import { Eye } from 'lucide-react';
 import Header from '../components/layout/Header';
 import PluginPage from '../components/layout/PluginPage';
@@ -19,6 +20,19 @@ export default function Watermark() {
 	const [totalImages, setTotalImages] = useState<number | null>(null);
 	const [alertOpen, setAlertOpen] = useState(false);
 	const openAlert = () => setAlertOpen(true);
+	const isProActive = window.THUMBPRESS?.pro_active;
+
+	// Pro replaces this whole page through `thumbpress_component_map`. A Pro build older than the
+	// watermark replaces nothing, so these actions are reached by someone who already pays, and the
+	// upsell dialog is the wrong answer for them (#575).
+	const handleProAction = () => {
+		if (isProActive) {
+			toast.error(__( 'This version of ThumbPress Pro cannot apply a watermark yet. Update ThumbPress Pro to the latest version.', 'image-sizes' ));
+			return;
+		}
+
+		openAlert();
+	};
 
 	// Free can count the library; only Pro tracks which images are watermarked, so those stay blank.
 	useEffect(() => {
@@ -77,13 +91,13 @@ export default function Watermark() {
 								{__( 'Preview your watermark', 'image-sizes' )}
 							</button>
 							<button
-								onClick={openAlert}
+								onClick={handleProAction}
 								className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors bg-thumbpress-primary text-white border border-thumbpress-primary py-2.5 w-[225px] cursor-pointer"
 							>
 								{__( 'Apply to unmarked images', 'image-sizes' )}
 							</button>
 							<button
-								onClick={openAlert}
+								onClick={handleProAction}
 								className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors border border-thumbpress-primary bg-white text-thumbpress-primary py-2.5 w-[225px] cursor-pointer"
 							>
 								{__( 'Re-apply to all', 'image-sizes' )}

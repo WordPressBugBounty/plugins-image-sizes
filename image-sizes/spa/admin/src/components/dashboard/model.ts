@@ -28,8 +28,17 @@ export interface DashboardLine {
 	to?: string;
 	/** A WordPress admin page (relative URL) the whole line links to, for fixes done by hand. */
 	href?: string;
-	/** Old Pro releases register a card filter per line; this is its name. */
-	filter?: 'large' | 'unused' | 'compress' | 'duplicate' | 'avif';
+	/**
+	 * The name of the per-line Pro filter, when this line has one.
+	 *
+	 * The first five exist for old Pro releases, which replaced the line wholesale; current Pro
+	 * skips those because free now draws their numbers itself (`THUMBPRESS.dashboard_lines`).
+	 * `alt` and `names` are the forward use: the SEO lines advertise an autofix Pro does not have
+	 * yet (thumbpress-pro#191), and without a filter name there is no way for Pro to supply it
+	 * once it does (#574). Pro registers these WITHOUT the `dashboard_lines` guard it uses on the
+	 * other five, since there is no free-drawn fix for them to defer to.
+	 */
+	filter?: 'large' | 'unused' | 'compress' | 'duplicate' | 'avif' | 'alt' | 'names';
 }
 
 export interface DashboardAction {
@@ -161,9 +170,10 @@ function seoLines( s: DashboardModelStats ): DashboardLine[] {
 			note: __( 'Google can’t read them. Add it in the Media Library', 'image-sizes' ),
 			tier: 'soon',
 			href: MEDIA_LIBRARY,
+			filter: 'alt',
 		} );
 	} else {
-		lines.push( { key: 'alt', label: __( 'Alt text', 'image-sizes' ), status: __( 'Done', 'image-sizes' ), note: __( 'Every image has it', 'image-sizes' ), tier: 'ok' } );
+		lines.push( { key: 'alt', label: __( 'Alt text', 'image-sizes' ), status: __( 'Done', 'image-sizes' ), note: __( 'Every image has it', 'image-sizes' ), tier: 'ok', filter: 'alt' } );
 	}
 
 	if ( s.bad_names > 0 ) {
@@ -173,6 +183,8 @@ function seoLines( s: DashboardModelStats ): DashboardLine[] {
 			label: _n( 'vague filename', 'vague filenames', s.bad_names, 'image-sizes' ),
 			note: __( 'Like IMG_4021.jpg', 'image-sizes' ),
 			tier: 'soon',
+			href: MEDIA_LIBRARY,
+			filter: 'names',
 		} );
 	}
 

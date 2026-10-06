@@ -4,7 +4,7 @@ Tags: image optimization, compress images, thumbnail manager, WebP converter, im
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 6.9.0
+Stable tag: 6.9.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -329,6 +329,10 @@ ThumbPress may connect to the WordPress.org API (api.wordpress.org) to check for
 The plugin links to thumbpress.co for Pro upgrade information. No data is sent automatically; links only open when the user clicks them.
 
 == Changelog ==
+
+= 6.9.1 - 2026-10-06 =
+* [fix] With an older ThumbPress Pro active, Save Changes in Settings > Watermark did nothing at all. It now tells you that a newer ThumbPress Pro is needed, and the Watermark page no longer offers Pro customers an upgrade to the plan they already have
+* [imp] ThumbPress Pro can now fix the dashboard's missing alt text and vague file names lines, and the vague file names line opens the Media Library like the alt text line does
 
 = 6.9.0 - 2026-10-01 =
 * [new] A redesigned dashboard: a letter grade for your media library, four scored areas (Speed, SEO, Storage and Protect), a recent-activity list, quick actions and a "Fix everything" button that switches on the free settings that help your site

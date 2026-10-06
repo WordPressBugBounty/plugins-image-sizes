@@ -1,11 +1,23 @@
 import React, { useState } from 'react';
 import { __ } from '@wordpress/i18n';
+import { toast } from 'sonner';
 import { Switch } from '../ui/switch';
 import ProAlert from '../ui/pro-alert';
 
 export default function DuplicateImages() {
 	const [alertOpen, setAlertOpen] = useState(false);
-	const openAlert = () => setAlertOpen(true);
+	const openAlert = () => {
+		// Pro replaces this tab by its slug. A Pro build that does not know this tab leaves free
+		// rendering it, and the upsell below is hidden from a paying customer — which is how the
+		// Watermark tab ended up with a Save button that did nothing (#575). Say what is wrong
+		// instead of falling silent.
+		if ( isProActive ) {
+			toast.error( __( 'This version of ThumbPress Pro cannot save these settings yet. Update ThumbPress Pro to the latest version.', 'image-sizes' ) );
+			return;
+		}
+
+		setAlertOpen( true );
+	};
 
 	const isProActive = window.THUMBPRESS?.pro_active;
 
@@ -20,7 +32,7 @@ export default function DuplicateImages() {
 						{!isProActive && (
 							<button
 								type="button"
-								onClick={() => setAlertOpen(true)}
+								onClick={openAlert}
 								className="inline-flex items-center gap-1 px-2 py-1 rounded text-[8px] bg-thumbpress-pro-yellow text-thumbpress-title cursor-pointer"
 							>
 								<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><g clipPath="url(#a)"><path d="M8.357 8.42H1.431a.494.494 0 0 0 0 .989H8.357a.494.494 0 0 0 0-.99Z" fill="#1C1C1C"/><path d="M9.097 2.055a.494.494 0 0 0-.543.033L6.959 3.285 5.28 1.186A.494.494 0 0 0 4.894 1a.494.494 0 0 0-.387.186L2.828 3.285 1.233 2.088a.494.494 0 0 0-.734.453l.495 4.452a.494.494 0 0 0 .491.431h6.926a.494.494 0 0 0 .491-.431l.495-4.452a.494.494 0 0 0-.308-.486ZM7.914 6.442H1.874L1.554 3.566l1.064.798a.494.494 0 0 0 .682-.092l1.593-1.99 1.592 1.99a.494.494 0 0 0 .683.092l1.064-.798-.318 2.876Z" fill="#1C1C1C"/></g><defs><clipPath id="a"><rect width="10" height="10" fill="#fff"/></clipPath></defs></svg>
