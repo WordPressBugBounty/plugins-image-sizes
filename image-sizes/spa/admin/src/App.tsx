@@ -84,7 +84,7 @@ const defaultNavItems: NavItemData[] = [
 	{ to: '/cdn', label: 'CDN', icon: 'CdnIcon', pro: true, isNew: true },
 	{ to: '/trashed-files', label: "Trashed Files", icon: 'TrashIcon', pro: true },
 	{ to: '/settings', label: 'Settings', icon: 'SettingsIcon' },
-	{ to: '/pro', label: 'Pro', icon: 'ProIcon' },
+	{ to: '/pro?src=sidebar', label: 'Pro', icon: 'ProIcon' },
 ];
 
 function App() {

@@ -53,8 +53,13 @@ export function percentFormat( value: number ): string {
  * The unit label is translatable and the number is locale-formatted.
  *
  * Pass `roundDown` for an estimate, which must never show more than was measured.
+ * A negative value (output larger than the source) keeps its sign, e.g. "-376 KB".
  */
 export function formatBytes( bytes: number, roundDown = false ): string {
+	if ( Number.isFinite( bytes ) && bytes < 0 ) {
+		// translators: %s is a formatted size; the value is negative because the files grew.
+		return sprintf( __( '-%s', 'image-sizes' ), formatBytes( -bytes, roundDown ) );
+	}
 	const safe = Number.isFinite( bytes ) && bytes > 0 ? bytes : 0;
 	const i = safe === 0 ? 0 : Math.min( 4, Math.floor( Math.log( safe ) / Math.log( 1024 ) ) );
 	const scaled = safe / Math.pow( 1024, i );

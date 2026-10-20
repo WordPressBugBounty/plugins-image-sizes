@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { __ } from '@wordpress/i18n';
+import { withSource } from '../pro-page/Pricing';
 
 interface UpgradeCardProps {
 	title: string;
@@ -13,7 +14,7 @@ export default function UpgradeCard({
 	title,
 	description,
 	buttonText = __( 'Upgrade for a Faster Website', 'image-sizes' ),
-	buttonUrl = 'https://thumbpress.co/pricing/',
+	buttonUrl = withSource( { url: 'https://thumbpress.co/pricing/' }, 'upgrade-card' ).url,
 	backgroundImage = 'table-shadow.png',
 }: UpgradeCardProps) {
 	return (

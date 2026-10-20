@@ -123,10 +123,16 @@ abstract class Image_Converter {
 		}
 
 		$size_after  = file_exists( $converted_path ) ? filesize( $converted_path ) : 0;
-		$saved_bytes = max( 0, $size_before - $size_after );
 
-		if ( $saved_bytes > 0 ) {
-			thumbpress_add_space_saved( $saved_bytes );
+		// A converted file that is not smaller than the upload is a loss: keep the upload as it is (#582).
+		if ( $size_before > 0 && $size_after >= $size_before && $converted_path !== $original_img_path ) {
+			wp_delete_file( $converted_path );
+			return $file_info;
+		}
+
+		// A missing size on either side means the delta is unknown, not that a whole file was saved or lost.
+		if ( $size_before > 0 && $size_after > 0 ) {
+			thumbpress_add_space_saved( $size_before - $size_after );
 		}
 
 		$converted_url = $this->generate_file_url( $converted_path );
@@ -141,6 +147,108 @@ abstract class Image_Converter {
 			'url'  => $converted_url,
 			'type' => $target_mime,
 		);
+	}
+
+	/**
+	 * Whether a GIF, APNG, WebP or AVIF file holds more than one frame.
+	 *
+	 * @param string $path Absolute file path.
+	 * @return bool
+	 */
+	private function is_animated( $path ) {
+		if ( ! is_readable( $path ) ) {
+			return false;
+		}
+
+		$handle = fopen( $path, 'rb' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen -- Reads local bytes in steps; WP_Filesystem would load the whole file.
+
+		if ( ! $handle ) {
+			return false;
+		}
+
+		$head     = fread( $handle, 32 ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fread -- Local header read.
+		$animated = false;
+
+		if ( 'GIF8' === substr( $head, 0, 4 ) ) {
+			$animated = $this->gif_has_many_frames( $handle );
+		} elseif ( "\x89PNG\r\n\x1a\n" === substr( $head, 0, 8 ) ) {
+			$animated = $this->png_is_animated( $handle );
+		} elseif ( 'RIFF' === substr( $head, 0, 4 ) && 'WEBP' === substr( $head, 8, 4 ) ) {
+			$animated = 'VP8X' === substr( $head, 12, 4 ) && ( ord( $head[20] ) & 0x02 );
+		} elseif ( 'ftyp' === substr( $head, 4, 4 ) ) {
+			$animated = false !== strpos( substr( $head, 8, 4 ) . substr( $head, 16, 16 ), 'avis' );
+		}
+
+		fclose( $handle ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose -- Local header read.
+
+		return (bool) $animated;
+	}
+
+	/**
+	 * Walk the GIF blocks and report whether a second image follows the first.
+	 *
+	 * @param resource $handle Open file handle.
+	 * @return bool
+	 */
+	private function gif_has_many_frames( $handle ) {
+		fseek( $handle, 10 );
+
+		$flags = ord( (string) fread( $handle, 1 ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fread -- Local block walk.
+
+		fseek( $handle, 2 + ( $flags & 0x80 ? 3 * ( 2 << ( $flags & 7 ) ) : 0 ), SEEK_CUR );
+
+		$frames = 0;
+
+		while ( true ) {
+			$block = (string) fread( $handle, 1 ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fread -- Local block walk.
+
+			if ( "\x21" === $block ) {
+				fseek( $handle, 1, SEEK_CUR );
+			} elseif ( "\x2C" === $block ) {
+				if ( ++$frames > 1 ) {
+					return true;
+				}
+
+				fseek( $handle, 8, SEEK_CUR );
+
+				$packed = ord( (string) fread( $handle, 1 ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fread -- Local block walk.
+
+				fseek( $handle, 1 + ( $packed & 0x80 ? 3 * ( 2 << ( $packed & 7 ) ) : 0 ), SEEK_CUR );
+			} else {
+				return false;
+			}
+
+			do {
+				$size = ord( (string) fread( $handle, 1 ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fread -- Local block walk.
+
+				fseek( $handle, $size, SEEK_CUR );
+			} while ( $size > 0 );
+		}
+	}
+
+	/**
+	 * Whether the PNG declares an animation control chunk before its image data.
+	 *
+	 * @param resource $handle Open file handle.
+	 * @return bool
+	 */
+	private function png_is_animated( $handle ) {
+		fseek( $handle, 8 );
+
+		while ( true ) {
+			$chunk = (string) fread( $handle, 8 ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fread -- Local chunk walk.
+			$type  = substr( $chunk, 4, 4 );
+
+			if ( 8 !== strlen( $chunk ) || 'IDAT' === $type || 'IEND' === $type ) {
+				return false;
+			}
+
+			if ( 'acTL' === $type ) {
+				return true;
+			}
+
+			fseek( $handle, current( unpack( 'N', substr( $chunk, 0, 4 ) ) ) + 4, SEEK_CUR );
+		}
 	}
 
 	/**
@@ -174,11 +282,12 @@ abstract class Image_Converter {
 		}
 
 		$html = sprintf(
-			'<button id="%1$s" data-image_id="%2$s" class="button thumbpress_img_btn" type="button">%3$s%4$s</button>',
+			'<button id="%1$s" data-image_id="%2$s" data-confirm="%5$s" class="button thumbpress_img_btn" type="button">%3$s%4$s</button>',
 			esc_attr( $config['button_id'] ),
 			$post->ID,
 			$config['button_icon'],
-			$config['button_label']
+			$config['button_label'],
+			esc_attr( __( 'Converting replaces this image with the converted file and deletes the original files, including every thumbnail size. This can\'t be undone, so back up your uploads first. Continue?', 'image-sizes' ) )
 		);
 
 		$form_fields[ $config['button_field'] ] = array(
@@ -228,6 +337,10 @@ abstract class Image_Converter {
 
 		if ( $extension === $format ) {
 			return new \WP_Error( 'thumbpress_already_' . $format, $config['already_message'] );
+		}
+
+		if ( $this->is_animated( $source ) ) {
+			return new \WP_Error( 'thumbpress_animated', __( 'Animated images are not converted, so the animation is kept.', 'image-sizes' ) );
 		}
 
 		$base_dir    = $file_info['dirname'];

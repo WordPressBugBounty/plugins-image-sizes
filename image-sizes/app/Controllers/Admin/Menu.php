@@ -164,7 +164,7 @@ class Menu {
 			),
 			array(
 				'label' => $pro_label,
-				'hash'  => '#/pro',
+				'hash'  => '#/pro?src=menu-pill',
 			),
 		);
 
@@ -296,7 +296,7 @@ class Menu {
 				'icon'  => 'SettingsIcon',
 			),
 			array(
-				'to'    => '/pro',
+				'to'    => '/pro?src=sidebar',
 				'label' => __( 'Pro', 'image-sizes' ),
 				'icon'  => 'ProIcon',
 			),

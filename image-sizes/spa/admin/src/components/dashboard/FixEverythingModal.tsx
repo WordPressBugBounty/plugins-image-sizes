@@ -4,13 +4,13 @@ import { toast } from 'sonner';
 import { ArrowRight, Check, X } from 'lucide-react';
 import { Checkbox } from '../ui/checkbox';
 import ProPill from './ProPill';
-import SoonTag from './SoonTag';
 import { getPluginSettings, savePluginSettings } from '../../api';
 import { formatBytes, numberFormat } from '../../lib/i18n';
 import { COMPRESSION_CHECK_PRO_LINK } from './compression-check';
 import { gradeFor, gradeStyle, proProjection, type DashboardModelStats } from './model';
 
 type FixKey = 'webp_on_upload' | 'lazy_load' | 'hotlink_protection' | 'right_click_disable';
+type FixState = Partial< Record< FixKey, boolean > >;
 
 interface FreeFix {
 	key: FixKey;
@@ -24,8 +24,8 @@ const FREE_FIXES: FreeFix[] = [
 	{
 		key: 'webp_on_upload',
 		label: __( 'Convert new uploads to WebP', 'image-sizes' ),
-		note: __( 'Every new image is converted as it arrives.', 'image-sizes' ),
-		recommended: true,
+		note: __( 'Every new image is converted as it arrives, and its original files are deleted. This can\'t be undone, so back up your uploads first.', 'image-sizes' ),
+		recommended: false,
 	},
 	{
 		key: 'lazy_load',
@@ -53,8 +53,8 @@ interface ProRow {
 	label: string;
 	note: string;
 	to: string;
-	/** Pro does not do this yet: shown, linked to the hand-made fix, never sold. */
-	soon?: boolean;
+	/** A fix made by hand in the Media Library: the link leaves the app and nothing is sold. */
+	manual?: boolean;
 }
 
 function proRows( s: DashboardModelStats ): ProRow[] {
@@ -67,7 +67,7 @@ function proRows( s: DashboardModelStats ): ProRow[] {
 		rows.push( { key: 'compress', num: numberFormat( s.not_compressed ), label: _n( 'image not compressed', 'images not compressed', s.not_compressed, 'image-sizes' ), note: __( 'Compress them all in one run.', 'image-sizes' ), to: '/compress-images' } );
 	}
 	if ( s.missing_alt > 0 ) {
-		rows.push( { key: 'alt', num: numberFormat( s.missing_alt ), label: _n( 'image with no alt text', 'images with no alt text', s.missing_alt, 'image-sizes' ), note: __( 'Google can’t read them.', 'image-sizes' ), to: 'upload.php?mode=list', soon: true } );
+		rows.push( { key: 'alt', num: numberFormat( s.missing_alt ), label: _n( 'image with no alt text', 'images with no alt text', s.missing_alt, 'image-sizes' ), note: __( 'Google can’t read them.', 'image-sizes' ), to: 'upload.php?mode=list', manual: true } );
 	}
 	if ( s.duplicate_images > 0 ) {
 		rows.push( {
@@ -97,6 +97,19 @@ function proRows( s: DashboardModelStats ): ProRow[] {
 	return rows;
 }
 
+/** What the server says is on right now, for the four free fixes. */
+async function readSettings(): Promise< FixState > {
+	const res = await getPluginSettings();
+	const data: any = res?.data ?? {};
+	const state: FixState = {};
+
+	for ( const fix of FREE_FIXES ) {
+		state[ fix.key ] = !! data[ fix.key ];
+	}
+
+	return state;
+}
+
 /**
  * Everything the dashboard found, in one place: the free fixes that apply right here, and what Pro
  * would do with this site's own numbers.
@@ -107,23 +120,20 @@ export default function FixEverythingModal( { stats, pro, onClose, onApplied }: 
 	onClose: () => void;
 	onApplied: () => void;
 } ) {
-	const [ current, setCurrent ] = useState< Partial< Record< FixKey, boolean > > | null >( null );
-	const [ picked, setPicked ] = useState< Partial< Record< FixKey, boolean > > >( {} );
+	const [ current, setCurrent ] = useState< FixState | null >( null );
+	const [ picked, setPicked ] = useState< FixState >( {} );
 	const [ busy, setBusy ] = useState( false );
-	const [ applied, setApplied ] = useState< string[] >( [] );
+	const [ applied, setApplied ] = useState< FixKey[] >( [] );
 	const dialog = useRef< HTMLDivElement >( null );
 	const opener = useRef< Element | null >( document.activeElement );
 
 	useEffect( () => {
-		getPluginSettings()
-			.then( ( res ) => {
-				const data: any = res?.data ?? {};
-				const state: Partial< Record< FixKey, boolean > > = {};
-				const start: Partial< Record< FixKey, boolean > > = {};
+		readSettings()
+			.then( ( state ) => {
+				const start: FixState = {};
 
 				for ( const fix of FREE_FIXES ) {
-					state[ fix.key ] = !! data[ fix.key ];
-					start[ fix.key ] = ! data[ fix.key ] && fix.recommended;
+					start[ fix.key ] = ! state[ fix.key ] && fix.recommended;
 				}
 
 				setCurrent( state );
@@ -160,13 +170,26 @@ export default function FixEverythingModal( { stats, pro, onClose, onApplied }: 
 	const apply = async () => {
 		setBusy( true );
 		try {
-			const payload: Partial< Record< FixKey, boolean > > = {};
+			const payload: FixState = {};
 			for ( const fix of chosen ) {
 				payload[ fix.key ] = true;
 			}
 			await savePluginSettings( payload );
-			setApplied( chosen.map( ( fix ) => fix.label ) );
-			setCurrent( ( state ) => ( { ...state, ...payload } ) );
+
+			// Ask the server what is on now, so a row is never marked on because the request merely returned.
+			let state: FixState;
+			try {
+				state = { ...( await readSettings() ) };
+			} catch {
+				state = { ...current, ...payload };
+			}
+
+			const done = chosen.filter( ( fix ) => state[ fix.key ] ).map( ( fix ) => fix.key );
+			setCurrent( state );
+			setApplied( done );
+			if ( done.length < chosen.length ) {
+				toast.error( __( 'Some settings could not be turned on.', 'image-sizes' ) );
+			}
 			onApplied();
 		} catch {
 			toast.error( __( 'Could not save. Nothing was changed.', 'image-sizes' ) );
@@ -241,7 +264,9 @@ export default function FixEverythingModal( { stats, pro, onClose, onApplied }: 
 											<span className="w-5 h-5 rounded-full bg-[#D1FAE5] text-[#047857] flex items-center justify-center shrink-0"><Check size={ 12 } strokeWidth={ 2.5 } aria-hidden="true" /></span>
 											<span className="grow">
 												<span className="block font-medium text-thumbpress-title">{ fix.label }</span>
-												<span className="block text-xs leading-4 text-[#64748B] mt-0.5">{ __( 'Already on.', 'image-sizes' ) }</span>
+												<span className="block text-xs leading-4 text-[#64748B] mt-0.5">
+													{ applied.includes( fix.key ) ? __( 'Turned on now.', 'image-sizes' ) : __( 'Already on.', 'image-sizes' ) }
+												</span>
 											</span>
 										</li>
 									);
@@ -308,11 +333,11 @@ export default function FixEverythingModal( { stats, pro, onClose, onApplied }: 
 						<ul className="list-none m-0 p-0">
 							{ rows.map( ( row ) => (
 								<li key={ row.key } className="flex items-center gap-3 py-3 border-t border-slate-100">
-									<a href={ row.soon ? row.to : `#${ row.to }` } onClick={ onClose } className="grow no-underline !text-inherit">
+									<a href={ row.manual ? row.to : `#${ row.to }` } onClick={ onClose } className="grow no-underline !text-inherit">
 										<span className="block text-thumbpress-body tabular-nums"><span className="text-[15px] font-bold text-thumbpress-title">{ row.num }</span> { row.label }</span>
 										<span className="block text-xs leading-4 text-[#64748B] mt-0.5">{ row.note }</span>
 									</a>
-									{ row.soon ? <SoonTag /> : ! pro && <ProPill src="fix-everything-tag" /> }
+									{ ! row.manual && ! pro && <ProPill src="fix-everything-tag" /> }
 								</li>
 							) ) }
 						</ul>

@@ -147,7 +147,10 @@ class Thumbnails {
 		// The -scaled rendition can carry a different extension than the original.
 		$attached_file = $main_img;
 		$original      = wp_get_original_image_path( $image_id );
-		if ( $original && file_exists( $original ) ) {
+		// An edit supersedes the original, but wp_save_image() leaves original_image pointing at it.
+		$stem   = pathinfo( $attached_file, PATHINFO_FILENAME );
+		$edited = strlen( $stem ) > 14 && '-e' === substr( $stem, -15, 2 ) && ctype_digit( substr( $stem, -13 ) );
+		if ( ! $edited && $original && file_exists( $original ) ) {
 			$main_img = $original;
 		}
 		// A decode too big for the machine kills the process outright, so refuse it as a failure instead.
@@ -193,6 +196,31 @@ class Thumbnails {
 			++$result['thumbs_deleted'];
 		}
 
+		// Core reports an editor that cannot open the file as truthy metadata with no sizes, not a WP_Error.
+		// Only refuse when there is something to lose: otherwise a BMP/ICO/TIFF on GD would fail on every run.
+		// Recorded sizes count even when their files are off this server, since the metadata is what gets wiped.
+		if ( $old_paths || ! empty( $old_metadata['sizes'] ) ) {
+			// SVG is exempt: no editor opens it, and SVG plugins supply its metadata themselves.
+			if ( 'image/svg+xml' !== get_post_mime_type( $image_id ) ) {
+				$editor = wp_get_image_editor( $main_img );
+				if ( is_wp_error( $editor ) ) {
+					$result['failed']         = true;
+					$result['thumbs_deleted'] = 0;
+					$result['reason']         = $editor->get_error_message();
+					return $result;
+				}
+				unset( $editor );
+			}
+
+			// An editor opens a JPEG cut off mid-scan and renders what is there, so the file has to be checked itself.
+			if ( $this->jpeg_is_truncated( $main_img ) ) {
+				$result['failed']         = true;
+				$result['thumbs_deleted'] = 0;
+				$result['reason']         = __( 'This JPEG is incomplete: the file ends before its image data does. Thumbnails made from it would be cut off, so the existing ones were kept. Re-upload the original image.', 'image-sizes' );
+				return $result;
+			}
+		}
+
 		// Default so the size-calculation block below is safe even if regeneration fails
 		// (the if-guard may leave $updated_metadata unset otherwise).
 		$updated_metadata = array();
@@ -201,6 +229,10 @@ class Thumbnails {
 
 		// Guard explicitly (WP_Error is truthy) and keep the old renditions on failure.
 		if ( $new_thumbs && ! is_wp_error( $new_thumbs ) ) {
+			if ( $edited && empty( $new_thumbs['original_image'] ) && ! empty( $old_metadata['original_image'] ) ) {
+				$new_thumbs['original_image'] = $old_metadata['original_image'];
+			}
+
 			wp_update_attachment_metadata( $image_id, $new_thumbs );
 
 			$updated_metadata = wp_get_attachment_metadata( $image_id );
@@ -246,6 +278,12 @@ class Thumbnails {
 			$created_files[ basename( $scaled_file ) ] = true;
 		}
 
+		// Turning "scaled" off moves the main file to the original and the old one goes below, so repoint what stores its URL first.
+		$old_main = basename( $attached_file );
+		if ( isset( $old_paths[ $old_main ] ) && ! isset( $created_files[ $old_main ] ) ) {
+			Utility::replace_attachment_urls( $image_id, $attached_file, $old_metadata );
+		}
+
 		// Delete only now that the fresh metadata is stored, and never what it still names.
 		foreach ( $old_paths as $old_file => $old_path ) {
 			if ( ! isset( $created_files[ $old_file ] ) && file_exists( $old_path ) ) {
@@ -253,10 +291,90 @@ class Thumbnails {
 			}
 		}
 
-		$result['space_saved']    = max( 0, $old_thumb_size - $new_thumb_size );
+		$result['space_saved']    = $old_thumb_size - $new_thumb_size;
 		$result['thumbs_created'] = count( $created_files );
 
 		return $result;
+	}
+
+	/**
+	 * Whether a JPEG ends before its image data reaches the end-of-image marker.
+	 *
+	 * Header segments are skipped first: an EXIF thumbnail carries its own marker, so searching
+	 * the whole file would call a cut-off image complete. Bytes after the marker are ignored.
+	 * Anything that is not a JPEG is reported as not truncated.
+	 *
+	 * @param string $path Absolute path.
+	 * @return bool
+	 */
+	private function jpeg_is_truncated( $path ) {
+		$handle = fopen( $path, 'rb' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen -- local file, streamed so a large image is not read into memory.
+		if ( ! $handle ) {
+			return false;
+		}
+
+		$truncated = false;
+
+		if ( "\xFF\xD8" === fread( $handle, 2 ) ) {
+			$truncated = true; // Until the end marker turns up.
+
+			// Walk the header segments up to the start of the scan.
+			while ( true ) {
+				$byte = fread( $handle, 1 );
+				if ( "\xFF" !== $byte ) {
+					if ( false === $byte || '' === $byte ) {
+						break;
+					}
+					continue;
+				}
+
+				$marker = fread( $handle, 1 );
+				if ( false === $marker || '' === $marker ) {
+					break;
+				}
+				$code = ord( $marker );
+
+				if ( 0xFF === $code || 0x00 === $code || 0x01 === $code || ( $code >= 0xD0 && $code <= 0xD8 ) ) {
+					continue; // Padding, stuffing or a marker with no length.
+				}
+
+				if ( 0xD9 === $code ) {
+					$truncated = false; // The image ended before any scan: odd, but not cut off.
+					break;
+				}
+
+				$length = fread( $handle, 2 );
+				if ( 2 !== strlen( (string) $length ) ) {
+					break;
+				}
+				$skip = (int) unpack( 'n', $length )[1] - 2;
+
+				if ( 0xDA === $code ) {
+					// Start of scan: the image data runs from here to the end marker.
+					$previous = '';
+					while ( ! feof( $handle ) ) {
+						$chunk = fread( $handle, 65536 );
+						if ( false === $chunk || '' === $chunk ) {
+							break;
+						}
+						if ( false !== strpos( $previous . $chunk, "\xFF\xD9" ) ) {
+							$truncated = false;
+							break;
+						}
+						$previous = substr( $chunk, -1 );
+					}
+					break;
+				}
+
+				if ( $skip < 0 || 0 !== fseek( $handle, $skip, SEEK_CUR ) ) {
+					break;
+				}
+			}
+		}
+
+		fclose( $handle );
+
+		return $truncated;
 	}
 
 	/**

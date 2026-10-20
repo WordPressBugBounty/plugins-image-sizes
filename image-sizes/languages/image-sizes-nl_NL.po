@@ -954,10 +954,6 @@ msgid "Bulk Image Compression is a Pro feature"
 msgstr "Bulkcompressie van afbeeldingen is een Pro-functie"
 
 #: build/admin.js:13
-msgid "Heavy images are silently costing you visitors. Compress your entire library in one click with absolutely no visible quality loss."
-msgstr "Zware afbeeldingen kosten je ongemerkt bezoekers. Comprimeer je hele bibliotheek met één klik zonder enig zichtbaar kwaliteitsverlies."
-
-#: build/admin.js:13
 msgid "Upgrade for a faster website"
 msgstr "Upgrade voor een snellere website"
 
@@ -972,10 +968,6 @@ msgstr "Blokkeer het uploaden van afbeeldingen die al in je mediabibliotheek sta
 #: build/admin.js:13
 msgid "Duplicate Image Detection is a Pro feature"
 msgstr "Detectie van dubbele afbeeldingen is een Pro-functie"
-
-#: build/admin.js:13
-msgid "Duplicate images quietly pile up and bloat your media library. Find and remove every copy you didn't even know existed."
-msgstr "Dubbele afbeeldingen stapelen zich ongemerkt op en laten je mediabibliotheek uitdijen. Vind en verwijder elke kopie waarvan je niet eens wist dat die bestond."
 
 #: build/admin.js:13
 msgid "Upgrade to detect duplicate images"

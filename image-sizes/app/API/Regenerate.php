@@ -33,7 +33,7 @@ class Regenerate {
 		$total_images         = (int) $wpdb->get_var( "SELECT COUNT(*) FROM `$wpdb->posts` WHERE `post_type` = 'attachment' AND `post_mime_type` LIKE 'image/%' AND `post_status` != 'trash'" );
 		$images               = $wpdb->get_results( $wpdb->prepare( "SELECT `ID` FROM `$wpdb->posts` WHERE `post_type` = 'attachment' AND `post_mime_type` LIKE 'image/%' AND `post_status` != 'trash' AND `ID` > %d ORDER BY `ID` ASC LIMIT %d", $last_id, $limit ) );
 		$thumbs_created       = $thumbs_deleted = 0;
-		$space_saved          = absint( $request->get_param( 'space_saved' ) );
+		$space_saved          = (int) $request->get_param( 'space_saved' );
 
 		if ( ! $images ) {
 			return $this->response_error(
@@ -48,6 +48,7 @@ class Regenerate {
 
 		$thumbnails      = new Thumbnails();
 		$chunk_saved     = 0;
+		$chunk_grown     = 0;
 		$not_found       = 0;
 		$failed          = 0;
 		$processed_count = 0;
@@ -84,9 +85,10 @@ class Regenerate {
 			$thumbs_created += $res['thumbs_created'];
 			$space_saved    += $res['space_saved'];
 			$chunk_saved    += $res['space_saved'];
+			$chunk_grown    += $res['space_saved'] < 0 ? 1 : 0;
 		}
 
-		thumbpress_add_space_saved( $chunk_saved );
+		thumbpress_add_space_saved( $chunk_saved, $chunk_grown );
 
 		$next_offset           = $offset + $done;
 		$total_deleted         = $deleted + $thumbs_deleted;
@@ -106,7 +108,7 @@ class Regenerate {
 			$this->delete_cache( 'stat_total_thumbnails' );
 		}
 
-		$space_saved_label = size_format( $space_saved );
+		$space_saved_label = thumbpress_format_size_delta( $space_saved );
 
 		return $this->response_success(
 			array(
@@ -223,7 +225,7 @@ class Regenerate {
 		$total     = (int) get_option( 'thumbpress_regenerate_total_image', 0 );
 
 		$space_saved       = (int) get_option( 'thumbpress_regenerate_space_saved', 0 );
-		$space_saved_label = size_format( $space_saved );
+		$space_saved_label = thumbpress_format_size_delta( $space_saved );
 		$not_found         = (int) get_option( 'thumbpress_regenerate_total_not_found', 0 );
 		$failed            = (int) get_option( 'thumbpress_regenerate_total_failed', 0 );
 		$failed_images     = $this->get_failed_images();

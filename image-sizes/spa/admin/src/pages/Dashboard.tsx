@@ -260,7 +260,7 @@ export default function Dashboard() {
 						/>
 					) }
 
-					{ pro && countsStats.total_space_saved > 0 && <SavedByPro bytes={ countsStats.total_space_saved } /> }
+					{ pro && ( countsStats.total_space_saved !== 0 || ( countsStats.files_grown ?? 0 ) > 0 ) && <SavedByPro bytes={ countsStats.total_space_saved } grown={ countsStats.files_grown ?? 0 } /> }
 
 					<div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
 						<ActivityCard items={ activity } />

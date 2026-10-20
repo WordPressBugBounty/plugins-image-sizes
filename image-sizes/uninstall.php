@@ -7,6 +7,36 @@ foreach ( $deletable_options as $option ) {
     delete_option( $option );
 }
 
+// Hotlink protection: deactivation already strips the .htaccess rules; this catches a plugin
+// removed some other way (files deleted by hand, a deactivation that never ran).
+$software = isset( $_SERVER['SERVER_SOFTWARE'] ) ? strtolower( $_SERVER['SERVER_SOFTWARE'] ) : '';
+if ( false !== strpos( $software, 'apache' ) ) {
+    require_once ABSPATH . 'wp-admin/includes/file.php';
+    WP_Filesystem();
+    global $wp_filesystem;
+
+    $uploads = wp_get_upload_dir();
+    foreach ( [ ABSPATH . '.htaccess', trailingslashit( $uploads['basedir'] ) . '.htaccess' ] as $htaccess ) {
+        if ( ! $wp_filesystem || ! $wp_filesystem->exists( $htaccess ) || ! $wp_filesystem->is_writable( $htaccess ) ) {
+            continue;
+        }
+
+        $content = (string) $wp_filesystem->get_contents( $htaccess );
+        $pattern = '/\n?# BEGIN ThumbPress Hotlink Protection.*?# END ThumbPress Hotlink Protection\n?/s';
+        if ( ! preg_match( $pattern, $content ) ) {
+            continue;
+        }
+
+        $content = preg_replace( $pattern, '', $content );
+        if ( '' === trim( $content ) && ABSPATH . '.htaccess' !== $htaccess ) {
+            wp_delete_file( $htaccess );
+        } else {
+            $wp_filesystem->put_contents( $htaccess, $content, FS_CHMOD_FILE );
+        }
+    }
+}
+delete_option( 'thumbpress_hotlink_protection' );
+
 // The hash index is ours, so it goes with us.
 global $wpdb;
 foreach ( [ 'hashes', 'hash_groups' ] as $table ) {

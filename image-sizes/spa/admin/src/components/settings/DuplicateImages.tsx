@@ -46,9 +46,9 @@ export default function DuplicateImages() {
 				</div>
 				{!isProActive && (
 					<ProAlert
-						title={__('Duplicate Image Detection is a Pro feature', 'image-sizes')}
-						description={__('Duplicate images quietly pile up and bloat your media library. Find and remove every copy you didn\'t even know existed.', 'image-sizes')}
-						buttonText={__('Upgrade to detect duplicate images', 'image-sizes')}
+						title={__('Preventing duplicate uploads is a Pro feature', 'image-sizes')}
+						description={__('Stop an image that is already in your media library from being uploaded again, so duplicates never pile up.', 'image-sizes')}
+						buttonText={__('Upgrade to block duplicate uploads', 'image-sizes')}
 						open={alertOpen}
 						onClose={() => setAlertOpen(false)}
 					/>

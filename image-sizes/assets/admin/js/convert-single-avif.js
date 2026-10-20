@@ -8,6 +8,9 @@
 		var imageId = btn.getAttribute('data-image_id');
 		if (!imageId) return;
 
+		var confirmText = btn.getAttribute('data-confirm');
+		if (confirmText && !window.confirm(confirmText)) return;
+
 		var originalText = btn.innerHTML;
 		btn.innerHTML = '<b>Converting...</b>';
 		btn.disabled = true;

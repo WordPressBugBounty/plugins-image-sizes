@@ -10,9 +10,8 @@ export type DashboardModelStats = DashboardStats & { scan_running: boolean };
  * free   - the fix is free and one click away.
  * ok     - nothing to do.
  * plain  - a number with a link, no lock (Pro users, or a fact).
- * soon   - a real finding whose fix Pro does not have yet: shown, never sold.
  */
-export type LineTier = 'pro' | 'free' | 'ok' | 'plain' | 'soon';
+export type LineTier = 'pro' | 'free' | 'ok' | 'plain';
 
 export interface DashboardLine {
 	key: string;
@@ -168,7 +167,7 @@ function seoLines( s: DashboardModelStats ): DashboardLine[] {
 			num: numberFormat( s.missing_alt ),
 			label: __( 'no alt text', 'image-sizes' ),
 			note: __( 'Google can’t read them. Add it in the Media Library', 'image-sizes' ),
-			tier: 'soon',
+			tier: 'plain',
 			href: MEDIA_LIBRARY,
 			filter: 'alt',
 		} );
@@ -182,7 +181,7 @@ function seoLines( s: DashboardModelStats ): DashboardLine[] {
 			num: numberFormat( s.bad_names ),
 			label: _n( 'vague filename', 'vague filenames', s.bad_names, 'image-sizes' ),
 			note: __( 'Like IMG_4021.jpg', 'image-sizes' ),
-			tier: 'soon',
+			tier: 'plain',
 			href: MEDIA_LIBRARY,
 			filter: 'names',
 		} );

@@ -954,10 +954,6 @@ msgid "Bulk Image Compression is a Pro feature"
 msgstr "批量图片压缩是 Pro 功能"
 
 #: build/admin.js:13
-msgid "Heavy images are silently costing you visitors. Compress your entire library in one click with absolutely no visible quality loss."
-msgstr "过大的图片正在悄悄让您流失访客。一键压缩整个媒体库，完全没有可见的质量损失。"
-
-#: build/admin.js:13
 msgid "Upgrade for a faster website"
 msgstr "升级以获得更快的网站"
 
@@ -972,10 +968,6 @@ msgstr "阻止上传您媒体库中已存在的图片"
 #: build/admin.js:13
 msgid "Duplicate Image Detection is a Pro feature"
 msgstr "重复图片检测是 Pro 功能"
-
-#: build/admin.js:13
-msgid "Duplicate images quietly pile up and bloat your media library. Find and remove every copy you didn't even know existed."
-msgstr "重复图片会悄然堆积并使您的媒体库变得臃肿。找出并移除每一个您甚至不知道存在的副本。"
 
 #: build/admin.js:13
 msgid "Upgrade to detect duplicate images"

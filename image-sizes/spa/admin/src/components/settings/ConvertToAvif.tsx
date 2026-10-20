@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { __ } from '@wordpress/i18n';
 import { toast } from 'sonner';
 import { Switch } from '../ui/switch';
+import ConfirmOriginalsModal, { OriginalsInlineWarning } from '../ui/confirm-originals-modal';
 import { PluginSettings, savePluginSettings } from '../../api';
 
 interface ConvertToAvifProps {
@@ -11,6 +12,7 @@ interface ConvertToAvifProps {
 
 export default function ConvertToAvif({ settings, onSave }: ConvertToAvifProps) {
 	const [saving, setSaving] = useState(false);
+	const [confirmOnUpload, setConfirmOnUpload] = useState(false);
 	const [avifOnUpload, setAvifOnUpload] = useState(
 		settings?.avif_on_upload ?? false,
 	);
@@ -50,10 +52,11 @@ export default function ConvertToAvif({ settings, onSave }: ConvertToAvifProps) 
 					<p className="2xl:text-sm lg:text-xs text-[#64748B] mt-1">
 						{__('Automatically convert images to AVIF when they are uploaded.', 'image-sizes')}
 					</p>
+					<OriginalsInlineWarning />
 				</div>
 				<Switch
 					checked={avifOnUpload}
-					onCheckedChange={(checked) => setAvifOnUpload(checked)}
+					onCheckedChange={(checked) => (checked ? setConfirmOnUpload(true) : setAvifOnUpload(false))}
 				/>
 			</div>
 			<div className="flex items-center justify-between py-4 border-b border-[#E2E8F0]">
@@ -86,6 +89,15 @@ export default function ConvertToAvif({ settings, onSave }: ConvertToAvifProps) 
 					{__('Save Changes', 'image-sizes')}
 				</button>
 			</div>
+			<ConfirmOriginalsModal
+				open={confirmOnUpload}
+				confirmLabel={__('I understand, turn on', 'image-sizes')}
+				onCancel={() => setConfirmOnUpload(false)}
+				onConfirm={() => {
+					setAvifOnUpload(true);
+					setConfirmOnUpload(false);
+				}}
+			/>
 		</div>
 	);
 }

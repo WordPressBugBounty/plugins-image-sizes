@@ -6,6 +6,7 @@ import { Image } from 'lucide-react';
 import SettingsButton from '../components/ui/settings-button';
 import ScanActionButton from '../components/ui/scan-action-button';
 import { Checkbox } from '../components/ui/checkbox';
+import ConfirmOriginalsModal from '../components/ui/confirm-originals-modal';
 import {
 	convertNow,
 	convertBackground,
@@ -61,6 +62,8 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 	const [spaceSaved, setSpaceSaved] = useState(0);
 	const [notFound, setNotFound] = useState(0);
 	const [failed, setFailed] = useState(0);
+	const [skipped, setSkipped] = useState(0);
+	const [pendingRun, setPendingRun] = useState<'now' | 'background' | null>(null);
 	const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
 	const generationRef = useRef(0);
 
@@ -92,6 +95,7 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 				setSpaceSaved(progressRes.data.space_saved || 0);
 				setNotFound(progressRes.data.not_found || 0);
 				setFailed(progressRes.data.failed || 0);
+				setSkipped(progressRes.data.skipped || 0);
 				pollRef.current = setInterval(async () => {
 					const pr = await getConvertProgress();
 					if (pr?.data) {
@@ -103,6 +107,7 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 						setSpaceSaved(pr.data.space_saved || 0);
 						setNotFound(pr.data.not_found || 0);
 						setFailed(pr.data.failed || 0);
+						setSkipped(pr.data.skipped || 0);
 						if (pr.data.is_complete) {
 							if (pollRef.current) clearInterval(pollRef.current);
 							setConverting(false);
@@ -123,6 +128,7 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 							setSpaceSaved(progressRes.data.space_saved || 0);
 							setNotFound(progressRes.data.not_found || 0);
 							setFailed(progressRes.data.failed || 0);
+							setSkipped(progressRes.data.skipped || 0);
 						}
 					}
 				}).catch(() => { }).finally(() => setLoading(false));
@@ -174,6 +180,7 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 		setRemaining(0);
 		setSpaceSaved(0);
 		setFailed(0);
+		setSkipped(0);
 
 		let lastId = 0;
 		let currentProcessed = 0;
@@ -181,12 +188,13 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 		let currentSpaceSaved = 0;
 		let currentNotFound = 0;
 		let currentFailed = 0;
+		let currentSkipped = 0;
 		let firstChunk = true;
 
 		const processChunk = async () => {
 			if (generationRef.current !== myGen) return;
 			try {
-				const res = await convertNow(lastId, limit, fileFormats, currentSpaceSaved, currentNotFound, currentProcessed, currentConverted, currentFailed);
+				const res = await convertNow(lastId, limit, fileFormats, currentSpaceSaved, currentNotFound, currentProcessed, currentConverted, currentFailed, currentSkipped);
 				if (generationRef.current !== myGen) return;
 				if (!res?.success) {
 					setConverting(false);
@@ -219,12 +227,14 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 					setSpaceSaved(data.space_saved || 0);
 					setNotFound(Number(data.not_found) || 0);
 					setFailed(Number(data.failed) || 0);
+					setSkipped(Number(data.skipped) || 0);
 					lastId = data.last_id || 0;
 					currentProcessed = data.processed || 0;
 					currentConverted = data.converted || 0;
 					currentSpaceSaved = data.space_saved || 0;
 					currentNotFound = Number(data.not_found) || 0;
 					currentFailed = Number(data.failed) || 0;
+					currentSkipped = Number(data.skipped) || 0;
 
 					if (data.is_complete || data.progress === undefined || data.progress >= 100) {
 						setConverting(false);
@@ -256,6 +266,7 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 		setRemaining(0);
 		setSpaceSaved(0);
 		setFailed(0);
+		setSkipped(0);
 
 		try {
 			const res = await convertBackground(limit, fileFormats);
@@ -279,6 +290,7 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 						setSpaceSaved(progressRes.data.space_saved || 0);
 						setNotFound(progressRes.data.not_found || 0);
 						setFailed(progressRes.data.failed || 0);
+						setSkipped(progressRes.data.skipped || 0);
 
 						if (progressRes.data.is_complete) {
 							if (pollRef.current) clearInterval(pollRef.current);
@@ -384,14 +396,14 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 
 								<div className="flex justify-center gap-6 mt-8">
 									<button
-										onClick={handleConvertNow}
+										onClick={() => setPendingRun('now')}
 										disabled={!chunkSize.trim() || !formats.some((f) => f.checked) || converting}
 										className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50 border border-thumbpress-primary bg-white text-thumbpress-primary py-2.5 w-[225px] cursor-pointer"
 									>
 										{__('Convert Now', 'image-sizes')}
 									</button>
 									<button
-										onClick={handleConvertBackground}
+										onClick={() => setPendingRun('background')}
 										disabled={!chunkSize.trim() || !formats.some((f) => f.checked) || converting}
 										className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50 bg-thumbpress-primary text-white border border-thumbpress-primary py-2.5 w-[225px] cursor-pointer"
 									>
@@ -433,6 +445,7 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 								<StatCard icon={<TotalImagesIcon2 />} value={ numberFormat( total ) } label={__('Total Images', 'image-sizes')} />
 								<StatCard icon={<ImageProcessedIcon />} value={ numberFormat( processed ) } label={__('Images Processed', 'image-sizes')} />
 								<StatCard icon={<FailedIcon />} value={ numberFormat( failed ) } label={__('Images Failed', 'image-sizes')} accent="red" />
+								<StatCard icon={<RemainingIcon />} value={ numberFormat( skipped ) } label={__('Images Skipped (Would Be Larger)', 'image-sizes')} />
 								<StatCard
 									icon={
 										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="currentColor" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -454,6 +467,20 @@ export default function ConvertToWebP({ tooltip }: { tooltip?: string } = {}) {
 					)}
 				</Card>
 			</PluginPage>
+			<ConfirmOriginalsModal
+				open={pendingRun !== null}
+				confirmLabel={__('Convert and delete originals', 'image-sizes')}
+				onCancel={() => setPendingRun(null)}
+				onConfirm={() => {
+					const run = pendingRun;
+					setPendingRun(null);
+					if (run === 'now') {
+						handleConvertNow();
+					} else if (run === 'background') {
+						handleConvertBackground();
+					}
+				}}
+			/>
 		</>
 	);
 }

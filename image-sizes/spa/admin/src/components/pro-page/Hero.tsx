@@ -5,10 +5,10 @@ const Hero = () => {
     const assetsUrl = window.THUMBPRESS?.assets_url || '';
     const proImgBase = `${assetsUrl}admin/img/pro/`;
 
-    // Starting price follows the promo gate: the discounted figure while the
-    // campaign is live, the regular Personal-plan price once it ends.
+    // Starting price follows the promo gate: the discounted yearly total while the
+    // campaign is live, the regular Personal-plan yearly price once it ends.
     const promoActive = window.THUMBPRESS?.promo_active ?? false;
-    const startingPrice = promoActive ? '$3.50' : '$5';
+    const startingPrice = promoActive ? '$42' : '$59';
 
 	return (
 		<div
@@ -61,8 +61,8 @@ const Hero = () => {
 							className="text-white 2xl:text-base lg:text-[12px] cursor-pointer"
 						>
 							{sprintf(
-								/* translators: %s is the starting monthly price, e.g. $5. */
-								__( 'Price starts from %s/month.', 'image-sizes' ),
+								/* translators: %s is the starting yearly price, e.g. $59. */
+								__( 'Plans start from %s/year.', 'image-sizes' ),
 								startingPrice
 							)}
 						</span>

@@ -139,23 +139,22 @@ class Lazy_Load {
 		$default = function_exists( 'wp_omit_loading_attr_threshold' ) ? wp_omit_loading_attr_threshold() : self::SKIP_IMAGES;
 		$skip    = (int) apply_filters( 'thumbpress_lazy_load_skip_images', $default );
 		$seen    = 0;
+		$source  = $html;
 
-		// Another loader's <noscript> copies would spend the budget meant for real images.
+		// Text the browser does not read as markup: an <img> in there is data, and an appended attribute breaks it.
+		// Another loader's <noscript> copies would also spend the budget meant for real images.
 		$stash = array();
+		$html  = $this->stash_blocks( $html, $stash );
 
+		// A quote is only read as one when it closes before the next tag, so a stray one cannot swallow what follows.
 		$html = preg_replace_callback(
-			'/<noscript\b[^>]*>.*?<\/noscript>/is',
-			function ( $match ) use ( &$stash ) {
-				$stash[] = $match[0];
-
-				return '<!--thumbpress-noscript-' . ( count( $stash ) - 1 ) . '-->';
-			},
-			$html
-		);
-
-		$html = preg_replace_callback(
-			'/<img\b([^>]*)>/i',
+			'/<img\b((?:[^>"\']++|"[^"<]*+"|\'[^\'<]*+\')*+)>/i',
 			function ( $match ) use ( $skip, &$seen ) {
+				// Markup escaped for a JS or JSON string (\") is that string's content, not a tag of the page.
+				if ( preg_match( '/\\\\["\']/', $match[1] ) ) {
+					return $match[0];
+				}
+
 				// A logo or avatar must not spend the budget meant for the LCP image.
 				if ( $this->is_lcp_candidate( $match[1] ) ) {
 					++$seen;
@@ -170,17 +169,64 @@ class Lazy_Load {
 			$html
 		);
 
+		// A failed pattern returns null; serve the page as it was rather than an empty one.
+		if ( null === $html ) {
+			return $source;
+		}
+
 		if ( empty( $stash ) ) {
 			return $html;
 		}
 
-		return preg_replace_callback(
-			'/<!--thumbpress-noscript-(\d+)-->/',
+		$restored = preg_replace_callback(
+			'/<!--thumbpress-stash-(\d+)-->/',
 			function ( $match ) use ( $stash ) {
 				return isset( $stash[ $match[1] ] ) ? $stash[ $match[1] ] : $match[0];
 			},
 			$html
 		);
+
+		return null === $restored ? $source : $restored;
+	}
+
+	/**
+	 * Swap the blocks whose content is not page markup for placeholders, noting them in $stash.
+	 *
+	 * Found with a short pattern for the opening tag and a plain scan for the closing one: a lazy
+	 * pattern across a multi-megabyte inline script exhausts the backtrack limit and returns null.
+	 * A block that never closes runs to the end of the document, as it does in a browser.
+	 *
+	 * @param string $html  Buffered page HTML.
+	 * @param array  $stash Receives the original blocks, in order.
+	 * @return string
+	 */
+	private function stash_blocks( $html, array &$stash ) {
+		if ( ! preg_match_all( '/<(noscript|script|style|textarea|template)(?=[\s\/>])[^>]*>/i', $html, $opens, PREG_OFFSET_CAPTURE ) ) {
+			return $html;
+		}
+
+		$out = '';
+		$pos = 0;
+
+		foreach ( $opens[0] as $i => $open ) {
+			$start = $open[1];
+
+			if ( $start < $pos ) {
+				continue; // Inside a block already taken.
+			}
+
+			$end = strlen( $html );
+
+			if ( 1 === preg_match( '#</' . $opens[1][ $i ][0] . '(?=[\s/>])[^>]*>#i', $html, $close, PREG_OFFSET_CAPTURE, $start + strlen( $open[0] ) ) ) {
+				$end = $close[0][1] + strlen( $close[0][0] );
+			}
+
+			$stash[] = substr( $html, $start, $end - $start );
+			$out    .= substr( $html, $pos, $start - $pos ) . '<!--thumbpress-stash-' . ( count( $stash ) - 1 ) . '-->';
+			$pos     = $end;
+		}
+
+		return $out . substr( $html, $pos );
 	}
 
 	/**

@@ -28,6 +28,7 @@ export interface DashboardCountsStats {
 	total_sizes: number;
 	disabled_sizes: number;
 	total_space_saved: number;
+	files_grown?: number;
 	not_webp: number;
 	not_avif: number;
 	lazy_load: boolean;
@@ -356,6 +357,7 @@ export interface ConvertResponse {
 		action_id?: number;
 		not_found?: number;
 		failed?: number;
+		skipped?: number;
 		is_complete?: boolean;
 	};
 	message?: string;
@@ -374,14 +376,15 @@ export interface ConvertProgressResponse {
 		completed_time: string;
 		not_found?: number;
 		failed?: number;
+		skipped?: number;
 	};
 }
 
-export function convertNow( lastId: number, limit: number, file_formats: string[], space_saved: number = 0, notFound: number = 0, processed: number = 0, converted: number = 0, failed: number = 0 ) {
+export function convertNow( lastId: number, limit: number, file_formats: string[], space_saved: number = 0, notFound: number = 0, processed: number = 0, converted: number = 0, failed: number = 0, skipped: number = 0 ) {
 	return apiFetch<ConvertResponse>( {
 		url: `${ BASE_URL }/convert/now`,
 		method: 'POST',
-		data: { last_id: lastId, limit, file_formats, space_saved, not_found: notFound, processed, converted, failed },
+		data: { last_id: lastId, limit, file_formats, space_saved, not_found: notFound, processed, converted, failed, skipped },
 	} );
 }
 

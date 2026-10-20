@@ -183,7 +183,7 @@ class Init {
 	 * @return void
 	 */
 	protected function add_offer_node( $wp_admin_bar ) {
-		$upgrade_url = admin_url( 'admin.php?page=thumbpress#/pro' );
+		$upgrade_url = admin_url( 'admin.php?page=thumbpress#/pro?src=admin-bar-offer' );
 
 		$offer_text = esc_html__( 'ThumbPress: Summer Special - Up to 48% OFF', 'image-sizes' );
 

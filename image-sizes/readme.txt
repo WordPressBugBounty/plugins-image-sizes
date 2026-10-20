@@ -4,7 +4,7 @@ Tags: image optimization, compress images, thumbnail manager, WebP converter, im
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 6.9.1
+Stable tag: 6.10.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -116,7 +116,7 @@ ThumbPress blocks external sites from loading images directly from your server. 
 
 Right-click protection disables the ability to save, copy, or drag images directly from your site. It's a practical barrier that stops casual image theft - especially useful for photographers, portfolio sites, and ecommerce stores.
 
-Enable it globally or for specific pages. No code needed.
+Turn it on or off for the whole site from the settings. No code needed.
 
 ---
 
@@ -253,7 +253,7 @@ This regenerates `build/admin.js` and `build/tailwind.css` from `spa/admin/src/`
 No. The Disable Thumbnails module only prevents new thumbnails from being generated on future uploads. Your existing files stay untouched unless you manually delete them. You can regenerate thumbnails based on the sizes you have picked.
 
 = Is WebP conversion reversible? =
-It’s a one-way process. You reduce image size without losing quality, and there’s rarely a need to switch back to heavier formats from WebP.
+It’s a one-way process. Conversion replaces the original file, so keep a backup first. It typically reduces image size without visible quality loss, and there’s rarely a need to switch back to heavier formats from WebP.
 
 = Can I use ThumbPress on multiple sites? =
 Yes, both Professional and Agency plans let you use it on multiple sites. Visit the [Pricing page](https://thumbpress.co/pricing) to view multi-site license options.
@@ -262,7 +262,7 @@ Yes, both Professional and Agency plans let you use it on multiple sites. Visit 
 Yes. ThumbPress works with WooCommerce, Elementor, Divi, and most major WordPress themes and plugins.
 
 = Will image compression affect my image quality? =
-No, ThumbPress uses lossless compression, so there’s no visible quality loss in your WordPress site images.
+In most cases the difference isn’t visible. WebP and AVIF are lossy formats, and compression in ThumbPress Pro uses a quality level you choose, so you control the trade-off between file size and quality.
 
 = What's the difference between WebP and AVIF? =
 WebP is a widely supported modern image format that reduces file sizes compared to JPG and PNG. AVIF is the next generation — it compresses even further with equal or better quality. Both are supported by major browsers and recommended for WordPress performance.
@@ -312,9 +312,8 @@ This plugin connects to the following external services. No personal data is eve
 **ThumbPress Feedback Service (pluggable.io / FluentCRM)**
 ThumbPress can send your information to our marketing/CRM endpoint (`https://my.pluggable.io/?fluentcrm=1`) so we can follow up, improve the plugin, and understand how it is used.
 
-This service is used in three places, and **only** when you choose to participate:
+This service is used in two places, and **only** when you choose to participate:
 
-* *Activation survey notice* — if (and only if) you click the "Ok, I agree" button on the optional survey notice, the plugin sends your WordPress user first name, last name, email address, the plugin slug, and your site URL. Clicking "Remind me later", dismissing, or ignoring the notice sends nothing.
 * *Deactivation feedback form* — if (and only if) you click "Submit & Deactivate" on the optional feedback form shown when deactivating the plugin, it sends your WordPress user first name, last name, email address, the plugin slug, your site URL, the time since install, the deactivation reason(s) you selected, and any free-text feedback you typed. Clicking "Skip & Deactivate" sends nothing.
 * *Feedback prompt* — about a week after install, ThumbPress may ask in its own admin screens whether it is working well. If (and only if) you answer "Not really" and click "Send feedback", the plugin sends the message you typed, the email address you entered, your WordPress user first name and last name, the plugin slug, and your site URL. Answering "Yes", "Maybe later", "Don't ask again" or closing the prompt sends nothing; "Leave a review" only opens the WordPress.org review page in a new tab.
 
@@ -329,6 +328,29 @@ ThumbPress may connect to the WordPress.org API (api.wordpress.org) to check for
 The plugin links to thumbpress.co for Pro upgrade information. No data is sent automatically; links only open when the user clicks them.
 
 == Changelog ==
+
+= 6.10.0 - 2026-10-20 =
+* [security] Stopped the image-address update that runs after converting, regenerating or replacing an image from rebuilding objects stored in post content, post meta or options
+* [fix] Converting to WebP or AVIF no longer flattens animated GIF, PNG, WebP and AVIF files into a single frame. They are skipped and the original is kept, on upload, with the single-image buttons and in bulk runs
+* [fix] Converting to WebP or AVIF now keeps the original when the converted file would not be smaller
+* [fix] Converting an image no longer deletes files that a duplicate attachment still uses, such as the copies WPML and Polylang make for each language
+* [fix] "Space Saved" now reports the real net saving instead of ignoring files that came out bigger
+* [fix] Regenerate Thumbnails no longer wipes an image's thumbnails when no image editor can open the file. The image is reported as Failed with a reason, and every file is left untouched. The same goes for a JPEG that was cut off mid-upload
+* [fix] Regenerate Thumbnails now keeps the edit when regenerating a large image you edited in Media > Edit Image, and no longer treats a restored image as edited
+* [fix] Turning off the "scaled" image size and regenerating no longer leaves Full Size images and other stored image addresses returning 404
+* [fix] Lazy load no longer adds attributes to image markup inside inline scripts and JSON, which caused JavaScript errors, and no longer cuts off images whose attributes contain a ">" character
+* [fix] Hotlink Protection now only rewrites image addresses, so CSS, PDF, font and video files in your uploads folder load again (Elementor styling no longer disappears)
+* [fix] Hotlink Protection now works on sites installed in a subfolder and on subfolder multisite
+* [fix] Deactivating or deleting ThumbPress now removes the Hotlink Protection rules from .htaccess, so images stop returning 403 to other sites
+* [fix] The dashboard now counts images that are in neither WebP nor AVIF exactly, which also corrects the health score
+* [fix] After Fix everything, the settings it just switched on now read "Turned on now" instead of "Already on". On-upload WebP is no longer pre-selected in the one-click fixes, and the confirmation says it only turns the switch on
+* [fix] Site Image Checkup: Start checkup now works every time, not only the first time
+* [fix] Images whose original file was deleted are now included in duplicate and large-image detection
+* [fix] The Pro upgrade windows in Settings now name the control you clicked instead of a different feature
+* [fix] The Pro page no longer shows a countdown that restarts every session, no longer opens a popup when you click a WordPress menu item, and no longer makes claims the plugin does not back
+* [fix] Removed the dashboard's "Autofix coming to Pro" notes on alt text and file names
+* [imp] A confirmation now warns before WebP or AVIF conversion deletes your original files, and a note sits under the on-upload conversion switches
+* [imp] When ThumbPress Pro is installed but not active, the button and badge now say "Activate License" instead of "Upgrade to Pro"
 
 = 6.9.1 - 2026-10-06 =
 * [fix] With an older ThumbPress Pro active, Save Changes in Settings > Watermark did nothing at all. It now tells you that a newer ThumbPress Pro is needed, and the Watermark page no longer offers Pro customers an upgrade to the plan they already have

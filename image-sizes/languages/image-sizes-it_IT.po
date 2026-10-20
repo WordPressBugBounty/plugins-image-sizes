@@ -954,10 +954,6 @@ msgid "Bulk Image Compression is a Pro feature"
 msgstr "La compressione in blocco delle immagini è una funzionalità Pro"
 
 #: build/admin.js:13
-msgid "Heavy images are silently costing you visitors. Compress your entire library in one click with absolutely no visible quality loss."
-msgstr "Le immagini pesanti ti stanno facendo perdere visitatori in silenzio. Comprimi l'intera libreria con un solo clic senza alcuna perdita di qualità visibile."
-
-#: build/admin.js:13
 msgid "Upgrade for a faster website"
 msgstr "Esegui l'upgrade per un sito web più veloce"
 
@@ -972,10 +968,6 @@ msgstr "Impedisci il caricamento di immagini già presenti nella tua libreria me
 #: build/admin.js:13
 msgid "Duplicate Image Detection is a Pro feature"
 msgstr "Il rilevamento delle immagini duplicate è una funzionalità Pro"
-
-#: build/admin.js:13
-msgid "Duplicate images quietly pile up and bloat your media library. Find and remove every copy you didn't even know existed."
-msgstr "Le immagini duplicate si accumulano silenziosamente e appesantiscono la tua libreria media. Trova e rimuovi ogni copia di cui non conoscevi nemmeno l'esistenza."
 
 #: build/admin.js:13
 msgid "Upgrade to detect duplicate images"

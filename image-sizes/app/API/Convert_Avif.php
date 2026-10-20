@@ -79,6 +79,26 @@ class Convert_Avif {
 			);
 		}
 
+		// A converted set that is not smaller than the original is a loss: keep the original and drop
+		// the new files. The attachment is left exactly as it was (#582).
+		$avif_files = array( $avif_file_path );
+		foreach ( ( $avif_metadata['sizes'] ?? array() ) as $avif_thumb ) {
+			$avif_files[] = $thumb_dir . $avif_thumb['file'];
+		}
+		$avif_files = array_diff( array_unique( $avif_files ), array( $main_img ) );
+		if ( array_sum( array_map( 'filesize', array_filter( $avif_files, 'file_exists' ) ) ) >= $old_size ) {
+			if ( ! empty( $avif_metadata['file'] ) ) {
+				$avif_files[] = wp_get_upload_dir()['basedir'] . DIRECTORY_SEPARATOR . $avif_metadata['file'];
+			}
+			// Generating the sizes already saved the new metadata; put the original's back.
+			wp_update_attachment_metadata( $img_id, $old_metadata );
+			if ( ! empty( $old_metadata['file'] ) ) {
+				update_post_meta( $img_id, '_wp_attached_file', $old_metadata['file'] );
+			}
+			array_map( 'wp_delete_file', array_diff( $avif_files, array( $main_img ) ) );
+			return $this->response_error( __( 'Skipped: the AVIF would not be smaller than the original, so the original was kept.', 'image-sizes' ) );
+		}
+
 		wp_update_attachment_metadata( $img_id, $avif_metadata );
 
 		// Keep _wp_attached_file aligned with metadata['file']. For big images WP scales the
@@ -97,23 +117,35 @@ class Convert_Avif {
 			)
 		);
 
+		// A WPML/Polylang duplicate attachment can point at the same files; deleting them would break it (#539).
+		global $wpdb;
+		$shared_rel = _wp_relative_upload_path( $main_img );
+		$shared = (bool) $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '_wp_attached_file' AND meta_value IN ( %s, %s ) AND post_id <> %d LIMIT 1",
+				$shared_rel,
+				str_replace( ".{$extension}", "-scaled.{$extension}", $shared_rel ),
+				$img_id
+			)
+		);
+
 		// Delete old files only AFTER the DB points at the new AVIF. If the request is
 		// interrupted during metadata generation above, the original survives and the DB
 		// still resolves it — instead of an avif on disk with the attachment stuck on jpeg.
 		if ( ! empty( $old_metadata['sizes'] ) ) {
 			foreach ( $old_metadata['sizes'] as $old_size_data ) {
-				if ( 'image/svg+xml' === $old_size_data['mime-type'] ) {
+				if ( $shared || 'image/svg+xml' === $old_size_data['mime-type'] ) {
 					continue;
 				}
 				wp_delete_file( $thumb_dir . $old_size_data['file'] );
 			}
 		}
 
-		if ( file_exists( $main_img ) ) {
+		if ( ! $shared && file_exists( $main_img ) ) {
 			wp_delete_file( $main_img );
 		}
 		$scaled_path = str_replace( ".{$extension}", "-scaled.{$extension}", $main_img );
-		if ( $scaled_path !== $main_img && file_exists( $scaled_path ) ) {
+		if ( ! $shared && $scaled_path !== $main_img && file_exists( $scaled_path ) ) {
 			wp_delete_file( $scaled_path );
 		}
 
@@ -133,8 +165,8 @@ class Convert_Avif {
 			}
 		}
 
-		$saved_bytes = max( 0, $old_size - $new_size );
-		if ( $saved_bytes > 0 ) {
+		$saved_bytes = $old_size - $new_size;
+		if ( 0 !== $saved_bytes ) {
 			$cumulative = (int) get_option( 'thumbpress_avif_convert_space_saved', 0 );
 			update_option( 'thumbpress_avif_convert_space_saved', $cumulative + $saved_bytes );
 			thumbpress_add_space_saved( $saved_bytes );

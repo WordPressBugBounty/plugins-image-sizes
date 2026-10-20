@@ -47,7 +47,7 @@ Object.keys(THUMBPRESS.menus).forEach(key => {
 
         // add .current to current menu
         const link = item.querySelector('a');
-        if (link && link.hash && link.hash === window.location.hash) {
+        if (link && link.hash && link.hash.split('?')[0] === window.location.hash.split('?')[0]) {
             document.querySelectorAll(`.toplevel_page_${key} .wp-submenu.wp-submenu-wrap > li`).forEach(function(li) {
                 li.classList.remove('current');
             });

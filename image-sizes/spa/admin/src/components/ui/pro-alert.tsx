@@ -1,6 +1,19 @@
 import React, { useState } from 'react';
 import { __ } from '@wordpress/i18n';
 
+/**
+ * utm_content for the upgrade link: the screen the alert sits on, e.g.
+ * pro-alert-compress-images or pro-alert-settings-cdn. Kept within the 40 characters
+ * the Pro page accepts for `src`.
+ */
+const alertSource = (): string => {
+	const [ path, query = '' ] = window.location.hash.replace( /^#\/?/, '' ).split( '?' );
+	const tab = new URLSearchParams( query ).get( 'tab' );
+	const slug = [ path || 'dashboard', tab ].filter( Boolean ).join( '-' ).toLowerCase().replace( /[^a-z0-9]+/g, '-' );
+
+	return `pro-alert-${ slug }`.slice( 0, 40 ).replace( /-+$/, '' );
+};
+
 export interface ProAlertProps {
 	title: string;
 	description: string;
@@ -118,7 +131,7 @@ const ProAlert: React.FC<ProAlertProps> = ({
 						<p className="text-[#F2EFEF] text-base mb-6">{description}</p>
 
 						<a
-							href="#/pro"
+							href={ `#/pro?src=${ alertSource() }` }
 							className="inline-flex items-center gap-2 bg-thumbpress-pro-yellow hover:bg-yellow-500 !text-thumbpress-title text-base font-medium px-6 py-3 rounded-lg transition-colors no-underline duration-300"
 						>
 							<svg

@@ -157,6 +157,7 @@ class Convert_Webp extends Image_Converter {
 		}
 
 		$batch_saved     = 0;
+		$batch_grown     = 0;
 		$batch_not_found = 0;
 		$batch_failed    = 0;
 		$batch_converted = 0;
@@ -167,6 +168,8 @@ class Convert_Webp extends Image_Converter {
 		$inflight        = (int) get_option( self::INFLIGHT_OPTION, 0 );
 		$prev_not_found  = (int) get_option( 'thumbpress_webp_total_not_found', 0 );
 		$prev_failed     = (int) get_option( 'thumbpress_convert_total_failed', 0 );
+		$prev_skipped    = (int) get_option( 'thumbpress_convert_total_skipped', 0 );
+		$batch_skipped   = 0;
 
 		foreach ( $attachments as $attachment ) {
 			$img_id      = (int) $attachment->ID;
@@ -241,6 +244,28 @@ class Convert_Webp extends Image_Converter {
 				continue;
 			}
 
+			// A converted set that is not smaller than the original is a loss: keep the original and drop
+			// the new files. The attachment is left exactly as it was (#582).
+			$webp_files = array( $webp_file_path );
+			foreach ( ( $webp_metadata['sizes'] ?? array() ) as $webp_thumb ) {
+				$webp_files[] = $thumb_dir . $webp_thumb['file'];
+			}
+			$webp_files = array_diff( array_unique( $webp_files ), array( $main_img ) );
+			if ( array_sum( array_map( 'filesize', array_filter( $webp_files, 'file_exists' ) ) ) >= $old_size ) {
+				if ( ! empty( $webp_metadata['file'] ) ) {
+					$webp_files[] = wp_get_upload_dir()['basedir'] . DIRECTORY_SEPARATOR . $webp_metadata['file'];
+				}
+				// Generating the sizes already saved the new metadata; put the original's back.
+				wp_update_attachment_metadata( $img_id, $old_metadata );
+				if ( ! empty( $old_metadata['file'] ) ) {
+					update_post_meta( $img_id, '_wp_attached_file', $old_metadata['file'] );
+				}
+				array_map( 'wp_delete_file', array_diff( $webp_files, array( $main_img ) ) );
+				update_option( 'thumbpress_convert_total_skipped', $prev_skipped + ++$batch_skipped );
+				$this->persist( $processed_count + $done, $converted_count + $batch_converted, $space_saved, $prev_not_found + $batch_not_found, $prev_failed + $batch_failed, $new_last_id, $total_attachments );
+				continue;
+			}
+
 			wp_update_attachment_metadata( $img_id, $webp_metadata );
 
 			// Keep _wp_attached_file aligned with metadata['file']. For big images WP scales the
@@ -259,20 +284,32 @@ class Convert_Webp extends Image_Converter {
 				)
 			);
 
+			// A WPML/Polylang duplicate attachment can point at the same files; deleting them would break it (#539).
+			global $wpdb;
+			$shared_rel = _wp_relative_upload_path( $main_img );
+			$shared = (bool) $wpdb->get_var(
+				$wpdb->prepare(
+					"SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '_wp_attached_file' AND meta_value IN ( %s, %s ) AND post_id <> %d LIMIT 1",
+					$shared_rel,
+					str_replace( ".{$extension}", "-scaled.{$extension}", $shared_rel ),
+					$img_id
+				)
+			);
+
 			// Delete old files only AFTER the DB points at the new WebP. If the request is
 			// interrupted during metadata generation above, the original survives and the DB
 			// still resolves it — instead of a webp on disk with the attachment stuck on jpeg.
 			foreach ( ( $old_metadata['sizes'] ?? array() ) as $size_name => $size_data ) {
-				if ( 'image/svg+xml' === $size_data['mime-type'] ) {
+				if ( $shared || 'image/svg+xml' === $size_data['mime-type'] ) {
 					continue;
 				}
 				wp_delete_file( $thumb_dir . $size_data['file'] );
 			}
-			if ( file_exists( $main_img ) ) {
+			if ( ! $shared && file_exists( $main_img ) ) {
 				wp_delete_file( $main_img );
 			}
 			$scaled_path = str_replace( ".{$extension}", "-scaled.{$extension}", $main_img );
-			if ( $scaled_path !== $main_img && file_exists( $scaled_path ) ) {
+			if ( ! $shared && $scaled_path !== $main_img && file_exists( $scaled_path ) ) {
 				wp_delete_file( $scaled_path );
 			}
 
@@ -298,8 +335,9 @@ class Convert_Webp extends Image_Converter {
 					}
 				}
 			}
-			$space_saved += max( 0, $old_size - $new_size );
-			$batch_saved += max( 0, $old_size - $new_size );
+			$space_saved += $old_size - $new_size;
+			$batch_saved += $old_size - $new_size;
+			$batch_grown += $new_size > $old_size ? 1 : 0;
 			$batch_converted++;
 			$this->persist( $processed_count + $done, $converted_count + $batch_converted, $space_saved, $prev_not_found + $batch_not_found, $prev_failed + $batch_failed, $new_last_id, $total_attachments );
 
@@ -314,7 +352,7 @@ class Convert_Webp extends Image_Converter {
 			delete_option( self::PENDING_REWRITES_OPTION );
 		}
 
-		thumbpress_add_space_saved( $batch_saved );
+		thumbpress_add_space_saved( $batch_saved, $batch_grown );
 
 		$processed_count += $done;
 		$is_complete      = ( $processed_count >= $total_attachments );

@@ -139,7 +139,8 @@ class Utility {
 	public static function refresh_file_meta( $attachment_id, $file_path = '' ) {
 		$original = function_exists( 'wp_get_original_image_path' ) ? wp_get_original_image_path( $attachment_id ) : false;
 
-		if ( ! $original ) {
+		// wp_get_original_image_path() does not check the file exists, so a deleted original still looks truthy.
+		if ( ! $original || ! file_exists( $original ) ) {
 			$original = function_exists( 'get_attached_file' ) ? get_attached_file( $attachment_id, true ) : $file_path;
 		}
 
@@ -363,7 +364,7 @@ class Utility {
 			$wpdb->prepare( "SELECT ID, post_content FROM {$wpdb->posts} WHERE {$where}", $params )
 		);
 		foreach ( (array) $rows as $row ) {
-			$updated = self::apply_replacements( $row->post_content, $search, $replace );
+			$updated = self::apply_replacements( $row->post_content, $search, $replace, false );
 			if ( null !== $updated && $updated !== $row->post_content ) {
 				$wpdb->update( $wpdb->posts, array( 'post_content' => $updated ), array( 'ID' => $row->ID ) );
 				clean_post_cache( $row->ID );
@@ -492,34 +493,118 @@ class Utility {
 
 	/**
 	 * Apply the literal search/replace map to one raw column value, preserving
-	 * serialization. Returns the new value, or null when nothing changed.
+	 * serialization. Returns the new value, or null when nothing changed or the row
+	 * must be left alone.
+	 *
+	 * Stored values are attacker-influenced (a Contributor controls their own
+	 * post_content and meta), so nothing here may instantiate an object: serialized
+	 * data is read with `allowed_classes => false`, and a row that holds an object is
+	 * skipped rather than rewritten.
+	 *
+	 * @param mixed  $raw           Raw column value.
+	 * @param array  $search        Search strings.
+	 * @param array  $replace       Replacement strings.
+	 * @param bool   $maybe_serial  False for post_content, which core never serializes and
+	 *                              which is therefore always treated as a plain string.
+	 * @return string|null
 	 */
-	private static function apply_replacements( $raw, $search, $replace ) {
+	private static function apply_replacements( $raw, $search, $replace, $maybe_serial = true ) {
 		if ( ! is_string( $raw ) || '' === $raw ) {
 			return null;
 		}
 
-		$changed = false;
-		$value   = self::walk_replace( maybe_unserialize( $raw ), $search, $replace, $changed );
+		if ( ! $maybe_serial ) {
+			$new = str_replace( $search, $replace, $raw );
 
-		return $changed ? maybe_serialize( $value ) : null;
+			return $new !== $raw ? $new : null;
+		}
+
+		$changed = false;
+		$unsafe  = false;
+		$value   = self::walk_replace( self::safe_unserialize( $raw, $unsafe ), $search, $replace, $changed, $unsafe );
+
+		if ( $unsafe || ! $changed ) {
+			return null;
+		}
+
+		return maybe_serialize( $value );
+	}
+
+	/**
+	 * Unserialize a stored value without ever instantiating a class.
+	 *
+	 * Plain strings come back unchanged. When the value is serialized but cannot be
+	 * read back safely (it holds an object, or is corrupt), `$unsafe` is set so the
+	 * caller skips the row: str_replace() on a serialized string would break its
+	 * `s:N` byte counts.
+	 *
+	 * @param string $raw    Raw stored value.
+	 * @param bool   $unsafe Set to true when the value must not be rewritten.
+	 * @return mixed
+	 */
+	private static function safe_unserialize( $raw, &$unsafe ) {
+		if ( ! is_string( $raw ) || ! is_serialized( $raw ) ) {
+			return $raw;
+		}
+
+		$value = @unserialize( trim( $raw ), array( 'allowed_classes' => false ) ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.PHP.DiscouragedPHPFunctions.serialize_unserialize
+
+		if ( false === $value && 'b:0;' !== trim( $raw ) ) {
+			$unsafe = true;
+
+			return $raw;
+		}
+
+		if ( self::contains_object( $value ) ) {
+			$unsafe = true;
+
+			return $raw;
+		}
+
+		return $value;
+	}
+
+	/**
+	 * Whether a value holds an object anywhere inside it. With `allowed_classes => false`
+	 * every serialized object arrives as a `__PHP_Incomplete_Class`.
+	 *
+	 * @param mixed $value Value to inspect.
+	 * @return bool
+	 */
+	private static function contains_object( $value ) {
+		if ( is_object( $value ) ) {
+			return true;
+		}
+
+		if ( is_array( $value ) ) {
+			foreach ( $value as $item ) {
+				if ( self::contains_object( $item ) ) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 	/**
 	 * Recursively str_replace inside unserialized data. Nested serialized strings are
 	 * unwound rather than touched directly so their byte counts stay valid.
 	 */
-	private static function walk_replace( $data, $search, $replace, &$changed ) {
+	private static function walk_replace( $data, $search, $replace, &$changed, &$unsafe ) {
 		if ( is_string( $data ) ) {
 			if ( '' === $data ) {
 				return $data;
 			}
 
 			if ( is_serialized( $data ) ) {
-				$inner = maybe_unserialize( $data );
+				$inner = self::safe_unserialize( $data, $unsafe );
+				if ( $unsafe ) {
+					return $data;
+				}
 				if ( $inner !== $data ) {
 					$sub   = false;
-					$inner = self::walk_replace( $inner, $search, $replace, $sub );
+					$inner = self::walk_replace( $inner, $search, $replace, $sub, $unsafe );
 					if ( $sub ) {
 						$changed = true;
 						return maybe_serialize( $inner );
@@ -537,17 +622,7 @@ class Utility {
 
 		if ( is_array( $data ) ) {
 			foreach ( $data as $key => $value ) {
-				$data[ $key ] = self::walk_replace( $value, $search, $replace, $changed );
-			}
-			return $data;
-		}
-
-		if ( is_object( $data ) ) {
-			if ( $data instanceof \__PHP_Incomplete_Class ) {
-				return $data;
-			}
-			foreach ( get_object_vars( $data ) as $key => $value ) {
-				$data->{$key} = self::walk_replace( $value, $search, $replace, $changed );
+				$data[ $key ] = self::walk_replace( $value, $search, $replace, $changed, $unsafe );
 			}
 			return $data;
 		}

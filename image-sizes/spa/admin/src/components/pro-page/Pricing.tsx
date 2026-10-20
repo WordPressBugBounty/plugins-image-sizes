@@ -3,20 +3,22 @@ import { __, sprintf } from '@wordpress/i18n';
 import { cn } from '../../lib/utils';
 import PricingCard from './components/PricingCard';
 
+/** utm_content for a visit that reached the Pro page without a usable `src`. */
+export const DIRECT_SOURCE = 'pro-page-direct';
+
 /**
  * Tag a checkout URL with the in-plugin screen that sent the buyer, so a purchase
- * can be traced to it. Untagged when no source is known; existing params are kept.
+ * can be traced to it. A missing or malformed source is tagged as a direct visit
+ * rather than left untagged; existing params are kept.
  */
 export function withSource< T extends { url: string } >( plan: T, source: string ): T {
-	if ( ! /^[a-z0-9-]{1,40}$/.test( source ) ) {
-		return plan;
-	}
+	const content = /^[a-z0-9-]{1,40}$/.test( source ) ? source : DIRECT_SOURCE;
 
 	const url = new URL( plan.url );
 	url.searchParams.set( 'utm_source', 'thumbpress-free' );
 	url.searchParams.set( 'utm_medium', 'plugin' );
 	url.searchParams.set( 'utm_campaign', 'in-plugin' );
-	url.searchParams.set( 'utm_content', source );
+	url.searchParams.set( 'utm_content', content );
 
 	return { ...plan, url: url.toString() };
 }

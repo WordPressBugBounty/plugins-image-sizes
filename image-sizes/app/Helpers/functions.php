@@ -22,17 +22,38 @@ function thumbpress_supported_image_mimes( $exclude = array() ) {
 }
 
 /**
- * Add bytes to the cumulative space-saved counter shared by all operations.
+ * Add a signed byte delta to the cumulative space-saved counter shared by all operations.
  *
- * @param int $bytes Bytes saved (must be > 0 to have any effect).
+ * A positive value is space freed; a negative value means the output ended up larger than the source.
+ * The counter is the net of both, so it never overstates what was really saved.
+ *
+ * @param int      $bytes Signed bytes saved (negative when files grew). Zero has no effect.
+ * @param int|null $grown Files that grew within this delta. Defaults to 1 for a negative single-file delta.
  */
-function thumbpress_add_space_saved( $bytes ) {
+function thumbpress_add_space_saved( $bytes, $grown = null ) {
 	$bytes = (int) $bytes;
-	if ( $bytes <= 0 ) {
-		return;
+	$grown = null === $grown ? ( $bytes < 0 ? 1 : 0 ) : max( 0, (int) $grown );
+
+	if ( 0 !== $bytes ) {
+		update_option( 'thumbpress_space_saved', (int) get_option( 'thumbpress_space_saved', 0 ) + $bytes );
 	}
-	$current = (int) get_option( 'thumbpress_space_saved', 0 );
-	update_option( 'thumbpress_space_saved', $current + $bytes );
+
+	if ( $grown > 0 ) {
+		update_option( 'thumbpress_files_grown', (int) get_option( 'thumbpress_files_grown', 0 ) + $grown );
+	}
+}
+
+/**
+ * Human-readable signed size, e.g. "1.5 MB" or "-376 KB" (size_format() returns false below zero).
+ *
+ * @param int $bytes Signed bytes.
+ * @return string
+ */
+function thumbpress_format_size_delta( $bytes ) {
+	$bytes = (int) $bytes;
+	$label = size_format( abs( $bytes ) );
+
+	return $bytes < 0 ? '-' . $label : $label;
 }
 
 /**

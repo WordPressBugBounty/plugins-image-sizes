@@ -62,7 +62,7 @@ class Hotlink_Protection {
 		// Check /thumbpress-image/path URL format (works on both Apache + Nginx).
 		if ( ! empty( $_SERVER['REQUEST_URI'] ) ) {
 			$uri    = strtok( wp_unslash( $_SERVER['REQUEST_URI'] ), '?' );
-			$prefix = '/thumbpress-image/';
+			$prefix = wp_parse_url( home_url( '/thumbpress-image/' ), PHP_URL_PATH );
 			if ( 0 === strpos( $uri, $prefix ) ) {
 				// Decode here — only REQUEST_URI is percent-encoded ($_GET is pre-decoded by PHP).
 				// Lets non-ASCII filenames survive the removal of sanitize_text_field() below (#474).
@@ -164,14 +164,15 @@ class Hotlink_Protection {
 		// Also handle alternate http/https scheme variant to catch mixed-scheme HTML.
 		$upload_url_alt = preg_replace( '/^https?/', 'http' === wp_parse_url( $upload_url, PHP_URL_SCHEME ) ? 'https' : 'http', $upload_url );
 
-		$html = str_replace( $upload_url . '/', $proxy_base, $html );
-		$html = str_replace( $upload_url, $proxy_base, $html );
+		$bases   = array_unique( array( $upload_url, $upload_url_alt ) );
+		$pattern = '~(?:' . implode( '|', array_map( 'preg_quote', $bases, array_fill( 0, count( $bases ), '~' ) ) ) . ')/([^\s"\'<>()]*?\.(?:jpe?g|png|gif|webp|avif|bmp))(?![\w.%-])~i';
 
-		if ( $upload_url_alt !== $upload_url ) {
-			$html = str_replace( $upload_url_alt . '/', $proxy_base, $html );
-			$html = str_replace( $upload_url_alt, $proxy_base, $html );
-		}
-
-		return $html;
+		return preg_replace_callback(
+			$pattern,
+			function ( $matches ) use ( $proxy_base ) {
+				return $proxy_base . $matches[1];
+			},
+			$html
+		);
 	}
 }

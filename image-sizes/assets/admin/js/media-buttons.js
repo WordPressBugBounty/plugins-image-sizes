@@ -20,7 +20,7 @@
 		titleEl.textContent = data.title;
 		descEl.textContent  = data.description;
 		ctaText.textContent = data.cta;
-		ctaEl.href          = THUMBPRESS_MEDIA.upgrade_url;
+		ctaEl.href          = THUMBPRESS_MEDIA.upgrade_url + '?src=media-' + feature;
 
 		modal.style.display = 'flex';
 		document.body.style.overflow = 'hidden';

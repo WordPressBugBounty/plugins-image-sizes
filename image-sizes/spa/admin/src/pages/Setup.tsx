@@ -46,8 +46,8 @@ const SITE_TYPES: { value: SiteType; label: string }[] = [
 	{ value: 'agency', label: __( 'Agency managing client sites', 'image-sizes' ) },
 ];
 
-const FREE_SETTINGS: { key: 'webp_on_upload' | 'lazy_load'; label: string }[] = [
-	{ key: 'webp_on_upload', label: __( 'WebP for new uploads', 'image-sizes' ) },
+// webp_on_upload is left out: it deletes originals, so it is only turned on through its own warning.
+const FREE_SETTINGS: { key: 'lazy_load'; label: string }[] = [
 	{ key: 'lazy_load', label: __( 'Lazy loading', 'image-sizes' ) },
 ];
 

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { __ } from '@wordpress/i18n';
 import { toast } from 'sonner';
 import { Switch } from '../ui/switch';
+import ConfirmOriginalsModal, { OriginalsInlineWarning } from '../ui/confirm-originals-modal';
 import { PluginSettings, savePluginSettings } from '../../api';
 
 interface ConvertToWebPProps {
@@ -11,6 +12,7 @@ interface ConvertToWebPProps {
 
 export default function ConvertToWebP({ settings, onSave }: ConvertToWebPProps) {
 	const [saving, setSaving] = useState(false);
+	const [confirmOnUpload, setConfirmOnUpload] = useState(false);
 	const [webpOnUpload, setWebpOnUpload] = useState(
 		settings?.webp_on_upload ?? false,
 	);
@@ -50,10 +52,11 @@ export default function ConvertToWebP({ settings, onSave }: ConvertToWebPProps) 
 					<p className="2xl:text-sm lg:text-xs text-[#64748B] mt-1">
 						{__('Automatically convert images to WebP when they are uploaded.', 'image-sizes')}
 					</p>
+					<OriginalsInlineWarning />
 				</div>
 				<Switch
 					checked={webpOnUpload}
-					onCheckedChange={(checked) => setWebpOnUpload(checked)}
+					onCheckedChange={(checked) => (checked ? setConfirmOnUpload(true) : setWebpOnUpload(false))}
 				/>
 			</div>
 			<div className="flex items-center justify-between py-4 border-b border-[#E2E8F0]">
@@ -86,6 +89,15 @@ export default function ConvertToWebP({ settings, onSave }: ConvertToWebPProps) 
 					{__('Save Changes', 'image-sizes')}
 				</button>
 			</div>
+			<ConfirmOriginalsModal
+				open={confirmOnUpload}
+				confirmLabel={__('I understand, turn on', 'image-sizes')}
+				onCancel={() => setConfirmOnUpload(false)}
+				onConfirm={() => {
+					setWebpOnUpload(true);
+					setConfirmOnUpload(false);
+				}}
+			/>
 		</div>
 	);
 }

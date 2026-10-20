@@ -1,6 +1,6 @@
 import React from 'react';
 import { __ } from '@wordpress/i18n';
-import { Lock } from 'lucide-react';
+import { Lock, Key } from 'lucide-react';
 
 const PILL_CLASS = 'inline-flex items-center gap-[3px] shrink-0 text-xs leading-4 font-bold px-[7px] py-px rounded-full bg-thumbpress-pro-yellow !text-thumbpress-title no-underline';
 
@@ -9,11 +9,14 @@ const PILL_CLASS = 'inline-flex items-center gap-[3px] shrink-0 text-xs leading-
  * can be traced back to the surface that sent the buyer. Inside another link it must be plain text
  * (`link={ false }`): links do not nest, and the row around it already goes somewhere.
  */
-export default function ProPill( { src, lock = true, link = true }: { src: string; lock?: boolean; link?: boolean } ) {
+export default function ProPill({ src, lock = true, link = true }: { src: string; lock?: boolean; link?: boolean }) {
+  const isProActive = window.THUMBPRESS?.pro_active;
+  const isProInstalled = window.THUMBPRESS?.pro_installed;
+  
 	const inner = (
 		<>
-			{ lock && <Lock size={ 11 } strokeWidth={ 1.75 } aria-hidden="true" /> }
-			{ __( 'PRO', 'image-sizes' ) }
+			{ isProInstalled ? <Key size={ 11 } strokeWidth={ 1.75 } aria-hidden="true" /> : <Lock size={ 11 } strokeWidth={ 1.75 } aria-hidden="true" /> }
+			{ isProInstalled ? __( 'Activate', 'image-sizes' ) : __( 'PRO', 'image-sizes' ) }
 		</>
 	);
 

@@ -5,7 +5,6 @@ import { ArrowRight, Check, FlaskConical, Gauge, HardDrive, Search, ShieldCheck,
 import type { NavigateFunction } from 'react-router-dom';
 import GradeChip from './GradeChip';
 import ProPill from './ProPill';
-import SoonTag from './SoonTag';
 import type { CategoryKey } from '../../api';
 import type { DashboardCard, DashboardLine, DashboardModelStats } from './model';
 
@@ -38,7 +37,6 @@ function LineBody( { line, cardKey }: { line: DashboardLine; cardKey: string } )
 						: <span className="font-medium text-thumbpress-title">{ line.label }</span> }
 				</span>
 				{ line.tier === 'pro' && <ProPill src={ `dashboard-tag-${ cardKey }` } link={ ! ( line.to || line.href ) } /> }
-				{ line.tier === 'soon' && <SoonTag /> }
 				{ line.tier === 'ok' && (
 					<span className="inline-flex items-center gap-[3px] shrink-0 text-xs leading-4 font-semibold px-2 py-px rounded-full bg-[#D1FAE5] text-[#047857]">
 						<Check size={ 11 } strokeWidth={ 2 } aria-hidden="true" />

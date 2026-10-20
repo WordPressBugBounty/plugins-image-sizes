@@ -15,10 +15,9 @@ interface NavItemData {
 
 interface SidebarProps {
 	navItems?: NavItemData[];
-	onNavRequest?: ( to: string ) => boolean;
 }
 
-export default function Sidebar( { navItems = [], onNavRequest }: SidebarProps ) {
+export default function Sidebar( { navItems = [] }: SidebarProps ) {
 	const location = useLocation();
 
 	// Sync WP admin submenu active state with SPA route
@@ -42,7 +41,8 @@ export default function Sidebar( { navItems = [], onNavRequest }: SidebarProps )
 		submenu.querySelectorAll( 'a' ).forEach( ( a ) => {
 			const href = a.getAttribute( 'href' ) || '';
 			const hashIndex = href.indexOf( '#' );
-			const linkHash = hashIndex !== -1 ? href.substring( hashIndex ) : '';
+			// The menu pill carries ?src=, which must not stop it matching its route.
+			const linkHash = ( hashIndex !== -1 ? href.substring( hashIndex ) : '' ).split( '?' )[ 0 ];
 			if ( ( linkHash === currentHash ) || ( currentHash === '#/' && ( linkHash === '#' || linkHash === '#/' || linkHash === '' ) ) ) {
 				matched = a as HTMLAnchorElement;
 			}
@@ -77,11 +77,6 @@ export default function Sidebar( { navItems = [], onNavRequest }: SidebarProps )
 							key={ to }
 							to={ to }
 							end={ to === '/' }
-							onClick={ ( e ) => {
-								if ( onNavRequest && onNavRequest( to ) ) {
-									e.preventDefault();
-								}
-							} }
 							className={({ isActive }) =>
 								cn(
 									'flex items-center gap-2 rounded-lg py-4 px-3 2xl:text-sm lg:text-xs font-normal transition-colors border focus:shadow-none hover:bg-[#F1EBFF] hover:text-thumbpress-primary focus:text-thumbpress-primary',

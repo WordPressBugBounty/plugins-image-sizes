@@ -33,6 +33,7 @@ class Dashboard {
 			'total_sizes'      => $sizes_data['total_sizes'],
 			'disabled_sizes'   => $sizes_data['disabled_sizes'],
 			'total_space_saved'=> $this->get_space_saved(),
+			'files_grown'      => $this->get_files_grown(),
 			'not_webp'         => $this->get_not_webp(),
 			'not_avif'         => $this->get_not_avif(),
 			'lazy_load'        => (bool) get_option( 'thumbpress_lazy_load', 0 ),
@@ -77,6 +78,7 @@ class Dashboard {
 			'total_sizes'        => $sizes_data['total_sizes'],
 			'disabled_sizes'     => $sizes_data['disabled_sizes'],
 			'total_space_saved'  => $this->get_space_saved(),
+			'files_grown'        => $this->get_files_grown(),
 			'not_webp'           => $not_webp,
 			'not_avif'           => $not_avif,
 			'lazy_load'          => (bool) get_option( 'thumbpress_lazy_load', 0 ),
@@ -316,6 +318,7 @@ class Dashboard {
 			'not_webp'           => $not_webp,
 			'not_avif'           => $not_avif,
 			'total_space_saved'  => $space_saved,
+			'files_grown'        => $this->get_files_grown(),
 			'total_thumbnails'   => $thumbnails,
 			'unused_images'      => 0,
 			'large_images'       => $large_images,
@@ -457,6 +460,13 @@ class Dashboard {
 
 	private function get_space_saved() {
 		return (int) get_option( 'thumbpress_space_saved', 0 );
+	}
+
+	/**
+	 * Files whose output ended up larger than the source, already netted into the space-saved total.
+	 */
+	private function get_files_grown() {
+		return (int) get_option( 'thumbpress_files_grown', 0 );
 	}
 
 	private function get_not_compressed() {
@@ -645,7 +655,8 @@ class Dashboard {
 		$not_webp        = (int) ( $stats['not_webp'] ?? 0 );
 		$not_avif        = (int) ( $stats['not_avif'] ?? 0 );
 		$duplicates      = (int) ( $stats['duplicate_images'] ?? 0 );
-		$webp_avif_count = min( $not_webp, $not_avif );
+		// WebP and AVIF are disjoint, so the images in neither are the two "not" counts less the total.
+		$webp_avif_count = max( 0, $not_webp + $not_avif - (int) ( $stats['total_images'] ?? 0 ) );
 
 		$all = array(
 			array(
@@ -816,7 +827,7 @@ class Dashboard {
 		$large                 = (int) $stats['large_images'];
 		$total_sizes           = (int) $stats['total_sizes'];
 		$disabled_sizes        = (int) $stats['disabled_sizes'];
-		$neither_webp_nor_avif = min( (int) $stats['not_webp'], (int) $stats['not_avif'] );
+		$neither_webp_nor_avif = max( 0, (int) $stats['not_webp'] + (int) $stats['not_avif'] - $total );
 		$webp_avif_score       = min( 1.0, ( $total - $neither_webp_nor_avif ) / $total ) * 15;
 		$thumbnail_score       = $total_sizes > 0 ? min( 1.0, ( $total_sizes - $disabled_sizes ) / $total_sizes ) * 15 : 15;
 		$compress_score        = max( 0.0, min( 1.0, ( $total - $not_compressed ) / $total ) ) * 25;
