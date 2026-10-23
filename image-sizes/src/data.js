@@ -1,1 +1,0 @@
-export const devHome = 'https://codexpert.io';
