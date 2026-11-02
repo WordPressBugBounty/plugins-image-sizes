@@ -105,10 +105,10 @@ class Menu {
 			$pro_label = __( 'Pro', 'image-sizes' );
 		} else {
 			$pro_cta_text = thumbpress_promo_active()
-				? __( 'Get Up to 48% OFF', 'image-sizes' )
+				? __( 'Get Up to 70% OFF', 'image-sizes' )
 				: __( 'Upgrade to Pro', 'image-sizes' );
 
-			$pro_label = '<span style="background: #ea580c; width: 100%; display: inline-block; color: #fff; text-align: center; padding: 5px 0; border-radius: 4px; font-weight: bold;">' . $pro_cta_text . '</span>';
+			$pro_label = '<span style="background: #FA9624; width: 100%; display: inline-block; color: #000; text-align: center; padding: 5px 0; border-radius: 4px; font-weight: 500;">' . $pro_cta_text . '</span>';
 		}
 
 		// "New" pill, same treatment as the Pro submenu label: WP prints submenu

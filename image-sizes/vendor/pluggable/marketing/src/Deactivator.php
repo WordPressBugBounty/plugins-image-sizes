@@ -50,12 +50,31 @@ class Deactivator {
 	public function hooks() {
 
 		add_action( 'admin_footer', [ $this, 'deactivation_survey_modal' ], 99 );
+		add_action( 'admin_init', [ $this, 'stamp_install_time' ] );
 
 		if( did_action( 'pl-plugin-deactivation' ) ) return;
 		do_action( 'pl-plugin-deactivation' );
 
 		add_action( 'admin_head', [ $this, 'head' ], 99 );
 		add_action( 'wp_ajax_pl-plugin-deactivation', [ $this, 'send_deactivation_survey' ], 99 );
+	}
+
+	public function stamp_install_time() {
+		if ( add_option( "{$this->slug}_install_time", time() ) ) {
+			add_option( "{$this->slug}_install_time_estimated", 1 );
+		}
+	}
+
+	public function get_install_time() {
+		$installed = (int) get_option( "{$this->slug}_install_time" );
+
+		return ( $installed > 0 && $installed <= time() && ! get_option( "{$this->slug}_install_time_estimated" ) ) ? $installed : '';
+	}
+
+	public function get_delay() {
+		$installed = $this->get_install_time();
+
+		return '' === $installed ? '' : time() - $installed;
 	}
 
 	public function head() {
@@ -88,6 +107,22 @@ class Deactivator {
 					$('.pl-plugin-dsm-reason-details-input').slideDown();
 				} )
 
+				function plValidateSurvey( form ) {
+					var reasons = $( 'input[name="reason[]"]:checked', form );
+					var valid   = reasons.length > 0;
+
+					if ( valid && reasons.filter( '[value="others"]' ).length ) {
+						valid = $.trim( $( 'textarea[name="explanation"]', form ).val() ) !== '';
+					}
+
+					$( 'button.pl-plugin-dsm-submit', form ).prop( 'disabled', ! valid );
+					$( 'textarea[name="explanation"]', form ).attr( 'placeholder', reasons.filter( '[value="doesnt_work"]' ).length ? 'What broke? Tell us what did not work' : 'Please Explain' );
+				}
+
+				$(document).on( 'change input', 'form.pl-plugin-deactivation-survey-form input[name="reason[]"], form.pl-plugin-deactivation-survey-form textarea', function(e){
+					plValidateSurvey( $(this).closest('form') );
+				} )
+
 				$(document).on( 'click', '.pl-consent-label', function(e){
 					var desc = $(this).data('desc');
 					alert(desc)
@@ -95,6 +130,8 @@ class Deactivator {
 				
 				$(document).on( 'submit', '.pl-plugin-deactivation-survey-form', function(e){
 					e.preventDefault();
+					plValidateSurvey( $(this) );
+					if ( $( 'button.pl-plugin-dsm-submit', this ).prop('disabled') ) return;
 					var data = $(this).serializeArray()
 					var parent = $(this);
 					$('.pl-plugin-dsm-submit', parent).prop('disabled', true);
@@ -115,6 +152,7 @@ class Deactivator {
 					$('.pl-plugin-deactivation-survey-overlay').css('display', 'flex');
 					$('.pl-plugin-dsm-skip-btn').prop('href', $(this).attr('href'));
 					$('#cxd-plugin-name').val( "<?php echo $this->slug; ?>" );
+					plValidateSurvey( $('form.pl-plugin-deactivation-survey-form') );
 				} )
 			})
 		</script>
@@ -161,7 +199,7 @@ class Deactivator {
 							<div class="pl-plugin-dsm-submit">
 								<button class="button pl-plugin-dsm-btn pl-plugin-dsm-close"><?php _e( 'Cancel', 'pluggable' ) ?></button>
 								&nbsp;
-								<button class="button button-primary pl-plugin-dsm-btn pl-plugin-dsm-submit" type="submit"><?php _e( 'Submit & Deactivate', 'pluggable' ) ?></button>
+								<button class="button button-primary pl-plugin-dsm-btn pl-plugin-dsm-submit" type="submit" disabled><?php _e( 'Submit & Deactivate', 'pluggable' ) ?></button>
 							</div>
 						</div>
 					</form>
@@ -193,7 +231,9 @@ class Deactivator {
 						'email'     	=> $user->user_email,
 						'plugin'     	=> sanitize_text_field( $_POST['plugin'] ),
 						'site_url'     	=> site_url( '/' ),
-						'delay'     	=> date_i18n( 'U' ) - (int) get_option( "{$this->slug}_install_time" ),
+						'delay'     	=> $this->get_delay(),
+						'install_time'	=> $this->get_install_time(),
+						'plugin_version'=> isset( $this->plugin['Version'] ) ? sanitize_text_field( $this->plugin['Version'] ) : '',
 						'deactivation'  => serialize( $_POST['reason'] ),
 						'feedback'		=> sanitize_textarea_field( $_POST['explanation'] ),
 					),

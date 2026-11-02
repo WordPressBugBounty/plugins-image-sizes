@@ -1,13 +1,14 @@
-import { Check } from 'lucide-react';
+import type { ReactNode } from 'react';
 import { __, sprintf } from '@wordpress/i18n';
 
 interface PricingCardProps {
 	plan: {
 		name: string;
 		price: string;
-		originalPrice?: string;
-		discount?: string;
-		totalPrice?: string;
+		/** Sale price shown instead of `price` (which is then struck through). */
+		discounted_price?: string;
+		/** Whole-number percent off; drives the "% OFF" badge. */
+		discount_percent?: number;
 		featured?: boolean;
 		sites: string;
 		support: string;
@@ -38,30 +39,47 @@ const NewBadge = () => (
 	</svg>
 );
 
+/** A single bullet: the checkmark plus whatever you pass in. */
+const PlanFeature = ({ children }: { children: ReactNode }) => (
+	<li className="flex items-center gap-2 text-base text-thumbpress-body">
+		<svg width="9" height="6" viewBox="0 0 9 6" fill="none" xmlns="http://www.w3.org/2000/svg" className="shrink-0">
+			<path
+				d="M7.25436 0.180711L2.98847 4.34393L1.07897 2.48039C0.832083 2.23944 0.432058 2.23944 0.185168 2.48039C-0.0617226 2.72134 -0.0617226 3.11174 0.185168 3.35269L2.54156 5.65237C2.66449 5.77233 2.827 5.83333 2.98847 5.83333C3.14994 5.83333 3.3114 5.77335 3.43537 5.65237L8.14816 1.053C8.39505 0.812056 8.39505 0.421659 8.14816 0.180711C7.90127 -0.060237 7.50125 -0.060237 7.25436 0.180711Z"
+				fill="#40189D"
+			/>
+		</svg>
+		{children}
+	</li>
+);
+
 const PricingCard = ({ plan, duration }: PricingCardProps) => {
 	return (
 		<div
 			key={plan.name}
 			className={`rounded-xl relative 2xl:p-[30px] lg:p-5 lg:pt-[36px] overflow-hidden ${plan.featured ? 'border-2 border-thumbpress-primary shadow-lg shadow-thumbpress-primary/10' : 'border border-thumbpress-border'} bg-white`}
 		>
-			{plan.featured && (
-				<div className="absolute top-0 right-0 bg-thumbpress-primary pointer-events-none py-2 px-4 text-white text-sm font-medium rounded-bl-lg">
-					{__('Best Value', 'image-sizes')}
-				</div>
+			{plan.discount_percent && (
+				<span className="absolute rounded-lg top-2 right-2 px-2 py-1 text-white bg-[#F91F3E] font-semibold text-xs">
+					{sprintf(
+						/* translators: %d is the discount percentage. */
+						__('%d%% OFF', 'image-sizes'),
+						plan.discount_percent,
+					)}
+				</span>
 			)}
 
-			<div className='pb-5 border-b border-thumbpress-primary/10 mb-5'>
-				<h3 className="text-2xl font-medium text-thumbpress-title mb-8">
-					{plan.name}
-				</h3>
-				<div className="flex items-baseline gap-1.5 mb-2">
-					{plan.originalPrice && (
-						<span className="text-xl font-medium text-thumbpress-body line-through">
-							{plan.originalPrice}
+			<div className="pb-5 border-b border-thumbpress-primary/10 mb-5">
+				<div className="flex items-start justify-between gap-3 mb-8">
+					<h3 className="text-2xl font-medium text-thumbpress-title">{plan.name}</h3>
+				</div>
+				<div className="flex items-center flex-wrap gap-1.5 mb-2">
+					{plan.discounted_price && (
+						<span className="text-xl text-thumbpress-body line-through mr-1 opacity-80 font-light">
+							{plan.price}
 						</span>
 					)}
-					<span className="text-4xl font-semibold text-thumbpress-primary">
-						{plan.price}
+					<span className="text-3xl font-semibold text-thumbpress-primary">
+						{plan.discounted_price ?? plan.price}
 					</span>
 					{duration === 'Yearly' && (
 						<span className="text-base text-thumbpress-body">{__('/ Year', 'image-sizes')}</span>
@@ -70,35 +88,20 @@ const PricingCard = ({ plan, duration }: PricingCardProps) => {
 					{duration === 'Lifetime' && (
 						<span className="text-base text-thumbpress-body">{__('/ Lifetime', 'image-sizes')}</span>
 					)}
-					{plan.discount && (
-						<span className="ml-auto self-center bg-[#F97316] text-white text-xs font-semibold px-2.5 py-1 rounded">
-							{plan.discount}
-						</span>
-					)}
 				</div>
 			</div>
 
 			<ul className="space-y-4 mb-8">
-				<li className="flex items-center gap-2 text-base text-thumbpress-body">
-					<Check className="w-4 h-4 text-thumbpress-primary flex-shrink-0" />
-					{plan.sites}
-				</li>
-				<li className="flex items-center gap-2 text-base text-thumbpress-body">
-					<Check className="w-4 h-4 text-thumbpress-primary flex-shrink-0" />
+				<PlanFeature>{plan.sites}</PlanFeature>
+				<PlanFeature>
 					<span>
 						<span className="font-bold text-thumbpress-primary">{plan.cdnStorage} </span>
 						{__('CDN Space', 'image-sizes')}
 					</span>
 					<NewBadge />
-				</li>
-				<li className="flex items-center gap-2 text-base text-thumbpress-body">
-					<Check className="w-4 h-4 text-thumbpress-primary flex-shrink-0" />
-					{plan.support}
-				</li>
-				<li className="flex items-center gap-2 text-base text-thumbpress-body">
-					<Check className="w-4 h-4 text-thumbpress-primary flex-shrink-0" />
-					{__('All Pro Features Included', 'image-sizes')}
-				</li>
+				</PlanFeature>
+				<PlanFeature>{plan.support}</PlanFeature>
+				<PlanFeature>{__('All Pro Features Included', 'image-sizes')}</PlanFeature>
 			</ul>
 			<a
 				href={plan.url}
@@ -106,7 +109,7 @@ const PricingCard = ({ plan, duration }: PricingCardProps) => {
 				rel="noopener noreferrer"
 				className={`block text-center py-3 rounded-lg text-sm font-medium no-underline transition-colors duration-300 border-2 border-thumbpress-primary ${plan.featured ? 'bg-thumbpress-primary !text-white' : ' !text-thumbpress-primary hover:bg-thumbpress-primary hover:!text-white'}`}
 			>
-				{__('Purchase', 'image-sizes')}
+				{__('Get Now', 'image-sizes')}
 			</a>
 		</div>
 	);

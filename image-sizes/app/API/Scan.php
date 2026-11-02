@@ -45,6 +45,9 @@ class Scan {
 
 		Hash_Index::mark_stale();
 
+		// The walk re-sets this when it finishes; until then the duplicate group-by would under-count.
+		delete_option( 'thumbpress_hashes_generated' );
+
 		as_schedule_single_action( wp_date( 'U' ) - 10, self::ACTION, array( 'offset' => 0 ) );
 
 		// Read before waking the runner, which can finish the batch first and leave this request a stale "not ready" for a scan that is done.

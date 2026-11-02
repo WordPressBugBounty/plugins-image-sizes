@@ -113,6 +113,12 @@ export default function Sidebar( { navItems = [] }: SidebarProps ) {
 										<path d="M7.44179 14.7031C7.37806 14.7027 7.31486 14.7148 7.25581 14.7388C7.19676 14.7628 7.14301 14.7982 7.09763 14.8429C7.05225 14.8877 7.01614 14.9409 6.99134 14.9997C6.96655 15.0584 6.95356 15.1214 6.95312 15.1851C6.95312 15.4511 7.17246 15.6665 7.44179 15.6665H16.5618C16.6904 15.6674 16.8141 15.6172 16.9057 15.5269C16.9973 15.4367 17.0494 15.3137 17.0505 15.1851C17.05 15.1214 17.037 15.0584 17.0122 14.9997C16.9874 14.9409 16.9513 14.8877 16.906 14.8429C16.8606 14.7982 16.8068 14.7628 16.7478 14.7388C16.6887 14.7148 16.6255 14.7027 16.5618 14.7031H7.44179Z" fill="#FA9624"/>
 									</svg>
 								</span>
+              )}
+
+							{ to.startsWith( '/pro' ) && window.THUMBPRESS?.promo_active && ! window.THUMBPRESS?.pro_active && ! window.THUMBPRESS?.pro_installed && (
+								<span className="relative overflow-hidden ml-auto shrink-0 rounded-[5px] bg-[#FA9624] px-2.5 py-2 text-xs font-semibold leading-none text-black after:pointer-events-none after:absolute after:inset-y-0 after:left-0 after:w-1/3 after:bg-gradient-to-r after:from-transparent after:via-white/70 after:to-transparent motion-safe:after:animate-badge-shine">
+									Up to 70% OFF
+								</span>
 							) }
 						</NavLink>
 					);

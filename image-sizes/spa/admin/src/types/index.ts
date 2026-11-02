@@ -58,6 +58,8 @@ declare global {
 			promo_active?: boolean;
 			/** UTC Unix timestamp (seconds) when the promo ends. */
 			promo_end?: number;
+			/** Whether the Pro page BFCM banner was dismissed within the last 7 days (server-computed). */
+			bfcm_banner_hidden?: boolean;
 			menus?: Record<string, unknown>;
 			/** BCP-47 locale tag from PHP (get_locale() with "_" → "-"), e.g. "bn-BD". */
 			locale?: string;

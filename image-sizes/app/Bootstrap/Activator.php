@@ -1,5 +1,6 @@
 <?php
 namespace Codexpert\ThumbPress\Bootstrap;
+use Codexpert\ThumbPress\API\Review;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -56,10 +57,7 @@ class Activator {
 		self::maybe_arm_announced_redirect();
 
 		// When the site first met the plugin, for the review prompt. add_option() is a no-op once set.
-		add_option( \Codexpert\ThumbPress\API\Review::INSTALLED_OPTION, time() );
-
-		// Set a flag that indicates the plugin has been activated
-		update_option( 'thumbpress_activated', true );
+		add_option( Review::INSTALLED_OPTION, time() );
 	}
 
 	/**
@@ -236,6 +234,9 @@ class Activator {
 		}
 
 		update_option( self::SETUP_REDIRECT_OPTION, true );
+
+		// Only a site that has just met the plugin knows its install time; the deactivation survey reads it.
+		add_option( 'image-sizes_install_time', time() );
 
 		// Nothing is new to a site that has only just met the plugin.
 		self::dismiss_whats_new();

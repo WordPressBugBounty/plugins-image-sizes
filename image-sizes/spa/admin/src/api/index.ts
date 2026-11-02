@@ -193,6 +193,13 @@ export function saveSettings( key: string, value: unknown ) {
 	} );
 }
 
+export function dismissBfcmBanner() {
+	return apiFetch<{ success: boolean }>( {
+		url: `${ BASE_URL }/promo/banner/dismiss`,
+		method: 'POST',
+	} );
+}
+
 export interface RegenerateResponse {
 	success: boolean;
 	data?: {

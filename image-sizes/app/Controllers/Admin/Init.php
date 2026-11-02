@@ -32,7 +32,7 @@ class Init {
 	 * Each campaign gets its own option, so dismissing one offer does not
 	 * silently hide every future one. Bump this when the campaign changes.
 	 */
-	const OFFER_DISMISSED_OPTION = 'thumbpress_summer_offer_dismissed';
+	const OFFER_DISMISSED_OPTION = 'thumbpress_bfcm_offer_dismissed';
 
 	/**
 	 * Option recording that the Media Health admin-bar notice was dismissed.
@@ -78,7 +78,7 @@ class Init {
 	}
 
 	/**
-	 * Whether the Summer Special upgrade offer should be shown to the current user.
+	 * Whether the Black Friday upgrade offer should be shown to the current user.
 	 *
 	 * Shown only while the promo campaign is live ({@see thumbpress_promo_active()}).
 	 * Hidden when Pro is active, when the user lacks the manage_options capability,
@@ -177,15 +177,15 @@ class Init {
 	}
 
 	/**
-	 * Add the Summer Special upgrade offer node to the admin bar.
+	 * Add the Black Friday upgrade offer node to the admin bar.
 	 *
 	 * @param \WP_Admin_Bar $wp_admin_bar The admin bar instance.
 	 * @return void
 	 */
 	protected function add_offer_node( $wp_admin_bar ) {
-		$upgrade_url = admin_url( 'admin.php?page=thumbpress#/pro?src=admin-bar-offer' );
+		$upgrade_url = 'https://thumbpress.co/pricing?utm_source=thumbpress-free&utm_medium=plugin&utm_campaign=bfcm2026&utm_content=admin-bar';
 
-		$offer_text = esc_html__( 'ThumbPress: Summer Special - Up to 48% OFF', 'image-sizes' );
+		$offer_text = esc_html__( 'ThumbPress: BFCM - Up to 70% OFF', 'image-sizes' );
 
 		$title = sprintf(
 			'<span class="thumbpress-offer-text">%1$s</span><span class="thumbpress-offer-dismiss" role="button" tabindex="0" aria-label="%2$s" title="%2$s">&times;</span>',
@@ -198,7 +198,10 @@ class Init {
 				'id'    => 'thumbpress-offer',
 				'title' => $title,
 				'href'  => $upgrade_url,
-				'meta'  => array( 'class' => 'thumbpress-offer-node' ),
+				'meta'  => array(
+					'class'  => 'thumbpress-offer-node',
+					'target' => '_blank',
+				),
 			)
 		);
 	}
@@ -250,16 +253,16 @@ class Init {
 		?>
 		<style>
 			#wpadminbar #wp-admin-bar-thumbpress-offer > .ab-item {
-				background: #ea580c;
-				color: #fff !important;
-				font-weight: 600;
+				background: #FA9624;
+				color: #000 !important;
+				font-weight: 500;
 			}
 			#wpadminbar #wp-admin-bar-thumbpress-offer:hover > .ab-item {
-				background: #c2410c;
-				color: #fff !important;
+				background: #E8850F;
+				color: #000 !important;
 			}
 			#wpadminbar #wp-admin-bar-thumbpress-offer .thumbpress-offer-text {
-				font-weight: 700;
+				font-weight: 500;
 			}
 			#wpadminbar #wp-admin-bar-thumbpress-offer .thumbpress-offer-dismiss {
 				margin-left: 8px;
@@ -373,7 +376,7 @@ class Init {
 	}
 
 	/**
-	 * AJAX handler: persist dismissal of the Summer Special offer.
+	 * AJAX handler: persist dismissal of the Black Friday offer.
 	 *
 	 * @return void
 	 */
@@ -510,6 +513,8 @@ class Init {
 				// its own deadline, so pricing/popup flip off in sync with PHP.
 				'promo_active'       => thumbpress_promo_active(),
 				'promo_end'          => thumbpress_promo_end_timestamp(), // UTC Unix seconds.
+				// The Pro page BFCM banner stays hidden for 7 days after it is dismissed.
+				'bfcm_banner_hidden' => ( time() - (int) get_option( 'thumbpress_bfcm_banner_dismissed_at', 0 ) ) < 7 * DAY_IN_SECONDS,
 				// BCP-47 locale tag for locale-aware number/size formatting in the SPA.
 				'locale'             => str_replace( '_', '-', get_locale() ),
 			)

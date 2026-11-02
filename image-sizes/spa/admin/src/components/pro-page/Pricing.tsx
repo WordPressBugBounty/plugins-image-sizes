@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { __, sprintf } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 import { cn } from '../../lib/utils';
 import PricingCard from './components/PricingCard';
 
@@ -82,68 +82,65 @@ const Pricing = ( { source = '' }: { source?: string } ) => {
 		},
 	];
 
-	// Promo (Summer Sale) figures — discounted price, struck-through original,
-	// discount badge and coupon-bearing checkout URLs.
+	// Promo (BFCM) figures — struck-through regular price, discounted price,
+	// discount badge and coupon-bearing checkout URLs. Mirrors the website pricing page.
 	const promoPlansYearly = [
 		{
 			name: __('Personal', 'image-sizes'),
-			price: '$3.50',
-			originalPrice: '$5',
-			discount: sprintf( /* translators: %d is the discount percentage. */ __('%d%% OFF', 'image-sizes'), 30),
-			totalPrice: '$42',
+			price: '$59',
+			discounted_price: '$29.50',
+			discount_percent: 50,
 			featured: false,
 			sites: __('1 Site', 'image-sizes'), cdnStorage: '10 GB', support: __('1 Year Support', 'image-sizes'),
-			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=1&discount=SUMMER30'
+			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=1&discount=BFCM26per'
 		},
 		{
 			name: __('Professional', 'image-sizes'),
-			price: '$7',
-			originalPrice: '$10',
-			discount: sprintf( /* translators: %d is the discount percentage. */ __('%d%% OFF', 'image-sizes'), 30),
-			totalPrice: '$84',
+			price: '$119',
+			discounted_price: '$47.60',
+			discount_percent: 60,
 			featured: true,
 			sites: __('5 Sites', 'image-sizes'), cdnStorage: '50 GB', support: __('1 Year Support', 'image-sizes'),
-			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=2&discount=SUMMER30'
+			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=2&discount=BFCM26fess'
 		},
 		{
 			name: __('Agency', 'image-sizes'),
-			price: '$17.50',
-			originalPrice: '$25',
-			discount: sprintf( /* translators: %d is the discount percentage. */ __('%d%% OFF', 'image-sizes'), 30),
-			totalPrice: '$210',
+			price: '$299',
+			discounted_price: '$89.70',
+			discount_percent: 70,
 			featured: false,
 			sites: __('Unlimited Sites', 'image-sizes'), cdnStorage: '100 GB', support: __('1 Year Support', 'image-sizes'),
-			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=4&discount=SUMMER30'
+			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=4&discount=BFCM26ncy'
 		},
 	];
 
 	const promoPlansLifetime = [
 		{
 			name: __('Personal', 'image-sizes'),
-			price: '$62',
-			originalPrice: '$119',
-			discount: sprintf( /* translators: %d is the discount percentage. */ __('%d%% OFF', 'image-sizes'), 48),
+			price: '$119',
+			discounted_price: '$59.50',
+			discount_percent: 50,
 			featured: false,
 			sites: __('1 Site', 'image-sizes'), cdnStorage: '10 GB', support: __('Lifetime Support', 'image-sizes'),
-			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=5&discount=SUMMER48'
+			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=5&discount=BFCM26per'
 		},
 		{
 			name: __('Professional', 'image-sizes'),
-			price: '$125',
-			originalPrice: '$239',
-			discount: sprintf( /* translators: %d is the discount percentage. */ __('%d%% OFF', 'image-sizes'), 48),
+			price: '$239',
+			discounted_price: '$95.60',
+			discount_percent: 60,
 			featured: false,
 			sites: __('5 Sites', 'image-sizes'), cdnStorage: '50 GB', support: __('Lifetime Support', 'image-sizes'),
-			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=6&discount=SUMMER48'
+			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=6&discount=BFCM26fess'
 		},
 		{
 			name: __('Agency', 'image-sizes'),
-			price: '$312',
-			originalPrice: '$599',
-			discount: sprintf( /* translators: %d is the discount percentage. */ __('%d%% OFF', 'image-sizes'), 48),
+			price: '$599',
+			discounted_price: '$179.70',
+			discount_percent: 70,
 			featured: true,
 			sites: __('Unlimited Sites', 'image-sizes'), cdnStorage: '100 GB', support: __('Lifetime Support', 'image-sizes'),
-			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=8&discount=SUMMER48'
+			url: 'https://my.pluggable.io/order/?edd_action=add_to_cart&download_id=348&edd_options%5Bprice_id%5D=8&discount=BFCM26ncy'
 		},
 	];
 

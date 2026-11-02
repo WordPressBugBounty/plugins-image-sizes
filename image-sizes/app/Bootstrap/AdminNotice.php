@@ -13,6 +13,21 @@ class AdminNotice {
 	 * Hook into WordPress.
 	 */
 	public function init() {
+		/*
+		 * Runs at file scope on every request, and the check below reads the header
+		 * of every plugin file. The notice only renders on an admin screen and the
+		 * dismiss handler only runs on admin-ajax, so REST, cron and the front end
+		 * have no use for it, nor has any other ajax call (heartbeat) (#560).
+		 */
+		if ( ! is_admin() ) {
+			return;
+		}
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- routing only; the handler verifies its nonce.
+		if ( wp_doing_ajax() && 'thumbpress_dismiss_pro_not_activated' !== sanitize_key( wp_unslash( $_REQUEST['action'] ?? '' ) ) ) {
+			return;
+		}
+
 		if ( $this->is_pro_installed_not_activated() ) {
 			add_action( 'admin_notices', array( $this, 'render_pro_not_activated_notice' ) );
 			add_action( 'wp_ajax_thumbpress_dismiss_pro_not_activated', array( $this, 'dismiss_pro_not_activated_notice' ) );

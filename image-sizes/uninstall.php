@@ -58,6 +58,6 @@ if ( is_string( $check_dir ) && preg_match( '/^thumbpress-check-[A-Za-z0-9]{20}$
         rmdir( $path ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_rmdir
     }
 }
-foreach ( [ 'thumbpress_compression_check', 'thumbpress_compression_check_run', 'thumbpress_compression_check_dir', 'thumbpress_usage_state', 'thumbpress_usage_scanned_at', 'thumbpress_usage_cancelled', 'thumbpress_missed_since', 'thumbpress_missed_kb', 'thumbpress_grade_history', 'thumbpress_setup_state', 'thumbpress_setup_redirect', 'thumbpress_hash_index_schema', 'thumbpress_installed_at', 'thumbpress_review_state' ] as $option ) {
+foreach ( [ 'thumbpress_compression_check', 'thumbpress_compression_check_run', 'thumbpress_compression_check_dir', 'thumbpress_usage_state', 'thumbpress_usage_scanned_at', 'thumbpress_usage_cancelled', 'thumbpress_missed_since', 'thumbpress_missed_kb', 'thumbpress_grade_history', 'thumbpress_setup_state', 'thumbpress_setup_redirect', 'thumbpress_hash_index_schema', 'thumbpress_installed_at', 'thumbpress_review_state', 'thumbpress_bfcm_banner_dismissed_at', 'thumbpress_bfcm_offer_dismissed' ] as $option ) {
     delete_option( $option );
 }

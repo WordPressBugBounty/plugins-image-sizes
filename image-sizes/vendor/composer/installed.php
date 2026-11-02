@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'image-sizes/image-sizes',
-        'pretty_version' => 'v6.10.0',
-        'version' => '6.10.0.0',
-        'reference' => '7d75a8cbe7b57b8a6e9e29d2b829317a8129e17e',
+        'pretty_version' => 'v6.10.1',
+        'version' => '6.10.1.0',
+        'reference' => 'ad010eadb62db48880d1fb14bf566fd3851e20d9',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,9 +22,9 @@
             'dev_requirement' => false,
         ),
         'image-sizes/image-sizes' => array(
-            'pretty_version' => 'v6.10.0',
-            'version' => '6.10.0.0',
-            'reference' => '7d75a8cbe7b57b8a6e9e29d2b829317a8129e17e',
+            'pretty_version' => 'v6.10.1',
+            'version' => '6.10.1.0',
+            'reference' => 'ad010eadb62db48880d1fb14bf566fd3851e20d9',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -33,7 +33,7 @@
         'pluggable/marketing' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'a94081e0881483722b8506ad87f6aa5da0b75f3b',
+            'reference' => '660bcf5e59a0deeb355139999d60a8bf9a3720fd',
             'type' => 'library',
             'install_path' => __DIR__ . '/../pluggable/marketing',
             'aliases' => array(

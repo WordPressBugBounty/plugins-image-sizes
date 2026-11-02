@@ -24,6 +24,11 @@ class Convert_Webp extends Image_Converter {
 	const INFLIGHT_OPTION = 'thumbpress_convert_inflight';
 
 	/**
+	 * The in-flight attachment's pre-conversion metadata, so a killed batch can put it back.
+	 */
+	const INFLIGHT_STATE_OPTION = 'thumbpress_convert_inflight_state';
+
+	/**
 	 * Stored-URL rewrites not yet flushed, so a killed batch cannot lose them.
 	 */
 	const PENDING_REWRITES_OPTION = 'thumbpress_convert_pending_rewrites';
@@ -122,6 +127,8 @@ class Convert_Webp extends Image_Converter {
 		if ( ! $total_attachments ) {
 			return;
 		}
+
+		$this->recover_interrupted();
 
 		$mime_in = "'" . implode( "','", array_map( 'esc_sql', $image_types ) ) . "'";
 
@@ -229,6 +236,18 @@ class Convert_Webp extends Image_Converter {
 				continue;
 			}
 
+			$old_file = get_post_meta( $img_id, '_wp_attached_file', true );
+			update_option(
+				self::INFLIGHT_STATE_OPTION,
+				array(
+					'id'   => $img_id,
+					'file' => $old_file,
+					'meta' => $old_metadata,
+					'webp' => $webp_file_path,
+				),
+				false
+			);
+
 			$webp_metadata = wp_generate_attachment_metadata( $img_id, $webp_file_path );
 
 			// Metadata generation failed — roll back. Delete the WebP we just created so a retry
@@ -236,6 +255,7 @@ class Convert_Webp extends Image_Converter {
 			// + its files untouched. Deleting the old files now would strand the DB on metadata that
 			// still references them (blank thumbnails, "media still says jpeg").
 			if ( ! $webp_metadata || is_wp_error( $webp_metadata ) ) {
+				$this->restore_attachment( $img_id, $old_metadata, $old_file, $webp_file_path );
 				if ( file_exists( $webp_file_path ) ) {
 					wp_delete_file( $webp_file_path );
 				}
@@ -283,6 +303,7 @@ class Convert_Webp extends Image_Converter {
 					'guid'           => wp_get_attachment_url( $img_id ),
 				)
 			);
+			delete_option( self::INFLIGHT_STATE_OPTION );
 
 			// A WPML/Polylang duplicate attachment can point at the same files; deleting them would break it (#539).
 			global $wpdb;
@@ -377,6 +398,57 @@ class Convert_Webp extends Image_Converter {
 	}
 
 	/**
+	 * Undo a conversion a killed request left half-applied.
+	 */
+	private function recover_interrupted() {
+		$state = get_option( self::INFLIGHT_STATE_OPTION );
+
+		if ( ! is_array( $state ) || empty( $state['id'] ) ) {
+			return;
+		}
+
+		delete_option( self::INFLIGHT_STATE_OPTION );
+
+		$mime = get_post_mime_type( (int) $state['id'] );
+		if ( $mime && 'image/webp' !== $mime ) {
+			$this->restore_attachment( (int) $state['id'], $state['meta'] ?? false, $state['file'] ?? '', $state['webp'] ?? '' );
+		}
+	}
+
+	/**
+	 * Put an attachment back as it was before core's metadata generation half-rewrote it, and drop the WebP files it made.
+	 *
+	 * @param int         $img_id       Attachment ID.
+	 * @param array|false $old_metadata `_wp_attachment_metadata` from before the conversion.
+	 * @param string      $old_file     `_wp_attached_file` from before the conversion.
+	 * @param string      $webp_path    Converted file the interrupted call was building sizes for.
+	 */
+	private function restore_attachment( $img_id, $old_metadata, $old_file, $webp_path ) {
+		$partial = wp_get_attachment_metadata( $img_id );
+		$orphans = array( $webp_path );
+
+		if ( ! empty( $partial['file'] ) ) {
+			$orphans[] = wp_get_upload_dir()['basedir'] . DIRECTORY_SEPARATOR . $partial['file'];
+		}
+		foreach ( ( $partial['sizes'] ?? array() ) as $size ) {
+			$orphans[] = dirname( $webp_path ) . DIRECTORY_SEPARATOR . $size['file'];
+		}
+
+		if ( $old_metadata ) {
+			wp_update_attachment_metadata( $img_id, $old_metadata );
+		}
+		if ( $old_file ) {
+			update_post_meta( $img_id, '_wp_attached_file', $old_file );
+		}
+
+		foreach ( array_unique( array_filter( $orphans ) ) as $file ) {
+			if ( 'webp' === strtolower( pathinfo( $file, PATHINFO_EXTENSION ) ) ) {
+				wp_delete_file( $file );
+			}
+		}
+	}
+
+	/**
 	 * Write the run cursor and counters so a killed batch still advances.
 	 *
 	 * @param int $processed Cumulative processed count.
@@ -391,6 +463,7 @@ class Convert_Webp extends Image_Converter {
 		$progress = $total > 0 ? ( $processed / $total ) * 100 : 100;
 
 		delete_option( self::INFLIGHT_OPTION );
+		delete_option( self::INFLIGHT_STATE_OPTION );
 		update_option( 'thumbpress_convert_progress', $processed >= $total ? 100 : min( 99, floor( $progress ) ) );
 		// The last row actually converted, never the page end — a resume must not skip work.
 		update_option( self::LAST_ID_OPTION, $last_id );

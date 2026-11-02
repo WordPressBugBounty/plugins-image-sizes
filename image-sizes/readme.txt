@@ -2,9 +2,9 @@
 Contributors: thumbpressco, codexpert, mukto90
 Tags: image optimization, compress images, thumbnail manager, WebP converter, image cdn, media library cleaner, AVIF converter, regenerate thumbnails, unused images, lazy load
 Requires at least: 6.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 6.10.0
+Stable tag: 6.10.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -328,6 +328,14 @@ ThumbPress may connect to the WordPress.org API (api.wordpress.org) to check for
 The plugin links to thumbpress.co for Pro upgrade information. No data is sent automatically; links only open when the user clicks them.
 
 == Changelog ==
+
+= 6.10.1 - 2026-11-02 =
+* [fix] Hotlink Protection on multisite no longer lets one site's setting block or unblock images on the other sites in the network. Each site now keeps its rules in its own uploads folder
+* [fix] A background WebP conversion that is stopped midway no longer leaves an image pointing at files it never finished. The next run restores the image, so its thumbnails and srcset work again
+* [fix] The deactivation survey now reports how long ThumbPress has been installed correctly, and asks for a reason before it submits
+* [perf] Admin pages no longer queue a full duplicate-image recount after every compress, convert or replace, which kept the database busy on large libraries
+* [perf] ThumbPress no longer writes to the database on every page load
+* [perf] Front-end pages, REST and cron requests no longer read every installed plugin's file just to check for ThumbPress Pro
 
 = 6.10.0 - 2026-10-20 =
 * [security] Stopped the image-address update that runs after converting, regenerating or replacing an image from rebuilding objects stored in post content, post meta or options

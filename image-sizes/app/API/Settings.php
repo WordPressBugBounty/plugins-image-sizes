@@ -90,17 +90,35 @@ class Settings {
 
 			if ( (bool) $previous !== (bool) $hotlink_protection ) {
 				if ( $this->is_apache() ) {
+					// The root .htaccess is shared by every site on a network and holds a
+					// single block for one host, so on multisite only the site's own uploads
+					// .htaccess is written. One site's toggle must never touch another's.
 					if ( $hotlink_protection ) {
-						$this->add_hotlink_rules();
+						if ( ! is_multisite() ) {
+							$this->add_hotlink_rules();
+						}
 						$this->add_uploads_htaccess();
 					} else {
-						$this->remove_hotlink_rules();
+						if ( ! is_multisite() ) {
+							$this->remove_hotlink_rules();
+						}
 						$this->remove_uploads_htaccess();
 					}
 				}
 				// Flush WordPress rewrite rules so /thumbpress-image/ pretty URL is written
 				// to .htaccess (Apache) and registered for WordPress routing (Nginx).
 				flush_rewrite_rules( true );
+			}
+
+			if ( is_multisite() && $this->is_apache() ) {
+				// Earlier versions wrote this site's block into the shared root file.
+				$this->remove_legacy_root_rules();
+
+				// And left an uploads block without the subsite exclusion. Refresh it, since the
+				// branch above only writes when the toggle flips.
+				if ( $hotlink_protection && (bool) $previous === (bool) $hotlink_protection ) {
+					$this->add_uploads_htaccess();
+				}
 			}
 		}
 
@@ -290,6 +308,11 @@ class Settings {
 		$rules   .= "RewriteEngine On\n";
 		$rules   .= "RewriteCond %{HTTP_REFERER} !^\$\n";
 		$rules   .= 'RewriteCond %{HTTP_REFERER} !^https?://(www\\.)?' . preg_quote( $site_url, '/' ) . " [NC]\n";
+		// The main site's uploads folder is the parent of uploads/sites/N/, so its rules
+		// would also cover every subsite and block them for any other host.
+		if ( is_multisite() && is_main_site() ) {
+			$rules .= "RewriteCond %{REQUEST_URI} !/uploads/sites/ [NC]\n";
+		}
 		$rules   .= "RewriteRule \\.(jpg|jpeg|png|gif|webp|avif|svg)$ - [F,NC,L]\n";
 		$rules   .= "</IfModule>\n";
 		$rules   .= "# END ThumbPress Hotlink Protection\n";
@@ -323,6 +346,35 @@ class Settings {
 			wp_delete_file( $htaccess );
 		} else {
 			$filesystem->put_contents( $htaccess, $content, FS_CHMOD_FILE );
+		}
+	}
+
+	/**
+	 * Remove this site's hotlink block from the shared root .htaccess on multisite.
+	 *
+	 * Blocks that allow another host belong to another site and are left alone.
+	 */
+	private function remove_legacy_root_rules() {
+		$htaccess   = ABSPATH . '.htaccess';
+		$filesystem = $this->filesystem();
+
+		if ( ! $filesystem || ! $filesystem->exists( $htaccess ) || ! $filesystem->is_writable( $htaccess ) ) {
+			return;
+		}
+
+		$content = (string) $filesystem->get_contents( $htaccess );
+		$host    = 'https?://(www\\.)?' . preg_quote( wp_parse_url( home_url(), PHP_URL_HOST ), '/' ) . ' [NC]';
+		$pattern = '/\n?# BEGIN ThumbPress Hotlink Protection.*?# END ThumbPress Hotlink Protection\n?/s';
+		$updated = preg_replace_callback(
+			$pattern,
+			static function ( $match ) use ( $host ) {
+				return false !== strpos( $match[0], $host ) ? '' : $match[0];
+			},
+			$content
+		);
+
+		if ( $updated !== $content ) {
+			$filesystem->put_contents( $htaccess, $updated, FS_CHMOD_FILE );
 		}
 	}
 

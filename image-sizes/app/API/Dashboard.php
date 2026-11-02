@@ -556,9 +556,8 @@ class Dashboard {
 			return 0;
 		}
 
-		// Grouping every hash filesorts the whole meta table, so no web request runs it.
+		// Grouping every hash filesorts the whole meta table, so no web request runs it or queues it.
 		if ( ! $compute ) {
-			$this->schedule_stat_cache_build();
 			return 0;
 		}
 
@@ -595,21 +594,6 @@ class Dashboard {
 		$this->release_stat_lock( 'stat_duplicates' );
 
 		return $value;
-	}
-
-	/**
-	 * Queue a background rebuild so a stat the request path refuses to compute fills itself in.
-	 */
-	private function schedule_stat_cache_build() {
-		if ( ! function_exists( 'as_has_scheduled_action' ) || ! function_exists( 'as_schedule_single_action' ) ) {
-			return;
-		}
-
-		if ( as_has_scheduled_action( 'thumbpress_build_stat_cache' ) ) {
-			return;
-		}
-
-		as_schedule_single_action( wp_date( 'U' ) - 10, 'thumbpress_build_stat_cache' );
 	}
 
 	/**

@@ -60,8 +60,8 @@ function thumbpress_format_size_delta( $bytes ) {
  * The instant the promo ends (normal state begins), as a UTC Unix timestamp.
  *
  * This is the EXCLUSIVE end boundary: the promo is active for every moment
- * strictly before it, so the default of `2026-08-10 00:00:00 UTC` keeps the sale
- * live through `2026-08-09 23:59:59 UTC` and flips to normal from midnight — per
+ * strictly before it, so the default of `2026-12-11 00:00:00 UTC` keeps the sale
+ * live through `2026-12-10 23:59:59 UTC` and flips to normal from midnight — per
  * the campaign spec.
  *
  * Sourced from the `thumbpress_promo_end_date` option (a `Y-m-d H:i:s` string
@@ -73,7 +73,7 @@ function thumbpress_format_size_delta( $bytes ) {
  * @return int UTC Unix timestamp at which the promo ends.
  */
 function thumbpress_promo_end_timestamp() {
-	$default = '2026-08-10 00:00:00';
+	$default = '2026-12-11 00:00:00';
 	$end     = (string) get_option( 'thumbpress_promo_end_date', $default );
 
 	$timestamp = strtotime( $end . ' UTC' );
@@ -85,7 +85,28 @@ function thumbpress_promo_end_timestamp() {
 }
 
 /**
- * Whether the promotional (Summer Sale) campaign is currently running.
+ * The instant the promo starts, as a UTC Unix timestamp (inclusive).
+ *
+ * Sourced from the `thumbpress_promo_start_date` option (a `Y-m-d H:i:s` string
+ * interpreted as UTC), falling back to `2026-10-29 00:00:00 UTC` when unset or
+ * malformed.
+ *
+ * @return int UTC Unix timestamp at which the promo starts.
+ */
+function thumbpress_promo_start_timestamp() {
+	$default = '2026-10-29 00:00:00';
+	$start   = (string) get_option( 'thumbpress_promo_start_date', $default );
+
+	$timestamp = strtotime( $start . ' UTC' );
+	if ( false === $timestamp ) {
+		$timestamp = strtotime( $default . ' UTC' );
+	}
+
+	return (int) $timestamp;
+}
+
+/**
+ * Whether the promotional (BFCM) campaign is currently running.
  *
  * Single source of truth for every promo surface — the admin-bar offer, the
  * sidebar CTA styling, the Pro pricing discounts and the exit-intent popup. Once
@@ -95,7 +116,8 @@ function thumbpress_promo_end_timestamp() {
  * @return bool
  */
 function thumbpress_promo_active() {
-	$active = time() < thumbpress_promo_end_timestamp();
+	$now    = time();
+	$active = $now >= thumbpress_promo_start_timestamp() && $now < thumbpress_promo_end_timestamp();
 
 	return (bool) apply_filters( 'thumbpress_promo_active', $active );
 }

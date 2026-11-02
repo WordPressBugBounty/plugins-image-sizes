@@ -5,10 +5,10 @@ import { toast } from 'sonner';
 
 // Offer deadline sourced from the server promo gate (UTC seconds) so the
 // countdown stays in sync with PHP; falls back to the campaign's end boundary
-// (2026-08-10 00:00:00 UTC — promo runs through 2026-08-09 23:59:59 UTC).
+// (2026-12-11 00:00:00 UTC — promo runs through 2026-12-10 23:59:59 UTC).
 const OFFER_DEADLINE_TS = window.THUMBPRESS?.promo_end
 	? window.THUMBPRESS.promo_end * 1000
-	: Date.UTC( 2026, 7, 10, 0, 0, 0 );
+	: Date.UTC( 2026, 11, 11, 0, 0, 0 );
 
 /**
  * Seconds remaining until the offer deadline.
@@ -38,10 +38,11 @@ interface Props {
 	onScrollToPricing: () => void;
 }
 
-// Coupon codes shown in the coupon box.
+// Coupon codes shown in the coupon box, one per plan (same codes as the pricing cards).
 const COUPONS = [
-	{ code: 'SUMMER30', label: __( 'Yearly', 'image-sizes' ) },
-	{ code: 'SUMMER48', label: __( 'Lifetime', 'image-sizes' ) },
+	{ code: 'BFCM26per', label: __( 'Personal · 50% OFF', 'image-sizes' ) },
+	{ code: 'BFCM26fess', label: __( 'Professional · 60% OFF', 'image-sizes' ) },
+	{ code: 'BFCM26ncy', label: __( 'Agency · 70% OFF', 'image-sizes' ) },
 ];
 
 export default function ExitIntentPopup( { onClose, onScrollToPricing }: Props ) {
@@ -57,8 +58,8 @@ export default function ExitIntentPopup( { onClose, onScrollToPricing }: Props )
 
 	const handleGetDiscount = () => {
 		toast.success(
-			__( 'Summer discount applied!', 'image-sizes' ),
-			{ description: __( 'Your up-to-48% discount is auto-applied at checkout.', 'image-sizes' ) }
+			__( 'BFCM discount applied!', 'image-sizes' ),
+			{ description: __( 'Your up-to-70% discount is auto-applied at checkout.', 'image-sizes' ) }
 		);
 		onScrollToPricing();
 	};
@@ -94,34 +95,12 @@ export default function ExitIntentPopup( { onClose, onScrollToPricing }: Props )
 					</div>
 
 					<h2 className="mb-2 text-2xl font-bold text-thumbpress-title">
-						{ __( 'Summer Sale Is Live!', 'image-sizes' ) }
+						{ __( 'BFCM Sale Is Live!', 'image-sizes' ) }
 					</h2>
 
 					<p className="mb-6 text-thumbpress-body">
-						{ __( 'Save up to 48% on ThumbPress Pro during our Summer Sale. The discount is automatically applied at checkout—grab it before the offer ends!', 'image-sizes' ) }
+						{ __( 'Save up to 70% on ThumbPress Pro during our Black Friday & Cyber Monday sale. The discount is automatically applied at checkout—grab it before the offer ends!', 'image-sizes' ) }
 					</p>
-
-					{ /* Coupon box */ }
-					<div className="mb-6">
-						<div className="mb-2 text-xs font-semibold uppercase tracking-wider text-thumbpress-body/70">
-							{ __( 'Apply Coupon:', 'image-sizes' ) }
-						</div>
-						<div className="grid grid-cols-2 gap-3">
-							{ COUPONS.map( ( coupon ) => (
-								<div
-									key={ coupon.code }
-									className="flex flex-col items-center gap-1 rounded-xl border-2 border-dashed border-thumbpress-primary bg-thumbpress-primary/5 px-3 py-3"
-								>
-									<span className="text-[10px] font-semibold uppercase tracking-wide text-thumbpress-primary/70">
-										{ coupon.label }
-									</span>
-									<span className="text-lg font-extrabold tracking-wide text-thumbpress-primary">
-										{ coupon.code }
-									</span>
-								</div>
-							) ) }
-						</div>
-					</div>
 
 					{ /* Countdown timer */ }
 					<div className="mb-6 rounded-xl border-2 border-dashed border-thumbpress-primary bg-thumbpress-primary/5 px-5 py-4">
@@ -150,7 +129,7 @@ export default function ExitIntentPopup( { onClose, onScrollToPricing }: Props )
 						onClick={ handleGetDiscount }
 						className="w-full rounded-md bg-thumbpress-primary py-3 text-base font-medium text-white transition-opacity hover:opacity-90"
 					>
-						{ __( 'Get 48% Off — View Pricing →', 'image-sizes' ) }
+						{ __( 'Get Up to 70% Off — View Pricing →', 'image-sizes' ) }
 					</button>
 
 					<button

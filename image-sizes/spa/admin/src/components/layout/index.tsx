@@ -56,7 +56,7 @@ export default function Layout( { navItems }: LayoutProps ) {
 
 	const isProInstalled = () => typeof window.THUMBPRESS_PRO !== 'undefined';
 
-	// Which variant to render: the dated Summer Sale popup while that campaign
+	// Which variant to render: the dated BFCM sale popup while that campaign
 	// is live, otherwise the evergreen TPTHANKS offer.
 	const isPromoActive = () => window.THUMBPRESS?.promo_active ?? false;
 

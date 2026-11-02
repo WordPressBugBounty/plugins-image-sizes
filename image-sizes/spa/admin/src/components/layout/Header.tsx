@@ -1,6 +1,10 @@
 import React from "react";
 import { __ } from "@wordpress/i18n";
 
+// "Upgrade to Pro" goes to the website's pricing page; "Activate License" stays in the plugin.
+const PRICING_URL =
+  "https://thumbpress.co/pricing?utm_source=thumbpress-free&utm_medium=plugin&utm_campaign=bfcm2026&utm_content=plugin-top-bar";
+
 interface HeaderProps {
   title: string;
 }
@@ -77,8 +81,9 @@ const Header = ({ title }: HeaderProps) => {
 
         {!isProActive && (
           <a
-            href="#/pro?src=header"
-            className="flex items-center gap-2.5 !text-white bg-thumbpress-primary hover:bg-thumbpress-primary-hover duration-300 px-4 py-2.5 rounded-lg"
+            href={isProInstalled ? "#/pro?src=header" : PRICING_URL}
+            {...(!isProInstalled && { target: "_blank", rel: "noopener noreferrer" })}
+            className="flex relative items-center gap-2.5 !text-white bg-thumbpress-primary hover:bg-thumbpress-primary-hover duration-300 px-4 py-2.5 rounded-lg"
           >
             {isProInstalled ? (
               <svg
@@ -116,7 +121,15 @@ const Header = ({ title }: HeaderProps) => {
 
             {isProInstalled
               ? __("Activate License", "image-sizes")
-              : __("Upgrade to Pro", "image-sizes")}
+              : window.THUMBPRESS?.promo_active
+                ? __("Get Pro", "image-sizes")
+                : __("Upgrade to Pro", "image-sizes")}
+
+            {window.THUMBPRESS?.promo_active && !isProInstalled && (
+              <span className="relative overflow-hidden rounded bg-[#ffa53e] px-2.5 py-2 text-xs font-semibold leading-none text-black after:pointer-events-none after:absolute after:inset-y-0 after:left-0 after:w-1/3 after:bg-gradient-to-r after:from-transparent after:via-white/70 after:to-transparent motion-safe:after:animate-badge-shine">
+                {__("Up to 70% OFF", "image-sizes")}
+              </span>
+            )}
           </a>
         )}
       </div>

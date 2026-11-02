@@ -568,6 +568,23 @@ class API {
 		);
 
 		/**
+		 * Dismiss the BFCM banner on the Pro page. The server stamps the time itself, so the
+		 * browser cannot store anything else; the banner stays hidden for 7 days.
+		 */
+		register_rest_route(
+			$this->namespace,
+			'/promo/banner/dismiss',
+			array(
+				'methods'             => WP_REST_Server::CREATABLE,
+				'callback'            => function () {
+					update_option( 'thumbpress_bfcm_banner_dismissed_at', time(), false );
+					return rest_ensure_response( array( 'success' => true ) );
+				},
+				'permission_callback' => array( $this, 'is_admin' ),
+			)
+		);
+
+		/**
 		 * Dismiss the "What's new" popup. The server stamps the announced version itself, so the
 		 * browser cannot store anything else.
 		 */
